@@ -1,0 +1,181 @@
+/*========== GOOGLE FONTS ==========*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
+
+/*========== VARIABLES CSS ==========*/
+:root {
+    /*========== Colors ==========*/
+    --first-color: #1f3a93;
+    --body-color: #eceffa;
+    --title-color: #1c1c22;
+
+    /*========== Font and typography ==========*/
+    --body-font: "Montserrat", sans-serif;
+    --normal-font-size: 0.938rem;
+    --h3-font-size: 1.125rem;
+    --small-font-size: 0.75rem;
+}
+
+@media screen and (min-width: 968px) {
+    :root {
+        --normal-font-size: 1rem;
+        --h3-font-size: 1.25rem;
+        --small-font-size: 0.813rem;
+    }
+}
+
+/*========== BASE ==========*/
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+h3 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bd-container {
+    max-width: 968px;
+    width: calc(100% - 3rem);
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+/*========== CARD GLASS ==========*/
+.card {
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 0;
+    background-color: var(--first-color);
+}
+
+.card__container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.card__glass {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 2.5rem;
+    background: linear-gradient(
+        130deg,
+        rgba(251, 251, 254, 0.6),
+        rgba(251, 251, 254, 0.2)
+    );
+    box-shadow: inset 2px 2px 1px rgba(251, 251, 254, 0.3) inset -2px -2px 1px
+        rgba(251, 251, 254, 0.2);
+    border-radius: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.card__img {
+    width: max-content;
+    margin-bottom: 1rem;
+}
+
+.card__button {
+    display: inline-block;
+    background: #1f3a93;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.4s;
+}
+
+.card__button:hover {
+    background: linear-gradient(
+        130deg,
+        rgba(251, 251, 254, 1),
+        rgba(251, 251, 254, 0.4)
+    );
+    color: #1c1c22;
+}
+
+.shape1,
+.shape2 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+.shape1 {
+    top: -7rem;
+    left: -3.5rem;
+    background: linear-gradient(
+        180deg,
+        var(--body-color) 0%,
+        rgba(196, 196, 196, 0) 100%
+    );
+}
+.shape2 {
+    bottom: -6rem;
+    right: -5.5rem;
+    background: linear-gradient(
+        180deg,
+        var(--body-color) 0%,
+        rgba(196, 196, 196, 0) 100%
+    );
+    transform: rotate(180deg);
+}
+
+.title {
+    text-align: center;
+    color: #eceffa;
+    margin-top: 2rem;
+    margin-bottom: -5rem;
+}
+
+/*========== MEDIA QUERIES ==========*/
+@media screen and (min-width: 568px) {
+    .card__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .bd-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .card {
+        padding: 0;
+    }
+
+    .card__container {
+        height: 100vh;
+        grid-template-columns: repeat(3, 1fr);
+        align-content: center;
+    }
+
+    .shape1 {
+        width: 400px;
+        height: 400px;
+        top: -11rem;
+        left: -6.5rem;
+    }
+    .shape2 {
+        width: 300px;
+        height: 300px;
+        right: -6.5rem;
+    }
+}
