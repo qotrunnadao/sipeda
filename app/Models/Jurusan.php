@@ -9,10 +9,14 @@ class Jurusan extends Model
 {
     use HasFactory;
     protected $table = 'jurusan';
-
     protected $fillable = [
-        'nama_jurusan',
+        'namaJurusan',
+        'fakultas_id',
+        'kodemk',
     ];
-
     protected $primaryKey = 'id';
+    public function Fakultas()
+    {
+        return $this->belongsTo(Fakultas::class);
+    }
 }

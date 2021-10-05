@@ -6,7 +6,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div>
-                <a href="<?= url('') ?>/TA/dosen/datakonsultasi" type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4">Kembali</a>
+                <a href="<?= url('') ?>/dosen/tugas-akhir/data-konsultasi" type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4">Kembali</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

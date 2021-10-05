@@ -14,18 +14,18 @@
                         <thead>
                             <tr>
                                 <th> # </th>
-                                <th> Jurusan </th>
                                 <th> Nama </th>
-                                <th> NIP </th>
+                                <th> Jurusan</th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php ($no = 1)
+                            @foreach ($komisi as $value)
                             <tr>
-                                <td> 1 </td>
-                                <td> Infomatika</td>
-                                <td> Arief Kelik Nugroho </td>
-                                <td> 1391893782488 </td>
+                                <td> {{ $no++ }}</td>
+                                <td> {{ $value->nama }}</td>
+                                <td> {{ $value->jurusan->namaJurusan }} </td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
@@ -36,6 +36,7 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>

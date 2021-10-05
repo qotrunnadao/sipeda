@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/pendadaran/admin/beranda">
+            <a class="nav-link" href="<?= url('') ?>/admin/beranda">
                 <span class="menu-title">Beranda</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
@@ -24,11 +24,13 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Data Jurusan </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Data Ruangan </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Data Komisi </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-404.html"> Data Dosen </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> Data Studi Akhir </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tahun-akademik"> Tahun Akademik </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/jurusan"> Data Jurusan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-ruang"> Data Ruangan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-user"> Data User </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-komisi"> Data Komisi </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/berita"> Berita </a></li>
                 </ul>
             </div>
         </li>
@@ -41,11 +43,14 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Pengajuan TA </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Upload SPK </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Pengajuan Seminar </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-404.html"> Berita Acara </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> Nilai TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/data-TA"> Data TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/data-konsultasi"> Data Konsultasi</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/data-seminar"> Data Seminar </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/pengajuan"> Pengajuan TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/spk"> Upload SPK </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/pengajuan-seminar"> Pengajuan Seminar </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/berita-acara"> Berita Acara </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/nilai"> Nilai TA </a></li>
                 </ul>
             </div>
         </li>
@@ -58,9 +63,10 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Pengajuan Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Surat Tugas</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Nilai Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/data-pendadaran"> Data Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/pengajuan"> Pengajuan Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/surat-tugas"> Surat Tugas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/nilai"> Nilai Pendadaran </a></li>
                 </ul>
             </div>
         </li>
@@ -73,9 +79,11 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Jadwal Pendadaran</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> SK Kelulusan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/data-yudisium"> Data Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/undangan"> Undangan Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/pengajuan"> Pengajuan Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/jadwal"> Jadwal Pendadaran</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/upload-sk"> SK Kelulusan </a></li>
                 </ul>
             </div>
         </li>

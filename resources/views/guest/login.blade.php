@@ -43,7 +43,9 @@
                     </div>
                 </div>
                 <div class="d-grid gap-2 mx-auto">
-                    <a class="form__button" href="<?= url('') ?>/guest/menu" role="button" style="text-decoration: none; text-align:center;">Login</a>
+                    <a class="form__button" href="<?= url('') ?>/admin/beranda" role="button" style="text-decoration: none; text-align:center;">Admin</a>
+                    <a class="form__button" href="<?= url('') ?>/komisi/beranda" role="button" style="text-decoration: none; text-align:center;">Komisi</a>
+                    <a class="form__button" href="<?= url('') ?>/dosen/beranda" role="button" style="text-decoration: none; text-align:center;">Dosen</a>
                     <a class="form__button" href="<?= url('') ?>/guest/menu" role="button" style="text-decoration: none; text-align:center;">Login SSO</a>
                 </div>
                 <div class="form__social">

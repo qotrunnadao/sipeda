@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <a href="" type="button" class="btn btn-gradient-primary">Edit</a>
-                    <a href="<?= url('') ?>/TA/komisi/datamahasiswa" type="button" class="btn btn-gradient-danger">Kembali</a>
+                    <a href="<?= url('') ?>/komisi/tugas-akhir/pengajuan" type="button" class="btn btn-gradient-danger">Kembali</a>
                 </div>
             </form>
         </div>

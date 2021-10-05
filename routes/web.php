@@ -1,7 +1,15 @@
 <?php
 
-use App\Http\Controllers\SeminarController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\RuangController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KomisiController;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\SeminarController;
+use App\Http\Controllers\BerandaAdminController;
+use App\Http\Controllers\TahunAkademikController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,190 +34,190 @@ Route::get('/error', function () {
     return view('guest.error-page');
 });
 
-// ================= TUGAS AKHIR ======================
-//ROUTE ADMIN
-Route::get('/TA/admin/beranda', function () {
-    return view('TA.admin.beranda');
-});
-Route::get('/TA/admin/datadosen', function () {
-    return view('TA.admin.datadosen');
-});
-Route::get('/TA/admin/datakomisi', function () {
-    return view('TA.admin.datakomisi');
-});
-Route::get('/TA/admin/pengajuanproposal', function () {
-    return view('TA.admin.pengajuanproposal');
-});
-Route::get('/TA/admin/uploadspk', function () {
-    return view('TA.admin.uploadSPK');
-});
-Route::get('/TA/admin/pengajuanseminar', function () {
-    return view('TA.admin.pengajuanseminar');
-});
-Route::get('/TA/admin/beritaacara', function () {
-    return view('TA.admin.beritaacara');
-});
-Route::get('/TA/admin/datanilai', function () {
-    return view('TA.admin.datanilai');
-});
+//================= DASHBOARD ====================
 
-// ROUTE MAHASISWA
-Route::get('/TA/mahasiswa/beranda', function () {
-    return view('TA.mahasiswa.beranda');
-});
-Route::get('/TA/mahasiswa/proposal', function () {
-    return view('TA.mahasiswa.proposal');
-});
-Route::get('/TA/mahasiswa/konsultasi', function () {
-    return view('TA.mahasiswa.konsultasi');
-});
-Route::get('/TA/mahasiswa/seminar', function () {
-    return view('TA.mahasiswa.seminar');
-});
-Route::get('/TA/mahasiswa/distribusi', function () {
-    return view('TA.mahasiswa.distribusi');
-});
-Route::get('/TA/mahasiswa/nilai', function () {
-    return view('TA.mahasiswa.nilai');
-});
+//=============== ROUTE ADMIN ====================
+Route::get('/admin/beranda', [BerandaAdminController::class, 'index']);
+Route::get('/admin/tahun-akademik', [TahunAkademikController::class, 'index']);
+Route::get('/admin/berita', [BeritaController::class, 'index']);
+Route::get('/admin/jurusan', [JurusanController::class, 'index']);
+Route::get('/admin/data-ruang', [RuangController::class, 'index']);
+Route::get('/admin/data-user', [UserController::class, 'index']);
+Route::get('/admin/data-dosen', [DosenController::class, 'index']);
+Route::get('/admin/data-komisi', [KomisiController::class, 'index']);
 
-// ROUTE KOMISI
-Route::get('/TA/komisi/beranda', function () {
-    return view('TA.komisi.beranda');
+//Tugas Akhir
+Route::get('/admin/tugas-akhir/data-TA', function () {
+    return view('admin.TA.dataTA');
 });
-Route::get('/TA/komisi/datamahasiswa', function () {
-    return view('TA.komisi.datamahasiswa');
+Route::get('/admin/tugas-akhir/data-konsultasi', function () {
+    return view('admin.TA.datakonsultasi');
 });
-Route::get('/TA/komisi/detailmahasiswa', function () {
-    return view('TA.komisi.detailmahasiswa');
+Route::get('/admin/tugas-akhir/data-seminar', function () {
+    return view('admin.TA.dataseminar');
 });
-Route::get('/TA/komisi/datadosen', function () {
-    return view('TA.komisi.datadosen');
+Route::get('/admin/tugas-akhir/pengajuan', function () {
+    return view('admin.TA.pengajuanproposal');
 });
-Route::get('/TA/komisi/datanilai', function () {
-    return view('TA.komisi.datanilai');
+Route::get('/admin/tugas-akhir/spk', function () {
+    return view('admin.TA.uploadSPK');
 });
-
-// ROUTE DOSEN
-Route::get('/TA/dosen/beranda', function () {
-    return view('TA.dosen.beranda');
+Route::get('/admin/tugas-akhir/pengajuan-seminar', function () {
+    return view('admin.TA.pengajuanseminar');
 });
-Route::get('/TA/dosen/datamahasiswa', function () {
-    return view('TA.dosen.datamahasiswa');
+Route::get('/admin/tugas-akhir/berita-acara', function () {
+    return view('admin.TA.beritaacara');
 });
-Route::get('/TA/dosen/datakonsultasi', function () {
-    return view('TA.dosen.datakonsultasi');
+Route::get('/admin/tugas-akhir/nilai', function () {
+    return view('admin.TA.datanilai');
 });
-Route::get('/TA/dosen/detailkonsultasi', function () {
-    return view('TA.dosen.detailkonsultasi');
+//Pendadaran
+Route::get('/admin/pendadaran/data-pendadaran', function () {
+    return view('admin.pendadaran.datapendadaran');
 });
-Route::get('/TA/dosen/uploadnilai', function () {
-    return view('TA.dosen.uploadnilai');
+Route::get('/admin/pendadaran/pengajuan', function () {
+    return view('admin.pendadaran.pengajuan');
 });
-
-// ================= PENDADARAN ======================
-//ROUTE MAHASISWA
-Route::get('/pendadaran/mahasiswa/beranda', function () {
-    return view('pendadaran.mahasiswa.beranda');
+Route::get('/admin/pendadaran/surat-tugas', function () {
+    return view('admin.pendadaran.surattugas');
 });
-Route::get('/pendadaran/mahasiswa/pendaftaran', function () {
-    return view('pendadaran.mahasiswa.pendaftaran');
+Route::get('/admin/pendadaran/nilai', function () {
+    return view('admin.pendadaran.datanilai');
 });
-Route::get('/pendadaran/mahasiswa/nilai', function () {
-    return view('pendadaran.mahasiswa.nilai');
+//yudisium
+Route::get('/admin/yudisium/data-yudisium', function () {
+    return view('admin.yudisium.datayudisium');
 });
-
-//ROUTE ADMIN
-Route::get('/pendadaran/admin/beranda', function () {
-    return view('pendadaran.admin.beranda');
+Route::get('/admin/yudisium/undangan', function () {
+    return view('admin.yudisium.undangan');
 });
-Route::get('/pendadaran/admin/datamahasiswa', function () {
-    return view('pendadaran.admin.datamahasiswa');
+Route::get('/admin/yudisium/pengajuan', function () {
+    return view('admin.yudisium.pengajuan');
 });
-Route::get('/pendadaran/admin/detailmahasiswa', function () {
-    return view('pendadaran.admin.detailmahasiswa');
+Route::get('/admin/yudisium/jadwal', function () {
+    return view('admin.yudisium.jadwal');
 });
-Route::get('pendadaran/admin/uploadsurat', function () {
-    return view('pendadaran.admin.uploadsurat');
-});
-Route::get('/pendadaran/admin/datanilai', function () {
-    return view('pendadaran.admin.datanilai');
-});
-
-//ROUTE KOMISI
-Route::get('/pendadaran/komisi/beranda', function () {
-    return view('pendadaran.komisi.beranda');
-});
-Route::get('/pendadaran/komisi/datamahasiswa', function () {
-    return view('pendadaran.komisi.datamahasiswa');
-});
-Route::get('/pendadaran/komisi/detailmahasiswa', function () {
-    return view('pendadaran.komisi.detailmahasiswa');
-});
-Route::get('/pendadaran/komisi/datanilai', function () {
-    return view('pendadaran.komisi.datanilai');
-});
-Route::get('/pendadaran/komisi/jadwal', function () {
-    return view('pendadaran.komisi.jadwal');
-});
-//ROUTE DOSEN
-Route::get('/pendadaran/dosen/beranda', function () {
-    return view('pendadaran.dosen.beranda');
-});
-Route::get('/pendadaran/dosen/jadwal', function () {
-    return view('pendadaran.dosen.jadwal');
-});
-Route::get('/pendadaran/dosen/uploadnilai', function () {
-    return view('pendadaran.dosen.uploadnilai');
-});
-
-// ================= YUDISIUM ======================
-// ROUTE ADMIM
-Route::get('/yudisium/admin/beranda', function () {
-    return view('yudisium.admin.beranda');
-});
-Route::get('yudisium/admin/pengajuan', function () {
-    return view('yudisium.admin.pengajuan');
-});
-Route::get('yudisium/admin/jadwal', function () {
-    return view('yudisium.admin.jadwal');
-});
-Route::get('yudisium/admin/upload-sk', function () {
-    return view('yudisium.admin.uploadSK');
-});
-
-//ROUTE MAHASISWA
-Route::get('/yudisium/mahasiswa/beranda', function () {
-    return view('yudisium.mahasiswa.beranda');
-});
-Route::get('yudisium/mahasiswa/pendaftaran', function () {
-    return view('yudisium.mahasiswa.pendaftaran');
-});
-
-//ROUTE KOMISI
-Route::get('/yudisium/komisi/beranda', function () {
-    return view('yudisium.komisi.beranda');
-});
-Route::get('/yudisium/komisi/jadwal', function () {
-    return view('yudisium.komisi.jadwal');
-});
-
-//ROUTE DOSEN
-Route::get('/yudisium/dosen/beranda', function () {
-    return view('yudisium.dosen.beranda');
-});
-Route::get('/yudisium/dosen/jadwal', function () {
-    return view('yudisium.dosen.jadwal');
+Route::get('/admin/yudisium/upload-sk', function () {
+    return view('admin.yudisium.uploadSK');
 });
 
 
-//BACKUP
-Route::get('/admin', function () {
-    return view('admin.layouts.main');
+
+//================= ROUTE KOMISI ====================
+Route::get('/komisi/beranda', function () {
+    return view('komisi.master.beranda');
 });
-Route::get('/komisi', function () {
-    return view('komisi.layouts.main');
+Route::get('/komisi/data-mahasiswa', function () {
+    return view('komisi.master.datamahasiswa');
 });
-Route::get('/dosen', function () {
-    return view('dosen.layouts.main');
+Route::get('/komisi/data-dosen', function () {
+    return view('komisi.master.datadosen');
+});
+//Tugas Akhir
+Route::get('/komisi/tugas-akhir/data-TA', function () {
+    return view('komisi.TA.dataTA');
+});
+Route::get('/komisi/tugas-akhir/dosen-pembimbing', function () {
+    return view('komisi.TA.dosbing');
+});
+Route::get('/komisi/tugas-akhir/pengajuan', function () {
+    return view('komisi.TA.pengajuan');
+});
+Route::get('/komisi/tugas-akhir/detail-pengajuan', function () {
+    return view('komisi.TA.detailpengajuan');
+});
+Route::get('/komisi/tugas-akhir/nilai', function () {
+    return view('komisi.TA.dosbing');
+});
+//Pendadaran
+Route::get('/komisi/pendadaran/data-pendadaran', function () {
+    return view('komisi.pendadaran.datapendadaran');
+});
+Route::get('/komisi/pendadaran/jadwal-pendadaran', function () {
+    return view('komisi.pendadaran.jadwal');
+});
+Route::get('/komisi/pendadaran/pengajuan', function () {
+    return view('komisi.pendadaran.pengajuan');
+});
+Route::get('/komisi/pendadaran/detail-pengajuan', function () {
+    return view('komisi.pendadaran.detailpengajuan');
+});
+Route::get('/komisi/pendadaran/nilai', function () {
+    return view('komisi.pendadaran.datanilai');
+});
+
+
+
+//================= ROUTE DOSEN ===========================
+Route::get('/dosen/beranda', function () {
+    return view('dosen.beranda');
+});
+//Tugas Akhir
+Route::get('/dosen/tugas-akhir/data-TA', function () {
+    return view('dosen.TA.datamahasiswa');
+});
+Route::get('/dosen/tugas-akhir/data-konsultasi', function () {
+    return view('dosen.TA.datakonsultasi');
+});
+Route::get('/dosen/tugas-akhir/detail-konsultasi', function () {
+    return view('dosen.TA.detailkonsultasi');
+});
+Route::get('/dosen/tugas-akhir/upload-nilai', function () {
+    return view('dosen.TA.uploadnilai');
+});
+//pendadaran
+Route::get('/dosen/pendadaran/data-pendadaran', function () {
+    return view('dosen.pendadaran.datapendadaran');
+});
+Route::get('/dosen/pendadaran/jadwal', function () {
+    return view('dosen.pendadaran.jadwal');
+});
+Route::get('/dosen/pendadaran/upload-nilai', function () {
+    return view('dosen.pendadaran.uploadnilai');
+});
+
+//================= ROUTE MAHASISWA =========================
+//Tugas Akhir
+Route::get('/mahasiswa/tugas-akhir/beranda', function () {
+    return view('mahasiswa.TA.pages.beranda');
+});
+Route::get('/mahasiswa/tugas-akhir/proposal', function () {
+    return view('mahasiswa.TA.pages.proposal');
+});
+Route::get('/mahasiswa/tugas-akhir/konsultasi', function () {
+    return view('mahasiswa.TA.pages.konsultasi');
+});
+Route::get('/mahasiswa/tugas-akhir/seminar', function () {
+    return view('mahasiswa.TA.pages.seminar');
+});
+Route::get('/mahasiswa/tugas-akhir/nilai', function () {
+    return view('mahasiswa.TA.pages.nilai');
+});
+Route::get('/mahasiswa/tugas-akhir/distribusi', function () {
+    return view('mahasiswa.TA.pages.distribusi');
+});
+
+//Pendadaran
+Route::get('/mahasiswa/pendadaran/beranda', function () {
+    return view('mahasiswa.pendadaran.pages.beranda');
+});
+Route::get('/mahasiswa/pendadaran/pendaftaran', function () {
+    return view('mahasiswa.pendadaran.pages.pendaftaran');
+});
+Route::get('/mahasiswa/pendadaran/jadwal', function () {
+    return view('mahasiswa.pendadaran.pages.jadwal');
+});
+Route::get('/mahasiswa/pendadaran/nilai', function () {
+    return view('mahasiswa.pendadaran.pages.nilai');
+});
+
+//Yudisium
+Route::get('/mahasiswa/yudisium/beranda', function () {
+    return view('mahasiswa.yudisium.pages.beranda');
+});
+Route::get('/mahasiswa/yudisium/pendaftaran', function () {
+    return view('mahasiswa.yudisium.pages.pendaftaran');
+});
+Route::get('/mahasiswa/yudisium/jadwal', function () {
+    return view('mahasiswa.yudisium.pages.jadwal');
 });

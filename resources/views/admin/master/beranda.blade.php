@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="col-8 grid-margin stretch-card">
+    <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-5">Rekap Pelaksanaan Studi Akhir</h4>
@@ -77,75 +77,139 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th> Status Pelaksanaan</th>
+                                <th> Status</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($status as $value)
                             <tr>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">Review Bapendik</div>
+                                    <div class="badge badge-danger badge-pill">{{ $value->ket }}</div>
                                 </td>
                             </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Status Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($statusnilai as $value)
                             <tr>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">Review Komisi</div>
+                                    <div class="badge badge-warning badge-pill">{{ $value->status }}</div>
                                 </td>
                             </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Status KP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($statusKP as $value)
                             <tr>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">Disetujui</div>
+                                    <div class="badge badge-info badge-pill">{{ $value->status }}</div>
                                 </td>
                             </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Status TA </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($statusTA as $value)
                             <tr>
                                 <td>
-                                    <div class="badge badge-warning badge-pill">Ajukan Ulang</div>
+                                    <div class="badge badge-info badge-pill">{{ $value->status }}</div>
                                 </td>
                             </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Status Pendadaran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($statusPendadaran as $value)
                             <tr>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">Pelaksanaan TA</div>
+                                    <div class="badge badge-primary badge-pill">{{ $value->status }}</div>
                                 </td>
                             </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Status Yudisium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($statusYudisium as $value)
                             <tr>
                                 <td>
-                                    <div class="badge badge-success badge-pill">Selesai TA</div>
+                                    <div class="badge badge-success badge-pill">{{ $value->status }}</div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="badge badge-danger badge-pill">Pengajuan Pendadaran</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="badge badge-primary badge-pill">Pelaksanaan Pendadaran</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="badge badge-success badge-pill">Selesai Pendadaran</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="badge badge-danger badge-pill">Pengajuan Yudisium</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="badge badge-primary badge-pill">Penerbitan Jadwal</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="badge badge-warning badge-pill">Penerbitan SK</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="badge badge-success badge-pill">Selesai Studi Akhir</div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

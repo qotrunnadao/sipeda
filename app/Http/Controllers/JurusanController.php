@@ -14,7 +14,10 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'jurusan' => Jurusan::latest()->get(),
+        );
+        return view('admin.master.jurusan', $data);
     }
 
     /**

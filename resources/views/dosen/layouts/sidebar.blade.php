@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/pendadaran/admin/beranda">
+            <a class="nav-link" href="<?= url('') ?>/dosen/beranda">
                 <span class="menu-title">Beranda</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
@@ -25,9 +25,9 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Data Mahasiswa </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Data Konsultasi </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> Upload Nilai TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/tugas-akhir/data-TA"> Data TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/tugas-akhir/data-konsultasi"> Data Konsultasi </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/tugas-akhir/upload-nilai"> Upload Nilai TA </a></li>
                 </ul>
             </div>
         </li>
@@ -40,24 +40,11 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Jadwal Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Upload Nilai Pendadaran aran</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/pendadaran/data-pendadaran"> Data Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/pendadaran/jadwal"> Jadwal Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/pendadaran/upload-nilai"> Upload Nilai Pendadaran</a></li>
                 </ul>
             </div>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Yudisium</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-folder menu-icon"></i>
-            </a>
-            <div class="collapse" id="general-pages">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Jadwal Yudisium</a></li>
-                </ul>
-            </div>
-        </li>
-
     </ul>
 </nav>

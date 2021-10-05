@@ -25,17 +25,17 @@
         <div class="card__container bd-container">
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/TA.svg') }}" alt="" class="card__img">
-                <a href="<?= url('') ?>/TA/mahasiswa/beranda" class="card__button">Tugas akhir</a>
+                <a href="<?= url('') ?>/mahasiswa/tugas-akhir/beranda" class="card__button">Tugas akhir</a>
             </div>
 
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/pendadaran.svg') }}" alt="" class="card__img">
-                <a href="<?= url('') ?>/pendadaran/mahasiswa/beranda" class="card__button">Pendadaran</a>
+                <a href="<?= url('') ?>/mahasiswa/pendadaran/beranda" class="card__button">Pendadaran</a>
             </div>
 
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/graduation.svg') }}" alt="" class="card__img">
-                <a href="<?= url('') ?>/yudisium/mahasiswa/beranda" class="card__button">Yudisium</a>
+                <a href="<?= url('') ?>/mahasiswa/yudisium/beranda" class="card__button">Yudisium</a>
             </div>
         </div>
     </section>

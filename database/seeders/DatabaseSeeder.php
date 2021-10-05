@@ -14,57 +14,195 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
+        $institusi = [
             [
-                'level' => 'admin',
+                'alamat' => "Jl. HR. Boenyamin",
+                'email' => 'unsoed@unsoed.ac.id',
+                'fax' => '09090',
+                'namaInstitusi' => 'Universitas Jenderal Soedirman',
+                'website' => 'http://unsoed.ac.id',
             ],
-            [
-                'level' => 'komisi',
-            ],
-            [
-                'level' => 'dosen',
-            ],
-            [
-                'level' => 'mahasiswa',
-            ],
-
         ];
 
-        DB::table('users')->insert($users);
+        DB::table('institusi')->insert($institusi);
+
+        $fakultas = [
+            [
+                'alamat' => "Jl. MayJend Sunkono",
+                'email' => 'ft@unsoed.ac.id',
+                'fax' => '09090',
+                'namaFakultas' => 'Teknik',
+                'website' => 'http://ft.unsoed.ac.id',
+                'ins_id' => 1,
+            ],
+        ];
+
+        DB::table('fakultas')->insert($fakultas);
 
         $jurusan = [
             [
-                'nama_jurusan' => 'teknik elektro',
+                'namaJurusan' => "Teknik Elektro",
+                'fakultas_id' => 1,
+                'kodemk' => 'TKE19'
             ],
             [
-                'nama_jurusan' => 'teknik sipil',
+                'namaJurusan' => "Teknik Sipil",
+                'fakultas_id' => 1,
+                'kodemk' => 'UNO101',
             ],
             [
-                'nama_jurusan' => 'teknik geologi',
+                'namaJurusan' => "Teknik Geologi",
+                'fakultas_id' => 1,
+                'kodemk' => 'UNO101',
             ],
             [
-                'nama_jurusan' => 'informatika',
+                'namaJurusan' => "Informatika",
+                'fakultas_id' => 1,
+                'kodemk' => 'UNO101',
             ],
             [
-                'nama_jurusan' => 'teknik industri',
+                'namaJurusan' => "Teknik Industri",
+                'fakultas_id' => 1,
+                'kodemk' => 'TKI211',
             ],
-
         ];
 
         DB::table('jurusan')->insert($jurusan);
 
-        $studi_akhir = [
+        $agama = [
             [
-                'tahapan' => 'tugas akhir',
+                'namaAgama' => "Islam",
             ],
             [
-                'tahapan' => 'pendadaran',
+                'namaAgama' => "Kristen",
             ],
             [
-                'tahapan' => 'yudisium',
+                'namaAgama' => "Protestan",
+            ],
+            [
+                'namaAgama' => "Hindu",
+            ],
+            [
+                'namaAgama' => "Budha",
+            ],
+            [
+                'namaAgama' => "Khong Hu Chu",
             ],
         ];
 
-        DB::table('studi_akhir')->insert($studi_akhir);
+        DB::table('agama')->insert($agama);
+
+        $jk = [
+            [
+                'ket' => "LAKI - LAKI",
+            ],
+            [
+                'ket' => "PEREMPUAN",
+            ],
+        ];
+
+        DB::table('jenkel')->insert($jk);
+
+        $level = [
+            [
+                'namaLevel' => "komisi",
+            ],
+            [
+                'namaLevel' => "admin",
+            ],
+            [
+                'namaLevel' => "dosen",
+            ],
+            [
+                'namaLevel' => "mhs",
+            ],
+            [
+                'namaLevel' => "bapendik",
+            ],
+            [
+                'namaLevel' => "perpus",
+            ],
+        ];
+
+        DB::table('level')->insert($level);
+
+        $semester = [
+            [
+                'semester' => "Gasal",
+            ],
+            [
+                'semester' => "Genap",
+            ],
+        ];
+
+        DB::table('semester')->insert($semester);
+
+        $studiakhir = [
+            [
+                'tahapan' => "KP",
+            ],
+            [
+                'tahapan' => "TA",
+            ],
+            [
+                'tahapan' => "Pendadaran",
+            ],
+            [
+                'tahapan' => "Yudisium",
+            ],
+        ];
+
+        DB::table('studi_akhir')->insert($studiakhir);
+
+        $status = [
+            [
+                'ket' => "Disetujui",
+            ],
+            [
+                'ket' => "Tidak Disetujui",
+            ],
+            [
+                'ket' => "Dalam Proses Review",
+            ],
+            [
+                'ket' => "Gagal",
+            ],
+            [
+                'ket' => "Boleh Ajukan Lagi",
+            ],
+        ];
+
+        DB::table('status')->insert($status);
+
+        $statusnilai = [
+            [
+                'status' => "Entry Dosen",
+            ],
+            [
+                'status' => "Verifikasi Bapendik",
+            ],
+            [
+                'status' => "Upload SIA",
+            ],
+        ];
+
+        DB::table('statusnilai')->insert($statusnilai);
+
+        $ruang = [
+            [
+                'namaRuang' => "SEMINAR 1",
+            ],
+            [
+                'namaRuang' => "SEMINAR 2",
+            ],
+            [
+                'namaRuang' => "SEMINAR 3",
+            ],
+            [
+                'namaRuang' => "SEMINAR 4",
+            ],
+        ];
+
+        DB::table('ruang')->insert($ruang);
     }
 }

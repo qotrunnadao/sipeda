@@ -27,33 +27,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="<?= url('') ?>/TA/dosen/detailkonsultasi" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> 1 </td>
-                                <td> Qotrunnada Oktiriani</td>
-                                <td> H1D018033</td>
-                                <td>
-                                    6
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="<?= url('') ?>/TA/dosen/detailkonsultasi" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> 1 </td>
-                                <td> Qotrunnada Oktiriani</td>
-                                <td> H1D018033</td>
-                                <td>
-                                    6
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="<?= url('') ?>/TA/dosen/detailkonsultasi" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
+                                        <a href="<?= url('') ?>/dosen/tugas-akhir/detail-konsultasi" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
                                     </div>
                                 </td>
                             </tr>

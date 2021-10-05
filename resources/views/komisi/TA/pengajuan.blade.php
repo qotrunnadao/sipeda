@@ -39,7 +39,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="<?= url('') ?>/TA/komisi/detailmahasiswa" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
+                                        <a href="<?= url('') ?>/komisi/tugas-akhir/detail-pengajuan" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="#" method="GET">
