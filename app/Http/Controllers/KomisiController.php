@@ -15,7 +15,7 @@ class KomisiController extends Controller
     public function index()
     {
         $data = array(
-            'komisi' => Dosen::where('isKomisi' == 1)->latest()->get(),
+            'komisi' => Dosen::where('isKomisi', 1)->latest()->get(),
         );
         return view('admin.master.datakomisi', $data);
     }
