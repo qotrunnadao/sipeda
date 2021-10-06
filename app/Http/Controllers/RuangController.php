@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruang;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RuangController extends Controller
 {
@@ -38,7 +39,14 @@ class RuangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        Ruang::create($data);
+        if (Ruang::create($data)) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
+        } else {
+            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -58,9 +66,8 @@ class RuangController extends Controller
      * @param  \App\Models\Ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ruang $ruang)
+    public function edit()
     {
-        //
     }
 
     /**
@@ -70,9 +77,13 @@ class RuangController extends Controller
      * @param  \App\Models\Ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ruang $ruang)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = Ruang::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Data Jurusan');
+        return back();
     }
 
     /**
@@ -81,8 +92,11 @@ class RuangController extends Controller
      * @param  \App\Models\Ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ruang $ruang)
+    public function destroy($id)
     {
-        //
+        $jurusan = Ruang::find($id);
+        $jurusan->delete();
+        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        return back();
     }
 }

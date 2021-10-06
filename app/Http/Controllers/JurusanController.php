@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JurusanController extends Controller
 {
@@ -27,7 +28,6 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -38,7 +38,14 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        Jurusan::create($data);
+        if (Jurusan::create($data)) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
+        } else {
+            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -58,9 +65,10 @@ class JurusanController extends Controller
      * @param  \App\Models\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jurusan $jurusan)
+    public function edit($id)
     {
-        //
+        $data = Jurusan::find($id);
+        return view('admin.master.jurusan', $data);
     }
 
     /**
@@ -70,9 +78,14 @@ class JurusanController extends Controller
      * @param  \App\Models\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jurusan $jurusan)
+    public function update(Request $request, $id)
     {
-        //
+
+        $value = Jurusan::where('id', $id)->first();
+        $data = $request->all();
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Data Jurusan');
+        return back();
     }
 
     /**
@@ -81,8 +94,11 @@ class JurusanController extends Controller
      * @param  \App\Models\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jurusan $jurusan)
+    public function destroy($id)
     {
-        //
+        $jurusan = Jurusan::find($id);
+        $jurusan->delete();
+        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        return back();
     }
 }
