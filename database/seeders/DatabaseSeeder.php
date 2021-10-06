@@ -204,5 +204,84 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('ruang')->insert($ruang);
+
+        $seminar = [
+            [
+                'jenis' => "seminar KP",
+            ],
+            [
+                'jenis' => "seminar proposal",
+            ],
+            [
+                'jenis' => "seminar hasil TA",
+            ],
+        ];
+
+        DB::table('jenis_seminar')->insert($seminar);
+
+        $user = [
+            [
+                'email' => "qotrunnada.oktiriani@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018033",
+                'password' => "H1D018033",
+                'level_id' => 4,
+            ],
+            [
+                'email' => "himawan.prayoga@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018009",
+                'password' => "H1D018009",
+                'level_id' => 1,
+            ],
+            [
+                'email' => "herfina.yuanita@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018026",
+                'password' => "H1D018026",
+                'level_id' => 2,
+            ],
+            [
+                'email' => "adinda.pangestika@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018059",
+                'password' => "H1D018059",
+                'level_id' => 3,
+            ],
+        ];
+
+        DB::table('user')->insert($user);
+
+        // $dosen = [
+        //     [
+        //         'alamat' => "Purwokerto",
+        //         'nama' => "Teguh Cahyono",
+        //         'nohp' => "082241443663",
+        //         'tmptLahir' => "Purwokerto",
+        //         'isKomisi' => 1,
+        //         'agama_id' => 1,
+        //         'jk_id' => 1,
+        //         'jurusan_id' => 4,
+        //         'user_id' => 1,
+        //     ],
+        // ];
+
+        // DB::table('user')->insert($user);
+
+        // $mahasiswa = [
+        //     [
+        //         'alamat' => "Banyumas",
+        //         'nama' => "Qotrunnada Oktiriani",
+        //         'nohp' => "082241443663",
+        //         'tmptLahir' => "Banyumas",
+        //         'agama_id' => 1,
+        //         'jurusan_id' => 4,
+        //         'user_id' => 1,
+        //         'pembimbing1_id' => 1,
+        //         'pembimbing2_id' => 1,
+        //         'penguji1_id' => 1,
+        //         'penguji2_id' => 1,
+        //         'penguji3_id' => 1,
+        //         'penguji4_id' => 1,
+        //     ],
+        // ];
+
+        // DB::table('mahasiswa')->insert($mahasiswa);
     }
 }

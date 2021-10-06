@@ -9,43 +9,27 @@ class SempropTA extends Model
 {
     use HasFactory;
     protected $table = 'SempropTA';
-    protected $fillable = [
-        'nama_jabatan',
-        'beritaAcara',
-        'nilai',
-        'nilaiHuruf',
-        'nosurat',
-        'distribusi',
-        'statusSIA',
-        'tglCetak',
-        'tglEntriNilai',
-        'tglUploadSIA',
-        'jadwal_id',
-        'pejabatSK_id',
-        'statusDosen_id',
-        'statusBapendik_id',
-        'TA_id',
-    ];
+    protected $guarded = [];
     protected $primaryKey = 'id';
 
     public function Jadwal()
     {
         return $this->belongsTo(Jadwal::class);
     }
-    public function StatusDosen()
+    public function Status()
     {
-        return $this->belongsTo(StatusDosen::class);
+        return $this->belongsTo(Status::class);
     }
     public function PejabatSK()
     {
         return $this->belongsTo(PejabatSK::class);
     }
-    public function StatusBapendik()
-    {
-        return $this->belongsTo(StatusBapendik::class);
-    }
     public function TA()
     {
         return $this->belongsTo(TA::class);
+    }
+    public function statusNilai()
+    {
+        return $this->belongsTo(StatusNilai::class);
     }
 }

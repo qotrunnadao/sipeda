@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKonsultasiTATable extends Migration
+class CreateKonsultasiTASTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateKonsultasiTATable extends Migration
      */
     public function up()
     {
-        Schema::create('konsultasi_TA', function (Blueprint $table) {
+        Schema::create('konsultasiTA', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('tanggal');
             $table->string('hasil');
+            $table->dateTime('tanggal');
             $table->string('topik');
             $table->tinyInteger('verifikasiDosen')->comment('0=false, 1=true')->default('0');
-            $table->foreignId('mahasiswa_id')->references('id')->on('mahasiswa');
+            $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
             $table->foreignId('dosen_id')->references('id')->on('dosen');
-           $table->timestamps();
+            $table->timestamps();
         });
     }
 
@@ -32,6 +32,6 @@ class CreateKonsultasiTATable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('konsultasi_t_a_s');
+        Schema::dropIfExists('konsultasiTA');
     }
 }

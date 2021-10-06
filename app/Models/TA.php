@@ -39,10 +39,6 @@ class TA extends Model
     {
         return $this->belongsTo(Mahasiswa::class);
     }
-    public function PejabatSK()
-    {
-        return $this->belongsTo(PejabatSK::class);
-    }
     public function Status()
     {
         return $this->belongsTo(Status::class);

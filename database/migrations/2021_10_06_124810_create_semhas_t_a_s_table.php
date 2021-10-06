@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSempropTATable extends Migration
+class CreateSemhasTASTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,24 @@ class CreateSempropTATable extends Migration
      */
     public function up()
     {
-        Schema::create('sempropTA', function (Blueprint $table) {
+        Schema::create('semhasTA', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_jabatan');
-            $table->string('beritaAcara');
+            $table->string('namajabatan');
+            $table->string('beritaacara');
             $table->double('nilai');
             $table->string('nilaiHuruf');
             $table->string('nosurat');
             $table->string('distribusi');
-            $table->string('statusSIA');
+            $table->string('statussia');
             $table->dateTime('tglCetak');
             $table->dateTime('tglEntriNilai');
             $table->dateTime('tglUploadSIA');
             $table->foreignId('jadwal_id')->references('id')->on('jadwal');
-            $table->foreignId('pejabatSK_id')->references('id')->on('jurusan');
-            $table->foreignId('statusDosen_id')->references('id')->on('statusDosen');
-            $table->foreignId('statusBapendik_id')->references('id')->on('statusBapendik');
-            $table->foreignId('TA_id')->references('id')->on('TA');
+            $table->foreignId('pejabatsk_id')->references('id')->on('dosen');
+            $table->foreignId('statusDosen_id')->references('id')->on('status');
+            $table->foreignId('statusBapendik_id')->references('id')->on('status');
+            $table->foreignId('ta_id')->references('id')->on('TA');
+            $table->foreignId('statusnilai_id')->references('id')->on('statusnilai');
             $table->timestamps();
         });
     }
@@ -41,6 +42,6 @@ class CreateSempropTATable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sempropTA');
+        Schema::dropIfExists('semhasTA');
     }
 }

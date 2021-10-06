@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KonsultasiTA extends Model
+class Pendadaran extends Model
 {
     use HasFactory;
-    protected $table = 'KonsultasiTA';
+    protected $table = 'pendadaran';
     protected $guarded = [
         'id',
     ];
@@ -21,5 +21,13 @@ class KonsultasiTA extends Model
     public function Mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class);
+    }
+    public function Status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+    public function Tahunakademik()
+    {
+        return $this->belongsTo(Tahunakademik::class);
     }
 }
