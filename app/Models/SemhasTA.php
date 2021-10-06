@@ -9,22 +9,8 @@ class SemhasTA extends Model
 {
     use HasFactory;
     protected $table = 'SemhasTA';
-    protected $fillable = [
-        'nama_jabatan',
-        'beritaAcara',
-        'nilai',
-        'nilaiHuruf',
-        'nosurat',
-        'distribusi',
-        'statusSIA',
-        'tglCetak',
-        'tglEntriNilai',
-        'tglUploadSIA',
-        'jadwal_id',
-        'pejabatSK_id',
-        'statusDosen_id',
-        'statusBapendik_id',
-        'TA_id',
+    protected $guarded = [
+
     ];
     protected $primaryKey = 'id';
 
