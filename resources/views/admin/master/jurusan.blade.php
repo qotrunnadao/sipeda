@@ -31,7 +31,7 @@
                                 <td> {{ $value->kodemk }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('jurusan.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="{{ route('jurusan.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-jurusan='{{ $value->namaJurusan }}' data-kodemk='{{ $value->kodemk }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('jurusan.destroy', $value->id) }}" method="GET">
@@ -106,27 +106,27 @@
             </div>
             <div class="modal-body">
                 {{-- @foreach ($jurusan as $value ) --}}
-                <form class="forms-sample" method="POST" action="{{route('jurusan.update', $value->id)}}">
+                <form class="forms-sample" method="POST" action="">
                     @method('PUT')
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Jurusan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="namaJurusan" value="{{ old('namaJurusan') ? old('namaJurusan') : $value->namaJurusan }}" />
+                            <input type="text" class="form-control" id="jurusan" name="namaJurusan" value="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Fakultas</label>
                         <div class="input-group">
                             <select type="text" class="form-control" name="fakultas_id">
-                                <option value="1" {{ $value->fakultas_id == 1 ? 'selected' : '' }}>Teknik</option>
+                                <option value="1">Teknik</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Kode Mata Kuliah</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="kodemk" value="{{ old('kodemk') ? old('kodemk') : $value->kodemk }}" />
+                            <input type="text" class="form-control" name="kodemk" id="kodemk" value="" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -138,4 +138,21 @@
         </div>
     </div>
 </div>
+@endsection
+@section('javascripts')
+<script>
+    $('#editdata').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var jurusan = button.data('jurusan') // Extract info from data-* attributes
+    var kodemk = button.data('kodemk') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
+    modal.find(".modal-body input[name='namaJurusan']").val(jurusan)
+    modal.find(".modal-body input[name='kodemk']").val(kodemk)
+    modal.find(".modal-body form").attr("action",'/admin/jurusan/update/'+id)
+    })
+</script>
 @endsection
