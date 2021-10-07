@@ -9,25 +9,8 @@ class TA extends Model
 {
     use HasFactory;
     protected $table = 'TA';
-    protected $fillable = [
-        'judulTA',
-        'judulTAFinal',
-        'keterangan',
-        'nama_jabatan',
-        'instansi',
-        'komisi',
-        'nilai',
-        'nosurat',
-        'praproposal',
-        'tglAmbil',
-        'tglSPK',
-        'tglDaftar',
-        'pembimbing1_id',
-        'pembimbing2_id',
-        'mahasiswa_id',
-        'pejabatSK_id',
-        'status_id',
-        'tahunakademik_id',
+    protected $guarded = [
+        'id'
     ];
     protected $primaryKey = 'id';
 

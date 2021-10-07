@@ -16,7 +16,7 @@ class CreateKonsultasiTASTable extends Migration
         Schema::create('konsultasiTA', function (Blueprint $table) {
             $table->id();
             $table->string('hasil');
-            $table->dateTime('tanggal');
+            $table->dateTime('tanggal')->nullable();
             $table->string('topik');
             $table->tinyInteger('verifikasiDosen')->comment('0=false, 1=true')->default('0');
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa');

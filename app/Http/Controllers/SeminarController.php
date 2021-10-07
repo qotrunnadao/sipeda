@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
 
-class SempropTAController extends Controller
+class SeminarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,7 @@ class SempropTAController extends Controller
      */
     public function index()
     {
-        $data = array(
-            'semprop' => Seminar::where('jenis_id', 2)->latest()->get(),
-        );
-        return view('sempropTA.index', $data);
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class SempropTAController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SempropTA  $sempropTA
+     * @param  \App\Models\Seminar  $seminar
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Seminar $seminar)
     {
         //
     }
@@ -55,10 +52,10 @@ class SempropTAController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SempropTA  $sempropTA
+     * @param  \App\Models\Seminar  $seminar
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Seminar $seminar)
     {
         //
     }
@@ -67,10 +64,10 @@ class SempropTAController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SempropTA  $sempropTA
+     * @param  \App\Models\Seminar  $seminar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Seminar $seminar)
     {
         //
     }
@@ -78,10 +75,10 @@ class SempropTAController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SempropTA  $sempropTA
+     * @param  \App\Models\Seminar  $seminar
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Seminar $seminar)
     {
         //
     }

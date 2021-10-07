@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Akademik;
 use App\Models\Status;
 use App\Models\StatusKP;
 use App\Models\StatusNilai;
@@ -26,6 +27,7 @@ class BerandaAdminController extends Controller
             'statusTA' => StatusTA::latest()->get(),
             'statusPendadaran' => StatusPendadaran::latest()->get(),
             'statusYudisium' => StatusYudisium::latest()->get(),
+            'akademik' => Akademik::latest()->get(),
         );
         return view('admin.master.beranda', $data);
     }

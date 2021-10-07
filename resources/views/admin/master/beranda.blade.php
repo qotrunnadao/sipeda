@@ -43,26 +43,37 @@
                         <thead>
                             <tr>
                                 <th> # </th>
-                                <th> Nama </th>
-                                <th> Status Tugas Akhir </th>
-                                <th> Status Pendadaran </th>
-                                <th> Status Yudisium </th>
+                                <th> Nama Mahasiswa </th>
+                                <th> IPK </th>
+                                <th> SKS </th>
+                                <th> Status KP </th>
+                                <th> Status TA </th>
+                                <th> Status Pendadaran</th>
+                                <th> Status Yudisium</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php ($no = 1)
+                            @foreach ($akademik as $value)
                             <tr>
                                 <td> 1 </td>
-                                <td> Qotrunnada Oktiriani </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
+                                <td> {{ $value->ipk }}</td>
+                                <td> {{ $vavue->sks }}</td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">Selesai</div>
+                                    <div class="badge badge-primary badge-pill">{{ $value->isKP }}</div>
                                 </td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">Selesai</div>
+                                    <div class="badge badge-waring badge-pill">{{ $value->isTA }}</div>
                                 </td>
                                 <td>
-                                    <div class="badge badge-success badge-pill">menunggu persetujuan</div>
+                                    <div class="badge badge-success badge-pill">{{ $value->isPendadaran }}</div>
+                                </td>
+                                <td>
+                                    <div class="badge badge-info badge-pill">{{ $value->isYudisium }}</div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

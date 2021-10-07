@@ -18,19 +18,13 @@ class CreateMahasiswasTable extends Migration
             $table->longText('alamat');
             $table->string('foto')->default('NULL');
             $table->string('nama');
+            $table->string('nim');
             $table->string('nohp');
             $table->dateTime('tglLahir')->nullable();
             $table->string('tmptLahir')->default('indonesia');
             $table->foreignId('agama_id')->references('id')->on('agama');
             $table->foreignId('jurusan_id')->references('id')->on('jurusan');
             $table->foreignId('user_id')->references('id')->on('user');
-            $table->foreignId('pembimbing1_id')->references('id')->on('dosen');
-            $table->foreignId('pembimbing2_id')->references('id')->on('dosen')->nullable();
-            $table->foreignId('penguji1_id')->references('id')->on('dosen')->nullable();
-            $table->foreignId('penguji2_id')->references('id')->on('dosen')->nullable();
-            $table->foreignId('penguji3_id')->references('id')->on('dosen')->nullable();
-            $table->foreignId('penguji4_id')->references('id')->on('dosen')->nullable();
-
             $table->timestamps();
         });
     }

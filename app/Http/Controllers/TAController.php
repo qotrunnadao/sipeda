@@ -14,7 +14,10 @@ class TAController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'tugas_akhir' => TA::latest()->get(),
+        );
+        return view('dataTA.index', $data);
     }
 
     /**
@@ -44,9 +47,14 @@ class TAController extends Controller
      * @param  \App\Models\TA  $tA
      * @return \Illuminate\Http\Response
      */
-    public function show(TA $tA)
+    public function show($id)
     {
-        //
+        $data_list = TA::find($id);
+        $data = [
+            'data_TA' => $data_list
+        ];
+        // passing data Izin yang didapat
+        return view('dataTA.detail', $data);
     }
 
     /**

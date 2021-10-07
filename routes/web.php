@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TAController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\RuangController;
@@ -8,7 +9,10 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\SeminarController;
+use App\Http\Controllers\SemhasTAController;
+use App\Http\Controllers\SempropTAController;
 use App\Http\Controllers\BerandaAdminController;
+use App\Http\Controllers\KonsultasiTAController;
 use App\Http\Controllers\TahunAkademikController;
 
 /*
@@ -59,15 +63,13 @@ Route::get('/admin/data-dosen', [DosenController::class, 'index']);
 Route::get('/admin/data-komisi', [KomisiController::class, 'index']);
 
 //Tugas Akhir
-Route::get('/admin/tugas-akhir/data-TA', function () {
-    return view('admin.TA.dataTA');
-});
-Route::get('/admin/tugas-akhir/data-konsultasi', function () {
-    return view('admin.TA.datakonsultasi');
-});
-Route::get('/admin/tugas-akhir/data-seminar', function () {
-    return view('admin.TA.dataseminar');
-});
+Route::get('/tugas-akhir/data-TA', [TAController::class, 'index'])->name('TA.index');
+Route::get('/tugas-akhir/detail-TA/{id}', [TAController::class, 'show'])->name('TA.show');
+Route::get('/tugas-akhir/data-konsultasi', [KonsultasiTAController::class, 'index'])->name('konsultasi.index');
+Route::get('/tugas-akhir/data-konsultasi/{id}', [KonsultasiTAController::class, 'show'])->name('konsultasi.show');
+Route::get('/tugas-akhir/semprop', [SempropTAController::class, 'index']);
+Route::get('/tugas-akhir/semhas', [SemhasTAController::class, 'index']);
+
 Route::get('/admin/tugas-akhir/pengajuan', function () {
     return view('admin.TA.pengajuanproposal');
 });
@@ -83,6 +85,8 @@ Route::get('/admin/tugas-akhir/berita-acara', function () {
 Route::get('/admin/tugas-akhir/nilai', function () {
     return view('admin.TA.datanilai');
 });
+
+
 //Pendadaran
 Route::get('/admin/pendadaran/data-pendadaran', function () {
     return view('admin.pendadaran.datapendadaran');

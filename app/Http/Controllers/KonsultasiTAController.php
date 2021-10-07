@@ -14,7 +14,10 @@ class KonsultasiTAController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'konsultasi' => KonsultasiTA::latest()->get(),
+        );
+        return view('konsultasiTA.index', $data);
     }
 
     /**
@@ -44,9 +47,14 @@ class KonsultasiTAController extends Controller
      * @param  \App\Models\KonsultasiTA  $konsultasiTA
      * @return \Illuminate\Http\Response
      */
-    public function show(KonsultasiTA $konsultasiTA)
+    public function show($id)
     {
-        //
+        $data_list = KonsultasiTA::find($id);
+        $data = [
+            'konsultasi' => $data_list
+        ];
+        // passing data Izin yang didapat
+        return view('konsultasiTA.detail', $data);
     }
 
     /**

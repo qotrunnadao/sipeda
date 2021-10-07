@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SemhasTA;
+use App\Models\Seminar;
 use Illuminate\Http\Request;
 
 class SemhasTAController extends Controller
@@ -14,7 +14,10 @@ class SemhasTAController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'semhas' => Seminar::where('jenis_id', 3)->latest()->get(),
+        );
+        return view('semhasTA.index', $data);
     }
 
     /**
@@ -44,7 +47,7 @@ class SemhasTAController extends Controller
      * @param  \App\Models\SemhasTA  $semhasTA
      * @return \Illuminate\Http\Response
      */
-    public function show(SemhasTA $semhasTA)
+    public function show($id)
     {
         //
     }
@@ -55,7 +58,7 @@ class SemhasTAController extends Controller
      * @param  \App\Models\SemhasTA  $semhasTA
      * @return \Illuminate\Http\Response
      */
-    public function edit(SemhasTA $semhasTA)
+    public function edit($id)
     {
         //
     }
@@ -67,7 +70,7 @@ class SemhasTAController extends Controller
      * @param  \App\Models\SemhasTA  $semhasTA
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SemhasTA $semhasTA)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,7 +81,7 @@ class SemhasTAController extends Controller
      * @param  \App\Models\SemhasTA  $semhasTA
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SemhasTA $semhasTA)
+    public function destroy($id)
     {
         //
     }

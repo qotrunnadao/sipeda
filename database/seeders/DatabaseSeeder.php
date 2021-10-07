@@ -248,40 +248,87 @@ class DatabaseSeeder extends Seeder
 
         DB::table('user')->insert($user);
 
-        // $dosen = [
-        //     [
-        //         'alamat' => "Purwokerto",
-        //         'nama' => "Teguh Cahyono",
-        //         'nohp' => "082241443663",
-        //         'tmptLahir' => "Purwokerto",
-        //         'isKomisi' => 1,
-        //         'agama_id' => 1,
-        //         'jk_id' => 1,
-        //         'jurusan_id' => 4,
-        //         'user_id' => 1,
-        //     ],
-        // ];
+        $dosen = [
+            [
+                'alamat' => "Purwokerto",
+                'nama' => "Teguh Cahyono",
+                'nohp' => "082241443663",
+                'tmptLahir' => "Purwokerto",
+                'isKomisi' => 1,
+                'agama_id' => 1,
+                'jk_id' => 1,
+                'jurusan_id' => 4,
+                'user_id' => 1,
+            ],
+        ];
 
-        // DB::table('user')->insert($user);
+        DB::table('dosen')->insert($dosen);
 
-        // $mahasiswa = [
-        //     [
-        //         'alamat' => "Banyumas",
-        //         'nama' => "Qotrunnada Oktiriani",
-        //         'nohp' => "082241443663",
-        //         'tmptLahir' => "Banyumas",
-        //         'agama_id' => 1,
-        //         'jurusan_id' => 4,
-        //         'user_id' => 1,
-        //         'pembimbing1_id' => 1,
-        //         'pembimbing2_id' => 1,
-        //         'penguji1_id' => 1,
-        //         'penguji2_id' => 1,
-        //         'penguji3_id' => 1,
-        //         'penguji4_id' => 1,
-        //     ],
-        // ];
+        $mahasiswa = [
+            [
+                'alamat' => "Banyumas",
+                'nama' => "Qotrunnada Oktiriani",
+                'nim' => "H1D018033",
+                'nohp' => "082241443663",
+                'tmptLahir' => "Banyumas",
+                'agama_id' => 1,
+                'jurusan_id' => 4,
+                'user_id' => 1,
+            ],
+        ];
 
-        // DB::table('mahasiswa')->insert($mahasiswa);
+        DB::table('mahasiswa')->insert($mahasiswa);
+
+        $thnAkad = [
+            [
+                'aktif' => 1,
+                'namaTahun' => "2021/2022",
+                'semester_id' => 1,
+            ],
+        ];
+
+        DB::table('tahunakademik')->insert($thnAkad);
+
+        $TA = [
+            [
+                'mahasiswa_id' => "1",
+                'judulTA' => "Sistem Pengelolaan Studi Akhir",
+                'instansi' => "Fakultasi Teknik Unsoed",
+                'praproposal' => "proposal-H1D018033",
+                'pembimbing1_id' => 1,
+                'pembimbing2_id' => 1,
+                'status_id' => 3,
+                'thnAkad_id' => 1,
+            ],
+        ];
+
+        DB::table('TA')->insert($TA);
+
+        $konsultasi = [
+            [
+                'hasil' => "perbaikan latar belakang",
+                'topik' => "BAB 1",
+                'verifikasiDosen' => 0,
+                'mhs_id' => 1,
+                'dosen_id' => 1,
+            ],
+        ];
+
+        DB::table('konsultasiTA')->insert($konsultasi);
+
+        $seminar = [
+            [
+                'ta_id' => 1,
+                'jenis_id' => 3,
+                'ruang_id' => 1,
+            ],
+            [
+                'ta_id' => 1,
+                'jenis_id' => 2,
+                'ruang_id' => 1,
+            ],
+        ];
+
+        DB::table('seminar')->insert($seminar);
     }
 }
