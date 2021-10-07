@@ -42,9 +42,18 @@ Route::get('/error', function () {
 
 //=============== ROUTE ADMIN ====================
 Route::get('/admin/beranda', [BerandaAdminController::class, 'index']);
+
+// Route Tahun Akademik
+Route::post('/admin/tahun-akademik/store', [TahunAkademikController::class, 'store'])->name('tahunAkademik.store');
+Route::get('/admin/tahun-akademik/edit/{id}', [TahunAkademikController::class, 'edit'])->name('tahunAkademik.edit');
+Route::put('/admin/tahun-akademik/update/{id}', [TahunAkademikController::class, 'update'])->name('tahunAkademik.update');
+Route::get('/admin/tahun-akademik/destroy/{id}', [TahunAkademikController::class, 'destroy'])->name('tahunAkademik.destroy');
 Route::get('/admin/tahun-akademik', [TahunAkademikController::class, 'index']);
+
+// Route Berita
 Route::get('/admin/berita', [BeritaController::class, 'index']);
 
+// Route Jurusan
 Route::get('/admin/jurusan', [JurusanController::class, 'index']);
 Route::post('/admin/jurusan/store', [JurusanController::class, 'store']);
 Route::get('/admin/jurusan/edit/{id}', [JurusanController::class, 'edit'])->name('jurusan.edit');
@@ -52,14 +61,20 @@ Route::put('/admin/jurusan/update/{id}', [JurusanController::class, 'update'])->
 Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
 // Route::resource('/admin/jurusan', JurusanController::class);
 
+// Route Data Ruangan
 Route::get('/admin/data-ruang', [RuangController::class, 'index']);
 Route::post('/admin/data-ruang/store', [RuangController::class, 'store'])->name('ruang.store');
 Route::put('/admin/data-ruang/update/{id}', [RuangController::class, 'update'])->name('ruang.update');
 Route::get('/admin/data-ruang/destroy/{id}', [RuangController::class, 'destroy'])->name('ruang.destroy');
 //Route::resource('/admin/ruang', RuangController::class);
 
+//Route Data User
 Route::get('/admin/data-user', [UserController::class, 'index']);
+
+//Route Data Dosen
 Route::get('/admin/data-dosen', [DosenController::class, 'index']);
+
+//Route Data Komisi
 Route::get('/admin/data-komisi', [KomisiController::class, 'index']);
 
 //Tugas Akhir

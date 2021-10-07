@@ -10,7 +10,7 @@ class TA extends Model
     use HasFactory;
     protected $table = 'TA';
     protected $guarded = [
-        'id'
+        'id',
     ];
     protected $primaryKey = 'id';
 

@@ -40,8 +40,8 @@ class RuangController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Ruang::create($data);
-        if (Ruang::create($data)) {
+        $cek = Ruang::create($data);
+        if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
         } else {
             Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');

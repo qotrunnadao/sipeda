@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<!-- Tambah Komisi -->
+<!-- Tambah Ruang -->
 <div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -74,7 +74,7 @@
         </div>
     </div>
 </div>
-
+{{-- Edit Ruang --}}
 <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\TahunAkademik;
+use App\Models\Semester;
 use Illuminate\Http\Request;
+use Alert;
 
 class TahunAkademikController extends Controller
 {
@@ -14,10 +16,9 @@ class TahunAkademikController extends Controller
      */
     public function index()
     {
-        $data = array(
-            'tahun_akademik' => TahunAkademik::latest()->get(),
-        );
-        return view('admin.master.tahunAkademik', $data);
+        $semester = Semester::all();
+        $tahun_akademik = TahunAkademik::latest()->get();
+        return view('admin.master.tahunAkademik', compact('tahun_akademik','semester'));
     }
 
     /**
@@ -38,7 +39,12 @@ class TahunAkademikController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        TahunAkademik::create($data);
+        $cek = TahunAkademik::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Tahun Akademik');
+        } else {
+            Alert::warning('Gagal', 'Data Tahun Akademik Gagal Ditambahkan');
+        }
         return back();
     }
 
@@ -73,7 +79,15 @@ class TahunAkademikController extends Controller
      */
     public function update(Request $request, TahunAkademik $tahunAkademik)
     {
-        //
+        $value = TahunAkademik::where('id', $id)->first();
+        $data = $request->all();
+        $ubah = $value->update($data);
+        if ($ubah == true){
+            Alert::success('Berhasil', 'Berhasil Ubah Data Tahun Akademik');
+        }else {
+            Alert::warning('Gagal', 'Data Tahun Akademik Gagal Diubah');
+        }
+        return back();
     }
 
     /**
@@ -82,8 +96,15 @@ class TahunAkademikController extends Controller
      * @param  \App\Models\TahunAkademik  $tahunAkademik
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TahunAkademik $tahunAkademik)
+    public function destroy($id)
     {
-        //
+        $tahunAkademik = TahunAkademik::find($id);
+        $hapus = $tahunAkademik->delete();
+        if($hapus == true){
+            Alert::success('Berhasil', 'Berhasil hapus data Tahun Akademik');
+        }else{
+            Alert::warning('Gagal', 'Data Tahun Akademik Gagal DIhapus');
+        }
+        return back();
     }
 }

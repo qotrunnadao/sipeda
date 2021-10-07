@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TA;
-use App\Models\Dosen;
+use App\Models\nilaiTA;
 use Illuminate\Http\Request;
 
-class TAController extends Controller
+class NilaiTAController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +14,7 @@ class TAController extends Controller
      */
     public function index()
     {
-        $tugas_akhir = TA::latest()->get();
-        foreach($tugas_akhir as $value){
-            $dosen1_id = $value->pembimbing1_id;
-            $dosen2_id = $value->pembimbing2_id;
-            $dosen1 = Dosen::where('id', $dosen1_id)->first();
-            $nama_dosen1 = $dosen1->nama;
-            $dosen2 = Dosen::where('id', $dosen2_id)->first();
-            $nama_dosen2 = $dosen2->nama;
-        }
-        return view('dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2'));
+        //
     }
 
     /**
@@ -51,26 +41,21 @@ class TAController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TA  $tA
+     * @param  \App\Models\nilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(nilaiTA $nilaiTA)
     {
-        $data_list = TA::find($id);
-        $data = [
-            'data_TA' => $data_list
-        ];
-        // passing data Izin yang didapat
-        return view('dataTA.detail', $data);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TA  $tA
+     * @param  \App\Models\nilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function edit(TA $tA)
+    public function edit(nilaiTA $nilaiTA)
     {
         //
     }
@@ -79,10 +64,10 @@ class TAController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TA  $tA
+     * @param  \App\Models\nilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TA $tA)
+    public function update(Request $request, nilaiTA $nilaiTA)
     {
         //
     }
@@ -90,10 +75,10 @@ class TAController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TA  $tA
+     * @param  \App\Models\nilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TA $tA)
+    public function destroy(nilaiTA $nilaiTA)
     {
         //
     }

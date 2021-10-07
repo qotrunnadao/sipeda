@@ -40,4 +40,8 @@ class Dosen extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function TA()
+    {
+        return $this->belongsTo(TA::class);
+    }
 }

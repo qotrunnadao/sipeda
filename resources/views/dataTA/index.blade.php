@@ -30,8 +30,8 @@
                                 <td> {{ $value->mahasiswa->nama }} </td>
                                 <td> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
                                 <td> {{ $value->judulTA }}</td>
-                                <td> {{ $value->pembimbing1_id }}</td>
-                                <td> {{ $value->pembimbing2_id }}</td>
+                                <td> {{ $nama_dosen1 }}</td>
+                                <td> {{ $nama_dosen2 }}</td>
                                 <td> {{ $value->praproposal }}</td>
                                 <td> {{ $value->status->status }}</td>
                                 <td>
@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('TA.show', $value->id) }}" class="btn btn-gradient-info btn-sm"><i class="mdi mdi-eye"></i></a>
+                                        <a href="{{ route('TA.show', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="#" method="GET">
