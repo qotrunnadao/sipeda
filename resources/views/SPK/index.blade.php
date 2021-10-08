@@ -71,9 +71,14 @@
                 <form class="forms-sample" action="{{route('spk.store')}}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="name"/>
+                            <select  type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option value="" selected disabled>PILIH</option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }}">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -83,14 +88,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
+                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <select  type="text" class="form-control" id="jurusan" name="jurusan">
-                                <option value="" selected disabled>PILIH</option>
-                                @foreach ($jurusan as $value)
-                                <option value="{{ $value->id }}">{{ $value->namaJurusan }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="name"/>
                         </div>
                     </div>
                     <div class="form-group">
