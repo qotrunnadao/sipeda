@@ -19,6 +19,7 @@ class SPKController extends Controller
     public function index()
     {
         $spk = SPK::latest()->get();
+        $jurusan = jurusan::all();
         foreach ($spk as $value) {
             $ta_id = $value->TA_id;
             $ta = TA::where('id', $ta_id)->first();
@@ -30,7 +31,7 @@ class SPKController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('SPK.index', compact('spk', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('SPK.index', compact('spk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan'));
     }
 
     /**
@@ -53,12 +54,24 @@ class SPKController extends Controller
     {
         $data = $request->all();
         $cek = SPK::create($data);
+        if ($request->file('doc')){
+            $file=$request->file('doc');
+            $filename=time().'.'.$file->getClientOriginalExtension();
+            $request->file->move('assets/file',$filename);
+            $data->file=$filename;
+            $data->name=$request->name;
+            $data->description=$request->description;
+            $data->save();
+        }else{
+            $data['doc'] = NULL;
+        }
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
         } else {
             Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
         }
         return back();
+
     }
 
     /**

@@ -92,7 +92,7 @@ Route::get('/tugas-akhir/semprop', [SempropTAController::class, 'index']);
 Route::get('/tugas-akhir/semhas', [SemhasTAController::class, 'index']);
 //spk
 Route::get('/tugas-akhir/spk', [SPKController::class, 'index'])->name('spk.index');
-Route::post('/tugas-akhir/spk/create', [SPKController::class, 'store'])->name('spk.store');
+Route::post('/tugas-akhir/spk/store', [SPKController::class, 'store'])->name('spk.store');
 Route::put('/tugas-akhir/spk/update/{id}', [SPKController::class, 'update'])->name('spk.update');
 Route::get('/tugas-akhir/spk/destroy/{id}', [SPKController::class, 'destroy'])->name('spk.destroy');
 //nilai TA
