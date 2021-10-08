@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisSeminar;
+use App\Models\Mahasiswa;
+use App\Models\Ruang;
 use App\Models\Seminar;
+use App\Models\TA;
 use Illuminate\Http\Request;
 
 class SempropTAController extends Controller
@@ -14,10 +18,25 @@ class SempropTAController extends Controller
      */
     public function index()
     {
-        $data = array(
-            'semprop' => Seminar::where('jenis_id', 2)->latest()->get(),
-        );
-        return view('sempropTA.index', $data);
+        $semprop = Seminar::where('jenis_id', 2)->latest()->get();
+        foreach ($semprop as $value) {
+            $ta_id = $value->ta_id;
+            $ta = TA::where('id', $ta_id)->first();
+            $judul = $ta->judulTA;
+            $mhs_id = $ta->mahasiswa_id;
+            $mahasiswa_id = Mahasiswa::where('id', $mhs_id)->first();
+            $namaMahasiswa  = $mahasiswa_id->nama;
+
+            $jenis_id = $value->jenis_id;
+            $jenis = JenisSeminar::where('id', $jenis_id)->first();
+            $jenisSeminar = $jenis->jenis;
+
+            $ruang_id = $value->ruang_id;
+            $ruang = Ruang::where('id', $ruang_id)->first();
+            $namaRuang = $ruang->namaRuang;
+        }
+
+        return view('sempropTA.index', compact('semprop', 'judul', 'namaMahasiswa', 'jenisSeminar', 'namaRuang'));
     }
 
     /**

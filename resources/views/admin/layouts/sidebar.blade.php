@@ -47,8 +47,8 @@
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-konsultasi"> Data Konsultasi</a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semprop"> Data Seminar Proposal </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semhas"> Data Seminar Hasil </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/spk"> Upload SPK </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tugas-akhir/nilai"> Nilai TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/spk"> Upload SPK </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/nilaita"> Nilai TA </a></li>
                 </ul>
             </div>
         </li>
@@ -61,10 +61,8 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/data-pendadaran"> Data Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/pengajuan"> Pengajuan Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/surat-tugas"> Surat Tugas</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/pendadaran/nilai"> Nilai Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/data-pendadaran"> Pengajuan Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/nilai-pendadaran"> Nilai Pendadaran </a></li>
                 </ul>
             </div>
         </li>
@@ -77,10 +75,8 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/data-yudisium"> Data Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/undangan"> Undangan Yudisium </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/pengajuan"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/jadwal"> Jadwal Pendadaran</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/jadwal"> Jadwal Yudisium</a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/upload-sk"> SK Kelulusan </a></li>
                 </ul>
             </div>

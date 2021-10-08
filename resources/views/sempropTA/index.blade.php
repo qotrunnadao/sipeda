@@ -28,10 +28,10 @@
 
                             <tr>
                                 <td> 1 </td>
-                                <td> {{ $value->ta_id }} </td>
-                                <td> {{ $value->jenis_id }}</td>
-                                <td> {{ $value->ta_id }}</td>
-                                <td> {{ $value->ruang_id }} </td>
+                                <td> {{ $namaMahasiswa }} </td>
+                                <td> {{ $jenisSeminar }}</td>
+                                <td> {{ $judul }}</td>
+                                <td> {{ $namaRuang }} </td>
                                 <td> {{ $value->tanggal }}</td>
                                 <td> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
                                 <td>

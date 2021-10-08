@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SPK extends Model
 {
     use HasFactory;
-    protected $table = 'nilaiTA';
+    protected $table = 'SPK';
     protected $fillable = [
         'fileSPK',
         'TA_id',

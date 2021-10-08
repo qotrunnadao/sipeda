@@ -16,14 +16,17 @@ class CreatePendadaransTable extends Migration
         Schema::create('pendadaran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
-            $table->string('nosurat');
-            $table->string('berkas1');
-            $table->string('berkas2');
-            $table->string('berkas3');
+            $table->string('nosurat')->nullable();
+            $table->dateTime('tanggal')->nullable();
+            $table->time('waktu')->nullable();
+            $table->string('transkip');
+            $table->string('hasiluept');
+            $table->string('buktidistribusi');
+            $table->string('beritaacara');
             $table->foreignId('penguji1_id')->references('id')->on('dosen');
             $table->foreignId('penguji2_id')->references('id')->on('dosen');
             $table->foreignId('penguji3_id')->references('id')->on('dosen');
-            $table->foreignId('pejabartsk_id')->references('id')->on('dosen');
+            $table->foreignId('penguji4_id')->references('id')->on('dosen')->nullable();
             $table->foreignId('status_id')->references('id')->on('status');
             $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik');
             $table->timestamps();

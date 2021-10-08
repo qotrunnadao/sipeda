@@ -2,18 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TAController;
+use App\Http\Controllers\SPKController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\NilaiTAController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\SemhasTAController;
 use App\Http\Controllers\SempropTAController;
+use App\Http\Controllers\PendadaranController;
 use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\KonsultasiTAController;
 use App\Http\Controllers\TahunAkademikController;
+use App\Http\Controllers\NilaiPendadaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,14 +63,12 @@ Route::post('/admin/jurusan/store', [JurusanController::class, 'store']);
 Route::get('/admin/jurusan/edit/{id}', [JurusanController::class, 'edit'])->name('jurusan.edit');
 Route::put('/admin/jurusan/update/{id}', [JurusanController::class, 'update'])->name('jurusan.update');
 Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
-// Route::resource('/admin/jurusan', JurusanController::class);
 
 // Route Data Ruangan
 Route::get('/admin/data-ruang', [RuangController::class, 'index']);
 Route::post('/admin/data-ruang/store', [RuangController::class, 'store'])->name('ruang.store');
 Route::put('/admin/data-ruang/update/{id}', [RuangController::class, 'update'])->name('ruang.update');
 Route::get('/admin/data-ruang/destroy/{id}', [RuangController::class, 'destroy'])->name('ruang.destroy');
-//Route::resource('/admin/ruang', RuangController::class);
 
 //Route Data User
 Route::get('/admin/data-user', [UserController::class, 'index']);
@@ -78,34 +80,34 @@ Route::get('/admin/data-dosen', [DosenController::class, 'index']);
 Route::get('/admin/data-komisi', [KomisiController::class, 'index']);
 
 //Tugas Akhir
+//data TA
 Route::get('/tugas-akhir/data-TA', [TAController::class, 'index'])->name('TA.index');
 Route::get('/tugas-akhir/detail-TA/{id}', [TAController::class, 'show'])->name('TA.show');
+//data Konsul
 Route::get('/tugas-akhir/data-konsultasi', [KonsultasiTAController::class, 'index'])->name('konsultasi.index');
 Route::get('/tugas-akhir/data-konsultasi/{id}', [KonsultasiTAController::class, 'show'])->name('konsultasi.show');
+//semprop
 Route::get('/tugas-akhir/semprop', [SempropTAController::class, 'index']);
+//semhas
 Route::get('/tugas-akhir/semhas', [SemhasTAController::class, 'index']);
-
-Route::get('/admin/tugas-akhir/pengajuan', function () {
-    return view('admin.TA.pengajuanproposal');
-});
-Route::get('/admin/tugas-akhir/spk', function () {
-    return view('admin.TA.uploadSPK');
-});
-Route::get('/admin/tugas-akhir/pengajuan-seminar', function () {
-    return view('admin.TA.pengajuanseminar');
-});
-Route::get('/admin/tugas-akhir/berita-acara', function () {
-    return view('admin.TA.beritaacara');
-});
-Route::get('/admin/tugas-akhir/nilai', function () {
-    return view('admin.TA.datanilai');
-});
+//spk
+Route::get('/tugas-akhir/spk', [SPKController::class, 'index'])->name('spk.index');
+Route::post('/tugas-akhir/spk/create', [SPKController::class, 'store'])->name('spk.store');
+Route::put('/tugas-akhir/spk/update/{id}', [SPKController::class, 'update'])->name('spk.update');
+Route::get('/tugas-akhir/spk/destroy/{id}', [SPKController::class, 'destroy'])->name('spk.destroy');
+//nilai TA
+Route::get('/tugas-akhir/nilaita', [NilaiTAController::class, 'index'])->name('nilaita.index');
+Route::post('/tugas-akhir/nilaita/store', [NilaiTAController::class, 'store'])->name('nilaita.store');
+Route::put('/tugas-akhir/nilaita/update/{id}', [NilaiTAController::class, 'update'])->name('nilaita.update');
+Route::get('/tugas-akhir/nilaita/destroy/{id}', [NilaiTAController::class, 'destroy'])->name('nilaita.destroy');
 
 
 //Pendadaran
-Route::get('/admin/pendadaran/data-pendadaran', function () {
-    return view('admin.pendadaran.datapendadaran');
-});
+//data pendadaran
+Route::get('pendadaran/data-pendadaran', [PendadaranController::class, 'index'])->name('pendadaran.index');
+Route::get('pendadaran/nilai-pendadaran', [NilaiPendadaranController::class, 'index'])->name('nilaiPendadaran.index');
+
+
 Route::get('/admin/pendadaran/pengajuan', function () {
     return view('admin.pendadaran.pengajuan');
 });

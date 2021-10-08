@@ -16,6 +16,7 @@
                                 <th> # </th>
                                 <th> Nama Mahasiswa </th>
                                 <th> NIM </th>
+                                <th> Jurusan</th>
                                 <th> Jumlah Konsultasi </th>
                                 <th> Aksi </th>
                             </tr>
@@ -26,8 +27,9 @@
 
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->mhs_id }}</td>
-                                <td> {{ $value->mhs_id }}</td>
+                                <td> {{ $namaMahasiswa }}</td>
+                                <td> {{ $nim }}</td>
+                                <td> {{ $namaJurusan }}</td>
                                 <td>
                                     {{ $value->count() }}
                                 </td>

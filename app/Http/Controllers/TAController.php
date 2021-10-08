@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TA;
 use App\Models\Dosen;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class TAController extends Controller
@@ -16,15 +17,18 @@ class TAController extends Controller
     public function index()
     {
         $tugas_akhir = TA::latest()->get();
-        foreach($tugas_akhir as $value){
+        foreach ($tugas_akhir as $value) {
             $dosen1_id = $value->pembimbing1_id;
             $dosen2_id = $value->pembimbing2_id;
+            $status_id = $value->status_id;
             $dosen1 = Dosen::where('id', $dosen1_id)->first();
             $nama_dosen1 = $dosen1->nama;
             $dosen2 = Dosen::where('id', $dosen2_id)->first();
             $nama_dosen2 = $dosen2->nama;
+            $status = Status::where('id', $status_id)->first();
+            $ketStatus = $status->ket;
         }
-        return view('dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2'));
+        return view('dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus'));
     }
 
     /**

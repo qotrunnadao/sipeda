@@ -33,7 +33,7 @@
                                 <td> {{ $nama_dosen1 }}</td>
                                 <td> {{ $nama_dosen2 }}</td>
                                 <td> {{ $value->praproposal }}</td>
-                                <td> {{ $value->status->status }}</td>
+                                <td> {{ $ketStatus}}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>

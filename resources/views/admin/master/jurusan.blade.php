@@ -61,7 +61,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="PUT" action="{{url('/admin/jurusan/store')}}">
+                <form class="forms-sample" method="POST" action="{{url('/admin/jurusan/store')}}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Jurusan</label>

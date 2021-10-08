@@ -330,5 +330,54 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('seminar')->insert($seminar);
+
+        $nilaiTA = [
+            [
+                'ta_id' => 1,
+                'statusnilai_id' => 3,
+                'nilaiAngka' => 80.00,
+                'nilaiHuruf' => "A",
+            ],
+        ];
+
+        DB::table('nilaiTA')->insert($nilaiTA);
+
+        $SPK = [
+            [
+                'ta_id' => 1,
+                'fileSPK' => "SPK - H1D018033",
+            ],
+        ];
+
+        DB::table('SPK')->insert($SPK);
+
+        $pendadaran = [
+            [
+                'mhs_id' => 1,
+                'transkip' => "transkip - H1D018033",
+                'hasilUEPT' => "uept - H1D018033",
+                'buktidistribusi' => "distribusi - H1D018033",
+                'beritaacara' => "berita acara",
+                'penguji1_id' => 1,
+                'penguji2_id' => 1,
+                'penguji3_id' => 1,
+                'penguji4_id' => 1,
+                'status_id' => 1,
+                'thnAkad_id' => 1,
+            ],
+        ];
+
+        DB::table('pendadaran')->insert($pendadaran);
+
+        $nilaiPendadaran = [
+            [
+                'pendadaran_id' => 1,
+                'statusnilai_id' => 3,
+                'nilaiAngka' => 80.00,
+                'nilaiHuruf' => "A",
+            ],
+        ];
+
+        DB::table('nilai_pendadaran')->insert($nilaiPendadaran);
     }
 }

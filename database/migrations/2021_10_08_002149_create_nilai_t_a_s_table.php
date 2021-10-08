@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSPKTable extends Migration
+class CreateNilaiTASTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateSPKTable extends Migration
      */
     public function up()
     {
-        Schema::create('SPK', function (Blueprint $table) {
+        Schema::create('nilaiTA', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('TA_id')->references('id')->on('TA');
-            $table->string('fileSPK');
+            $table->foreignId('ta_id')->references('id')->on('TA');
+            $table->foreignId('statusnilai_id')->references('id')->on('statusnilai');
+            $table->double('nilaiAngka');
+            $table->string('nilaiHuruf');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateSPKTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('SPK');
+        Schema::dropIfExists('nilaiTA');
     }
 }

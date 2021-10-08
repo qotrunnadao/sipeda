@@ -27,7 +27,7 @@
                             {{-- @foreach ($konsultasi as $value ) --}}
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $konsultasi->mhs_id }}</td>
+                                <td> {{ $namaMahasiswa }}</td>
                                 <td> {{ $konsultasi->tanggal }}</td>
                                 <td> {{ $konsultasi->topik }}</td>
                                 <td>

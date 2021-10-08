@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
-use App\Models\KonsultasiTA;
 use App\Models\Mahasiswa;
+use App\Models\Pendadaran;
 use Illuminate\Http\Request;
+use App\Models\NilaiPendadaran;
 
-class KonsultasiTAController extends Controller
+class NilaiPendadaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,11 @@ class KonsultasiTAController extends Controller
      */
     public function index()
     {
-        $konsultasi = KonsultasiTA::latest()->get();
-        foreach ($konsultasi as $value) {
-            $mahasiswa_id = $value->mhs_id;
+        $nilai = NilaiPendadaran::latest()->get();
+        foreach ($nilai as $value) {
+            $pendadaran_id = $value->pendadaran_id;
+            $pendadaran = Pendadaran::where('id', $pendadaran_id)->first();
+            $mahasiswa_id = $pendadaran->mhs_id;
             $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
             $namaMahasiswa = $mhs_id->nama;
             $nim = $mhs_id->nim;
@@ -26,7 +29,7 @@ class KonsultasiTAController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('konsultasiTA.index', compact('konsultasi', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('nilaiPendadaran.index', compact('nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
     }
 
     /**
@@ -53,29 +56,21 @@ class KonsultasiTAController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\KonsultasiTA  $konsultasiTA
+     * @param  \App\Models\NilaiPendadaran  $nilaiPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(NilaiPendadaran $nilaiPendadaran)
     {
-
-        $konsultasi = KonsultasiTA::find($id);
-
-        $mahasiswa_id = $konsultasi->mhs_id;
-        $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-        $namaMahasiswa = $mhs_id->nama;
-        $nim = $mhs_id->nim;
-        // passing data Izin yang didapat
-        return view('konsultasiTA.detail', compact('konsultasi', 'namaMahasiswa', 'nim'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\KonsultasiTA  $konsultasiTA
+     * @param  \App\Models\NilaiPendadaran  $nilaiPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function edit(KonsultasiTA $konsultasiTA)
+    public function edit(NilaiPendadaran $nilaiPendadaran)
     {
         //
     }
@@ -84,10 +79,10 @@ class KonsultasiTAController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\KonsultasiTA  $konsultasiTA
+     * @param  \App\Models\NilaiPendadaran  $nilaiPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KonsultasiTA $konsultasiTA)
+    public function update(Request $request, NilaiPendadaran $nilaiPendadaran)
     {
         //
     }
@@ -95,10 +90,10 @@ class KonsultasiTAController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\KonsultasiTA  $konsultasiTA
+     * @param  \App\Models\NilaiPendadaran  $nilaiPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KonsultasiTA $konsultasiTA)
+    public function destroy(NilaiPendadaran $nilaiPendadaran)
     {
         //
     }

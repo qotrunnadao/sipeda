@@ -5,21 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NilaiTA extends Model
+class NilaiPendadaran extends Model
 {
     use HasFactory;
-    protected $table = 'nilaiTA';
+    protected $table = 'nilai_pendadaran';
     protected $fillable = [
         'nilaiHuruf',
         'nilaiAngka',
-        'status_nilai_id',
-        'TA_id',
+        'statusnilai_id',
+        'pendadaran_id',
     ];
     protected $primaryKey = 'id';
 
-    public function TA()
+    public function Pendadaran()
     {
-        return $this->belongsTo(TA::class);
+        return $this->belongsTo(Pendadaran::class);
     }
     public function StatusNilai()
     {

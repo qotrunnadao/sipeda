@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TahunAkademik;
 use App\Models\Semester;
 use Illuminate\Http\Request;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TahunAkademikController extends Controller
 {
@@ -18,7 +18,7 @@ class TahunAkademikController extends Controller
     {
         $semester = Semester::all();
         $tahun_akademik = TahunAkademik::latest()->get();
-        return view('admin.master.tahunAkademik', compact('tahun_akademik','semester'));
+        return view('admin.master.tahunAkademik', compact('tahun_akademik', 'semester'));
     }
 
     /**
@@ -77,14 +77,14 @@ class TahunAkademikController extends Controller
      * @param  \App\Models\TahunAkademik  $tahunAkademik
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TahunAkademik $tahunAkademik)
+    public function update(Request $request, $id)
     {
         $value = TahunAkademik::where('id', $id)->first();
         $data = $request->all();
         $ubah = $value->update($data);
-        if ($ubah == true){
+        if ($ubah == true) {
             Alert::success('Berhasil', 'Berhasil Ubah Data Tahun Akademik');
-        }else {
+        } else {
             Alert::warning('Gagal', 'Data Tahun Akademik Gagal Diubah');
         }
         return back();
@@ -100,9 +100,9 @@ class TahunAkademikController extends Controller
     {
         $tahunAkademik = TahunAkademik::find($id);
         $hapus = $tahunAkademik->delete();
-        if($hapus == true){
+        if ($hapus == true) {
             Alert::success('Berhasil', 'Berhasil hapus data Tahun Akademik');
-        }else{
+        } else {
             Alert::warning('Gagal', 'Data Tahun Akademik Gagal DIhapus');
         }
         return back();

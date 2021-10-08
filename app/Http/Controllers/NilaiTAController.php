@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\nilaiTA;
+use App\Models\Jurusan;
+use App\Models\NilaiTA;
+use App\Models\Mahasiswa;
+use App\Models\TA;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NilaiTAController extends Controller
 {
@@ -14,7 +18,19 @@ class NilaiTAController extends Controller
      */
     public function index()
     {
-        //
+        $nilai = NilaiTA::latest()->get();
+        foreach ($nilai as $value) {
+            $ta_id = $value->ta_id;
+            $ta = TA::where('id', $ta_id)->first();
+            $mahasiswa_id = $ta->mahasiswa_id;
+            $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
+            $namaMahasiswa = $mhs_id->nama;
+            $nim = $mhs_id->nim;
+            $jrsn_id = $mhs_id->jurusan_id;
+            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
+            $namaJurusan = $jurusan_id->namaJurusan;
+        }
+        return view('nilaiTA.index', compact('nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
     }
 
     /**
@@ -35,16 +51,23 @@ class NilaiTAController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $cek = NilaiTA::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
+        } else {
+            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\nilaiTA  $nilaiTA
+     * @param  \App\Models\NilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function show(nilaiTA $nilaiTA)
+    public function show(NilaiTA $nilaiTA)
     {
         //
     }
@@ -52,10 +75,10 @@ class NilaiTAController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\nilaiTA  $nilaiTA
+     * @param  \App\Models\NilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function edit(nilaiTA $nilaiTA)
+    public function edit(NilaiTA $nilaiTA)
     {
         //
     }
@@ -64,22 +87,29 @@ class NilaiTAController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\nilaiTA  $nilaiTA
+     * @param  \App\Models\NilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, nilaiTA $nilaiTA)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = NilaiTA::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Data Jurusan');
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\nilaiTA  $nilaiTA
+     * @param  \App\Models\NilaiTA  $nilaiTA
      * @return \Illuminate\Http\Response
      */
-    public function destroy(nilaiTA $nilaiTA)
+    public function destroy($id)
     {
-        //
+        $nilai = NilaiTA::find($id);
+        $nilai->delete();
+        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        return back();
     }
 }
