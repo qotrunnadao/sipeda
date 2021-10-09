@@ -73,30 +73,42 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="jurusan" name="jurusan">
-                                <option value="" selected disabled>PILIH</option>
-                                @foreach ($jurusan as $value)
-                                <option value="{{ $value->id }}">{{ $value->namaJurusan }}</option>
-                                @endforeach
-                            </select>
+                            <<<<<<< HEAD <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                =======
+                                <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                    >>>>>>> e7e0873341cf18da92209a88afa8d27dc0d9964b
+                                    <option value="" selected disabled>PILIH</option>
+                                    @foreach ($jurusan as $value)
+                                    <option value="{{ $value->id }}">{{ $value->namaJurusan }}</option>
+                                    @endforeach
+                                </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">NIM</label>
                         <div class="input-group">
+                            <<<<<<< HEAD <input type="text" class="form-control" name="nim" />
+                            =======
                             <input type="text" class="form-control" name="nim" />
+                            >>>>>>> e7e0873341cf18da92209a88afa8d27dc0d9964b
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
+                            <<<<<<< HEAD <input type="text" class="form-control" name="name" />
+                            =======
                             <input type="text" class="form-control" name="name" />
+                            >>>>>>> e7e0873341cf18da92209a88afa8d27dc0d9964b
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Upload SPK</label>
                         <div class="input-group">
+                            <<<<<<< HEAD <input type="file" class="form-control" name="fileSPK" />
+                            =======
                             <input type="file" class="form-control" name="fileSPK" />
+                            >>>>>>> e7e0873341cf18da92209a88afa8d27dc0d9964b
                         </div>
                     </div>
                     <div class="modal-footer">
