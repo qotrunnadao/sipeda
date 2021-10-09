@@ -10,17 +10,16 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="text-center">
-                                <th> # </th>
-                                <th> Nama Mahasiswa </th>
-                                <th> NIM </th>
-                                <th> Jurusan </th>
-                                <th> Nilai Angka </th>
-                                <th> Nilai Huruf </th>
-                                <th> Aksi</th>
-                            </tr>
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <tr class="text-center">
+                            <th> # </th>
+                            <th> Nama Mahasiswa </th>
+                            <th> NIM </th>
+                            <th> Jurusan </th>
+                            <th> Nilai Angka </th>
+                            <th> Nilai Huruf </th>
+                            <th> Aksi</th>
+                        </tr>
                         </thead>
                         <tbody>
                             @php($no=1)

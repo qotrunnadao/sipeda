@@ -54,6 +54,7 @@ Route::put('/admin/tahun-akademik/update/{id}', [TahunAkademikController::class,
 Route::get('/admin/tahun-akademik/destroy/{id}', [TahunAkademikController::class, 'destroy'])->name('tahunAkademik.destroy');
 Route::get('/admin/tahun-akademik', [TahunAkademikController::class, 'index']);
 
+
 // Route Berita
 Route::get('/admin/berita', [BeritaController::class, 'index']);
 
@@ -105,6 +106,14 @@ Route::get('/tugas-akhir/nilaita/destroy/{id}', [NilaiTAController::class, 'dest
 //Pendadaran
 //data pendadaran
 Route::get('pendadaran/data-pendadaran', [PendadaranController::class, 'index'])->name('pendadaran.index');
+Route::get('pendadaran/data-pendadaran/create', [PendadaranController::class, 'create'])->name('pendadaran.create');
+Route::post('pendadaran/data-pendadaran/store', [PendadaranController::class, 'store'])->name('pendadaran.store');
+Route::get('pendadaran/data-pendadaran/edit/{id}', [PendadaranController::class, 'edit'])->name('pendadaran.edit');
+Route::put('pendadaran/data-pendadaran/update/{id}', [PendadaranController::class, 'update'])->name('pendadaran.update');
+Route::get('pendadaran/data-pendadaran/delete/{id}', [PendadaranController::class, 'destroy'])->name('pendadaran.delete');
+Route::get('pendadaran/data-pendadaran/diterima/{pendadaran}', [PendadaranController::class, 'diterima'])->name('pendadaran.diterima');
+Route::get('pendadaran/data-pendadaran/ditolak/{pendadaran}', [PendadaranController::class, 'ditolak'])->name('pendadaran.ditolak');
+
 Route::get('pendadaran/nilai-pendadaran', [NilaiPendadaranController::class, 'index'])->name('nilaiPendadaran.index');
 
 

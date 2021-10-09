@@ -244,6 +244,19 @@ class DatabaseSeeder extends Seeder
                 'password' => "H1D018059",
                 'level_id' => 3,
             ],
+            [
+                'email' => "himawan.prayoga@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018009",
+                'password' => "H1D018009",
+                'level_id' => 4,
+            ],
+            [
+                'email' => "herina.intan@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018026",
+                'password' => "H1D018026",
+                'level_id' => 4,
+            ],
+
         ];
 
         DB::table('user')->insert($user);
@@ -275,6 +288,26 @@ class DatabaseSeeder extends Seeder
                 'jurusan_id' => 4,
                 'user_id' => 1,
             ],
+            [
+                'alamat' => "Cirebon",
+                'nama' => "Himawan Zidan Prayoga",
+                'nim' => "H1D018009",
+                'nohp' => "082241443663",
+                'tmptLahir' => "Cirebon",
+                'agama_id' => 1,
+                'jurusan_id' => 1,
+                'user_id' => 5,
+            ],
+            [
+                'alamat' => "Purwokerto",
+                'nama' => "Herfina Intan Yuanita",
+                'nim' => "H1D018026",
+                'nohp' => "082241443663",
+                'tmptLahir' => "Purwokerto",
+                'agama_id' => 1,
+                'jurusan_id' => 2,
+                'user_id' => 6,
+            ],
         ];
 
         DB::table('mahasiswa')->insert($mahasiswa);
@@ -298,6 +331,26 @@ class DatabaseSeeder extends Seeder
                 'pembimbing1_id' => 1,
                 'pembimbing2_id' => 1,
                 'status_id' => 3,
+                'thnAkad_id' => 1,
+            ],
+            [
+                'mahasiswa_id' => "2",
+                'judulTA' => "Sistem Pengelolaan Studi Akhir",
+                'instansi' => "Fakultasi Teknik Unsoed",
+                'praproposal' => "proposal-H1D018009",
+                'pembimbing1_id' => 1,
+                'pembimbing2_id' => 1,
+                'status_id' => 1,
+                'thnAkad_id' => 1,
+            ],
+            [
+                'mahasiswa_id' => "3",
+                'judulTA' => "Sistem Pengelolaan Studi Akhir",
+                'instansi' => "Fakultasi Teknik Unsoed",
+                'praproposal' => "proposal-H1D018026",
+                'pembimbing1_id' => 1,
+                'pembimbing2_id' => 1,
+                'status_id' => 2,
                 'thnAkad_id' => 1,
             ],
         ];
@@ -362,7 +415,30 @@ class DatabaseSeeder extends Seeder
                 'penguji2_id' => 1,
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
-                'status_id' => 1,
+                'thnAkad_id' => 1,
+            ],
+            [
+                'mhs_id' => 2,
+                'transkip' => "transkip - H1D018009",
+                'hasilUEPT' => "uept - H1D018009",
+                'buktidistribusi' => "distribusi - H1D018009",
+                'beritaacara' => "berita acara",
+                'penguji1_id' => 1,
+                'penguji2_id' => 1,
+                'penguji3_id' => 1,
+                'penguji4_id' => 1,
+                'thnAkad_id' => 1,
+            ],
+            [
+                'mhs_id' => 3,
+                'transkip' => "transkip - H1D018009",
+                'hasilUEPT' => "uept - H1D018009",
+                'buktidistribusi' => "distribusi - H1D018009",
+                'beritaacara' => "berita acara",
+                'penguji1_id' => 1,
+                'penguji2_id' => 1,
+                'penguji3_id' => 1,
+                'penguji4_id' => 1,
                 'thnAkad_id' => 1,
             ],
         ];

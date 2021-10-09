@@ -1,14 +1,14 @@
 @extends('admin.layouts.main')
 @section('content')
-@section('icon', 'account-multiple')
-@section('title', 'Data Mahasiswa Pendadaran')
+@section('icon', 'file')
+@section('title', 'Pengajuan Pendadaran')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div class="card-title mb-5">Pengajuan Pendadaran</div>
                 <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -29,27 +29,36 @@
                                 <td> {{ $nim }} </td>
                                 <td> {{ $namaJurusan }} </td>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">{{ $ketStatus }}</div>
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">Menunggu</span></td>
+                                @elseif($value->status == 1)
+                                <span class="badge badge-success">Diterima</span></td>
+                                @else
+                                <span class="badge badge-danger">Ditolak</span></td>
+                                @endif
+                                </td>
+                                <td>
+                                    @if($value->status == 0)
+                                    <div class="btn-group">
+                                        <a href="{{ route('pendadaran.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="{{ route('pendadaran.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
+                                    </div>
+                                    @elseif($value->status == 1)
+                                    diterima
+                                    @else
+                                    ditolak
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                        <a href="{{ route('pendadaran.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#detail"><i class="mdi mdi-information"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-warning btn-sm"><i class="mdi mdi-border-color"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <form action="#" method="GET">
+                                        <form action="{{ route('pendadaran.delete', $value->id)}}" method="GET">
+                                            @method('DELETE')
+                                            @csrf
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
@@ -62,82 +71,75 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Jadwal Pendadaran</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="table-responsive">
-                    <table class="table">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            @foreach ($pendadaran as $value )
+            <div class="card-body">
+                <div>
+                    <a href="{{ route('pendadaran.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
+                </div>
+                <h4 class="card-title my-4">Data Pengajuan</h4>
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td> <b>Nama</b> </td>
+                                <td> Nama</td>
                                 <td>:</td>
                                 <td> {{ $namaMahasiswa }} </td>
                             </tr>
                             <tr>
-                                <td> <b>NIM</b> </td>
+                                <td> NIM</td>
                                 <td>:</td>
                                 <td> {{ $nim }} </td>
                             </tr>
                             <tr>
-                                <td> <b>Transkip Nilai</b> </td>
+                                <td> Jurusan</td>
                                 <td>:</td>
-                                <td> {{ $value->transkip }} </td>
+                                <td> {{ $namaJurusan }} </td>
                             </tr>
                             <tr>
-                                <td> <b>Hasil UEPT</b> </td>
-                                <td>:</td>
-                                <td> {{ $value->hasiluept }} </td>
-                            </tr>
-                            <tr>
-                                <td> <b>Tanggal Pendadaran </b></td>
+                                <td> Diajukan Pada </td>
                                 <td>:</td>
                                 <td> {{ $value->tanggal }} </td>
                             </tr>
                             <tr>
-                                <td> <b>Waktu</b> </td>
+                                <td> Transkip Nilai </td>
                                 <td>:</td>
-                                <td> {{ $value->waktu }} </td>
+                                <td> {{ $value->transkip }} </td>
                             </tr>
                             <tr>
-                                <td> <b>Dosen Penguji 1</b></td>
+                                <td> Hasil UEPT </td>
                                 <td>:</td>
-                                <td> {{ $namaPenguji1 }} </td>
+                                <td> {{ $value->hasiluept }} </td>
                             </tr>
                             <tr>
-                                <td> <b>Dosen Penguji 2</b></td>
+                                <td> Form Distribusi TA </td>
                                 <td>:</td>
-                                <td> {{ $namaPenguji2 }} </td>
+                                <td> {{ $value->buktidistribusi }} </td>
                             </tr>
                             <tr>
-                                <td> <b>Dosen Penguji 3</b></td>
-                                <td>:</td>
-                                <td> {{ $namaPenguji3 }} </td>
-                            </tr>
-                            <tr>
-                                <td> <b>Dosen Penguji 4</b></td>
-                                <td>:</td>
-                                <td> {{ $namaPenguji4 }} </td>
-                            </tr>
-                            <tr>
-                                <td> <b>Status</b></td>
+                                <td> Status Pendaftaran </td>
                                 <td>:</td>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">{{ $ketStatus }}</div>
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">Menunggu</span></td>
+                                @elseif($value->status == 1)
+                                <span class="badge badge-success">Diterima</span></td>
+                                @else
+                                <span class="badge badge-danger">Ditolak</span></td>
+                                @endif
                                 </td>
+                            </tr>
+                            <tr>
+                                <td> Keterangan </td>
+                                <td>:</td>
+                                <td> {{ $value->ket }} </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>

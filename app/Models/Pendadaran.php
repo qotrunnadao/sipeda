@@ -22,10 +22,6 @@ class Pendadaran extends Model
     {
         return $this->belongsTo(Mahasiswa::class);
     }
-    public function Status()
-    {
-        return $this->belongsTo(Status::class);
-    }
     public function Tahunakademik()
     {
         return $this->belongsTo(Tahunakademik::class);

@@ -19,6 +19,8 @@
                                 <th> Jurusan </th>
                                 <th> File SPK </th>
                                 <th> Aksi </th>
+                                <th> View </th>
+                                <th> Download </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,6 +45,8 @@
                                         </form>
                                     </div>
                                 </td>
+                                <td><a href="">View</a></td>
+                                <td><a href="">Download</a></td>
                             </tr>
                         </tbody>
                         @endforeach
@@ -53,7 +57,7 @@
     </div>
 </div>
 
-<!-- Modal Tambah SK -->
+<!-- Modal Tambah SPK -->
 <div class="modal fade" id="uploadSPK" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -64,35 +68,41 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample">
+                <form class="forms-sample" action="{{route('spk.store')}}" method="post">
+                    @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option value="" selected disabled>PILIH</option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }}">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">NIM</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" name="nim" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
+                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" name="name" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Upload SPK</label>
                         <div class="input-group">
-                            <input type="file" class="form-control" />
+                            <input type="file" class="form-control" name="fileSPK" />
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>

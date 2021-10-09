@@ -30,9 +30,7 @@
                                 <td> {{ $value->aktif == 0 ? 'false' : 'true'}} </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata"
-                                         data-id='{{ $value->id }}' data-tahunakademik='{{ $value->tahunakademik }}'
-                                         data-semester='{{ $value->semester }}'data-aktif='{{ $value->aktif1 }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="#" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-namatahun='{{ $value->namaTahun }}' data-semester='{{ $value->Semester->id }}' data-aktif='{{ $value->aktif}}' data-route="{{ route('tahunAkademik.update', $value->id) }}"><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('tahunAkademik.destroy', $value->id) }}" method="GET">
@@ -157,18 +155,19 @@
 @section('javascripts')
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    var tahunakademik = button.data('tahunakademik') // Extract info from data-* attributes
-    var semester = button.data('semester') // Extract info from data-* attributes
-    var aktif1 = button.data('aktif1') // Extract info from data-* attributes
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var route = button.data('route')
+        var namaTahun = button.data('namatahun') // Extract info from data-* attributes
+        var semester = button.data('semester') // Extract info from data-* attributes
+        var aktif = button.data('aktif') // Extract info from data-* attributes
 
-    var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='namaTahun']").val(tahunakademik)
-    modal.find(".modal-body select[name='semester_id']").val(semester)
-    modal.find(".modal-body select[name='aktif']").val(aktif1)
-    modal.find(".modal-body form").attr("action",'/admin/tahun-akademik/update/'+id)
+        var modal = $(this)
+
+
+        modal.find(".modal-body input[name='namaTahun']").val(namaTahun)
+        modal.find(".modal-body select[name='semester_id']").val(semester)
+        modal.find(".modal-body select[name='aktif']").val(aktif)
+        modal.find(".modal-body form").attr("action",route)
     })
 </script>
 @endsection
