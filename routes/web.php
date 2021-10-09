@@ -100,7 +100,7 @@ Route::get('/tugas-akhir/spk/destroy/{id}', [SPKController::class, 'destroy'])->
 Route::get('/tugas-akhir/nilaita', [NilaiTAController::class, 'index'])->name('nilaita.index');
 Route::post('/tugas-akhir/nilaita/store', [NilaiTAController::class, 'store'])->name('nilaita.store');
 Route::put('/tugas-akhir/nilaita/update/{id}', [NilaiTAController::class, 'update'])->name('nilaita.update');
-Route::get('/tugas-akhir/nilaita/destroy/{id}', [NilaiTAController::class, 'destroy'])->name('nilaita.destroy');
+Route::get('/tugas-akhir/nilaita/delete/{id}', [NilaiTAController::class, 'destroy'])->name('nilaita.delete');
 
 
 //Pendadaran
@@ -115,6 +115,9 @@ Route::get('pendadaran/data-pendadaran/diterima/{pendadaran}', [PendadaranContro
 Route::get('pendadaran/data-pendadaran/ditolak/{pendadaran}', [PendadaranController::class, 'ditolak'])->name('pendadaran.ditolak');
 
 Route::get('pendadaran/nilai-pendadaran', [NilaiPendadaranController::class, 'index'])->name('nilaiPendadaran.index');
+Route::post('pendadaran/nilai-pendadaran/store', [NilaiPendadaranController::class, 'store'])->name('nilaiPendadaran.store');
+Route::put('pendadaran/nilai-pendadaran/update/{id}', [NilaiPendadaranController::class, 'update'])->name('nilaiPendadaran.update');
+Route::get('pendadaran/nilai-pendadaran/delete/{id}', [NilaiPendadaranController::class, 'destroy'])->name('nilaiPendadaran.delete');
 
 
 Route::get('/admin/pendadaran/pengajuan', function () {

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TA;
 use App\Models\Jurusan;
 use App\Models\NilaiTA;
 use App\Models\Mahasiswa;
-use App\Models\TA;
+use App\Models\StatusNilai;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -18,6 +19,7 @@ class NilaiTAController extends Controller
      */
     public function index()
     {
+        $statusnilai = StatusNilai::latest()->get();
         $nilai = NilaiTA::latest()->get();
         foreach ($nilai as $value) {
             $ta_id = $value->ta_id;
@@ -30,7 +32,7 @@ class NilaiTAController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('nilaiTA.index', compact('nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('nilaiTA.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
     }
 
     /**
@@ -95,7 +97,7 @@ class NilaiTAController extends Controller
         $data = $request->all();
         $value = NilaiTA::findOrFail($id);
         $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Jurusan');
+        Alert::success('Berhasil', 'Berhasil Ubah Status Nilai');
         return back();
     }
 

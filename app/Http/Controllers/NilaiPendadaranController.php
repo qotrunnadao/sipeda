@@ -7,6 +7,8 @@ use App\Models\Mahasiswa;
 use App\Models\Pendadaran;
 use Illuminate\Http\Request;
 use App\Models\NilaiPendadaran;
+use App\Models\StatusNilai;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NilaiPendadaranController extends Controller
 {
@@ -17,6 +19,7 @@ class NilaiPendadaranController extends Controller
      */
     public function index()
     {
+        $statusnilai = StatusNilai::latest()->get();
         $nilai = NilaiPendadaran::latest()->get();
         foreach ($nilai as $value) {
             $pendadaran_id = $value->pendadaran_id;
@@ -29,7 +32,7 @@ class NilaiPendadaranController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('nilaiPendadaran.index', compact('nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('nilaiPendadaran.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
     }
 
     /**
@@ -50,7 +53,14 @@ class NilaiPendadaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        NilaiPendadaran::create($data);
+        if (NilaiPendadaran::create($data)) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
+        } else {
+            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -82,9 +92,13 @@ class NilaiPendadaranController extends Controller
      * @param  \App\Models\NilaiPendadaran  $nilaiPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NilaiPendadaran $nilaiPendadaran)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = NilaiPendadaran::find($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Status Nilai');
+        return back();
     }
 
     /**
@@ -93,8 +107,11 @@ class NilaiPendadaranController extends Controller
      * @param  \App\Models\NilaiPendadaran  $nilaiPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NilaiPendadaran $nilaiPendadaran)
+    public function destroy($id)
     {
-        //
+        $nilai = NilaiPendadaran::find($id);
+        $nilai->delete();
+        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        return back();
     }
 }

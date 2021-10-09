@@ -19,6 +19,7 @@
                                 <th> Jurusan </th>
                                 <th> Nilai Angka </th>
                                 <th> Nilai Huruf </th>
+                                <th> Status Nilai</th>
                                 <th> Aksi</th>
                             </tr>
                         </thead>
@@ -33,11 +34,20 @@
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf }}</td>
                                 <td class="text-center">
+                                    @if($value->statusnilai_id == 1)
+                                    <span class="badge badge-warning">Entry dosen</span></td>
+                                @elseif($value->statusnilai_id == 2)
+                                <span class="badge badge-primary">Verifikasi Bapendik</span></td>
+                                @else
+                                <span class="badge badge-success">Upload SIA</span></td>
+                                @endif</td>
+
+                                <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{{ route('nilaita.update', $value->id) }}" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-ta_id='{{ $value->ta_id }}' data-nilaiAngka='{{ $value->nilaiAngka }}' data-nilaiHuruf='{{ $value->nilaiHuruf }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="{{ route('nilaita.destroy', $value->id) }}" method="GET">
+                                        <form action="{{ route('nilaiPendadaran.delete', $value->id) }}" method="GET">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
@@ -55,7 +65,7 @@
 </div>
 
 <!-- Tambah Jurusan -->
-<div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="tambahdata" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -65,15 +75,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{ route('nilaita.store') }}">
+                <form class="forms-sample" method="POST" action="{{ route('nilaiPendadaran.store') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail3">ID TA</label>
+                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="ta_id">
+                            <select type="text" class="form-control" name="pendadaran_id">
                                 <option value="">PILIH</option>
                                 @foreach ($nilai as $value)
-                                <option value="{{ $value->id }}" {{ $value->id == $value->ta_id ? 'selected' : '' }}>{{ $value->ta_id }}</option>
+                                <option value="{{ $value->id }}" {{ $value->id == $value->pendadaran_id ? 'selected' : '' }}>{{ $value->pendadaran_id }} {{ $namaMahasiswa }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -90,6 +100,17 @@
                             <input type="text" class="form-control" name="nilaiHuruf" />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Status Nilai</label>
+                        <div class="input-group">
+                            <select type="text" class="form-control" name="statusnilai_id">
+                                <option value="">PILIH</option>
+                                @foreach ($statusnilai as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
@@ -104,7 +125,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Nilai</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Status Nilai</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -114,21 +135,15 @@
                     @method('PUT')
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail3">ID TA</label>
+                        <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="ta_id" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Angka</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiAngka" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Huruf</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiHuruf" />
+                            <select type="text" class="form-control" name="statusnilai_id">
+                                <option value="">PILIH</option>
+                                @foreach ($statusnilai as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -145,15 +160,11 @@
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
-    var ta_id = button.data('ta_id')
-    var nilaiAngka = button.data('nilaiAngka')
-    var nilaiHuruf = button.data('nilaiHuruf')
+    var statusnilai_id = button.data('statusnilai_id')
     var modal = $(this)
     {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='ta_id']").val(ta_id)
-    modal.find(".modal-body input[name='nilaiAngka']").val(nilaiAngka)
-    modal.find(".modal-body input[name='nilaiHuruf']").val(nilaiHuruf)
-    modal.find(".modal-body form").attr("action",'/tugas-akhir/nilaita/update/'+id)
+    modal.find(".modal-body input[name='statusnilai_id']").val(statusnilai_id)
+    modal.find(".modal-body form").attr("action",'/pendadaran/nilai-pendadaran/update/'+id)
     })
 </script>
 @endsection

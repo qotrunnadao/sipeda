@@ -177,6 +177,28 @@
     <!-- Hapus Data -->
     <script>
         $(document).ready(function() {
+            $("#buttondatatable").on('click','.hapus', function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: 'Apakah anda yakin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1f3a93',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.value) {
+                        form.submit();
+                    }
+                })
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
             $("#datatable").on('click','.hapus', function(e) {
                 e.preventDefault();
                 var form = $(this).parents('form');
