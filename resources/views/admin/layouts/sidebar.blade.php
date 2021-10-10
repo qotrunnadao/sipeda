@@ -75,12 +75,10 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/pengajuan"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/jadwal"> Jadwal Yudisium</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/yudisium/upload-sk"> SK Kelulusan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/data-yudisium"> Pengajuan Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/sk-mahasiswa"> SK Kelulusan </a></li>
                 </ul>
             </div>
         </li>
-
     </ul>
 </nav>

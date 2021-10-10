@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TA;
-use App\Models\SPK;
+use App\Models\SK;
 use App\Models\Jurusan;
+use App\Models\Yudisium;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class SPKController extends Controller
+class SKController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +18,12 @@ class SPKController extends Controller
      */
     public function index()
     {
-        $spk = SPK::latest()->get();
-        $jurusan = jurusan::all();
-        foreach ($spk as $value) {
-            $ta_id = $value->TA_id;
-            $ta = TA::where('id', $ta_id)->first();
-            $mahasiswa_id = $ta->mahasiswa_id;
+        $jurusan = Jurusan::all();
+        $sk = SK::latest()->get();
+        foreach ($sk as $value) {
+            $yudisium_id = $value->yudisium_id;
+            $yudisium = Yudisium::where('id', $yudisium_id)->first();
+            $mahasiswa_id = $yudisium->mhs_id;
             $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
             $namaMahasiswa = $mhs_id->nama;
             $nim = $mhs_id->nim;
@@ -31,7 +31,7 @@ class SPKController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('SPK.index', compact('spk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan'));
+        return view('SK.index', compact('sk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan'));
     }
 
     /**
@@ -52,34 +52,25 @@ class SPKController extends Controller
      */
     public function store(Request $request)
     {
+        SK::create($request->all());
         $data = $request->all();
-        $cek = SPK::create($data);
-        if ($request->file('doc')) {
-            $file = $request->file('doc');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $request->file->move('assets/file', $filename);
-            $data->file = $filename;
-            $data->name = $request->name;
-            $data->description = $request->description;
-            $data->save();
+
+        if (SK::create($data)) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Izin');
         } else {
-            $data['doc'] = NULL;
+            Alert::warning('Gagal', 'Data Izin Gagal Ditambahkan');
         }
-        if ($cek == true) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
-        } else {
-            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
-        }
-        return back();
+
+        return redirect(route('sk.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SPK  $sPK
+     * @param  \App\Models\SK  $sK
      * @return \Illuminate\Http\Response
      */
-    public function show(SPK $sPK)
+    public function show(SK $sK)
     {
         //
     }
@@ -87,10 +78,10 @@ class SPKController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\SPK  $sPK
+     * @param  \App\Models\SK  $sK
      * @return \Illuminate\Http\Response
      */
-    public function edit(SPK $sPK)
+    public function edit(SK $sK)
     {
         //
     }
@@ -99,28 +90,24 @@ class SPKController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SPK  $sPK
+     * @param  \App\Models\SK  $sK
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SK $sK)
     {
-        $data = $request->all();
-        $value = SPK::findOrFail($id);
-        $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Jurusan');
-        return back();
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SPK  $sPK
+     * @param  \App\Models\SK  $sK
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $spk = SPK::find($id);
-        $spk->delete();
+        $nilai = SK::find($id);
+        $nilai->delete();
         Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
         return back();
     }

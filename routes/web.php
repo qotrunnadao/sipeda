@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SKController;
 use App\Http\Controllers\TAController;
 use App\Http\Controllers\SPKController;
 use App\Http\Controllers\UserController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\NilaiTAController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\SemhasTAController;
+use App\Http\Controllers\YudisiumController;
 use App\Http\Controllers\SempropTAController;
 use App\Http\Controllers\PendadaranController;
 use App\Http\Controllers\BerandaAdminController;
@@ -119,6 +121,20 @@ Route::post('pendadaran/nilai-pendadaran/store', [NilaiPendadaranController::cla
 Route::put('pendadaran/nilai-pendadaran/update/{id}', [NilaiPendadaranController::class, 'update'])->name('nilaiPendadaran.update');
 Route::get('pendadaran/nilai-pendadaran/delete/{id}', [NilaiPendadaranController::class, 'destroy'])->name('nilaiPendadaran.delete');
 
+
+//yudisium
+Route::get('yudisium/data-yudisium', [YudisiumController::class, 'index'])->name('yudisium.index');
+Route::get('yudisium/data-yudisium/create', [YudisiumController::class, 'create'])->name('yudisium.create');
+Route::post('yudisium/data-yudisium/store', [YudisiumController::class, 'store'])->name('yudisium.store');
+Route::get('yudisium/data-yudisium/edit/{id}', [YudisiumController::class, 'edit'])->name('yudisium.edit');
+Route::put('yudisium/data-yudisium/update/{id}', [YudisiumController::class, 'update'])->name('yudisium.update');
+Route::get('yudisium/data-yudisium/delete/{id}', [YudisiumController::class, 'destroy'])->name('yudisium.delete');
+Route::get('yudisium/data-yudisium/diterima/{yudisium}', [YudisiumController::class, 'diterima'])->name('yudisium.diterima');
+Route::get('yudisium/data-yudisium/ditolak/{yudisium}', [YudisiumController::class, 'ditolak'])->name('yudisium.ditolak');
+
+Route::get('yudisium/sk-mahasiswa', [SKController::class, 'index'])->name('sk.index');
+Route::post('yudisium/sk-mahasiswa/store', [SKController::class, 'store'])->name('sk.store');
+Route::get('yudisium/sk-mahasiswa/delete/{id}', [SKController::class, 'destroy'])->name('sk.delete');
 
 Route::get('/admin/pendadaran/pengajuan', function () {
     return view('admin.pendadaran.pengajuan');

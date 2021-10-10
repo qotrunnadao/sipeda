@@ -14,17 +14,9 @@ class Yudisium extends Model
     ];
     protected $primaryKey = 'id';
 
-    public function Dosen()
-    {
-        return $this->belongsTo(Dosen::class);
-    }
     public function Mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class);
-    }
-    public function Status()
-    {
-        return $this->belongsTo(Status::class);
     }
     public function Tahunakademik()
     {

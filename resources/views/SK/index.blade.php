@@ -6,11 +6,11 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#uploadSK"> <i class="mdi mdi-plus"></i> Tambah</button>
+                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -22,18 +22,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php ($no = 1)
+                            @foreach ($sk as $value )
                             <tr>
-                                <td> 1 </td>
-                                <td> Qotrunnada Oktiriani </td>
-                                <td> H1D018033 </td>
-                                <td> Informatika</td>
+                                <td> {{ $no++ }} </td>
+                                <td> {{ $namaMahasiswa }} </td>
+                                <td> {{ $nim }} </td>
+                                <td> {{ $namaJurusan }}</td>
                                 <td>
-                                    Surat Tugas-H1D018033
+                                    {{ $value->fileSK }}
                                 </td>
                                 <td>
-                                    <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
-                                    </div>
                                     <div class="btn-group">
                                         <form action="#" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
@@ -41,6 +40,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -50,45 +50,57 @@
 </div>
 
 <!-- Modal Tambah SK -->
-<div class="modal fade" id="uploadSK" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload Surat Kelulusan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Upload SK</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample">
+                <form class="forms-sample" action="{{route('sk.store')}}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">ID Yudisium</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="yudisium_id" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" name="name" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">NIM</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" name="nim" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option value="" selected disabled>PILIH</option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }}">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Upload Surat</label>
+                        <label for="exampleInputEmail3">Upload SK</label>
                         <div class="input-group">
-                            <input type="file" class="form-control" />
+                            <input type="file" class="form-control" name="fileSK" />
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
             </div>
         </div>
     </div>

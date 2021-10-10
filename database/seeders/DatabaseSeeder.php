@@ -455,5 +455,29 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('nilai_pendadaran')->insert($nilaiPendadaran);
+
+        $yudisium = [
+            [
+                'mhs_id' => 1,
+                'transkip' => "transkip - H1D018033",
+                'thnAkad_id' => 1,
+            ],
+            [
+                'mhs_id' => 2,
+                'transkip' => "transkip - H1D018009",
+                'thnAkad_id' => 1,
+            ],
+        ];
+
+        DB::table('yudisium')->insert($yudisium);
+
+        $SK = [
+            [
+                'yudisium_id' => 1,
+                'fileSK' => "SK - H1D018033",
+            ],
+        ];
+
+        DB::table('SK')->insert($SK);
     }
 }

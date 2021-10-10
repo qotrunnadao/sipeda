@@ -16,9 +16,12 @@ class CreateYudisiaTable extends Migration
         Schema::create('yudisium', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
-            $table->string('nosurat');
-            $table->foreignId('pejabartsk_id')->references('id')->on('dosen');
-            $table->foreignId('status_id')->references('id')->on('status');
+            $table->string('nosurat')->nullable();
+            $table->dateTime('tanggal')->nullable();
+            $table->time('waktu')->nullable();
+            $table->string('transkip');
+            $table->tinyInteger('status')->comment('0=proses review', '1=diterima', '2=ditolak', '3=selesai')->default(0);
+            $table->longText('ket')->nullable();
             $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik');
             $table->timestamps();
         });
