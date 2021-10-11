@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TA;
 use App\Models\Dosen;
+use App\Models\jurusan;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ class TAController extends Controller
     public function index()
     {
         $tugas_akhir = TA::latest()->get();
+        $jurusan = jurusan::get();
         foreach ($tugas_akhir as $value) {
             $dosen1_id = $value->pembimbing1_id;
             $dosen2_id = $value->pembimbing2_id;
@@ -28,7 +30,7 @@ class TAController extends Controller
             $status = Status::where('id', $status_id)->first();
             $ketStatus = $status->ket;
         }
-        return view('dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus'));
+        return view('dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'jurusan'));
     }
 
     /**

@@ -19,8 +19,6 @@
                                 <th> Jurusan </th>
                                 <th> File SPK </th>
                                 <th> Aksi </th>
-                                <th> View </th>
-                                <th> Download </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +36,14 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
+                                        <form action="{{ route('spk.download', $value->fileSPK) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download"><i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    {{-- <button type="submit" class="btn btn-gradient-warning btn-sm "><a href="{{ route('spk.view', $ta->ta_id) }}"><i class="mdi mdi-eye"></i></a></button> --}}
+                                    <div class="btn-group">
                                         <form action="{{ route('spk.destroy', $value->id) }}" method="GET">
                                             @method('DELETE')
                                             @csrf
@@ -45,8 +51,6 @@
                                         </form>
                                     </div>
                                 </td>
-                                <td><a href="">View</a></td>
-                                <td><a href="">Download</a></td>
                             </tr>
                         </tbody>
                         @endforeach
@@ -68,29 +72,35 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" action="{{route('spk.store')}}" method="post">
+                <form class="forms-sample" action="{{route('spk.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
                         <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
                             <select type="text" class="form-control" id="jurusan" name="jurusan">
-                                <option value="" selected disabled>PILIH</option>
+                                <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
-                                <option value="{{ $value->id }}">{{ $value->namaJurusan }}</option>
+                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">NIM</label>
+                        <label for="exampleInputEmail3"> NIM</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nim" />
+                            <select type="text" class="form-control" id="nim" name="nim">
+                                <option value="" selected disabled>Pilih NIM </option>
+                                {{-- @foreach ($taAll as $value)
+                                <option value="{{ $value->mahasiswa->id }} " data-id={{ $value->id }}" data-nama="{{ $value->mahasiswa->nama }}">{{ $value->mahasiswa->nim }}</option>
+                                @endforeach --}}
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="name" />
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -108,3 +118,50 @@
     </div>
 </div>
 @endsection
+@section('javascripts')
+<script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+        $("#nim").find('option').not(':first').remove();
+        $("#name").val('');
+        var id = $(this).val();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('spk.nim') }}",
+           data:{id:id},
+           success:function(data){
+               console.log(data)
+               var nim = document.getElementById('nim')
+                for (var i = 0; i < data.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                    nim.innerHTML = nim.innerHTML +
+                        '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
+
+                }
+           }
+        });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#ta_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
+</script>
+@endsection
+

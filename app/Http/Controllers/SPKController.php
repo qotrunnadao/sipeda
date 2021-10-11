@@ -8,6 +8,7 @@ use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Builder;
 
 class SPKController extends Controller
 {
@@ -20,6 +21,7 @@ class SPKController extends Controller
     {
         $spk = SPK::latest()->get();
         $jurusan = jurusan::all();
+        $taAll = TA::with(['mahasiswa'])->get();
         foreach ($spk as $value) {
             $ta_id = $value->TA_id;
             $ta = TA::where('id', $ta_id)->first();
@@ -31,7 +33,17 @@ class SPKController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('SPK.index', compact('spk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan'));
+        // dd($taAll);
+        return view('SPK.index', compact('spk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'ta', 'mhs_id', 'taAll'));
+    }
+
+    public function nim(Request $request)
+    {
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use($request) {
+            $query->where('jurusan_id', $request->id);
+        })->where('status_id','1')->get();
+        // dd($taAll);
+        return response()->json($taAll, 200);
     }
 
     /**
@@ -53,22 +65,22 @@ class SPKController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $cek = SPK::create($data);
-        if ($request->file('doc')) {
-            $file = $request->file('doc');
+        if ($request->file('fileSPK')) {
+            $file = $request->file('fileSPK');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $request->file->move('assets/file', $filename);
-            $data->file = $filename;
-            $data->name = $request->name;
-            $data->description = $request->description;
-            $data->save();
+            $path = $request->file('fileSPK')->storeAS('public/assets/file',$filename);
+            $data = [
+                'TA_id' => $request->ta_id,
+                'fileSPK' => $filename,
+            ];
+            $cek = SPK::create($data);
         } else {
             $data['doc'] = NULL;
         }
         if ($cek == true) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
+            Alert::success('Berhasil', 'Berhasil Tambah Data SPK');
         } else {
-            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
+            Alert::warning('Gagal', 'Data SPK Gagal Ditambahkan');
         }
         return back();
     }
@@ -84,16 +96,25 @@ class SPKController extends Controller
         //
     }
 
+    public function download($filename)
+   {
+    //    dd($filename);
+        return response()->download(public_path('storage/assets/file/'.$filename.''));
+   }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\SPK  $sPK
      * @return \Illuminate\Http\Response
      */
-    public function edit(SPK $sPK)
-    {
-        //
-    }
+//     public function view($id)
+//    {
+//    	$data=SPK::find($id);
+
+//    	return view('viewproduct',compact('data'));
+
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -107,7 +128,7 @@ class SPKController extends Controller
         $data = $request->all();
         $value = SPK::findOrFail($id);
         $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Jurusan');
+        Alert::success('Berhasil', 'Berhasil Ubah Data SPK');
         return back();
     }
 
@@ -121,7 +142,7 @@ class SPKController extends Controller
     {
         $spk = SPK::find($id);
         $spk->delete();
-        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        Alert::success('Berhasil', 'Berhasil hapus data SPK');
         return back();
     }
 }

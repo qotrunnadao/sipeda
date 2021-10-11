@@ -162,7 +162,10 @@ class DatabaseSeeder extends Seeder
                 'ket' => "Tidak Disetujui",
             ],
             [
-                'ket' => "Dalam Proses Review",
+                'ket' => "Dalam Proses Review Administrasi",
+            ],
+            [
+                'ket' => "Dalam Proses Review Komisi",
             ],
             [
                 'ket' => "Gagal",
@@ -256,6 +259,12 @@ class DatabaseSeeder extends Seeder
                 'password' => "H1D018026",
                 'level_id' => 4,
             ],
+            [
+                'email' => "atha.narentha@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018049",
+                'password' => "H1D018049",
+                'level_id' => 4,
+            ],
 
         ];
 
@@ -308,6 +317,16 @@ class DatabaseSeeder extends Seeder
                 'jurusan_id' => 2,
                 'user_id' => 6,
             ],
+            [
+                'alamat' => "Purwokerto",
+                'nama' => "Atha Narentha O",
+                'nim' => "H1A018049",
+                'nohp' => "082241443765",
+                'tmptLahir' => "Purwokerto",
+                'agama_id' => 1,
+                'jurusan_id' => 4,
+                'user_id' => 7,
+            ],
         ];
 
         DB::table('mahasiswa')->insert($mahasiswa);
@@ -351,6 +370,16 @@ class DatabaseSeeder extends Seeder
                 'pembimbing1_id' => 1,
                 'pembimbing2_id' => 1,
                 'status_id' => 2,
+                'thnAkad_id' => 1,
+            ],
+            [
+                'mahasiswa_id' => "4",
+                'judulTA' => "Sistem Pengelolaan Studi Akhir",
+                'instansi' => "Fakultas Teknik Unsoed",
+                'praproposal' => "proposal-H1D018049",
+                'pembimbing1_id' => 1,
+                'pembimbing2_id' => 1,
+                'status_id' => 1,
                 'thnAkad_id' => 1,
             ],
         ];

@@ -96,8 +96,10 @@ Route::get('/tugas-akhir/semhas', [SemhasTAController::class, 'index']);
 //spk
 Route::get('/tugas-akhir/spk', [SPKController::class, 'index'])->name('spk.index');
 Route::post('/tugas-akhir/spk/store', [SPKController::class, 'store'])->name('spk.store');
+Route::put('/tugas-akhir/spk/download/{filename}', [SPKController::class, 'download'])->name('spk.download');
 Route::put('/tugas-akhir/spk/update/{id}', [SPKController::class, 'update'])->name('spk.update');
 Route::get('/tugas-akhir/spk/destroy/{id}', [SPKController::class, 'destroy'])->name('spk.destroy');
+Route::post('/tugas-akhir/spk/nim/', [SPKController::class, 'nim'])->name('spk.nim');
 //nilai TA
 Route::get('/tugas-akhir/nilaita', [NilaiTAController::class, 'index'])->name('nilaita.index');
 Route::post('/tugas-akhir/nilaita/store', [NilaiTAController::class, 'store'])->name('nilaita.store');
