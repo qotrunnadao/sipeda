@@ -20,6 +20,7 @@ class SKController extends Controller
     {
         $jurusan = Jurusan::all();
         $sk = SK::latest()->get();
+        $yudisiumAll = Yudisium::with(['mahasiswa'])->get();
         foreach ($sk as $value) {
             $yudisium_id = $value->yudisium_id;
             $yudisium = Yudisium::where('id', $yudisium_id)->first();
@@ -31,7 +32,16 @@ class SKController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('SK.index', compact('sk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan'));
+        return view('SK.index', compact('sk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'yudisium', 'mhs_id', 'yudisiumAll'));
+    }
+
+    public function nim(Request $request)
+    {
+        $yudisiumAll = Yudisium::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+            $query->where('jurusan_id', $request->id);
+        })->where('status_id', '1')->get();
+        // dd($taAll);
+        return response()->json($yudisiumAll, 200);
     }
 
     /**
@@ -52,16 +62,25 @@ class SKController extends Controller
      */
     public function store(Request $request)
     {
-        SK::create($request->all());
         $data = $request->all();
-
-        if (SK::create($data)) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Izin');
+        if ($request->file('fileSK')) {
+            $file = $request->file('fileSK');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('fileSK')->storeAS('public/assets/sk', $filename);
+            $data = [
+                'yudisium_id' => $request->yudisium_id,
+                'fileSK' => $filename,
+            ];
+            $cek = SK::create($data);
         } else {
-            Alert::warning('Gagal', 'Data Izin Gagal Ditambahkan');
+            $data['doc'] = NULL;
         }
-
-        return redirect(route('sk.index'));
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data SK');
+        } else {
+            Alert::warning('Gagal', 'Data SK Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -73,6 +92,12 @@ class SKController extends Controller
     public function show(SK $sK)
     {
         //
+    }
+
+    public function download($filename)
+    {
+        //    dd($filename);
+        return response()->download(public_path('storage/assets/sk/' . $filename . ''));
     }
 
     /**
@@ -93,9 +118,13 @@ class SKController extends Controller
      * @param  \App\Models\SK  $sK
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SK $sK)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = SK::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Data SK');
+        return back();
     }
 
     /**
@@ -108,7 +137,7 @@ class SKController extends Controller
     {
         $nilai = SK::find($id);
         $nilai->delete();
-        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        Alert::success('Berhasil', 'Berhasil hapus SK');
         return back();
     }
 }

@@ -20,7 +20,7 @@ class CreateYudisiaTable extends Migration
             $table->dateTime('tanggal')->nullable();
             $table->time('waktu')->nullable();
             $table->string('transkip');
-            $table->tinyInteger('status')->comment('0=proses review', '1=diterima', '2=ditolak', '3=selesai')->default(0);
+            $table->foreignId('status_id')->references('id')->on('statusyudisium')->default(1);
             $table->longText('ket')->nullable();
             $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik');
             $table->timestamps();

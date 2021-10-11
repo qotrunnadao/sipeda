@@ -151,7 +151,7 @@ class YudisiumController extends Controller
     public function diterima(Yudisium $yudisium)
     {
         $data = array(
-            'status' => 1,
+            'statusyudisium_id' => 1,
         );
         $yudisium->update($data);
         Alert::success('Berhasil', 'Pengajuan Yudisium Diterima');
@@ -160,7 +160,7 @@ class YudisiumController extends Controller
     public function ditolak(Yudisium $yudisium)
     {
         $data = array(
-            'status' => 2,
+            'statusyudisium_id' => 2,
         );
         $yudisium->update($data);
         Alert::warning('Berhasil', 'Pengajuan Yudisium Ditolak');

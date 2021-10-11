@@ -243,6 +243,26 @@ class DatabaseSeeder extends Seeder
 
         DB::table('statuspendadaran')->insert($statuspendadaran);
 
+        $statusyudisium = [
+            [
+                'status' => "Review Bapendik",
+            ],
+            [
+                'status' => "Disetujui",
+            ],
+            [
+                'status' => "Tidak Disetujui",
+            ],
+            [
+                'status' => "Boleh Ajukan Lagi",
+            ],
+            [
+                'status' => "Selesai",
+            ],
+        ];
+
+        DB::table('statusyudisium')->insert($statusyudisium);
+
         $ruang = [
             [
                 'namaRuang' => "SEMINAR 1",
@@ -545,11 +565,13 @@ class DatabaseSeeder extends Seeder
                 'mhs_id' => 1,
                 'transkip' => "transkip - H1D018033",
                 'thnAkad_id' => 1,
+                'status_id' => 1,
             ],
             [
                 'mhs_id' => 2,
                 'transkip' => "transkip - H1D018009",
                 'thnAkad_id' => 1,
+                'status_id' => 1,
             ],
         ];
 

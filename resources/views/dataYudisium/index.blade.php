@@ -26,33 +26,28 @@
 
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $namaMahasiswa }} </td>
-                                <td> {{ $nim }}</td>
-                                <td> {{ $namaJurusan }}</td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
+                                <td> {{ $value->mahasiswa->nim }}</td>
+                                <td> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td> {{ $value->transkip }}</td>
                                 <td>
-                                    @if($value->status == 0)
-                                    <span class="badge badge-warning">Proses Review</span></td>
-                                @elseif($value->status == 1)
-                                <span class="badge badge-success">Diterima</span></td>
-                                @elseif($value->status == 2)
-                                <span class="badge badge-danger">Ditolak</span></td>
-                                @else
-                                <span class="badge badge-primary">Selesai</span></td>
-                                @endif
-                                </td>
+                                    <span class="badge badge-primary">{{ $value->statusyudisium->status }}</span></td>
                                 <td>
-                                    @if($value->status == 0)
+                                    @if($value->statusyudisium_id == 1)
                                     <div class="btn-group">
                                         <a href="{{ route('yudisium.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <a href="{{ route('yudisium.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
                                     </div>
-                                    @elseif($value->status == 1)
+                                    @elseif($value->statusyudisium_id == 2)
                                     diterima
+                                    @elseif($value->statusyudisium_id == 3)
+                                    tidak disetujui
+                                    @elseif($value->statusyudisium_id == 4)
+                                    boleh ajukan lagi
                                     @else
-                                    ditolak
+                                    Selesai
                                     @endif
                                 </td>
                                 <td>
@@ -80,7 +75,6 @@
         <div class="card">
             @foreach ($yudisium as $value )
             <div class="card-body">
-
                 <div>
                     <a href="{{ route('yudisium.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
                 </div>
@@ -92,17 +86,17 @@
                             <tr>
                                 <td> Nama</td>
                                 <td>:</td>
-                                <td> {{ $namaMahasiswa }} </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
                             </tr>
                             <tr>
                                 <td> NIM</td>
                                 <td>:</td>
-                                <td> {{ $nim }} </td>
+                                <td> {{ $value->mahasiswa->nim }} </td>
                             </tr>
                             <tr>
                                 <td> Jurusan</td>
                                 <td>:</td>
-                                <td> {{ $namaJurusan }} </td>
+                                <td> {{ $value->mahasiswa->jurusan->namaJurusan }} </td>
                             </tr>
                             <tr>
                                 <td> Diajukan Pada </td>
@@ -118,15 +112,7 @@
                                 <td> Status Yudisium </td>
                                 <td>:</td>
                                 <td>
-                                    @if($value->status == 0)
-                                    <span class="badge badge-warning">Proses Review</span></td>
-                                @elseif($value->status == 1)
-                                <span class="badge badge-success">Diterima</span></td>
-                                @elseif($value->status == 2)
-                                <span class="badge badge-danger">Ditolak</span></td>
-                                @else
-                                <span class="badge badge-primary">Selesai</span></td>
-                                @endif
+                                    <span class="badge badge-primary">{{ $value->statusyudisium->status }}</span>
                                 </td>
                             </tr>
                             <tr>

@@ -39,9 +39,9 @@ class SPKController extends Controller
 
     public function nim(Request $request)
     {
-        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use($request) {
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
             $query->where('jurusan_id', $request->id);
-        })->where('status_id','1')->get();
+        })->where('status_id', '1')->get();
         // dd($taAll);
         return response()->json($taAll, 200);
     }
@@ -68,7 +68,7 @@ class SPKController extends Controller
         if ($request->file('fileSPK')) {
             $file = $request->file('fileSPK');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('fileSPK')->storeAS('public/assets/file',$filename);
+            $path = $request->file('fileSPK')->storeAS('public/assets/file', $filename);
             $data = [
                 'TA_id' => $request->ta_id,
                 'fileSPK' => $filename,
@@ -97,10 +97,10 @@ class SPKController extends Controller
     }
 
     public function download($filename)
-   {
-    //    dd($filename);
-        return response()->download(public_path('storage/assets/file/'.$filename.''));
-   }
+    {
+        //    dd($filename);
+        return response()->download(public_path('storage/assets/file/' . $filename . ''));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -108,13 +108,13 @@ class SPKController extends Controller
      * @param  \App\Models\SPK  $sPK
      * @return \Illuminate\Http\Response
      */
-//     public function view($id)
-//    {
-//    	$data=SPK::find($id);
+    //     public function view($id)
+    //    {
+    //    	$data=SPK::find($id);
 
-//    	return view('viewproduct',compact('data'));
+    //    	return view('viewproduct',compact('data'));
 
-//    }
+    //    }
 
     /**
      * Update the specified resource in storage.

@@ -100,7 +100,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="name" id="name" value="" readonly/>
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group">
@@ -120,7 +120,6 @@
 @endsection
 @section('javascripts')
 <script>
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -164,4 +163,3 @@
 
 </script>
 @endsection
-

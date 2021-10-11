@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusYudisium;
 use Illuminate\Http\Request;
+use App\Models\StatusYudisium;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StatusYudisiumController extends Controller
 {
@@ -14,7 +15,10 @@ class StatusYudisiumController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'status' => StatusYudisium::latest()->get(),
+        );
+        return view('statusYudisium.index', $data);
     }
 
     /**
@@ -35,7 +39,14 @@ class StatusYudisiumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $cek = StatusYudisium::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Status Yudisium');
+        } else {
+            Alert::warning('Gagal', 'Status Pendadaran Gagal Yudisium');
+        }
+        return back();
     }
 
     /**
@@ -67,9 +78,13 @@ class StatusYudisiumController extends Controller
      * @param  \App\Models\StatusYudisium  $statusYudisium
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StatusYudisium $statusYudisium)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = StatusYudisium::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Status Yudisium');
+        return back();
     }
 
     /**
@@ -78,8 +93,11 @@ class StatusYudisiumController extends Controller
      * @param  \App\Models\StatusYudisium  $statusYudisium
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StatusYudisium $statusYudisium)
+    public function destroy($id)
     {
-        //
+        $status = StatusYudisium::find($id);
+        $status->delete();
+        Alert::success('Berhasil', 'Berhasil hapus status yudisium');
+        return back();
     }
 }
