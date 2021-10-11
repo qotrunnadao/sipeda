@@ -18,12 +18,17 @@ class Pendadaran extends Model
     {
         return $this->belongsTo(Dosen::class);
     }
-    public function Mahasiswa()
+    public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class, 'mhs_id');
     }
     public function Tahunakademik()
     {
         return $this->belongsTo(Tahunakademik::class);
+    }
+
+    public function StatusPendadaran()
+    {
+        return $this->belongsTo(StatusPendadaran::class, 'statuspendadaran_id');
     }
 }

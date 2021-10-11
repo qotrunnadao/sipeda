@@ -20,6 +20,7 @@ use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\KonsultasiTAController;
 use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\NilaiPendadaranController;
+use App\Http\Controllers\StatusPendadaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +119,12 @@ Route::get('/tugas-akhir/nilaita/delete/{id}', [NilaiTAController::class, 'destr
 
 
 //Pendadaran
+//status pendadaran
+Route::get('pendadaran/status-pendadaran', [StatusPendadaranController::class, 'index'])->name('statuspendadaran.index');
+Route::post('pendadaran/status-pendadaran/store', [StatusPendadaranController::class, 'store'])->name('statuspendadaran.store');
+Route::put('pendadaran/status-pendadaran/update/{id}', [StatusPendadaranController::class, 'update'])->name('statuspendadaran.update');
+Route::get('pendadaran/status-pendadaran/delete/{id}', [StatusPendadaranController::class, 'destroy'])->name('statuspendadaran.delete');
+
 //data pendadaran
 Route::get('pendadaran/data-pendadaran', [PendadaranController::class, 'index'])->name('pendadaran.index');
 Route::get('pendadaran/data-pendadaran/create', [PendadaranController::class, 'create'])->name('pendadaran.create');
@@ -127,7 +134,7 @@ Route::put('pendadaran/data-pendadaran/update/{id}', [PendadaranController::clas
 Route::get('pendadaran/data-pendadaran/delete/{id}', [PendadaranController::class, 'destroy'])->name('pendadaran.delete');
 Route::get('pendadaran/data-pendadaran/diterima/{pendadaran}', [PendadaranController::class, 'diterima'])->name('pendadaran.diterima');
 Route::get('pendadaran/data-pendadaran/ditolak/{pendadaran}', [PendadaranController::class, 'ditolak'])->name('pendadaran.ditolak');
-
+//nilai pendadaran
 Route::get('pendadaran/nilai-pendadaran', [NilaiPendadaranController::class, 'index'])->name('nilaiPendadaran.index');
 Route::post('pendadaran/nilai-pendadaran/store', [NilaiPendadaranController::class, 'store'])->name('nilaiPendadaran.store');
 Route::put('pendadaran/nilai-pendadaran/update/{id}', [NilaiPendadaranController::class, 'update'])->name('nilaiPendadaran.update');

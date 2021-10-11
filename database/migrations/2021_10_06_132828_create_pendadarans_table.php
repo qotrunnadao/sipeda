@@ -27,7 +27,7 @@ class CreatePendadaransTable extends Migration
             $table->foreignId('penguji2_id')->references('id')->on('dosen');
             $table->foreignId('penguji3_id')->references('id')->on('dosen');
             $table->foreignId('penguji4_id')->references('id')->on('dosen')->nullable();
-            $table->tinyInteger('status')->comment('0=menunggu', '1=diterima', '2=ditolak')->default(0);
+            $table->foreignId('statuspendadaran_id')->references('id')->on('statuspendadaran')->default(1);
             $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik');
             $table->longText('ket')->nullable();
             $table->timestamps();

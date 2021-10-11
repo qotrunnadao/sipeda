@@ -16,7 +16,6 @@
                                 <th> NIM </th>
                                 <th> Jurusan</th>
                                 <th> status </th>
-                                <th> verifikasi </th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
@@ -25,31 +24,11 @@
                             @foreach ($pendadaran as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $namaMahasiswa }}</td>
-                                <td> {{ $nim }} </td>
-                                <td> {{ $namaJurusan }} </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
+                                <td> {{ $value->mahasiswa->nim }} </td>
+                                <td> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
                                 <td>
-                                    @if($value->status == 0)
-                                    <span class="badge badge-warning">Menunggu</span></td>
-                                @elseif($value->status == 1)
-                                <span class="badge badge-success">Diterima</span></td>
-                                @else
-                                <span class="badge badge-danger">Ditolak</span></td>
-                                @endif
-                                </td>
-                                <td>
-                                    @if($value->status == 0)
-                                    <div class="btn-group">
-                                        <a href="{{ route('pendadaran.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <a href="{{ route('pendadaran.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
-                                    </div>
-                                    @elseif($value->status == 1)
-                                    diterima
-                                    @else
-                                    ditolak
-                                    @endif
+                                    <span class="badge badge-primary">{{ $value->statuspendadaran->status }}</span>
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -85,17 +64,17 @@
                             <tr>
                                 <td> Nama</td>
                                 <td>:</td>
-                                <td> {{ $namaMahasiswa }} </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
                             </tr>
                             <tr>
                                 <td> NIM</td>
                                 <td>:</td>
-                                <td> {{ $nim }} </td>
+                                <td> {{ $value->mahasiswa->nim }} </td>
                             </tr>
                             <tr>
                                 <td> Jurusan</td>
                                 <td>:</td>
-                                <td> {{ $namaJurusan }} </td>
+                                <td> {{ $value->mahasiswa->jurusan->namaJurusan }} </td>
                             </tr>
                             <tr>
                                 <td> Diajukan Pada </td>
@@ -121,13 +100,7 @@
                                 <td> Status Pendaftaran </td>
                                 <td>:</td>
                                 <td>
-                                    @if($value->status == 0)
-                                    <span class="badge badge-warning">Menunggu</span></td>
-                                @elseif($value->status == 1)
-                                <span class="badge badge-success">Diterima</span></td>
-                                @else
-                                <span class="badge badge-danger">Ditolak</span></td>
-                                @endif
+                                    <span class="badge badge-primary">{{ $value->statuspendadaran->status }}</span>
                                 </td>
                             </tr>
                             <tr>

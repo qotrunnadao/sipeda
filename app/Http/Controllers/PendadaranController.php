@@ -7,6 +7,7 @@ use App\Models\Status;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\Pendadaran;
+use App\Models\StatusPendadaran;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,21 +21,14 @@ class PendadaranController extends Controller
      */
     public function index()
     {
+        $status = StatusPendadaran::latest()->get();
         $pendadaran = Pendadaran::latest()->get();
+        $jurusan = jurusan::get();
         foreach ($pendadaran as $value) {
-            $mhs_id = $value->mhs_id;
-            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
-            $namaMahasiswa = $mahasiswa->nama;
-            $nim = $mahasiswa->nim;
-            $jurusan_id = $mahasiswa->jurusan_id;
-            $jurusan = Jurusan::where('id', $jurusan_id)->first();
-            $namaJurusan = $jurusan->namaJurusan;
-
             $penguji1_id = $value->penguji1_id;
             $penguji2_id = $value->penguji2_id;
             $penguji3_id = $value->penguji3_id;
             $penguji4_id = $value->penguji4_id;
-            $thnAkad_id = $value->thnAkad_id;
 
             $penguji1 = Dosen::where('id', $penguji1_id)->first();
             $namaPenguji1 = $penguji1->nama;
@@ -44,10 +38,8 @@ class PendadaranController extends Controller
             $namaPenguji3 = $penguji3->nama;
             $penguji4 = Dosen::where('id', $penguji4_id)->first();
             $namaPenguji4 = $penguji4->nama;
-            $thn = TahunAkademik::where('id', $thnAkad_id)->first();
-            $thnAkad = $thn->ket;
         }
-        return view('dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
     }
 
     /**
@@ -62,21 +54,22 @@ class PendadaranController extends Controller
         $data_pendadaran = new Pendadaran();
         $pendadaran = Pendadaran::get();
         $dosen = Dosen::get();
+        $status = StatusPendadaran::latest()->get();
+        $jurusan = jurusan::get();
         foreach ($pendadaran as $value) {
-            $mhs_id = $value->mhs_id;
-            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
-            $namaMahasiswa = $mahasiswa->nama;
-            $nim = $mahasiswa->nim;
-            $jurusan_id = $mahasiswa->jurusan_id;
-            $jurusan = Jurusan::where('id', $jurusan_id)->first();
-            $namaJurusan = $jurusan->namaJurusan;
-
             $penguji1_id = $value->penguji1_id;
             $penguji2_id = $value->penguji2_id;
             $penguji3_id = $value->penguji3_id;
             $penguji4_id = $value->penguji4_id;
-            $status_id = $value->status_id;
-            $thnAkad_id = $value->thnAkad_id;
+            $status_id = $value->statuspendadaran_id;
+            $mhs_id = $value->mhs_id;
+            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
+            $namaMahasiswa = $mahasiswa->nama;
+            $nim = $mahasiswa->nim;
+            $jrsn_id = $mahasiswa->jurusan_id;
+            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
+            $namaJurusan = $jurusan_id->namaJurusan;
+
             $penguji1 = Dosen::where('id', $penguji1_id)->first();
             $namaPenguji1 = $penguji1->nama;
             $penguji2 = Dosen::where('id', $penguji2_id)->first();
@@ -85,10 +78,10 @@ class PendadaranController extends Controller
             $namaPenguji3 = $penguji3->nama;
             $penguji4 = Dosen::where('id', $penguji4_id)->first();
             $namaPenguji4 = $penguji4->nama;
-            $thn = TahunAkademik::where('id', $thnAkad_id)->first();
-            $thnAkad = $thn->ket;
+            $stts = StatusPendadaran::where('id', $status_id)->first();
+            $ketStatus = $stts->status;
         }
-        return view('dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'dosen', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
     }
 
     /**
@@ -130,26 +123,27 @@ class PendadaranController extends Controller
      */
     public function edit($id)
     {
-        $pendadaran = Pendadaran::get();
-        $data_pendadaran = Pendadaran::find($id);
         $action = url('/pendadaran/data-pendadaran/update');
         $button = 'Edit';
+        $pendadaran = Pendadaran::get();
+        $data_pendadaran = Pendadaran::find($id);
         $dosen = Dosen::get();
+        $status = StatusPendadaran::latest()->get();
+        $jurusan = jurusan::get();
         foreach ($pendadaran as $value) {
-            $mhs_id = $value->mhs_id;
-            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
-            $namaMahasiswa = $mahasiswa->nama;
-            $nim = $mahasiswa->nim;
-            $jurusan_id = $mahasiswa->jurusan_id;
-            $jurusan = Jurusan::where('id', $jurusan_id)->first();
-            $namaJurusan = $jurusan->namaJurusan;
-
             $penguji1_id = $value->penguji1_id;
             $penguji2_id = $value->penguji2_id;
             $penguji3_id = $value->penguji3_id;
             $penguji4_id = $value->penguji4_id;
-            $status_id = $value->status_id;
-            $thnAkad_id = $value->thnAkad_id;
+            $status_id = $value->statuspendadaran_id;
+            $mhs_id = $value->mhs_id;
+            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
+            $namaMahasiswa = $mahasiswa->nama;
+            $nim = $mahasiswa->nim;
+            $jrsn_id = $mahasiswa->jurusan_id;
+            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
+            $namaJurusan = $jurusan_id->namaJurusan;
+
             $penguji1 = Dosen::where('id', $penguji1_id)->first();
             $namaPenguji1 = $penguji1->nama;
             $penguji2 = Dosen::where('id', $penguji2_id)->first();
@@ -158,10 +152,10 @@ class PendadaranController extends Controller
             $namaPenguji3 = $penguji3->nama;
             $penguji4 = Dosen::where('id', $penguji4_id)->first();
             $namaPenguji4 = $penguji4->nama;
-            $thn = TahunAkademik::where('id', $thnAkad_id)->first();
-            $thnAkad = $thn->ket;
+            $stts = StatusPendadaran::where('id', $status_id)->first();
+            $ketStatus = $stts->status;
         }
-        return view('dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'dosen', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
     }
 
     /**

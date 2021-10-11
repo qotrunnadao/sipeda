@@ -191,6 +191,58 @@ class DatabaseSeeder extends Seeder
 
         DB::table('statusnilai')->insert($statusnilai);
 
+        $statusta = [
+            [
+                'status' => "Review Bapendik",
+            ],
+            [
+                'status' => "Review Komisi",
+            ],
+            [
+                'status' => "Layak",
+            ],
+            [
+                'status' => "Tidak Layak",
+            ],
+            [
+                'status' => "Revisi",
+            ],
+            [
+                'status' => "Pelaksanaan TA",
+            ],
+            [
+                'status' => "Selesai",
+            ],
+        ];
+
+        DB::table('statusta')->insert($statusta);
+
+        $statuspendadaran = [
+            [
+                'status' => "Review Bapendik",
+            ],
+            [
+                'status' => "Review Komisi",
+            ],
+            [
+                'status' => "Layak",
+            ],
+            [
+                'status' => "Tidak Layak",
+            ],
+            [
+                'status' => "Revisi",
+            ],
+            [
+                'status' => "Pelaksanaan Pendadaran",
+            ],
+            [
+                'status' => "Selesai",
+            ],
+        ];
+
+        DB::table('statuspendadaran')->insert($statuspendadaran);
+
         $ruang = [
             [
                 'namaRuang' => "SEMINAR 1",
@@ -445,6 +497,7 @@ class DatabaseSeeder extends Seeder
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,
+                'statuspendadaran_id' => 1,
             ],
             [
                 'mhs_id' => 2,
@@ -457,6 +510,7 @@ class DatabaseSeeder extends Seeder
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,
+                'statuspendadaran_id' => 2,
             ],
             [
                 'mhs_id' => 3,
@@ -469,6 +523,7 @@ class DatabaseSeeder extends Seeder
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,
+                'statuspendadaran_id' => 3,
             ],
         ];
 
