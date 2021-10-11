@@ -162,10 +162,10 @@ class DatabaseSeeder extends Seeder
                 'ket' => "Tidak Disetujui",
             ],
             [
-                'ket' => "Dalam Proses Review Administrasi",
+                'ket' => "Review Bapendik",
             ],
             [
-                'ket' => "Dalam Proses Review Komisi",
+                'ket' => "Review Komisi",
             ],
             [
                 'ket' => "Gagal",

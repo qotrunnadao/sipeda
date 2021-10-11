@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisSeminar;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class SeminarController extends Controller
      */
     public function index()
     {
-        //
+        $jenis = JenisSeminar::latest()->get();
+        $seminar = Seminar::latest()->get();
+        return view('seminar.index', compact('jenis', 'seminar'));
     }
 
     /**
