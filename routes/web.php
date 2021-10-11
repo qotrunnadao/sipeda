@@ -86,9 +86,19 @@ Route::get('/admin/data-komisi', [KomisiController::class, 'index']);
 //data TA
 Route::get('/tugas-akhir/data-TA', [TAController::class, 'index'])->name('TA.index');
 Route::get('/tugas-akhir/detail-TA/{id}', [TAController::class, 'show'])->name('TA.show');
+Route::get('/tugas-akhir/data-TA/create', [TAController::class, 'create'])->name('TA.create');
+Route::get('/tugas-akhir/data-TA/store', [TAController::class, 'store'])->name('TA.store');
+Route::get('/tugas-akhir/data-TA/edit/{id}', [TAController::class, 'edit'])->name('TA.edit');
+Route::get('/tugas-akhir/data-TA/update/{id}', [TAController::class, 'update'])->name('TA.update');
+Route::get('/tugas-akhir/data-TA/delete/{id}', [TAController::class, 'destroy'])->name('TA.delete');
+
 //data Konsul
 Route::get('/tugas-akhir/data-konsultasi', [KonsultasiTAController::class, 'index'])->name('konsultasi.index');
 Route::get('/tugas-akhir/data-konsultasi/{id}', [KonsultasiTAController::class, 'show'])->name('konsultasi.show');
+
+//seminar
+Route::get('/tugas-akhir/seminar', [SeminarController::class, 'index']);
+
 //semprop
 Route::get('/tugas-akhir/semprop', [SempropTAController::class, 'index']);
 //semhas

@@ -36,8 +36,12 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="badge badge-warning badge-pill">{{ $konsultasi->status }}</div>
+                                    @if($konsultasi->verifikasiDosen == 0)
+                                    <span class="badge badge-danger">false</span></td>
+                                @else
+                                <span class="badge badge-success">true</span></td>
                                 </td>
+                                @endif
                                 <td>
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>

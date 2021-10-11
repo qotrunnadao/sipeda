@@ -62,6 +62,84 @@
             </div>
         </div>
     </div>
+
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            @foreach ($tugas_akhir as $value )
+            <div class="card-body">
+                <div>
+                    <a href="{{ route('TA.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
+                </div>
+                <h4 class="card-title mb-4">Pengajuan Tugas Akhir</h4>
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td> Nama</td>
+                                <td>:</td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
+                            </tr>
+                            <tr>
+                                <td> NIM</td>
+                                <td>:</td>
+                                <td> {{ $value->mahasiswa->nim }} </td>
+                            </tr>
+                            <tr>
+                                <td> Jurusan</td>
+                                <td>:</td>
+                                <td> {{ $value->mahasiswa->Jurusan->namaJurusan }} </td>
+                            </tr>
+                            <tr>
+                                <td> Diajukan Pada </td>
+                                <td>:</td>
+                                <td> {{ $value->created_at }} </td>
+                            </tr>
+                            <tr>
+                                <td> Judul Penelitian </td>
+                                <td>:</td>
+                                <td> {{ $value->judulTA }} </td>
+                            </tr>
+                            <tr>
+                                <td> Lokasi / Instansi</td>
+                                <td>:</td>
+                                <td> {{ $value->instansi }} </td>
+                            </tr>
+                            <tr>
+                                <td> Dosen Pembimbing 1</td>
+                                <td>:</td>
+                                <td> {{ $nama_dosen1 }} </td>
+                            </tr>
+                            <tr>
+                                <td> Dosen Pembimbing 2</td>
+                                <td>:</td>
+                                <td> {{ $nama_dosen1 }} </td>
+                            </tr>
+                            <tr>
+                                <td> File Pra Proposal</td>
+                                <td>:</td>
+                                <td> {{ $value->praproposal }} </td>
+                            </tr>
+                            <tr>
+                                <td> Status Pelaksanaan </td>
+                                <td>:</td>
+                                <td>
+                                    <div class="badge badge-danger badge-pill">{{ $ketStatus}}</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Keterangan </td>
+                                <td>:</td>
+                                <td>
+                                    {{ $value->ket }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
 </div>
 
 @endsection
