@@ -8,6 +8,7 @@ use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 
 class SPKController extends Controller
@@ -19,22 +20,23 @@ class SPKController extends Controller
      */
     public function index()
     {
-        $spk = SPK::latest()->get();
+        // $spk = SPK::latest()->get();
         $jurusan = jurusan::all();
         $taAll = TA::with(['mahasiswa'])->get();
-        foreach ($spk as $value) {
-            $ta_id = $value->TA_id;
-            $ta = TA::where('id', $ta_id)->first();
-            $mahasiswa_id = $ta->mahasiswa_id;
-            $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-            $namaMahasiswa = $mhs_id->nama;
-            $nim = $mhs_id->nim;
-            $jrsn_id = $mhs_id->jurusan_id;
-            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
-            $namaJurusan = $jurusan_id->namaJurusan;
-        }
-        // dd($taAll);
-        return view('SPK.index', compact('spk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'ta', 'mhs_id', 'taAll'));
+        // $spk = SPK::with(['TA', 'TA.Mahasiswa'])->latest()->get();
+
+        $spk = DB::table('spk')
+        ->join('ta', 'ta.id', '=', 'spk.ta_id')
+        ->join('mahasiswa', 'ta.mahasiswa_id', '=', 'mahasiswa.id')
+        ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
+        ->select('spk.fileSPK', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'spk.created_at')
+        // ->where('ta.mahasiswa_id', '=', $id)
+        ->latest()
+        ->get();
+
+
+        // dd($spk);
+        return view('SPK.index', compact('spk', 'jurusan', 'taAll'));
     }
 
     public function nim(Request $request)
@@ -77,6 +79,7 @@ class SPKController extends Controller
         } else {
             $data['doc'] = NULL;
         }
+        // dd($data);
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data SPK');
         } else {
@@ -138,11 +141,17 @@ class SPKController extends Controller
      * @param  \App\Models\SPK  $sPK
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($fileSPK)
     {
-        $spk = SPK::find($id);
-        $spk->delete();
-        Alert::success('Berhasil', 'Berhasil hapus data SPK');
+        $spk = SPK::where('fileSPK',$fileSPK)->first();
+        // $post =Post::where('id',$post_id)->first();
+        if ($spk != null) {
+            $spk->delete();
+            Alert::success('Berhasil', 'Berhasil hapus data SPK');
+            return back();
+        }
+        Alert::warning('Gagal', 'Data SPK Gagal Dihapus');
         return back();
+
     }
 }

@@ -117,6 +117,8 @@ Route::get('/tugas-akhir/nilaita', [NilaiTAController::class, 'index'])->name('n
 Route::post('/tugas-akhir/nilaita/store', [NilaiTAController::class, 'store'])->name('nilaita.store');
 Route::put('/tugas-akhir/nilaita/update/{id}', [NilaiTAController::class, 'update'])->name('nilaita.update');
 Route::get('/tugas-akhir/nilaita/delete/{id}', [NilaiTAController::class, 'destroy'])->name('nilaita.delete');
+Route::post('/tugas-akhir/nilaita/nim/', [NilaiTAController::class, 'nim'])->name('nilaita.nim');
+
 
 
 //Pendadaran
