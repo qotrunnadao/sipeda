@@ -89,64 +89,50 @@
                             </select>
                         </div>
                     </div>
-                    {{-- <div class="form-group">
-                        <label for="exampleInputEmail3">NIM Mahasiswa</label>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3"> NIM</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="pendadaran_id">
-                                <option selected disabled>Pilih NIM </option>
-                                @foreach ($pendadaran as $value)
-                                <option value="{{ $value->id }}" {{ $value->id == $value->pendadaran_id ? 'selected' : '' }}>{{ $value->pendadaran_id }} {{ $value->mahasiswa->nim}}</option>
-                    @endforeach
-                    </select>
-            </div>
-        </div> --}}
-        <div class="form-group">
-            <label for="exampleInputEmail3"> NIM</label>
-            <div class="input-group">
-                <select type="text" class="form-control" id="nim" name="nim">
-                    <option value="" selected disabled>Pilih NIM </option>
-                    {{-- @foreach ($taAll as $value)
-                                <option value="{{ $value->mahasiswa->id }} " data-id={{ $value->id }}" data-nama="{{ $value->mahasiswa->nama }}">{{ $value->mahasiswa->nim }}</option>
-                    @endforeach --}}
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail3">Nama Mahasiswa</label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="name" id="name" value="" readonly />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail3">Nilai Angka</label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="nilaiAngka" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail3">Nilai Huruf</label>
-            <div class="input-group">
-                <input type="text" class="form-control" name="nilaiHuruf" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail3">Status Nilai</label>
-            <div class="input-group">
-                <select type="text" class="form-control" name="statusnilai_id">
-                    <option value="">PILIH</option>
-                    @foreach ($statusnilai as $value)
-                    <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}</option>
-                    @endforeach
-                </select>
+                            <select type="text" class="form-control" id="nim" name="nim">
+                                <option value="" selected disabled>Pilih NIM </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nilai Angka</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nilaiAngka" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nilai Huruf</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nilaiHuruf" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Status Nilai</label>
+                        <div class="input-group">
+                            <select type="text" class="form-control" name="statusnilai_id">
+                                <option value="">PILIH</option>
+                                @foreach ($statusnilai as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-        </form>
     </div>
-</div>
-</div>
 </div>
 
 <!--edit Jurusan -->
