@@ -10,7 +10,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -42,7 +42,6 @@
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download"><i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
-                                    {{-- <button type="submit" class="btn btn-gradient-warning btn-sm "><a href="{{ route('spk.view', $ta->ta_id) }}"><i class="mdi mdi-eye"></i></a></button> --}}
                                     <div class="btn-group">
                                         <form action="{{ route('spk.destroy', $value->fileSPK) }}" method="GET">
                                             @method('DELETE')

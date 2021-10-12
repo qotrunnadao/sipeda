@@ -19,10 +19,10 @@ class NilaiTA extends Model
 
     public function TA()
     {
-        return $this->belongsTo(TA::class);
+        return $this->belongsTo(TA::class, 'ta_id');
     }
     public function StatusNilai()
     {
-        return $this->belongsTo(StatusNilai::class);
+        return $this->belongsTo(StatusNilai::class, 'statusnilai_id');
     }
 }

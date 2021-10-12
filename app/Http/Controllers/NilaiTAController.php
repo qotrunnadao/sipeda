@@ -9,6 +9,7 @@ use App\Models\Mahasiswa;
 use App\Models\StatusNilai;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Builder;
 
 class NilaiTAController extends Controller
 {
@@ -19,6 +20,8 @@ class NilaiTAController extends Controller
      */
     public function index()
     {
+        $jurusan = Jurusan::latest()->get();
+        $taAll = TA::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::latest()->get();
         $nilai = NilaiTA::latest()->get();
         foreach ($nilai as $value) {
@@ -32,9 +35,17 @@ class NilaiTAController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('nilaiTA.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('nilaiTA.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'taAll'));
     }
 
+    public function nim(Request $request)
+    {
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+            $query->where('jurusan_id', $request->id);
+        })->where('status_id', '1')->get();
+        // dd($taAll);
+        return response()->json($taAll, 200);
+    }
     /**
      * Show the form for creating a new resource.
      *

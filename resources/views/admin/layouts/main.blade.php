@@ -124,9 +124,6 @@
         buttons: [ 'csv', 'excel', 'pdf', 'print', 'colvis' ]
     } );
 
-    table.buttons().container()
-        .appendTo( '#example_wrapper .col-md-6:eq(0)' );
-
 	} );
     </script>
     <!-- datatable -->
