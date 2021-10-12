@@ -62,6 +62,7 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/status-pendadaran"> Status Pendadaran </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/data-pendadaran"> Pengajuan Pendadaran </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/nilai-pendadaran"> Nilai Pendadaran </a></li>
                 </ul>
@@ -76,8 +77,9 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/status-yudisium"> Status Yudisium </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/data-yudisium"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/sk-mahasiswa"> SK Kelulusan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/sk"> SK Kelulusan </a></li>
                 </ul>
             </div>
         </li>

@@ -19,12 +19,13 @@ class NilaiPendadaranController extends Controller
      */
     public function index()
     {
+        $pendadaran = Pendadaran::latest()->get();
         $statusnilai = StatusNilai::latest()->get();
         $nilai = NilaiPendadaran::latest()->get();
         foreach ($nilai as $value) {
             $pendadaran_id = $value->pendadaran_id;
-            $pendadaran = Pendadaran::where('id', $pendadaran_id)->first();
-            $mahasiswa_id = $pendadaran->mhs_id;
+            $pdd = Pendadaran::where('id', $pendadaran_id)->first();
+            $mahasiswa_id = $pdd->mhs_id;
             $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
             $namaMahasiswa = $mhs_id->nama;
             $nim = $mhs_id->nim;
@@ -32,7 +33,7 @@ class NilaiPendadaranController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('nilaiPendadaran.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('nilaiPendadaran.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'pendadaran'));
     }
 
     /**

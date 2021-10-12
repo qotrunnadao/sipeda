@@ -191,6 +191,78 @@ class DatabaseSeeder extends Seeder
 
         DB::table('statusnilai')->insert($statusnilai);
 
+        $statusta = [
+            [
+                'status' => "Review Bapendik",
+            ],
+            [
+                'status' => "Review Komisi",
+            ],
+            [
+                'status' => "Layak",
+            ],
+            [
+                'status' => "Tidak Layak",
+            ],
+            [
+                'status' => "Revisi",
+            ],
+            [
+                'status' => "Pelaksanaan TA",
+            ],
+            [
+                'status' => "Selesai",
+            ],
+        ];
+
+        DB::table('statusta')->insert($statusta);
+
+        $statuspendadaran = [
+            [
+                'status' => "Review Bapendik",
+            ],
+            [
+                'status' => "Review Komisi",
+            ],
+            [
+                'status' => "Layak",
+            ],
+            [
+                'status' => "Tidak Layak",
+            ],
+            [
+                'status' => "Revisi",
+            ],
+            [
+                'status' => "Pelaksanaan Pendadaran",
+            ],
+            [
+                'status' => "Selesai",
+            ],
+        ];
+
+        DB::table('statuspendadaran')->insert($statuspendadaran);
+
+        $statusyudisium = [
+            [
+                'status' => "Review Bapendik",
+            ],
+            [
+                'status' => "Disetujui",
+            ],
+            [
+                'status' => "Tidak Disetujui",
+            ],
+            [
+                'status' => "Boleh Ajukan Lagi",
+            ],
+            [
+                'status' => "Selesai",
+            ],
+        ];
+
+        DB::table('statusyudisium')->insert($statusyudisium);
+
         $ruang = [
             [
                 'namaRuang' => "SEMINAR 1",
@@ -446,6 +518,7 @@ class DatabaseSeeder extends Seeder
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,
+                'statuspendadaran_id' => 1,
             ],
             [
                 'mhs_id' => 2,
@@ -458,6 +531,7 @@ class DatabaseSeeder extends Seeder
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,
+                'statuspendadaran_id' => 2,
             ],
             [
                 'mhs_id' => 3,
@@ -470,6 +544,7 @@ class DatabaseSeeder extends Seeder
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,
+                'statuspendadaran_id' => 3,
             ],
         ];
 
@@ -491,11 +566,13 @@ class DatabaseSeeder extends Seeder
                 'mhs_id' => 1,
                 'transkip' => "transkip - H1D018033",
                 'thnAkad_id' => 1,
+                'status_id' => 1,
             ],
             [
                 'mhs_id' => 2,
                 'transkip' => "transkip - H1D018009",
                 'thnAkad_id' => 1,
+                'status_id' => 1,
             ],
         ];
 

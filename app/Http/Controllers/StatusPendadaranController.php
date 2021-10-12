@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusPendadaran;
 use Illuminate\Http\Request;
+use App\Models\StatusPendadaran;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StatusPendadaranController extends Controller
 {
@@ -14,7 +15,10 @@ class StatusPendadaranController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'status' => StatusPendadaran::latest()->get(),
+        );
+        return view('statusPendadaran.index', $data);
     }
 
     /**
@@ -35,7 +39,14 @@ class StatusPendadaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $cek = StatusPendadaran::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Status Pendadaran');
+        } else {
+            Alert::warning('Gagal', 'Status Pendadaran Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -67,9 +78,13 @@ class StatusPendadaranController extends Controller
      * @param  \App\Models\StatusPendadaran  $statusPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StatusPendadaran $statusPendadaran)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = StatusPendadaran::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Status Pendadaran');
+        return back();
     }
 
     /**
@@ -78,8 +93,11 @@ class StatusPendadaranController extends Controller
      * @param  \App\Models\StatusPendadaran  $statusPendadaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StatusPendadaran $statusPendadaran)
+    public function destroy($id)
     {
-        //
+        $status = StatusPendadaran::find($id);
+        $status->delete();
+        Alert::success('Berhasil', 'Berhasil hapus status pendadaran');
+        return back();
     }
 }

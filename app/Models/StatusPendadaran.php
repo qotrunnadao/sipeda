@@ -13,4 +13,9 @@ class StatusPendadaran extends Model
         'status',
     ];
     protected $primaryKey = 'id';
+
+    public function StatusPendadaran()
+    {
+        return $this->belongsTo(StatusPendadaran::class);
+    }
 }

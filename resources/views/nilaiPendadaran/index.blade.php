@@ -28,9 +28,9 @@
                             @foreach ($nilai as $value )
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
-                                <td class="text-center"> {{ $namaMahasiswa }} </td>
-                                <td class="text-center"> {{ $nim }}</td>
-                                <td class="text-center"> {{ $namaJurusan }}</td>
+                                <td class="text-center"> {{ $value->pendadaran->mahasiswa->nama }} </td>
+                                <td class="text-center"> {{ $value->pendadaran->mahasiswa->nim }}</td>
+                                <td class="text-center"> {{ $value->pendadaran->mahasiswa->jurusan->namaJurusan}}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf }}</td>
                                 <td class="text-center">
@@ -82,8 +82,8 @@
                         <div class="input-group">
                             <select type="text" class="form-control" name="pendadaran_id">
                                 <option value="">PILIH</option>
-                                @foreach ($nilai as $value)
-                                <option value="{{ $value->id }}" {{ $value->id == $value->pendadaran_id ? 'selected' : '' }}>{{ $value->pendadaran_id }} {{ $namaMahasiswa }}</option>
+                                @foreach ($pendadaran as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->pendadaran_id ? 'selected' : '' }}>{{ $value->pendadaran_id }} {{ $value->mahasiswa->nama}}</option>
                                 @endforeach
                             </select>
                         </div>

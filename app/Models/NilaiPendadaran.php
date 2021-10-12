@@ -19,10 +19,10 @@ class NilaiPendadaran extends Model
 
     public function Pendadaran()
     {
-        return $this->belongsTo(Pendadaran::class);
+        return $this->belongsTo(Pendadaran::class, 'pendadaran_id');
     }
     public function StatusNilai()
     {
-        return $this->belongsTo(StatusNilai::class);
+        return $this->belongsTo(StatusNilai::class, 'statusnilai_id');
     }
 }

@@ -19,7 +19,9 @@ use App\Http\Controllers\PendadaranController;
 use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\KonsultasiTAController;
 use App\Http\Controllers\TahunAkademikController;
+use App\Http\Controllers\StatusYudisiumController;
 use App\Http\Controllers\NilaiPendadaranController;
+use App\Http\Controllers\StatusPendadaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +122,12 @@ Route::post('/tugas-akhir/nilaita/nim/', [NilaiTAController::class, 'nim'])->nam
 
 
 //Pendadaran
+//status pendadaran
+Route::get('pendadaran/status-pendadaran', [StatusPendadaranController::class, 'index'])->name('statuspendadaran.index');
+Route::post('pendadaran/status-pendadaran/store', [StatusPendadaranController::class, 'store'])->name('statuspendadaran.store');
+Route::put('pendadaran/status-pendadaran/update/{id}', [StatusPendadaranController::class, 'update'])->name('statuspendadaran.update');
+Route::get('pendadaran/status-pendadaran/delete/{id}', [StatusPendadaranController::class, 'destroy'])->name('statuspendadaran.delete');
+
 //data pendadaran
 Route::get('pendadaran/data-pendadaran', [PendadaranController::class, 'index'])->name('pendadaran.index');
 Route::get('pendadaran/data-pendadaran/create', [PendadaranController::class, 'create'])->name('pendadaran.create');
@@ -129,14 +137,19 @@ Route::put('pendadaran/data-pendadaran/update/{id}', [PendadaranController::clas
 Route::get('pendadaran/data-pendadaran/delete/{id}', [PendadaranController::class, 'destroy'])->name('pendadaran.delete');
 Route::get('pendadaran/data-pendadaran/diterima/{pendadaran}', [PendadaranController::class, 'diterima'])->name('pendadaran.diterima');
 Route::get('pendadaran/data-pendadaran/ditolak/{pendadaran}', [PendadaranController::class, 'ditolak'])->name('pendadaran.ditolak');
-
+//nilai pendadaran
 Route::get('pendadaran/nilai-pendadaran', [NilaiPendadaranController::class, 'index'])->name('nilaiPendadaran.index');
 Route::post('pendadaran/nilai-pendadaran/store', [NilaiPendadaranController::class, 'store'])->name('nilaiPendadaran.store');
 Route::put('pendadaran/nilai-pendadaran/update/{id}', [NilaiPendadaranController::class, 'update'])->name('nilaiPendadaran.update');
 Route::get('pendadaran/nilai-pendadaran/delete/{id}', [NilaiPendadaranController::class, 'destroy'])->name('nilaiPendadaran.delete');
 
-
-//yudisium
+//=================== yudisium =========================
+//status yudisium
+Route::get('yudisium/status-yudisium', [StatusYudisiumController::class, 'index'])->name('statusyudisium.index');
+Route::post('yudisium/status-yudisium/store', [StatusYudisiumController::class, 'store'])->name('statusyudisium.store');
+Route::put('yudisium/status-yudisium/update/{id}', [StatusYudisiumController::class, 'update'])->name('statusyudisium.update');
+Route::get('yudisium/status-yudisium/delete/{id}', [StatusYudisiumController::class, 'destroy'])->name('statusyudisium.delete');
+//data yudisium
 Route::get('yudisium/data-yudisium', [YudisiumController::class, 'index'])->name('yudisium.index');
 Route::get('yudisium/data-yudisium/create', [YudisiumController::class, 'create'])->name('yudisium.create');
 Route::post('yudisium/data-yudisium/store', [YudisiumController::class, 'store'])->name('yudisium.store');
@@ -145,10 +158,14 @@ Route::put('yudisium/data-yudisium/update/{id}', [YudisiumController::class, 'up
 Route::get('yudisium/data-yudisium/delete/{id}', [YudisiumController::class, 'destroy'])->name('yudisium.delete');
 Route::get('yudisium/data-yudisium/diterima/{yudisium}', [YudisiumController::class, 'diterima'])->name('yudisium.diterima');
 Route::get('yudisium/data-yudisium/ditolak/{yudisium}', [YudisiumController::class, 'ditolak'])->name('yudisium.ditolak');
+// sk kelulusan
+Route::get('/yudisium/sk', [SKController::class, 'index'])->name('sk.index');
+Route::post('/yudisium/sk/store', [SKController::class, 'store'])->name('sk.store');
+Route::put('/yudisium/sk/download/{filename}', [SPKController::class, 'download'])->name('sk.download');
+Route::put('/yudisium/sk/update/{id}', [SKController::class, 'update'])->name('sk.update');
+Route::get('/yudisium/sk/destroy/{id}', [SKController::class, 'destroy'])->name('sk.destroy');
+Route::post('/yudisium/sk/nim/', [SKController::class, 'nim'])->name('sk.nim');
 
-Route::get('yudisium/sk-mahasiswa', [SKController::class, 'index'])->name('sk.index');
-Route::post('yudisium/sk-mahasiswa/store', [SKController::class, 'store'])->name('sk.store');
-Route::get('yudisium/sk-mahasiswa/delete/{id}', [SKController::class, 'destroy'])->name('sk.delete');
 
 Route::get('/admin/pendadaran/pengajuan', function () {
     return view('admin.pendadaran.pengajuan');
