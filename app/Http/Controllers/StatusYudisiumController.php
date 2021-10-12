@@ -16,7 +16,7 @@ class StatusYudisiumController extends Controller
     public function index()
     {
         $data = array(
-            'status' => StatusYudisium::latest()->get(),
+            'status' => StatusYudisium::get(),
         );
         return view('statusYudisium.index', $data);
     }

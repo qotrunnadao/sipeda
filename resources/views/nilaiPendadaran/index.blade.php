@@ -77,47 +77,76 @@
             <div class="modal-body">
                 <form class="forms-sample" method="POST" action="{{ route('nilaiPendadaran.store') }}">
                     @csrf
+                    <input type="hidden" class="form-control" id="pendadaran_id" name="pendadaran_id" value="">
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <label for="exampleInputEmail3">Jurusan</label>
+                        <div class="input-group">
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option selected disabled>Pilih Jurusan </option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    {{-- <div class="form-group">
+                        <label for="exampleInputEmail3">NIM Mahasiswa</label>
                         <div class="input-group">
                             <select type="text" class="form-control" name="pendadaran_id">
-                                <option value="">PILIH</option>
+                                <option selected disabled>Pilih NIM </option>
                                 @foreach ($pendadaran as $value)
-                                <option value="{{ $value->id }}" {{ $value->id == $value->pendadaran_id ? 'selected' : '' }}>{{ $value->pendadaran_id }} {{ $value->mahasiswa->nama}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Angka</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiAngka" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Huruf</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiHuruf" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Status Nilai</label>
-                        <div class="input-group">
-                            <select type="text" class="form-control" name="statusnilai_id">
-                                <option value="">PILIH</option>
-                                @foreach ($statusnilai as $value)
-                                <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+                                <option value="{{ $value->id }}" {{ $value->id == $value->pendadaran_id ? 'selected' : '' }}>{{ $value->pendadaran_id }} {{ $value->mahasiswa->nim}}</option>
+                    @endforeach
+                    </select>
+            </div>
+        </div> --}}
+        <div class="form-group">
+            <label for="exampleInputEmail3"> NIM</label>
+            <div class="input-group">
+                <select type="text" class="form-control" id="nim" name="nim">
+                    <option value="" selected disabled>Pilih NIM </option>
+                    {{-- @foreach ($taAll as $value)
+                                <option value="{{ $value->mahasiswa->id }} " data-id={{ $value->id }}" data-nama="{{ $value->mahasiswa->nama }}">{{ $value->mahasiswa->nim }}</option>
+                    @endforeach --}}
+                </select>
             </div>
         </div>
+        <div class="form-group">
+            <label for="exampleInputEmail3">Nama Mahasiswa</label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="name" id="name" value="" readonly />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail3">Nilai Angka</label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="nilaiAngka" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail3">Nilai Huruf</label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="nilaiHuruf" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail3">Status Nilai</label>
+            <div class="input-group">
+                <select type="text" class="form-control" name="statusnilai_id">
+                    <option value="">PILIH</option>
+                    @foreach ($statusnilai as $value)
+                    <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+        </form>
     </div>
+</div>
+</div>
 </div>
 
 <!--edit Jurusan -->
@@ -166,5 +195,49 @@
     modal.find(".modal-body input[name='statusnilai_id']").val(statusnilai_id)
     modal.find(".modal-body form").attr("action",'/pendadaran/nilai-pendadaran/update/'+id)
     })
+</script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+        $("#nim").find('option').not(':first').remove();
+        $("#name").val('');
+        var id = $(this).val();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('nilaipendadaran.nim') }}",
+           data:{id:id},
+           success:function(data){
+               console.log(data)
+               var nim = document.getElementById('nim')
+                for (var i = 0; i < data.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                    nim.innerHTML = nim.innerHTML +
+                        '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
+
+                }
+           }
+        });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#pendadaran_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
 </script>
 @endsection

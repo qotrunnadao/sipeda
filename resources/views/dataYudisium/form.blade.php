@@ -14,7 +14,7 @@
                             Nama
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="namaMahasiswa" value="@if ($button == 'Tambah'){{ old('namaMahasiswa') }}@else{{ $namaMahasiswa }}@endif" />
+                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="namaMahasiswa" value="@if ($button == 'Tambah'){{ old('namaMahasiswa') }}@else{{ $data_yudisium->mahasiswa->nama }}@endif" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -22,7 +22,7 @@
                             NIM
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="@if ($button == 'Tambah'){{ old('nim') }}@else{{ $nim }}@endif" />
+                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="@if ($button == 'Tambah'){{ old('nim') }}@else{{ $data_yudisium->mahasiswa->nim }}@endif" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -30,7 +30,7 @@
                             Jurusan
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="@if ($button == 'Tambah'){{ old('namaJurusan') }}@else{{ $namaJurusan }}@endif" />
+                            <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="@if ($button == 'Tambah'){{ old('namaJurusan') }}@else{{ $data_yudisium->mahasiswa->jurusan->namaJurusan }}@endif" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -69,13 +69,10 @@
                             Status
                         </label>
                         <div class="col-sm-9">
-                            <select name="status" id="status" class="form-control">
-                                <option value="">PILIH</option>
-                                <option value="0" {{ $data_yudisium->status == 0 ? 'selected' : '' }}>Proses Review</option>
-                                <option value="1" {{ $data_yudisium->status == 1 ? 'selected' : '' }}>Diterima</option>
-                                <option value="2" {{ $data_yudisium->status == 2 ? 'selected' : '' }}>Ditolak</option>
-                                <option value="3" {{ $data_yudisium->status == 2 ? 'selected' : '' }}>Selesai</option>
-
+                            <select name="statusyudisium_id" id="statusyudisium" class="form-control">
+                                @foreach ($status as $value )
+                                <option value="@if ($button == 'Tambah'){{ old('ketStatus') }}@else{{ $ketStatus }}@endif">{{ $value->status}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ use App\Models\Yudisium;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Builder;
 
 class SKController extends Controller
 {

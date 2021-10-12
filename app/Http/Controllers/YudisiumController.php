@@ -7,6 +7,7 @@ use App\Models\Yudisium;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
+use App\Models\StatusYudisium;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class YudisiumController extends Controller
@@ -45,6 +46,7 @@ class YudisiumController extends Controller
         $button = 'Tambah';
         $data_yudisium = new Yudisium();
         $yudisium = Yudisium::get();
+		$status = StatusYudisium::get();
         foreach ($yudisium as $value) {
             $mhs_id = $value->mhs_id;
             $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
@@ -57,7 +59,7 @@ class YudisiumController extends Controller
             $thn = TahunAkademik::where('id', $thnAkad_id)->first();
             $thnAkad = $thn->ket;
         }
-        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'yudisium', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'yudisium', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan', 'status'));
     }
 
     /**
@@ -103,6 +105,7 @@ class YudisiumController extends Controller
         $data_yudisium = Yudisium::find($id);
         $action = url('/yudisium/data-yudisium/update');
         $button = 'Edit';
+		$status = StatusYudisium::get();
         foreach ($yudisium as $value) {
             $mhs_id = $value->mhs_id;
             $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
@@ -115,7 +118,7 @@ class YudisiumController extends Controller
             $thn = TahunAkademik::where('id', $thnAkad_id)->first();
             $thnAkad = $thn->ket;
         }
-        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'yudisium', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'yudisium', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan', 'status'));
     }
 
     /**

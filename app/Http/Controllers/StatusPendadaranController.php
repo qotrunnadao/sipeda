@@ -16,7 +16,7 @@ class StatusPendadaranController extends Controller
     public function index()
     {
         $data = array(
-            'status' => StatusPendadaran::latest()->get(),
+            'status' => StatusPendadaran::get(),
         );
         return view('statusPendadaran.index', $data);
     }

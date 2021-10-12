@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\NilaiPendadaran;
 use App\Models\StatusNilai;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Builder;
 
 class NilaiPendadaranController extends Controller
 {
@@ -19,7 +20,8 @@ class NilaiPendadaranController extends Controller
      */
     public function index()
     {
-        $pendadaran = Pendadaran::latest()->get();
+        $jurusan = Jurusan::latest()->get();
+        $pendadaran = Pendadaran::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::latest()->get();
         $nilai = NilaiPendadaran::latest()->get();
         foreach ($nilai as $value) {
@@ -33,7 +35,16 @@ class NilaiPendadaranController extends Controller
             $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
             $namaJurusan = $jurusan_id->namaJurusan;
         }
-        return view('nilaiPendadaran.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'pendadaran'));
+        return view('nilaiPendadaran.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'pendadaran', 'jurusan'));
+    }
+
+    public function nim(Request $request)
+    {
+        $pendadaranAll = Pendadaran::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+            $query->where('jurusan_id', $request->id);
+        })->where('statuspendadaran_id', '1')->get();
+        // dd($taAll);
+        return response()->json($pendadaranAll, 200);
     }
 
     /**

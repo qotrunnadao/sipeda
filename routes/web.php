@@ -140,6 +140,8 @@ Route::get('pendadaran/nilai-pendadaran', [NilaiPendadaranController::class, 'in
 Route::post('pendadaran/nilai-pendadaran/store', [NilaiPendadaranController::class, 'store'])->name('nilaiPendadaran.store');
 Route::put('pendadaran/nilai-pendadaran/update/{id}', [NilaiPendadaranController::class, 'update'])->name('nilaiPendadaran.update');
 Route::get('pendadaran/nilai-pendadaran/delete/{id}', [NilaiPendadaranController::class, 'destroy'])->name('nilaiPendadaran.delete');
+Route::post('/pendadaran/nilai-pendadaran/nim/', [NilaiPendadaranController::class, 'nim'])->name('nilaipendadaran.nim');
+
 
 //=================== yudisium =========================
 //status yudisium
