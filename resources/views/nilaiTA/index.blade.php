@@ -28,14 +28,15 @@
                             @foreach ($nilai as $value )
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
-                                <td class="text-center"> {{ $namaMahasiswa }} </td>
-                                <td class="text-center"> {{ $nim }}</td>
-                                <td class="text-center"> {{ $namaJurusan }}</td>
+                                <td class="text-center"> {{ $value->ta->mahasiswa->nama }} </td>
+                                <td class="text-center"> {{ $value->ta->mahasiswa->nim }}</td>
+                                <td class="text-center"> {{ $value->ta->mahasiswa->jurusan->namaJurusan}}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf }}</td>
                                 <td class="text-center">
                                     @if($value->statusnilai_id == 1)
-                                    <span class="badge badge-warning">Entry dosen</span></td>
+                                    <span class="badge badge-warning">Entry dosen</span>
+                                </td>
                                 @elseif($value->statusnilai_id == 2)
                                 <span class="badge badge-primary">Verifikasi Bapendik</span></td>
                                 @else
@@ -77,15 +78,30 @@
             <div class="modal-body">
                 <form class="forms-sample" method="POST" action="{{ route('nilaita.store') }}">
                     @csrf
+                    <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Jurusan</label>
+                        <div class="input-group">
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option selected disabled>Pilih Jurusan </option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3"> NIM</label>
+                        <div class="input-group">
+                            <select type="text" class="form-control" id="nim" name="nim">
+                                <option value="" selected disabled>Pilih NIM </option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="ta_id">
-                                <option value="">PILIH</option>
-                                @foreach ($nilai as $value)
-                                <option value="{{ $value->id }}" {{ $value->id == $value->ta_id ? 'selected' : '' }}>{{ $value->ta_id }} {{ $namaMahasiswa }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group">
@@ -166,5 +182,49 @@
     modal.find(".modal-body input[name='statusnilai_id']").val(statusnilai_id)
     modal.find(".modal-body form").attr("action",'/tugas-akhir/nilaita/update/'+id)
     })
+</script>
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+        $("#nim").find('option').not(':first').remove();
+        $("#name").val('');
+        var id = $(this).val();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('nilaita.nim') }}",
+           data:{id:id},
+           success:function(data){
+               console.log(data)
+               var nim = document.getElementById('nim')
+                for (var i = 0; i < data.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                    nim.innerHTML = nim.innerHTML +
+                        '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
+
+                }
+           }
+        });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#ta_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
 </script>
 @endsection
