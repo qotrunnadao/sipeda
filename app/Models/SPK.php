@@ -19,4 +19,8 @@ class SPK extends Model
     {
         return $this->belongsTo(TA::class);
     }
+    public function Mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class);
+    }
 }

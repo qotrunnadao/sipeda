@@ -419,6 +419,7 @@ class DatabaseSeeder extends Seeder
                 'statusnilai_id' => 3,
                 'nilaiAngka' => 80.00,
                 'nilaiHuruf' => "A",
+                'filenilaiTA' => "Berita Acara - H1D018033",
             ],
         ];
 

@@ -26,11 +26,11 @@
                             @foreach ($spk as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $namaMahasiswa}} </td>
+                                <td> {{ $value->nama}} </td>
                                 <td>
-                                    {{ $nim }}
+                                    {{ $value->nim }}
                                 </td>
-                                <td> {{ $namaJurusan }}</td>
+                                <td> {{ $value->namaJurusan }}</td>
                                 <td>
                                     {{ $value->fileSPK }}
                                 </td>
@@ -44,7 +44,7 @@
                                     </div>
                                     {{-- <button type="submit" class="btn btn-gradient-warning btn-sm "><a href="{{ route('spk.view', $ta->ta_id) }}"><i class="mdi mdi-eye"></i></a></button> --}}
                                     <div class="btn-group">
-                                        <form action="{{ route('spk.destroy', $value->id) }}" method="GET">
+                                        <form action="{{ route('spk.destroy', $value->fileSPK) }}" method="GET">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
