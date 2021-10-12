@@ -170,7 +170,7 @@ Route::get('yudisium/data-yudisium/ditolak/{yudisium}', [YudisiumController::cla
 // sk kelulusan
 Route::get('/yudisium/sk', [SKController::class, 'index'])->name('sk.index');
 Route::post('/yudisium/sk/store', [SKController::class, 'store'])->name('sk.store');
-Route::put('/yudisium/sk/download/{filename}', [SPKController::class, 'download'])->name('sk.download');
+Route::put('/yudisium/sk/download/{filename}', [SKController::class, 'download'])->name('sk.download');
 Route::put('/yudisium/sk/update/{id}', [SKController::class, 'update'])->name('sk.update');
 Route::get('/yudisium/sk/destroy/{id}', [SKController::class, 'destroy'])->name('sk.destroy');
 Route::post('/yudisium/sk/nim/', [SKController::class, 'nim'])->name('sk.nim');

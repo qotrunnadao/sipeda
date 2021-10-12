@@ -12,8 +12,9 @@ class NilaiTA extends Model
     protected $fillable = [
         'nilaiHuruf',
         'nilaiAngka',
-        'status_nilai_id',
+        'statusnilai_id',
         'ta_id',
+        'filenilaiTA',
     ];
     protected $primaryKey = 'id';
 

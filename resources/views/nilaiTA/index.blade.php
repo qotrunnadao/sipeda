@@ -76,7 +76,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{ route('nilaita.store') }}">
+                <form class="forms-sample" method="POST" action="{{ route('nilaita.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
@@ -114,6 +114,12 @@
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="nilaiHuruf" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Upload Berita Acara</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" name="filenilaiTA" />
                         </div>
                     </div>
                     <div class="form-group">

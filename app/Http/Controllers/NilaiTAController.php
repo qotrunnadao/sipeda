@@ -36,23 +36,6 @@ class NilaiTAController extends Controller
 
         // dd($spk);
         return view('nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-
-        // $jurusan = Jurusan::latest()->get();
-        // $taAll = TA::with(['mahasiswa'])->get();
-        // $statusnilai = StatusNilai::latest()->get();
-        // $nilai = NilaiTA::latest()->get();
-        // foreach ($nilai as $value) {
-        //     $ta_id = $value->ta_id;
-        //     $ta = TA::where('id', $ta_id)->first();
-        //     $mahasiswa_id = $ta->mahasiswa_id;
-        //     $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-        //     $namaMahasiswa = $mhs_id->nama;
-        //     $nim = $mhs_id->nim;
-        //     $jrsn_id = $mhs_id->jurusan_id;
-        //     $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
-        //     $namaJurusan = $jurusan_id->namaJurusan;
-        // }
-        // return view('nilaiTA.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'taAll'));
     }
 
     public function nim(Request $request)
@@ -82,11 +65,26 @@ class NilaiTAController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $cek = NilaiTA::create($data);
-        if ($cek == true) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
+        // dd($data);
+        if ($request->file('filenilaiTA')) {
+            $file = $request->file('filenilaiTA');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('filenilaiTA')->storeAS('public/assets/file/nilaiTA', $filename);
+            $data = [
+                'filenilaiTA' => $filename,
+                'ta_id' => $request->ta_id,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilaiHuruf' => $request->nilaiHuruf,
+                'statusnilai_id' => $request->statusnilai_id,
+            ];
+            $cek = NilaiTA::create($data);
         } else {
-            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
+            $data['doc'] = NULL;
+        }
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Nilai Tugas Akhir');
+        } else {
+            Alert::warning('Gagal', 'Data Nilai Tugas Akhir Gagal Ditambahkan');
         }
         return back();
     }
