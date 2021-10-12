@@ -26,9 +26,11 @@
                             @foreach ($sk as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $namaMahasiswa }} </td>
-                                <td> {{ $nim }} </td>
-                                <td> {{ $namaJurusan }}</td>
+                                <td> {{ $value->nama}} </td>
+                                <td>
+                                    {{ $value->nim }}
+                                </td>
+                                <td> {{ $value->namaJurusan }}</td>
                                 <td>
                                     {{ $value->fileSK }}
                                 </td>
@@ -41,7 +43,9 @@
                                         </form>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="#" method="GET">
+                                        <form action="{{ route('sk.destroy', $value->fileSK) }}" method="GET">
+                                            @method('DELETE')
+                                            @csrf
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>

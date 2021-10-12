@@ -26,13 +26,13 @@ class SPKController extends Controller
         // $spk = SPK::with(['TA', 'TA.Mahasiswa'])->latest()->get();
 
         $spk = DB::table('spk')
-        ->join('ta', 'ta.id', '=', 'spk.ta_id')
-        ->join('mahasiswa', 'ta.mahasiswa_id', '=', 'mahasiswa.id')
-        ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-        ->select('spk.fileSPK', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'spk.created_at')
-        // ->where('ta.mahasiswa_id', '=', $id)
-        ->latest()
-        ->get();
+            ->join('ta', 'ta.id', '=', 'spk.ta_id')
+            ->join('mahasiswa', 'ta.mahasiswa_id', '=', 'mahasiswa.id')
+            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
+            ->select('spk.fileSPK', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'spk.created_at')
+            // ->where('ta.mahasiswa_id', '=', $id)
+            ->latest()
+            ->get();
 
 
         // dd($spk);
@@ -143,7 +143,7 @@ class SPKController extends Controller
      */
     public function destroy($fileSPK)
     {
-        $spk = SPK::where('fileSPK',$fileSPK)->first();
+        $spk = SPK::where('fileSPK', $fileSPK)->first();
         // $post =Post::where('id',$post_id)->first();
         if ($spk != null) {
             $spk->delete();
@@ -152,6 +152,5 @@ class SPKController extends Controller
         }
         Alert::warning('Gagal', 'Data SPK Gagal Dihapus');
         return back();
-
     }
 }

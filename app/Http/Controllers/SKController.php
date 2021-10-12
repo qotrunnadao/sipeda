@@ -7,6 +7,7 @@ use App\Models\Jurusan;
 use App\Models\Yudisium;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -19,21 +20,35 @@ class SKController extends Controller
      */
     public function index()
     {
-        $jurusan = Jurusan::all();
-        $sk = SK::latest()->get();
+        $jurusan = jurusan::all();
         $yudisiumAll = Yudisium::with(['mahasiswa'])->get();
-        foreach ($sk as $value) {
-            $yudisium_id = $value->yudisium_id;
-            $yudisium = Yudisium::where('id', $yudisium_id)->first();
-            $mahasiswa_id = $yudisium->mhs_id;
-            $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-            $namaMahasiswa = $mhs_id->nama;
-            $nim = $mhs_id->nim;
-            $jrsn_id = $mhs_id->jurusan_id;
-            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
-            $namaJurusan = $jurusan_id->namaJurusan;
-        }
-        return view('SK.index', compact('sk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'yudisium', 'mhs_id', 'yudisiumAll'));
+
+        $sk = DB::table('sk')
+            ->join('yudisium', 'yudisium.id', '=', 'sk.yudisium_id')
+            ->join('mahasiswa', 'yudisium.mhs_id', '=', 'mahasiswa.id')
+            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
+            ->select('sk.fileSK', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'sk.created_at')
+            ->latest()
+            ->get();
+
+        return view('SK.index', compact('sk', 'jurusan', 'yudisiumAll'));
+
+
+        // $jurusan = Jurusan::all();
+        // $sk = SK::latest()->get();
+        // $yudisiumAll = Yudisium::with(['mahasiswa'])->get();
+        // foreach ($sk as $value) {
+        //     $yudisium_id = $value->yudisium_id;
+        //     $yudisium = Yudisium::where('id', $yudisium_id)->first();
+        //     $mahasiswa_id = $yudisium->mhs_id;
+        //     $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
+        //     $namaMahasiswa = $mhs_id->nama;
+        //     $nim = $mhs_id->nim;
+        //     $jrsn_id = $mhs_id->jurusan_id;
+        //     $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
+        //     $namaJurusan = $jurusan_id->namaJurusan;
+        // }
+        // return view('SK.index', compact('sk', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'yudisium', 'mhs_id', 'yudisiumAll'));
     }
 
     public function nim(Request $request)
@@ -134,11 +149,16 @@ class SKController extends Controller
      * @param  \App\Models\SK  $sK
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($fileSK)
     {
-        $nilai = SK::find($id);
-        $nilai->delete();
-        Alert::success('Berhasil', 'Berhasil hapus SK');
+        $sk = SK::where('fileSK', $fileSK)->first();
+        // $post =Post::where('id',$post_id)->first();
+        if ($sk != null) {
+            $sk->delete();
+            Alert::success('Berhasil', 'Berhasil hapus data SK');
+            return back();
+        }
+        Alert::warning('Gagal', 'Data SK Gagal Dihapus');
         return back();
     }
 }
