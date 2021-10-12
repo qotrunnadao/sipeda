@@ -13,7 +13,7 @@ class NilaiTA extends Model
         'nilaiHuruf',
         'nilaiAngka',
         'status_nilai_id',
-        'TA_id',
+        'ta_id',
     ];
     protected $primaryKey = 'id';
 

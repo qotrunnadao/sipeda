@@ -8,6 +8,7 @@ use App\Models\NilaiTA;
 use App\Models\Mahasiswa;
 use App\Models\StatusNilai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -20,22 +21,38 @@ class NilaiTAController extends Controller
      */
     public function index()
     {
-        $jurusan = Jurusan::latest()->get();
+        $jurusan = jurusan::all();
         $taAll = TA::with(['mahasiswa'])->get();
-        $statusnilai = StatusNilai::latest()->get();
-        $nilai = NilaiTA::latest()->get();
-        foreach ($nilai as $value) {
-            $ta_id = $value->ta_id;
-            $ta = TA::where('id', $ta_id)->first();
-            $mahasiswa_id = $ta->mahasiswa_id;
-            $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-            $namaMahasiswa = $mhs_id->nama;
-            $nim = $mhs_id->nim;
-            $jrsn_id = $mhs_id->jurusan_id;
-            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
-            $namaJurusan = $jurusan_id->namaJurusan;
-        }
-        return view('nilaiTA.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'taAll'));
+        $statusnilai = StatusNilai::all();
+        $nilai = DB::table('nilaita')
+            ->join('ta', 'ta.id', '=', 'nilaita.ta_id')
+            ->join('mahasiswa', 'ta.mahasiswa_id', '=', 'mahasiswa.id')
+            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
+            ->select('nilaita.statusnilai_id', 'nilaita.nilaiAngka', 'nilaita.nilaiHuruf', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'nilaita.created_at', 'nilaita.id')
+            // ->where('ta.mahasiswa_id', '=', $id)
+            ->latest()
+            ->get();
+
+
+        // dd($spk);
+        return view('nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
+
+        // $jurusan = Jurusan::latest()->get();
+        // $taAll = TA::with(['mahasiswa'])->get();
+        // $statusnilai = StatusNilai::latest()->get();
+        // $nilai = NilaiTA::latest()->get();
+        // foreach ($nilai as $value) {
+        //     $ta_id = $value->ta_id;
+        //     $ta = TA::where('id', $ta_id)->first();
+        //     $mahasiswa_id = $ta->mahasiswa_id;
+        //     $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
+        //     $namaMahasiswa = $mhs_id->nama;
+        //     $nim = $mhs_id->nim;
+        //     $jrsn_id = $mhs_id->jurusan_id;
+        //     $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
+        //     $namaJurusan = $jurusan_id->namaJurusan;
+        // }
+        // return view('nilaiTA.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'jurusan', 'taAll'));
     }
 
     public function nim(Request $request)

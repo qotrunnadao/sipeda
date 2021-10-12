@@ -43,6 +43,7 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/statusta"> Status TA </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-TA"> Pengajuan TA </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-konsultasi"> Data Konsultasi</a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/seminar"> Pengajuan Seminar </a></li>

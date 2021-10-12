@@ -28,9 +28,9 @@
                             @foreach ($nilai as $value )
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
-                                <td class="text-center"> {{ $value->ta->mahasiswa->nama }} </td>
-                                <td class="text-center"> {{ $value->ta->mahasiswa->nim }}</td>
-                                <td class="text-center"> {{ $value->ta->mahasiswa->jurusan->namaJurusan}}</td>
+                                <td class="text-center"> {{ $value->nama }} </td>
+                                <td class="text-center"> {{ $value->nim }}</td>
+                                <td class="text-center"> {{ $value->namaJurusan}}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf }}</td>
                                 <td class="text-center">

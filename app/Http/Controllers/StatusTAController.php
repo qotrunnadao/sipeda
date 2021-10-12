@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StatusTA;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StatusTAController extends Controller
 {
@@ -14,7 +15,10 @@ class StatusTAController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'status' => StatusTA::get(),
+        );
+        return view('statusTA.index', $data);
     }
 
     /**
@@ -24,7 +28,6 @@ class StatusTAController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -35,7 +38,14 @@ class StatusTAController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $cek = StatusTA::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Status TA');
+        } else {
+            Alert::warning('Gagal', 'Status TA Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -67,9 +77,13 @@ class StatusTAController extends Controller
      * @param  \App\Models\StatusTA  $statusTA
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StatusTA $statusTA)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = StatusTA::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Status TA');
+        return back();
     }
 
     /**
@@ -78,8 +92,11 @@ class StatusTAController extends Controller
      * @param  \App\Models\StatusTA  $statusTA
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StatusTA $statusTA)
+    public function destroy($id)
     {
-        //
+        $status = StatusTA::find($id);
+        $status->delete();
+        Alert::success('Berhasil', 'Berhasil hapus status TA');
+        return back();
     }
 }

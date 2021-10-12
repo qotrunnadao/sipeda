@@ -22,6 +22,7 @@ use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\StatusYudisiumController;
 use App\Http\Controllers\NilaiPendadaranController;
 use App\Http\Controllers\StatusPendadaranController;
+use App\Http\Controllers\StatusTAController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,12 @@ Route::get('/admin/data-dosen', [DosenController::class, 'index']);
 Route::get('/admin/data-komisi', [KomisiController::class, 'index']);
 
 //Tugas Akhir
+//status TA
+Route::get('/tugas-akhir/statusta', [StatusTAController::class, 'index'])->name('statusta.index');
+Route::post('/tugas-akhir/statusta/store', [StatusTAController::class, 'store'])->name('statusta.store');
+Route::put('/tugas-akhir/statusta/update/{id}', [StatusTAController::class, 'update'])->name('statusta.update');
+Route::get('/tugas-akhir/statusta/delete/{id}', [StatusTAController::class, 'destroy'])->name('statusta.delete');
+
 //data TA
 Route::get('/tugas-akhir/data-TA', [TAController::class, 'index'])->name('TA.index');
 Route::get('/tugas-akhir/detail-TA/{id}', [TAController::class, 'show'])->name('TA.show');
