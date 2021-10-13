@@ -35,6 +35,22 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
+                            Judul Tugas Akhir
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Judul Tugas Akhir" name="judulTA" value="@if ($button == 'Tambah'){{ old('judulTA') }}@else{{ $data_TA->judulTA }}@endif" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            Instansi / Lokasi Penelitian
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Instansi / Lokasi Penelitian" name="instansi" value="@if ($button == 'Tambah'){{ old('instansi') }}@else{{ $data_TA->instansi }}@endif" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
                             Praporosal
                         </label>
                         <div class="col-sm-9">
