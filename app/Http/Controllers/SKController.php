@@ -32,7 +32,6 @@ class SKController extends Controller
             ->get();
 
         return view('SK.index', compact('sk', 'jurusan', 'yudisiumAll'));
-
     }
 
     public function nim(Request $request)
@@ -64,8 +63,16 @@ class SKController extends Controller
     {
         $data = $request->all();
         if ($request->file('fileSK')) {
+            $sk = SK::latest()->get();
+            foreach ($sk as $value) {
+                $yudisium_id = $value->yudisium_id;
+                $yds = Yudisium::where('id', $yudisium_id)->first();
+                $mahasiswa_id = $yds->mhs_id;
+                $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
+                $nim = $mhs_id->nim;
+            }
             $file = $request->file('fileSK');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filename = 'SK' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('fileSK')->storeAS('public/assets/file/sk', $filename);
             $data = [
                 'yudisium_id' => $request->yudisium_id,
@@ -99,7 +106,6 @@ class SKController extends Controller
         // dd($filename);
         // return response()->download(public_path('storage/assets/sk/' . $filename . ''));
         return response()->download(public_path('storage/assets/file/sk/' . $filename . ''));
-
     }
 
     /**

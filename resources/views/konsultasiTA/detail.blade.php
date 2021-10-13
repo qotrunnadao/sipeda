@@ -16,8 +16,6 @@
                                 <th> # </th>
                                 <th> Nama Mahasiswa </th>
                                 <th> Tanggal </th>
-                                <th> Topik</th>
-                                <th> Hasil Konsultasi </th>
                                 <th> Status </th>
                                 <th> Aksi </th>
                             </tr>
@@ -29,29 +27,29 @@
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $namaMahasiswa }}</td>
                                 <td> {{ $konsultasi->tanggal }}</td>
-                                <td> {{ $konsultasi->topik }}</td>
+                                <td>
+                                    @if($konsultasi->verifikasiDosen == 0)
+                                    <span class="badge badge-warning">menunggu</span>
+                                </td>
+                                @elseif($konsultasi->verifikasiDosen == 1)
+                                <span class="badge badge-success">diterima</span></td>
+                                @else
+                                <span class="badge badge-danger">ditolak</span></td>
+                                @endif
                                 <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#hasilkonsultasi"><i class="mdi mdi-information"></i></a>
                                     </div>
-                                </td>
-                                <td>
                                     @if($konsultasi->verifikasiDosen == 0)
-                                    <span class="badge badge-danger">false</span></td>
-                                @else
-                                <span class="badge badge-success">true</span></td>
-                                </td>
-                                @endif
-                                <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                        <a href="{{ route('konsultasi.diterima', $konsultasi->id) }}" class="btn btn-gradient-success btn-sm"><i class="fa fa-check"></i></a>
                                     </div>
+                                    <div class="btn-group">
+                                        <a href="{{ route('konsultasi.ditolak', $konsultasi->id) }}" class="btn btn-gradient-danger btn-sm"><i class="fa fa-times"></i></a>
+                                    </div>
+                                    @elseif($konsultasi->verifikasiDosen == 1)
 
-                                    <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-close"></i></button>
-                                        </form>
-                                    </div>
+                                    @endif
                                 </td>
                             </tr>
                             {{-- @endforeach --}}
@@ -68,13 +66,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hasil Konsultasi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Konsultasi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>{{ $konsultasi->hasil }}</p>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Topik Konsultasi</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="topik" id="name" value="{{ $konsultasi->topik }}" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Hasil Konsultasi</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="hasil" value="{{ $konsultasi->hasil }}" readonly />
+                    </div>
+                </div>
             </div>
 
         </div>

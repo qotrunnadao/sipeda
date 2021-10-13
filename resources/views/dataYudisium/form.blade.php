@@ -71,7 +71,7 @@
                         <div class="col-sm-9">
                             <select name="statusyudisium_id" id="statusyudisium" class="form-control">
                                 @foreach ($status as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('ketStatus') }}@else{{ $ketStatus }}@endif">{{ $value->status}}</option>
+                                <option value="@if ($button == 'Tambah'){{ old('status') }}@else{{ $status }}@endif">{{ $value->status}}</option>
                                 @endforeach
                             </select>
                         </div>

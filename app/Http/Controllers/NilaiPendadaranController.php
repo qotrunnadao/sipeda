@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\Pendadaran;
+use App\Models\StatusNilai;
 use Illuminate\Http\Request;
 use App\Models\NilaiPendadaran;
-use App\Models\StatusNilai;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -20,22 +21,21 @@ class NilaiPendadaranController extends Controller
      */
     public function index()
     {
-        $jurusan = Jurusan::latest()->get();
+        $jurusan = jurusan::all();
         $pendadaran = Pendadaran::with(['mahasiswa'])->get();
-        $statusnilai = StatusNilai::latest()->get();
-        $nilai = NilaiPendadaran::latest()->get();
-        foreach ($nilai as $value) {
-            $pendadaran_id = $value->pendadaran_id;
-            $pdd = Pendadaran::where('id', $pendadaran_id)->first();
-            $mahasiswa_id = $pdd->mhs_id;
-            $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-            $namaMahasiswa = $mhs_id->nama;
-            $nim = $mhs_id->nim;
-            $jrsn_id = $mhs_id->jurusan_id;
-            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
-            $namaJurusan = $jurusan_id->namaJurusan;
-        }
-        return view('nilaiPendadaran.index', compact('statusnilai', 'nilai', 'namaMahasiswa', 'nim', 'namaJurusan', 'pendadaran', 'jurusan'));
+        $statusnilai = StatusNilai::all();
+        $nilai = DB::table('nilai_pendadaran')
+            ->join('pendadaran', 'pendadaran.id', '=', 'nilai_pendadaran.pendadaran_id')
+            ->join('mahasiswa', 'pendadaran.mhs_id', '=', 'mahasiswa.id')
+            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
+            ->select('nilai_pendadaran.statusnilai_id', 'nilai_pendadaran.nilaiAngka', 'nilai_pendadaran.nilaiHuruf', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'nilai_pendadaran.created_at', 'nilai_pendadaran.id')
+            // ->where('ta.mahasiswa_id', '=', $id)
+            ->latest()
+            ->get();
+
+
+        // dd($spk);
+        return view('nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
     }
 
     public function nim(Request $request)
@@ -66,8 +66,14 @@ class NilaiPendadaranController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        NilaiPendadaran::create($data);
-        if (NilaiPendadaran::create($data)) {
+        $data = array(
+            'pendadaran_id' => $request->pendadaran_id,
+            'nilaiAngka' => $request->nilaiAngka,
+            'nilaiHuruf' => $request->nilaiHuruf,
+            'statusnilai_id' => $request->statusnilai_id
+        );
+        $cek = NilaiPendadaran::create($data);
+        if ($cek = true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
         } else {
             Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');

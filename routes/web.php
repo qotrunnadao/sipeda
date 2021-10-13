@@ -13,6 +13,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\NilaiTAController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\SemhasTAController;
+use App\Http\Controllers\StatusTAController;
 use App\Http\Controllers\YudisiumController;
 use App\Http\Controllers\SempropTAController;
 use App\Http\Controllers\PendadaranController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\StatusYudisiumController;
 use App\Http\Controllers\NilaiPendadaranController;
 use App\Http\Controllers\StatusPendadaranController;
-use App\Http\Controllers\StatusTAController;
+use App\Http\Controllers\BeritaAcaraPendadaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +105,8 @@ Route::get('/tugas-akhir/data-TA/delete/{id}', [TAController::class, 'destroy'])
 //data Konsul
 Route::get('/tugas-akhir/data-konsultasi', [KonsultasiTAController::class, 'index'])->name('konsultasi.index');
 Route::get('/tugas-akhir/data-konsultasi/{id}', [KonsultasiTAController::class, 'show'])->name('konsultasi.show');
+Route::get('/tugas-akhir/data-konsultasi/diterima/{konsultasiTA}', [KonsultasiTAController::class, 'diterima'])->name('konsultasi.diterima');
+Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', [KonsultasiTAController::class, 'ditolak'])->name('konsultasi.ditolak');
 
 //seminar
 Route::get('/tugas-akhir/seminar', [SeminarController::class, 'index']);
@@ -150,6 +153,13 @@ Route::post('pendadaran/nilai-pendadaran/store', [NilaiPendadaranController::cla
 Route::put('pendadaran/nilai-pendadaran/update/{id}', [NilaiPendadaranController::class, 'update'])->name('nilaiPendadaran.update');
 Route::get('pendadaran/nilai-pendadaran/delete/{id}', [NilaiPendadaranController::class, 'destroy'])->name('nilaiPendadaran.delete');
 Route::post('/pendadaran/nilai-pendadaran/nim/', [NilaiPendadaranController::class, 'nim'])->name('nilaipendadaran.nim');
+// berita acara pendadaran
+Route::get('/pendadaran/beritaacara', [BeritaAcaraPendadaranController::class, 'index'])->name('beritaacarapendadaran.index');
+Route::post('/pendadaran/beritaacara/store', [BeritaAcaraPendadaranController::class, 'store'])->name('beritaacarapendadaran.store');
+Route::put('/pendadaran/beritaacara/download/{filename}', [BeritaAcaraPendadaranController::class, 'download'])->name('beritaacarapendadaran.download');
+Route::put('/pendadaran/beritaacara/update/{id}', [BeritaAcaraPendadaranController::class, 'update'])->name('beritaacarapendadaran.update');
+Route::get('/pendadaran/beritaacara/destroy/{id}', [BeritaAcaraPendadaranController::class, 'destroy'])->name('beritaacarapendadaran.destroy');
+Route::post('/pendadaran/beritaacara/nim/', [BeritaAcaraPendadaranController::class, 'nim'])->name('beritaacarapendadaran.nim');
 
 
 //=================== yudisium =========================

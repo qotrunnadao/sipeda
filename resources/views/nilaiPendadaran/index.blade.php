@@ -28,14 +28,15 @@
                             @foreach ($nilai as $value )
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
-                                <td class="text-center"> {{ $value->pendadaran->mahasiswa->nama }} </td>
-                                <td class="text-center"> {{ $value->pendadaran->mahasiswa->nim }}</td>
-                                <td class="text-center"> {{ $value->pendadaran->mahasiswa->jurusan->namaJurusan}}</td>
+                                <td class="text-center"> {{ $value->nama }} </td>
+                                <td class="text-center"> {{ $value->nim }}</td>
+                                <td class="text-center"> {{ $value->namaJurusan}}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf }}</td>
                                 <td class="text-center">
                                     @if($value->statusnilai_id == 1)
-                                    <span class="badge badge-warning">Entry dosen</span></td>
+                                    <span class="badge badge-warning">Entry dosen</span>
+                                </td>
                                 @elseif($value->statusnilai_id == 2)
                                 <span class="badge badge-primary">Verifikasi Bapendik</span></td>
                                 @else
@@ -75,7 +76,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{ route('nilaiPendadaran.store') }}">
+                <form class="forms-sample" method="POST" action="{{ route('nilaiPendadaran.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" class="form-control" id="pendadaran_id" name="pendadaran_id" value="">
                     <div class="form-group">
@@ -112,7 +113,15 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiHuruf" />
+                            {{-- <input type="text" class="form-control" name="nilaiHuruf" /> --}}
+                            <select type="text" class="form-control" name="nilaiHuruf">
+                                <option value="">PILIH</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

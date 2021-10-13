@@ -68,8 +68,16 @@ class SPKController extends Controller
     {
         $data = $request->all();
         if ($request->file('fileSPK')) {
+            $spk = SPK::latest()->get();
+            foreach ($spk as $value) {
+                $ta_id = $value->TA_id;
+                $ta = TA::where('id', $ta_id)->first();
+                $mahasiswa_id = $ta->mahasiswa_id;
+                $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
+                $nim = $mhs_id->nim;
+            }
             $file = $request->file('fileSPK');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filename = 'SPK' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('fileSPK')->storeAS('public/assets/file', $filename);
             $data = [
                 'TA_id' => $request->ta_id,

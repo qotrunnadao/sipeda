@@ -561,6 +561,15 @@ class DatabaseSeeder extends Seeder
 
         DB::table('nilai_pendadaran')->insert($nilaiPendadaran);
 
+        $beritaacara = [
+            [
+                'pendadaran_id' => 1,
+                'beritaacara' => "Berita acara-H1D018033",
+            ],
+        ];
+
+        DB::table('beritaacara_pendadaran')->insert($beritaacara);
+
         $yudisium = [
             [
                 'mhs_id' => 1,

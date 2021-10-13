@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
-use App\Models\KonsultasiTA;
 use App\Models\Mahasiswa;
+use App\Models\KonsultasiTA;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KonsultasiTAController extends Controller
 {
@@ -101,5 +102,24 @@ class KonsultasiTAController extends Controller
     public function destroy(KonsultasiTA $konsultasiTA)
     {
         //
+    }
+
+    public function diterima(KonsultasiTA  $konsultasiTA)
+    {
+        $data = array(
+            'verifikasiDosen' => 1,
+        );
+        $konsultasiTA->update($data);
+        Alert::success('Berhasil', 'Pengajuan Izin Diterima');
+        return back();
+    }
+    public function ditolak(KonsultasiTA  $konsultasiTA)
+    {
+        $data = array(
+            'verifikasiDosen' => 2,
+        );
+        $konsultasiTA->update($data);
+        Alert::warning('Berhasil', 'Pengajuan Izin Ditolak');
+        return back();
     }
 }
