@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BeritaAcaraPendadaran extends Model
 {
@@ -18,5 +19,15 @@ class BeritaAcaraPendadaran extends Model
     public function pendadaran()
     {
         return $this->belongsTo(Pendadaran::class, 'pendadaran_id');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
+    }
+
+    public function getUpdatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
     }
 }

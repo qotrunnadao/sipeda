@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Yudisium extends Model
 {
@@ -25,5 +26,25 @@ class Yudisium extends Model
     public function StatusYudisium()
     {
         return $this->belongsTo(StatusYudisium::class, 'status_id');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
+    }
+
+    public function getUpdatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
+    }
+
+    public function getTanggalAttribute()
+    {
+        return Carbon::parse($this->attributes['tanggal'])->translatedFormat('d F Y');
+    }
+
+    public function getWaktuAttribute()
+    {
+        return Carbon::parse($this->attributes['waktu'])->translatedFormat('H:i:s');
     }
 }

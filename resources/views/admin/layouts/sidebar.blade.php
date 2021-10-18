@@ -27,10 +27,11 @@
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tahun-akademik"> Tahun Akademik </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/jurusan"> Data Jurusan </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-ruang"> Data Ruangan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/level-user"> Level User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-user"> Data User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-komisi"> Data Komisi </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/berita"> Berita </a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/berita"> Berita </a></li> --}}
                 </ul>
             </div>
         </li>
