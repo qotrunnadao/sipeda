@@ -11,10 +11,7 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-<<<<<<< HEAD
-=======
         "laravel/ui": "^3.3",
->>>>>>> a3eb32d32dc01f8f3fcf2781d850b326374c10cd
         "realrashid/sweet-alert": "^4.0",
         "subfission/cas": "^4.1"
     },

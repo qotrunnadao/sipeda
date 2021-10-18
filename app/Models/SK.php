@@ -18,7 +18,7 @@ class SK extends Model
 
     public function Yudisium()
     {
-        return $this->belongsTo(Yudisium::class);
+        return $this->belongsTo(Yudisium::class, 'yudisium_id');
     }
 
     public function getCreatedAtAttribute()

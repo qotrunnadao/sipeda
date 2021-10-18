@@ -23,13 +23,8 @@ class SKController extends Controller
         $jurusan = jurusan::all();
         $yudisiumAll = Yudisium::with(['mahasiswa'])->get();
 
-        $sk = DB::table('sk')
-            ->join('yudisium', 'yudisium.id', '=', 'sk.yudisium_id')
-            ->join('mahasiswa', 'yudisium.mhs_id', '=', 'mahasiswa.id')
-            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-            ->select('sk.fileSK', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'sk.created_at')
-            ->latest()
-            ->get();
+        $sk = SK::With('yudisium.mahasiswa.jurusan')->latest()->get();
+
 
         return view('SK.index', compact('sk', 'jurusan', 'yudisiumAll'));
     }
