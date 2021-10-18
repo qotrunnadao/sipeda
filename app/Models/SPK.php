@@ -17,7 +17,7 @@ class SPK extends Model
 
     public function TA()
     {
-        return $this->belongsTo(TA::class);
+        return $this->belongsTo(TA::class, 'TA_id');
     }
     public function Mahasiswa()
     {

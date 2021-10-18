@@ -25,16 +25,7 @@ class SPKController extends Controller
         $taAll = TA::with(['mahasiswa'])->get();
         // $spk = SPK::with(['TA', 'TA.Mahasiswa'])->latest()->get();
 
-        $spk = DB::table('spk')
-            ->join('ta', 'ta.id', '=', 'spk.ta_id')
-            ->join('mahasiswa', 'ta.mahasiswa_id', '=', 'mahasiswa.id')
-            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-            ->select('spk.fileSPK', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'spk.created_at')
-            // ->where('ta.mahasiswa_id', '=', $id)
-            ->latest()
-            ->get();
-
-
+        $spk = SPK::With('TA.mahasiswa.jurusan')->get();
         // dd($spk);
         return view('SPK.index', compact('spk', 'jurusan', 'taAll'));
     }

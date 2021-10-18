@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        'Subfission\Cas\CasServiceProvider',
 
         /*
          * Package Service Providers...
@@ -230,6 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        // 'Cas' => Subfission\Cas\Facades\Cas,
+
 
 
     ],

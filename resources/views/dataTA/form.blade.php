@@ -8,31 +8,8 @@
             <form action="{{$action}}@if($button == 'Edit')/{{ $data_TA->id}}@endif" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
+                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nama
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="namaMahasiswa" value="@if ($button == 'Tambah'){{ old('namaMahasiswa') }}@else{{ $data_TA->mahasiswa->nama }}@endif" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            NIM
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="@if ($button == 'Tambah'){{ old('nim') }}@else{{ $dataTA->mahasiswa->nim }}@endif" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Jurusan
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="@if ($button == 'Tambah'){{ old('namaJurusan') }}@else{{ $data_TA->mahasiswa->jurusan->namaJurusan }}@endif" />
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Judul Tugas Akhir
@@ -83,6 +60,7 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Status Pelaksanaan
