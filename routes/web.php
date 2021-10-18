@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SKController;
 use App\Http\Controllers\TAController;
 use App\Http\Controllers\SPKController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KomisiController;
@@ -36,7 +38,7 @@ use App\Http\Controllers\BeritaAcaraPendadaranController;
 |
 */
 
-
+Auth::routes();
 // ROUTE GUEST
 Route::get('/', function () {
     return view('guest.login');
@@ -51,7 +53,7 @@ Route::get('/error', function () {
 //================= DASHBOARD ====================
 
 //=============== ROUTE ADMIN ====================
-Route::get('/admin/beranda', [BerandaAdminController::class, 'index']);
+Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.route')->middleware('admin');
 
 // Route Tahun Akademik
 Route::post('/admin/tahun-akademik/store', [TahunAkademikController::class, 'store'])->name('tahunAkademik.store');
@@ -76,6 +78,12 @@ Route::get('/admin/data-ruang', [RuangController::class, 'index']);
 Route::post('/admin/data-ruang/store', [RuangController::class, 'store'])->name('ruang.store');
 Route::put('/admin/data-ruang/update/{id}', [RuangController::class, 'update'])->name('ruang.update');
 Route::get('/admin/data-ruang/destroy/{id}', [RuangController::class, 'destroy'])->name('ruang.destroy');
+
+// Route Level User
+Route::get('/admin/level-user', [LevelController::class, 'index']);
+Route::post('/admin/level-user/store', [LevelController::class, 'store'])->name('level.store');
+Route::put('/admin/level-user/update/{id}', [LevelController::class, 'update'])->name('level.update');
+Route::get('/admin/level-user/delete/{id}', [LevelController::class, 'destroy'])->name('level.delete');
 
 //Route Data User
 Route::get('/admin/data-user', [UserController::class, 'index']);
@@ -332,3 +340,7 @@ Route::get('/mahasiswa/yudisium/pendaftaran', function () {
 Route::get('/mahasiswa/yudisium/jadwal', function () {
     return view('mahasiswa.yudisium.pages.jadwal');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

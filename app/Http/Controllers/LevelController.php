@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Level;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LevelController extends Controller
 {
@@ -14,7 +15,10 @@ class LevelController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'level' => Level::latest()->get(),
+        );
+        return view('admin.master.levelUser', $data);
     }
 
     /**
@@ -35,7 +39,14 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $cek = Level::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Level User');
+        } else {
+            Alert::warning('Gagal', 'Level User Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -55,9 +66,10 @@ class LevelController extends Controller
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function edit(Level $level)
+    public function edit($id)
     {
-        //
+        $data = Level::find($id);
+        return view('admin.master.levelUser', $data);
     }
 
     /**
@@ -67,9 +79,13 @@ class LevelController extends Controller
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Level $level)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = Level::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Level User');
+        return back();
     }
 
     /**
@@ -78,8 +94,11 @@ class LevelController extends Controller
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Level $level)
+    public function destroy($id)
     {
-        //
+        $level = Level::find($id);
+        $level->delete();
+        Alert::success('Berhasil', 'Berhasil hapus level user');
+        return back();
     }
 }

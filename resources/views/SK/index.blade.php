@@ -18,6 +18,7 @@
                                 <th> NIM </th>
                                 <th> Jurusan </th>
                                 <th> SK Kelulusan </th>
+                                <th> Dibuat Pada </th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
@@ -33,6 +34,9 @@
                                 <td> {{ $value->namaJurusan }}</td>
                                 <td>
                                     {{ $value->fileSK }}
+                                </td>
+                                <td>
+                                    {{ $value->created_at }}
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -84,6 +88,11 @@
                                 @endforeach
                             </select>
                         </div>
+                        @if ($errors->has('jurusan'))
+                        <div class="text-danger">
+                            {{ $errors->first('jurusan') }}
+                        </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3"> NIM</label>
@@ -92,6 +101,11 @@
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
                         </div>
+                        @if ($errors->has('nim'))
+                        <div class="text-danger">
+                            {{ $errors->first('nim') }}
+                        </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
@@ -104,6 +118,11 @@
                         <div class="input-group">
                             <input type="file" class="form-control" name="fileSK" />
                         </div>
+                        @if ($errors->has('fileSK'))
+                        <div class="text-danger">
+                            {{ $errors->first('fileSK') }}
+                        </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -135,7 +154,6 @@
                console.log(data)
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
-                // POPULATE SELECT ELEMENT WITH JSON.
                     nim.innerHTML = nim.innerHTML +
                         '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
 
