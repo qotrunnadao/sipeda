@@ -26,11 +26,11 @@
                             @foreach ($spk as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->nama}} </td>
+                                <td> {{ $value->TA->mahasiswa->nama}} </td>
                                 <td>
-                                    {{ $value->nim }}
+                                    {{ $value->TA->mahasiswa->nim }}
                                 </td>
-                                <td> {{ $value->namaJurusan }}</td>
+                                <td> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td>
                                     {{ $value->fileSPK }}
                                 </td>
