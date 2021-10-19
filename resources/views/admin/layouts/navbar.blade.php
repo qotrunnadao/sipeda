@@ -18,12 +18,13 @@
                     </div>
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="<?= url('') ?>/guest/menu">
+                        <i class="mdi mdi-cached mr-2 text-success"></i> Menu </a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">
-                            {{ __('Logout') }} <i class="mdi mdi-logout text-primary"></i>
+                            <i class="mdi mdi-logout mr-2 text-primary"></i> {{ __('Logout') }}
                         </button>
-
                     </form>
                 </div>
             </li>

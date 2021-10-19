@@ -6,25 +6,19 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class NilaiTA extends Model
+class BeritaAcaraTA extends Model
 {
     use HasFactory;
-    protected $table = 'nilaiTA';
+    protected $table = 'beritaacara_ta';
     protected $fillable = [
-        'nilaiHuruf',
-        'nilaiAngka',
-        'statusnilai_id',
-        'ta_id',
+        'beritaacara',
+        'seminar_id',
     ];
     protected $primaryKey = 'id';
 
-    public function TA()
+    public function seminar()
     {
-        return $this->belongsTo(TA::class, 'ta_id');
-    }
-    public function StatusNilai()
-    {
-        return $this->belongsTo(StatusNilai::class, 'statusnilai_id');
+        return $this->belongsTo(Seminar::class, 'seminar_id');
     }
 
     public function getCreatedAtAttribute()

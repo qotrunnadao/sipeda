@@ -21,9 +21,11 @@ use App\Http\Controllers\SempropTAController;
 use App\Http\Controllers\PendadaranController;
 use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\KonsultasiTAController;
+use App\Http\Controllers\SeminarHasilController;
 use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\StatusYudisiumController;
 use App\Http\Controllers\NilaiPendadaranController;
+use App\Http\Controllers\SeminarProposalController;
 use App\Http\Controllers\StatusPendadaranController;
 use App\Http\Controllers\BeritaAcaraPendadaranController;
 
@@ -58,10 +60,6 @@ Route::get('/admin/tahun-akademik/edit/{id}', [TahunAkademikController::class, '
 Route::put('/admin/tahun-akademik/update/{id}', [TahunAkademikController::class, 'update'])->name('tahunAkademik.update');
 Route::get('/admin/tahun-akademik/destroy/{id}', [TahunAkademikController::class, 'destroy'])->name('tahunAkademik.destroy');
 Route::get('/admin/tahun-akademik', [TahunAkademikController::class, 'index']);
-
-
-// Route Berita
-Route::get('/admin/berita', [BeritaController::class, 'index']);
 
 // Route Jurusan
 Route::get('/admin/jurusan', [JurusanController::class, 'index']);
@@ -117,9 +115,21 @@ Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', [KonsultasiTAC
 Route::get('/tugas-akhir/seminar', [SeminarController::class, 'index']);
 
 //semprop
-Route::get('/tugas-akhir/semprop', [SempropTAController::class, 'index']);
+Route::get('/tugas-akhir/semprop', [SeminarProposalController::class, 'index']);
+Route::get('/tugas-akhir/semprop/edit/{id}', [SeminarProposalController::class, 'edit'])->name('semprop.edit');
+Route::get('/tugas-akhir/semprop/update/{id}', [SeminarProposalController::class, 'update'])->name('semprop.update');
+Route::get('/tugas-akhir/semprop/delete/{id}', [SeminarProposalController::class, 'destroy'])->name('semprop.delete');
+Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', [SeminarProposalController::class, 'diterima'])->name('semprop.diterima');
+Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', [SeminarProposalController::class, 'ditolak'])->name('semprop.ditolak');
+
 //semhas
-Route::get('/tugas-akhir/semhas', [SemhasTAController::class, 'index']);
+Route::get('/tugas-akhir/semhas', [SeminarHasilController::class, 'index']);
+Route::get('/tugas-akhir/semhas/edit/{id}', [SeminarHasilController::class, 'edit'])->name('semhas.edit');
+Route::get('/tugas-akhir/semhas/update/{id}', [SeminarHasilController::class, 'update'])->name('semhas.update');
+Route::get('/tugas-akhir/semhas/delete/{id}', [SeminarHasilController::class, 'destroy'])->name('semhas.delete');
+Route::get('/tugas-akhir/semhas/diterima/{seminarHasil}', [SeminarHasilController::class, 'diterima'])->name('semhas.diterima');
+Route::get('/tugas-akhir/semhas/ditolak/{SeminarHasil}', [SeminarHasilController::class, 'ditolak'])->name('semhas.ditolak');
+
 //spk
 Route::get('/tugas-akhir/spk', [SPKController::class, 'index'])->name('spk.index');
 Route::post('/tugas-akhir/spk/store', [SPKController::class, 'store'])->name('spk.store');

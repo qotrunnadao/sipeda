@@ -31,7 +31,6 @@
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-user"> Data User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-komisi"> Data Komisi </a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/berita"> Berita </a></li> --}}
                 </ul>
             </div>
         </li>
@@ -47,9 +46,9 @@
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/statusta"> Status TA </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-TA"> Pengajuan TA </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-konsultasi"> Data Konsultasi</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/seminar"> Pengajuan Seminar </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semprop"> Data Seminar Proposal </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semhas"> Data Seminar Hasil </a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/seminar"> Pengajuan Seminar </a></li> --}}
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semprop"> Seminar Proposal </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semhas"> Seminar Hasil </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/spk"> Upload SPK </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/nilaita"> Nilai TA </a></li>
                 </ul>

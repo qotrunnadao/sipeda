@@ -29,7 +29,6 @@ class NilaiTAController extends Controller
             ->join('mahasiswa', 'ta.mahasiswa_id', '=', 'mahasiswa.id')
             ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
             ->select('nilaita.statusnilai_id', 'nilaita.nilaiAngka', 'nilaita.nilaiHuruf', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'nilaita.created_at', 'nilaita.id')
-            // ->where('ta.mahasiswa_id', '=', $id)
             ->latest()
             ->get();
 
@@ -43,7 +42,6 @@ class NilaiTAController extends Controller
         $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
             $query->where('jurusan_id', $request->id);
         })->where('status_id', '1')->get();
-        // dd($taAll);
         return response()->json($taAll, 200);
     }
     /**
@@ -65,22 +63,14 @@ class NilaiTAController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // dd($data);
-        if ($request->file('filenilaiTA')) {
-            $file = $request->file('filenilaiTA');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('filenilaiTA')->storeAS('public/assets/file/nilaiTA', $filename);
-            $data = [
-                'filenilaiTA' => $filename,
-                'ta_id' => $request->ta_id,
-                'nilaiAngka' => $request->nilaiAngka,
-                'nilaiHuruf' => $request->nilaiHuruf,
-                'statusnilai_id' => $request->statusnilai_id,
-            ];
-            $cek = NilaiTA::create($data);
-        } else {
-            $data['doc'] = NULL;
-        }
+
+        $data = [
+            'ta_id' => $request->ta_id,
+            'nilaiAngka' => $request->nilaiAngka,
+            'nilaiHuruf' => $request->nilaiHuruf,
+            'statusnilai_id' => $request->statusnilai_id,
+        ];
+        $cek = NilaiTA::create($data);
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Nilai Tugas Akhir');
         } else {

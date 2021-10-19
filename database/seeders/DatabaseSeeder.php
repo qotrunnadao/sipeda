@@ -485,13 +485,46 @@ class DatabaseSeeder extends Seeder
 
         DB::table('seminar')->insert($seminar);
 
+        $seminar_proposal = [
+            [
+                'ta_id' => 1,
+                'ruang_id' => 1,
+            ],
+            [
+                'ta_id' => 3,
+                'ruang_id' => 1,
+            ],
+            [
+                'ta_id' => 4,
+                'ruang_id' => 1,
+            ],
+        ];
+
+        DB::table('seminar_proposal')->insert($seminar_proposal);
+
+        $seminar_hasil = [
+            [
+                'ta_id' => 1,
+                'ruang_id' => 1,
+            ],
+            [
+                'ta_id' => 3,
+                'ruang_id' => 1,
+            ],
+            [
+                'ta_id' => 4,
+                'ruang_id' => 1,
+            ],
+        ];
+
+        DB::table('seminar_hasil')->insert($seminar_hasil);
+
         $nilaiTA = [
             [
                 'ta_id' => 1,
                 'statusnilai_id' => 3,
                 'nilaiAngka' => 80.00,
                 'nilaiHuruf' => "A",
-                'filenilaiTA' => "Berita Acara - H1D018033",
             ],
         ];
 

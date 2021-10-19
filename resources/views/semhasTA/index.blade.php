@@ -12,8 +12,7 @@
                             <tr>
                                 <th> # </th>
                                 <th> Nama Mahasiswa </th>
-                                <th> Jenis Seminar </th>
-                                <th> Judul </th>
+                                <th> Jurusan </th>
                                 <th> Ruang </th>
                                 <th> Tanggal </th>
                                 <th> Waktu </th>
@@ -27,30 +26,36 @@
                             @foreach ($semhas as $value )
 
                             <tr>
-                                <td> 1 </td>
-                                <td> {{ $namaMahasiswa }} </td>
-                                <td> {{ $jenisSeminar }}</td>
-                                <td> {{ $judul }}</td>
-                                <td> {{ $namaRuang }} </td>
+                                <td> {{ $no++ }} </td>
+                                <td> {{ $value->TA->mahasiswa->nama }} </td>
+                                <td> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td> {{ $value->ruang->namaRuang }} </td>
                                 <td> {{ $value->tanggal }}</td>
                                 <td> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
                                 <td>
-                                    <div class="badge badge-success badge-pill">{{ $value->status }}</div>
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">menunggu</span>
+                                </td>
+                                @elseif($value->status == 1)
+                                <span class="badge badge-success">diterima</span></td>
+                                @else
+                                <span class="badge badge-danger">ditolak</span></td>
+                                @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                        <a href="{{ route('semhas.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="fa fa-check"></i></a>
                                     </div>
-
                                     <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-close"></i></button>
-                                        </form>
+                                        <a href="{{ route('semhas.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <form action="#" method="GET">
+                                        <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <form action="{{ route('semhas.delete', $value->id) }}" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>

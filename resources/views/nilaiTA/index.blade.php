@@ -114,13 +114,14 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiHuruf" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Upload Berita Acara</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" name="filenilaiTA" />
+                            <select type="text" class="form-control" name="nilaiHuruf">
+                                <option value="">PILIH</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
