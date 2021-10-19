@@ -58,9 +58,11 @@ class LoginController extends Controller
             if (auth()->user()->level_id == 2) {
                 return redirect()->route('admin.route');
             } elseif (auth()->user()->level_id == 1) {
-                return redirect()->route('komisi.route');
+                // return redirect()->route('komisi.route');
+                return redirect()->route('admin.route');
             } elseif (auth()->user()->level_id == 3) {
-                return redirect()->route('dosen.route');
+                // return redirect()->route('dosen.route');
+                return redirect()->route('admin.route');
             } else {
                 return redirect()->route('mhs.route');
             }

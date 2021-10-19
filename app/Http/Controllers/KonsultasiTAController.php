@@ -17,17 +17,10 @@ class KonsultasiTAController extends Controller
      */
     public function index()
     {
-        $konsultasi = KonsultasiTA::latest()->get();
-        foreach ($konsultasi as $value) {
-            $mahasiswa_id = $value->mhs_id;
-            $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-            $namaMahasiswa = $mhs_id->nama;
-            $nim = $mhs_id->nim;
-            $jrsn_id = $mhs_id->jurusan_id;
-            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
-            $namaJurusan = $jurusan_id->namaJurusan;
-        }
-        return view('konsultasiTA.index', compact('konsultasi', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        $konsultasi = KonsultasiTA::with('TA.mahasiswa.jurusan')->latest()->get();
+
+
+        return view('konsultasiTA.index', compact('konsultasi'));
     }
 
     /**

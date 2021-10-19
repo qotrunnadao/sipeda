@@ -23,7 +23,7 @@ class SK extends Model
 
     public function Mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
+        return $this->belongsTo(Mahasiswa::class);
     }
 
     public function getCreatedAtAttribute()

@@ -22,14 +22,7 @@ class BeritaAcaraPendadaranController extends Controller
     {
         $jurusan = Jurusan::all();
         $pendadaranAll = Pendadaran::with(['mahasiswa'])->get();
-
-        $beritaacara = DB::table('beritaacara_pendadaran')
-            ->join('pendadaran', 'pendadaran.id', '=', 'beritaacara_pendadaran.pendadaran_id')
-            ->join('mahasiswa', 'pendadaran.mhs_id', '=', 'mahasiswa.id')
-            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-            ->select('beritaacara_pendadaran.beritaacara', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'beritaacara_pendadaran.created_at')
-            ->latest()
-            ->get();
+        $beritaacara = BeritaAcaraPendadaran::with('pendadaran.mahasiswa.jurusan')->latest()->get();
 
         return view('beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
     }

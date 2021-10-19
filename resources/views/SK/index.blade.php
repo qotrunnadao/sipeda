@@ -27,11 +27,11 @@
                             @foreach ($sk as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->ta->mahasiswa->nama}} </td>
+                                <td> {{ $value->yudisium->mahasiswa->nama}} </td>
                                 <td>
-                                    {{ $value->ta->mahasiswa->nim }}
+                                    {{ $value->yudisium->mahasiswa->nim }}
                                 </td>
-                                <td> {{ $value->ta->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td> {{ $value->yudisium->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td>
                                     {{ $value->fileSK }}
                                 </td>

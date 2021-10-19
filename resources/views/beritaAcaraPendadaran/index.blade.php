@@ -26,11 +26,11 @@
                             @foreach ($beritaacara as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->nama}} </td>
+                                <td> {{ $value->pendadaran->mahasiswa->nama}} </td>
                                 <td>
-                                    {{ $value->nim }}
+                                    {{ $value->pendadaran->mahasiswa->nim }}
                                 </td>
-                                <td> {{ $value->namaJurusan }}</td>
+                                <td> {{ $value->pendadaran->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td>
                                     {{ $value->beritaacara }}
                                 </td>

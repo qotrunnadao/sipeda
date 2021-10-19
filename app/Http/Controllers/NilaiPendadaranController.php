@@ -24,14 +24,15 @@ class NilaiPendadaranController extends Controller
         $jurusan = jurusan::all();
         $pendadaran = Pendadaran::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::all();
-        $nilai = DB::table('nilai_pendadaran')
-            ->join('pendadaran', 'pendadaran.id', '=', 'nilai_pendadaran.pendadaran_id')
-            ->join('mahasiswa', 'pendadaran.mhs_id', '=', 'mahasiswa.id')
-            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-            ->select('nilai_pendadaran.statusnilai_id', 'nilai_pendadaran.nilaiAngka', 'nilai_pendadaran.nilaiHuruf', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'nilai_pendadaran.created_at', 'nilai_pendadaran.id')
-            // ->where('ta.mahasiswa_id', '=', $id)
-            ->latest()
-            ->get();
+        // $nilai = DB::table('nilai_pendadaran')
+        //     ->join('pendadaran', 'pendadaran.id', '=', 'nilai_pendadaran.pendadaran_id')
+        //     ->join('mahasiswa', 'pendadaran.mhs_id', '=', 'mahasiswa.id')
+        //     ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
+        //     ->select('nilai_pendadaran.statusnilai_id', 'nilai_pendadaran.nilaiAngka', 'nilai_pendadaran.nilaiHuruf', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'nilai_pendadaran.created_at', 'nilai_pendadaran.id')
+        //     // ->where('ta.mahasiswa_id', '=', $id)
+        //     ->latest()
+        //     ->get();
+        $nilai = NilaiPendadaran::With('pendadaran.mahasiswa.jurusan')->latest()->get();
 
 
         // dd($spk);

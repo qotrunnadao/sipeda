@@ -24,13 +24,7 @@ class NilaiTAController extends Controller
         $jurusan = jurusan::all();
         $taAll = TA::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::all();
-        $nilai = DB::table('nilaita')
-            ->join('ta', 'ta.id', '=', 'nilaita.ta_id')
-            ->join('mahasiswa', 'ta.mahasiswa_id', '=', 'mahasiswa.id')
-            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-            ->select('nilaita.statusnilai_id', 'nilaita.nilaiAngka', 'nilaita.nilaiHuruf', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'nilaita.created_at', 'nilaita.id')
-            ->latest()
-            ->get();
+        $nilai = NilaiTA::With('TA.mahasiswa.jurusan')->latest()->get();
 
 
         // dd($spk);
