@@ -43,9 +43,6 @@ Auth::routes();
 Route::get('/', function () {
     return view('guest.login');
 });
-Route::get('/guest/menu', function () {
-    return view('guest.menu');
-});
 Route::get('/error', function () {
     return view('guest.error-page');
 });
@@ -224,7 +221,7 @@ Route::get('/admin/yudisium/upload-sk', function () {
 
 //================= ROUTE KOMISI ====================
 Route::get('/komisi/beranda', function () {
-    return view('komisi.master.beranda');
+    return view('komisi.master.beranda')->name('komisi.route');
 });
 Route::get('/komisi/data-mahasiswa', function () {
     return view('komisi.master.datamahasiswa');
@@ -269,7 +266,7 @@ Route::get('/komisi/pendadaran/nilai', function () {
 
 //================= ROUTE DOSEN ===========================
 Route::get('/dosen/beranda', function () {
-    return view('dosen.beranda');
+    return view('dosen.beranda')->name('dosen.route');
 });
 //Tugas Akhir
 Route::get('/dosen/tugas-akhir/data-TA', function () {
@@ -296,6 +293,9 @@ Route::get('/dosen/pendadaran/upload-nilai', function () {
 });
 
 //================= ROUTE MAHASISWA =========================
+Route::get('/guest/menu', function () {
+    return view('guest.menu')->name('mhs.route');
+});
 //Tugas Akhir
 Route::get('/mahasiswa/tugas-akhir/beranda', function () {
     return view('mahasiswa.TA.pages.beranda');

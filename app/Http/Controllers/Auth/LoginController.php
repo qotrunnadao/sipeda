@@ -53,13 +53,13 @@ class LoginController extends Controller
             ->where('password', $request->password)->get()
             ->first();
 
-        // dd(Auth::login($user));
-        if (auth()->loginUsingId($user->id, true)) {
+        //dd($user);
+        if (auth()->loginUsingId($user->id)) {
             if (auth()->user()->level_id == 2) {
                 return redirect()->route('admin.route');
             } elseif (auth()->user()->level_id == 1) {
                 return redirect()->route('komisi.route');
-            } elseif (auth()->user()->level_id == 1) {
+            } elseif (auth()->user()->level_id == 3) {
                 return redirect()->route('dosen.route');
             } else {
                 return redirect()->route('mhs.route');

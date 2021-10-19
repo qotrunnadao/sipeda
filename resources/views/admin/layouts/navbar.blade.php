@@ -20,11 +20,10 @@
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <a class="dropdown-item">
-                            <button type="submit" class="mdi mdi-logout mr-2 text-primary">
-                                {{ __('Logout') }}
-                            </button>
-                            {{-- <i class="mdi mdi-logout mr-2 text-primary"></i> Keluar </a> --}}
+                        <button type="submit" class="dropdown-item">
+                            {{ __('Logout') }} <i class="mdi mdi-logout text-primary"></i>
+                        </button>
+
                     </form>
                 </div>
             </li>
