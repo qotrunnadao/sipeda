@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -53,7 +53,7 @@ class LoginController extends Controller
             ->where('password', $request->password)->get()
             ->first();
 
-        // dd($user);
+        //dd($user);
         if (auth()->loginUsingId($user->id)) {
             if (auth()->user()->level_id == 2) {
                 return redirect()->route('admin.route');

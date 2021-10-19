@@ -6,27 +6,22 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Seminar extends Model
+class SeminarProposal extends Model
 {
     use HasFactory;
-    protected $table = 'Seminar';
+    protected $table = 'seminar_proposal';
     protected $guarded = [];
     protected $primaryKey = 'id';
 
     public function ruang()
     {
-        return $this->belongsTo(Ruang::class);
+        return $this->belongsTo(Ruang::class, 'ruang_id');
     }
 
     public function TA()
     {
-        return $this->belongsTo(TA::class);
+        return $this->belongsTo(TA::class, 'ta_id');
     }
-    public function Jenis()
-    {
-        return $this->belongsTo(JenisSeminar::class);
-    }
-
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');

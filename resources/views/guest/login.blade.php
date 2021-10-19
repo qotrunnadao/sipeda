@@ -31,7 +31,7 @@
                     </div>
                     <div class="form__div-input">
                         <label for="email" class="form__label">E-mail</label>
-                        <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email">
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -46,7 +46,6 @@
                     <div class="form__div-input">
                         <label for="password" class="form__label">Password</label>
                         <input type="password" class="form__input" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -55,13 +54,13 @@
                     </div>
                 </div>
                 <div class="d-grid gap-2 mx-auto">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="form__button">
                         {{ __('Login') }}
                     </button>
-                    <a class="form__button" href="<?= url('') ?>/admin/beranda" role="button" style="text-decoration: none; text-align:center;">Admin</a>
-                    <a class="form__button" href="<?= url('') ?>/komisi/beranda" role="button" style="text-decoration: none; text-align:center;">Komisi</a>
-                    <a class="form__button" href="<?= url('') ?>/dosen/beranda" role="button" style="text-decoration: none; text-align:center;">Dosen</a>
-                    <a class="form__button" href="<?= url('') ?>/guest/menu" role="button" style="text-decoration: none; text-align:center;">Login SSO</a>
+                    {{-- <a class="form__button" href="<?= url('') ?>/admin/beranda" role="button" style="text-decoration: none; text-align:center;">Admin</a> --}}
+                    <button type="submit" class="form__button">
+                        <a href="<?= url('') ?>/guest/menu" style="text-decoration: none; text-align:center; color:white;">Login SSO</a>
+                    </button>
                 </div>
                 <div class="form__social">
                     <span class="form__social-text"><i class='bx bx-info-circle'></i> Mahasiswa Silahkan Login Menggunakan Akun SSO</span>

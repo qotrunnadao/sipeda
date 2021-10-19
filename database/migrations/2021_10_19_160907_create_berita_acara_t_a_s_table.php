@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNilaiTASTable extends Migration
+class CreateBeritaAcaraTASTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateNilaiTASTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilaiTA', function (Blueprint $table) {
+        Schema::create('beritaacara_ta', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ta_id')->references('id')->on('TA');
-            $table->foreignId('statusnilai_id')->references('id')->on('statusnilai');
-            $table->double('nilaiAngka');
-            $table->string('nilaiHuruf');
+            $table->foreignId('seminar_id')->references('id')->on('seminar');
+            $table->string('beritaacara');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateNilaiTASTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilaiTA');
+        Schema::dropIfExists('beritaacara_ta');
     }
 }
