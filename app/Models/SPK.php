@@ -22,7 +22,7 @@ class SPK extends Model
     }
     public function Mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa.id');
     }
 
     public function getCreatedAtAttribute()

@@ -25,7 +25,7 @@ class SKController extends Controller
 
         $sk = SK::With('yudisium.mahasiswa.jurusan')->latest()->get();
 
-
+        // dd($sk);
         return view('SK.index', compact('sk', 'jurusan', 'yudisiumAll'));
     }
 
