@@ -26,15 +26,15 @@ class NilaiTAController extends Controller
         $statusnilai = StatusNilai::all();
         $nilai = NilaiTA::With('TA.mahasiswa.jurusan')->latest()->get();
 
-        // return view('nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
+        return view('TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
 
-        if (auth()->user()->level_id == 2) {
-            return view('admin.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-        } elseif (auth()->user()->level_id == 1) {
-            return view('komisi.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-        } elseif (auth()->user()->level_id == 3) {
-            return view('dosen.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-        }
+        // if (auth()->user()->level_id == 2) {
+        //     return view('admin.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
+        // } elseif (auth()->user()->level_id == 1) {
+        //     return view('komisi.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
+        // } elseif (auth()->user()->level_id == 3) {
+        //     return view('dosen.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
+        // }
     }
 
     public function nim(Request $request)

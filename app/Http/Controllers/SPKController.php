@@ -24,7 +24,7 @@ class SPKController extends Controller
         $taAll = TA::with(['mahasiswa'])->get();
 
         $spk = SPK::With('TA.mahasiswa.jurusan')->latest()->get();
-        return view('SPK.index', compact('spk', 'jurusan', 'taAll'));
+        return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll'));
     }
 
     public function nim(Request $request)

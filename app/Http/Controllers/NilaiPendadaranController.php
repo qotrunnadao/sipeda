@@ -25,15 +25,15 @@ class NilaiPendadaranController extends Controller
         $pendadaran = Pendadaran::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::all();
         $nilai = NilaiPendadaran::With('pendadaran.mahasiswa.jurusan')->latest()->get();
-        //return view('nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        return view('pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
 
-        if (auth()->user()->level_id == 2) {
-            return view('admin.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
-        } elseif (auth()->user()->level_id == 1) {
-            return view('komisi.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
-        } elseif (auth()->user()->level_id == 3) {
-            return view('dosen.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
-        }
+        // if (auth()->user()->level_id == 2) {
+        //     return view('admin.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        // } elseif (auth()->user()->level_id == 1) {
+        //     return view('komisi.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        // } elseif (auth()->user()->level_id == 3) {
+        //     return view('dosen.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        // }
     }
 
     public function nim(Request $request)

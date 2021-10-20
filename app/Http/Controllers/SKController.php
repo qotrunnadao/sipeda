@@ -24,7 +24,7 @@ class SKController extends Controller
         $yudisiumAll = Yudisium::with(['mahasiswa'])->get();
         $sk = SK::With('yudisium.mahasiswa.jurusan')->latest()->get();
 
-        return view('admin.yudisium.SK.index', compact('sk', 'jurusan', 'yudisiumAll'));
+        return view('yudisium.SK.index', compact('sk', 'jurusan', 'yudisiumAll'));
     }
 
     public function nim(Request $request)

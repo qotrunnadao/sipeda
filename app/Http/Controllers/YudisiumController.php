@@ -21,7 +21,7 @@ class YudisiumController extends Controller
     public function index()
     {
         $yudisium = Yudisium::latest()->get();
-        return view('admin.yudisium.dataYudisium.index', compact('yudisium'));
+        return view('yudisium.dataYudisium.index', compact('yudisium'));
     }
 
     /**
@@ -36,7 +36,7 @@ class YudisiumController extends Controller
         $data_yudisium = new Yudisium();
         $yudisium = Yudisium::get();
         $status = StatusYudisium::get();
-        return view('admin.yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status'));
+        return view('yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status'));
     }
 
     /**
@@ -83,7 +83,7 @@ class YudisiumController extends Controller
         $button = 'Edit';
         $action = url('/yudisium/data-yudisium/update');
         $status = StatusYudisium::get();
-        return view('admin.yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status'));
+        return view('yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status'));
     }
 
     /**

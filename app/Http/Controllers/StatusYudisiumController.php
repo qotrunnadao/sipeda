@@ -18,7 +18,7 @@ class StatusYudisiumController extends Controller
         $data = array(
             'status' => StatusYudisium::get(),
         );
-        return view('admin.yudisium.statusYudisium.index', $data);
+        return view('yudisium.statusYudisium.index', $data);
     }
 
     /**

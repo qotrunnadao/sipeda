@@ -17,7 +17,7 @@ class SeminarController extends Controller
     {
         $jenis = JenisSeminar::latest()->get();
         $seminar = Seminar::latest()->get();
-        return view('seminar.index', compact('jenis', 'seminar'));
+        return view('TA.seminar.index', compact('jenis', 'seminar'));
     }
 
     /**

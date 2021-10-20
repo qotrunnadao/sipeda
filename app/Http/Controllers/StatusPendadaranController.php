@@ -18,7 +18,7 @@ class StatusPendadaranController extends Controller
         $data = array(
             'status' => StatusPendadaran::get(),
         );
-        return view('admin.pendadaran.statusPendadaran.index', $data);
+        return view('pendadaran.statusPendadaran.index', $data);
     }
 
     /**
