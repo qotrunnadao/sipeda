@@ -21,6 +21,11 @@ class SK extends Model
         return $this->belongsTo(Yudisium::class, 'yudisium_id');
     }
 
+    public function Mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class);
+    }
+
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');

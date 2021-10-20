@@ -305,9 +305,11 @@ Route::get('/dosen/pendadaran/upload-nilai', function () {
 });
 
 //================= ROUTE MAHASISWA =========================
-Route::get('/guest/menu', function () {
-    return view('guest.menu')->name('mhs.route');
+Route::get('/mhs/beranda', function () {
+    return view('guest.menu')->name('mhs.route')->middleware('mhs');
 });
+// Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.route')->middleware('admin');
+
 //Tugas Akhir
 Route::get('/mahasiswa/tugas-akhir/beranda', function () {
     return view('mahasiswa.TA.pages.beranda');

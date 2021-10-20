@@ -22,7 +22,8 @@ class BeritaAcaraPendadaranController extends Controller
     {
         $jurusan = Jurusan::all();
         $pendadaranAll = Pendadaran::with(['mahasiswa'])->get();
-        $beritaacara = BeritaAcaraPendadaran::With('pendadaran.mahasiswa.jurusan')->latest()->get();
+        $beritaacara = BeritaAcaraPendadaran::with('pendadaran.mahasiswa.jurusan')->latest()->get();
+
         return view('beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
     }
 
