@@ -47,7 +47,7 @@ Route::get('/error', function () {
     return view('guest.error-page');
 });
 
-//=============== ROUTE ADMIN , KOMISI, & DOSEN ====================
+//=============== ROUTE ADMIN ====================
 Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.route')->middleware('admin');
 
 //======= MASTER DATA ========
@@ -210,7 +210,7 @@ Route::get('/dosen/beranda', function () {
 
 //================= ROUTE MAHASISWA =========================
 Route::get('/mhs/beranda', function () {
-    return view('guest.menu');
+    return view('mahasiswa.menu');
 })->name('mhs.route')->middleware('mhs');
 
 //Tugas Akhir
