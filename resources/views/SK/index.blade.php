@@ -27,25 +27,25 @@
                             @foreach ($sk as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->nama}} </td>
+                                <td> {{ $value->yudisium->mahasiswa->nama}} </td>
                                 <td>
-                                    {{ $value->nim }}
+                                    {{ $value->yudisium->mahasiswa->nim }}
                                 </td>
-                                <td> {{ $value->namaJurusan }}</td>
-                                <td>
-                                    {{ $value->fileSK }}
-                                </td>
-                                <td>
-                                    {{ $value->created_at }}
-                                </td>
+                                <td> {{ $value->yudisium->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <form action="{{ route('sk.download', $value->fileSK) }}" method="post">
                                             @method('PUT')
                                             @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download"><i class="mdi mdi-download"></i></a></button>
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileSK }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
+
+                                </td>
+                                <td>
+                                    {{ $value->created_at }}
+                                </td>
+                                <td>
                                     <div class="btn-group">
                                         <form action="{{ route('sk.destroy', $value->fileSK) }}" method="GET">
                                             @method('DELETE')

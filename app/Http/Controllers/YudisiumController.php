@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jurusan;
 use App\Models\Yudisium;
 use App\Models\Mahasiswa;
+use App\Models\SK;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
 use App\Models\StatusYudisium;
@@ -20,19 +21,7 @@ class YudisiumController extends Controller
     public function index()
     {
         $yudisium = Yudisium::latest()->get();
-        foreach ($yudisium as $value) {
-            $mhs_id = $value->mhs_id;
-            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
-            $namaMahasiswa = $mahasiswa->nama;
-            $nim = $mahasiswa->nim;
-            $jurusan_id = $mahasiswa->jurusan_id;
-            $jurusan = Jurusan::where('id', $jurusan_id)->first();
-            $namaJurusan = $jurusan->namaJurusan;
-            $thnAkad_id = $value->thnAkad_id;
-            $thn = TahunAkademik::where('id', $thnAkad_id)->first();
-            $thnAkad = $thn->ket;
-        }
-        return view('dataYudisium.index', compact('yudisium', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('dataYudisium.index', compact('yudisium'));
     }
 
     /**
@@ -46,20 +35,8 @@ class YudisiumController extends Controller
         $button = 'Tambah';
         $data_yudisium = new Yudisium();
         $yudisium = Yudisium::get();
-		$status = StatusYudisium::get();
-        foreach ($yudisium as $value) {
-            $mhs_id = $value->mhs_id;
-            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
-            $namaMahasiswa = $mahasiswa->nama;
-            $nim = $mahasiswa->nim;
-            $jurusan_id = $mahasiswa->jurusan_id;
-            $jurusan = Jurusan::where('id', $jurusan_id)->first();
-            $namaJurusan = $jurusan->namaJurusan;
-            $thnAkad_id = $value->thnAkad_id;
-            $thn = TahunAkademik::where('id', $thnAkad_id)->first();
-            $thnAkad = $thn->ket;
-        }
-        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'yudisium', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan', 'status'));
+        $status = StatusYudisium::get();
+        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status'));
     }
 
     /**
@@ -103,22 +80,10 @@ class YudisiumController extends Controller
     {
         $yudisium = Yudisium::get();
         $data_yudisium = Yudisium::find($id);
-        $action = url('/yudisium/data-yudisium/update');
         $button = 'Edit';
-		$status = StatusYudisium::get();
-        foreach ($yudisium as $value) {
-            $mhs_id = $value->mhs_id;
-            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
-            $namaMahasiswa = $mahasiswa->nama;
-            $nim = $mahasiswa->nim;
-            $jurusan_id = $mahasiswa->jurusan_id;
-            $jurusan = Jurusan::where('id', $jurusan_id)->first();
-            $namaJurusan = $jurusan->namaJurusan;
-            $thnAkad_id = $value->thnAkad_id;
-            $thn = TahunAkademik::where('id', $thnAkad_id)->first();
-            $thnAkad = $thn->ket;
-        }
-        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'yudisium', 'thnAkad', 'namaMahasiswa', 'nim', 'namaJurusan', 'status'));
+        $action = url('/yudisium/data-yudisium/update');
+        $status = StatusYudisium::get();
+        return view('dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status'));
     }
 
     /**
@@ -133,6 +98,7 @@ class YudisiumController extends Controller
         $yudisium = Yudisium::find($id);
         $data = $request->all();
         $yudisium->update($data);
+        dd($yudisium);
         Alert::success('Berhasil', 'Berhasil edit data Yudisium');
         return redirect('/yudisium/data-yudisium');
     }
@@ -154,7 +120,7 @@ class YudisiumController extends Controller
     public function diterima(Yudisium $yudisium)
     {
         $data = array(
-            'statusyudisium_id' => 1,
+            'status_id' => 2,
         );
         $yudisium->update($data);
         Alert::success('Berhasil', 'Pengajuan Yudisium Diterima');
@@ -163,10 +129,30 @@ class YudisiumController extends Controller
     public function ditolak(Yudisium $yudisium)
     {
         $data = array(
-            'statusyudisium_id' => 2,
+            'status_id' => 3,
         );
         $yudisium->update($data);
         Alert::warning('Berhasil', 'Pengajuan Yudisium Ditolak');
         return back();
+    }
+
+    public function ulang(Yudisium $yudisium)
+    {
+        $data = array(
+            'status_id' => 4,
+        );
+        $yudisium->update($data);
+        Alert::success('Berhasil', 'Pengajuan yudisium boleh diajukan lagi');
+        return back();
+    }
+
+    public function selesai(Yudisium $yudisium)
+    {
+        if (SK::where('id', $yudisium->id) != null) {
+            $data = array(
+                'status_id' => 4,
+            );
+            $yudisium->update($data);
+        }
     }
 }

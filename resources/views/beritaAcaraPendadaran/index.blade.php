@@ -5,9 +5,11 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
+            @if(auth()->user()->level_id == 3)
             <div>
                 <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
             </div>
+            @endif
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -26,22 +28,21 @@
                             @foreach ($beritaacara as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->nama}} </td>
+                                <td> {{ $value->pendadaran->mahasiswa->nama}} </td>
                                 <td>
-                                    {{ $value->nim }}
+                                    {{ $value->pendadaran->mahasiswa->nim }}
                                 </td>
-                                <td> {{ $value->namaJurusan }}</td>
-                                <td>
-                                    {{ $value->beritaacara }}
-                                </td>
+                                <td> {{ $value->pendadaran->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post">
                                             @method('PUT')
                                             @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download"><i class="mdi mdi-download"></i></a></button>
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
+                                </td>
+                                <td>
                                     <div class="btn-group">
                                         <form action="{{ route('beritaacarapendadaran.destroy', $value->beritaacara) }}" method="GET">
                                             @method('DELETE')

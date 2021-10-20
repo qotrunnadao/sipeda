@@ -6,6 +6,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div>
+                    <a href="{{ route('TA.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
+                </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -63,7 +66,7 @@
         </div>
     </div>
 
-    <div class="col-12 grid-margin stretch-card">
+    {{-- <div class="col-12 grid-margin stretch-card">
         <div class="card">
             @foreach ($tugas_akhir as $value )
             <div class="card-body">
@@ -139,7 +142,7 @@
             </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @endsection

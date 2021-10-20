@@ -22,10 +22,7 @@ class SKController extends Controller
     {
         $jurusan = jurusan::all();
         $yudisiumAll = Yudisium::with(['mahasiswa'])->get();
-
         $sk = SK::With('yudisium.mahasiswa.jurusan')->latest()->get();
-
-
         return view('SK.index', compact('sk', 'jurusan', 'yudisiumAll'));
     }
 
@@ -33,7 +30,7 @@ class SKController extends Controller
     {
         $yudisiumAll = Yudisium::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
             $query->where('jurusan_id', $request->id);
-        })->where('status_id', '1')->get();
+        })->where('status_id', '2')->get();
         // dd($taAll);
         return response()->json($yudisiumAll, 200);
     }

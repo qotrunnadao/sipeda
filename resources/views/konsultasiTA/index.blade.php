@@ -6,6 +6,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div>
+                    <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#exampleModal"> <i class="mdi mdi-plus"></i> Tambah</button>
+                </div>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -46,7 +49,7 @@
 </div>
 
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div>
@@ -76,7 +79,8 @@
                                 <td> {{ $value->topik }} </td>
                                 <td> {{ $value->hasil }}</td>
                                 <td> @if($value->verifikasiDosen == 0)
-                                    <span class="badge badge-danger">false</span></td>
+                                    <span class="badge badge-danger">false</span>
+                                </td>
                                 @else
                                 <span class="badge badge-success">true</span></td>
                                 </td>
@@ -100,7 +104,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Modal Tembah Data Konsultasi -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

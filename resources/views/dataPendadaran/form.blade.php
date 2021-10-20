@@ -38,7 +38,17 @@
                             Transkip nilai
                         </label>
                         <div class="col-sm-9">
+                            @if($data_pendadaran->transkip != null)
+                            <div class="btn-group">
+                                <form action="" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_pendadaran->transkip }} <i class="mdi mdi-download"></i></a></button>
+                                </form>
+                            </div>
+                            @else
                             <input type="file" class="form-control" placeholder="transkip nilai" name="transkip" value="@if ($button == 'Tambah'){{ old('transkip') }}@else{{ $data_pendadaran->transkip }}@endif" />
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
@@ -46,7 +56,17 @@
                             ujian UEPT
                         </label>
                         <div class="col-sm-9">
+                            @if($data_pendadaran->hasiluept != null)
+                            <div class="btn-group">
+                                <form action="" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_pendadaran->hasiluept }} <i class="mdi mdi-download"></i></a></button>
+                                </form>
+                            </div>
+                            @else
                             <input type="file" class="form-control" placeholder="Hasil Ujian UEPT" name="hasiluept" value="@if ($button == 'Tambah'){{ old('hasiluept') }}@else{{ $data_pendadaran->hasiluept }}@endif" />
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
@@ -54,7 +74,17 @@
                             Bukti Distribusi TA
                         </label>
                         <div class="col-sm-9">
+                            @if($data_pendadaran->buktidistribusi != null)
+                            <div class="btn-group">
+                                <form action="" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_pendadaran->buktidistribusi }} <i class="mdi mdi-download"></i></a></button>
+                                </form>
+                            </div>
+                            @else
                             <input type="file" class="form-control" placeholder="form distribusi TA" name="buktidistribusi" value="@if ($button == 'Tambah'){{ old('buktidistribusi') }}@else{{ $data_pendadaran->buktidistribusi }}@endif" />
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
@@ -145,7 +175,8 @@
                             Keterangan
                         </label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control" placeholder="-" name="ket">@if ($button == 'Tambah'){{ old('ket') }}@else{{ $data_pendadaran->ket }}@endif</textarea>
+                            <textarea type="text" class="form-control" placeholder="" name="ket">@if ($button == 'Tambah'){{ old('ket') }}@else{{ $data_pendadaran->ket }}@endif</textarea>
+                            <p class="text-muted"> * tidak wajib di isi</p>
                         </div>
                     </div>
                     <a href="<?= url('') ?>/pendadaran/data-pendadaran" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>

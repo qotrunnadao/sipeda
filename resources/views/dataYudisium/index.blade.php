@@ -6,6 +6,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div>
+                    <a href="{{ route('yudisium.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
+                </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -31,24 +34,28 @@
                                 <td> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td> {{ $value->transkip }}</td>
                                 <td>
-                                    <span class="badge badge-primary">{{ $value->statusyudisium->status }}</span></td>
+                                    @if($value->status_id == 1)
+                                    <span class="badge badge-warning">Review Bapendik</span>
+                                    @elseif($value->status_id == 2)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @elseif($value->status_id == 3)
+                                    <span class="badge badge-danger">Tidak disetujui</span>
+                                    @elseif($value->status_id == 4)
+                                    <span class="badge badge-primary">boleh ajukan lagi</span>
+                                    @else
+                                    <span class="badge badge-primary">Selesai</span>
+                                    @endif
+                                </td>
                                 <td>
-                                    @if($value->statusyudisium_id == 1)
                                     <div class="btn-group">
                                         <a href="{{ route('yudisium.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
                                     </div>
                                     <div class="btn-group">
+                                        <a href="{{ route('yudisium.ulang', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-cached"></i></a>
+                                    </div>
+                                    <div class="btn-group">
                                         <a href="{{ route('yudisium.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
                                     </div>
-                                    @elseif($value->statusyudisium_id == 2)
-                                    diterima
-                                    @elseif($value->statusyudisium_id == 3)
-                                    tidak disetujui
-                                    @elseif($value->statusyudisium_id == 4)
-                                    boleh ajukan lagi
-                                    @else
-                                    Selesai
-                                    @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -71,14 +78,13 @@
         </div>
     </div>
 
-    <div class="col-12 grid-margin stretch-card">
+    {{-- <div class="col-12 grid-margin stretch-card">
         <div class="card">
             @foreach ($yudisium as $value )
             <div class="card-body">
                 <div>
                     <a href="{{ route('yudisium.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
                 </div>
-
                 <h4 class="card-title mb-4">Data Pendaftaran</h4>
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
@@ -112,7 +118,17 @@
                                 <td> Status Yudisium </td>
                                 <td>:</td>
                                 <td>
-                                    <span class="badge badge-primary">{{ $value->statusyudisium->status }}</span>
+                                    @if($value->status_id == 1)
+                                    <span class="badge badge-warning">Review Bapendik</span>
+                                    @elseif($value->status_id == 2)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @elseif($value->status_id == 3)
+                                    <span class="badge badge-danger">Tidak disetujui</span>
+                                    @elseif($value->status_id == 4)
+                                    <span class="badge badge-primary">boleh ajukan lagi</span>
+                                    @else
+                                    <span class="badge badge-primary">Selesai</span>
+                                    @endif
                                 </td>
                             </tr>
                             <tr>
@@ -123,10 +139,9 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

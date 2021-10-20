@@ -38,7 +38,17 @@
                             Transkip nilai
                         </label>
                         <div class="col-sm-9">
+                            @if($data_yudisium->transkip != null)
+                            <div class="btn-group">
+                                <form action="" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_yudisium->transkip }} <i class="mdi mdi-download"></i></a></button>
+                                </form>
+                            </div>
+                            @else
                             <input type="file" class="form-control" placeholder="transkip nilai" name="transkip" value="@if ($button == 'Tambah'){{ old('transkip') }}@else{{ $data_yudisium->transkip }}@endif" />
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
@@ -81,7 +91,8 @@
                             Keterangan
                         </label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control" placeholder="-" name="ket">@if ($button == 'Tambah'){{ old('ket') }}@else{{ $data_yudisium->ket }}@endif</textarea>
+                            <textarea type="text" class="form-control" placeholder="" name="ket">@if ($button == 'Tambah'){{ old('ket') }}@else{{ $data_yudisium->ket }}@endif</textarea>
+                            <p class="text-muted"> * tidak wajib di isi</p>
                         </div>
                     </div>
                     <a href="<?= url('') ?>/yudisium/data-yudisium" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>

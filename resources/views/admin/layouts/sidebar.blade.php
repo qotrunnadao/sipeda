@@ -16,6 +16,7 @@
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
+        @if(auth()->user()->level_id == 2 && 1)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Master Data</span>
@@ -24,16 +25,21 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
+                    @if(auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tahun-akademik"> Tahun Akademik </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/jurusan"> Data Jurusan </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-ruang"> Data Ruangan </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/level-user"> Level User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-user"> Data User </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-komisi"> Data Komisi </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
+                    @else
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
+                    @endif
                 </ul>
             </div>
         </li>
+        @endif
 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
@@ -43,13 +49,14 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
+                    @if(auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/statusta"> Status TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/spk"> Upload SPK </a></li>
+                    @endif
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-TA"> Pengajuan TA </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-konsultasi"> Data Konsultasi</a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/seminar"> Pengajuan Seminar </a></li> --}}
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semprop"> Seminar Proposal </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semhas"> Seminar Hasil </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/spk"> Upload SPK </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/nilaita"> Nilai TA </a></li>
                 </ul>
             </div>
@@ -71,6 +78,7 @@
             </div>
         </li>
 
+        @if(auth()->user()->level_id == 2)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Yudisium</span>
@@ -85,5 +93,6 @@
                 </ul>
             </div>
         </li>
+        @endif
     </ul>
 </nav>

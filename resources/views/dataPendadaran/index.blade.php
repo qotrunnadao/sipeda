@@ -6,6 +6,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div>
+                    <a href="{{ route('pendadaran.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
+                </div>
                 <div class="card-title mb-5">Pengajuan Pendadaran</div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -50,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 grid-margin stretch-card">
+    {{-- <div class="col-12 grid-margin stretch-card">
         <div class="card">
             @foreach ($pendadaran as $value )
             <div class="card-body">
@@ -114,6 +117,6 @@
             </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

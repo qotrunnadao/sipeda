@@ -51,7 +51,7 @@ Route::get('/error', function () {
 
 //================= DASHBOARD ====================
 
-//=============== ROUTE ADMIN ====================
+//=============== ROUTE ADMIN , KOMISI, & DOSEN ====================
 Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.route')->middleware('admin');
 
 // Route Tahun Akademik
@@ -192,6 +192,8 @@ Route::put('yudisium/data-yudisium/update/{id}', [YudisiumController::class, 'up
 Route::get('yudisium/data-yudisium/delete/{id}', [YudisiumController::class, 'destroy'])->name('yudisium.delete');
 Route::get('yudisium/data-yudisium/diterima/{yudisium}', [YudisiumController::class, 'diterima'])->name('yudisium.diterima');
 Route::get('yudisium/data-yudisium/ditolak/{yudisium}', [YudisiumController::class, 'ditolak'])->name('yudisium.ditolak');
+Route::get('yudisium/data-yudisium/ulang/{yudisium}', [YudisiumController::class, 'ulang'])->name('yudisium.ulang');
+Route::get('yudisium/data-yudisium/selesai/{yudisium}', [YudisiumController::class, 'selesai'])->name('yudisium.selesai');
 // sk kelulusan
 Route::get('/yudisium/sk', [SKController::class, 'index'])->name('sk.index');
 Route::post('/yudisium/sk/store', [SKController::class, 'store'])->name('sk.store');

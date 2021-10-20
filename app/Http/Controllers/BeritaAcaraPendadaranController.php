@@ -22,15 +22,7 @@ class BeritaAcaraPendadaranController extends Controller
     {
         $jurusan = Jurusan::all();
         $pendadaranAll = Pendadaran::with(['mahasiswa'])->get();
-
-        $beritaacara = DB::table('beritaacara_pendadaran')
-            ->join('pendadaran', 'pendadaran.id', '=', 'beritaacara_pendadaran.pendadaran_id')
-            ->join('mahasiswa', 'pendadaran.mhs_id', '=', 'mahasiswa.id')
-            ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-            ->select('beritaacara_pendadaran.beritaacara', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'beritaacara_pendadaran.created_at')
-            ->latest()
-            ->get();
-
+        $beritaacara = BeritaAcaraPendadaran::With('pendadaran.mahasiswa.jurusan')->latest()->get();
         return view('beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
     }
 
@@ -117,13 +109,6 @@ class BeritaAcaraPendadaranController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BeritaAcaraPendadaran  $beritaAcaraPendadaran
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $data = $request->all();
@@ -133,16 +118,9 @@ class BeritaAcaraPendadaranController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BeritaAcaraPendadaran  $beritaAcaraPendadaran
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BeritaAcaraPendadaran $beritaAcaraPendadaran)
+    public function destroy($beritaacara)
     {
-        $beritaacara = BeritaAcaraPendadaran::where('beritaacara', $beritaAcaraPendadaran)->first();
-        // $post =Post::where('id',$post_id)->first();
+        $beritaacara = BeritaAcaraPendadaran::where('beritaacara', $beritaacara)->first();
         if ($beritaacara != null) {
             $beritaacara->delete();
             Alert::success('Berhasil', 'Berhasil hapus data Beita Acara');
