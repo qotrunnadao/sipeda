@@ -19,7 +19,7 @@ class CreateKonsultasiTASTable extends Migration
             $table->dateTime('tanggal')->nullable();
             $table->string('topik');
             $table->tinyInteger('verifikasiDosen')->comment('0=menunggu, 1=diterima', '2=ditolak')->default('0');
-            $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
+            $table->foreignId('ta_id')->references('id')->on('ta');
             $table->foreignId('dosen_id')->references('id')->on('dosen');
             $table->timestamps();
         });

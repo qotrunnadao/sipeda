@@ -39,7 +39,15 @@ class PendadaranController extends Controller
             $penguji4 = Dosen::where('id', $penguji4_id)->first();
             $namaPenguji4 = $penguji4->nama;
         }
-        return view('dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
+        //return view('dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
+
+        if (auth()->user()->level_id == 2) {
+            return view('admin.pendadaran.dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
+        } elseif (auth()->user()->level_id == 1) {
+            return view('komisi.pendadaran.dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.pendadaran.dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
+        }
     }
 
     /**
@@ -81,7 +89,15 @@ class PendadaranController extends Controller
             $stts = StatusPendadaran::where('id', $status_id)->first();
             $ketStatus = $stts->status;
         }
-        return view('dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        //return view('dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
+
+        if (auth()->user()->level_id == 2) {
+            return view('admin.pendadaran.dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        } elseif (auth()->user()->level_id == 1) {
+            return view('komisi.pendadaran.dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.pendadaran.dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        }
     }
 
     /**
@@ -100,7 +116,6 @@ class PendadaranController extends Controller
         } else {
             Alert::warning('Gagal', 'Data Izin Gagal Ditambahkan');
         }
-
         return redirect(route('pendadaran.index'));
     }
 

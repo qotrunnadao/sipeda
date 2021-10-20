@@ -21,7 +21,7 @@ class SeminarHasilController extends Controller
     {
         $semhas = SeminarHasil::latest()->get();
 
-        return view('semhasTA.index', compact('semhas'));
+        return view('admin.TA.semhasTA.index', compact('semhas'));
     }
 
     /**
@@ -66,7 +66,7 @@ class SeminarHasilController extends Controller
     {
         $semhas = SeminarHasil::find($id);
         $ruang = Ruang::get();
-        return view('semhasTA.edit', compact('semhas', 'ruang'));
+        return view('admin.TA.semhasTA.edit', compact('semhas', 'ruang'));
     }
 
     /**

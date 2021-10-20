@@ -32,7 +32,15 @@ class TAController extends Controller
             $status = Status::where('id', $status_id)->first();
             $ketStatus = $status->ket;
         }
-        return view('dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+        //return view('dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+
+        if (auth()->user()->level_id == 2) {
+            return view('admin.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+        } elseif (auth()->user()->level_id == 1) {
+            return view('komisi.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+        }
     }
 
     /**
@@ -60,7 +68,7 @@ class TAController extends Controller
             $stts = Status::where('id', $status_id)->first();
             $ketStatus = $stts->ket;
         }
-        return view('dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status', 'dosen'));
+        return view('admin.TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status', 'dosen'));
     }
 
     /**
@@ -96,7 +104,7 @@ class TAController extends Controller
             'data_TA' => $data_list
         ];
         // passing data Izin yang didapat
-        return view('dataTA.detail', $data);
+        return view('admin.TA.dataTA.detail', $data);
     }
 
     /**
@@ -125,7 +133,7 @@ class TAController extends Controller
             $status = Status::where('id', $status_id)->first();
             $ketStatus = $status->ket;
         }
-        return view('dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+        return view('admin.TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
     }
 
     /**

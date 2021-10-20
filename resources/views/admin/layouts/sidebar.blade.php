@@ -16,7 +16,6 @@
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
-        @if(auth()->user()->level_id == 2 && 1)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Master Data</span>
@@ -25,7 +24,6 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    @if(auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tahun-akademik"> Tahun Akademik </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/jurusan"> Data Jurusan </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-ruang"> Data Ruangan </a></li>
@@ -33,13 +31,11 @@
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-user"> Data User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-komisi"> Data Komisi </a></li>
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
-                    @else
                     <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
-                    @endif
                 </ul>
             </div>
         </li>
-        @endif
+
 
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
@@ -49,15 +45,13 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    @if(auth()->user()->level_id == 2)
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/statusta"> Status TA </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/spk"> Upload SPK </a></li>
-                    @endif
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-TA"> Pengajuan TA </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/data-konsultasi"> Data Konsultasi</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semprop"> Seminar Proposal </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/semhas"> Seminar Hasil </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/tugas-akhir/nilaita"> Nilai TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('statusta.index') }}"> Status TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('spk.index') }}"> Upload SPK </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('TA.index') }}"> Pengajuan TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('konsultasi.index') }}"> Data Konsultasi</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('semprop.index') }}"> Seminar Proposal </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('semhas.index') }}"> Seminar Hasil </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('nilaita.index') }}"> Nilai TA </a></li>
                 </ul>
             </div>
         </li>
@@ -70,15 +64,14 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/status-pendadaran"> Status Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/data-pendadaran"> Pengajuan Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/beritaacara"> Berita Acara </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/pendadaran/nilai-pendadaran"> Nilai Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('statuspendadaran.index') }}"> Status Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('pendadaran.index') }}"> Pengajuan Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('beritaacarapendadaran.index') }}"> Berita Acara </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="route('nilaiPendadaran.index')"> Nilai Pendadaran </a></li>
                 </ul>
             </div>
         </li>
 
-        @if(auth()->user()->level_id == 2)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Yudisium</span>
@@ -87,12 +80,11 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/status-yudisium"> Status Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/data-yudisium"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/yudisium/sk"> SK Kelulusan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('statusyudisium.index') }}"> Status Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('sk.index') }}"> SK Kelulusan </a></li>
                 </ul>
             </div>
         </li>
-        @endif
     </ul>
 </nav>

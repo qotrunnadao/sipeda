@@ -18,7 +18,7 @@ class StatusTAController extends Controller
         $data = array(
             'status' => StatusTA::get(),
         );
-        return view('statusTA.index', $data);
+        return view('admin.TA.statusTA.index', $data);
     }
 
     /**

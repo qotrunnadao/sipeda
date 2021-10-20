@@ -463,7 +463,7 @@ class DatabaseSeeder extends Seeder
                 'hasil' => "perbaikan latar belakang",
                 'topik' => "BAB 1",
                 'verifikasiDosen' => 0,
-                'mhs_id' => 1,
+                'ta_id' => 1,
                 'dosen_id' => 1,
             ],
         ];

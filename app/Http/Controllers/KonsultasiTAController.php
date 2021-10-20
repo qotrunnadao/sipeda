@@ -18,9 +18,13 @@ class KonsultasiTAController extends Controller
     public function index()
     {
         $konsultasi = KonsultasiTA::with('TA.mahasiswa.jurusan')->latest()->get();
+        //return view('konsultasiTA.index', compact('konsultasi'));
 
-
-        return view('konsultasiTA.index', compact('konsultasi'));
+        if (auth()->user()->level_id == 2) {
+            return view('admin.TA.konsultasiTA.index', compact('konsultasi'));
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.TA.konsultasiTA.index', compact('konsultasi'));
+        }
     }
 
     /**
@@ -59,8 +63,13 @@ class KonsultasiTAController extends Controller
         $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
         $namaMahasiswa = $mhs_id->nama;
         $nim = $mhs_id->nim;
-        // passing data Izin yang didapat
-        return view('konsultasiTA.detail', compact('konsultasi', 'namaMahasiswa', 'nim'));
+        //return view('konsultasiTA.detail', compact('konsultasi', 'namaMahasiswa', 'nim'));
+
+        if (auth()->user()->level_id == 2) {
+            return view('admin.TA.konsultasiTA.detail', compact('konsultasi', 'namaMahasiswa', 'nim'));
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.TA.konsultasiTA.detail', compact('konsultasi', 'namaMahasiswa', 'nim'));
+        }
     }
 
     /**

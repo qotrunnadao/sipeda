@@ -24,7 +24,15 @@ class BeritaAcaraPendadaranController extends Controller
         $pendadaranAll = Pendadaran::with(['mahasiswa'])->get();
         $beritaacara = BeritaAcaraPendadaran::with('pendadaran.mahasiswa.jurusan')->latest()->get();
 
-        return view('beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
+        //return view('beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
+
+        if (auth()->user()->level_id == 2) {
+            return view('admin.pendadaran.beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
+        } elseif (auth()->user()->level_id == 1) {
+            return view('komisi.pendadaran.beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.pendadaran.beritaAcaraPendadaran.index', compact('beritaacara', 'jurusan', 'pendadaranAll'));
+        }
     }
 
     public function nim(Request $request)

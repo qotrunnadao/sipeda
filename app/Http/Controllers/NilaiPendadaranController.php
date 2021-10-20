@@ -24,19 +24,16 @@ class NilaiPendadaranController extends Controller
         $jurusan = jurusan::all();
         $pendadaran = Pendadaran::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::all();
-        // $nilai = DB::table('nilai_pendadaran')
-        //     ->join('pendadaran', 'pendadaran.id', '=', 'nilai_pendadaran.pendadaran_id')
-        //     ->join('mahasiswa', 'pendadaran.mhs_id', '=', 'mahasiswa.id')
-        //     ->join('jurusan', 'mahasiswa.jurusan_id', '=', 'jurusan.id')
-        //     ->select('nilai_pendadaran.statusnilai_id', 'nilai_pendadaran.nilaiAngka', 'nilai_pendadaran.nilaiHuruf', 'mahasiswa.nama', 'mahasiswa.nim', 'jurusan.namaJurusan', 'nilai_pendadaran.created_at', 'nilai_pendadaran.id')
-        //     // ->where('ta.mahasiswa_id', '=', $id)
-        //     ->latest()
-        //     ->get();
         $nilai = NilaiPendadaran::With('pendadaran.mahasiswa.jurusan')->latest()->get();
+        //return view('nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
 
-
-        // dd($spk);
-        return view('nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        if (auth()->user()->level_id == 2) {
+            return view('admin.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        } elseif (auth()->user()->level_id == 1) {
+            return view('komisi.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        }
     }
 
     public function nim(Request $request)

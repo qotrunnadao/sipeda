@@ -25,9 +25,9 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/tugas-akhir/data-TA"> Data TA </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/tugas-akhir/data-konsultasi"> Data Konsultasi </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/tugas-akhir/upload-nilai"> Upload Nilai TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('TA.index') }}"> Data TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('konsultasi.index') }}"> Data Konsultasi </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('nilaita.index') }}"> Upload Nilai TA </a></li>
                 </ul>
             </div>
         </li>
@@ -40,9 +40,9 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/pendadaran/data-pendadaran"> Data Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/pendadaran/jadwal"> Jadwal Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/dosen/pendadaran/upload-nilai"> Upload Nilai Pendadaran</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('pendadaran.index') }}"> Data Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('beritaacarapendadaran.index') }}"> Berita Acara Pendadaran </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('nilaiPendadaran.index') }}"> Upload Nilai Pendadaran</a></li>
                 </ul>
             </div>
         </li>

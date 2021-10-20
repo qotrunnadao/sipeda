@@ -115,7 +115,7 @@ Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', [KonsultasiTAC
 Route::get('/tugas-akhir/seminar', [SeminarController::class, 'index']);
 
 //semprop
-Route::get('/tugas-akhir/semprop', [SeminarProposalController::class, 'index']);
+Route::get('/tugas-akhir/semprop', [SeminarProposalController::class, 'index'])->name('semprop.index');
 Route::get('/tugas-akhir/semprop/edit/{id}', [SeminarProposalController::class, 'edit'])->name('semprop.edit');
 Route::get('/tugas-akhir/semprop/update/{id}', [SeminarProposalController::class, 'update'])->name('semprop.update');
 Route::get('/tugas-akhir/semprop/delete/{id}', [SeminarProposalController::class, 'destroy'])->name('semprop.delete');
@@ -123,7 +123,7 @@ Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', [SeminarProposalCo
 Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', [SeminarProposalController::class, 'ditolak'])->name('semprop.ditolak');
 
 //semhas
-Route::get('/tugas-akhir/semhas', [SeminarHasilController::class, 'index']);
+Route::get('/tugas-akhir/semhas', [SeminarHasilController::class, 'index'])->name('semhas.index');
 Route::get('/tugas-akhir/semhas/edit/{id}', [SeminarHasilController::class, 'edit'])->name('semhas.edit');
 Route::get('/tugas-akhir/semhas/update/{id}', [SeminarHasilController::class, 'update'])->name('semhas.update');
 Route::get('/tugas-akhir/semhas/delete/{id}', [SeminarHasilController::class, 'destroy'])->name('semhas.delete');
@@ -306,10 +306,8 @@ Route::get('/dosen/pendadaran/upload-nilai', function () {
 
 //================= ROUTE MAHASISWA =========================
 Route::get('/mhs/beranda', function () {
-    return view('guest.menu')->name('mhs.route')->middleware('mhs');
-});
-// Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.route')->middleware('admin');
-
+    return view('guest.menu');
+})->name('mhs.route')->middleware('mhs');
 //Tugas Akhir
 Route::get('/mahasiswa/tugas-akhir/beranda', function () {
     return view('mahasiswa.TA.pages.beranda');

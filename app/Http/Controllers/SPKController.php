@@ -20,13 +20,10 @@ class SPKController extends Controller
      */
     public function index()
     {
-        // $spk = SPK::latest()->get();
         $jurusan = jurusan::all();
         $taAll = TA::with(['mahasiswa'])->get();
-        // $spk = SPK::with(['TA', 'TA.Mahasiswa'])->latest()->get();
 
         $spk = SPK::With('TA.mahasiswa.jurusan')->latest()->get();
-        // dd($spk);
         return view('SPK.index', compact('spk', 'jurusan', 'taAll'));
     }
 

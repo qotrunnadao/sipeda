@@ -20,7 +20,7 @@ class SeminarProposalController extends Controller
     public function index()
     {
         $semprop = SeminarProposal::latest()->get();
-        return view('sempropTA.index', compact('semprop'));
+        return view('admin.TA.sempropTA.index', compact('semprop'));
     }
 
     /**
@@ -66,7 +66,7 @@ class SeminarProposalController extends Controller
         $sempropAll = SeminarProposal::get();
         $semprop = SeminarProposal::find($id);
         $ruang = Ruang::get();
-        return view('sempropTA.edit', compact('semprop', 'ruang'));
+        return view('admin.TA.sempropTA.edit', compact('semprop', 'ruang'));
     }
 
     /**

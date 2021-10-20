@@ -15,6 +15,10 @@
     <!-- DataTables -->
     <link href="{{ asset('sitak/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('sitak/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('sitak/plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('sitak/plugins/Buttons-2.0.1/css/buttons.dataTables.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('sitak/plugins/Buttons-2.0.1/css/buttons.bootstrap5.css') }}" rel="stylesheet" type="text/css">
+
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('sitak/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- Sweet Alert --->
@@ -23,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('sitak/plugins/clockpicker-gh-pages/src/clockpicker.css') }}">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('sitak/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -74,10 +79,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="{{ asset('sitak/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('sitak/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- datatable Responsive -->
+    <!-- datatable -->
     <script src="{{ asset('sitak/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('sitak/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('sitak/plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+    <script src="{{ asset('sitak/plugins/datatables-fixedheader/js/fixedHeader.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('sitak/plugins/Buttons-2.0.1/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('sitak/plugins/Buttons-2.0.1/js/buttons.html5.min.js')}}"></script>
+    <script src="{{ asset('sitak/plugins/Buttons-2.0.1/js/buttons.print.min.js')}}"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.colVis.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+
     <!-- overlayScrollbars -->
     <script src="{{ asset('sitak/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- PAGE PLUGINS -->
@@ -99,6 +116,22 @@
     <!-- clockpicker -->
     <script src="{{ asset('sitak/plugins/clockpicker-gh-pages/src/clockpicker.js') }}"></script>
     <!-- My Script -->
+
+    <script>
+        $(document).ready(function() {
+    $('#buttondatatable').DataTable( {
+        dom: 'lBfrtip',
+        buttons: [ 'csv', 'excel', 'pdf', 'print', 'colvis' ]
+    } );
+
+	} );
+    </script>
+    <!-- datatable -->
+    <script>
+        $(document).ready( function () {
+        $('#datatable').DataTable();
+    } );
+    </script>
 
     <!-- datepicker -->
     <script>
@@ -129,12 +162,7 @@
              });
     </script>
 
-    <!-- datatable -->
-    <script>
-        $(document).ready( function () {
-        $('#datatable').DataTable();
-    } );
-    </script>
+
     <!-- Clockpicker -->
     <script type="text/javascript">
         $('.clockpicker').clockpicker({
@@ -144,6 +172,28 @@
     });
     </script>
     <!-- Hapus Data -->
+    <script>
+        $(document).ready(function() {
+            $("#buttondatatable").on('click','.hapus', function(e) {
+                e.preventDefault();
+                var form = $(this).parents('form');
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: 'Apakah anda yakin menghapus data ini?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1f3a93',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.value) {
+                        form.submit();
+                    }
+                })
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $("#datatable").on('click','.hapus', function(e) {

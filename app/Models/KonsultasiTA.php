@@ -17,11 +17,11 @@ class KonsultasiTA extends Model
 
     public function Dosen()
     {
-        return $this->belongsTo(Dosen::class);
+        return $this->belongsTo(Dosen::class, 'dosen_id');
     }
-    public function Mahasiswa()
+    public function TA()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(TA::class, 'ta_id');
     }
 
     public function getCreatedAtAttribute()
