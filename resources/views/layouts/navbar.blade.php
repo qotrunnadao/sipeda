@@ -15,11 +15,10 @@
                     </div>
                     <div class="nav-profile-text">
                         <p class="mb-1 text-black">{{ auth()->user()->email }}</p>
+                        <span class="badge badge-gradient-primary">{{ auth()->user()->level->namaLevel }}</span>
                     </div>
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="<?= url('') ?>/guest/menu">
-                        <i class="mdi mdi-cached mr-2 text-success"></i> Menu </a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">

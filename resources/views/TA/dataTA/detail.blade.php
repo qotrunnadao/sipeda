@@ -43,7 +43,7 @@
                         Pembimbing 1
                     </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="{{ $data_TA->pembimbing1_id }}" />
+                        <input type="text" class="form-control" value="{{ $data_TA->dosen->nama }}" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -51,7 +51,7 @@
                         Pembimbing2
                     </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="{{ $data_TA->pembimbing2_id }}" />
+                        <input type="text" class="form-control" value="{{ $data_TA->dosen->nama }}" />
                     </div>
                 </div>
 

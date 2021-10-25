@@ -8,21 +8,26 @@
         </button>
         <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="Dropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                     <div class="nav-profile-img">
                         <img src="{{ asset('sitak/assets/images/faces/atun.jpg') }}" alt="image">
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text">
-                        <p class="mb-1 text-black">H1D018033</p>
+                        <p class="mb-1 text-black">{{ auth()->user()->email }}</p>
+                        <span class="badge badge-gradient-primary">{{ auth()->user()->level->namaLevel }}</span>
                     </div>
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="<?= url('') ?>/guest/menu">
+                    <a class="dropdown-item" href="{{ route('mahasiswa.menu') }}">
                         <i class="mdi mdi-cached mr-2 text-success"></i> Menu </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<?= url('') ?>/">
-                        <i class="mdi mdi-logout mr-2 text-primary"></i> Keluar </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item">
+                            <i class="mdi mdi-logout mr-2 text-primary"></i> {{ __('Logout') }}
+                        </button>
+                    </form>
                 </div>
             </li>
             <li class="nav-item d-none d-lg-block full-screen-link">

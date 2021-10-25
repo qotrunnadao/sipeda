@@ -15,21 +15,25 @@ class TA extends Model
     ];
     protected $primaryKey = 'id';
 
-    public function Dosen()
+    public function Dosen1()
     {
-        return $this->belongsTo(Dosen::class);
+        return $this->belongsTo(Dosen::class, 'pembimbing1_id');
+    }
+    public function Dosen2()
+    {
+        return $this->belongsTo(Dosen::class, 'pembimbing2_id');
     }
     public function Mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
     public function Status()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'status_id');
     }
     public function Tahunakademik()
     {
-        return $this->belongsTo(Tahunakademik::class);
+        return $this->belongsTo(Tahunakademik::class, 'thnAkad_id');
     }
 
     public function getCreatedAtAttribute()

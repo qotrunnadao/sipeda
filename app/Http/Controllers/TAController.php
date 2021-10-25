@@ -21,18 +21,7 @@ class TAController extends Controller
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();
         $jurusan = jurusan::get();
-        foreach ($tugas_akhir as $value) {
-            $dosen1_id = $value->pembimbing1_id;
-            $dosen2_id = $value->pembimbing2_id;
-            $status_id = $value->status_id;
-            $dosen1 = Dosen::where('id', $dosen1_id)->first();
-            $nama_dosen1 = $dosen1->nama;
-            $dosen2 = Dosen::where('id', $dosen2_id)->first();
-            $nama_dosen2 = $dosen2->nama;
-            $status = Status::where('id', $status_id)->first();
-            $ketStatus = $status->ket;
-        }
-        return view('TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+        return view('TA.dataTA.index', compact('tugas_akhir'));
 
         // if (auth()->user()->level_id == 2) {
         //     return view('admin.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
@@ -57,18 +46,7 @@ class TAController extends Controller
         $dosen = Dosen::get();
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();
-        foreach ($tugas_akhir as $value) {
-            $dosen1_id = $value->pembimbing1_id;
-            $dosen2_id = $value->pembimbing2_id;
-            $status_id = $value->status_id;
-            $dosen1 = Dosen::where('id', $dosen1_id)->first();
-            $nama_dosen1 = $dosen1->nama;
-            $dosen2 = Dosen::where('id', $dosen2_id)->first();
-            $nama_dosen2 = $dosen2->nama;
-            $stts = Status::where('id', $status_id)->first();
-            $ketStatus = $stts->ket;
-        }
-        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status', 'dosen'));
+        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'status', 'dosen'));
     }
 
     /**
@@ -115,7 +93,6 @@ class TAController extends Controller
      */
     public function edit($id)
     {
-        $tugas_akhir = TA::get();
         $data_ta = TA::find($id);
         $action = url('/tugas-akhir/data-TA/update');
         $button = 'Edit';
@@ -130,10 +107,10 @@ class TAController extends Controller
             $nama_dosen1 = $dosen1->nama;
             $dosen2 = Dosen::where('id', $dosen2_id)->first();
             $nama_dosen2 = $dosen2->nama;
-            $status = Status::where('id', $status_id)->first();
-            $ketStatus = $status->ket;
+            $stts = Status::where('id', $status_id)->first();
+            $ketStatus = $stts->ket;
         }
-        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
+        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status', 'dosen'));
     }
 
     /**

@@ -5,9 +5,11 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
+            @if (auth()->user()->level_id == 2)
             <div>
                 <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#exampleModal"> <i class="mdi mdi-plus"></i> Tambah</button>
             </div>
+            @endif
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">

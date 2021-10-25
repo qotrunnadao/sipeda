@@ -7,7 +7,7 @@
         <div class="card  bg-gradient-primary">
             <div class="card-body">
                 <img class="float-left img-start" src="{{ asset('sitak/assets/images/welcome.svg') }}" alt="" style="width: 200px">
-                <h1 class="card-title text-white text-center mt-5">Selamat Datang, QOTRUNNADA OKTIRIANI!</h1>
+                <h1 class="card-title text-white text-center mt-5">Selamat Datang, {{ auth()->user()->email }}!</h1>
             </div>
         </div>
     </div>

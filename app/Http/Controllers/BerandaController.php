@@ -11,7 +11,7 @@ use App\Models\StatusTA;
 use App\Models\StatusYudisium;
 use Illuminate\Http\Request;
 
-class BerandaAdminController extends Controller
+class BerandaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,15 @@ class BerandaAdminController extends Controller
             'statusYudisium' => StatusYudisium::latest()->get(),
             'akademik' => Akademik::latest()->get(),
         );
-        return view('admin.master.beranda', $data);
+        if (auth()->user()->level_id == 2) {
+            return view('admin.master.beranda', $data);
+        } elseif (auth()->user()->level_id == 1) {
+            return view('komisi.beranda', $data);
+        } elseif (auth()->user()->level_id == 3) {
+            return view('dosen.beranda', $data);
+        } elseif (auth()->user()->level_id == 5) {
+            return view('kajur.beranda', $data);
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('layouts.main')
 @section('content')
 @section('icon', 'home')
 @section('title', 'Beranda Admin')

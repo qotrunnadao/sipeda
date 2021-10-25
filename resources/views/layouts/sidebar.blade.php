@@ -6,7 +6,7 @@
                     <img src="{{ asset('sitak/assets/images/unsoed.png') }}" alt="profile">
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                    <span class="text-secondary text-small">FAKULTAS TEKNIK</span>
+                    <span class="text-secondary">FAKULTAS TEKNIK</span>
                 </div>
             </a>
         </li>
@@ -16,6 +16,7 @@
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
+        @if (auth()->user()->level_id == 2)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Master Data</span>
@@ -35,8 +36,7 @@
                 </ul>
             </div>
         </li>
-
-
+        @endif
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Tugas Akhir</span>
@@ -45,10 +45,14 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
+                    @if (auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statusta.index') }}"> Status TA </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('spk.index') }}"> Upload SPK </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('TA.index') }}"> Pengajuan TA </a></li>
+                    @endif
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('TA.index') }}"> Data Tugas Akhir </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('spk.index') }}"> SPK </a></li>
+                    {{-- @if (auth()->user()->level_id == 3) --}}
                     <li class="nav-item"> <a class="nav-link" href="{{ route('konsultasi.index') }}"> Data Konsultasi</a></li>
+                    {{-- @endif --}}
                     <li class="nav-item"> <a class="nav-link" href="{{ route('semprop.index') }}"> Seminar Proposal </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('semhas.index') }}"> Seminar Hasil </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('nilaita.index') }}"> Nilai TA </a></li>
@@ -64,14 +68,16 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
+                    @if (auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statuspendadaran.index') }}"> Status Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('pendadaran.index') }}"> Pengajuan Pendadaran </a></li>
+                    @endif
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('pendadaran.index') }}"> Data Pendadaran </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('beritaacarapendadaran.index') }}"> Berita Acara </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('nilaiPendadaran.index') }}"> Nilai Pendadaran </a></li>
                 </ul>
             </div>
         </li>
-
+        @if (auth()->user()->level_id == 2)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Yudisium</span>
@@ -86,5 +92,20 @@
                 </ul>
             </div>
         </li>
+        @elseif (auth()->user()->level_id == 5)
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                <span class="menu-title">Yudisium</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-folder menu-icon"></i>
+            </a>
+            <div class="collapse" id="general-pages">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('sk.index') }}"> SK Kelulusan </a></li>
+                </ul>
+            </div>
+        </li>
+        @endif
     </ul>
 </nav>

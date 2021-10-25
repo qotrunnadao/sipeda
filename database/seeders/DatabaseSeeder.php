@@ -114,7 +114,10 @@ class DatabaseSeeder extends Seeder
                 'namaLevel' => "dosen",
             ],
             [
-                'namaLevel' => "mhs",
+                'namaLevel' => "mahasiswa",
+            ],
+            [
+                'namaLevel' => "ketua jurusan",
             ],
             [
                 'namaLevel' => "bapendik",
@@ -337,6 +340,12 @@ class DatabaseSeeder extends Seeder
                 'password' => "H1D018049",
                 'level_id' => 4,
             ],
+            [
+                'email' => "nahda.putri@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018019",
+                'password' => "H1D018019",
+                'level_id' => 5,
+            ],
 
         ];
 
@@ -349,6 +358,7 @@ class DatabaseSeeder extends Seeder
                 'nohp' => "082241443663",
                 'tmptLahir' => "Purwokerto",
                 'isKomisi' => 1,
+                'isKajur' => 1,
                 'agama_id' => 1,
                 'jk_id' => 1,
                 'jurusan_id' => 4,

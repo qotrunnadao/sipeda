@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\Dosen;
+use App\Http\Middleware\Komisi;
+use App\Http\Middleware\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SKController;
@@ -11,13 +14,13 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KomisiController;
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\NilaiTAController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\StatusTAController;
 use App\Http\Controllers\YudisiumController;
 use App\Http\Controllers\PendadaranController;
-use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\KonsultasiTAController;
 use App\Http\Controllers\SeminarHasilController;
 use App\Http\Controllers\TahunAkademikController;
@@ -26,6 +29,7 @@ use App\Http\Controllers\NilaiPendadaranController;
 use App\Http\Controllers\SeminarProposalController;
 use App\Http\Controllers\StatusPendadaranController;
 use App\Http\Controllers\BeritaAcaraPendadaranController;
+use App\Http\Middleware\Kajur;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +52,7 @@ Route::get('/error', function () {
 });
 
 //=============== ROUTE ADMIN ====================
-Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.route')->middleware('admin');
+Route::get('/admin/beranda', [BerandaController::class, 'index'])->name('admin.route')->middleware('admin');
 
 //======= MASTER DATA ========
 // Route Tahun Akademik
@@ -199,19 +203,18 @@ Route::post('/yudisium/sk/nim/', [SKController::class, 'nim'])->name('sk.nim');
 
 
 //================= ROUTE KOMISI ====================
-Route::get('/komisi/beranda', function () {
-    return view('komisi.master.beranda');
-})->name('komisi.route');
+Route::get('/komisi/beranda', [BerandaController::class, 'index'])->name('komisi.beranda')->middleware([Komisi::class]);
 
 //================= ROUTE DOSEN ===========================
-Route::get('/dosen/beranda', function () {
-    return view('dosen.beranda');
-})->name('dosen.route');
+Route::get('/dosen/beranda', [BerandaController::class, 'index'])->name('dosen.beranda')->middleware([Dosen::class]);
+
+//================= ROUTE KAJUR ===========================
+Route::get('/kajur/beranda', [BerandaController::class, 'index'])->name('kajur.beranda')->middleware([Kajur::class]);
 
 //================= ROUTE MAHASISWA =========================
 Route::get('/mhs/beranda', function () {
     return view('mahasiswa.menu');
-})->name('mhs.route')->middleware('mhs');
+})->name('mahasiswa.menu')->middleware([Mahasiswa::class]);
 
 //Tugas Akhir
 Route::get('/mahasiswa/tugas-akhir/beranda', function () {
