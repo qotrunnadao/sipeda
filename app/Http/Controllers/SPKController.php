@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class SPKController extends Controller
 {
@@ -24,6 +26,7 @@ class SPKController extends Controller
         $taAll = TA::with(['mahasiswa'])->get();
 
         $spk = SPK::With('TA.mahasiswa.jurusan')->latest()->get();
+        // dd($spk);
         return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll'));
     }
 
@@ -55,27 +58,23 @@ class SPKController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        if ($request->file('fileSPK')) {
-            $spk = SPK::latest()->get();
-            foreach ($spk as $value) {
-                $ta_id = $value->TA_id;
-                $ta = TA::where('id', $ta_id)->first();
-                $mahasiswa_id = $ta->mahasiswa_id;
-                $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-                $nim = $mhs_id->nim;
-            }
-            $file = $request->file('fileSPK');
-            $filename = 'SPK' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('fileSPK')->storeAS('public/assets/file', $filename);
+        // dd($data);
+        $jurusan = jurusan::all();
+        $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
+        // $spk = SPK::With('TA.mahasiswa')->latest()->get();
+        // dd($data);
+
+            // $data = ['spk' => $spk, 'taAll' => $taAll, 'jurusan' => $jurusan];
+            $pdf = PDF::loadView('TA.SPK.download');
+
+            $filename = 'SPK' . '_'.$taAll->mahasiswa->nim.'_' . time() . '.pdf';
+            Storage::put('public/assets/file/'. $filename, $pdf->output());
+
             $data = [
                 'TA_id' => $request->ta_id,
                 'fileSPK' => $filename,
             ];
             $cek = SPK::create($data);
-        } else {
-            $data['doc'] = NULL;
-        }
-        // dd($data);
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data SPK');
         } else {
@@ -147,6 +146,32 @@ class SPKController extends Controller
             return back();
         }
         Alert::warning('Gagal', 'Data SPK Gagal Dihapus');
+        return back();
+    }
+
+    public function eksport()
+    {
+        $jurusan = jurusan::all();
+        $taAll = TA::with(['mahasiswa'])->get();
+
+        $spk = SPK::With('TA.mahasiswa.jurusan')->latest()->get();
+        // dd($taAll);
+        $data = ['spk' => $spk, 'taAll' => $taAll, 'jurusan' => $jurusan];
+        $pdf = PDF::loadView('TA.SPK.download', $data);
+
+        $filename = 'SPK' . '_nim_' . time() . '.pdf';
+        $cek = Storage::put('public/assets/file/'. $filename, $pdf->output());
+
+        if($cek){
+            $data = [
+                'TA_id' => 5,
+                'fileSPK' => $filename,
+            ];
+            SPK::create($data);
+            Alert::success('Berhasil', 'Berhasil Tambah Data SPK');
+        }else{
+            Alert::warning('Gagal', 'Data SPK Gagal Ditambahkan');
+        }
         return back();
     }
 }

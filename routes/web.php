@@ -135,7 +135,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::put('/tugas-akhir/spk/update/{id}',  'SPKController@update')->name('spk.update');
     Route::get('/tugas-akhir/spk/destroy/{id}',  'SPKController@destroy')->name('spk.destroy');
     Route::post('/tugas-akhir/spk/nim/',  'SPKController@nim')->name('spk.nim');
-    
+    Route::get('/tugas-akhir/spk/pdf/',  'SPKController@eksport')->name('spk.eksport');
+
     //nilai TA
     Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita.index');
     Route::post('/tugas-akhir/nilaita/store',  'NilaiTAController@store')->name('nilaita.store');
