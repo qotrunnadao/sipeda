@@ -8,7 +8,7 @@
             <form action="{{$action}}@if($button == 'Edit')/{{ $data_TA->id}}@endif" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
-                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
+                {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
@@ -40,7 +40,7 @@
                         </label>
                         <div class="col-sm-9">
                             <select name="pembimbing1_id" id="pembimbing1_id" class="form-control">
-                                <option value="">PILIH</option>
+                                <option value="" selected disabled>PILIH</option>
                                 @foreach ($dosen as $value )
                                 <option value="@if ($button == 'Tambah'){{ old('namaDosen1') }}@else{{ $namaDosen1 }}@endif">{{ $value->nama}}</option>
                                 @endforeach
@@ -53,7 +53,7 @@
                         </label>
                         <div class="col-sm-9">
                             <select name="pembimbing2_id" id="pembimbing2_id" class="form-control">
-                                <option value="">PILIH</option>
+                                <option value="" selected disabled>PILIH</option>
                                 @foreach ($dosen as $value )
                                 <option value="@if ($button == 'Tambah'){{ old('namaDosen2') }}@else{{ $namaDosen2 }}@endif">{{ $value->nama}}</option>
                                 @endforeach
@@ -67,7 +67,7 @@
                         </label>
                         <div class="col-sm-9">
                             <select name="status" id="status" class="form-control">
-                                <option value="">PILIH</option>
+                                <option value="" selected disabled>PILIH</option>
                                 @foreach ($status as $value )
                                 <option value="@if ($button == 'Tambah'){{ old('ketStatus') }}@else{{ $ketStatus }}@endif">{{ $value->ket}}</option>
                                 @endforeach

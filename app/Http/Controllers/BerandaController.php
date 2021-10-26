@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Akademik;
+use App\Http\Controllers\Auth;
+use App\Models\Mahasiswa;
+use App\Models\User;
 use App\Models\Status;
 use App\Models\StatusKP;
 use App\Models\StatusNilai;
@@ -38,6 +41,23 @@ class BerandaController extends Controller
         } elseif (auth()->user()->level_id == 5) {
             return view('kajur.beranda', $data);
         }
+    }
+
+    public function mahasiswaTA()
+    {
+        $ta = array(
+            'status' => Status::latest()->get(),
+            'statusnilai' => StatusNilai::latest()->get(),
+            'statusKP' => StatusKP::latest()->get(),
+            'statusTA' => StatusTA::latest()->get(),
+            'statusPendadaran' => StatusPendadaran::latest()->get(),
+            'statusYudisium' => StatusYudisium::latest()->get(),
+            'akademik' => Akademik::latest()->get(),
+            // 'user' => Auth::user()::With('mahasiswa')->latest()->get(),
+        );
+        // dd($ta);
+        return view('mahasiswa.TA.pages.beranda', $ta);
+
     }
 
     /**

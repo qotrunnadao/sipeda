@@ -18,6 +18,10 @@ class User extends Authenticatable
         'password',
         'level_id',
     ];
+    public function Mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class);
+    }
 
     /**
      * The attributes that should be hidden for arrays.

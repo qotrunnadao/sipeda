@@ -67,7 +67,7 @@ class LoginController extends Controller
             }
         } else {
             return redirect('/login')
-                ->with('error', 'Email & Password are incorrect.');
+                ->with('error', 'Login Failed.');
         }
     }
 }

@@ -84,78 +84,14 @@
                 <h4 class="card-title mb-3">Tahapan TA</h4>
                 <div class="list-wrapper">
                     <ul class="d-flex flex-column todo-list todo-list-custom">
+                        @foreach ($statusTA as $value)
                         <li>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Pengajuan Pra Proposal <i class="input-helper"></i></label>
+                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} "> {{ $value->status }} <i class="input-helper"></i></label>
                             </div>
                         </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Review Administratif oleh Bapendik <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Review Komisi TA <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Pengajuan Proposal <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Pencetakan SPK <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Pengajuan Seminar Proposal <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Persetujuan Seminar Proposal <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Konsultasi TA <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Pengajuan Seminar Hasil <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Persetujuan Seminar Hasil <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> Distribusi Dokumen <i class="input-helper"></i></label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox"> SELESAI <i class="input-helper"></i></label>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
