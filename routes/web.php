@@ -33,16 +33,6 @@ use App\Http\Controllers\BeritaAcaraPendadaranController;
 use App\Http\Controllers\MahasiswaTAController;
 use App\Http\Middleware\Kajur;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Auth::routes();
 // ROUTE GUEST
@@ -305,7 +295,6 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::get('/pendadaran/beritaacara/destroy/{id}',  'BeritaAcaraPendadaranController@destroy')->name('dosenberitaacarapendadaran.destroy');
     Route::post('/pendadaran/beritaacara/nim/',  'BeritaAcaraPendadaranController@nim')->name('dosenberitaacarapendadaran.nim');
 
-
     //=================== YUDISIUM =========================
     //status yudisium
     Route::get('/yudisium/status-yudisium', 'StatusYudisiumController@index')->name('dosenstatusyudisium.index');
@@ -334,41 +323,43 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::post('/yudisium/sk/nim/', 'SKController@nim')->name('dosensk.nim');
 });
 
-Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
-    //Beranda
-    Route::get('/beranda', 'BerandaController@index')->name('admin.route');
+//================= ROUTE MAHASISWA =========================
 
-    //================= ROUTE MAHASISWA =========================
-    Route::get('/beranda', function () {
+Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
+
+    Route::get('/menu', function () {
         return view('mahasiswa.menu');
     })->name('mahasiswa.menu');
 
+    //============= TUGAS AKHIR ===============
     Route::get('/tugas-akhir/beranda', 'BerandaController@mahasiswaTA')->name('mahasiswaTA.beranda');
-    // Route::get('/tugas-akhir/store', 'TAController@store')->name('mahasiswaTA.store');
 
-    //data TA
-    Route::get('/tugas-akhir/proposal', 'TAMahasiswaController@index')->name('MahasiswaTA.index');
-    Route::get('/tugas-akhir/detail-TA/{id}',  'TAMahasiswaController@show')->name('MahasiswaTA.show');
-    Route::get('/tugas-akhir/data-TA/create', 'TAMahasiswaController@create')->name('MahasiswaTA.create');
-    Route::post('/tugas-akhir/data-TA/store', 'TAMahasiswaController@store')->name('MahasiswaTA.store');
-    Route::get('/tugas-akhir/data-TA/edit/{id}', 'TAMahasiswaController@edit')->name('MahasiswaTA.edit');
-    Route::patch('/tugas-akhir/data-TA/update/{id}', 'TAMahasiswaController@update')->name('MahasiswaTA.update');
-    Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAMahasiswaController@destroy')->name('MahasiswaTA.delete');
+    //pengajuan
+    Route::get('/tugas-akhir/data-TA/create', 'TAMahasiswaController@create')->name('mahasiswaTA.create');
+    Route::post('/tugas-akhir/data-TA/store', 'TAMahasiswaController@store')->name('mahasiswaTA.store');
 
+    //konsultasi
     Route::get('/tugas-akhir/konsultasi', function () {
         return view('mahasiswa.TA.pages.konsultasi');
-    });
-    Route::get('/tugas-akhir/seminar', function () {
+    })->name('mahasiswaTA.konsultasi');
+    //seminar proposal
+    Route::get('/tugas-akhir/semprop', function () {
         return view('mahasiswa.TA.pages.seminar');
-    });
+    })->name('mahasiswaTA.semprop');
+    //seminar hasil
+    Route::get('/tugas-akhir/semihas', function () {
+        return view('mahasiswa.TA.pages.seminarHasil');
+    })->name('mahasiswaTA.semhas');
+    //nilai TA
     Route::get('/tugas-akhir/nilai', function () {
         return view('mahasiswa.TA.pages.nilai');
-    });
+    })->name('mahasiswaTA.nilai');
+    //distribusi
     Route::get('/tugas-akhir/distribusi', function () {
         return view('mahasiswa.TA.pages.distribusi');
-    });
+    })->name('mahasiswaTA.distribusi');
 
-    //Pendadaran
+    //=========== PENDADARAN==============
     Route::get('/pendadaran/beranda', function () {
         return view('mahasiswa.pendadaran.pages.beranda');
     });
@@ -382,7 +373,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
         return view('mahasiswa.pendadaran.pages.nilai');
     });
 
-    //Yudisium
+    //============= YUDISIUM =============
     Route::get('/yudisium/beranda', function () {
         return view('mahasiswa.yudisium.pages.beranda');
     });

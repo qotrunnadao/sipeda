@@ -25,16 +25,7 @@ class TAMahasiswaController extends Controller
         $tugas_akhir = TA::latest()->get();
         $jurusan = Jurusan::get();
         $dosen = Dosen::all();
-        dd($status);
         return view('mahasiswa.TA.pages.beranda', compact('tugas_akhir', 'status', 'jurusan', 'dosen'));
-
-        // if (auth()->user()->level_id == 2) {
-        //     return view('admin.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
-        // } elseif (auth()->user()->level_id == 1) {
-        //     return view('komisi.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
-        // } elseif (auth()->user()->level_id == 3) {
-        //     return view('dosen.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
-        // }
     }
 
     /**
@@ -44,17 +35,14 @@ class TAMahasiswaController extends Controller
      */
     public function create()
     {
-        $action = route('MahasiswaTA.store');
-        $button = 'Tambah';
         $data_ta = new TA();
         $tugas_akhir = TA::get();
         $dosen = Dosen::all();
         $tahunAkademik = TahunAkademik::With('semester')->get();
-        // dd($tahunAkademik);
         $mhs = Mahasiswa::all();
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();
-        return view('mahasiswa.TA.pages.pengajuan', compact('action', 'button', 'data_ta', 'tugas_akhir', 'status', 'dosen', 'mhs', 'tahunAkademik'));
+        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'status', 'dosen', 'mhs', 'tahunAkademik'));
     }
 
     /**
@@ -98,8 +86,7 @@ class TAMahasiswaController extends Controller
         } else {
             Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
         }
-
-        return redirect(route('TA.index'));
+        return back();
     }
 
     /**
@@ -128,8 +115,6 @@ class TAMahasiswaController extends Controller
     public function edit($id)
     {
         $data_ta = TA::find($id);
-        $action = route('TA.update', $data_ta->id);
-        $button = 'Edit';
         $dosen = Dosen::get();
         $tahunAkademik = TahunAkademik::With('semester')->get();
         $mhs = Mahasiswa::get();

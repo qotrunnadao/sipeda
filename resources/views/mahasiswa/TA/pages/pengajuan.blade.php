@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form class="forms-sample" action="{{route('MahasiswaTA.store')}}" method="post" enctype="multipart/form-data">
+            <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
                 <div class="card-body">

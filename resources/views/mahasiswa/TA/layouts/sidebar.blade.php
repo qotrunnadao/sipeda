@@ -18,31 +18,31 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('MahasiswaTA.create') }}">
+            <a class="nav-link" href="{{ route('mahasiswaTA.create') }}">
                 <span class="menu-title">Pendaftaran</span>
                 <i class="mdi mdi-file menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/tugas-akhir/konsultasi">
+            <a class="nav-link" href="{{ route('mahasiswaTA.konsultasi') }}">
                 <span class="menu-title">Konsultasi TA</span>
                 <i class="mdi mdi-account-multiple menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/tugas-akhir/seminar">
-                <span class="menu-title">seminar</span>
+            <a class="nav-link" href="{{ route('mahasiswaTA.semprop') }}">
+                <span class="menu-title">seminar proposal</span>
                 <i class="mdi mdi-comment-text menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/tugas-akhir/nilai">
+            <a class="nav-link" href="{{ route('mahasiswaTA.nilai') }}">
                 <span class="menu-title">Nilai TA</span>
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/tugas-akhir/distribusi">
+            <a class="nav-link" href="{{ route('mahasiswaTA.distribusi') }}">
                 <span class="menu-title">Distribusi</span>
                 <i class="mdi mdi-share-variant menu-icon"></i>
             </a>
