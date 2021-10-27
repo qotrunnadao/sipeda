@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            {{-- <form  class="forms-sample" action="{{route('ta.store')}}" method="post" enctype="multipart/form-data"> --}}
+            <form  class="forms-sample" action="{{route('MahasiswaTA.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
                 <div class="card-body">
@@ -28,30 +28,25 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
-                            Pembimbing 1
+                            Dosen Pembimbing 1
                         </label>
                         <div class="col-sm-4">
                             <select type="text" id="pembimbing1" name="pembimbing1" class="form-control form-control-sm">
-                                <option selected disabled>Pilih Jurusan </option>
-                            {{-- @foreach ($dosen as $value)
+                                <option selected disabled>Pilih Dosen </option>
+                            @foreach ($dosen as $value)
                             <option value="{{ $value->id }} ">{{ $value->nama }}</option>
-                            @endforeach --}}
+                            @endforeach
                             </select>
                         </div>
                         <label class="col-sm-2 col-form-label">
-                            Pembimbing 2
+                           Dosen Pembimbing 2
                         </label>
                         <div class="col-sm-4">
-                            <select class="form-control form-control-sm">
-                                <option>
-                                    Option 1
-                                </option>
-                                <option>
-                                    Option 2
-                                </option>
-                                <option>
-                                    Option 3
-                                </option>
+                            <select type="text" id="pembimbing2" name="pembimbing2" class="form-control form-control-sm">
+                                <option selected disabled>Pilih Dosen </option>
+                            @foreach ($dosen as $value)
+                            <option value="{{ $value->id }} ">{{ $value->nama }}</option>
+                            @endforeach
                             </select>
                         </div>
                     </div>

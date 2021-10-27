@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SKController;
 use App\Http\Controllers\TAController;
+use App\Http\Controllers\TAMahasiswaController;
 use App\Http\Controllers\SPKController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
@@ -96,7 +97,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/tugas-akhir/statusta/store', 'StatusTAController@store')->name('statusta.store');
     Route::put('/tugas-akhir/statusta/update/{id}', 'StatusTAController@update')->name('statusta.update');
     Route::get('/tugas-akhir/statusta/delete/{id}', 'StatusTAController@destroy')->name('statusta.delete');
-    
+
     //data TA
     Route::get('/tugas-akhir/data-TA', 'TAController@index')->name('TA.index');
     Route::get('/tugas-akhir/detail-TA/{id}',  'TAController@show')->name('TA.show');
@@ -105,13 +106,13 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/tugas-akhir/data-TA/edit/{id}', 'TAController@edit')->name('TA.edit');
     Route::patch('/tugas-akhir/data-TA/update/{id}', 'TAController@update')->name('TA.update');
     Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAController@destroy')->name('TA.delete');
-    
+
     //data Konsul
     Route::get('/tugas-akhir/data-konsultasi', 'KonsultasiTAController@index')->name('konsultasi.index');
     Route::get('/tugas-akhir/data-konsultasi/{id}',  'KonsultasiTAController@show')->name('konsultasi.show');
     Route::get('/tugas-akhir/data-konsultasi/diterima/{konsultasiTA}', 'KonsultasiTAController@diterima')->name('konsultasi.diterima');
     Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAController@ditolak')->name('konsultasi.ditolak');
-    
+
     //semprop
     Route::get('/tugas-akhir/semprop', 'SeminarProposalController@index')->name('semprop.index');
     Route::get('/tugas-akhir/semprop/edit/{id}', 'SeminarProposalController@edit')->name('semprop.edit');
@@ -119,7 +120,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/tugas-akhir/semprop/delete/{id}', 'SeminarProposalController@destroy')->name('semprop.delete');
     Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', 'SeminarProposalController@diterima')->name('semprop.diterima');
     Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', 'SeminarProposalController@ditolak')->name('semprop.ditolak');
-    
+
     //semhas
     Route::get('/tugas-akhir/semhas',  'SeminarHasilController@index')->name('semhas.index');
     Route::get('/tugas-akhir/semhas/edit/{id}',  'SeminarHasilController@edit')->name('semhas.edit');
@@ -127,7 +128,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/tugas-akhir/semhas/delete/{id}',  'SeminarHasilController@destroy')->name('semhas.delete');
     Route::get('/tugas-akhir/semhas/diterima/{seminarHasil}',  'SeminarHasilController@diterima')->name('semhas.diterima');
     Route::get('/tugas-akhir/semhas/ditolak/{SeminarHasil}',  'SeminarHasilController@ditolak')->name('semhas.ditolak');
-    
+
     //spk
     Route::get('/tugas-akhir/spk',  'SPKController@index')->name('spk.index');
     Route::post('/tugas-akhir/spk/store',  'SPKController@store')->name('spk.store');
@@ -143,14 +144,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::put('/tugas-akhir/nilaita/update/{id}',  'NilaiTAController@update')->name('nilaita.update');
     Route::get('/tugas-akhir/nilaita/delete/{id}',  'NilaiTAController@destroy')->name('nilaita.delete');
     Route::post('/tugas-akhir/nilaita/nim/',  'NilaiTAController@nim')->name('nilaita.nim');
-    
+
     //=============== PENDADARAN ===================
     //status pendadaran
     Route::get('/pendadaran/status-pendadaran',  'StatusPendadaranController@index')->name('statuspendadaran.index');
     Route::post('/pendadaran/status-pendadaran/store',  'StatusPendadaranController@store')->name('statuspendadaran.store');
     Route::put('/pendadaran/status-pendadaran/update/{id}',  'StatusPendadaranController@update')->name('statuspendadaran.update');
     Route::get('/pendadaran/status-pendadaran/delete/{id}',  'StatusPendadaranController@destroy')->name('statuspendadaran.delete');
-    
+
     //data pendadaran
     Route::get('/pendadaran/data-pendadaran',  'PendadaranController@index')->name('pendadaran.index');
     Route::get('/pendadaran/data-pendadaran/create',  'PendadaranController@create')->name('pendadaran.create');
@@ -160,14 +161,14 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/pendadaran/data-pendadaran/delete/{id}',  'PendadaranController@destroy')->name('pendadaran.delete');
     Route::get('/pendadaran/data-pendadaran/diterima/{pendadaran}',  'PendadaranController@diterima')->name('pendadaran.diterima');
     Route::get('/pendadaran/data-pendadaran/ditolak/{pendadaran}',  'PendadaranController@ditolak')->name('pendadaran.ditolak');
-    
+
     //nilai pendadaran
     Route::get('/pendadaran/nilai-pendadaran', 'NilaiPendadaranController@index')->name('nilaiPendadaran.index');
     Route::post('/pendadaran/nilai-pendadaran/store', 'NilaiPendadaranController@store')->name('nilaiPendadaran.store');
     Route::put('/pendadaran/nilai-pendadaran/update/{id}', 'NilaiPendadaranController@update')->name('nilaiPendadaran.update');
     Route::get('/pendadaran/nilai-pendadaran/delete/{id}', 'NilaiPendadaranController@destroy')->name('nilaiPendadaran.delete');
     Route::post('/pendadaran/nilai-pendadaran/nim/', 'NilaiPendadaranController@nim')->name('nilaipendadaran.nim');
-    
+
     // berita acara pendadaran
     Route::get('/pendadaran/beritaacara',  'BeritaAcaraPendadaranController@index')->name('beritaacarapendadaran.index');
     Route::post('/pendadaran/beritaacara/store',  'BeritaAcaraPendadaranController@store')->name('beritaacarapendadaran.store');
@@ -175,15 +176,15 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::put('/pendadaran/beritaacara/update/{id}',  'BeritaAcaraPendadaranController@update')->name('beritaacarapendadaran.update');
     Route::get('/pendadaran/beritaacara/destroy/{id}',  'BeritaAcaraPendadaranController@destroy')->name('beritaacarapendadaran.destroy');
     Route::post('/pendadaran/beritaacara/nim/',  'BeritaAcaraPendadaranController@nim')->name('beritaacarapendadaran.nim');
-    
-    
+
+
     //=================== YUDISIUM =========================
     //status yudisium
     Route::get('/yudisium/status-yudisium', 'StatusYudisiumController@index')->name('statusyudisium.index');
     Route::post('/yudisium/status-yudisium/store', 'StatusYudisiumController@store')->name('statusyudisium.store');
     Route::put('/yudisium/status-yudisium/update/{id}', 'StatusYudisiumController@update')->name('statusyudisium.update');
     Route::get('/yudisium/status-yudisium/delete/{id}', 'StatusYudisiumController@destroy')->name('statusyudisium.delete');
-    
+
     //data yudisium
     Route::get('/yudisium/data-yudisium',  'YudisiumController@index')->name('yudisium.index');
     Route::get('/yudisium/data-yudisium/create',  'YudisiumController@create')->name('yudisium.create');
@@ -195,7 +196,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/yudisium/data-yudisium/ditolak/{yudisium}',  'YudisiumController@ditolak')->name('yudisium.ditolak');
     Route::get('/yudisium/data-yudisium/ulang/{yudisium}',  'YudisiumController@ulang')->name('yudisium.ulang');
     Route::get('/yudisium/data-yudisium/selesai/{yudisium}',  'YudisiumController@selesai')->name('yudisium.selesai');
-    
+
     // sk kelulusan
     Route::get('/yudisium/sk', 'SKController@index')->name('sk.index');
     Route::post('/yudisium/sk/store', 'SKController@store')->name('sk.store');
@@ -209,7 +210,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 Route::middleware('dosen')->prefix('dosen')->group(function () {
     //Beranda
     Route::get('/beranda', 'BerandaController@index')->name('dosen.beranda');
-    
+
     // Route::get('/dosen/beranda', [BerandaController::class, 'index'])->name('dosen.beranda')->middleware([Dosen::class]);
 
     //=========== TUGAS AKHIR ================
@@ -218,7 +219,7 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::post('/tugas-akhir/statusta/store', 'StatusTAController@store')->name('dosenstatusta.store');
     Route::put('/tugas-akhir/statusta/update/{id}', 'StatusTAController@update')->name('dosenstatusta.update');
     Route::get('/tugas-akhir/statusta/delete/{id}', 'StatusTAController@destroy')->name('dosenstatusta.delete');
-    
+
     //data TA
     Route::get('/tugas-akhir/data-TA', 'TAController@index')->name('dosenTA.index');
     Route::get('/tugas-akhir/detail-TA/{id}',  'TAController@show')->name('dosenTA.show');
@@ -227,13 +228,13 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::get('/tugas-akhir/data-TA/edit/{id}', 'TAController@edit')->name('dosenTA.edit');
     Route::get('/tugas-akhir/data-TA/update/{id}', 'TAController@update')->name('dosenTA.update');
     Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAController@destroy')->name('dosenTA.delete');
-    
+
     //data Konsul
     Route::get('/tugas-akhir/data-konsultasi', 'KonsultasiTAController@index')->name('dosenkonsultasi.index');
     Route::get('/tugas-akhir/data-konsultasi/{id}',  'KonsultasiTAController@show')->name('dosenkonsultasi.show');
     Route::get('/tugas-akhir/data-konsultasi/diterima/{konsultasiTA}', 'KonsultasiTAController@diterima')->name('dosenkonsultasi.diterima');
     Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAController@ditolak')->name('dosenkonsultasi.ditolak');
-    
+
     //semprop
     Route::get('/tugas-akhir/semprop', 'SeminarProposalController@index')->name('dosensemprop.index');
     Route::get('/tugas-akhir/semprop/edit/{id}', 'SeminarProposalController@edit')->name('dosensemprop.edit');
@@ -241,7 +242,7 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::get('/tugas-akhir/semprop/delete/{id}', 'SeminarProposalController@destroy')->name('dosensemprop.delete');
     Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', 'SeminarProposalController@diterima')->name('dosensemprop.diterima');
     Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', 'SeminarProposalController@ditolak')->name('dosensemprop.ditolak');
-    
+
     //semhas
     Route::get('/tugas-akhir/semhas',  'SeminarHasilController@index')->name('dosensemhas.index');
     Route::get('/tugas-akhir/semhas/edit/{id}',  'SeminarHasilController@edit')->name('dosensemhas.edit');
@@ -249,7 +250,7 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::get('/tugas-akhir/semhas/delete/{id}',  'SeminarHasilController@destroy')->name('dosensemhas.delete');
     Route::get('/tugas-akhir/semhas/diterima/{seminarHasil}',  'SeminarHasilController@diterima')->name('dosensemhas.diterima');
     Route::get('/tugas-akhir/semhas/ditolak/{SeminarHasil}',  'SeminarHasilController@ditolak')->name('dosensemhas.ditolak');
-    
+
     //spk
     Route::get('/tugas-akhir/spk',  'SPKController@index')->name('dosenspk.index');
     Route::post('/tugas-akhir/spk/store',  'SPKController@store')->name('dosenspk.store');
@@ -257,21 +258,21 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::put('/tugas-akhir/spk/update/{id}',  'SPKController@update')->name('dosenspk.update');
     Route::get('/tugas-akhir/spk/destroy/{id}',  'SPKController@destroy')->name('dosenspk.destroy');
     Route::post('/tugas-akhir/spk/nim/',  'SPKController@nim')->name('dosenspk.nim');
-    
+
     //nilai TA
     Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('dosennilaita.index');
     Route::post('/tugas-akhir/nilaita/store',  'NilaiTAController@store')->name('dosennilaita.store');
     Route::put('/tugas-akhir/nilaita/update/{id}',  'NilaiTAController@update')->name('dosennilaita.update');
     Route::get('/tugas-akhir/nilaita/delete/{id}',  'NilaiTAController@destroy')->name('dosennilaita.delete');
     Route::post('/tugas-akhir/nilaita/nim/',  'NilaiTAController@nim')->name('dosennilaita.nim');
-    
+
     //=============== PENDADARAN ===================
     //status pendadaran
     Route::get('/pendadaran/status-pendadaran',  'StatusPendadaranController@index')->name('dosenstatuspendadaran.index');
     Route::post('/pendadaran/status-pendadaran/store',  'StatusPendadaranController@store')->name('dosenstatuspendadaran.store');
     Route::put('/pendadaran/status-pendadaran/update/{id}',  'StatusPendadaranController@update')->name('dosenstatuspendadaran.update');
     Route::get('/pendadaran/status-pendadaran/delete/{id}',  'StatusPendadaranController@destroy')->name('dosenstatuspendadaran.delete');
-    
+
     //data pendadaran
     Route::get('/pendadaran/data-pendadaran',  'PendadaranController@index')->name('dosenpendadaran.index');
     Route::get('/pendadaran/data-pendadaran/create',  'PendadaranController@create')->name('dosenpendadaran.create');
@@ -281,14 +282,14 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::get('/pendadaran/data-pendadaran/delete/{id}',  'PendadaranController@destroy')->name('dosenpendadaran.delete');
     Route::get('/pendadaran/data-pendadaran/diterima/{pendadaran}',  'PendadaranController@diterima')->name('dosenpendadaran.diterima');
     Route::get('/pendadaran/data-pendadaran/ditolak/{pendadaran}',  'PendadaranController@ditolak')->name('dosenpendadaran.ditolak');
-    
+
     //nilai pendadaran
     Route::get('/pendadaran/nilai-pendadaran', 'NilaiPendadaranController@index')->name('dosennilaiPendadaran.index');
     Route::post('/pendadaran/nilai-pendadaran/store', 'NilaiPendadaranController@store')->name('dosennilaiPendadaran.store');
     Route::put('/pendadaran/nilai-pendadaran/update/{id}', 'NilaiPendadaranController@update')->name('dosennilaiPendadaran.update');
     Route::get('/pendadaran/nilai-pendadaran/delete/{id}', 'NilaiPendadaranController@destroy')->name('dosennilaiPendadaran.delete');
     Route::post('/pendadaran/nilai-pendadaran/nim/', 'NilaiPendadaranController@nim')->name('dosennilaipendadaran.nim');
-    
+
     // berita acara pendadaran
     Route::get('/pendadaran/beritaacara',  'BeritaAcaraPendadaranController@index')->name('dosenberitaacarapendadaran.index');
     Route::post('/pendadaran/beritaacara/store',  'BeritaAcaraPendadaranController@store')->name('dosenberitaacarapendadaran.store');
@@ -296,15 +297,15 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::put('/pendadaran/beritaacara/update/{id}',  'BeritaAcaraPendadaranController@update')->name('dosenberitaacarapendadaran.update');
     Route::get('/pendadaran/beritaacara/destroy/{id}',  'BeritaAcaraPendadaranController@destroy')->name('dosenberitaacarapendadaran.destroy');
     Route::post('/pendadaran/beritaacara/nim/',  'BeritaAcaraPendadaranController@nim')->name('dosenberitaacarapendadaran.nim');
-    
-    
+
+
     //=================== YUDISIUM =========================
     //status yudisium
     Route::get('/yudisium/status-yudisium', 'StatusYudisiumController@index')->name('dosenstatusyudisium.index');
     Route::post('/yudisium/status-yudisium/store', 'StatusYudisiumController@store')->name('dosenstatusyudisium.store');
     Route::put('/yudisium/status-yudisium/update/{id}', 'StatusYudisiumController@update')->name('dosenstatusyudisium.update');
     Route::get('/yudisium/status-yudisium/delete/{id}', 'StatusYudisiumController@destroy')->name('dosenstatusyudisium.delete');
-    
+
     //data yudisium
     Route::get('/yudisium/data-yudisium',  'YudisiumController@index')->name('dosenyudisium.index');
     Route::get('/yudisium/data-yudisium/create',  'YudisiumController@create')->name('dosenyudisium.create');
@@ -316,7 +317,7 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
     Route::get('/yudisium/data-yudisium/ditolak/{yudisium}',  'YudisiumController@ditolak')->name('dosenyudisium.ditolak');
     Route::get('/yudisium/data-yudisium/ulang/{yudisium}',  'YudisiumController@ulang')->name('dosenyudisium.ulang');
     Route::get('/yudisium/data-yudisium/selesai/{yudisium}',  'YudisiumController@selesai')->name('dosenyudisium.selesai');
-    
+
     // sk kelulusan
     Route::get('/yudisium/sk', 'SKController@index')->name('dosensk.index');
     Route::post('/yudisium/sk/store', 'SKController@store')->name('dosensk.store');
@@ -336,7 +337,16 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     })->name('mahasiswa.menu');
 
     Route::get('/tugas-akhir/beranda', 'BerandaController@mahasiswaTA')->name('mahasiswa.beranda');
-    Route::get('/tugas-akhir/store', 'TAController@store')->name('mahasiswaTA.store');
+    // Route::get('/tugas-akhir/store', 'TAController@store')->name('mahasiswaTA.store');
+
+    //data TA
+    Route::get('/tugas-akhir/proposal', 'TAMahasiswaController@index')->name('MahasiswaTA.index');
+    Route::get('/tugas-akhir/detail-TA/{id}',  'TAMahasiswaController@show')->name('MahasiswaTA.show');
+    Route::get('/tugas-akhir/data-TA/create', 'TAMahasiswaController@create')->name('MahasiswaTA.create');
+    Route::post('/tugas-akhir/data-TA/store', 'TAMahasiswaController@store')->name('MahasiswaTA.store');
+    Route::get('/tugas-akhir/data-TA/edit/{id}', 'TAMahasiswaController@edit')->name('MahasiswaTA.edit');
+    Route::patch('/tugas-akhir/data-TA/update/{id}', 'TAMahasiswaController@update')->name('MahasiswaTA.update');
+    Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAMahasiswaController@destroy')->name('MahasiswaTA.delete');
 
     //Tugas Akhir
     Route::get('/tugas-akhir/proposal', function () {
