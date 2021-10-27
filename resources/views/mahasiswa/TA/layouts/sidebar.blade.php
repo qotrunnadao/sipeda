@@ -18,7 +18,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('mahasiswaTA.proposal') }}">
+            <a class="nav-link" href="{{ route('MahasiswaTA.create') }}">
                 <span class="menu-title">Pendaftaran</span>
                 <i class="mdi mdi-file menu-icon"></i>
             </a>
