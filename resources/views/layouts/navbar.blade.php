@@ -42,25 +42,3 @@
         </button>
     </div>
 </nav>
-
-<div class="modal fade" id="modal-logout">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#f96868">
-                <h4 class="modal-title text-white"><i class="fas fa-sign-out-alt"></i> Keluar Aplikasi</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p style="text-align: center;">Apakah anda yakin untuk keluar aplikasi?</p>
-                <div class="col text-center">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-primary text-center"><i class="fas fa-sign-out-alt"></i> Ya. Keluar Aplikasi</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
