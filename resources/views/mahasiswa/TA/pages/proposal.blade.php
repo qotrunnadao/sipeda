@@ -5,14 +5,16 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form>
+            {{-- <form  class="forms-sample" action="{{route('ta.store')}}" method="post" enctype="multipart/form-data"> --}}
+                @csrf
+                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
                             Judul Penelitian
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" required autofocus />
+                            <input type="text" class="form-control" name="judulTA" id="judulTA" value="{{ old('judulTA') }}" required autofocus />
                         </div>
                     </div>
 
@@ -21,7 +23,7 @@
                             Lokasi/Instansi
                         </label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" required />
+                            <input type="email" class="form-control" name="instansi" iid="instansi" value="{{ old('instansi') }}" required />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -29,16 +31,11 @@
                             Pembimbing 1
                         </label>
                         <div class="col-sm-4">
-                            <select class="form-control form-control-sm">
-                                <option>
-                                    Option 1
-                                </option>
-                                <option>
-                                    Option 2
-                                </option>
-                                <option>
-                                    Option 3
-                                </option>
+                            <select type="text" id="pembimbing1" name="pembimbing1" class="form-control form-control-sm">
+                                <option selected disabled>Pilih Jurusan </option>
+                            {{-- @foreach ($dosen as $value)
+                            <option value="{{ $value->id }} ">{{ $value->nama }}</option>
+                            @endforeach --}}
                             </select>
                         </div>
                         <label class="col-sm-2 col-form-label">
@@ -63,7 +60,7 @@
                             File Pra Proposal
                         </label>
                         <div class="col-sm-10">
-                            <input type="file" class="form-control" />
+                            <input type="file" class="form-control" name="praproposal"/>
                         </div>
                     </div>
                     <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>

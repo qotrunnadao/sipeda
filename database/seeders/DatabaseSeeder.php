@@ -325,7 +325,7 @@ class DatabaseSeeder extends Seeder
             [
                 'email' => "himawan.prayoga@mhs.unsoed.ac.id",
                 'noInduk' => "H1D018009",
-                'password' => "H1D018009",
+                'password' => "yoga123",
                 'level_id' => 4,
             ],
             [
@@ -346,6 +346,18 @@ class DatabaseSeeder extends Seeder
                 'password' => "H1D018019",
                 'level_id' => 5,
             ],
+            [
+                'email' => "Teguh.Cahyono@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018099",
+                'password' => "komisi123",
+                'level_id' => 3,
+            ],
+            [
+                'email' => "Lasmedi.Afuan@mhs.unsoed.ac.id",
+                'noInduk' => "H1D018199",
+                'password' => "dosen123",
+                'level_id' => 3,
+            ],
 
         ];
 
@@ -357,12 +369,48 @@ class DatabaseSeeder extends Seeder
                 'nama' => "Teguh Cahyono",
                 'nohp' => "082241443663",
                 'tmptLahir' => "Purwokerto",
-                'isKomisi' => 1,
+                'isKomisi' => 0,
                 'isKajur' => 1,
                 'agama_id' => 1,
                 'jk_id' => 1,
                 'jurusan_id' => 4,
-                'user_id' => 1,
+                'user_id' => 9,
+            ],
+            [
+                'alamat' => "Purwokerto",
+                'nama' => "Lasmedi Afuan",
+                'nohp' => "082241441234",
+                'tmptLahir' => "Purwokerto",
+                'isKomisi' => 0,
+                'isKajur' => 0,
+                'agama_id' => 1,
+                'jk_id' => 1,
+                'jurusan_id' => 4,
+                'user_id' => 10,
+            ],
+            [
+                'alamat' => "Purwokerto",
+                'nama' => "Adinda Rizkijati Pangestika",
+                'nohp' => "087871161840",
+                'tmptLahir' => "Purwokerto",
+                'isKomisi' => 0,
+                'isKajur' => 0,
+                'agama_id' => 1,
+                'jk_id' => 2,
+                'jurusan_id' => 4,
+                'user_id' => 4,
+            ],
+            [
+                'alamat' => "Purwokerto",
+                'nama' => "Himawan Zidan Prayoga",
+                'nohp' => "087871161830",
+                'tmptLahir' => "Purwokerto",
+                'isKomisi' => 1,
+                'isKajur' => 0,
+                'agama_id' => 1,
+                'jk_id' => 2,
+                'jurusan_id' => 4,
+                'user_id' => 2,
             ],
         ];
 

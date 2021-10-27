@@ -50,6 +50,15 @@
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
+                                    <a href="{{ route('spk.eksport') }}">
+                                        <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                    </a>
+                                    {{-- <div class="btn-group">
+                                        <form action="{{ route('spk.eksport') }}" method="get">
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div> --}}
                                 </td>
                             </tr>
                         </tbody>
@@ -101,12 +110,6 @@
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Upload SPK</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" name="fileSPK" />
                         </div>
                     </div>
                     <div class="modal-footer">
