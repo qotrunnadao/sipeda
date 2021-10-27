@@ -25,7 +25,7 @@ class CreateTASTable extends Migration
             $table->dateTime('tglAmbil')->nullable();
             $table->longText('ket')->nullable();
             $table->foreignId('status_id')->references('id')->on('status');
-            $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik');
+            $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik')->nullable();
             $table->timestamps();
         });
     }

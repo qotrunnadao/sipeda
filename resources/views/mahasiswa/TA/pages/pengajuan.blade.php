@@ -7,7 +7,9 @@
         <div class="card card-primary">
             <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
+                <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
+                <input type="hidden" class="form-control" id="status_id" name="status_id" value="3">
+                <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="1">
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
@@ -31,7 +33,7 @@
                             Pembimbing 1
                         </label>
                         <div class="col-sm-4">
-                            <select type="text" id="pembimbing1" name="pembimbing1" class="form-control form-control-sm">
+                            <select type="text" id="pembimbing1_id" name="pembimbing1_id" class="form-control form-control-sm">
                                 <option selected disabled> Pilih Dosen </option>
                                 @foreach ($dosen as $value)
                                 <option value="{{ $value->id }} ">{{ $value->nama }}</option>
@@ -42,7 +44,7 @@
                             Pembimbing 2
                         </label>
                         <div class="col-sm-4">
-                            <select type="text" id="pembimbing2" name="pembimbing2" class="form-control form-control-sm">
+                            <select type="text" id="pembimbing2_id" name="pembimbing2_id" class="form-control form-control-sm">
                                 <option selected disabled>Pilih Dosen </option>
                                 @foreach ($dosen as $value)
                                 <option value="{{ $value->id }} ">{{ $value->nama }}</option>
@@ -71,55 +73,55 @@
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
+                            @foreach ($tugas_akhir as $value )
+                            <tr>
                             <tr>
                                 <td> Nama</td>
                                 <td>:</td>
-                                <td> Qotrunnada Oktiriani </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
                             </tr>
                             <tr>
                                 <td> Diajukan Pada </td>
                                 <td>:</td>
-                                <td> 20/02/2022 </td>
+                                <td> {{ $value->created_at }} </td>
                             </tr>
                             <tr>
                                 <td> Judul Penelitian </td>
                                 <td>:</td>
-                                <td> Sistem Pengelolaan Studi Akhir </td>
+                                <td> {{ $value->judulTA }} </td>
                             </tr>
                             <tr>
                                 <td> Lokasi / Instansi</td>
                                 <td>:</td>
-                                <td> Fakultas Teknik </td>
+                                <td> {{ $value->instansi }} </td>
                             </tr>
                             <tr>
                                 <td> Dosen Pembimbing 1</td>
                                 <td>:</td>
-                                <td> Swahesti Puspita Rahayu </td>
+                                <td> {{ $value->dosen1->nama }} </td>
                             </tr>
                             <tr>
                                 <td> Dosen Pembimbing 2</td>
                                 <td>:</td>
-                                <td> Bangun Wijayanto </td>
+                                <td> {{ $value->dosen2->nama }} </td>
                             </tr>
                             <tr>
                                 <td> File Pra Proposal</td>
                                 <td>:</td>
-                                <td> Praproposal - H1D018033 </td>
+                                <td> {{ $value->praproposal }} </td>
                             </tr>
                             <tr>
                                 <td> Status Pelaksanaan </td>
                                 <td>:</td>
-                                <td>
-                                    <div class="badge badge-primary badge-pill">review bapendik</div>
-                                </td>
+                                <td> {{ $value->status->ket}}</td>
                             </tr>
                             <tr>
                                 <td> Keterangan </td>
                                 <td>:</td>
-                                <td>
-                                    -
-                                </td>
+                                <td> {{ $value->ket}}</td>
                             </tr>
+                        </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -20,7 +20,7 @@ class User extends Authenticatable
     ];
     public function Mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
 
     /**

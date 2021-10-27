@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\TA;
 use App\Models\Dosen;
+use App\Models\User;
 use App\Models\TahunAkademik;
 use App\Models\Mahasiswa;
 use App\Models\Jurusan;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,16 +35,17 @@ class TAMahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $data_ta = new TA();
-        $tugas_akhir = TA::get();
         $dosen = Dosen::all();
-        $tahunAkademik = TahunAkademik::With('semester')->get();
-        $mhs = Mahasiswa::all();
-        $status = Status::latest()->get();
-        $tugas_akhir = TA::latest()->get();
-        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'status', 'dosen', 'mhs', 'tahunAkademik'));
+        $id = Auth::User()->id;
+        $user_id = User::where('id', $id)->get()->first();
+        $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $tugas_akhir = TA::with(['mahasiswa','dosen1', 'dosen2', 'status'])->where('mahasiswa_id', $mhs_id->id)->latest()->get();
+        // dd($tugas_akhir);
+        $mahasiswa = Mahasiswa::with('user')->get()->all();
+        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'dosen'));
     }
 
     /**
@@ -53,30 +56,28 @@ class TAMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // TA::create($request->all());
-        // $cek = false;
         $data = $request->all();
         // dd($data);
 
         if ($request->file('praproposal')) {
-            $TA = TA::latest()->get();
-            $mhs_id = Mahasiswa::where('id', $request->mahasiswa)->get()->first();
-            // dd($mhs_id);
+            $user_id = User::where('id', $request->user)->get()->first();
+            $mhs_id = Mahasiswa::with(['user'])->where('user_id', $request->user_id)->get()->first();
             $nim = $mhs_id->nim;
+            // dd($mhs_id);
             $file = $request->file('praproposal');
             $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('praproposal')->storeAS('public/assets/file/TA', $filename);
+            $path = $request->file('praproposal')->storeAS('public/assets/file/ProposalTA', $filename);
             $data = [
-                'mahasiswa_id' => $request->mahasiswa,
+                'mahasiswa_id' => $mhs_id->id,
                 'judulTA' => $request->judulTA,
                 'instansi' => $request->instansi,
-                'pembimbing1_id' => $request->pembimbing1_id,
-                'pembimbing2_id' => $request->pembimbing2_id,
-                'ket' => $request->ket,
-                'status_id' => $request->status,
-                'thnAkad_id' => $request->tahunAkademik,
+                'pembimbing1_id' => $request->pembimbing1,
+                'pembimbing2_id' => $request->pembimbing2,
+                'thnAkad_id' => $request->thnAkad_id,
+                'status_id' => $request->status_id,
                 'praproposal' => $filename,
             ];
+            // dd($data);
             $cek = TA::create($data);
         } else {
             $data['doc'] = NULL;
