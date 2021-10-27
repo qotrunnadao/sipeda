@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            {{-- <form  class="forms-sample" action="{{route('ta.store')}}" method="post" enctype="multipart/form-data"> --}}
+            <form class="forms-sample" action="{{route('mahasiswaTA.pengajuan')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
                 <div class="card-body">
@@ -23,7 +23,7 @@
                             Lokasi/Instansi
                         </label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" name="instansi" iid="instansi" value="{{ old('instansi') }}" required />
+                            <input type="email" class="form-control" name="instansi" id="instansi" value="{{ old('instansi') }}" required />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -32,10 +32,10 @@
                         </label>
                         <div class="col-sm-4">
                             <select type="text" id="pembimbing1" name="pembimbing1" class="form-control form-control-sm">
-                                <option selected disabled>Pilih Jurusan </option>
-                            {{-- @foreach ($dosen as $value)
-                            <option value="{{ $value->id }} ">{{ $value->nama }}</option>
-                            @endforeach --}}
+                                <option selected disabled> Dosen Pembimbing 1 </option>
+                                {{-- @foreach ($dosen as $value)
+                                <option value="{{ $value->id }} ">{{ $value->nama }}</option>
+                                @endforeach --}}
                             </select>
                         </div>
                         <label class="col-sm-2 col-form-label">
@@ -60,7 +60,7 @@
                             File Pra Proposal
                         </label>
                         <div class="col-sm-10">
-                            <input type="file" class="form-control" name="praproposal"/>
+                            <input type="file" class="form-control" name="praproposal" />
                         </div>
                     </div>
                     <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>

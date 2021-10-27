@@ -25,7 +25,7 @@
         <div class="card__container bd-container">
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/TA.svg') }}" alt="" class="card__img">
-                <a href="<?= url('') ?>/mahasiswa/tugas-akhir/beranda" class="card__button">Tugas akhir</a>
+                <a href="{{ route('mahasiswaTA.beranda') }}" class="card__button">Tugas akhir</a>
             </div>
 
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">

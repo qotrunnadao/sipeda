@@ -12,13 +12,13 @@
         </li>
         {{-- SIDEBAR MAHASISWA --}}
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/tugas-akhir/beranda">
+            <a class="nav-link" href="{{ route('mahasiswaTA.beranda') }}">
                 <span class="menu-title">Beranda</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/tugas-akhir/proposal">
+            <a class="nav-link" href="{{ route('mahasiswaTA.proposal') }}">
                 <span class="menu-title">Pendaftaran</span>
                 <i class="mdi mdi-file menu-icon"></i>
             </a>

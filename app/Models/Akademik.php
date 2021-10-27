@@ -26,6 +26,11 @@ class Akademik extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mhs_id');
+    }
+
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');

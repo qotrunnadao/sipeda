@@ -57,7 +57,6 @@ class BerandaController extends Controller
         );
         // dd($ta);
         return view('mahasiswa.TA.pages.beranda', $ta);
-
     }
 
     /**
