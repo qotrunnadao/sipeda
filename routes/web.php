@@ -51,6 +51,12 @@ Route::get('/error', function () {
     return view('guest.error-page');
 });
 
+// Route::middleware(['cas.auth'])->group(function () {
+//     Route::get('/', function () {
+//         return view('guest.login');
+//     });
+// });
+
 //=============== ROUTE ADMIN ====================
 Route::get('/admin/beranda', [BerandaController::class, 'index'])->name('admin.route')->middleware('admin');
 
