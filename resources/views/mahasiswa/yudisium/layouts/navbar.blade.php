@@ -22,11 +22,15 @@
                     <a class="dropdown-item" href="{{ route('mahasiswa.menu') }}">
                         <i class="mdi mdi-cached mr-2 text-success"></i> Menu </a>
                     <div class="dropdown-divider"></div>
-                    <form action="{{ route('logout') }}" method="POST">
+                    {{-- <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">
                             <i class="mdi mdi-logout mr-2 text-primary"></i> {{ __('Logout') }}
                         </button>
+                    </form> --}}
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-logout"><i class="mdi mdi-logout mr-2 text-primary"></i> {{ __('Logout') }}</button>
                     </form>
                 </div>
             </li>
@@ -42,27 +46,24 @@
     </div>
 </nav>
 
-<!-- Sweet Alert Logout -->
-@section('javascripts')
-<script>
-    $(document).ready(function() {
-        $("#dropdown").on('click','.logout', function(e) {
-            e.preventDefault();
-            var form = $(this).parents('form');
-            Swal.fire({
-                title: 'Konfirmasi',
-                text: 'Apakah anda yakin akan logout?',
-                showCancelButton: true,
-                confirmButtonColor: '#1f3a93',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Logout',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.value) {
-                    form.submit();
-                }
-            })
-        });
-    });
-</script>
-@endsection
+<div class="modal fade" id="modal-logout">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#f96868">
+                <h4 class="modal-title text-white"><i class="fas fa-sign-out-alt"></i> Keluar Aplikasi</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Apakah anda yakin untuk keluar aplikasi?</p>
+                <div class="col text-center">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-primary text-center"><i class="fas fa-sign-out-alt"></i> Ya. Keluar Aplikasi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
