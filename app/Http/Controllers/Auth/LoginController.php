@@ -52,17 +52,18 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)
             ->where('password', $request->password)->get()
             ->first();
+        // dd($user);
 
         if (auth()->loginUsingId($user->id)) {
             if (auth()->user()->level_id == 2) {
-                return redirect()->route('admin.route');
+                return redirect()->route('admin.beranda');
             } elseif (auth()->user()->level_id == 1) {
                 return redirect()->route('komisi.beranda');
             } elseif (auth()->user()->level_id == 3) {
                 return redirect()->route('dosen.beranda');
             } elseif (auth()->user()->level_id == 5) {
                 return redirect()->route('kajur.beranda');
-            } else {
+            } elseif (auth()->user()->level_id == 4) {
                 return redirect()->route('mahasiswa.menu');
             }
         } else {
