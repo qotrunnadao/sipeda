@@ -68,6 +68,7 @@
 
     <div class="col-12 grid-margin stretch-card">
         @foreach ($tugas_akhir as $value )
+        {{-- {{ dd($tugas_akhir) }} --}}
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Data Pengajuan TA</h4>
@@ -123,8 +124,8 @@
                     </table>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </div>
 @endsection

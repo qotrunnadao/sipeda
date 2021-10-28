@@ -39,6 +39,7 @@ class TahunAkademikController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        // dd($data);
         $cek = TahunAkademik::create($data);
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Tahun Akademik');
