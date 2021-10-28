@@ -23,12 +23,10 @@
                                 <th> Dosen Pembimbing 2</th>
                                 <th> Praproposal </th>
                                 <th> Status</th>
-                                @if (auth()->user()->level_id == 2)
-                                <th> Verifikasi Bapendik </th>
-                                @else
-                                <th> Verifikasi Komisi </th>
-                                @endif
+                                <th> Keterangan </th>
+                                @if(auth()->user()->level_id == 2 && 1)
                                 <th> Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -42,34 +40,28 @@
                                 <td> {{ $value->dosen1->nama }}</td>
                                 <td> {{ $value->dosen2->nama }}</td>
                                 <td> {{ $value->praproposal }}</td>
-                                <td> <span class="badge badge-primary">{{ $value->status->ket}}</span></td>
+                                <td> <span class="badge badge-primary">{{ $value->status->ket}} </span>
+                                </td>
+                                <td> {{ $value->keterangan }}</td>
                                 <td>
                                     @if (auth()->user()->level_id == 2)
                                     <div class="btn-group">
                                         <a href="{{ route('TA.diterimaBapendik', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
                                     </div>
-                                    @elseif(auth()->user()->level_id == 1)
                                     <div class="btn-group">
-                                        <a href="{{ route('TA.diterimaKomisi', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                        <div data-toggle="modal" data-target="#tambahdata">
+                                            <a href="" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
+                                        </div>
                                     </div>
-                                    @endif
-                                    <div class="btn-group">
-                                        <a href="{{ route('TA.ulang', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-cached"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <a href="{{ route('TA.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
-                                    </div>
-                                    @if(auth()->user()->level_id == 2)
                                     <div class="btn-group">
                                         <form action="#" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
+                                    </div>
+                                    @endif
+                                    @if (auth()->user()->level_id == 1)
+                                    <div class="btn-group">
+                                        <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
                                     </div>
                                     @endif
                                 </td>
@@ -78,6 +70,39 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="tambahdata" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" method="POST" action="{{ route('TA.update', $value->id) }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Status</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="tidak disetujui" name="status_id" value="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Keterangan</label>
+                        <div class="input-group">
+                            <textarea type="text" class="form-control" placeholder="{{ old('ket') }}" name="ket"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

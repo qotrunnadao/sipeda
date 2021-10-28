@@ -48,8 +48,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-
-
     ];
 
     /**
@@ -69,10 +67,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'mahasiswa' => \App\Http\Middleware\Mahasiswa::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'dosen' => \App\Http\Middleware\Dosen::class,
         'komisi' => \App\Http\Middleware\Komisi::class,
-        'mahasiswa' => \App\Http\Middleware\Mahasiswa::class,
         'kajur' => \App\Http\Middleware\Kajur::class,
     ];
 }

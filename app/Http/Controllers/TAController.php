@@ -24,10 +24,9 @@ class TAController extends Controller
     public function index()
     {
         $status = Status::latest()->get();
-        $tugas_akhir = TA::latest()->get();
+        $tugas_akhir = TA::with('status')->latest()->first()->get();
+        // dd($tugas_akhir);
         $jurusan = jurusan::get();
-        // $dosen = Dosen::all();
-        // dd($dosen);
         return view('TA.dataTA.index', compact('tugas_akhir'));
 
         // if (auth()->user()->level_id == 2) {
@@ -229,7 +228,6 @@ class TAController extends Controller
             'status_id' => 4,
         );
         $ta->update($data);
-        Alert::warning('Berhasil', 'Pengajuan Yudisium Ditolak');
         return back();
     }
 

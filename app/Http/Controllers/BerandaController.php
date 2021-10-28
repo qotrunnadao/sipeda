@@ -39,7 +39,7 @@ class BerandaController extends Controller
         } elseif (auth()->user()->level_id == 3) {
             return view('dosen.beranda', $data);
         } elseif (auth()->user()->level_id == 5) {
-            return view('kajur.beranda', $data);
+            return view('kajur.beranda');
         }
     }
 
