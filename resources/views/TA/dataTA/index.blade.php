@@ -23,7 +23,11 @@
                                 <th> Dosen Pembimbing 2</th>
                                 <th> Praproposal </th>
                                 <th> Status</th>
-                                <th> Verifikasi </th>
+                                @if (auth()->user()->level_id == 2)
+                                <th> Verifikasi Bapendik </th>
+                                @else
+                                <th> Verifikasi Komisi </th>
+                                @endif
                                 <th> Aksi</th>
                             </tr>
                         </thead>
@@ -40,24 +44,34 @@
                                 <td> {{ $value->praproposal }}</td>
                                 <td> <span class="badge badge-primary">{{ $value->status->ket}}</span></td>
                                 <td>
+                                    @if (auth()->user()->level_id == 2)
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                        <a href="{{ route('TA.diterimaBapendik', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                    </div>
+                                    @elseif(auth()->user()->level_id == 1)
+                                    <div class="btn-group">
+                                        <a href="{{ route('TA.diterimaKomisi', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                    </div>
+                                    @endif
+                                    <div class="btn-group">
+                                        <a href="{{ route('TA.ulang', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-cached"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm"><i class="mdi mdi-close"></i></button>
-                                        </form>
+                                        <a href="{{ route('TA.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
                                     </div>
                                 </td>
+
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
                                     </div>
+                                    @if(auth()->user()->level_id == 2)
                                     <div class="btn-group">
                                         <form action="#" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

@@ -90,10 +90,10 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
     //=========== TUGAS AKHIR ================
     //status TA
-    Route::get('/tugas-akhir/statusta', 'StatusTAController@index')->name('statusta.index');
-    Route::post('/tugas-akhir/statusta/store', 'StatusTAController@store')->name('statusta.store');
-    Route::put('/tugas-akhir/statusta/update/{id}', 'StatusTAController@update')->name('statusta.update');
-    Route::get('/tugas-akhir/statusta/delete/{id}', 'StatusTAController@destroy')->name('statusta.delete');
+    Route::get('/tugas-akhir/statusta', 'StatusController@index')->name('statusta.index');
+    Route::post('/tugas-akhir/statusta/store', 'StatusController@store')->name('statusta.store');
+    Route::put('/tugas-akhir/statusta/update/{id}', 'StatusController@update')->name('statusta.update');
+    Route::get('/tugas-akhir/statusta/delete/{id}', 'StatusController@destroy')->name('statusta.delete');
 
     //data TA
     Route::get('/tugas-akhir/data-TA', 'TAController@index')->name('TA.index');
@@ -102,7 +102,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::post('/tugas-akhir/data-TA/store', 'TAController@store')->name('TA.store');
     Route::get('/tugas-akhir/data-TA/edit/{id}', 'TAController@edit')->name('TA.edit');
     Route::patch('/tugas-akhir/data-TA/update/{id}', 'TAController@update')->name('TA.update');
-    Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAController@destroy')->name('TA.delete');
+    Route::get('/tugas-akhir/data-TA/diterima-bapendik/{ta}', 'TAController@diterimaBapendik')->name('TA.diterimaBapendik');
+    Route::get('/tugas-akhir/data-TA/diterima-komisi/{ta}', 'TAController@diterimaKomisi')->name('TA.diterimaKomisi');
+    Route::get('/tugas-akhir/data-TA/ditolak/{ta}', 'TAController@ditolak')->name('TA.ditolak');
+    Route::get('/tugas-akhir/data-TA/revisi/{ta}', 'TAController@ulang')->name('TA.ulang');
+    Route::get('/tugas-akhir/data-TA/pelaksanaan/{ta}', 'TAController@pelaksanaan')->name('TA.pelaksanaan');
+    Route::get('/tugas-akhir/data-TA/selesai/{ta}', 'TAController@selesai')->name('TA.selesai');
 
     //data Konsul
     Route::get('/tugas-akhir/data-konsultasi', 'KonsultasiTAController@index')->name('konsultasi.index');
@@ -212,10 +217,10 @@ Route::middleware('dosen')->prefix('dosen')->group(function () {
 
     //=========== TUGAS AKHIR ================
     //status TA
-    Route::get('/tugas-akhir/statusta', 'StatusTAController@index')->name('dosenstatusta.index');
-    Route::post('/tugas-akhir/statusta/store', 'StatusTAController@store')->name('dosenstatusta.store');
-    Route::put('/tugas-akhir/statusta/update/{id}', 'StatusTAController@update')->name('dosenstatusta.update');
-    Route::get('/tugas-akhir/statusta/delete/{id}', 'StatusTAController@destroy')->name('dosenstatusta.delete');
+    Route::get('/tugas-akhir/statusta', 'StatusController@index')->name('dosenstatusta.index');
+    Route::post('/tugas-akhir/statusta/store', 'StatusController@store')->name('dosenstatusta.store');
+    Route::put('/tugas-akhir/statusta/update/{id}', 'StatusController@update')->name('dosenstatusta.update');
+    Route::get('/tugas-akhir/statusta/delete/{id}', 'StatusController@destroy')->name('dosenstatusta.delete');
 
     //data TA
     Route::get('/tugas-akhir/data-TA', 'TAController@index')->name('dosenTA.index');

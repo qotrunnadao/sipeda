@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\TA;
+use App\Models\SPK;
 use App\Models\Dosen;
-use App\Models\TahunAkademik;
-use App\Models\Mahasiswa;
-use App\Models\jurusan;
 use App\Models\Status;
+use App\Models\jurusan;
+use App\Models\Mahasiswa;
+use App\Models\NilaiTA;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\TahunAkademik;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Builder;
 
 class TAController extends Controller
 {
@@ -69,7 +71,7 @@ class TAController extends Controller
         // $cek = false;
         $data = $request->all();
         // dd($data);
-        
+
         if ($request->file('praproposal')) {
             $TA = TA::latest()->get();
             $mhs_id = Mahasiswa::where('id', $request->mahasiswa)->get()->first();
@@ -201,5 +203,63 @@ class TAController extends Controller
         $tugas_akhir->delete();
         Alert::success('Berhasil', 'Berhasil hapus data Pendadaran');
         return back();
+    }
+
+    public function diterimaBapendik(TA $ta)
+    {
+        $data = array(
+            'status_id' => 2,
+        );
+        $ta->update($data);
+        Alert::success('Berhasil', 'Pengajuan Tugas Akhir Diterima');
+        return back();
+    }
+    public function diterimaKomisi(TA $ta)
+    {
+        $data = array(
+            'status_id' => 3,
+        );
+        $ta->update($data);
+        Alert::success('Berhasil', 'Pengajuan Tugas AKhir Diterima');
+        return back();
+    }
+    public function ditolak(TA $ta)
+    {
+        $data = array(
+            'status_id' => 4,
+        );
+        $ta->update($data);
+        Alert::warning('Berhasil', 'Pengajuan Yudisium Ditolak');
+        return back();
+    }
+
+    public function ulang(TA $ta)
+    {
+        $data = array(
+            'status_id' => 5,
+        );
+        $ta->update($data);
+        Alert::success('Berhasil', 'Pengajuan yudisium boleh diajukan lagi');
+        return back();
+    }
+
+    public function pelaksanaan(TA $ta)
+    {
+        if (SPK::where('id', $ta->id) != null) {
+            $data = array(
+                'status_id' => 6,
+            );
+            $ta->update($data);
+        }
+    }
+
+    public function selesai(TA $ta)
+    {
+        if (NilaiTA::where('id', $ta->id) != null) {
+            $data = array(
+                'status_id' => 7,
+            );
+            $ta->update($data);
+        }
     }
 }

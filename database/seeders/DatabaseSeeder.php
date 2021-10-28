@@ -159,22 +159,25 @@ class DatabaseSeeder extends Seeder
 
         $status = [
             [
-                'ket' => "Disetujui",
-            ],
-            [
-                'ket' => "Tidak Disetujui",
-            ],
-            [
                 'ket' => "Review Bapendik",
             ],
             [
                 'ket' => "Review Komisi",
             ],
             [
-                'ket' => "Gagal",
+                'ket' => "Layak",
             ],
             [
-                'ket' => "Boleh Ajukan Lagi",
+                'ket' => "Tidak Layak",
+            ],
+            [
+                'ket' => "Revisi",
+            ],
+            [
+                'ket' => "Pelaksanaan TA",
+            ],
+            [
+                'ket' => "Selesai",
             ],
         ];
 

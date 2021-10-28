@@ -24,10 +24,10 @@
                             @foreach ($status as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->status }}</td>
+                                <td> {{ $value->ket }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-target="#editdata" data-id='{{ $value->id }}' data-status='{{ $value->status }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-target="#editdata" data-id='{{ $value->id }}' data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('statusta.delete', $value->id) }}" method="GET">
@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan Status</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="status" />
+                            <input type="text" class="form-control" name="ket" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -79,7 +79,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Status Yudisium</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Status TA</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan Status</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="status" name="status" value="" />
+                            <input type="text" class="form-control" id="ket" name="ket" value="" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -110,11 +110,11 @@
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
-    var status = button.data('status') // Extract info from data-* attributes
+    var ket = button.data('ket') // Extract info from data-* attributes
 
     var modal = $(this)
     {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='status']").val(status)
+    modal.find(".modal-body input[name='ket']").val(ket)
     modal.find(".modal-body form").attr("action",'/tugas-akhir/statusta/update/'+id)
     })
 </script>

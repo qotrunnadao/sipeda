@@ -33,7 +33,7 @@
                             Pembimbing 1
                         </label>
                         <div class="col-sm-4">
-                            <select type="text" id="pembimbing1_id" name="pembimbing1_id" class="form-control form-control-sm">
+                            <select type="text" id="pembimbing1_id" name="pembimbing1" class="form-control form-control-sm">
                                 <option selected disabled> Pilih Dosen </option>
                                 @foreach ($dosen as $value)
                                 <option value="{{ $value->id }} ">{{ $value->nama }}</option>
@@ -44,7 +44,7 @@
                             Pembimbing 2
                         </label>
                         <div class="col-sm-4">
-                            <select type="text" id="pembimbing2_id" name="pembimbing2_id" class="form-control form-control-sm">
+                            <select type="text" id="pembimbing2_id" name="pembimbing2" class="form-control form-control-sm">
                                 <option selected disabled>Pilih Dosen </option>
                                 @foreach ($dosen as $value)
                                 <option value="{{ $value->id }} ">{{ $value->nama }}</option>
@@ -67,14 +67,13 @@
     </div>
 
     <div class="col-12 grid-margin stretch-card">
+        @foreach ($tugas_akhir as $value )
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Data Pengajuan TA</h4>
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
-                            @foreach ($tugas_akhir as $value )
-                            <tr>
                             <tr>
                                 <td> Nama</td>
                                 <td>:</td>
@@ -120,13 +119,12 @@
                                 <td>:</td>
                                 <td> {{ $value->ket}}</td>
                             </tr>
-                        </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 @endsection
