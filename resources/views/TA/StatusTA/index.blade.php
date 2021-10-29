@@ -57,7 +57,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{route('statusta.storez')}}">
+                <form class="forms-sample" method="POST" action="{{route('statusta.store')}}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan Status</label>

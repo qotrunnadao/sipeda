@@ -23,6 +23,7 @@ use App\Http\Controllers\StatusTAController;
 use App\Http\Controllers\YudisiumController;
 use App\Http\Controllers\PendadaranController;
 use App\Http\Controllers\KonsultasiTAController;
+use App\Http\Controllers\KonsultasiTAMahasiswaController;
 use App\Http\Controllers\SeminarHasilController;
 use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\StatusYudisiumController;
@@ -66,37 +67,37 @@ Route::get('/kajur/beranda', [BerandaController::class, 'index'])->name('kajur.b
 
 //======= MASTER DATA ========
 // Route Tahun Akademik
-Route::get('/tahun-akademik', 'TahunAkademikController@index')->name('tahunAkademik.index');
-Route::post('/tahun-akademik/store', 'TahunAkademikController@store')->name('tahunAkademik.store');
-Route::get('/tahun-akademik/edit/{id}', 'TahunAkademikController@edit')->name('tahunAkademik.edit');
-Route::put('/tahun-akademik/update/{id}', 'TahunAkademikController@update')->name('tahunAkademik.update');
-Route::get('/tahun-akademik/destroy/{id}', 'TahunAkademikController@destroy')->name('tahunAkademik.destroy');
+Route::get('/admin/tahun-akademik', 'TahunAkademikController@index')->name('tahunAkademik.index');
+Route::post('/admin/tahun-akademik/store', 'TahunAkademikController@store')->name('tahunAkademik.store');
+Route::get('/admin/tahun-akademik/edit/{id}', 'TahunAkademikController@edit')->name('tahunAkademik.edit');
+Route::put('/admin/tahun-akademik/update/{id}', 'TahunAkademikController@update')->name('tahunAkademik.update');
+Route::get('/admin/tahun-akademik/destroy/{id}', 'TahunAkademikController@destroy')->name('tahunAkademik.destroy');
 
 // Route Jurusan
-Route::get('/jurusan', 'JurusanController@index');
-Route::post('/jurusan/store', 'JurusanController@store');
-Route::get('/jurusan/edit/{id}', 'JurusanController@edit')->name('jurusan.edit');
-Route::put('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.update');
-Route::get('/jurusan/destroy/{id}', 'JurusanController@destroy')->name('jurusan.destroy');
+Route::get('/admin/jurusan', 'JurusanController@index');
+Route::post('/admin/jurusan/store', 'JurusanController@store');
+Route::get('/admin/jurusan/edit/{id}', 'JurusanController@edit')->name('jurusan.edit');
+Route::put('/admin/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.update');
+Route::get('/admin/jurusan/destroy/{id}', 'JurusanController@destroy')->name('jurusan.destroy');
 
 // Route Data Ruangan
-Route::get('/data-ruang', 'RuangController@index');
-Route::post('/data-ruang/store', 'RuangController@store')->name('ruang.store');
-Route::put('/data-ruang/update/{id}', 'RuangController@update')->name('ruang.update');
-Route::get('/data-ruang/destroy/{id}', 'RuangController@destroy')->name('ruang.destroy');
+Route::get('/admin/data-ruang', 'RuangController@index');
+Route::post('/admin/data-ruang/store', 'RuangController@store')->name('ruang.store');
+Route::put('/admin/data-ruang/update/{id}', 'RuangController@update')->name('ruang.update');
+Route::get('/admin/data-ruang/destroy/{id}', 'RuangController@destroy')->name('ruang.destroy');
 
 // Route Level User
-Route::get('/level-user', 'LevelController@index');
-Route::post('/level-user/store', 'LevelController@store')->name('level.store');
-Route::put('/level-user/update/{id}', 'LevelController@update')->name('level.update');
-Route::get('/level-user/delete/{id}', 'LevelController@destroy')->name('level.delete');
+Route::get('/admin/level-user', 'LevelController@index');
+Route::post('/admin/level-user/store', 'LevelController@store')->name('level.store');
+Route::put('/admin/level-user/update/{id}', 'LevelController@update')->name('level.update');
+Route::get('/admin/level-user/delete/{id}', 'LevelController@destroy')->name('level.delete');
 
 //Route Data User
-Route::get('/data-user', 'UserController@index');
+Route::get('/admin/data-user', 'UserController@index');
 //Route Data Dosen
-Route::get('/data-dosen', 'DosenController@index');
+Route::get('/admin/data-dosen', 'DosenController@index');
 //Route Data Komisi
-Route::get('/data-komisi', 'KomisiController@index');
+Route::get('/admin/data-komisi', 'KomisiController@index');
 
 //=========== TUGAS AKHIR ================
 //status TA
@@ -233,9 +234,13 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::post('/tugas-akhir/data-TA/store', 'TAMahasiswaController@store')->name('mahasiswaTA.store');
 
     //konsultasi
-    Route::get('/tugas-akhir/konsultasi', function () {
-        return view('mahasiswa.TA.pages.konsultasi');
-    })->name('mahasiswaTA.konsultasi');
+    Route::get('/tugas-akhir/konsultasi', 'KonsultasiTAMahasiswaController@index')->name('mahasiswaTA.konsultasi');
+    Route::post('/tugas-akhir/data-TA/store', 'KonsultasiTAMahasiswaController@store')->name('mahasiswaKonsultasi.store');
+    Route::get('/tugas-akhir/konsultasi/{id}',  'KonsultasiTAMahasiswaController@show')->name('mahasiswaKonsultai.show');
+    Route::get('/tugas-akhir/konsultasi/diterima/{konsultasiTA}', 'KonsultasiTAMahasiswaController@diterima')->name('mahasiswaKonsultai.diterima');
+    Route::get('/tugas-akhir/pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAMahasiswaController@ditolak')->name('mahasiswaKonsultai.ditolak');
+
+
     //seminar proposal
     Route::get('/tugas-akhir/semprop', function () {
         return view('mahasiswa.TA.pages.seminar');
