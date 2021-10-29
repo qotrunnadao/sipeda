@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
-            <div>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#uploadSPK"> <i class="mdi mdi-plus"></i> Tambah</button>
-            </div>
             <div class="card-body">
+                <div>
+                    <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#uploadSPK"> <i class="mdi mdi-plus"></i> Tambah</button>
+                </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -42,7 +42,6 @@
 
                                 </td>
                                 <td>
-
                                     <div class="btn-group">
                                         <form action="{{ route('spk.destroy', $value->fileSPK) }}" method="GET">
                                             @method('DELETE')
@@ -53,12 +52,6 @@
                                     <a href="{{ route('spk.eksport') }}">
                                         <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
                                     </a>
-                                    {{-- <div class="btn-group">
-                                        <form action="{{ route('spk.eksport') }}" method="get">
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                        </form>
-                                    </div> --}}
                                 </td>
                             </tr>
                         </tbody>

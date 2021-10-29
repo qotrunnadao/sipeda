@@ -88,16 +88,18 @@
                             <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semprop->beritaacara_dosen }}" />
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Status Pengajuan
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" placeholder="status pengajuan" name="status" value="@if($semprop->status == 0)menunggu @elseif ($semprop->status == 1) Diterima @else Ditolak @endif" />
+                            <select name="status" id="status" class="form-control">
+                                <option value="0" {{ $semprop->status == 0 ? 'selected' : '' }}>Menunggu</option>
+                                <option value="1" {{ $semprop->status == 1 ? 'selected' : '' }}>Disetujui</option>
+                                <option value="2" {{ $semprop->status == 2 ? 'selected' : '' }}>Ditolak</option>
+                            </select>
                         </div>
                     </div>
-
                     <a href="<?= url('') ?>/tugas-akhir/semprop" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
                     <a href="" type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</a>
                 </div>

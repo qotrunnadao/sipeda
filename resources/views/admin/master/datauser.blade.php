@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('layouts.main')
 @section('content')
 @section('icon', 'folder-account')
 @section('title', 'Data User')
@@ -10,10 +10,12 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> # </th>
+                                <th> No. </th>
+                                <th> ID </th>
                                 <th> Email </th>
                                 <th> no Induk </th>
-                                <th> level </th>
+                                <th> Level ID</th>
+                                <th> Nama Level </th>
                                 <th> Aksi</th>
                             </tr>
                         </thead>
@@ -22,9 +24,11 @@
                             @foreach ($user as $value)
                             <tr>
                                 <td> {{ $no++ }}</td>
+                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->email }}</td>
                                 <td> {{ $value->noInduk }}</td>
                                 <td> {{ $value->level_id }}</td>
+                                <td> {{ $value->level->namaLevel }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>

@@ -52,19 +52,7 @@ Route::get('/error', function () {
 
 
 //=============== ROUTE ADMIN ====================
-//Beranda
 Route::get('/admin/beranda', 'BerandaController@index')->name('admin.beranda')->middleware('admin');
-
-//================= ROUTE DOSEN ========================
-Route::get('/dosen/beranda', [BerandaController::class, 'index'])->name('dosen.beranda')->middleware([Dosen::class]);
-
-//================= ROUTE KOMISI ====================
-Route::get('/komisi/beranda', [BerandaController::class, 'index'])->name('komisi.beranda')->middleware([Komisi::class]);
-
-//================= ROUTE KAJUR ===========================
-Route::get('/kajur/beranda', [BerandaController::class, 'index'])->name('kajur.beranda')->middleware([Kajur::class]);
-
-
 //======= MASTER DATA ========
 // Route Tahun Akademik
 Route::get('/admin/tahun-akademik', 'TahunAkademikController@index')->name('tahunAkademik.index');
@@ -74,30 +62,40 @@ Route::put('/admin/tahun-akademik/update/{id}', 'TahunAkademikController@update'
 Route::get('/admin/tahun-akademik/destroy/{id}', 'TahunAkademikController@destroy')->name('tahunAkademik.destroy');
 
 // Route Jurusan
-Route::get('/admin/jurusan', 'JurusanController@index');
-Route::post('/admin/jurusan/store', 'JurusanController@store');
-Route::get('/admin/jurusan/edit/{id}', 'JurusanController@edit')->name('jurusan.edit');
-Route::put('/admin/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.update');
-Route::get('/admin/jurusan/destroy/{id}', 'JurusanController@destroy')->name('jurusan.destroy');
+Route::get('/jurusan', 'JurusanController@index')->name('jurusan.index');
+Route::post('/jurusan/store', 'JurusanController@store')->name('jurusan.store');
+Route::get('/jurusan/edit/{id}', 'JurusanController@edit')->name('jurusan.edit');
+Route::put('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.update');
+Route::get('/jurusan/destroy/{id}', 'JurusanController@destroy')->name('jurusan.destroy');
 
 // Route Data Ruangan
-Route::get('/admin/data-ruang', 'RuangController@index');
-Route::post('/admin/data-ruang/store', 'RuangController@store')->name('ruang.store');
-Route::put('/admin/data-ruang/update/{id}', 'RuangController@update')->name('ruang.update');
-Route::get('/admin/data-ruang/destroy/{id}', 'RuangController@destroy')->name('ruang.destroy');
+Route::get('/data-ruang', 'RuangController@index')->name('ruang.index');
+Route::post('/data-ruang/store', 'RuangController@store')->name('ruang.store');
+Route::put('/data-ruang/update/{id}', 'RuangController@update')->name('ruang.update');
+Route::get('/data-ruang/destroy/{id}', 'RuangController@destroy')->name('ruang.destroy');
 
 // Route Level User
-Route::get('/admin/level-user', 'LevelController@index');
-Route::post('/admin/level-user/store', 'LevelController@store')->name('level.store');
-Route::put('/admin/level-user/update/{id}', 'LevelController@update')->name('level.update');
-Route::get('/admin/level-user/delete/{id}', 'LevelController@destroy')->name('level.delete');
+Route::get('/level-user', 'LevelController@index')->name('level.index');
+Route::post('/level-user/store', 'LevelController@store')->name('level.store');
+Route::put('/level-user/update/{id}', 'LevelController@update')->name('level.update');
+Route::get('/level-user/delete/{id}', 'LevelController@destroy')->name('level.delete');
 
 //Route Data User
-Route::get('/admin/data-user', 'UserController@index');
+Route::get('/data-user', 'UserController@index')->name('user.index');
 //Route Data Dosen
-Route::get('/admin/data-dosen', 'DosenController@index');
+Route::get('/data-dosen', 'DosenController@index')->name('dosen.index');
 //Route Data Komisi
-Route::get('/admin/data-komisi', 'KomisiController@index');
+Route::get('/data-komisi', 'KomisiController@index')->name('komisi.index');
+
+
+//================= ROUTE DOSEN ========================
+Route::get('/dosen/beranda', [BerandaController::class, 'index'])->name('dosen.beranda')->middleware([Dosen::class]);
+
+//================= ROUTE KOMISI ====================
+Route::get('/komisi/beranda', [BerandaController::class, 'index'])->name('komisi.beranda')->middleware([Komisi::class]);
+
+//================= ROUTE KAJUR ===========================
+Route::get('/kajur/beranda', [BerandaController::class, 'index'])->name('kajur.beranda')->middleware([Kajur::class]);
 
 //=========== TUGAS AKHIR ================
 //status TA
@@ -112,13 +110,8 @@ Route::get('/tugas-akhir/detail-TA/{id}',  'TAController@show')->name('TA.show')
 Route::get('/tugas-akhir/data-TA/create', 'TAController@create')->name('TA.create');
 Route::post('/tugas-akhir/data-TA/store', 'TAController@store')->name('TA.store');
 Route::get('/tugas-akhir/data-TA/edit/{id}', 'TAController@edit')->name('TA.edit');
-Route::patch('/tugas-akhir/data-TA/update/{id}', 'TAController@update')->name('TA.update');
-Route::get('/tugas-akhir/data-TA/diterima-bapendik/{ta}', 'TAController@diterimaBapendik')->name('TA.diterimaBapendik');
-Route::get('/tugas-akhir/data-TA/diterima-komisi/{ta}', 'TAController@diterimaKomisi')->name('TA.diterimaKomisi');
-Route::get('/tugas-akhir/data-TA/ditolak/{ta}', 'TAController@ditolak')->name('TA.ditolak');
-Route::get('/tugas-akhir/data-TA/revisi/{ta}', 'TAController@ulang')->name('TA.ulang');
-Route::get('/tugas-akhir/data-TA/pelaksanaan/{ta}', 'TAController@pelaksanaan')->name('TA.pelaksanaan');
-Route::get('/tugas-akhir/data-TA/selesai/{ta}', 'TAController@selesai')->name('TA.selesai');
+Route::put('/tugas-akhir/data-TA/update/{id}', 'TAController@update')->name('TA.update');
+Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAController@destroy')->name('TA.delete');
 
 //data Konsul
 Route::get('/tugas-akhir/data-konsultasi', 'KonsultasiTAController@index')->name('konsultasi.index');
@@ -172,8 +165,6 @@ Route::post('/pendadaran/data-pendadaran/store',  'PendadaranController@store')-
 Route::get('/pendadaran/data-pendadaran/edit/{id}',  'PendadaranController@edit')->name('pendadaran.edit');
 Route::put('/pendadaran/data-pendadaran/update/{id}',  'PendadaranController@update')->name('pendadaran.update');
 Route::get('/pendadaran/data-pendadaran/delete/{id}',  'PendadaranController@destroy')->name('pendadaran.delete');
-Route::get('/pendadaran/data-pendadaran/diterima/{pendadaran}',  'PendadaranController@diterima')->name('pendadaran.diterima');
-Route::get('/pendadaran/data-pendadaran/ditolak/{pendadaran}',  'PendadaranController@ditolak')->name('pendadaran.ditolak');
 
 //nilai pendadaran
 Route::get('/pendadaran/nilai-pendadaran', 'NilaiPendadaranController@index')->name('nilaiPendadaran.index');

@@ -1,20 +1,20 @@
-@extends('admin.layouts.main')
+@extends('layouts.main')
 @section('content')
 @section('icon', 'calendar')
 @section('title', 'Tahun Akademik')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
-            <div>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-2"> <i class="mdi mdi-upload"></i> Unggah SIA</button>
-            </div>
             <div class="card-body">
+                <div>
+                    <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
+                </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> # </th>
+                                <th> No. </th>
+                                <th> ID </th>
                                 <th> Nama Tahun </th>
                                 <th> Semester </th>
                                 <th> Aktif </th>
@@ -26,6 +26,7 @@
                             @foreach ($tahun_akademik as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
+                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->namaTahun }}</td>
                                 <td> {{ $value->Semester->semester }} </td>
                                 <td> {{ $value->aktif == 0 ? 'false' : 'true'}} </td>
@@ -84,7 +85,7 @@
                         <label for="exampleInputEmail3">Status</label>
                         <div class="input-group">
                             <select type="text" class="form-control" name="aktif">
-                                <option value=""selected disabled>PILIH</option>
+                                <option value="" selected disabled>PILIH</option>
                                 <option value="1">True</option>
                                 <option value="0">False</option>
                             </select>
@@ -136,7 +137,7 @@
                         <div class="input-group">
                             <select type="text" class="form-control" id="aktif1" name="aktif">
                                 <option value="">PILIH</option>
-                                <option value=""selected disabled>PILIH</option>
+                                <option value="" selected disabled>PILIH</option>
                                 <option value="1">True</option>
                                 <option value="0">False</option>
                             </select>

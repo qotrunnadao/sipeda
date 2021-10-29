@@ -16,7 +16,7 @@ class RuangController extends Controller
     public function index()
     {
         $data = array(
-            'ruang' => Ruang::latest()->get(),
+            'ruang' => Ruang::get(),
         );
         return view('admin.master.dataruang', $data);
     }

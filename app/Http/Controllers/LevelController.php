@@ -16,7 +16,7 @@ class LevelController extends Controller
     public function index()
     {
         $data = array(
-            'level' => Level::latest()->get(),
+            'level' => Level::get(),
         );
         return view('admin.master.levelUser', $data);
     }

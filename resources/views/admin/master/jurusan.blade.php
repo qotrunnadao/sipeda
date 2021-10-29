@@ -1,20 +1,20 @@
-@extends('admin.layouts.main')
+@extends('layouts.main')
 @section('content')
 @section('icon', 'hospital-building')
 @section('title', 'Data Jurusan')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
-            <div>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4 float-left" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-2"> <i class="mdi mdi-upload"></i> Unggah SIA</button>
-            </div>
             <div class="card-body">
+                <div>
+                    <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
+                </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> # </th>
+                                <th> No. </th>
+                                <th> ID </th>
                                 <th> Nama Jurusan </th>
                                 <th> Nama fakultas </th>
                                 <th> Kode MK </th>
@@ -26,6 +26,8 @@
                             @foreach ($jurusan as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
+                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
+                                </td>
                                 <td> {{ $value->namaJurusan }}</td>
                                 <td> {{ $value->fakultas->namaFakultas }}</td>
                                 <td> {{ $value->kodemk }}</td>
@@ -61,7 +63,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{url('/admin/jurusan/store')}}">
+                <form class="forms-sample" method="POST" action="{{ route('jurusan.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Jurusan</label>
@@ -152,7 +154,7 @@
     {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
     modal.find(".modal-body input[name='namaJurusan']").val(jurusan)
     modal.find(".modal-body input[name='kodemk']").val(kodemk)
-    modal.find(".modal-body form").attr("action",'/admin/jurusan/update/'+id)
+    modal.find(".modal-body form").attr("action",'/jurusan/update/'+id)
     })
 </script>
 @endsection
