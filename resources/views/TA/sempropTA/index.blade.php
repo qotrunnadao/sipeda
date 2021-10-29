@@ -17,7 +17,6 @@
                                 <th> Tanggal </th>
                                 <th> Waktu </th>
                                 <th> Status</th>
-                                <th> Verifikasi</th>
                                 <th> Aksi</th>
                             </tr>
                         </thead>
@@ -35,24 +34,15 @@
                                 <td>
                                     @if($value->status == 0)
                                     <span class="badge badge-warning">menunggu</span>
-                                </td>
-                                @elseif($value->status == 1)
-                                <span class="badge badge-success">diterima</span></td>
-                                @else
-                                <span class="badge badge-danger">ditolak</span></td>
-                                @endif
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="{{ route('semprop.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="fa fa-check"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <a href="{{ route('semprop.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm"><i class="fa fa-times"></i></a>
-                                    </div>
+                                    @elseif($value->status == 1)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @else
+                                    <span class="badge badge-danger">Tidak Disetujui</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
+                                        <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('semprop.delete', $value->id) }}" method="GET">

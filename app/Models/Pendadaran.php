@@ -15,9 +15,21 @@ class Pendadaran extends Model
     ];
     protected $primaryKey = 'id';
 
-    public function Dosen()
+    public function penguji1()
     {
-        return $this->belongsTo(Dosen::class);
+        return $this->belongsTo(Dosen::class, 'penguji1_id');
+    }
+    public function penguji2()
+    {
+        return $this->belongsTo(Dosen::class, 'penguji2_id');
+    }
+    public function penguji3()
+    {
+        return $this->belongsTo(Dosen::class, 'penguji3_id');
+    }
+    public function penguji4()
+    {
+        return $this->belongsTo(Dosen::class, 'penguji4_id');
     }
     public function mahasiswa()
     {

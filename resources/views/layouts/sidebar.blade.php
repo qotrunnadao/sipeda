@@ -25,13 +25,13 @@
             </a>
             <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/tahun-akademik"> Tahun Akademik </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/jurusan"> Data Jurusan </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-ruang"> Data Ruangan </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/level-user"> Level User </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-user"> Data User </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-komisi"> Data Komisi </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="<?= url('') ?>/admin/data-dosen"> Data Dosen </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('tahunAkademik.index') }}"> Tahun Akademik </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('jurusan.index') }}"> Data Jurusan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('ruang.index') }}"> Data Ruangan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('level.index') }}"> Level User </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('user.index') }}"> Data User </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('komisi.index') }}"> Data Komisi </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('dosen.index') }}"> Data Dosen </a></li>
                 </ul>
             </div>
         </li>

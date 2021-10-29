@@ -115,9 +115,9 @@
                             Dosen Penguji 1
                         </label>
                         <div class="col-sm-9">
-                            <select name="namaPenguji1" id="namaPenguji1" class="form-control">
+                            <select name="penguji1_id" id="penguji1_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('namaPenguji1') }}@else{{ $namaPenguji1 }}@endif">{{ $value->nama}}</option>
+                                <option value="@if ($button == 'Tambah'){{ old('penguji1_id') }}@else{{ $data_pendadaran->penguji1->nama }}@endif">{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -127,9 +127,9 @@
                             Dosen Penguji 2
                         </label>
                         <div class="col-sm-9">
-                            <select name="namaPenguji2" id="namaPenguji2" class="form-control">
+                            <select name="penguji2_id" id="penguji2_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('namaPenguji2') }}@else{{ $namaPenguji2 }}@endif">{{ $value->nama}}</option>
+                                <option value="@if ($button == 'Tambah'){{ old('penguji2_id') }}@else{{ $data_pendadaran->penguji2->nama }}@endif">{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -139,9 +139,9 @@
                             Dosen Penguji 3
                         </label>
                         <div class="col-sm-9">
-                            <select name="namaPenguji3" id="namaPenguji3" class="form-control">
+                            <select name="penguji3_id" id="penguji3_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('namaPenguji3') }}@else{{ $namaPenguji3 }}@endif">{{ $value->nama}}</option>
+                                <option value="@if ($button == 'Tambah'){{ old('penguji3_id') }}@else{{ $data_pendadaran->penguji3->nama }}@endif">{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -151,9 +151,9 @@
                             Dosen Penguji 4
                         </label>
                         <div class="col-sm-9">
-                            <select name="namaPenguji4" id="namaPenguji4" class="form-control">
+                            <select name="penguji4_id" id="penguji4_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('namaPenguji4') }}@else{{ $namaPenguji4 }}@endif">{{ $value->nama}}</option>
+                                <option value="@if ($button == 'Tambah'){{ old('penguji4_id') }}@else{{ $data_pendadaran->penguji4->nama }}@endif">{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>

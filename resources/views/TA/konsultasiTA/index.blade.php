@@ -5,14 +5,14 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
-            @if (auth()->user()->level_id == 2)
-            <div>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#exampleModal"> <i class="mdi mdi-plus"></i> Tambah</button>
-            </div>
-            @endif
             <div class="card-body">
+                {{-- @if (auth()->user()->level_id == 2)
+                <div>
+                    <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
+                </div>
+                @endif --}}
                 <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -37,7 +37,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('konsultasi.show', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-information"></i></a>
+                                        <a href="{{ route('konsultasi.show', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -50,65 +50,8 @@
     </div>
 </div>
 
-
-{{-- <div class="row">
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div>
-                <button type="button" class="btn btn-sm btn-gradient-primary mt-4 ml-4" data-toggle="modal" data-target="#exampleModal"> <i class="mdi mdi-plus"></i> Tambah</button>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                            <tr>
-                                <th> No. </th>
-                                <th> Tanggal Konsultasi </th>
-                                <th> Nama Dosen </th>
-                                <th> Topik</th>
-                                <th> Hasil Konsultasi </th>
-                                <th> Status </th>
-                                <th> Aksi </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php($no=1)
-                            @foreach ($konsultasi as $value )
-                            <tr>
-                                <td> {{ $no++ }} </td>
-                                <td> {{ $value->tanggal }} </td>
-                                <td> {{ $value->dosen->nama }} </td>
-                                <td> {{ $value->topik }} </td>
-                                <td> {{ $value->hasil }}</td>
-                                <td> @if($value->verifikasiDosen == 0)
-                                    <span class="badge badge-danger">false</span>
-                                </td>
-                                @else
-                                <span class="badge badge-success">true</span></td>
-                                </td>
-                                @endif</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
-                                    </div>
-
-                                    <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-close"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 <!-- Modal Tembah Data Konsultasi -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

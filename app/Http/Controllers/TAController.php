@@ -24,18 +24,9 @@ class TAController extends Controller
     public function index()
     {
         $status = Status::latest()->get();
-        $tugas_akhir = TA::with('status')->latest()->first()->get();
-        // dd($tugas_akhir);
+        $tugas_akhir = TA::with('status')->latest()->get();
         $jurusan = jurusan::get();
-        return view('TA.dataTA.index', compact('tugas_akhir'));
-
-        // if (auth()->user()->level_id == 2) {
-        //     return view('admin.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
-        // } elseif (auth()->user()->level_id == 1) {
-        //     return view('komisi.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
-        // } elseif (auth()->user()->level_id == 3) {
-        //     return view('dosen.TA.dataTA.index', compact('tugas_akhir', 'nama_dosen1', 'nama_dosen2', 'ketStatus', 'status'));
-        // }
+        return view('TA.dataTA.index', compact('tugas_akhir', 'status'));
     }
 
     /**
@@ -51,7 +42,6 @@ class TAController extends Controller
         $tugas_akhir = TA::get();
         $dosen = Dosen::all();
         $tahunAkademik = TahunAkademik::With('semester')->get();
-        // dd($tahunAkademik);
         $mhs = Mahasiswa::all();
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();
@@ -182,7 +172,6 @@ class TAController extends Controller
             ];
         } else {
             $data['praproposal'] = $tugas_akhir->praproposal;
-            // dd($data);
         }
 
         $tugas_akhir->update($data);
@@ -200,64 +189,7 @@ class TAController extends Controller
     {
         $tugas_akhir = TA::find($id);
         $tugas_akhir->delete();
-        Alert::success('Berhasil', 'Berhasil hapus data Pendadaran');
+        Alert::success('Berhasil', 'Berhasil hapus data Tugas Akhir');
         return back();
-    }
-
-    public function diterimaBapendik(TA $ta)
-    {
-        $data = array(
-            'status_id' => 2,
-        );
-        $ta->update($data);
-        Alert::success('Berhasil', 'Pengajuan Tugas Akhir Diterima');
-        return back();
-    }
-    public function diterimaKomisi(TA $ta)
-    {
-        $data = array(
-            'status_id' => 3,
-        );
-        $ta->update($data);
-        Alert::success('Berhasil', 'Pengajuan Tugas AKhir Diterima');
-        return back();
-    }
-    public function ditolak(TA $ta)
-    {
-        $data = array(
-            'status_id' => 4,
-        );
-        $ta->update($data);
-        return back();
-    }
-
-    public function ulang(TA $ta)
-    {
-        $data = array(
-            'status_id' => 5,
-        );
-        $ta->update($data);
-        Alert::success('Berhasil', 'Pengajuan yudisium boleh diajukan lagi');
-        return back();
-    }
-
-    public function pelaksanaan(TA $ta)
-    {
-        if (SPK::where('id', $ta->id) != null) {
-            $data = array(
-                'status_id' => 6,
-            );
-            $ta->update($data);
-        }
-    }
-
-    public function selesai(TA $ta)
-    {
-        if (NilaiTA::where('id', $ta->id) != null) {
-            $data = array(
-                'status_id' => 7,
-            );
-            $ta->update($data);
-        }
     }
 }

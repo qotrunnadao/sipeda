@@ -40,14 +40,6 @@ class PendadaranController extends Controller
             $namaPenguji4 = $penguji4->nama;
         }
         return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
-
-        // if (auth()->user()->level_id == 2) {
-        //     return view('admin.pendadaran.dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
-        // } elseif (auth()->user()->level_id == 1) {
-        //     return view('komisi.pendadaran.dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
-        // } elseif (auth()->user()->level_id == 3) {
-        //     return view('dosen.pendadaran.dataPendadaran.index', compact('pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'status', 'jurusan'));
-        // }
     }
 
     /**
@@ -201,26 +193,6 @@ class PendadaranController extends Controller
         $pendadaran = Pendadaran::find($id);
         $pendadaran->delete();
         Alert::success('Berhasil', 'Berhasil hapus data Pendadaran');
-        return back();
-    }
-
-
-    public function diterima(Pendadaran $pendadaran)
-    {
-        $data = array(
-            'status' => 1,
-        );
-        $pendadaran->update($data);
-        Alert::success('Berhasil', 'Pengajuan Izin Diterima');
-        return back();
-    }
-    public function ditolak(Pendadaran $pendadaran)
-    {
-        $data = array(
-            'status' => 2,
-        );
-        $pendadaran->update($data);
-        Alert::warning('Berhasil', 'Pengajuan Izin Ditolak');
         return back();
     }
 }
