@@ -61,15 +61,9 @@ class SPKController extends Controller
         // dd($data);
         $jurusan = jurusan::all();
         $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
-        // $spk = SPK::With('TA.mahasiswa')->latest()->get();
-        // dd($data);
-
-            // $data = ['spk' => $spk, 'taAll' => $taAll, 'jurusan' => $jurusan];
             $pdf = PDF::loadView('TA.SPK.download');
-
             $filename = 'SPK' . '_'.$taAll->mahasiswa->nim.'_' . time() . '.pdf';
             Storage::put('public/assets/file/'. $filename, $pdf->output());
-
             $data = [
                 'TA_id' => $request->ta_id,
                 'fileSPK' => $filename,

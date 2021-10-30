@@ -27,6 +27,7 @@ use App\Http\Controllers\PendadaranController;
 use App\Http\Controllers\MahasiswaTAController;
 use App\Http\Controllers\TAMahasiswaController;
 use App\Http\Controllers\KonsultasiTAController;
+use App\Http\Controllers\KonsultasiTAMahasiswaController;
 use App\Http\Controllers\SeminarHasilController;
 use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\StatusYudisiumController;
@@ -53,11 +54,11 @@ Route::get('/admin/beranda', 'BerandaController@index')->name('admin.beranda')->
 
 //======= MASTER DATA ========
 // Route Tahun Akademik
-Route::get('/tahun-akademik', 'TahunAkademikController@index')->name('tahunAkademik.index');
-Route::post('/tahun-akademik/store', 'TahunAkademikController@store')->name('tahunAkademik.store');
-Route::get('/tahun-akademik/edit/{id}', 'TahunAkademikController@edit')->name('tahunAkademik.edit');
-Route::put('/tahun-akademik/update/{id}', 'TahunAkademikController@update')->name('tahunAkademik.update');
-Route::get('/tahun-akademik/destroy/{id}', 'TahunAkademikController@destroy')->name('tahunAkademik.destroy');
+Route::get('/admin/tahun-akademik', 'TahunAkademikController@index')->name('tahunAkademik.index');
+Route::post('/admin/tahun-akademik/store', 'TahunAkademikController@store')->name('tahunAkademik.store');
+Route::get('/admin/tahun-akademik/edit/{id}', 'TahunAkademikController@edit')->name('tahunAkademik.edit');
+Route::put('/admin/tahun-akademik/update/{id}', 'TahunAkademikController@update')->name('tahunAkademik.update');
+Route::get('/admin/tahun-akademik/destroy/{id}', 'TahunAkademikController@destroy')->name('tahunAkademik.destroy');
 
 // Route Jurusan
 Route::get('/jurusan', 'JurusanController@index')->name('jurusan.index');
@@ -225,9 +226,13 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::post('/tugas-akhir/data-TA/store', 'TAMahasiswaController@store')->name('mahasiswaTA.store');
 
     //konsultasi
-    Route::get('/tugas-akhir/konsultasi', function () {
-        return view('mahasiswa.TA.pages.konsultasi');
-    })->name('mahasiswaTA.konsultasi');
+    Route::get('/tugas-akhir/konsultasi', 'KonsultasiTAMahasiswaController@index')->name('mahasiswaTA.konsultasi');
+    Route::post('/tugas-akhir/data-TA/store', 'KonsultasiTAMahasiswaController@store')->name('mahasiswaKonsultasi.store');
+    Route::get('/tugas-akhir/konsultasi/{id}',  'KonsultasiTAMahasiswaController@show')->name('mahasiswaKonsultai.show');
+    Route::get('/tugas-akhir/konsultasi/diterima/{konsultasiTA}', 'KonsultasiTAMahasiswaController@diterima')->name('mahasiswaKonsultai.diterima');
+    Route::get('/tugas-akhir/pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAMahasiswaController@ditolak')->name('mahasiswaKonsultai.ditolak');
+
+
     //seminar proposal
     Route::get('/tugas-akhir/semprop', function () {
         return view('mahasiswa.TA.pages.semprop');

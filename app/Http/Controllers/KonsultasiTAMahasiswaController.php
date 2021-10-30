@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use App\Models\TA;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Mahasiswa;
 use App\Models\KonsultasiTA;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class KonsultasiTAController extends Controller
+class KonsultasiTAMahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +20,14 @@ class KonsultasiTAController extends Controller
      */
     public function index()
     {
-        $konsultasi = KonsultasiTA::with('TA.mahasiswa.jurusan')->latest()->get();
-        return view('TA.konsultasiTA.index', compact('konsultasi'));
+        $id = Auth::User()->id;
+        $user_id = User::where('id', $id)->get()->first();
+        $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $tugas_akhir = TA::with([ 'dosen1', 'dosen2'])->where('mahasiswa_id', $mhs_id->id)->where('status_id', '3')->latest()->get()->first();
+        // $tugas_akhir = TA::find($id)->with(['dosen1', 'dosen2'])->where('status_id', '3')->first();
+        $konsultasi = KonsultasiTA::with([ 'dosen'])->where('ta_id', $tugas_akhir->id)->latest()->get();
+        // dd($konsultasi->tanggal);
+        return view('mahasiswa.TA.pages.konsultasi', compact('konsultasi', 'tugas_akhir'));
 
         // if (auth()->user()->level_id == 2) {
         //     return view('admin.TA.konsultasiTA.index', compact('konsultasi'));
@@ -45,7 +54,15 @@ class KonsultasiTAController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        $cek = KonsultasiTA::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Konsultasi TA');
+        } else {
+            Alert::warning('Gagal', 'Data Konsultasi TA Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -56,15 +73,8 @@ class KonsultasiTAController extends Controller
      */
     public function show($id)
     {
-
         $konsultasi = KonsultasiTA::find($id);
         return view('TA.konsultasiTA.detail', compact('konsultasi'));
-
-        // if (auth()->user()->level_id == 2) {
-        //     return view('admin.TA.konsultasiTA.detail', compact('konsultasi', 'namaMahasiswa', 'nim'));
-        // } elseif (auth()->user()->level_id == 3) {
-        //     return view('dosen.TA.konsultasiTA.detail', compact('konsultasi', 'namaMahasiswa', 'nim'));
-        // }
     }
 
     /**
