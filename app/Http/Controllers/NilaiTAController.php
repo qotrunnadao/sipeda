@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\TA;
+use App\Models\User;
 use App\Models\Jurusan;
 use App\Models\NilaiTA;
 use App\Models\Mahasiswa;
 use App\Models\StatusNilai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -21,20 +23,21 @@ class NilaiTAController extends Controller
      */
     public function index()
     {
-        $jurusan = jurusan::all();
-        $taAll = TA::with(['mahasiswa'])->get();
-        $statusnilai = StatusNilai::all();
-        $nilai = NilaiTA::With('TA.mahasiswa.jurusan')->latest()->get();
-
-        return view('TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-
-        // if (auth()->user()->level_id == 2) {
-        //     return view('admin.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-        // } elseif (auth()->user()->level_id == 1) {
-        //     return view('komisi.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-        // } elseif (auth()->user()->level_id == 3) {
-        //     return view('dosen.TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
-        // }
+        if (Auth::user()->level_id == 4) {
+            $id = Auth::User()->id;
+            $user_id = User::where('id', $id)->get()->first();
+            $mhs_id = Mahasiswa::with(['user'])->where('user_id', $user_id->id)->get()->first();
+            $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->get();
+            $nilai = NilaiTA::with('TA')->latest()->get();
+            //dd($nilai);
+            return view('mahasiswa.TA.pages.nilai', compact('nilai'));
+        } else {
+            $jurusan = jurusan::all();
+            $taAll = TA::with(['mahasiswa'])->get();
+            $statusnilai = StatusNilai::all();
+            $nilai = NilaiTA::With('TA.mahasiswa.jurusan')->latest()->get();
+            return view('TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
+        }
     }
 
     public function nim(Request $request)

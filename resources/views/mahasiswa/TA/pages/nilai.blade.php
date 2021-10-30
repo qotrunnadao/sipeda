@@ -14,19 +14,32 @@
                                 <th> Komponen Penilaian</th>
                                 <th> Nilai Angka </th>
                                 <th> Nilai Huruf </th>
+                                <th> Status Nilai </th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php ($no = 1)
+                            @foreach ($nilai as $value)
                             <tr>
-                                <td class="text-center"> 1 </td>
+                                <td class="text-center"> {{ $no++}} </td>
                                 <td class="text-center"> Nilai Akhir Tugas Akhir</td>
                                 <td class="text-center">
-                                    <div class="badge badge-success badge-pill">85.00</div>
+                                    <div class="badge badge-secondary badge-pill">{{ $value->nilaiAngka }}</div>
                                 </td>
                                 <td class="text-center">
-                                    <div class="badge badge-primary badge-pill">A</div>
+                                    <div class="badge badge-secondary badge-pill">{{ $value->nilaiHuruf }}</div>
+                                </td>
+                                <td class="text-center">
+                                    @if($value->statusnilai_id == 1)
+                                    <span class="badge badge-warning">Entry dosen</span>
+                                    @elseif($value->statusnilai_id == 2)
+                                    <span class="badge badge-primary">Verifikasi Bapendik</span>
+                                    @else
+                                    <span class="badge badge-success">Upload SIA</span>
+                                    @endif
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

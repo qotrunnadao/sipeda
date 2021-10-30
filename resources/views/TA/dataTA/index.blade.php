@@ -68,6 +68,7 @@
                                     @endif
                                 </td>
                                 <td> {{ $value->ket }}</td>
+                                @if(auth()->user()->level_id == 2 && 1)
                                 <td>
                                     @if (auth()->user()->level_id == 2)
                                     <div class="btn-group">
@@ -86,6 +87,7 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>

@@ -21,8 +21,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        // 'cas.auth'  => 'Subfission\Cas\Middleware\CASAuth',
-        // 'cas.guest' => 'Subfission\Cas\Middleware\RedirectCASAuthenticated',
 
     ];
 
@@ -72,5 +70,7 @@ class Kernel extends HttpKernel
         'dosen' => \App\Http\Middleware\Dosen::class,
         'komisi' => \App\Http\Middleware\Komisi::class,
         'kajur' => \App\Http\Middleware\Kajur::class,
+        'cas.auth'  => 'Subfission\Cas\Middleware\CASAuth',
+        'cas.guest' => 'Subfission\Cas\Middleware\RedirectCASAuthenticated',
     ];
 }

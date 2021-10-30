@@ -31,21 +31,27 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('mahasiswaTA.semprop') }}">
-                <span class="menu-title">seminar proposal</span>
+                <span class="menu-title">Seminar Proposal</span>
                 <i class="mdi mdi-comment-text menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('mahasiswaTA.nilai') }}">
+            <a class="nav-link" href="{{ route('mahasiswaTA.semhas') }}">
+                <span class="menu-title">Seminar Hasil</span>
+                <i class="mdi mdi-comment-text menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('nilaita.index') }}">
                 <span class="menu-title">Nilai TA</span>
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('mahasiswaTA.distribusi') }}">
                 <span class="menu-title">Distribusi</span>
                 <i class="mdi mdi-share-variant menu-icon"></i>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </nav>

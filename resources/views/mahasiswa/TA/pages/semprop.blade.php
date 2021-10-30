@@ -1,6 +1,6 @@
 @extends('mahasiswa.TA.layouts.main')
 @section('icon', 'comment-text')
-@section('title', 'Seminar TA')
+@section('title', 'Seminar Proposal')
 @section('content')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
@@ -13,17 +13,6 @@
                     </div>
                     <div class="col-lg-8">
                         <input class="form-control" maxlength="25" name="judul" id="judul" type="text" autofocus>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="col-form-label">Jenis Seminar</label>
-                    </div>
-                    <div class="col-lg-8">
-                        <select class="form-control" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                            <option value="AL" data-select2-id="3">Seminar proposal</option>
-                            <option value="WY" data-select2-id="17">seminar Hasil</option>
-                        </select>
                     </div>
                 </div>
                 <div class="form-group row">

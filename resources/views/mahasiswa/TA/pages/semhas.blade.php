@@ -17,17 +17,6 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-3">
-                        <label class="col-form-label">Jenis Seminar</label>
-                    </div>
-                    <div class="col-lg-8">
-                        <select class="form-control" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                            <option value="AL" data-select2-id="3">Seminar proposal</option>
-                            <option value="WY" data-select2-id="17">seminar Hasil</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-3">
                         <label class="col-form-label">Tanggal Seminar</label>
                     </div>
                     <div class="col-lg-8">
@@ -68,15 +57,6 @@
                             <span class="input-group-text">
                                 <i class="mdi mdi-clock"></i></span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-lg-3 col-form-label">
-                        File Proposal
-                    </label>
-                    <div class="col-lg-8">
-                        <input type="file" class="form-control" />
                     </div>
                 </div>
                 <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>

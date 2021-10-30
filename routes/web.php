@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Middleware\Dosen;
+use App\Http\Middleware\Kajur;
 use App\Http\Middleware\Komisi;
+use Subfission\Cas\Facades\Cas;
 use App\Http\Middleware\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SKController;
 use App\Http\Controllers\TAController;
-use App\Http\Controllers\TAMahasiswaController;
+use App\Http\Controllers\CasController;
 use App\Http\Controllers\SPKController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
@@ -22,6 +24,8 @@ use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\StatusTAController;
 use App\Http\Controllers\YudisiumController;
 use App\Http\Controllers\PendadaranController;
+use App\Http\Controllers\MahasiswaTAController;
+use App\Http\Controllers\TAMahasiswaController;
 use App\Http\Controllers\KonsultasiTAController;
 use App\Http\Controllers\SeminarHasilController;
 use App\Http\Controllers\TahunAkademikController;
@@ -30,28 +34,23 @@ use App\Http\Controllers\NilaiPendadaranController;
 use App\Http\Controllers\SeminarProposalController;
 use App\Http\Controllers\StatusPendadaranController;
 use App\Http\Controllers\BeritaAcaraPendadaranController;
-use App\Http\Controllers\MahasiswaTAController;
-use App\Http\Middleware\Kajur;
-
 
 Auth::routes();
+
 // ROUTE GUEST
 Route::get('/', function () {
     return view('guest.login');
-});
-Route::get('/error', function () {
-    return view('guest.error-page');
-});
+});  //Halaman Login LandingPage
 
-// Route::middleware(['cas.auth'])->group(function () {
-//     Route::get('/', function () {
-//         return view('guest.login');
-//     });
-// });
+Route::get('/cas/login', function () {
+    return cas()->authenticate();
+})->name('cas.login'); //Halaman login KORI
+
 
 
 //=============== ROUTE ADMIN ====================
 Route::get('/admin/beranda', 'BerandaController@index')->name('admin.beranda')->middleware('admin');
+
 //======= MASTER DATA ========
 // Route Tahun Akademik
 Route::get('/tahun-akademik', 'TahunAkademikController@index')->name('tahunAkademik.index');
@@ -81,8 +80,10 @@ Route::get('/level-user/delete/{id}', 'LevelController@destroy')->name('level.de
 
 //Route Data User
 Route::get('/data-user', 'UserController@index')->name('user.index');
+
 //Route Data Dosen
 Route::get('/data-dosen', 'DosenController@index')->name('dosen.index');
+
 //Route Data Komisi
 Route::get('/data-komisi', 'KomisiController@index')->name('komisi.index');
 
@@ -229,16 +230,17 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     })->name('mahasiswaTA.konsultasi');
     //seminar proposal
     Route::get('/tugas-akhir/semprop', function () {
-        return view('mahasiswa.TA.pages.seminar');
+        return view('mahasiswa.TA.pages.semprop');
     })->name('mahasiswaTA.semprop');
     //seminar hasil
     Route::get('/tugas-akhir/semihas', function () {
-        return view('mahasiswa.TA.pages.seminarHasil');
+        return view('mahasiswa.TA.pages.semhas');
     })->name('mahasiswaTA.semhas');
     //nilai TA
-    Route::get('/tugas-akhir/nilai', function () {
-        return view('mahasiswa.TA.pages.nilai');
-    })->name('mahasiswaTA.nilai');
+    // Route::get('/tugas-akhir/nilai', function () {
+    //     return view('mahasiswa.TA.pages.nilai');
+    // })->name('mahasiswaTA.nilai');
+    Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita.index');
     //distribusi
     Route::get('/tugas-akhir/distribusi', function () {
         return view('mahasiswa.TA.pages.distribusi');
@@ -249,7 +251,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
         return view('mahasiswa.pendadaran.pages.beranda');
     });
     Route::get('/pendadaran/pendaftaran', function () {
-        return view('mahasiswa.pendadaran.pages.pendaftaran');
+        return view('mahasiswa.pendadaran.pages.pengajuan');
     });
     Route::get('/pendadaran/jadwal', function () {
         return view('mahasiswa.pendadaran.pages.jadwal');
@@ -274,6 +276,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -57,9 +57,8 @@
                     <button type="submit" class="form__button">
                         {{ __('Login') }}
                     </button>
-                    {{-- <a class="form__button" href="<?= url('') ?>/admin/beranda" role="button" style="text-decoration: none; text-align:center;">Admin</a> --}}
                     <button type="submit" class="form__button">
-                        <a href="<?= url('') ?>/guest/menu" style="text-decoration: none; text-align:center; color:white;">Login SSO</a>
+                        <a href="{{ route('cas.login') }}" style="text-decoration: none; text-align:center; color:white;">Login SSO</a>
                     </button>
                 </div>
                 <div class="form__social">
