@@ -227,11 +227,9 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
 
     //konsultasi
     Route::get('/tugas-akhir/konsultasi', 'KonsultasiTAMahasiswaController@index')->name('mahasiswaTA.konsultasi');
-    Route::post('/tugas-akhir/data-TA/store', 'KonsultasiTAMahasiswaController@store')->name('mahasiswaKonsultasi.store');
-    Route::get('/tugas-akhir/konsultasi/{id}',  'KonsultasiTAMahasiswaController@show')->name('mahasiswaKonsultai.show');
-    Route::get('/tugas-akhir/konsultasi/diterima/{konsultasiTA}', 'KonsultasiTAMahasiswaController@diterima')->name('mahasiswaKonsultai.diterima');
-    Route::get('/tugas-akhir/pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAMahasiswaController@ditolak')->name('mahasiswaKonsultai.ditolak');
-
+    Route::post('/tugas-akhir/konsultasi/store', 'KonsultasiTAMahasiswaController@store')->name('mahasiswaKonsultasi.store');
+    Route::post('/mahasiswa/tugas-akhir/konsultasi/update/{id}', 'KonsultasiTAMahasiswaController@update')->name('mahasiswaKonsultasi.update');
+    Route::get('/mahasiswa/tugas-akhir/konsultasi/delete/{id}', 'KonsultasiTAMahasiswaController@destroy')->name('mahasiswaKonsultasi.delete');
 
     //seminar proposal
     Route::get('/tugas-akhir/semprop', function () {
@@ -242,9 +240,6 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
         return view('mahasiswa.TA.pages.semhas');
     })->name('mahasiswaTA.semhas');
     //nilai TA
-    // Route::get('/tugas-akhir/nilai', function () {
-    //     return view('mahasiswa.TA.pages.nilai');
-    // })->name('mahasiswaTA.nilai');
     Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita.index');
     //distribusi
     Route::get('/tugas-akhir/distribusi', function () {

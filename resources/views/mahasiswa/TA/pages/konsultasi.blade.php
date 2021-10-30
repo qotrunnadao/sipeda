@@ -17,7 +17,7 @@
                                 <th> No. </th>
                                 <th> Tanggal Konsul </th>
                                 <th> Nama Pembimbing </th>
-                                <th> Terverivikasi </th>
+                                <th> Terverifikasi </th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
@@ -28,24 +28,21 @@
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $value->tanggal }}</td>
                                 <td> {{ $value->dosen->nama }}</td>
-                                <td> @if  ($value->verifikasiDosen =='0')
+                                <td> @if ($value->verifikasiDosen =='0')
                                     <span class="badge badge-danger"> False</span>
                                     @elseif ($value->verifikasiDosen == '1')
-                                    <span class="badge badge-success"> True</span></td>
+                                    <span class="badge badge-success"> True</span>
+                                </td>
                                 @endif
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{route('mahasiswaKonsultasi.show', $value->id)}}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-eye"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-dosen_id='{{ $value->dosen->nama }}' data-tanggal='{{ $value->tanggal }}' data-topik='{{ $value->topik}}' data-hasil='{{ $value->hasil}}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-warning btn-sm" data-toggle="modal" data-target="#editdata"
-                                        data-dosen_id='{{ $value->dosen->nama }}' data-tanggal='{{ $value->tanggal }}' data-topik='{{ $value->topik}}'
-                                         data-hasil='{{ $value->hasil}}' data-verifikasiDosen='{{ $value->verifikasiDosen}}'
-                                         data-route="{{ route('mahasiswaKonsultasi.update', $value->id) }}"><i class="mdi mdi-border-color"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete-forever"></i></button>
+                                        <form action="{{ route('mahasiswaKonsultasi.delete', $value->id) }}" method="GET">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
                                 </td>
@@ -59,7 +56,7 @@
     </div>
 </div>
 
-<!-- Modal Tembah Data Konsultasi -->
+<!-- Modal Tambah Data Konsultasi -->
 <div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -76,7 +73,7 @@
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
                     <div class="form-group">
                         <label for="exampleSelectGender">Nama Pembimbing</label>
-                        <select class="form-control" id="exampleSelectGender"  name="dosen_id">
+                        <select class="form-control" id="exampleSelectGender" name="dosen_id">
                             <option selected disabled> Pilih Dosen </option>
                             {{-- @foreach ($tugas_akhir as $value) --}}
                             <option value="{{ $tugas_akhir->pembimbing1_id }}">{{ $tugas_akhir->dosen1->nama }}</option>
@@ -112,54 +109,53 @@
     </div>
 </div>
 
-{{-- Edit Konsultasi --}}
 <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Tahun Akademik</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Konsultasi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                {{-- @foreach ($jurusan as $value ) --}}
-                <form class="forms-sample" method="POST" action="">
-                    @method('PUT')
+                <form class="forms-sample" action="" method="post">
                     @csrf
+                    @method('put')
+                    <input type="hidden" class="form-control" id="verifikasiDosen" name="verifikasiDosen" value="0">
+                    <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Tahun</label>
+                        <label>Nama Pembimbing</label>
+                        <select class="form-control" id="dosen_id" name="dosen_id">
+                            <option value="{{ $tugas_akhir->pembimbing1_id }}">{{ $tugas_akhir->dosen1->nama }}</option>
+                            <option value="{{ $tugas_akhir->pembimbing2_id }}">{{ $tugas_akhir->dosen2->nama }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Tanggal Konsultasi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="tahunakademik" name="namaTahun" value="" />
+                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Semester</label>
+                        <label for="exampleInputEmail3">Topik Konsultasi</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="semester" name="semester_id">
-                                <option value="">PILIH</option>
-                                @foreach ($semester as $value)
-                                <option value="{{ $value->id }}">{{ $value->semester }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="topik" id="topik" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Status</label>
+                        <label for="alasan">Hasil Konsultasi</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="aktif1" name="aktif">
-                                <option value="">PILIH</option>
-                                <option value=""selected disabled>PILIH</option>
-                                <option value="1">True</option>
-                                <option value="0">False</option>
-                            </select>
+                            <textarea class="form-control" rows="4" name="hasil" id="hasil"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Edit </button>
                     </div>
                 </form>
-                {{-- @endforeach --}}
             </div>
         </div>
     </div>
@@ -168,20 +164,19 @@
 @section('javascripts')
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var route = button.data('route')
-        var namaTahun = button.data('namatahun') // Extract info from data-* attributes
-        var semester = button.data('semester') // Extract info from data-* attributes
-        var aktif = button.data('aktif') // Extract info from data-* attributes
-
-        var modal = $(this)
-
-
-        modal.find(".modal-body input[name='namaTahun']").val(namaTahun)
-        modal.find(".modal-body select[name='semester_id']").val(semester)
-        modal.find(".modal-body select[name='aktif']").val(aktif)
-        modal.find(".modal-body form").attr("action",route)
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var dosen_id = button.data('dosen_id') // Extract info from data-* attributes
+    var tanggal = button.data('tanggal') // Extract info from data-* attributes
+    var topik = button.data('topik')
+    var hasil = button.data('hasil')
+    var modal = $(this)
+    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
+    modal.find(".modal-body input[name='dosen_id']").val(dosen_id)
+    modal.find(".modal-body input[name='tanggal']").val(tanggal)
+    modal.find(".modal-body input[name='topik']").val(topik)
+    modal.find(".modal-body input[name='hasil']").val(hasil)
+    modal.find(".modal-body form").attr("action",'/mahasiswa/tugas-akhir/konsultasi/update/'+id)
     })
 </script>
 @endsection
-

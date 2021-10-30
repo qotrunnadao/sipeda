@@ -23,17 +23,11 @@ class KonsultasiTAMahasiswaController extends Controller
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
-        $tugas_akhir = TA::with([ 'dosen1', 'dosen2'])->where('mahasiswa_id', $mhs_id->id)->where('status_id', '3')->latest()->get()->first();
+        $tugas_akhir = TA::with(['dosen1', 'dosen2'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         // $tugas_akhir = TA::find($id)->with(['dosen1', 'dosen2'])->where('status_id', '3')->first();
-        $konsultasi = KonsultasiTA::with([ 'dosen'])->where('ta_id', $tugas_akhir->id)->latest()->get();
-        // dd($konsultasi->tanggal);
+        $konsultasi = KonsultasiTA::with(['dosen'])->where('ta_id', $tugas_akhir->id)->select('*')->latest()->get();
+        //dd($konsultasi);
         return view('mahasiswa.TA.pages.konsultasi', compact('konsultasi', 'tugas_akhir'));
-
-        // if (auth()->user()->level_id == 2) {
-        //     return view('admin.TA.konsultasiTA.index', compact('konsultasi'));
-        // } elseif (auth()->user()->level_id == 3) {
-        //     return view('dosen.TA.konsultasiTA.index', compact('konsultasi'));
-        // }
     }
 
     /**
@@ -95,9 +89,21 @@ class KonsultasiTAMahasiswaController extends Controller
      * @param  \App\Models\KonsultasiTA  $konsultasiTA
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KonsultasiTA $konsultasiTA)
+    public function update(Request $request, $id)
     {
-        //
+        $value = KonsultasiTA::where('id', $id)->first();
+        $data = [
+            'ta_id' => $request->ta_id,
+            'dosen_id' => $request->dosen_id,
+            'hasil' => $request->hasil,
+            'tanggal' => $request->tanggal,
+            'topik' => $request->topik,
+            'ket' => $request->ket,
+            'verifikasiDosen' => $request->verifikasiDosen,
+        ];
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Data Konsultasi');
+        return back();
     }
 
     /**
@@ -106,9 +112,12 @@ class KonsultasiTAMahasiswaController extends Controller
      * @param  \App\Models\KonsultasiTA  $konsultasiTA
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KonsultasiTA $konsultasiTA)
+    public function destroy($id)
     {
-        //
+        $konsultasi = KonsultasiTA::find($id);
+        $konsultasi->delete();
+        Alert::success('Berhasil', 'Berhasil hapus data Konsultasi');
+        return back();
     }
 
     public function diterima(KonsultasiTA  $konsultasiTA)
