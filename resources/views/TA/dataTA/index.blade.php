@@ -25,9 +25,9 @@
                                 <th> Dosen Pembimbing 2</th>
                                 <th> Status</th>
                                 <th> Keterangan </th>
-                                @if(auth()->user()->level_id == 2 && 1)
+                                {{-- @if(auth()->user()->level_id == 2 && auth()->user()->level_id == 1) --}}
                                 <th> Aksi</th>
-                                @endif
+                                {{-- @endif --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +68,7 @@
                                     @endif
                                 </td>
                                 <td> {{ $value->ket }}</td>
-                                @if(auth()->user()->level_id == 2 && 1)
+                                {{-- @if(auth()->user()->level_id == 2 && auth()->user()->level_id == 1) --}}
                                 <td>
                                     @if (auth()->user()->level_id == 2)
                                     <div class="btn-group">
@@ -87,7 +87,7 @@
                                         </form>
                                     </div>
                                 </td>
-                                @endif
+                                {{-- @endif --}}
                             </tr>
                             @endforeach
                         </tbody>

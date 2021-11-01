@@ -119,23 +119,4 @@ class KonsultasiTAMahasiswaController extends Controller
         Alert::success('Berhasil', 'Berhasil hapus data Konsultasi');
         return back();
     }
-
-    public function diterima(KonsultasiTA  $konsultasiTA)
-    {
-        $data = array(
-            'verifikasiDosen' => 1,
-        );
-        $konsultasiTA->update($data);
-        Alert::success('Berhasil', 'Pengajuan Konsultasi Diterima');
-        return back();
-    }
-    public function ditolak(KonsultasiTA  $konsultasiTA)
-    {
-        $data = array(
-            'verifikasiDosen' => 2,
-        );
-        $konsultasiTA->update($data);
-        Alert::warning('Berhasil', 'Pengajuan Konsultasi Ditolak');
-        return back();
-    }
 }
