@@ -17,6 +17,18 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-3">
+                        <label class="col-form-label">Ruang Seminar</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-control" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                            <option value="AL" data-select2-id="3">Ruang Seminar 1</option>
+                            <option value="WY" data-select2-id="17">Ruang Seminar 2</option>
+                            <option value="AM" data-select2-id="18">Ruang Seminar 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3">
                         <label class="col-form-label">Tanggal Seminar</label>
                     </div>
                     <div class="col-lg-8">
@@ -26,18 +38,6 @@
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="col-form-label">Ruang Seminar</label>
-                    </div>
-                    <div class="col-lg-8">
-                        <select class="form-control" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                            <option value="AL" data-select2-id="3">Ruang Seminar 1</option>
-                            <option value="WY" data-select2-id="17">Ruang Seminar 2</option>
-                            <option value="AM" data-select2-id="18">Ruang Seminar 3</option>
-                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
