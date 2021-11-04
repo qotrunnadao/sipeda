@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Akademik;
-use App\Http\Controllers\Auth;
 use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\StatusKP;
@@ -45,18 +45,22 @@ class BerandaController extends Controller
 
     public function mahasiswaTA()
     {
+        $id = Auth::User()->id;
+        $user_id = User::where('id', $id)->get()->first();
+        $mhs_id = Mahasiswa::where('user_id', $id)->get()->first();
+        $statusTA = StatusTA::latest()->get();
+        // dd($mhs_id->nama);
         $ta = array(
             'status' => Status::latest()->get(),
             'statusnilai' => StatusNilai::latest()->get(),
             'statusKP' => StatusKP::latest()->get(),
-            'statusTA' => StatusTA::latest()->get(),
             'statusPendadaran' => StatusPendadaran::latest()->get(),
             'statusYudisium' => StatusYudisium::latest()->get(),
             'akademik' => Akademik::latest()->get(),
             // 'user' => Auth::user()::With('mahasiswa')->latest()->get(),
         );
         // dd($ta);
-        return view('mahasiswa.TA.pages.beranda', $ta);
+        return view('mahasiswa.TA.pages.beranda',  compact('ta', 'mhs_id', 'statusTA'));
     }
 
     /**

@@ -31,6 +31,10 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function KonsultasiTA()
+    {
+        return $this->belongsTo(KonsultasiTA::class, 'konsultasiTA_id');
+    }
 
     public function getCreatedAtAttribute()
     {

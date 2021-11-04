@@ -29,10 +29,12 @@ use App\Http\Controllers\TAMahasiswaController;
 use App\Http\Controllers\KonsultasiTAController;
 use App\Http\Controllers\KonsultasiTAMahasiswaController;
 use App\Http\Controllers\SeminarHasilController;
+use App\Http\Controllers\SeminarHasilMahasiswaController;
 use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\StatusYudisiumController;
 use App\Http\Controllers\NilaiPendadaranController;
 use App\Http\Controllers\SeminarProposalController;
+use App\Http\Controllers\SeminarProposalMahasiswaController;
 use App\Http\Controllers\StatusPendadaranController;
 use App\Http\Controllers\BeritaAcaraPendadaranController;
 
@@ -228,17 +230,17 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     //konsultasi
     Route::get('/tugas-akhir/konsultasi', 'KonsultasiTAMahasiswaController@index')->name('mahasiswaTA.konsultasi');
     Route::post('/tugas-akhir/konsultasi/store', 'KonsultasiTAMahasiswaController@store')->name('mahasiswaKonsultasi.store');
-    Route::post('/mahasiswa/tugas-akhir/konsultasi/update/{id}', 'KonsultasiTAMahasiswaController@update')->name('mahasiswaKonsultasi.update');
-    Route::get('/mahasiswa/tugas-akhir/konsultasi/delete/{id}', 'KonsultasiTAMahasiswaController@destroy')->name('mahasiswaKonsultasi.delete');
+    Route::put('/tugas-akhir/konsultasi/update/{id}', 'KonsultasiTAMahasiswaController@update')->name('mahasiswaKonsultasi.update');
+    Route::get('/tugas-akhir/konsultasi/delete/{id}', 'KonsultasiTAMahasiswaController@destroy')->name('mahasiswaKonsultasi.delete');
 
     //seminar proposal
-    Route::get('/tugas-akhir/semprop', function () {
-        return view('mahasiswa.TA.pages.semprop');
-    })->name('mahasiswaTA.semprop');
+    Route::get('/tugas-akhir/semprop', 'SeminarProposalMahasiswaController@create')->name('mahasiswaTA.semprop');
+    Route::post('/tugas-akhir/semprop/store', 'SeminarProposalMahasiswaController@store')->name('mahasiswaSempro.store');
+
     //seminar hasil
-    Route::get('/tugas-akhir/semihas', function () {
-        return view('mahasiswa.TA.pages.semhas');
-    })->name('mahasiswaTA.semhas');
+    Route::get('/tugas-akhir/semhas', 'SeminarHasilMahasiswaController@create')->name('mahasiswaTA.semhas');
+    Route::post('/tugas-akhir/semhas/store', 'SeminarHasilMahasiswaController@store')->name('mahasiswaSemhas.store');
+
     //nilai TA
     Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita.index');
     //distribusi

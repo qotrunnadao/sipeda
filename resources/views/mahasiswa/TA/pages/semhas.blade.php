@@ -5,62 +5,77 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mb-5">Pengajuan Seminar</h4>
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="col-form-label">Judul Penelitian</label>
+            <form class="forms-sample" action="{{route('mahasiswaSemhas.store')}}" method="post" enctype="multipart/form-data">
+                 @csrf
+                <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
+                <input type="hidden" class="form-control" id="status" name="status" value="0">
+                <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
+                <div class="card-body">
+                    <h4 class="card-title mb-5">Pengajuan Seminar</h4>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">Judul Penelitian</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="form-control" maxlength="100" name="judul" id="judul" type="text" autofocus>
+                        </div>
                     </div>
-                    <div class="col-lg-8">
-                        <input class="form-control" maxlength="25" name="judul" id="judul" type="text" autofocus>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="col-form-label">Tanggal Seminar</label>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal seminar" />
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">Tanggal Seminar</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal seminar" />
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="col-form-label">Ruang Seminar</label>
-                    </div>
-                    <div class="col-lg-8">
-                        <select class="form-control" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                            <option value="AL" data-select2-id="3">Ruang Seminar 1</option>
-                            <option value="WY" data-select2-id="17">Ruang Seminar 2</option>
-                            <option value="AM" data-select2-id="18">Ruang Seminar 3</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="col-form-label">waktu</label>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="input-group clockpicker">
-                            <input type="text" class="form-control" placeholder="mulai">
-                            <span class="input-group-text">
-                                <i class="mdi mdi-clock"></i></span>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">Ruang Seminar</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                            @foreach ($Ruang as $value)
+                                    <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="input-group clockpicker">
-                            <input type="text" class="form-control" placeholder="selesai">
-                            <span class="input-group-text">
-                                <i class="mdi mdi-clock"></i></span>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">waktu</label>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="input-group clockpicker">
+                                <input type="text" id="jamMulai" name="jamMulai" class="form-control" placeholder="mulai">
+                                <span class="input-group-text">
+                                    <i class="mdi mdi-clock"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="input-group clockpicker">
+                                <input type="text" id="jamSelesai" name="jamSelesai" class="form-control" placeholder="selesai">
+                                <span class="input-group-text">
+                                    <i class="mdi mdi-clock"></i></span>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label">
+                            File Laporan
+                        </label>
+                        <div class="col-lg-8">
+                            <input type="file" class="form-control" name="laporan" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
-                <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
-            </div>
+            </form>
         </div>
     </div>
     <div class="col-12 grid-margin stretch-card">
@@ -73,25 +88,28 @@
                             <tr>
                                 <th> # </th>
                                 <th> Judul Penelitian </th>
-                                <th> Jenis </th>
                                 <th> Tanggal </th>
-                                <th> Ruang </th>
                                 <th> Waktu </th>
+                                <th> Ruang </th>
                                 <th> Status </th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
+                           @php($no=1)
+                            @foreach ($SeminarHasil as $value )
                             <tr>
-                                <td> 1 </td>
-                                <td> SIPETA </td>
-                                <td> Seminar Proposal</td>
-                                <td> 26/10/2021</td>
-                                <td> Seminar 1 </td>
-                                <td> 09:00 - 11:00 </td>
+                                <td> {{ $no++ }} </td>
+                                <td> {{ $value->TA->judulTA}} </td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">True</div>
+                                    {{ $value->tanggal }}
+                                </td>
+                                <td> {{ $value->jamMulai }} - {{$value->jamSelesai}}</td>
+                                <td> {{ $value->ruang->namaRuang }}</td>
+                                <td>
+                                    <div class="badge badge-primary badge-pill">{{$value->status}}</div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -36,7 +36,7 @@
                                 @endif
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-dosen_id='{{ $value->dosen->nama }}' data-tanggal='{{ $value->tanggal }}' data-topik='{{ $value->topik}}' data-hasil='{{ $value->hasil}}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-dosen_id='{{ $value->dosen->id }}' data-tanggal='{{ $value->tanggal }}' data-topik='{{ $value->topik}}' data-hasil='{{ $value->hasil}}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('mahasiswaKonsultasi.delete', $value->id) }}" method="GET">
@@ -109,6 +109,7 @@
     </div>
 </div>
 
+{{-- Modal Edit Data Konsultasi --}}
 <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -122,7 +123,6 @@
                 <form class="forms-sample" action="" method="post">
                     @csrf
                     @method('put')
-                    <input type="hidden" class="form-control" id="verifikasiDosen" name="verifikasiDosen" value="0">
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
                     <div class="form-group">
                         <label>Nama Pembimbing</label>
@@ -171,11 +171,11 @@
     var topik = button.data('topik')
     var hasil = button.data('hasil')
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='dosen_id']").val(dosen_id)
+
+    modal.find(".modal-body select[name='dosen_id']").val(dosen_id)
     modal.find(".modal-body input[name='tanggal']").val(tanggal)
     modal.find(".modal-body input[name='topik']").val(topik)
-    modal.find(".modal-body input[name='hasil']").val(hasil)
+    modal.find(".modal-body textarea[name='hasil']").val(hasil)
     modal.find(".modal-body form").attr("action",'/mahasiswa/tugas-akhir/konsultasi/update/'+id)
     })
 </script>

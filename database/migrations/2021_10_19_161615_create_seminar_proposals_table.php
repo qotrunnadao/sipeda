@@ -16,10 +16,11 @@ class CreateSeminarProposalsTable extends Migration
         Schema::create('seminar_proposal', function (Blueprint $table) {
             $table->id();
             $table->foreignId('ta_id')->references('id')->on('TA');
+            $table->string('proposal')->nullable();
             $table->string('beritaacara')->nullable();
             $table->string('beritaacara_dosen')->nullable();
-            $table->dateTime('jamMulai')->nullable();
-            $table->dateTime('jamSelesai')->nullable();
+            $table->time('jamMulai')->nullable();
+            $table->time('jamSelesai')->nullable();
             $table->date('tanggal')->nullable();
             $table->foreignId('ruang_id')->references('id')->on('ruang');
             $table->tinyInteger('status')->comment('0=menunggu, 1=disetujui, 2=ditolak')->default('0');

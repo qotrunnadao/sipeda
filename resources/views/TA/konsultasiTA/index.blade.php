@@ -25,15 +25,15 @@
                         </thead>
                         <tbody>
                             @php($no=1)
-                            @foreach ($konsultasi as $value )
+                            @foreach ($tugas_akhir as $value )
 
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->ta->mahasiswa->nama }}</td>
-                                <td> {{ $value->ta->mahasiswa->nim }}</td>
-                                <td> {{ $value->ta->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td> {{ $value->mahasiswa->nama }}</td>
+                                <td> {{ $value->mahasiswa->nim }}</td>
+                                <td> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td>
-                                    {{ $value->count() }}
+                                    {{ $value->konsultasiTA->count() }}
                                 </td>
                                 <td>
                                     <div class="btn-group">

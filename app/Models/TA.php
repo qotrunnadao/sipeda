@@ -31,6 +31,10 @@ class TA extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+    public function KonsultasiTA()
+    {
+        return $this->hasMany(KonsultasiTA::class, 'ta_id');
+    }
     public function Tahunakademik()
     {
         return $this->belongsTo(Tahunakademik::class, 'thnAkad_id');

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use App\Models\TA;
+use App\Models\Dosen;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Mahasiswa;
 use App\Models\KonsultasiTA;
 use Illuminate\Http\Request;
@@ -17,8 +21,16 @@ class KonsultasiTAController extends Controller
      */
     public function index()
     {
-        $konsultasi = KonsultasiTA::with('TA.mahasiswa.jurusan')->latest()->get();
-        return view('TA.konsultasiTA.index', compact('konsultasi'));
+        $id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+        // dd($dosen_id);
+        $konsultasi = KonsultasiTA::with('dosen')->where('dosen_id', $dosen_id->id)->get();
+        $tugas_akhir = TA::with(['konsultasiTA'])->whereHas('konsultasiTA', function($q) use ($dosen_id) {
+            $q->where('dosen_id', $dosen_id->id);
+        })->latest()->get();
+        // dd($tugas_akhir);
+        return view('TA.konsultasiTA.index', compact('tugas_akhir'));
 
         // if (auth()->user()->level_id == 2) {
         //     return view('admin.TA.konsultasiTA.index', compact('konsultasi'));
@@ -54,10 +66,11 @@ class KonsultasiTAController extends Controller
      * @param  \App\Models\KonsultasiTA  $konsultasiTA
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-
-        $konsultasi = KonsultasiTA::find($id);
+        $ta_id = $request->id;
+        $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->latest()->get();
+        // dd($konsultasi);
         return view('TA.konsultasiTA.detail', compact('konsultasi'));
 
         // if (auth()->user()->level_id == 2) {
