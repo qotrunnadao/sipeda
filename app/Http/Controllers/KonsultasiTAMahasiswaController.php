@@ -26,7 +26,7 @@ class KonsultasiTAMahasiswaController extends Controller
         $tugas_akhir = TA::with(['dosen1', 'dosen2'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         // $tugas_akhir = TA::find($id)->with(['dosen1', 'dosen2'])->where('status_id', '3')->first();
         $konsultasi = KonsultasiTA::with(['dosen'])->where('ta_id', $tugas_akhir->id)->select('*')->latest()->get();
-        //dd($konsultasi);
+        // dd($konsultasi);
         return view('mahasiswa.TA.pages.konsultasi', compact('konsultasi', 'tugas_akhir'));
     }
 
@@ -92,17 +92,23 @@ class KonsultasiTAMahasiswaController extends Controller
     public function update(Request $request, $id)
     {
         $value = KonsultasiTA::where('id', $id)->first();
+        // $data = $request->all();
         $data = [
             'ta_id' => $request->ta_id,
             'dosen_id' => $request->dosen_id,
             'hasil' => $request->hasil,
             'tanggal' => $request->tanggal,
             'topik' => $request->topik,
-            'ket' => $request->ket,
-            'verifikasiDosen' => $request->verifikasiDosen,
+            // 'ket' => $request->ket,
+            'verifikasiDosen' => 0,
         ];
-        $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Konsultasi');
+        // dd($data);
+        $ubah = $value->update($data);
+        if ($ubah == true) {
+            Alert::success('Berhasil', 'Berhasil Ubah Data Konsultasi');
+        } else {
+            Alert::warning('Gagal', 'Data Konsultasi Gagal Diubah');
+        }
         return back();
     }
 

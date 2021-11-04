@@ -63,7 +63,6 @@ class BerandaController extends Controller
             'status' => Status::latest()->get(),
             'statusnilai' => StatusNilai::latest()->get(),
             'statusKP' => StatusKP::latest()->get(),
-            'statusTA' => StatusTA::latest()->get(),
             'statusPendadaran' => StatusPendadaran::latest()->get(),
             'statusYudisium' => StatusYudisium::latest()->get(),
             'akademik' => Akademik::latest()->get(),

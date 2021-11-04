@@ -22,37 +22,37 @@
                         </thead>
                         <tbody>
                             @php($no=1)
-                            {{-- @foreach ($konsultasi as $value ) --}}
+                            @foreach ($konsultasi as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $konsultasi->ta->mahasiswa->nama }}</td>
-                                <td> {{ $konsultasi->tanggal }}</td>
+                                <td> {{ $value->TA->mahasiswa->nama }}</td>
+                                <td> {{ $value->tanggal }}</td>
                                 <td>
-                                    @if($konsultasi->verifikasiDosen == 0)
+                                    @if($value->verifikasiDosen == 0)
                                     <span class="badge badge-warning">menunggu</span>
                                 </td>
-                                @elseif($konsultasi->verifikasiDosen == 1)
+                                @elseif($value->verifikasiDosen == 1)
                                 <span class="badge badge-success">diterima</span></td>
                                 @else
                                 <span class="badge badge-danger">ditolak</span></td>
                                 @endif
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#hasilkonsultasi"><i class="mdi mdi-information"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#hasilkonsultasi" data-topik='{{ $value->topik }}' data-hasil='{{ $value->hasil }}'><i class="mdi mdi-information"></i></a>
                                     </div>
-                                    @if($konsultasi->verifikasiDosen == 0)
+                                    @if($value->verifikasiDosen == 0)
                                     <div class="btn-group">
-                                        <a href="{{ route('konsultasi.diterima', $konsultasi->id) }}" class="btn btn-gradient-success btn-sm"><i class="fa fa-check"></i></a>
+                                        <a href="{{ route('konsultasi.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="fa fa-check"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <a href="{{ route('konsultasi.ditolak', $konsultasi->id) }}" class="btn btn-gradient-danger btn-sm"><i class="fa fa-times"></i></a>
+                                        <a href="{{ route('konsultasi.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm"><i class="fa fa-times"></i></a>
                                     </div>
-                                    @elseif($konsultasi->verifikasiDosen == 1)
+                                    @elseif($value->verifikasiDosen == 1)
 
                                     @endif
                                 </td>
                             </tr>
-                            {{-- @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -75,13 +75,13 @@
                 <div class="form-group">
                     <label for="exampleInputEmail3">Topik Konsultasi</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="topik" id="name" value="{{ $konsultasi->topik }}" readonly />
+                        <input type="text" class="form-control" name="topik" id="topik" value="" readonly />
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail3">Hasil Konsultasi</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="hasil" value="{{ $konsultasi->hasil }}" readonly />
+                        <input type="text" class="form-control" name="hasil" id="hasil" value="" readonly />
                     </div>
                 </div>
             </div>
@@ -89,4 +89,21 @@
         </div>
     </div>
 </div>
+@endsection
+@section('javascripts')
+<script>
+    $('#hasilkonsultasi').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        // var route = button.data('route')
+        var topik = button.data('topik') // Extract info from data-* attributes
+        var hasil = button.data('hasil') // Extract info from data-* attributes
+
+        var modal = $(this)
+
+
+        modal.find(".modal-body input[name='topik']").val(topik)
+        modal.find(".modal-body input[name='hasil']").val(aktif)
+        // modal.find(".modal-body form").attr("action",route)
+    })
+</script>
 @endsection

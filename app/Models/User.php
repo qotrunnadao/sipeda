@@ -22,7 +22,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
-
+    public function Dosen()
+    {
+        return $this->belongsTo(Dosen::class, 'Dosen_id');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
