@@ -84,11 +84,11 @@
                 <h4 class="card-title mb-3">Tahapan TA</h4>
                 <div class="list-wrapper">
                     <ul class="d-flex flex-column todo-list todo-list-custom">
-                        @foreach ($statusTA as $value)
+                        @foreach ($status as $value)
                         <li>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} "> {{ $value->status }} <i class="input-helper"></i></label>
+                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} "> {{ $value->ket }} <i class="input-helper"></i></label>
                             </div>
                         </li>
                         @endforeach
@@ -118,13 +118,31 @@
                                 <td> 1 </td>
                                 <td> Qotrunnada Oktiriani </td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">Pelaksanaan</div>
+                                    <div class="badge badge-primary badge-pill">
+                                        @if($TA == null)
+                                        belum mengajukan
+                                        @else
+                                        {{ $TA->status->ket }}
+                                        @endif
+                                    </div>
                                 </td>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">Belum Mengajukan</div>
+                                    <div class="badge badge-danger badge-pill">
+                                        {{-- @if($pendadaran == null)
+                                        belum mengajukan
+                                        @else
+                                        {{ $pendadaran->StatusPendadaran->id }}
+                                        @endif --}}
+                                    </div>
                                 </td>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">Belum Mengajukan</div>
+                                    <div class="badge badge-danger badge-pill">
+                                        {{-- @if($yudisium == null)
+                                        belum mengajukan
+                                        @else
+                                        {{ $yudisium->StatusYudisium->id }}
+                                        @endif --}}
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -142,7 +160,13 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td> Berita Acara Seminar Proposal </td>
+                                <td>
+                                    {{-- @if($semprop->beritaacara == null)
+                                    belum terbit
+                                    @else
+                                    {{ $semprop->beritaacara }}
+                                    @endif --}}
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
@@ -150,7 +174,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td> Berita Acara Seminar Hasil </td>
+                                <td>
+                                    {{-- @if($semhas->beritaacara == null)
+                                    belum terbit
+                                    @else
+                                    {{ $semhas->beritaacara }}
+                                    @endif --}}
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>

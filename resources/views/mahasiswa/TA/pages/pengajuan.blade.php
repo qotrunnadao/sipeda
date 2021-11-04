@@ -65,13 +65,15 @@
             </form>
         </div>
     </div>
+</div>
 
+<div class="row">
+    @php ($no = 1)
+    @foreach ($tugas_akhir as $value )
     <div class="col-12 grid-margin stretch-card">
-        @foreach ($tugas_akhir as $value )
-        {{-- {{ dd($tugas_akhir) }} --}}
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Data Pengajuan TA</h4>
+                <h4 class="card-title mb-4">Data Pengajuan TA {{ $no++ }}</h4>
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
@@ -124,8 +126,8 @@
                     </table>
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
+    @endforeach
 </div>
 @endsection
