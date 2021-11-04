@@ -164,10 +164,10 @@
 @section('javascripts')
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    var dosen_id = button.data('dosen_id') // Extract info from data-* attributes
-    var tanggal = button.data('tanggal') // Extract info from data-* attributes
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var dosen_id = button.data('dosen_id')
+    var tanggal = button.data('tanggal')
     var topik = button.data('topik')
     var hasil = button.data('hasil')
     var modal = $(this)

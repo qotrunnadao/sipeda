@@ -8,7 +8,7 @@
             <form action="{{$action}}" method="post" enctype="multipart/form-data">
                 {{-- {{ dd($mhs) }} --}}
                 {{ csrf_field() }}
-                @if ($button == 'Edit'){{ method_field('PATCH') }}@endif
+                @if ($button == 'Edit'){{ method_field('PUT') }}@endif
                 {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
                     <div class="form-group row">
@@ -71,7 +71,7 @@
                             <select name="pembimbing2_id" id="pembimbing2_id" class="form-control">
                                 <option value="">PILIH </option>
                                 @foreach ($dosen as $value )
-                                <option value="{{ $value->id }}"{{ $value->id == $data_ta->pembimbing2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                                <option value="{{ $value->id }}" {{ $value->id == $data_ta->pembimbing2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -81,8 +81,6 @@
                             Tahun Akademik
                         </label>
                         <div class="col-sm-9">
-                            {{-- <input type="hidden" name="pembimbing1_id" id="pembimbing1_id" /> --}}
-                            {{-- {{ dd($tahunAkademik->first()->namaTahun) }} --}}
                             <select name="tahunAkademik" id="tahunAkademik" class="form-control">
                                 <option value="">PILIH</option>
                                 @foreach ($tahunAkademik as $value )
@@ -96,7 +94,7 @@
                             Status Pelaksanaan
                         </label>
                         <div class="col-sm-9">
-                            <select name="status" id="status" class="form-control">
+                            <select name="status_id" id="status_id" class="form-control">
                                 <option value="">PILIH</option>
                                 @foreach ($status as $value )
                                 <option value="{{ $value->id }}" {{ $value->id == $data_ta->status_id ? 'selected' : '' }}>{{ $value->ket}}</option>
@@ -113,8 +111,8 @@
                             <p class="text-muted"> * tidak wajib di isi</p>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</button>
                     <a href="<?= url('') ?>/tugas-akhir/data-TA" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
+                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</button>
                 </div>
             </form>
         </div>
