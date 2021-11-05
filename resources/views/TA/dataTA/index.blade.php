@@ -15,31 +15,29 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> # </th>
-                                <th> Nama Mahasiswa </th>
-                                <th> NIM </th>
-                                <th> Jurusan</th>
-                                <th> Judul </th>
-                                <th> Praproposal </th>
-                                <th> Dosen Pembimbing 1</th>
-                                <th> Dosen Pembimbing 2</th>
-                                <th> Status</th>
-                                <th> Keterangan </th>
-                                {{-- @if(auth()->user()->level_id == 2 && auth()->user()->level_id == 1) --}}
-                                <th> Aksi</th>
-                                {{-- @endif --}}
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> NIM </th>
+                                <th class="text-center"> Jurusan</th>
+                                <th class="text-center"> Judul </th>
+                                <th class="text-center"> Praproposal </th>
+                                <th class="text-center"> Dosen Pembimbing 1</th>
+                                <th class="text-center"> Dosen Pembimbing 2</th>
+                                <th class="text-center"> Status</th>
+                                <th class="text-center"> Keterangan </th>
+                                <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php($no=1)
                             @foreach ($tugas_akhir as $value )
                             <tr>
-                                <td> {{ $no++ }} </td>
+                                <td class="text-center"> {{ $no++ }} </td>
                                 <td> {{ $value->mahasiswa->nama }} </td>
-                                <td> {{ $value->mahasiswa->nim }}</td>
-                                <td> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
+                                <td class="text-center"> {{ $value->mahasiswa->nim }}</td>
+                                <td class="text-center"> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
                                 <td> {{ $value->judulTA }}</td>
-                                <td>
+                                <td class="text-center">
                                     <div class="btn-group">
                                         <form action="" method="post">
                                             @method('PUT')
@@ -48,8 +46,8 @@
                                         </form>
                                     </div>
                                 </td>
-                                <td> {{ $value->dosen1->nama }}</td>
-                                <td> {{ $value->dosen2->nama }}</td>
+                                <td class="text-center"> {{ $value->dosen1->nama }}</td>
+                                <td class="text-center"> {{ $value->dosen2->nama }}</td>
                                 <td>
                                     @if($value->status_id == 1)
                                     <span class="badge badge-warning">Review Bapendik</span>
@@ -67,9 +65,9 @@
                                     <span class="badge badge-success">Selesai</span>
                                     @endif
                                 </td>
-                                <td> {{ $value->ket }}</td>
+                                <td class="text-center"> {{ $value->ket }}</td>
                                 {{-- @if(auth()->user()->level_id == 2 && auth()->user()->level_id == 1) --}}
-                                <td>
+                                <td class="text-center">
                                     @if (auth()->user()->level_id == 2)
                                     <div class="btn-group">
                                         <a href="" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>

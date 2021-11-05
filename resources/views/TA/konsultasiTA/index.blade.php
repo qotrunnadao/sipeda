@@ -15,12 +15,12 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> # </th>
-                                <th> Nama Mahasiswa </th>
-                                <th> NIM </th>
-                                <th> Jurusan</th>
-                                <th> Jumlah Konsultasi </th>
-                                <th> Aksi </th>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> NIM </th>
+                                <th class="text-center"> Jurusan</th>
+                                <th class="text-center"> Jumlah Konsultasi </th>
+                                <th class="text-center"> Aksi </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,16 +28,16 @@
                             @foreach ($tugas_akhir as $value )
 
                             <tr>
-                                <td> {{ $no++ }} </td>
+                                <td class="text-center"> {{ $no++ }} </td>
                                 <td> {{ $value->mahasiswa->nama }}</td>
-                                <td> {{ $value->mahasiswa->nim }}</td>
-                                <td> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
-                                <td>
+                                <td class="text-center"> {{ $value->mahasiswa->nim }}</td>
+                                <td class="text-center"> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td class="text-center">
                                     {{ $value->konsultasiTA->count() }}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{{ route('konsultasi.show', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="{{ route('konsultasi.show', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-eye"></i></a>
                                     </div>
                                 </td>
                             </tr>

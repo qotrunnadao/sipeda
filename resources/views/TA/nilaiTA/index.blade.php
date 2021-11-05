@@ -9,7 +9,7 @@
                 <div>
                     @if(auth()->user()->level_id == 2)
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-upload"></i> Unggah SIA</button>
-                    @elseif(auth()->user()->level_id == 3)
+                    @else
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
                     @endif
                 </div>
@@ -17,14 +17,14 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr class="text-center">
-                                <th> # </th>
-                                <th> Nama Mahasiswa </th>
-                                <th> NIM </th>
-                                <th> Jurusan </th>
-                                <th> Nilai Angka </th>
-                                <th> Nilai Huruf </th>
-                                <th> Status Nilai</th>
-                                <th> Aksi</th>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> NIM </th>
+                                <th class="text-center"> Jurusan </th>
+                                <th class="text-center"> Nilai Angka </th>
+                                <th class="text-center"> Nilai Huruf </th>
+                                <th class="text-center"> Status Nilai</th>
+                                <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

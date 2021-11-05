@@ -40,10 +40,10 @@ class SeminarHasil extends Model
         return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
     }
 
-    public function getTanggalAttribute()
-    {
-        return Carbon::parse($this->attributes['tanggal'])->translatedFormat('d F Y');
-    }
+    // public function getTanggalAttribute()
+    // {
+    //     return Carbon::parse($this->attributes['tanggal'])->translatedFormat('d F Y');
+    // }
 
     public function getJamMulaitribute()
     {

@@ -19,52 +19,55 @@
         <div class="shape2"></div>
         <div class="form">
             <img src="{{ asset('masuk/assets/img/auth4.svg') }}" alt="" class="form__img move" data-speed="2">
-            <form action="{{ route('login') }}" class="form__content" method="POST">
-                @csrf
-                <span class="login100-form-logo">
-                    <img src="{{ asset('sitak/assets/images/unsoed.png') }}">
-                </span>
-                <span class="form__social-text" style="text-align: center"><b>Sistem Infromasi Pengelolaan Tugas Akhir <br>Fakultas Teknik UNSOED</b></span>
-                <div class="form__div form__div-one">
-                    <div class="form__icon">
-                        <i class='bx bx-user-circle'></i>
-                    </div>
-                    <div class="form__div-input">
-                        <label for="email" class="form__label">E-mail</label>
-                        <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email">
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form__div">
-                    <div class="form__icon">
-                        <i class='bx bx-lock'></i>
-                    </div>
-                    <div class="form__div-input">
-                        <label for="password" class="form__label">Password</label>
-                        <input type="password" class="form__input" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
+            <div class="form__content">
                 <div class="d-grid gap-2 mx-auto">
-                    <button type="submit" class="form__button">
-                        {{ __('Login') }}
-                    </button>
-                    <button type="submit" class="form__button">
-                        <a href="{{ route('cas.login') }}" style="text-decoration: none; text-align:center; color:white;">Login SSO</a>
-                    </button>
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
+                        <span class="login100-form-logo">
+                            <img src="{{ asset('sitak/assets/images/unsoed.png') }}">
+                        </span>
+                        <span class="form__social-text" style="text-align: center"><b>Sistem Infromasi Pengelolaan Tugas Akhir <br>Fakultas Teknik UNSOED</b></span>
+                        <div class="form__div form__div-one">
+                            <div class="form__icon">
+                                <i class='bx bx-user-circle'></i>
+                            </div>
+                            <div class="form__div-input">
+                                <label for="email" class="form__label">E-mail</label>
+                                <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form__div">
+                            <div class="form__icon">
+                                <i class='bx bx-lock'></i>
+                            </div>
+                            <div class="form__div-input">
+                                <label for="password" class="form__label">Password</label>
+                                <input type="password" class="form__input" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <button type="submit" class="form__button">
+                            {{ __('Login') }}
+                        </button>
+                    </form>
+                    <form action="{{ route('cas.login') }}" method="get">
+                        @csrf
+                        <button class="form__button" href="">Login SSO</button>
+                        <div class="form__social">
+                            <span class="form__social-text"><i class='bx bx-info-circle'></i> Mahasiswa Silahkan Login Menggunakan Akun SSO</span>
+                        </div>
+                    </form>
                 </div>
-                <div class="form__social">
-                    <span class="form__social-text"><i class='bx bx-info-circle'></i> Mahasiswa Silahkan Login Menggunakan Akun SSO</span>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
     <!-- ===== MAIN JS ===== -->

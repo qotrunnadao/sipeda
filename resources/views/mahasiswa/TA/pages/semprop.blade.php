@@ -6,7 +6,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <form class="forms-sample" action="{{route('mahasiswaSempro.store')}}" method="post" enctype="multipart/form-data">
-                 @csrf
+                @csrf
                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
                 <input type="hidden" class="form-control" id="status" name="status" value="0">
                 <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
@@ -39,9 +39,9 @@
                         </div>
                         <div class="col-lg-8">
                             <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                            @foreach ($Ruang as $value)
-                                    <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
-                            @endforeach
+                                @foreach ($Ruang as $value)
+                                <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                        @php($no=1)
+                            @php($no=1)
                             @foreach ($SeminarProposal as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
@@ -106,7 +106,13 @@
                                 <td> {{ $value->jamMulai }} - {{$value->jamSelesai}}</td>
                                 <td> {{ $value->ruang->namaRuang }}</td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">{{$value->status}}</div>
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">menunggu</span>
+                                    @elseif($value->status == 1)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @else
+                                    <span class="badge badge-danger">Tidak Disetujui</span>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Akademik;
-use App\Models\Mahasiswa;
-use Illuminate\Support\Facades\Auth;
+use App\Models\TA;
 use App\Models\User;
 use App\Models\Status;
+use App\Models\Akademik;
 use App\Models\StatusKP;
-use App\Models\StatusNilai;
-use App\Models\StatusPendadaran;
 use App\Models\StatusTA;
-use App\Models\StatusYudisium;
+use App\Models\Mahasiswa;
+use App\Models\StatusNilai;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth;
+use App\Models\Pendadaran;
+use App\Models\SeminarHasil;
+use App\Models\SeminarProposal;
+use App\Models\StatusYudisium;
+use App\Models\StatusPendadaran;
+use App\Models\Yudisium;
 
 class BerandaController extends Controller
 {
@@ -45,11 +50,15 @@ class BerandaController extends Controller
 
     public function mahasiswaTA()
     {
-        $id = Auth::User()->id;
+        $id = auth()->User()->id;
         $user_id = User::where('id', $id)->get()->first();
-        $mhs_id = Mahasiswa::where('user_id', $id)->get()->first();
-        $statusTA = StatusTA::latest()->get();
-        // dd($mhs_id->nama);
+        $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
+        // $pendadaran = Pendadaran::where('mhs_id', $mhs_id->id)->latest()->get();
+        // $yudisium = Yudisium::where('mhs_id', $mhs_id->id)->latest()->get();
+        $semprop = SeminarProposal::with('ta')->where('ta_id', $TA->id)->latest()->first();
+        $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
+
         $ta = array(
             'status' => Status::latest()->get(),
             'statusnilai' => StatusNilai::latest()->get(),
@@ -59,8 +68,8 @@ class BerandaController extends Controller
             'akademik' => Akademik::latest()->get(),
             // 'user' => Auth::user()::With('mahasiswa')->latest()->get(),
         );
-        // dd($ta);
-        return view('mahasiswa.TA.pages.beranda',  compact('ta', 'mhs_id', 'statusTA'));
+
+        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id'));
     }
 
     /**

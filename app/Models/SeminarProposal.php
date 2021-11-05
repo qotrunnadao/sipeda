@@ -40,10 +40,10 @@ class SeminarProposal extends Model
         return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d M Y H:i:s');
     }
 
-    public function getTanggalAttribute()
-    {
-        return Carbon::parse($this->attributes['tanggal'])->translatedFormat('D M Y');
-    }
+    // public function getTanggalAttribute()
+    // {
+    //     return Carbon::parse($this->attributes['tanggal'])->translatedFormat('D M Y H:i:s');
+    // }
 
     public function getJamMulaitribute()
     {

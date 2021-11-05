@@ -36,10 +36,12 @@
                                 @else
                                 <span class="badge badge-danger">ditolak</span></td>
                                 @endif
+
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#hasilkonsultasi" data-topik='{{ $value->topik }}' data-hasil='{{ $value->hasil }}'><i class="mdi mdi-information"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#hasilkonsultasi" data-id='{{ $value->id }}' data-topik='{{ $value->topik }}' data-hasil='{{ $value->hasil }}'><i class="mdi mdi-information"></i></a>
                                     </div>
+                                    @if(auth()->user()->level_id !== 2)
                                     @if($value->verifikasiDosen == 0)
                                     <div class="btn-group">
                                         <a href="{{ route('konsultasi.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="fa fa-check"></i></a>
@@ -47,10 +49,12 @@
                                     <div class="btn-group">
                                         <a href="{{ route('konsultasi.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm"><i class="fa fa-times"></i></a>
                                     </div>
+                                    @endif
                                     @elseif($value->verifikasiDosen == 1)
 
                                     @endif
                                 </td>
+
                             </tr>
                             @endforeach
                         </tbody>
@@ -94,16 +98,15 @@
 <script>
     $('#hasilkonsultasi').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        // var route = button.data('route')
+        var id = button.data('id')
         var topik = button.data('topik') // Extract info from data-* attributes
         var hasil = button.data('hasil') // Extract info from data-* attributes
 
         var modal = $(this)
 
-
         modal.find(".modal-body input[name='topik']").val(topik)
         modal.find(".modal-body input[name='hasil']").val(hasil)
-        // modal.find(".modal-body form").attr("action",route)
+        modal.find(".modal-body form").attr("action",route)
     })
 </script>
 @endsection

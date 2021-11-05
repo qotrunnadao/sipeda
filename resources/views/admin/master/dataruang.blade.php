@@ -28,7 +28,7 @@
                                 <td> {{ $value->namaRuang }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-target="#editdata" data-id='{{ $value->id }}' data-ruang='{{ $value->namaRuang }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="#" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-ruang='{{ $value->namaRuang }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('ruang.destroy', $value->id) }}" method="GET">

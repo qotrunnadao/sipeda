@@ -19,6 +19,7 @@ class CreateNilaiTASTable extends Migration
             $table->foreignId('statusnilai_id')->references('id')->on('statusnilai');
             $table->double('nilaiAngka');
             $table->string('nilaiHuruf');
+            $table->string('ket')->nullable();
             $table->timestamps();
         });
     }

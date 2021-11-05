@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\TA;
 use Carbon\Carbon;
-use App\Models\SeminarProposal;
-use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Models\Ruang;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Status;
+use App\Models\Seminar;
+use App\Models\Mahasiswa;
+use App\Models\SeminarHasil;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\SeminarProposal;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Builder;
 
 class SeminarProposalMahasiswaController extends Controller
 {
@@ -64,48 +66,48 @@ class SeminarProposalMahasiswaController extends Controller
                 $semhasCount = SeminarHasil::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                         $query->where('tanggal', '=', $tanggal)
-                        ->where('jamMulai', '>=', $jamMulai)
-                        ->where('jamSelesai', '<', $jamMulai)
-                        ->where('ruang_id', '=', $ruang);
+                            ->where('jamMulai', '>=', $jamMulai)
+                            ->where('jamSelesai', '<', $jamMulai)
+                            ->where('ruang_id', '=', $ruang);
                     })
-                    ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                        $query->where('jamMulai', '<', $jamSelesai)
+                        ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                            $query->where('jamMulai', '<', $jamSelesai)
                                 ->where('jamSelesai', '>=', $jamSelesai)
                                 ->where('tanggal', '=', $tanggal)
                                 ->where('ruang_id', '=', $ruang);
-                    });;
+                        });;
                 })->count();
                 $semproCount = SeminarProposal::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                         $query->where('tanggal', '=', $tanggal)
-                        ->where('jamMulai', '>=', $jamMulai)
-                        ->where('jamSelesai', '<', $jamMulai)
-                        ->where('ruang_id', '=', $ruang);
+                            ->where('jamMulai', '>=', $jamMulai)
+                            ->where('jamSelesai', '<', $jamMulai)
+                            ->where('ruang_id', '=', $ruang);
                     })
-                    ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                        $query->where('jamMulai', '<', $jamSelesai)
+                        ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                            $query->where('jamMulai', '<', $jamSelesai)
                                 ->where('jamSelesai', '>=', $jamSelesai)
                                 ->where('tanggal', '=', $tanggal)
                                 ->where('ruang_id', '=', $ruang);
-                    });;
+                        });;
                 })->count();
                 $seminarCount = Seminar::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                         $query->where('tanggal', '=', $tanggal)
-                        ->where('jamMulai', '>=', $jamMulai)
-                        ->where('jamSelesai', '<', $jamMulai)
-                        ->where('ruang_id', '=', $ruang);
+                            ->where('jamMulai', '>=', $jamMulai)
+                            ->where('jamSelesai', '<', $jamMulai)
+                            ->where('ruang_id', '=', $ruang);
                     })
-                    ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                        $query->where('jamMulai', '<', $jamSelesai)
+                        ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                            $query->where('jamMulai', '<', $jamSelesai)
                                 ->where('jamSelesai', '>=', $jamSelesai)
                                 ->where('tanggal', '=', $tanggal)
                                 ->where('ruang_id', '=', $ruang);
-                    });;
+                        });;
                 })->count();
                 // dd($tanggalCount);
 
-                if(!$semhasCount && !$semproCount && !$seminarCount ){
+                if (!$semhasCount && !$semproCount && !$seminarCount) {
                     $id = Auth::User()->id;
                     $user_id = User::where('id', $request->user)->get()->first();
                     $mhs_id = Mahasiswa::with(['user'])->where('user_id', $request->user_id)->get()->first();
@@ -114,23 +116,22 @@ class SeminarProposalMahasiswaController extends Controller
                     $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
                     $path = $request->file('proposal')->storeAS('public/assets/file/ProposalTA', $filename);
                     $data = [
-                    'ta_id' => $request->ta_id,
-                    'jamMulai' => $jamMulai,
-                    'jamSelesai' => $jamSelesai,
-                    'tanggal' => $request->tanggal,
-                    'ruang_id' => $ruang,
-                    'status' => $request->status,
-                    'proposal' => $filename,
+                        'ta_id' => $request->ta_id,
+                        'jamMulai' => $jamMulai,
+                        'jamSelesai' => $jamSelesai,
+                        'tanggal' => $request->tanggal,
+                        'ruang_id' => $ruang,
+                        'status' => $request->status,
+                        'proposal' => $filename,
                     ];
-                        $cek = SeminarProposal::create($data);
-                        Alert::success('Berhasil', 'Pengajuan Seminar Proposal telah Berhasil');
-                    }else{
-                        Alert::warning('Gagal', 'Pengajuan Seminar Proposal Gagal Ditambahkan, Ruangan Sudah Digunakan');
-                    }
-                }else{
-                    Alert::warning('Gagal', 'Pengajuan Seminar Proposal diajukan minimal 4 Hari Sebelum Pelaksanaan Seminar');
+                    $cek = SeminarProposal::create($data);
+                    Alert::success('Berhasil', 'Pengajuan Seminar Proposal telah Berhasil');
+                } else {
+                    Alert::warning('Gagal', 'Pengajuan Seminar Proposal Gagal Ditambahkan, Ruangan Sudah Digunakan');
                 }
-
+            } else {
+                Alert::warning('Gagal', 'Pengajuan Seminar Proposal diajukan minimal 4 Hari Sebelum Pelaksanaan Seminar');
+            }
         } else {
             $data['doc'] = NULL;
         }

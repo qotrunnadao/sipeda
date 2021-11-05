@@ -8,7 +8,7 @@
             <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
-                <input type="hidden" class="form-control" id="status_id" name="status_id" value="3">
+                <input type="hidden" class="form-control" id="status_id" name="status_id" value="1">
                 <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="1">
                 <div class="card-body">
                     <div class="form-group row">
@@ -25,7 +25,7 @@
                             Lokasi/Instansi
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="instansi" id="instansi" value="{{ old('instansi') }}" required />
+                            <input type="text" class="form-control" name="instansi" id="instansi" value="{{ old('instansi') }}" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -65,13 +65,15 @@
             </form>
         </div>
     </div>
+</div>
 
+<div class="row">
+    @php ($no = 1)
+    @foreach ($tugas_akhir as $value )
     <div class="col-12 grid-margin stretch-card">
-        @foreach ($tugas_akhir as $value )
-        {{-- {{ dd($tugas_akhir) }} --}}
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Data Pengajuan TA</h4>
+                <h4 class="card-title mb-4">Data Pengajuan TA {{ $no++ }}</h4>
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
@@ -124,8 +126,8 @@
                     </table>
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
+    @endforeach
 </div>
 @endsection

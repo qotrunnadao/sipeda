@@ -159,22 +159,31 @@ class DatabaseSeeder extends Seeder
 
         $status = [
             [
+                'ket' => "Tidak Layak",
+            ],
+            [
                 'ket' => "Review Bapendik",
             ],
             [
                 'ket' => "Review Komisi",
             ],
             [
-                'ket' => "Layak",
-            ],
-            [
-                'ket' => "Tidak Layak",
-            ],
-            [
-                'ket' => "Revisi",
+                'ket' => "Pencetakan SPK",
             ],
             [
                 'ket' => "Pelaksanaan TA",
+            ],
+            [
+                'ket' => "Pengajuan Seminar Proposal",
+            ],
+            [
+                'ket' => "Pelaksanaan Seminar Proposal",
+            ],
+            [
+                'ket' => "Pengajuan Seminar Hasil",
+            ],
+            [
+                'ket' => "Pelaksanaan Seminar Hasil",
             ],
             [
                 'ket' => "Selesai",
@@ -185,10 +194,7 @@ class DatabaseSeeder extends Seeder
 
         $statusnilai = [
             [
-                'status' => "Entry Dosen",
-            ],
-            [
-                'status' => "Verifikasi Bapendik",
+                'status' => "Menunggu",
             ],
             [
                 'status' => "Upload SIA",
@@ -583,7 +589,7 @@ class DatabaseSeeder extends Seeder
         $nilaiTA = [
             [
                 'ta_id' => 1,
-                'statusnilai_id' => 3,
+                'statusnilai_id' => 1,
                 'nilaiAngka' => 80.00,
                 'nilaiHuruf' => "A",
             ],
@@ -647,7 +653,7 @@ class DatabaseSeeder extends Seeder
         $nilaiPendadaran = [
             [
                 'pendadaran_id' => 1,
-                'statusnilai_id' => 3,
+                'statusnilai_id' => 1,
                 'nilaiAngka' => 80.00,
                 'nilaiHuruf' => "A",
             ],
