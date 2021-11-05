@@ -149,6 +149,7 @@ class SeminarHasilController extends Controller
         $data = array(
             'status' => 2,
         );
+        //dd($data);
         $seminarHasil->update($data);
         Alert::warning('Berhasil', 'Pengajuan Seminar Hasil Ditolak');
         return back();

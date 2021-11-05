@@ -10,14 +10,14 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> # </th>
-                                <th> Nama Mahasiswa </th>
-                                <th> Jurusan </th>
-                                <th> Ruang </th>
-                                <th> Tanggal </th>
-                                <th> Waktu </th>
-                                <th> Status</th>
-                                <th> Aksi</th>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> Jurusan </th>
+                                <th class="text-center"> Ruang </th>
+                                <th class="text-center"> Tanggal </th>
+                                <th class="text-center"> Waktu </th>
+                                <th class="text-center"> Status</th>
+                                <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,13 +25,13 @@
                             @foreach ($semhas as $value )
 
                             <tr>
-                                <td> {{ $no++ }} </td>
+                                <td class="text-center"> {{ $no++ }} </td>
                                 <td> {{ $value->TA->mahasiswa->nama }} </td>
-                                <td> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
-                                <td> {{ $value->ruang->namaRuang }} </td>
-                                <td> {{ $value->tanggal }}</td>
-                                <td> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
-                                <td>
+                                <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
+                                <td class="text-center"> {{ $value->tanggal }}</td>
+                                <td class="text-center"> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
+                                <td class="text-center">
                                     @if($value->status == 0)
                                     <span class="badge badge-warning">menunggu</span>
                                     @elseif($value->status == 1)
@@ -40,9 +40,16 @@
                                     <span class="badge badge-danger">Tidak Disetujui</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <div class="btn-group">
+                                <td class="text-center">
+                                    {{-- <div class="btn-group">
                                         <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                    </div> --}}
+
+                                    <div class="btn-group">
+                                        <a href="{{ route('semhas.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="{{ route('semhas.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('semhas.delete', $value->id) }}" method="GET">

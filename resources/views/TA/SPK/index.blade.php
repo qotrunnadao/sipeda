@@ -13,25 +13,25 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> # </th>
-                                <th> Nama </th>
-                                <th> NIM </th>
-                                <th> Jurusan </th>
-                                <th> File SPK </th>
-                                <th> Aksi </th>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama </th>
+                                <th class="text-center"> NIM </th>
+                                <th class="text-center"> Jurusan </th>
+                                <th class="text-center"> File SPK </th>
+                                <th class="text-center"> Aksi </th>
                             </tr>
                         </thead>
                         <tbody>
                             @php($no=1)
                             @foreach ($spk as $value )
                             <tr>
-                                <td> {{ $no++ }} </td>
+                                <td class="text-center"> {{ $no++ }} </td>
                                 <td> {{ $value->TA->mahasiswa->nama}} </td>
-                                <td>
+                                <td class="text-center">
                                     {{ $value->TA->mahasiswa->nim }}
                                 </td>
-                                <td> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
-                                <td>
+                                <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td class="text-center">
                                     <div class="btn-group">
                                         <form action="{{ route('spk.download', $value->fileSPK) }}" method="post">
                                             @method('PUT')

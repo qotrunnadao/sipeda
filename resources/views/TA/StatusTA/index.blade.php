@@ -13,20 +13,20 @@
                     <table class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> No. </th>
-                                <th> ID </th>
-                                <th> Keterangan Status </th>
-                                <th> Aksi </th>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> ID </th>
+                                <th class="text-center"> Keterangan Status </th>
+                                <th class="text-center"> Aksi </th>
                             </tr>
                         </thead>
                         <tbody>
                             @php ($no = 1)
                             @foreach ($status as $value)
                             <tr>
-                                <td> {{ $no++ }} </td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
-                                <td> {{ $value->ket }}</td>
-                                <td>
+                                <td class="text-center"> {{ $no++ }} </td>
+                                <td class="text-center"> <span class="badge badge-secondary">{{ $value->id }}</span></td>
+                                <td class="text-center"> {{ $value->ket }}</td>
+                                <td class="text-center">
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-target="#editdata" data-id='{{ $value->id }}' data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
