@@ -78,11 +78,47 @@ class SeminarHasilController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $seminar_hasil = SeminarHasil::find($id);
         $data = $request->all();
-        $value = SeminarHasil::findOrFail($id);
-        $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Seminar Hasil');
-        return back();
+        $data = [
+            'ta_id' => $request->ta_id,
+            'laporan' => $request->laporan,
+            'beritaacara' => $request->beritaacara,
+            'beritaacara_dosen' => $request->beritaacara_dosen,
+            'jamMulai' => $request->jamMulai,
+            'jamSelesai' => $request->jamSelesai,
+            'tanggal' => $request->tanggal,
+            'ruang_id' => $request->ruang_id,
+            'status' => $request->status,
+        ];
+
+        //dd($data);
+        if ($request->file('beritaacara')) {
+            $semhas = SeminarHasil::latest()->get();
+            $mhs_id = Mahasiswa::where('id', $request->mahasiswa)->get()->first();
+            // dd($mhs_id);
+            $nim = $mhs_id->nim;
+            $file = $request->file('beritaacara');
+            $filename = 'beritaAcara' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('beritaacara')->storeAS('public/assets/file/beritaacara', $filename);
+            $data = [
+                'ta_id' => $request->ta_id,
+                'laporan' => $request->laporan,
+                'beritaacara' => $request->beritaacara,
+                'beritaacara_dosen' => $request->beritaacara_dosen,
+                'jamMulai' => $request->jamMulai,
+                'jamSelesai' => $request->jamSelesai,
+                'tanggal' => $request->tanggal,
+                'ruang_id' => $request->ruang_id,
+                'status' => $request->status,
+            ];
+        } else {
+            $data['beritaacara'] = $seminar_hasil->beritaacara;
+        }
+
+        $seminar_hasil->update($data);
+        Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Proposal');
+        return redirect(route('semhas.index'));
     }
 
     /**

@@ -16,6 +16,7 @@
                                 <th> Ruang </th>
                                 <th> Tanggal </th>
                                 <th> Waktu </th>
+                                <th> Berita Acara</th>
                                 <th> Status</th>
                                 <th> Aksi</th>
                             </tr>
@@ -31,6 +32,7 @@
                                 <td> {{ $value->ruang->namaRuang }} </td>
                                 <td> {{ $value->tanggal }}</td>
                                 <td> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
+                                <td> {{ $value->beritaacara }}</td>
                                 <td>
                                     @if($value->status == 0)
                                     <span class="badge badge-warning">menunggu</span>

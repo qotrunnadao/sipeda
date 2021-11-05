@@ -5,16 +5,17 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{ route('semprop.update', $semprop->id) }}" method="post">
+            <form action="{{ route('semprop.update', $semprop->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
+                <input type="hidden" class="form-control" id="mahasiswa_id" name="ta_id" value="{{ $semprop->ta_id }}">
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Nama
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="namaMahasiswa" value="{{ $semprop->TA->mahasiswa->nama }}" />
+                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="nama" value="{{ $semprop->TA->mahasiswa->nama }}" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -68,6 +69,7 @@
                             Ruang Seminar
                         </label>
                         <div class="col-sm-9">
+                            <input type="hidden" class="form-control" id="mahasiswa_id" name="ruang_id" value="{{ $semprop->ruang_id }}">
                             <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semprop->ruang->namaRuang }}" />
                         </div>
                     </div>
@@ -100,8 +102,8 @@
                             </select>
                         </div>
                     </div>
-                    <a href="<?= url('') ?>/tugas-akhir/semprop" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
-                    <a href="" type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</a>
+                    <a href="{{ route('semprop.index') }}" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
+                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan </button>
                 </div>
             </form>
         </div>

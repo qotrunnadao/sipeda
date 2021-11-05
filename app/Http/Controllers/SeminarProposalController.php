@@ -78,11 +78,50 @@ class SeminarProposalController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $seminar_proposal = SeminarProposal::find($id);
         $data = $request->all();
-        $value = SeminarProposal::findOrFail($id);
-        $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Seminar Proposal');
-        return back();
+        $data = [
+            'ta_id' => $request->ta_id,
+            'proposal' => $request->proposal,
+            'beritaacara' => $request->beritaacara,
+            'beritaacara_dosen' => $request->beritaacara_dosen,
+            'jamMulai' => $request->jamMulai,
+            'jamSelesai' => $request->jamSelesai,
+            'tanggal' => $request->tanggal,
+            'ruang_id' => $request->ruang_id,
+            'status' => $request->status,
+        ];
+
+        //dd($data);
+        if ($request->file('beritaacara')) {
+            $semprop = SeminarProposal::latest()->get();
+            $mhs_id = Mahasiswa::where('id', $request->mahasiswa)->get()->first();
+            // dd($mhs_id);
+            $nim = $mhs_id->nim;
+            $file = $request->file('beritaacara');
+            $filename = 'beritaAcara' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('beritaacara')->storeAS('public/assets/file/beritaacara', $filename);
+            $data = [
+                'ta_id' => $request->ta_id,
+                'proposal' => $request->proposal,
+                'beritaacara' => $request->beritaacara,
+                'beritaacara_dosen' => $request->beritaacara_dosen,
+                'jamMulai' => $request->jamMulai,
+                'jamSelesai' => $request->jamSelesai,
+                'tanggal' => $request->tanggal,
+                'ruang_id' => $request->ruang_id,
+                'status' => $request->status,
+                'nama' => $request->TA->mahasiswa->nama,
+                'nim' => $request->TA->mahasiswa->nim,
+                'namaJurusan' => $request->TA->mahasiswa->jurusan->namaJurusan,
+            ];
+        } else {
+            $data['beritaacara'] = $seminar_proposal->beritaacara;
+        }
+
+        $seminar_proposal->update($data);
+        Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Proposal');
+        return redirect(route('semprop.index'));
     }
 
     /**

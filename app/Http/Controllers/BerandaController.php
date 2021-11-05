@@ -69,7 +69,7 @@ class BerandaController extends Controller
             // 'user' => Auth::user()::With('mahasiswa')->latest()->get(),
         );
 
-        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop'));
+        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id'));
     }
 
     /**

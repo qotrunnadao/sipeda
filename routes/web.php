@@ -125,7 +125,7 @@ Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAC
 //semprop
 Route::get('/tugas-akhir/semprop', 'SeminarProposalController@index')->name('semprop.index');
 Route::get('/tugas-akhir/semprop/edit/{id}', 'SeminarProposalController@edit')->name('semprop.edit');
-Route::get('/tugas-akhir/semprop/update/{id}', 'SeminarProposalController@update')->name('semprop.update');
+Route::put('/tugas-akhir/semprop/update/{id}', 'SeminarProposalController@update')->name('semprop.update');
 Route::get('/tugas-akhir/semprop/delete/{id}', 'SeminarProposalController@destroy')->name('semprop.delete');
 Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', 'SeminarProposalController@diterima')->name('semprop.diterima');
 Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', 'SeminarProposalController@ditolak')->name('semprop.ditolak');
@@ -133,7 +133,7 @@ Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', 'SeminarProposalCon
 //semhas
 Route::get('/tugas-akhir/semhas',  'SeminarHasilController@index')->name('semhas.index');
 Route::get('/tugas-akhir/semhas/edit/{id}',  'SeminarHasilController@edit')->name('semhas.edit');
-Route::get('/tugas-akhir/semhas/update/{id}',  'SeminarHasilController@update')->name('semhas.update');
+Route::put('/tugas-akhir/semhas/update/{id}',  'SeminarHasilController@update')->name('semhas.update');
 Route::get('/tugas-akhir/semhas/delete/{id}',  'SeminarHasilController@destroy')->name('semhas.delete');
 Route::get('/tugas-akhir/semhas/diterima/{seminarHasil}',  'SeminarHasilController@diterima')->name('semhas.diterima');
 Route::get('/tugas-akhir/semhas/ditolak/{SeminarHasil}',  'SeminarHasilController@ditolak')->name('semhas.ditolak');
@@ -242,7 +242,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::post('/tugas-akhir/semhas/store', 'SeminarHasilMahasiswaController@store')->name('mahasiswaSemhas.store');
 
     //nilai TA
-    Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita.index');
+    Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita_mhs.index');
     //distribusi
     Route::get('/tugas-akhir/distribusi', function () {
         return view('mahasiswa.TA.pages.distribusi');

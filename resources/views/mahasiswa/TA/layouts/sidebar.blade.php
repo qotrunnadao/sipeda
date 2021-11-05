@@ -42,7 +42,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('nilaita.index') }}">
+            <a class="nav-link" href="{{ route('nilaita_mhs.index') }}">
                 <span class="menu-title">Nilai TA</span>
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>

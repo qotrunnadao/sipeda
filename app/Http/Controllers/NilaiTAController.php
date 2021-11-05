@@ -16,11 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class NilaiTAController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         if (Auth::user()->level_id == 4) {
@@ -47,22 +43,7 @@ class NilaiTAController extends Controller
         })->where('status_id', '1')->get();
         return response()->json($taAll, 200);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $data = $request->all();
@@ -82,35 +63,6 @@ class NilaiTAController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\NilaiTA  $nilaiTA
-     * @return \Illuminate\Http\Response
-     */
-    public function show(NilaiTA $nilaiTA)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\NilaiTA  $nilaiTA
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(NilaiTA $nilaiTA)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NilaiTA  $nilaiTA
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $data = $request->all();
@@ -120,12 +72,6 @@ class NilaiTAController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\NilaiTA  $nilaiTA
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $nilai = NilaiTA::find($id);
