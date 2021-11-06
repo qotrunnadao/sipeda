@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\TA;
+use App\Models\SPK;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\Akademik;
+use Carbon\Carbon;
 use App\Models\StatusKP;
 use App\Models\StatusTA;
 use App\Models\Mahasiswa;
@@ -57,7 +59,12 @@ class BerandaController extends Controller
         // $pendadaran = Pendadaran::where('mhs_id', $mhs_id->id)->latest()->get();
         // $yudisium = Yudisium::where('mhs_id', $mhs_id->id)->latest()->get();
         $semprop = SeminarProposal::with('ta')->where('ta_id', $TA->id)->latest()->first();
+        $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
         $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
+        // $spkterbit = $spk->where('created_at', date());
+        // $spkberakhir = Carbon::now()->addYear(1)->isoFormat('Y M D');
+
+        // dd($semprop);
 
         $ta = array(
             'status' => Status::latest()->get(),
@@ -69,9 +76,24 @@ class BerandaController extends Controller
             // 'user' => Auth::user()::With('mahasiswa')->latest()->get(),
         );
 
-        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id'));
+        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id','spk'));
     }
 
+    public function downloadSPK($filename)
+    {
+        //    dd($filename);
+        return response()->download(public_path('storage\assets\file\SPK/' . $filename . ''));
+    }
+    public function downloadSemprop($filename)
+    {
+        //    dd($filename);
+        return response()->download(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
+    }
+    public function downloadSemhas($filename)
+    {
+        //    dd($filename);
+        return response()->download(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
+    }
     /**
      * Show the form for creating a new resource.
      *

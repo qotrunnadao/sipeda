@@ -125,6 +125,12 @@ class SeminarProposalMahasiswaController extends Controller
                         'proposal' => $filename,
                     ];
                     $cek = SeminarProposal::create($data);
+                    $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
+                    $status = array(
+                        'status_id' => 6,
+                    );
+                    // dd($status);
+                    $taAll->update($status);
                     Alert::success('Berhasil', 'Pengajuan Seminar Proposal telah Berhasil');
                 } else {
                     Alert::warning('Gagal', 'Pengajuan Seminar Proposal Gagal Ditambahkan, Ruangan Sudah Digunakan');

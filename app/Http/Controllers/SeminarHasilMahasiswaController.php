@@ -62,7 +62,7 @@ class SeminarHasilMahasiswaController extends Controller
             $ruang = $request->ruang;
             $tanggal = $request->tanggal;
             $today = Carbon::now()->addDays(4)->isoFormat('Y M D');
-            // dd($jamSelesai);
+            // dd($ruang);
             if ($tanggal >= $today) {
                 $semhasCount = SeminarHasil::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
@@ -128,6 +128,12 @@ class SeminarHasilMahasiswaController extends Controller
                     'laporan' => $filename,
                     ];
                         $cek = SeminarHasil::create($data);
+                        $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
+                        $status = array(
+                            'status_id' => 8,
+                        );
+                        // dd($taAll);
+                        $taAll->update($status);
                         Alert::success('Berhasil', 'Pengajuan Seminar Hasil telah Berhasil');
                     }else{
                         Alert::warning('Gagal', 'Pengajuan Seminar Hasil Gagal Ditambahkan, Ruangan Sudah Digunakan');

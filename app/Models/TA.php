@@ -31,6 +31,10 @@ class TA extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+    public function SPK()
+    {
+        return $this->belongsTo(SPK::class, 'SPK_id');
+    }
     public function KonsultasiTA()
     {
         return $this->hasMany(KonsultasiTA::class, 'ta_id');

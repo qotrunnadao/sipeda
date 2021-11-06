@@ -127,6 +127,8 @@ Route::get('/tugas-akhir/semprop', 'SeminarProposalController@index')->name('sem
 Route::get('/tugas-akhir/semprop/edit/{id}', 'SeminarProposalController@edit')->name('semprop.edit');
 Route::put('/tugas-akhir/semprop/update/{id}', 'SeminarProposalController@update')->name('semprop.update');
 Route::get('/tugas-akhir/semprop/delete/{id}', 'SeminarProposalController@destroy')->name('semprop.delete');
+Route::put('/tugas-akhir/beritaAcara/download/{filename}',  'SeminarProposalController@download')->name('semprop.download');
+Route::get('/tugas-akhir/beritaAcara/pdf/{id}',  'SeminarProposalController@eksport')->name('semprop.eksport');
 Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', 'SeminarProposalController@diterima')->name('semprop.diterima');
 Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', 'SeminarProposalController@ditolak')->name('semprop.ditolak');
 
@@ -135,6 +137,8 @@ Route::get('/tugas-akhir/semhas',  'SeminarHasilController@index')->name('semhas
 Route::get('/tugas-akhir/semhas/edit/{id}',  'SeminarHasilController@edit')->name('semhas.edit');
 Route::put('/tugas-akhir/semhas/update/{id}',  'SeminarHasilController@update')->name('semhas.update');
 Route::get('/tugas-akhir/semhas/delete/{id}',  'SeminarHasilController@destroy')->name('semhas.delete');
+Route::put('/tugas-akhir/beritaAcaraSemhas/download/{filename}',  'SeminarHasilController@download')->name('semhas.download');
+Route::get('/tugas-akhir/beritaAcaraSemhas/pdf/{id}',  'SeminarHasilController@eksport')->name('semhas.eksport');
 Route::get('/tugas-akhir/semhas/diterima/{seminarHasil}',  'SeminarHasilController@diterima')->name('semhas.diterima');
 Route::get('/tugas-akhir/semhas/ditolak/{SeminarHasil}',  'SeminarHasilController@ditolak')->name('semhas.ditolak');
 
@@ -145,7 +149,7 @@ Route::put('/tugas-akhir/spk/download/{filename}',  'SPKController@download')->n
 Route::put('/tugas-akhir/spk/update/{id}',  'SPKController@update')->name('spk.update');
 Route::get('/tugas-akhir/spk/destroy/{id}',  'SPKController@destroy')->name('spk.destroy');
 Route::post('/tugas-akhir/spk/nim/',  'SPKController@nim')->name('spk.nim');
-Route::get('/tugas-akhir/spk/pdf/',  'SPKController@eksport')->name('spk.eksport');
+Route::get('/tugas-akhir/spk/pdf/{id}',  'SPKController@eksport')->name('spk.eksport');
 
 //nilai TA
 Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita.index');
@@ -222,6 +226,9 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
 
     //============= TUGAS AKHIR ===============
     Route::get('/tugas-akhir/beranda', 'BerandaController@mahasiswaTA')->name('mahasiswaTA.beranda');
+    Route::put('/tugas-akhir/downloadBeritaAcaraSempro/{filename}',  'BerandaController@downloadSemprop')->name('download.semprop');
+    Route::put('/tugas-akhir/downloadBeritaAcaraSemhas/{filename}',  'BerandaController@downloadSemhas')->name('download.semhas');
+    Route::put('/tugas-akhir/downloadSPK/{filename}',  'BerandaController@downloadSPK')->name('download.spk');
 
     //pengajuan
     Route::get('/tugas-akhir/data-TA/create', 'TAMahasiswaController@create')->name('mahasiswaTA.create');

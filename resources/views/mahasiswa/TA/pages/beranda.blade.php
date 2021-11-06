@@ -18,7 +18,7 @@
                 <div class="border-bottom text-center pb-4">
                     <img src="{{ asset('sitak/assets/images/faces/atun.jpg') }}" alt="profile" class="img-lg rounded-circle mb-3">
                     <div class="d-flex justify-content-center">
-                        <div class="badge badge-gradient-primary">Qotrunnada Oktiriani</div>
+                        <div class="badge badge-gradient-primary"> {{$mhs_id->nama }}</div>
                     </div>
                 </div>
                 <h4 class="card-title mb-4">Deskripsi TA Anda</h4>
@@ -43,12 +43,14 @@
                             <tr>
                                 <td> Judul Penelitian </td>
                                 <td>:</td>
-                                <td> SIPETA </td>
+                                <td>                                         {{ $TA->judulTA }}
+                                </td>
                             </tr>
                             <tr>
                                 <td> Lokasi </td>
                                 <td>:</td>
-                                <td> Fakultas Teknik UNSOED </td>
+                                <td>                                         {{ $TA->instansi }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -60,7 +62,7 @@
                             <tr>
                                 <td> SPK Tanggal </td>
                                 <td>:</td>
-                                <td> 24/10/2000 </td>
+                                <td> {{ $spk->created_at }} </td>
                             </tr>
                             <tr>
                                 <td> SPK diambil </td>
@@ -116,7 +118,7 @@
                         <tbody>
                             <tr>
                                 <td> 1 </td>
-                                <td> Qotrunnada Oktiriani </td>
+                                <td> {{$mhs_id->nama }} </td>
                                 <td>
                                     <div class="badge badge-primary badge-pill">
                                         @if($TA == null)
@@ -161,29 +163,56 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    {{-- @if($semprop->beritaacara == null)
-                                    belum terbit
-                                    @else
-                                    {{ $semprop->beritaacara }}
-                                    @endif --}}
+                                    @if($spk->fileSPK == null)
+                                    <button type="submit" class="btn btn-gradient-primary">belum terbit</i></a></button>
+                                    @elseif($TA->status_id >=5)
+                                    <div class="btn-group">
+                                        <form action="{{ route('download.spk', $spk->fileSPK) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    @if($semprop->beritaacara == null)
+                                    <button type="submit" class="btn btn-gradient-primary">belum terbit</i></a></button>
+                                    @elseif($TA->status_id >=7)
+                                    <div class="btn-group">
+                                        <form action="{{ route('download.semprop', $semprop->beritaacara) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semprop->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
+                                        {{-- <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a> --}}
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    {{-- @if($semhas->beritaacara == null)
-                                    belum terbit
-                                    @else
-                                    {{ $semhas->beritaacara }}
-                                    @endif --}}
+                                    @if($semhas->beritaacara == null)
+                                    <button type="submit" class="btn btn-gradient-primary">belum terbit</i></a></button>
+                                    @elseif($TA->status_id >=9)
+                                    <div class="btn-group">
+                                        <form action="{{ route('download.semhas', $semhas->beritaacara) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semhas->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
+                                        {{-- <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a> --}}
                                     </div>
                                 </td>
                             </tr>

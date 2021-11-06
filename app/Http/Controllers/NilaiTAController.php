@@ -40,20 +40,30 @@ class NilaiTAController extends Controller
     {
         $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
             $query->where('jurusan_id', $request->id);
-        })->where('status_id', '1')->get();
+        })->where('status_id', '9')->get();
+        // dd($taAll);
         return response()->json($taAll, 200);
     }
 
     public function store(Request $request)
     {
         $data = $request->all();
-
+        $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
+        // dd($data);
         $data = [
             'ta_id' => $request->ta_id,
             'nilaiAngka' => $request->nilaiAngka,
             'nilaiHuruf' => $request->nilaiHuruf,
             'statusnilai_id' => $request->statusnilai_id,
+            'ket' => $request->ket,
         ];
+        if($request->statusnilai_id == 2){
+            $status = array(
+                'status_id' => 10,
+            );
+            // dd($status);
+            $taAll->update($status);
+        }
         $cek = NilaiTA::create($data);
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Nilai Tugas Akhir');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TA;
 use App\Models\SPK;
 use App\Models\Dosen;
+use App\Models\User;
 use App\Models\Status;
 use App\Models\jurusan;
 use App\Models\Mahasiswa;
@@ -24,7 +25,18 @@ class TAController extends Controller
     public function index()
     {
         $status = Status::latest()->get();
-        $tugas_akhir = TA::with('status')->latest()->get();
+        $id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+        if (auth()->user()->level_id == 3) {
+            // dd($dosen_id->id);
+            $tugas_akhir = TA::with(['status'])->whereHas('status', function ($q) use ($dosen_id) {
+                $q->where('pembimbing1_id', $dosen_id->id)
+                ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->latest()->get();
+        }else{
+            $tugas_akhir = TA::with('status')->latest()->get();
+        }
         $jurusan = jurusan::get();
         return view('TA.dataTA.index', compact('tugas_akhir', 'status'));
     }

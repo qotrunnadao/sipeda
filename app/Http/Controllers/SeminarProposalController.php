@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\TA;
 use App\Models\Ruang;
+use App\Models\User;
+use App\Models\Dosen;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use PDF;
+use Illuminate\Support\Facades\Storage;
 use App\Models\SeminarProposal;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -19,7 +23,18 @@ class SeminarProposalController extends Controller
      */
     public function index()
     {
-        $semprop = SeminarProposal::latest()->get();
+        $id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+        if (auth()->user()->level_id == 3) {
+            $semprop = SeminarProposal::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
+                $q->where('pembimbing1_id', $dosen_id->id)
+                ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->latest()->get();
+        }else{
+            $semprop = SeminarProposal::where('status', '=', '1')->latest()->get();
+            // dd($semprop);
+        }
         return view('TA.sempropTA.index', compact('semprop'));
     }
 
@@ -81,44 +96,41 @@ class SeminarProposalController extends Controller
         $seminar_proposal = SeminarProposal::find($id);
         $data = $request->all();
         $data = [
-            'ta_id' => $request->ta_id,
-            'proposal' => $request->proposal,
-            'beritaacara' => $request->beritaacara,
+            // 'ta_id' => $request->ta_id,
+            // 'proposal' => $request->proposal,
+            // 'beritaacara' => $request->beritaacara,
             'beritaacara_dosen' => $request->beritaacara_dosen,
-            'jamMulai' => $request->jamMulai,
-            'jamSelesai' => $request->jamSelesai,
-            'tanggal' => $request->tanggal,
-            'ruang_id' => $request->ruang_id,
-            'status' => $request->status,
+            // 'jamMulai' => $request->jamMulai,
+            // 'jamSelesai' => $request->jamSelesai,
+            // 'tanggal' => $request->tanggal,
+            // 'ruang_id' => $request->ruang_id,
+            // 'status' => $request->status,
         ];
 
-        //dd($data);
-        if ($request->file('beritaacara')) {
-            $semprop = SeminarProposal::latest()->get();
-            $mhs_id = Mahasiswa::where('id', $request->mahasiswa)->get()->first();
-            // dd($mhs_id);
-            $nim = $mhs_id->nim;
-            $file = $request->file('beritaacara');
-            $filename = 'beritaAcara' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('beritaacara')->storeAS('public/assets/file/beritaacara', $filename);
+        if ($request->file('beritaacara_dosen')) {
+            $semprop = SeminarProposal::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
+            // dd($seminar_proposal->ta->mahasiswa->nim);
+            $file = $request->file('beritaacara_dosen');
+            $filename = 'Berita Acara Dosen SEMPROP' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('beritaacara_dosen')->storeAS('public/assets/file/Berita Acara Dosen Semprop TA/', $filename);
             $data = [
-                'ta_id' => $request->ta_id,
-                'proposal' => $request->proposal,
-                'beritaacara' => $request->beritaacara,
-                'beritaacara_dosen' => $request->beritaacara_dosen,
-                'jamMulai' => $request->jamMulai,
-                'jamSelesai' => $request->jamSelesai,
-                'tanggal' => $request->tanggal,
-                'ruang_id' => $request->ruang_id,
-                'status' => $request->status,
-                'nama' => $request->TA->mahasiswa->nama,
-                'nim' => $request->TA->mahasiswa->nim,
-                'namaJurusan' => $request->TA->mahasiswa->jurusan->namaJurusan,
+                // 'ta_id' => $request->ta_id,
+                // 'proposal' => $request->proposal,
+                // 'beritaacara' => $request->beritaacara,
+                'beritaacara_dosen' => $filename,
+                // 'jamMulai' => $request->jamMulai,
+                // 'jamSelesai' => $request->jamSelesai,
+                // 'tanggal' => $request->tanggal,
+                // 'ruang_id' => $request->ruang_id,
+                // 'status' => $request->status,
+                // 'nama' => $request->TA->mahasiswa->nama,
+                // 'nim' => $request->TA->mahasiswa->nim,
+                // 'namaJurusan' => $request->TA->mahasiswa->jurusan->namaJurusan,
             ];
         } else {
             $data['beritaacara'] = $seminar_proposal->beritaacara;
         }
-
+        // dd($data);
         $seminar_proposal->update($data);
         Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Proposal');
         return redirect(route('semprop.index'));
@@ -143,19 +155,56 @@ class SeminarProposalController extends Controller
         $data = array(
             'status' => 1,
         );
+        // dd($seminarProposal);
         $seminarProposal->update($data);
-        //dd($seminarProposal);
         Alert::success('Berhasil', 'Pengajuan Seminar Proposal Diterima');
         return back();
     }
-    public function ditolak(SeminarProposal $seminarProposal)
+    public function ditolak(SeminarProposal $SeminarProposal)
     {
         $data = array(
             'status' => 2,
         );
-        $seminarProposal->update($data);
-        //dd($seminarProposal);
-        Alert::success('Berhasil', 'Pengajuan Seminar Proposal Ditolak');
+        // dd($SeminarProposal);
+        $SeminarProposal->update($data);
+        Alert::warning('Gagal', 'Pengajuan Seminar Proposal Ditolak');
+        return back();
+    }
+    public function download($filename)
+    {
+        //    dd($filename);
+        return response()->download(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
+    }
+    public function eksport(Request $request, $id)
+    {
+        $ta_id = $request->route('id');
+
+        $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id',$request->route('id'))->get()->first();
+        $taAll = TA::with(['mahasiswa'])->where('id',$request->route('id'))->get()->first();
+        
+        
+        $data = ['ta_id' => $ta_id, 'sempro' => $sempro];
+        $pdf = PDF::loadView('TA.SPK.download', $data);
+        
+        $filename = 'Berita Acara Seminar Proposal' . '_'.$sempro->ta->mahasiswa->nim.'_' . time() . '.pdf';
+        
+        $cek = Storage::put('public/assets/file/Berita Acara Semprop TA/'. $filename, $pdf->output());
+        
+        if($cek){
+            $data = [
+                'beritaacara' => $filename,
+            ];
+            // dd($data );
+            $sempro->update($data);
+            $status = array(
+                'status_id' => 7,
+            );
+            // dd($status);
+            $taAll->update($status);
+            Alert::success('Berhasil', 'Berhasil Tambah Data Berita Acara Seminar Proposal');
+        }else{
+            Alert::warning('Gagal', 'Data Berita Acara Seminar Proposal Gagal Ditambahkan');
+        }
         return back();
     }
 }

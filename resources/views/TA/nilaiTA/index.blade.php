@@ -38,13 +38,13 @@
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf }}</td>
                                 <td class="text-center">
-                                    @if($value->statusnilai_id == 1)
-                                    <span class="badge badge-warning">Entry dosen</span>
+                                @if($value->statusnilai_id == 1)
+                                    <span class="badge badge-warning">Menunggu</span>
                                 </td>
                                 @elseif($value->statusnilai_id == 2)
-                                <span class="badge badge-primary">Verifikasi Bapendik</span></td>
-                                @else
                                 <span class="badge badge-success">Upload SIA</span></td>
+                                @else
+                                <span class="badge badge-primary">Verifikasi Bapendik</span></td>
                                 @endif</td>
 
                                 <td class="text-center">
@@ -128,6 +128,13 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail3">Keterangan</label>
+                        <div class="input-group">
+                            <textarea type="text" class="form-control" placeholder="" name="ket"></textarea>
+                        </div>
+                        <p class="text-muted"> * tidak wajib di isi</p>
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">
                             <select type="text" class="form-control" name="statusnilai_id">
@@ -152,7 +159,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ubah Status Nilai</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Data Nilai Tugas Akhir</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -161,6 +168,32 @@
                 <form class="forms-sample" method="POST" action="">
                     @method('PUT')
                     @csrf
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nilai Angka</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nilaiAngka" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nilai Huruf</label>
+                        <div class="input-group">
+                            <select type="text" class="form-control" name="nilaiHuruf">
+                                <option value="">PILIH</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Keterangan</label>
+                        <div class="input-group">
+                            <textarea type="text" class="form-control" placeholder="" name="ket"></textarea>
+                        </div>
+                        <p class="text-muted"> * tidak wajib di isi</p>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">

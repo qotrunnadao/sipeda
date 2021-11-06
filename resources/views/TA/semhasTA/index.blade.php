@@ -16,6 +16,7 @@
                                 <th class="text-center"> Ruang </th>
                                 <th class="text-center"> Tanggal </th>
                                 <th class="text-center"> Waktu </th>
+                                <th class="text-center"> Berita Acara</th>
                                 <th class="text-center"> Status</th>
                                 <th class="text-center"> Aksi</th>
                             </tr>
@@ -31,6 +32,19 @@
                                 <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
                                 <td class="text-center"> {{ $value->tanggal }}</td>
                                 <td class="text-center"> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
+                                <td class="text-center"> 
+                                    @if ($value->beritaacara == null)
+                                    <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if($value->status == 0)
                                     <span class="badge badge-warning">menunggu</span>
@@ -41,10 +55,35 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
+                                    @if ($value->status != 0)
                                     {{-- <div class="btn-group">
-                                        <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="{{ route('semhas.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
                                     </div> --}}
-
+                                    @if (auth()->user()->level_id == 2 && $value->beritaacara == null)
+                                    <a href="{{ route('semhas.eksport', $value->ta_id) }}">
+                                        <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                    </a>
+                                    @endif
+                                    @if (auth()->user()->level_id != 2 &&  4)
+                                    <div class="btn-group">
+                                        <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                    </div> 
+                                    @endif
+                                    <div class="btn-group">
+                                        <form action="{{ route('semhas.delete', $value->id) }}" method="GET">
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
+                                    {{-- @elseif ($value->status == 2)
+                                    <div class="btn-group">
+                                        <a href="{{ route('semhas.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <form action="{{ route('semhas.delete', $value->id) }}" method="GET">
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div> --}}
+                                    @else
                                     <div class="btn-group">
                                         <a href="{{ route('semhas.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
                                     </div>
@@ -56,6 +95,7 @@
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

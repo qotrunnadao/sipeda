@@ -26,32 +26,39 @@
                             @foreach ($spk as $value )
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
-                                <td> {{ $value->TA->mahasiswa->nama}} </td>
+                                <td> {{ $value->mahasiswa->nama}} </td>
                                 <td class="text-center">
-                                    {{ $value->TA->mahasiswa->nim }}
+                                    {{ $value->mahasiswa->nim }}
                                 </td>
-                                <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td class="text-center"> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center">
+                                    {{-- {{ dd($value) }} --}}
+                                    @if ($value->spk == null)
+                                    <span class="badge badge-danger">Belum Ada Data SPK</span>
+                                    @else
                                     <div class="btn-group">
-                                        <form action="{{ route('spk.download', $value->fileSPK) }}" method="post">
+                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
                                             @method('PUT')
                                             @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
 
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <form action="{{ route('spk.destroy', $value->fileSPK) }}" method="GET">
+                                        <form action="{{ route('spk.destroy', $value->spk->fileSPK) }}" method="GET">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
-                                    <a href="{{ route('spk.eksport') }}">
-                                        <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                    </a>
+                                    @endif
+                                    <td>
+                                        <a href="{{ route('spk.eksport', $value->id) }}">
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </a>
+                                    </td>
                                 </td>
                             </tr>
                         </tbody>

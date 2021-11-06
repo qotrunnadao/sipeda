@@ -49,21 +49,8 @@
                                 <td class="text-center"> {{ $value->dosen1->nama }}</td>
                                 <td class="text-center"> {{ $value->dosen2->nama }}</td>
                                 <td>
-                                    @if($value->status_id == 1)
-                                    <span class="badge badge-warning">Review Bapendik</span>
-                                    @elseif($value->status_id == 2)
-                                    <span class="badge badge-warning">Review Komisi</span>
-                                    @elseif($value->status_id == 3)
-                                    <span class="badge badge-primary">Layak</span>
-                                    @elseif($value->status_id == 4)
-                                    <span class="badge badge-danger">Tidak Layak</span>
-                                    @elseif($value->status_id == 5)
-                                    <span class="badge badge-danger">Revisi</span>
-                                    @elseif($value->status_id == 6)
-                                    <span class="badge badge-primary">Pelaksanaan</span>
-                                    @else
-                                    <span class="badge badge-success">Selesai</span>
-                                    @endif
+                                    <span class="badge badge-warning">{{ $value->status->ket }}</span>
+
                                 </td>
                                 <td class="text-center"> {{ $value->ket }}</td>
                                 {{-- @if(auth()->user()->level_id == 2 && auth()->user()->level_id == 1) --}}
