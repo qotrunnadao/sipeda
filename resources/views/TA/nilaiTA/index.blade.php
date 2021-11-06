@@ -30,13 +30,14 @@
                         <tbody>
                             @php($no=1)
                             @foreach ($nilai as $value )
+                            {{-- {{ dd($value) }} --}}
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
                                 <td class="text-center"> {{ $value->TA->mahasiswa->nama}} </td>
                                 <td class="text-center"> {{ $value->TA->mahasiswa->nim }}</td>
                                 <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
-                                <td class="text-center"> {{ $value->nilaiHuruf }}</td>
+                                <td class="text-center"> {{ $value->nilaiHuruf }} </td>
                                 <td class="text-center">
                                 @if($value->statusnilai_id == 1)
                                     <span class="badge badge-warning">Menunggu</span>
@@ -49,7 +50,7 @@
 
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiAngka ='{{ $value->nilaiAngka }}' data-nilaiHuruf ='{{ $value->nilaiHuruf }}' data-ket ='{{ $value->ket }}' data-statusnilai_id ='{{ $value->statusnilai_id }}' ><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('nilaita.delete', $value->id) }}" method="GET">
@@ -168,6 +169,7 @@
                 <form class="forms-sample" method="POST" action="">
                     @method('PUT')
                     @csrf
+                    <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Angka</label>
                         <div class="input-group">
@@ -221,10 +223,18 @@
     var button = $(event.relatedTarget)
     var id = button.data('id')
     var statusnilai_id = button.data('statusnilai_id')
+    var nilaiAngka = button.data('nilaiAngka')
+    var nilaiHuruf = button.data('nilaiHuruf')
+    var ket = button.data('ket')
+    
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='statusnilai_id']").val(statusnilai_id)
+
+    modal.find(".modal-body input[name='nilaiAngka']").val(nilaiAngka)
+    modal.find(".modal-body select[name='nilaiHuruf']").val(nilaiHuruf)
+    modal.find(".modal-body textarea[name='ket']").val(ket)
+    modal.find(".modal-body select[name='statusnilai_id']").val(statusnilai_id)
     modal.find(".modal-body form").attr("action",'/tugas-akhir/nilaita/update/'+id)
+
     })
 </script>
 

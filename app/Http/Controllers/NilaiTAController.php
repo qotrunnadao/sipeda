@@ -76,8 +76,17 @@ class NilaiTAController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        dd($data);
+        $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
         $value = NilaiTA::findOrFail($id);
         $value->update($data);
+        if($request->statusnilai_id == 2){
+            $status = array(
+                'status_id' => 10,
+            );
+            // dd($status);
+            $taAll->update($status);
+        }
         Alert::success('Berhasil', 'Berhasil Ubah Status Nilai');
         return back();
     }
