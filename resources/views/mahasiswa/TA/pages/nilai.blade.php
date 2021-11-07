@@ -33,9 +33,9 @@
                                     @if($value->statusnilai_id == 1)
                                     <span class="badge badge-warning">Entry dosen</span>
                                     @elseif($value->statusnilai_id == 2)
-                                    <span class="badge badge-primary">Verifikasi Bapendik</span>
-                                    @else
                                     <span class="badge badge-success">Upload SIA</span>
+                                    @else
+                                    <span class="badge badge-primary">Verifikasi Bapendik</span>
                                     @endif
                                 </td>
                             </tr>

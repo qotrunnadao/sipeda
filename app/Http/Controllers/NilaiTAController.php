@@ -23,9 +23,14 @@ class NilaiTAController extends Controller
             $id = Auth::User()->id;
             $user_id = User::where('id', $id)->get()->first();
             $mhs_id = Mahasiswa::with(['user'])->where('user_id', $user_id->id)->get()->first();
-            $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->get();
-            $nilai = NilaiTA::with('TA')->latest()->get();
-            //dd($nilai);
+            $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->where('status_id', '10')->latest()->get()->first();
+            // dd($ta->id);
+            if($ta){
+                $nilai = NilaiTA::with('TA')->where('ta_id', $ta->id)->latest()->get();
+            }else{
+            $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->get()->first();
+            $nilai = NilaiTA::with('TA')->where('ta_id', $ta->id)->latest()->get();
+            }
             return view('mahasiswa.TA.pages.nilai', compact('nilai'));
         } else {
             $jurusan = jurusan::all();
@@ -49,14 +54,24 @@ class NilaiTAController extends Controller
     {
         $data = $request->all();
         $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
+        if($request->ket){
+            $data = [
+                'ta_id' => $request->ta_id,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilaiHuruf' => $request->nilaiHuruf,
+                'statusnilai_id' => $request->statusnilai_id,
+                'ket' => $request->ket,
+            ];
+        }else{
+            $data = [
+                'ta_id' => $request->ta_id,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilaiHuruf' => $request->nilaiHuruf,
+                'statusnilai_id' => $request->statusnilai_id,
+                'ket' => ' ',
+            ];
+        }
         // dd($data);
-        $data = [
-            'ta_id' => $request->ta_id,
-            'nilaiAngka' => $request->nilaiAngka,
-            'nilaiHuruf' => $request->nilaiHuruf,
-            'statusnilai_id' => $request->statusnilai_id,
-            'ket' => $request->ket,
-        ];
         if($request->statusnilai_id == 2){
             $status = array(
                 'status_id' => 10,
@@ -76,18 +91,17 @@ class NilaiTAController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        dd($data);
-        $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
         $value = NilaiTA::findOrFail($id);
+        // dd($value->ta_id);
+        $taAll = TA::with(['mahasiswa'])->where('id',$value->ta_id)->get()->first();
         $value->update($data);
         if($request->statusnilai_id == 2){
             $status = array(
                 'status_id' => 10,
             );
-            // dd($status);
             $taAll->update($status);
         }
-        Alert::success('Berhasil', 'Berhasil Ubah Status Nilai');
+        Alert::success('Berhasil', 'Berhasil Ubah Data Nilai Tugas Akhir');
         return back();
     }
 
@@ -95,7 +109,7 @@ class NilaiTAController extends Controller
     {
         $nilai = NilaiTA::find($id);
         $nilai->delete();
-        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        Alert::success('Berhasil', 'Berhasil hapus data Nilai Tugas Akhir');
         return back();
     }
 }
