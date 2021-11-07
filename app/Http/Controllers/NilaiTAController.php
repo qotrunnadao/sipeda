@@ -54,7 +54,6 @@ class NilaiTAController extends Controller
     {
         $data = $request->all();
         $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
-        if($request->ket){
             $data = [
                 'ta_id' => $request->ta_id,
                 'nilaiAngka' => $request->nilaiAngka,
@@ -62,15 +61,6 @@ class NilaiTAController extends Controller
                 'statusnilai_id' => $request->statusnilai_id,
                 'ket' => $request->ket,
             ];
-        }else{
-            $data = [
-                'ta_id' => $request->ta_id,
-                'nilaiAngka' => $request->nilaiAngka,
-                'nilaiHuruf' => $request->nilaiHuruf,
-                'statusnilai_id' => $request->statusnilai_id,
-                'ket' => ' ',
-            ];
-        }
         // dd($data);
         if($request->statusnilai_id == 2){
             $status = array(
