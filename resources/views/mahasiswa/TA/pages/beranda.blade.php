@@ -43,13 +43,13 @@
                             <tr>
                                 <td> Judul Penelitian </td>
                                 <td>:</td>
-                                <td>                                         {{ $TA->judulTA }}
+                                <td> {{ $TA->judulTA }}
                                 </td>
                             </tr>
                             <tr>
                                 <td> Lokasi </td>
                                 <td>:</td>
-                                <td>                                         {{ $TA->instansi }}
+                                <td> {{ $TA->instansi }}
                                 </td>
                             </tr>
                         </tbody>
@@ -164,7 +164,8 @@
                             <tr>
                                 <td>
                                     @if($spk->fileSPK == null)
-                                    <button type="submit" class="btn btn-gradient-primary">belum terbit</i></a></button>
+                                    SPK Tugas Akhir
+                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
                                     @elseif($TA->status_id >=5)
                                     <div class="btn-group">
                                         <form action="{{ route('download.spk', $spk->fileSPK) }}" method="post">
@@ -176,10 +177,11 @@
                                     @endif
                                 </td>
                             </tr>
-                             <tr>
+                            <tr>
                                 <td>
                                     @if($semprop->beritaacara == null)
-                                    <button type="submit" class="btn btn-gradient-primary">belum terbit</i></a></button>
+                                    Berita Acara Seminar Proposal
+                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
                                     @elseif($TA->status_id >=7)
                                     <div class="btn-group">
                                         <form action="{{ route('download.semprop', $semprop->beritaacara) }}" method="post">
@@ -190,16 +192,12 @@
                                     </div>
                                     @endif
                                 </td>
-                                <td>
-                                    <div class="btn-group">
-                                        {{-- <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a> --}}
-                                    </div>
-                                </td>
                             </tr>
                             <tr>
                                 <td>
                                     @if($semhas->beritaacara == null)
-                                    <button type="submit" class="btn btn-gradient-primary">belum terbit</i></a></button>
+                                    Berita Acara Seminar Hasil
+                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
                                     @elseif($TA->status_id >=9)
                                     <div class="btn-group">
                                         <form action="{{ route('download.semhas', $semhas->beritaacara) }}" method="post">
@@ -210,13 +208,7 @@
                                     </div>
                                     @endif
                                 </td>
-                                <td>
-                                    <div class="btn-group">
-                                        {{-- <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a> --}}
-                                    </div>
-                                </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
