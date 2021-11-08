@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -42,17 +43,14 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
-        $inputVal = $request->all();
-
-        $this->validate($request, [
-            'email' => 'required|email',
+        $credentials = $request->validate([
+            'email' => 'required|email:dns',
             'password' => 'required',
         ]);
 
         $user = User::where('email', $request->email)
             ->where('password', $request->password)->get()
             ->first();
-        // dd($user);
 
         if (auth()->loginUsingId($user->id)) {
             if (auth()->user()->level_id == 2) {
@@ -67,8 +65,8 @@ class LoginController extends Controller
                 return redirect()->route('mahasiswa.menu');
             }
         } else {
-            return redirect('/login')
-                ->with('error', 'Login Failed.');
+            Alert::warning('Gagal', 'Anda gagal login');
+            return back();
         }
     }
 }

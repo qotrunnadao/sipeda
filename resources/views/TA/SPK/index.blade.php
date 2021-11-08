@@ -6,9 +6,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div>
+                {{-- <div>
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#uploadSPK"> <i class="mdi mdi-plus"></i> Tambah</button>
-                </div>
+                </div> --}}
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -31,16 +31,19 @@
                                     {{ $value->mahasiswa->nim }}
                                 </td>
                                 <td class="text-center"> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
+                                @if ($value->spk == null)
                                 <td class="text-center">
-                                    {{-- {{ dd($value) }} --}}
-                                    @if ($value->spk == null)
                                     <span class="badge badge-danger">Belum Ada Data SPK</span>
-                                    <td>
-                                        <a href="{{ route('spk.eksport', $value->id) }}">
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                        </a>
-                                    </td>
-                                    @else
+                                </td>
+                                @if (auth()->user()->level_id == 5)
+                                <td>
+                                    <a href="{{ route('spk.eksport', $value->id) }}">
+                                        <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                    </a>
+                                </td>
+                                @endif
+                                @else
+                                <td>
                                     <div class="btn-group">
                                         <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
                                             @method('PUT')
@@ -48,12 +51,11 @@
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
-
                                 </td>
                                 <td>
                                     @if (auth()->user()->level_id == 5)
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK ='{{ $value->spk->fileSPK }}'  ><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     @endif
                                     <div class="btn-group">
@@ -63,64 +65,13 @@
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
-                                    @endif
                                 </td>
+                                @endif
                             </tr>
+                            @endforeach
                         </tbody>
-                        @endforeach
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah SPK -->
-<div class="modal fade" id="uploadSPK" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload SPK</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="forms-sample" action="{{route('spk.store')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
-                        <div class="input-group">
-                            <select type="text" class="form-control" id="jurusan" name="jurusan">
-                                <option selected disabled>Pilih Jurusan </option>
-                                @foreach ($jurusan as $value)
-                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3"> NIM</label>
-                        <div class="input-group">
-                            <select type="text" class="form-control" id="nim" name="nim">
-                                <option value="" selected disabled>Pilih NIM </option>
-                                {{-- @foreach ($taAll as $value)
-                                <option value="{{ $value->mahasiswa->id }} " data-id={{ $value->id }}" data-nama="{{ $value->mahasiswa->nama }}">{{ $value->mahasiswa->nim }}</option>
-                                @endforeach --}}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -131,23 +82,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ubah Data Nilai Tugas Akhir</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Upload SPK Ketua Jurusan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="">
+                <form class="forms-sample" method="POST" action="" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $nilai->ta_id }}"> --}}
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            SPK Ketua Jurusan
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK"  />
+                        <div class="col">
+                            <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK" />
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -170,48 +118,5 @@
     modal.find(".modal-body input[name='fileSPK']").val(fileSPK)
     modal.find(".modal-body form").attr("action",'/tugas-akhir/spk/update/'+id)
     })
-</script>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-    });
-    $('#jurusan').on('change', function (event) {
-
-        $("#nim").find('option').not(':first').remove();
-        $("#name").val('');
-        var id = $(this).val();
-
-        $.ajax({
-           type:'POST',
-           url:"{{ route('spk.nim') }}",
-           data:{id:id},
-           success:function(data){
-               console.log(data)
-               var nim = document.getElementById('nim')
-                for (var i = 0; i < data.length; i++) {
-                // POPULATE SELECT ELEMENT WITH JSON.
-                    nim.innerHTML = nim.innerHTML +
-                        '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
-
-                }
-           }
-        });
-
-
-    })
-    $('#nim').on('change', function (event) {
-
-    var kel = $(this).val();
-    var id = $(this).find(':selected').data('id');
-    var name = $(this).find(':selected').data('nama');
-
-    $('#ta_id').val(id);
-    $('#name').val(name);
-    // $('#keluhan').val(kel);
-
-})
-
 </script>
 @endsection

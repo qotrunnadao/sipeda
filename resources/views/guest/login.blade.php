@@ -33,9 +33,9 @@
                             </div>
                             <div class="form__div-input">
                                 <label for="email" class="form__label">E-mail</label>
-                                <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" autocomplete="email">
                                 @error('email')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback mt-4" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -47,9 +47,9 @@
                             </div>
                             <div class="form__div-input">
                                 <label for="password" class="form__label">Password</label>
-                                <input type="password" class="form__input" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input type="password" class="form__input @error('password') is-invalid @enderror" id="password" type="password" name="password" autocomplete="current-password">
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback mt-4" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
