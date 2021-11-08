@@ -35,6 +35,11 @@
                                     {{-- {{ dd($value) }} --}}
                                     @if ($value->spk == null)
                                     <span class="badge badge-danger">Belum Ada Data SPK</span>
+                                    <td>
+                                        <a href="{{ route('spk.eksport', $value->id) }}">
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </a>
+                                    </td>
                                     @else
                                     <div class="btn-group">
                                         <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
@@ -46,6 +51,11 @@
 
                                 </td>
                                 <td>
+                                    @if (auth()->user()->level_id == 5)
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK ='{{ $value->spk->fileSPK }}'  ><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @endif
                                     <div class="btn-group">
                                         <form action="{{ route('spk.destroy', $value->spk->fileSPK) }}" method="GET">
                                             @method('DELETE')
@@ -54,11 +64,6 @@
                                         </form>
                                     </div>
                                     @endif
-                                    <td>
-                                        <a href="{{ route('spk.eksport', $value->id) }}">
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                        </a>
-                                    </td>
                                 </td>
                             </tr>
                         </tbody>
@@ -120,8 +125,52 @@
         </div>
     </div>
 </div>
+
+{{-- Edit Data SPK --}}
+<div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Data Nilai Tugas Akhir</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" method="POST" action="">
+                    @method('PUT')
+                    @csrf
+                    {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $nilai->ta_id }}"> --}}
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            SPK Ketua Jurusan
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK"  />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('javascripts')
+<script>
+    $('#editdata').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var fileSPK = button.data('fileSPK')
+
+    var modal = $(this)
+
+    modal.find(".modal-body input[name='fileSPK']").val(fileSPK)
+    modal.find(".modal-body form").attr("action",'/tugas-akhir/spk/update/'+id)
+    })
+</script>
 <script>
     $.ajaxSetup({
         headers: {

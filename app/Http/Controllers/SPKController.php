@@ -118,13 +118,28 @@ class SPKController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $taAll = TA::with(['mahasiswa'])->where('id',$request->route('id'))->get()->first();
-        $value = SPK::findOrFail($id);
+        dd($data);
+        $spk = SPK::findOrFail($id);
+        $data = [
+            'fileSPK' => $request->fileSPK,
+        ];
+        if ($request->file('fileSPK')) {
+            // dd($seminar_proposal->ta->mahasiswa->nim);
+            $file = $request->file('fileSPK');
+            $filename = 'SPK Kajur' . '_' . $spk->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('fileSPK')->storeAS('public/assets/file/SPK/', $filename);
+            $data = [
+                'fileSPK' => $filename,
+            ];
+            // dd($data);
+        } else {
+            $data['fileSPK'] = $spk->fileSPK;
+        }
         $value->update($data);
+        $taAll = TA::with(['mahasiswa'])->where('id',$spk->ta_id)->get()->first();
         $status = array(
             'status_id' => 5,
         );
-        // dd($status);
         $taAll->update($status);
         Alert::success('Berhasil', 'Berhasil Ubah Data SPK');
         return back();

@@ -33,7 +33,7 @@ class TA extends Model
     }
     public function SPK()
     {
-        return $this->belongsTo(SPK::class, 'SPK_id');
+        return $this->hasOne(SPK::class, 'TA_id');
     }
     public function KonsultasiTA()
     {
