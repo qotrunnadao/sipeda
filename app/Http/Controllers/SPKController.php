@@ -91,7 +91,7 @@ class SPKController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/SPK/' . $filename . ''));
+        return response()->download(public_path('storage/assets/file/SPK TA/' . $filename . ''));
     }
 
     /**
@@ -118,8 +118,7 @@ class SPKController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        dd($data);
-        $spk = SPK::findOrFail($id);
+        $spk = SPK::where('ta_id',$id)->get()->first();
         $data = [
             'fileSPK' => $request->fileSPK,
         ];
@@ -127,16 +126,19 @@ class SPKController extends Controller
             // dd($seminar_proposal->ta->mahasiswa->nim);
             $file = $request->file('fileSPK');
             $filename = 'SPK Kajur' . '_' . $spk->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('fileSPK')->storeAS('public/assets/file/SPK/', $filename);
+            $path = $request->file('fileSPK')->storeAS('public/assets/file/SPK TA/', $filename);
             $data = [
                 'fileSPK' => $filename,
             ];
             // dd($data);
         } else {
             $data['fileSPK'] = $spk->fileSPK;
+            Alert::warning('Gagal', 'Gagal Ubah Data SPK');
+            return back();
         }
-        $value->update($data);
-        $taAll = TA::with(['mahasiswa'])->where('id',$spk->ta_id)->get()->first();
+        // dd($data);
+        $spk->update($data);
+        $taAll = TA::with(['mahasiswa'])->where('id',$id)->get()->first();
         $status = array(
             'status_id' => 5,
         );

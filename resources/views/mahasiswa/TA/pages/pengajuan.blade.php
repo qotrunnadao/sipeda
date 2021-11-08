@@ -8,7 +8,7 @@
             <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
-                <input type="hidden" class="form-control" id="status_id" name="status_id" value="1">
+                <input type="hidden" class="form-control" id="status_id" name="status_id" value="2">
                 <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="1">
                 <div class="card-body">
                     <div class="form-group row">

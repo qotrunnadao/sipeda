@@ -80,7 +80,7 @@ class TAController extends Controller
             $nim = $mhs_id->nim;
             $file = $request->file('praproposal');
             $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('praproposal')->storeAS('public/assets/file/TA', $filename);
+            $path = $request->file('praproposal')->storeAS('public/assets/file/PraproposalTA/', $filename);
             $data = [
                 'mahasiswa_id' => $request->mahasiswa,
                 'judulTA' => $request->judulTA,
@@ -170,7 +170,7 @@ class TAController extends Controller
             $nim = $mhs_id->nim;
             $file = $request->file('praproposal');
             $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('praproposal')->storeAS('public/assets/file/TA', $filename);
+            $path = $request->file('praproposal')->storeAS('public/assets/file/PraproposalTA/', $filename);
             $data = [
                 'mahasiswa_id' => $request->mahasiswa,
                 'judulTA' => $request->judulTA,
@@ -203,5 +203,10 @@ class TAController extends Controller
         $tugas_akhir->delete();
         Alert::success('Berhasil', 'Berhasil hapus data Tugas Akhir');
         return back();
+    }
+    public function download($filename)
+    {
+        //    dd($filename);
+        return response()->download(public_path('storage/assets/file/PraproposalTA/' . $filename . ''));
     }
 }

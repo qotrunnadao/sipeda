@@ -112,6 +112,7 @@ Route::get('/tugas-akhir/data-TA', 'TAController@index')->name('TA.index');
 Route::get('/tugas-akhir/detail-TA/{id}',  'TAController@show')->name('TA.show');
 Route::get('/tugas-akhir/data-TA/create', 'TAController@create')->name('TA.create');
 Route::post('/tugas-akhir/data-TA/store', 'TAController@store')->name('TA.store');
+Route::put('/tugas-akhir/data-TA/download/{filename}',  'TAController@download')->name('TA.download');
 Route::get('/tugas-akhir/data-TA/edit/{id}', 'TAController@edit')->name('TA.edit');
 Route::put('/tugas-akhir/data-TA/update/{id}', 'TAController@update')->name('TA.update');
 Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAController@destroy')->name('TA.delete');
