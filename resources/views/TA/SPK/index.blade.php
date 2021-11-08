@@ -36,14 +36,12 @@
                                 @if ($value->spk == null)
                                 <td class="text-center">
                                     <span class="badge badge-danger">Belum Ada Data SPK</span>
-                                </td>
-                                @if (auth()->user()->level_id == 5)
-                                <td>
+                                    @if (auth()->user()->level_id == 5)
                                     <a href="{{ route('spk.eksport', $value->id) }}">
                                         <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
                                     </a>
+                                    @endif
                                 </td>
-                                @endif
                                 @else
                                 <td>
                                     <div class="btn-group">
@@ -54,8 +52,9 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endif
+                                @if (auth()->user()->level_id == 5)
                                 <td>
-                                    @if (auth()->user()->level_id == 5)
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
