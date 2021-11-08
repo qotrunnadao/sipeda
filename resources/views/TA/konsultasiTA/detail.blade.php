@@ -106,7 +106,7 @@
 
         modal.find(".modal-body input[name='topik']").val(topik)
         modal.find(".modal-body input[name='hasil']").val(hasil)
-        modal.find(".modal-body form").attr("action",route)
+        modal.find(".modal-body form").attr("action")
     })
 </script>
 @endsection

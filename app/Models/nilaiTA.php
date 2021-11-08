@@ -15,6 +15,7 @@ class NilaiTA extends Model
         'nilaiAngka',
         'statusnilai_id',
         'ta_id',
+        'ket',
     ];
     protected $primaryKey = 'id';
 

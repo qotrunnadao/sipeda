@@ -29,7 +29,7 @@ class NilaiTAController extends Controller
                 $nilai = NilaiTA::with('TA')->where('ta_id', $ta->id)->latest()->get();
             }else{
             $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->get()->first();
-            $nilai = NilaiTA::with('TA')->where('ta_id', $ta->id)->latest()->get();
+            $nilai = NilaiTA::with('TA')->where('ta_id', $ta->id)->where('statusnilai_id', '2')->latest()->get();
             }
             return view('mahasiswa.TA.pages.nilai', compact('nilai'));
         } else {
@@ -61,15 +61,16 @@ class NilaiTAController extends Controller
                 'statusnilai_id' => $request->statusnilai_id,
                 'ket' => $request->ket,
             ];
-        // dd($data);
-        if($request->statusnilai_id == 2){
-            $status = array(
-                'status_id' => 10,
-            );
-            // dd($status);
-            $taAll->update($status);
-        }
-        $cek = NilaiTA::create($data);
+            $cek = NilaiTA::create($data);
+            // dd($cek);
+            if($request->statusnilai_id == 2){
+                $status = array(
+                    'status_id' => 10,
+                );
+                // dd($status);
+                $taAll->update($status);
+            }
+
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Nilai Tugas Akhir');
         } else {

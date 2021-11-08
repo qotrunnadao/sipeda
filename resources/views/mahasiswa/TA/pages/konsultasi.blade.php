@@ -29,9 +29,11 @@
                                 <td> {{ $value->tanggal }}</td>
                                 <td> {{ $value->dosen->nama }}</td>
                                 <td> @if ($value->verifikasiDosen =='0')
-                                    <span class="badge badge-danger"> False</span>
+                                    <span class="badge badge-danger"> Menunggu</span>
                                     @elseif ($value->verifikasiDosen == '1')
-                                    <span class="badge badge-success"> True</span>
+                                    <span class="badge badge-success"> Diterima</span>
+                                    @else
+                                    <span class="badge badge-danger">Ditolak</span></td>
                                 </td>
                                 @endif
                                 <td>

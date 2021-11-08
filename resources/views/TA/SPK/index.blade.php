@@ -18,7 +18,9 @@
                                 <th class="text-center"> NIM </th>
                                 <th class="text-center"> Jurusan </th>
                                 <th class="text-center"> File SPK </th>
+                                @if (auth()->user()->level_id == 5)
                                 <th class="text-center"> Aksi </th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -57,7 +59,6 @@
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
-                                    @endif
                                     <div class="btn-group">
                                         <form action="{{ route('spk.destroy', $value->spk->fileSPK) }}" method="GET">
                                             @method('DELETE')

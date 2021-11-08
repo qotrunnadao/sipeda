@@ -82,7 +82,7 @@ class BerandaController extends Controller
     public function downloadSPK($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage\assets\file\SPK/' . $filename . ''));
+        return response()->download(public_path('storage\assets\file\SPK TA/' . $filename . ''));
     }
     public function downloadSemprop($filename)
     {
