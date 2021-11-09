@@ -31,6 +31,22 @@ class SeminarHasilController extends Controller
                 $q->where('pembimbing1_id', $dosen_id->id)
                 ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
+        }elseif(auth()->user()->level_id == 5){
+            $semhas = SeminarHasil::with(['ta.mahasiswa'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->orwhereHas('ta', function ($q) use ($dosen_id){
+                $q->where('pembimbing1_id', $dosen_id->id)
+                ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->latest()->get();
+            // dd($semprop);
+        }elseif(auth()->user()->level_id == 1){
+            $semhas = SeminarHasil::with(['ta.mahasiswa'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->orwhereHas('ta', function ($q) use ($dosen_id){
+                $q->where('pembimbing1_id', $dosen_id->id)
+                ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->latest()->get();
+            // dd($semprop);
         }else{
             $semhas = SeminarHasil::where('status', '=', '1')->latest()->get();
             // dd($semhas);
@@ -182,11 +198,11 @@ class SeminarHasilController extends Controller
 
         $data = ['ta_id' => $ta_id, 'semhas' => $semhas];
         $pdf = PDF::loadView('TA.SPK.download', $data);
-        
+
         $filename = 'Berita Acara Seminar Hasil' . '_'.$semhas->ta->mahasiswa->nim.'_' . time() . '.pdf';
-        
+
         $cek = Storage::put('public/assets/file/Berita Acara Semhas TA/'. $filename, $pdf->output());
-        
+
         if($cek){
             $data = [
                 'beritaacara' => $filename,

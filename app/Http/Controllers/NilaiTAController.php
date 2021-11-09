@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TA;
 use App\Models\User;
+use App\Models\Dosen;
 use App\Models\Jurusan;
 use App\Models\NilaiTA;
 use App\Models\Mahasiswa;
@@ -43,9 +44,15 @@ class NilaiTAController extends Controller
 
     public function nim(Request $request)
     {
-        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
-            $query->where('jurusan_id', $request->id);
-        })->where('status_id', '9')->get();
+        $id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request, $dosen_id) {
+            $query->where('jurusan_id', $request->id)
+            ->where('pembimbing1_id', $dosen_id->id)
+            ->orWhere('pembimbing2_id', $dosen_id->id);
+        })->where('status_id', '9')
+        ->get();
         // dd($taAll);
         return response()->json($taAll, 200);
     }

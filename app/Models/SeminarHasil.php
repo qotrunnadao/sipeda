@@ -22,6 +22,10 @@ class SeminarHasil extends Model
     {
         return $this->belongsTo(TA::class, 'ta_id');
     }
+    public function Mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'ta_id');
+    }
     public function Seminar()
     {
         return $this->belongsTo(Seminar::class, 'seminar_id');
