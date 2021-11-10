@@ -26,17 +26,24 @@ class SeminarHasilController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
-        if (auth()->user()->level_id == 3) {
-            $semhas = SeminarHasil::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
-                $q->where('pembimbing1_id', $dosen_id->id)
-                ->orWhere('pembimbing2_id', $dosen_id->id);
-            })->latest()->get();
-        }else{
-            $semhas = SeminarHasil::where('status', '=', '1')->latest()->get();
-            // dd($semhas);
+        if (auth()->user()->level_id == 2) {
+            $data = array(
+                'semhas_all' => SeminarHasil::latest()->get(),
+            );
+        } else {
+            $data = array(
+                'semhas_all' => SeminarHasil::latest()->get(),
+                'semhas_dosen' => SeminarHasil::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
+                    $q->where('pembimbing1_id', $dosen_id->id)
+                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                })->latest()->get(),
+                'semhas_jurusan' => SeminarHasil::with(['ta.mahasiswa'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                    $q->where('jurusan_id', $dosen_id->jurusan_id);
+                })->latest()->get(),
+            );
         }
 
-        return view('TA.semhasTA.index', compact('semhas'));
+        return view('TA.semhasTA.index', $data);
     }
 
     /**
@@ -176,18 +183,18 @@ class SeminarHasilController extends Controller
     {
         $ta_id = $request->route('id');
 
-        $semhas = SeminarHasil::with(['TA.mahasiswa'])->where('ta_id',$request->route('id'))->get()->first();
-        $taAll = TA::with(['mahasiswa'])->where('id',$request->route('id'))->get()->first();
+        $semhas = SeminarHasil::with(['TA.mahasiswa'])->where('ta_id', $request->route('id'))->get()->first();
+        $taAll = TA::with(['mahasiswa'])->where('id', $request->route('id'))->get()->first();
         // dd($semhas->ta->mahasiswa->nim);
 
         $data = ['ta_id' => $ta_id, 'semhas' => $semhas];
         $pdf = PDF::loadView('TA.SPK.download', $data);
-        
-        $filename = 'Berita Acara Seminar Hasil' . '_'.$semhas->ta->mahasiswa->nim.'_' . time() . '.pdf';
-        
-        $cek = Storage::put('public/assets/file/Berita Acara Semhas TA/'. $filename, $pdf->output());
-        
-        if($cek){
+
+        $filename = 'Berita Acara Seminar Hasil' . '_' . $semhas->ta->mahasiswa->nim . '_' . time() . '.pdf';
+
+        $cek = Storage::put('public/assets/file/Berita Acara Semhas TA/' . $filename, $pdf->output());
+
+        if ($cek) {
             $data = [
                 'beritaacara' => $filename,
             ];
@@ -199,7 +206,7 @@ class SeminarHasilController extends Controller
             // dd($status);
             $taAll->update($status);
             Alert::success('Berhasil', 'Berhasil Tambah Data Berita Acara Seminar Hasil');
-        }else{
+        } else {
             Alert::warning('Gagal', 'Data Berita Acara Seminar Hasil Gagal Ditambahkan');
         }
         return back();

@@ -47,14 +47,22 @@
                             <tr>
                                 <td> Judul Penelitian </td>
                                 <td>:</td>
+                                @if ($TA == null)
+                                <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
+                                @else
                                 <td> {{ $TA->judulTA }}
                                 </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> Lokasi </td>
                                 <td>:</td>
-                                <td> {{ $TA->instansi }}
-                                </td>
+                                @if ($TA == null)
+                                <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
+                                @else
+                                    <td> {{ $TA->instansi }}
+                                    </td>
+                                @endif
                             </tr>
                         </tbody>
                     </table>
@@ -66,7 +74,11 @@
                             <tr>
                                 <td> SPK Tanggal </td>
                                 <td>:</td>
+                                @if ($spk == null)
+                                <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
+                                @else
                                 <td> {{ $spk->created_at }} </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> SPK diambil </td>
@@ -126,7 +138,7 @@
                                 <td>
                                     <div class="badge badge-primary badge-pill">
                                         @if($TA == null)
-                                        belum mengajukan
+                                     Belum mengajukan Tugas Akhir
                                         @else
                                         {{ $TA->status->ket }}
                                         @endif

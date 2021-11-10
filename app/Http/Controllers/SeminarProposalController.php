@@ -26,15 +26,25 @@ class SeminarProposalController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
-        if (auth()->user()->level_id == 3) {
-            $semprop = SeminarProposal::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
-                $q->where('pembimbing1_id', $dosen_id->id)
-                    ->orWhere('pembimbing2_id', $dosen_id->id);
-            })->latest()->get();
+
+        if (auth()->user()->level_id == 2) {
+            $data = array(
+                'semprop_all' => SeminarProposal::latest()->get(),
+            );
         } else {
-            $semprop = SeminarProposal::where('status', '=', '1')->latest()->get();
+            $data = array(
+                'semprop_all' => SeminarProposal::latest()->get(),
+                'semprop_dosen' => SeminarProposal::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
+                    $q->where('pembimbing1_id', $dosen_id->id)
+                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                })->latest()->get(),
+                'semprop_jurusan' => SeminarProposal::with(['ta.mahasiswa'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                    $q->where('jurusan_id', $dosen_id->jurusan_id);
+                })->latest()->get(),
+            );
         }
-        return view('TA.sempropTA.index', compact('semprop'));
+
+        return view('TA.sempropTA.index', $data);
     }
 
     /**

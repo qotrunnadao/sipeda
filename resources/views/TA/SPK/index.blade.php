@@ -35,15 +35,21 @@
                                 <td class="text-center"> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
                                 @if ($value->spk == null)
                                 <td class="text-center">
-                                    <span class="badge badge-danger">Belum Ada Data SPK</span>
+                                    <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
                                     @if (auth()->user()->level_id == 5)
-                                    <a href="{{ route('spk.eksport', $value->id) }}">
-                                        <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                    </a>
+                                    <td>
+                                        <a href="{{ route('spk.eksport', $value->id) }}">
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </a>
+                                    </td>
                                     @endif
                                 </td>
                                 @else
                                 <td>
+                                @if ($value->spk->fileSPK == null)
+                                    SPK Tugas Akhir
+                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
+                                @else
                                     <div class="btn-group">
                                         <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
                                             @method('PUT')
@@ -66,6 +72,7 @@
                                         </form>
                                     </div>
                                 </td>
+                                @endif
                                 @endif
                             </tr>
                             @endforeach
