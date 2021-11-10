@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TA;
 use App\Models\User;
 use App\Models\Dosen;
+use App\Models\NilaiHuruf;
 use App\Models\Jurusan;
 use App\Models\NilaiTA;
 use App\Models\Mahasiswa;
@@ -21,24 +22,26 @@ class NilaiTAController extends Controller
     public function index()
     {
         if (Auth::user()->level_id == 4) {
+            $NilaiHuruf = NilaiHuruf::latest()->get();
             $id = Auth::User()->id;
             $user_id = User::where('id', $id)->get()->first();
             $mhs_id = Mahasiswa::with(['user'])->where('user_id', $user_id->id)->get()->first();
             $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->where('status_id', '10')->latest()->get()->first();
-            // dd($ta->id);
             if($ta){
-                $nilai = NilaiTA::with('TA')->where('ta_id', $ta->id)->latest()->get();
+                $nilai = NilaiTA::with('TA','NilaiHuruf')->where('ta_id', $ta->id)->latest()->get();
             }else{
-            $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->get()->first();
-            $nilai = NilaiTA::with('TA')->where('ta_id', $ta->id)->where('statusnilai_id', '2')->latest()->get();
+                $ta = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->get()->first();
+                $nilai = NilaiTA::with('TA', 'NilaiHuruf')->where('ta_id', $ta->id)->where('statusnilai_id', '2')->latest()->get();
             }
-            return view('mahasiswa.TA.pages.nilai', compact('nilai'));
+            return view('mahasiswa.TA.pages.nilai', compact('nilai','NilaiHuruf'));
         } else {
+            $NilaiHuruf = NilaiHuruf::latest()->get();
             $jurusan = jurusan::all();
             $taAll = TA::with(['mahasiswa'])->get();
             $statusnilai = StatusNilai::all();
-            $nilai = NilaiTA::With('TA.mahasiswa.jurusan')->latest()->get();
-            return view('TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai'));
+            $nilai = NilaiTA::With('TA.mahasiswa.jurusan', 'NilaiHuruf')->latest()->get();
+            // dd($nilai);
+            return view('TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai', 'NilaiHuruf'));
         }
     }
 
@@ -64,12 +67,12 @@ class NilaiTAController extends Controller
             $data = [
                 'ta_id' => $request->ta_id,
                 'nilaiAngka' => $request->nilaiAngka,
-                'nilaiHuruf' => $request->nilaiHuruf,
+                'nilai_huruf_id' => $request->nilai_huruf_id,
                 'statusnilai_id' => $request->statusnilai_id,
                 'ket' => $request->ket,
             ];
             $cek = NilaiTA::create($data);
-            // dd($cek);
+            // dd($data);
             if($request->statusnilai_id == 2){
                 $status = array(
                     'status_id' => 10,
