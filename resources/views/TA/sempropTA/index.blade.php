@@ -6,6 +6,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <h4 class="card-title">Pengajuan Seminar Proposal</h4>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -32,7 +33,7 @@
                                 <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
                                 <td class="text-center"> {{ $value->tanggal }}</td>
                                 <td class="text-center"> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
-                                <td class="text-center"> 
+                                <td class="text-center">
                                     @if ($value->beritaacara == null)
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
@@ -65,10 +66,10 @@
                                         <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
                                     </a>
                                     @endif
-                                    @if (auth()->user()->level_id != 2 &&  4)
+                                    @if (auth()->user()->level_id != 2 && 4)
                                     <div class="btn-group">
                                         <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
-                                    </div> 
+                                    </div>
                                     @endif
                                     <div class="btn-group">
                                         <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
@@ -99,6 +100,51 @@
                                     @endif
                                 </td>
 
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Data Seminar Proposal Jurusan</h4>
+                <div class="table-responsive">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> Jurusan </th>
+                                <th class="text-center"> Ruang </th>
+                                <th class="text-center"> Tanggal </th>
+                                <th class="text-center"> Waktu </th>
+                                <th class="text-center"> Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($no=1)
+                            @foreach ($semprop as $value )
+                            <tr>
+                                <td class="text-center"> {{ $no++ }} </td>
+                                <td> {{ $value->TA->mahasiswa->nama }} </td>
+                                <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
+                                <td class="text-center"> {{ $value->tanggal }}</td>
+                                <td class="text-center"> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
+                                <td class="text-center">
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">menunggu</span>
+                                    @elseif($value->status == 1)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @else
+                                    <span class="badge badge-danger">Tidak Disetujui</span>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

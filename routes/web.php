@@ -45,10 +45,11 @@ Route::get('/', function () {
     return view('guest.login');
 });  //Halaman Login LandingPage
 
-Route::get('/cas/login', function () {
-    return cas()->authenticate();
-})->name('cas.login'); //Halaman login KORI
+// Route::get('/cas/login', function () {
+//     return cas()->authenticate();
+// })->name('cas.login'); //Halaman login KORI
 
+Route::get('/cas/callback', 'CasController@callback')->name('cas.login');
 
 
 //=============== ROUTE ADMIN ====================
@@ -257,9 +258,9 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     })->name('mahasiswaTA.distribusi');
 
     //=========== PENDADARAN==============
-    Route::get('/pendadaran/beranda', function () {
-        return view('mahasiswa.pendadaran.pages.beranda');
-    });
+
+    Route::get('/pendadaran/beranda', 'BerandaController@mahasiswaPendadaran')->name('mahasiswaPendadaran.beranda');
+
     Route::get('/pendadaran/pendaftaran', function () {
         return view('mahasiswa.pendadaran.pages.pengajuan');
     });
@@ -271,9 +272,9 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     });
 
     //============= YUDISIUM =============
-    Route::get('/yudisium/beranda', function () {
-        return view('mahasiswa.yudisium.pages.beranda');
-    });
+
+    Route::get('/yudisium/beranda', 'BerandaController@mahasiswaYudisium')->name('mahasiswaYudisium.beranda');
+
     Route::get('/yudisium/pendaftaran', function () {
         return view('mahasiswa.yudisium.pages.pendaftaran');
     });

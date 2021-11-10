@@ -68,7 +68,7 @@ return [
     |
     | VALIDATING THE CAS SERVER IS CRUCIAL TO THE SECURITY OF THE CAS PROTOCOL
     */
-    'cas_validation'          => env('CAS_VALIDATION', 'https://kori.unsoed.ac.id/cas/p3/serviceValidate'),
+    'cas_validation'          => env('CAS_VALIDATION', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -95,7 +95,7 @@ return [
     |--------------------------------------------------------------------------
     | Empty is fine
     */
-    'cas_login_url'       => env('CAS_LOGIN_URL', 'https://kori.unsoed.ac.id'),
+    'cas_login_url'       => env('CAS_LOGIN_URL', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -111,7 +111,7 @@ return [
     | If your server supports redirection services, enter the redirect url
     | in this section.  If left blank, it will default to disabled.
     */
-    'cas_logout_redirect' => env('CAS_LOGOUT_REDIRECT', 'https://kori.unsoed.ac.id'),
+    'cas_logout_redirect' => env('CAS_LOGOUT_REDIRECT', ''),
 
     /*
     |--------------------------------------------------------------------------

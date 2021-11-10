@@ -76,7 +76,7 @@ class BerandaController extends Controller
             // 'user' => Auth::user()::With('mahasiswa')->latest()->get(),
         );
 
-        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id','spk'));
+        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id', 'spk'));
     }
 
     public function downloadSPK($filename)
@@ -94,69 +94,42 @@ class BerandaController extends Controller
         //    dd($filename);
         return response()->download(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function mahasiswaPendadaran()
     {
-        //
+        $id = auth()->User()->id;
+        $user_id = User::where('id', $id)->get()->first();
+        $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $pendadaran = Pendadaran::with(['mahasiswa'])->where('mhs_id', $mhs_id->id)->latest()->first();
+
+        $data_pendadaran = array(
+            'status' => Status::latest()->get(),
+            'statusnilai' => StatusNilai::latest()->get(),
+            'statusKP' => StatusKP::latest()->get(),
+            'statusPendadaran' => StatusPendadaran::latest()->get(),
+            'statusYudisium' => StatusYudisium::latest()->get(),
+            'akademik' => Akademik::latest()->get(),
+        );
+
+        return view('mahasiswa.Pendadaran.pages.beranda', $data_pendadaran, compact('pendadaran', 'mhs_id'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function mahasiswaYudisium()
     {
-        //
-    }
+        $id = auth()->User()->id;
+        $user_id = User::where('id', $id)->get()->first();
+        $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $yudisium = Yudisium::with(['mahasiswa'])->where('mhs_id', $mhs_id->id)->latest()->first();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $data_yudisium = array(
+            'status' => Status::latest()->get(),
+            'statusnilai' => StatusNilai::latest()->get(),
+            'statusKP' => StatusKP::latest()->get(),
+            'statusPendadaran' => StatusPendadaran::latest()->get(),
+            'statusYudisium' => StatusYudisium::latest()->get(),
+            'akademik' => Akademik::latest()->get(),
+        );
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('mahasiswa.yudisium.pages.beranda', $data_yudisium, compact('yudisium', 'mhs_id'));
     }
 }

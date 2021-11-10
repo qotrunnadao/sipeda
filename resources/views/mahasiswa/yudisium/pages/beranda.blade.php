@@ -7,7 +7,7 @@
         <div class="card  bg-gradient-primary">
             <div class="card-body">
                 <img class="float-left" src="{{ asset('sitak/assets/images/party.svg') }}" alt="" style="width: 150px">
-                <h1 class="card-title text-white text-center mt-5">Selamat Datang, QOTRUNNADA OKTIRIANI!</h1>
+                <h1 class="card-title text-white text-center mt-5">Selamat Datang, {{$mhs_id->nama}}!</h1>
             </div>
         </div>
     </div>
@@ -16,9 +16,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="border-bottom text-center pb-4">
-                    <img src="{{ asset('sitak/assets/images/faces/atun.jpg') }}" alt="profile" class="img-lg rounded-circle mb-3">
+                    @if (Auth::user()->foto)
+                    <img src="{{ $mhs_id->foto }}" alt="{{$mhs_id->nama}}" class="img-lg rounded-circle mb-3">
+                    @else
+                    <img src="{{ asset('sitak/assets/images/profile.jpg') }}" alt="{{$mhs_id->nama}}" class="img-lg rounded-circle mb-3">
+                    @endif
                     <div class="d-flex justify-content-center">
-                        <div class="badge badge-gradient-primary">Qotrunnada Oktiriani</div>
+                        <div class="badge badge-gradient-primary">{{$mhs_id->nama}}</div>
                     </div>
                 </div>
                 <h4 class="card-title mb-4">Deskripsi Yudisium Anda</h4>

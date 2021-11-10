@@ -16,9 +16,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="border-bottom text-center pb-4">
-                    <img src="{{ asset('sitak/assets/images/faces/atun.jpg') }}" alt="profile" class="img-lg rounded-circle mb-3">
+                    @if (Auth::user()->foto)
+                    <img src="{{ $mhs_id->foto }}" alt="{{$mhs_id->nama}}" class="img-lg rounded-circle mb-3">
+                    @else
+                    <img src="{{ asset('sitak/assets/images/profile.jpg') }}" alt="{{$mhs_id->nama}}" class="img-lg rounded-circle mb-3">
+                    @endif
                     <div class="d-flex justify-content-center">
-                        <div class="badge badge-gradient-primary"> {{$mhs_id->nama }}</div>
+                        <div class="badge badge-gradient-primary">{{$mhs_id->nama}}</div>
                     </div>
                 </div>
                 <h4 class="card-title mb-4">Deskripsi TA Anda</h4>

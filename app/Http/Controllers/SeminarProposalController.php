@@ -29,11 +29,10 @@ class SeminarProposalController extends Controller
         if (auth()->user()->level_id == 3) {
             $semprop = SeminarProposal::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
-                ->orWhere('pembimbing2_id', $dosen_id->id);
+                    ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
-        }else{
+        } else {
             $semprop = SeminarProposal::where('status', '=', '1')->latest()->get();
-            // dd($semprop);
         }
         return view('TA.sempropTA.index', compact('semprop'));
     }
@@ -179,18 +178,18 @@ class SeminarProposalController extends Controller
     {
         $ta_id = $request->route('id');
 
-        $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id',$request->route('id'))->get()->first();
-        $taAll = TA::with(['mahasiswa'])->where('id',$request->route('id'))->get()->first();
-        
-        
+        $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id', $request->route('id'))->get()->first();
+        $taAll = TA::with(['mahasiswa'])->where('id', $request->route('id'))->get()->first();
+
+
         $data = ['ta_id' => $ta_id, 'sempro' => $sempro];
         $pdf = PDF::loadView('TA.SPK.download', $data);
-        
-        $filename = 'Berita Acara Seminar Proposal' . '_'.$sempro->ta->mahasiswa->nim.'_' . time() . '.pdf';
-        
-        $cek = Storage::put('public/assets/file/Berita Acara Semprop TA/'. $filename, $pdf->output());
-        
-        if($cek){
+
+        $filename = 'Berita Acara Seminar Proposal' . '_' . $sempro->ta->mahasiswa->nim . '_' . time() . '.pdf';
+
+        $cek = Storage::put('public/assets/file/Berita Acara Semprop TA/' . $filename, $pdf->output());
+
+        if ($cek) {
             $data = [
                 'beritaacara' => $filename,
             ];
@@ -202,7 +201,7 @@ class SeminarProposalController extends Controller
             // dd($status);
             $taAll->update($status);
             Alert::success('Berhasil', 'Berhasil Tambah Data Berita Acara Seminar Proposal');
-        }else{
+        } else {
             Alert::warning('Gagal', 'Data Berita Acara Seminar Proposal Gagal Ditambahkan');
         }
         return back();

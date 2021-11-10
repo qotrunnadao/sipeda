@@ -30,12 +30,12 @@
 
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/pendadaran.svg') }}" alt="" class="card__img">
-                <a href="<?= url('') ?>/mahasiswa/pendadaran/beranda" class="card__button">Pendadaran</a>
+                <a href="{{ route('mahasiswaPendadaran.beranda') }}" class="card__button">Pendadaran</a>
             </div>
 
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/graduation.svg') }}" alt="" class="card__img">
-                <a href="<?= url('') ?>/mahasiswa/yudisium/beranda" class="card__button">Yudisium</a>
+                <a href="{{ route('mahasiswaYudisium.beranda') }}" class="card__button">Yudisium</a>
             </div>
         </div>
     </section>

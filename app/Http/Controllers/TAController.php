@@ -32,9 +32,9 @@ class TAController extends Controller
             // dd($dosen_id->id);
             $tugas_akhir = TA::with(['status'])->whereHas('status', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
-                ->orWhere('pembimbing2_id', $dosen_id->id);
+                    ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
-        }else{
+        } else {
             $tugas_akhir = TA::with('status')->latest()->get();
         }
         $jurusan = jurusan::get();

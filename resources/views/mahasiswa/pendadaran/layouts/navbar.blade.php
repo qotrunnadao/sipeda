@@ -10,7 +10,11 @@
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" id="Dropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                     <div class="nav-profile-img">
-                        <img src="{{ asset('sitak/assets/images/faces/atun.jpg') }}" alt="image">
+                        @if (Auth::user()->foto)
+                        <img src="{{ $user->foto }}" alt="{{ Auth::user()->email }}" class="foto img-thumbnail img-preview">
+                        @else
+                        <img src="{{ asset('sitak/assets/images/profile.jpg') }}" alt="{{ Auth::user()->email }}" class="foto img-thumbnail img-preview">
+                        @endif
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text">
@@ -22,12 +26,6 @@
                     <a class="dropdown-item" href="{{ route('mahasiswa.menu') }}">
                         <i class="mdi mdi-cached mr-2 text-success"></i> Menu </a>
                     <div class="dropdown-divider"></div>
-                    {{-- <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="dropdown-item">
-                            <i class="mdi mdi-logout mr-2 text-primary"></i> {{ __('Logout') }}
-                        </button>
-                    </form> --}}
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-logout"><i class="mdi mdi-logout mr-2 text-primary"></i> {{ __('Logout') }}</button>

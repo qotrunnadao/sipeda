@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Subfission\Cas\Facades\Cas;
 
 class LoginController extends Controller
 {
@@ -41,6 +42,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([

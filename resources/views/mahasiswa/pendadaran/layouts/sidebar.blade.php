@@ -12,7 +12,7 @@
         </li>
         {{-- SIDEBAR MAHASISWA --}}
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/pendadaran/beranda">
+            <a class="nav-link" href="{{ route('mahasiswaPendadaran.beranda') }}">
                 <span class="menu-title">Beranda</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
