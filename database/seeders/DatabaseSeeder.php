@@ -227,6 +227,35 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        $nilaiHuruf = [
+            [
+                'nilaiHuruf' => 'A',
+            ],
+            [
+                'nilaiHuruf' => 'AB',
+            ],
+            [
+                'nilaiHuruf' => 'B',
+            ],
+            [
+                'nilaiHuruf' => 'BC',
+            ],
+            [
+                'nilaiHuruf' => 'C',
+            ],
+            [
+                'nilaiHuruf' => 'CD',
+            ],
+            [
+                'nilaiHuruf' => 'D',
+            ],
+            [
+                'nilaiHuruf' => 'E',
+            ],
+        ];
+
+        DB::table('nilai_huruf')->insert($nilaiHuruf);
+
         DB::table('statusta')->insert($statusta);
 
         $statuspendadaran = [
@@ -776,7 +805,7 @@ class DatabaseSeeder extends Seeder
                 'ta_id' => 1,
                 'statusnilai_id' => 1,
                 'nilaiAngka' => 80.00,
-                'nilaiHuruf' => "A",
+                'nilai_huruf_id' => 1,
             ],
         ];
 
@@ -840,7 +869,7 @@ class DatabaseSeeder extends Seeder
                 'pendadaran_id' => 1,
                 'statusnilai_id' => 1,
                 'nilaiAngka' => 80.00,
-                'nilaiHuruf' => "A",
+                'nilai_huruf_id' => 1,
             ],
         ];
 
@@ -881,33 +910,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('SK')->insert($SK);
 
-        $nilaiHuruf = [
-            [
-                'nilaiHuruf' => 'A',
-            ],
-            [
-                'nilaiHuruf' => 'AB',
-            ],
-            [
-                'nilaiHuruf' => 'B',
-            ],
-            [
-                'nilaiHuruf' => 'BC',
-            ],
-            [
-                'nilaiHuruf' => 'C',
-            ],
-            [
-                'nilaiHuruf' => 'CD',
-            ],
-            [
-                'nilaiHuruf' => 'D',
-            ],
-            [
-                'nilaiHuruf' => 'E',
-            ],
-        ];
 
-        DB::table('nilai_huruf')->insert($nilaiHuruf);
     }
 }

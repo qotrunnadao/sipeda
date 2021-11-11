@@ -17,8 +17,9 @@ class CreateNilaiTASTable extends Migration
             $table->id();
             $table->foreignId('ta_id')->references('id')->on('TA');
             $table->foreignId('statusnilai_id')->references('id')->on('statusnilai');
+            $table->foreignId('nilai_huruf_id')->references('id')->on('nilai_huruf');
             $table->double('nilaiAngka');
-            $table->string('nilaiHuruf');
+            // $table->string('nilaiHuruf');
             $table->string('ket')->nullable();
             $table->timestamps();
         });

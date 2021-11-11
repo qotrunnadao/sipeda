@@ -37,7 +37,7 @@
                                 <td class="text-center"> {{ $value->TA->mahasiswa->nim }}</td>
                                 <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
-                                <td class="text-center"> {{ $value->nilaiHuruf }} </td>
+                                <td class="text-center"> {{ $value->NilaiHuruf->nilaiHuruf }} </td>
                                 <td class="text-center">
                                 @if($value->statusnilai_id == 1)
                                     <span class="badge badge-warning">Menunggu</span>
@@ -50,7 +50,7 @@
 
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiangka ='{{ $value->nilaiAngka }}' data-nilaihuruf ='{{ $value->nilaiHuruf }}' data-ket ='{{ $value->ket }}' data-statusnilai_id ='{{ $value->statusnilai_id }}' ><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiangka ='{{ $value->nilaiAngka }}' data-nilai_huruf_id ='{{ $value->NilaiHuruf->id }}' data-ket ='{{ $value->ket }}' data-statusnilai_id ='{{ $value->statusnilai_id }}' ><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('nilaita.delete', $value->id) }}" method="GET">
@@ -118,13 +118,11 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="nilaiHuruf">
-                                <option value="">PILIH</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
+                            <select type="text" class="form-control" name="nilai_huruf_id">
+                                <option value="">PILIH Nilai Huruf</option>
+                                @foreach ($NilaiHuruf as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -179,13 +177,11 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="nilaihuruf">
-                                <option value="">PILIH</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
+                            <select type="text" class="form-control" name="nilai_huruf_id">
+                                <option value="">PILIH Nilai Huruf</option>
+                                @foreach ($NilaiHuruf as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -224,13 +220,13 @@
     var id = button.data('id')
     var statusnilai_id = button.data('statusnilai_id')
     var nilaiangka = button.data('nilaiangka')
-    var nilaihuruf = button.data('nilaihuruf')
+    var nilai_huruf_id = button.data('nilai_huruf_id')
     var ket = button.data('ket')
 
     var modal = $(this)
 
     modal.find(".modal-body input[name='nilaiangka']").val(nilaiangka)
-    modal.find(".modal-body select[name='nilaihuruf']").val(nilaihuruf)
+    modal.find(".modal-body select[name='nilai_huruf_id']").val(nilai_huruf_id)
     modal.find(".modal-body textarea[name='ket']").val(ket)
     modal.find(".modal-body select[name='statusnilai_id']").val(statusnilai_id)
     modal.find(".modal-body form").attr("action",'/tugas-akhir/nilaita/update/'+id)

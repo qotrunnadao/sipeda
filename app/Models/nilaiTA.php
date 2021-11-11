@@ -11,7 +11,7 @@ class NilaiTA extends Model
     use HasFactory;
     protected $table = 'nilaiTA';
     protected $fillable = [
-        'nilaiHuruf',
+        'nilai_huruf_id',
         'nilaiAngka',
         'statusnilai_id',
         'ta_id',
@@ -22,6 +22,10 @@ class NilaiTA extends Model
     public function TA()
     {
         return $this->belongsTo(TA::class, 'ta_id');
+    }
+    public function NilaiHuruf()
+    {
+        return $this->belongsTo(NilaiHuruf::class, 'nilai_huruf_id');
     }
     public function StatusNilai()
     {

@@ -11,7 +11,7 @@ class NilaiPendadaran extends Model
     use HasFactory;
     protected $table = 'nilai_pendadaran';
     protected $fillable = [
-        'nilaiHuruf',
+        'nilai_huruf_id',
         'nilaiAngka',
         'statusnilai_id',
         'pendadaran_id',
@@ -21,6 +21,10 @@ class NilaiPendadaran extends Model
     public function Pendadaran()
     {
         return $this->belongsTo(Pendadaran::class, 'pendadaran_id');
+    }
+    public function NilaiHuruf()
+    {
+        return $this->belongsTo(NilaiHuruf::class, 'nilai_huruf_id');
     }
     public function StatusNilai()
     {
