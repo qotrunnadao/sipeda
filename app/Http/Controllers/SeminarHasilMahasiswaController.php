@@ -117,7 +117,7 @@ class SeminarHasilMahasiswaController extends Controller
                     $nim = $mhs_id->nim;
                     $file = $request->file('laporan');
                     $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $path = $request->file('laporan')->storeAS('public/assets/file/LaporanTA', $filename);
+                    $path = $request->file('laporan')->storeAS('public/assets/file/LaporanTA/', $filename);
                     $data = [
                     'ta_id' => $request->ta_id,
                     'jamMulai' => $jamMulai,

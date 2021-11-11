@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use File;
 
 class DistribusiController extends Controller
 {
@@ -30,14 +31,14 @@ class DistribusiController extends Controller
         if (auth()->user()->level_id == 2) {
             $distribusi = Distribusi::with('ta')->latest()->get();
         } elseif (auth()->user()->level_id == 3) {
-            $distribusi = Distribusi::with(['ta'])->whereHas('status', function ($q) use ($dosen_id) {
+            $distribusi = Distribusi::with(['ta'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
         } elseif (auth()->user()->level_id == 1 || 5) {
             $distribusi = Distribusi::with(['ta'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
-            })->orWhereHas('status', function ($q) use ($dosen_id) {
+            })->orWhereHas('ta', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
@@ -57,8 +58,9 @@ class DistribusiController extends Controller
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $tugas_akhir = TA::with(['dosen1', 'dosen2'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
+    //    dd($tugas_akhir);
         $distribusi = Distribusi::with(['mahasiswa'])->where('ta_id', $tugas_akhir->id)->select('*')->latest()->get();
-        return view('mahasiswa.TA.pages.distribusi', compact('data_distribusi', 'distribusi'));
+        return view('mahasiswa.TA.pages.distribusi', compact('data_distribusi', 'distribusi', 'tugas_akhir'));
     }
 
     /**
@@ -69,7 +71,35 @@ class DistribusiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $tugas_akhir = TA::where('id', $request->ta_id)->latest()->first();
+        // dd($tugas_akhir->status_id);
+        if ($tugas_akhir->status_id < '5') {
+            Alert::warning('Gagal', ' Anda Belom Mempunyai Data Pengajuan TA yang Sudah Disetujui');
+            return back();
+        }
+        elseif ($tugas_akhir->status_id >= '5') {
+            $mhs_id = Mahasiswa::with(['user'])->where('user_id', $request->user_id)->get()->first();
+            $nim = $mhs_id->nim;
+            // dd($nim);
+            $file = $request->file('fileDistribusi');
+            $filename = 'Distribusi TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('fileDistribusi')->storeAS('public/assets/file/fileDistribusiTA/', $filename);
+            $data = [
+                'ta_id' => $request->ta_id,
+                'fileDistribusi' => $filename,
+            ];
+            // dd($data);
+            $cek = Distribusi::create($data);
+        } else {
+            $data['fileDistribusi'] = NULL;
+        }
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Menambahkan Data Distribusi Tugas Akhir');
+        } else {
+            Alert::warning('Gagal', 'Data Distribusi Tugas Akhir Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -82,41 +112,9 @@ class DistribusiController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/Distribusi TA/' . $filename . ''));
+        return response()->download(public_path('storage/assets/file/fileDistribusiTA/' . $filename . ''));
     }
 
-    public function eksport(Request $request, $id)
-    {
-        $ta_id = $request->route('id');
-
-        $distribusi = Distribusi::with(['TA.mahasiswa'])->where('ta_id', $request->route('id'))->get()->first();
-        $taAll = TA::with(['mahasiswa'])->where('id', $request->route('id'))->get()->first();
-
-
-        $data = ['ta_id' => $ta_id, 'distribusi' => $distribusi];
-        $pdf = PDF::loadView('TA.distribusi.download', $data);
-
-        $filename = 'Distribusi TA' . '_' . $distribusi->ta->mahasiswa->nim . '_' . time() . '.pdf';
-
-        $cek = Storage::put('public/assets/file/Distribusi TA/' . $filename, $pdf->output());
-
-        if ($cek) {
-            $data = [
-                'fileDsitribusi' => $filename,
-            ];
-            // dd($data );
-            $distribusi->update($data);
-            $status = array(
-                'status_id' => 12,
-            );
-            // dd($status);
-            $taAll->update($status);
-            Alert::success('Berhasil', 'Berhasil upload file distribusi');
-        } else {
-            Alert::warning('Gagal', 'File distribusi Gagal Ditambahkan');
-        }
-        return back();
-    }
 
     public function show(Distribusi $distribusi)
     {
@@ -155,6 +153,8 @@ class DistribusiController extends Controller
     public function destroy($id)
     {
         $distribusi = Distribusi::find($id);
+        File::delete(public_path('storage/assets/file/fileDistribusiTA/' . $distribusi->fileDistribusi . ''));
+        // dd($distribusi->fileDistribusi);
         $distribusi->delete();
         Alert::success('Berhasil', 'Berhasil hapus data distribusi');
         return back();

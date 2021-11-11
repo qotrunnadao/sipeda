@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" method="post" enctype="multipart/form-data">
+            <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" id = "creatData" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
                 <input type="hidden" class="form-control" id="status_id" name="status_id" value="2">
@@ -60,7 +60,7 @@
                             <input type="file" class="form-control" name="praproposal" />
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -130,4 +130,16 @@
     </div>
     @endforeach
 </div>
+<script>
+    $(document).ready(function () {
+
+    $("#creatData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection

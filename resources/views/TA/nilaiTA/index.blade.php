@@ -81,7 +81,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{ route('nilaita.store') }}" enctype="multipart/form-data">
+                <form class="forms-sample" id="creatData" method="POST" action="{{ route('nilaita.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -164,7 +164,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="">
+                <form class="forms-sample" id="editData" method="POST" action="">
                     @method('PUT')
                     @csrf
                     {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $nilai->ta_id }}"> --}}
@@ -205,13 +205,37 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+    $("#creatData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
+<script>
+    $(document).ready(function () {
+
+    $("#editData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
 @section('javascripts')
 <script>

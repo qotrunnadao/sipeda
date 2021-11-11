@@ -69,7 +69,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" action="{{route('mahasiswaKonsultasi.store')}}" method="post">
+                <form class="forms-sample" action="{{route('mahasiswaKonsultasi.store')}}" id="createData" method="post">
                     @csrf
                     <input type="hidden" class="form-control" id="verifikasiDosen" name="verifikasiDosen" value="0">
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
@@ -103,7 +103,7 @@
                         <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
+                        <button type="submit" id = "btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                     </div>
                 </form>
             </div>
@@ -162,6 +162,18 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+    $("#createData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
 @section('javascripts')
 <script>

@@ -33,6 +33,7 @@ class KonsultasiTAController extends Controller
             $tugas_akhir = TA::with(['konsultasiTA'])->whereHas('konsultasiTA', function ($q) use ($dosen_id) {
                 $q->where('dosen_id', $dosen_id->id);
             })->latest()->get();
+            // dd($tugas_akhir);
         }
         return view('TA.konsultasiTA.index', compact('tugas_akhir'));
     }

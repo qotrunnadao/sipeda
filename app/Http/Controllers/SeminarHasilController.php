@@ -11,6 +11,7 @@ use App\Models\Mahasiswa;
 use App\Models\SeminarHasil;
 use Illuminate\Http\Request;
 use PDF;
+use File;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -101,41 +102,27 @@ class SeminarHasilController extends Controller
     public function update(Request $request, $id)
     {
         $seminar_hasil = SeminarHasil::find($id);
+        // $hapus = $seminar_hasil->beritaacara;
+        // dd($hapus);
         $data = $request->all();
         $data = [
-            // 'ta_id' => $request->ta_id,
-            // 'laporan' => $request->laporan,
-            // 'beritaacara' => $request->beritaacara,
-            'beritaacara_dosen' => $request->beritaacara_dosen,
-            // 'jamMulai' => $request->jamMulai,
-            // 'jamSelesai' => $request->jamSelesai,
-            // 'tanggal' => $request->tanggal,
-            // 'ruang_id' => $request->ruang_id,
-            // 'status' => $request->status,
+            'beritaacara' => $request->beritaacara_dosen,
         ];
 
-        if ($request->file('beritaacara_dosen')) {
+        if ($request->file('beritaacara')) {
             $semhas = SeminarHasil::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
             // dd($seminar_proposal->ta->mahasiswa->nim);
-            $file = $request->file('beritaacara_dosen');
+            $file = $request->file('beritaacara');
             $filename = 'Berita Acara Dosen SEMHAS' . '_' . $seminar_hasil->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('beritaacara_dosen')->storeAS('public/assets/file/Berita Acara Dosen Semhas TA', $filename);
+            $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semhas TA/', $filename);
             $data = [
-                // 'ta_id' => $request->ta_id,
-                // 'laporan' => $request->laporan,
-                // 'beritaacara' => $request->beritaacara,
-                'beritaacara_dosen' => $filename,
-                // 'jamMulai' => $request->jamMulai,
-                // 'jamSelesai' => $request->jamSelesai,
-                // 'tanggal' => $request->tanggal,
-                // 'ruang_id' => $request->ruang_id,
-                // 'status' => $request->status,
+                'beritaacara' => $filename,
             ];
             // dd($data);
         } else {
             $data['beritaacara'] = $seminar_hasil->beritaacara;
         }
-
+        // File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
         $seminar_hasil->update($data);
         Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Hasil');
         return redirect(route('semhas.index'));
@@ -150,7 +137,13 @@ class SeminarHasilController extends Controller
     public function destroy($id)
     {
         $semhas = SeminarHasil::find($id);
+        $taAll = TA::with(['mahasiswa'])->where('id',$semprop->ta->id)->get()->first();
+        File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $semhas->beritaacara . ''));
         $semhas->delete();
+        $status = array(
+            'status_id' => 6,
+        );
+        $taAll->update($status);
         Alert::success('Berhasil', 'Berhasil hapus data Seminar Hasil');
         return back();
     }

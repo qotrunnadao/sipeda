@@ -18,7 +18,6 @@ class CreateSeminarHasilsTable extends Migration
             $table->foreignId('ta_id')->references('id')->on('TA');
             $table->string('laporan')->nullable();
             $table->string('beritaacara')->nullable();
-            $table->string('beritaacara_dosen')->nullable();
             $table->time('jamMulai')->nullable();
             $table->time('jamSelesai')->nullable();
             $table->date('tanggal')->nullable();

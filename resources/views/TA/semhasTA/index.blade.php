@@ -61,9 +61,11 @@
                                 <td class="text-center">
                                     @if ($value->status != 0)
                                     @if ( $value->beritaacara == null)
-                                    <a href="{{ route('semhas.eksport', $value->ta_id) }}">
-                                        <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                    </a>
+                                    <div class="btn-group">
+                                        <form action="{{ route('semhas.eksport', $value->ta_id) }}" method="GET" id="export">
+                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div>
                                     @endif
 
                                     <div class="btn-group">
@@ -229,4 +231,16 @@
     @endif
 </div>
 @endif
+<script>
+    $(document).ready(function () {
+
+    $("#export").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection

@@ -10,7 +10,7 @@
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#uploadSPK"> <i class="mdi mdi-plus"></i> Tambah</button>
                 </div> --}}
                 <div class="table-responsive">
-                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="creatData" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>
@@ -38,8 +38,8 @@
                                     <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
                                     @if (auth()->user()->level_id == 5)
                                     <td>
-                                        <a href="{{ route('spk.eksport', $value->id) }}">
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        <a href="" id="linkButton">
+                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport" idv="{{ $value->ta_id }}"><i class="mdi mdi-check"></i></button>
                                         </a>
                                     </td>
                                     @endif
@@ -78,6 +78,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                 </form>
                 </div>
             </div>
         </div>
@@ -95,7 +96,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="" enctype="multipart/form-data">
+                <form class="forms-sample" method="POST" id="editData" action="" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="form-group row">
@@ -105,13 +106,47 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        var cek = true;
+
+    $("#btnSubmit").on('click', function () {
+        if (cek) {
+        var id = $('#btnSubmit').attr('idv');
+        console.log(id);
+        $("#linkButton").attr("href","/tugas-akhir/spk/pdf/" + id);
+        cek = false;
+        }else {
+
+            $("#linkButton").attr("href","");
+        }
+
+        // $('#btnSubmit').submit();
+
+    return true;
+
+    });
+});
+</script>
+<script>
+    $(document).ready(function () {
+
+    $("#editData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
 @section('javascripts')
 <script>

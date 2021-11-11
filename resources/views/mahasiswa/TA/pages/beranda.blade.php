@@ -75,7 +75,7 @@
                                 <td> SPK Tanggal </td>
                                 <td>:</td>
                                 @if ($spk == null)
-                                <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
+                                <td><span class="badge badge-primary">SPK Tugas Akhir Belum Terbit</span></td>
                                 @else
                                 <td> {{ $spk->created_at }} </td>
                                 @endif

@@ -10,6 +10,7 @@ use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use PDF;
+use File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\SeminarProposal;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -105,36 +106,17 @@ class SeminarProposalController extends Controller
         $seminar_proposal = SeminarProposal::find($id);
         $data = $request->all();
         $data = [
-            // 'ta_id' => $request->ta_id,
-            // 'proposal' => $request->proposal,
-            // 'beritaacara' => $request->beritaacara,
-            'beritaacara_dosen' => $request->beritaacara_dosen,
-            // 'jamMulai' => $request->jamMulai,
-            // 'jamSelesai' => $request->jamSelesai,
-            // 'tanggal' => $request->tanggal,
-            // 'ruang_id' => $request->ruang_id,
-            // 'status' => $request->status,
+            'beritaacara' => $request->beritaacara,
         ];
 
-        if ($request->file('beritaacara_dosen')) {
+        if ($request->file('beritaacara')) {
             $semprop = SeminarProposal::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
             // dd($seminar_proposal->ta->mahasiswa->nim);
-            $file = $request->file('beritaacara_dosen');
+            $file = $request->file('beritaacara');
             $filename = 'Berita Acara Dosen SEMPROP' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('beritaacara_dosen')->storeAS('public/assets/file/Berita Acara Dosen Semprop TA/', $filename);
+            $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semprop TA/', $filename);
             $data = [
-                // 'ta_id' => $request->ta_id,
-                // 'proposal' => $request->proposal,
-                // 'beritaacara' => $request->beritaacara,
-                'beritaacara_dosen' => $filename,
-                // 'jamMulai' => $request->jamMulai,
-                // 'jamSelesai' => $request->jamSelesai,
-                // 'tanggal' => $request->tanggal,
-                // 'ruang_id' => $request->ruang_id,
-                // 'status' => $request->status,
-                // 'nama' => $request->TA->mahasiswa->nama,
-                // 'nim' => $request->TA->mahasiswa->nim,
-                // 'namaJurusan' => $request->TA->mahasiswa->jurusan->namaJurusan,
+                'beritaacara' => $filename,
             ];
         } else {
             $data['beritaacara'] = $seminar_proposal->beritaacara;
@@ -154,7 +136,13 @@ class SeminarProposalController extends Controller
     public function destroy($id)
     {
         $semprop = SeminarProposal::find($id);
+        $taAll = TA::with(['mahasiswa'])->where('id',$semprop->ta->id)->get()->first();
+        File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $semprop->beritaacara . ''));
         $semprop->delete();
+        $status = array(
+            'status_id' => 4,
+        );
+        $taAll->update($status);
         Alert::success('Berhasil', 'Berhasil hapus data Seminar Proposal');
         return back();
     }
@@ -186,13 +174,15 @@ class SeminarProposalController extends Controller
     }
     public function eksport(Request $request, $id)
     {
-        $ta_id = $request->route('id');
+        $id = $request->route('id');
+        $ta_id =  SeminarProposal::where('id',$id )->get()->first();
 
-        $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id', $request->route('id'))->get()->first();
-        $taAll = TA::with(['mahasiswa'])->where('id', $request->route('id'))->get()->first();
+        $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id',$ta_id->ta_id )->get()->first();
+        // dd($sempro->ta->mahasiswa->nim);
+        $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
 
 
-        $data = ['ta_id' => $ta_id, 'sempro' => $sempro];
+        $data = ['id' => $id, 'sempro' => $sempro];
         $pdf = PDF::loadView('TA.SPK.download', $data);
 
         $filename = 'Berita Acara Seminar Proposal' . '_' . $sempro->ta->mahasiswa->nim . '_' . time() . '.pdf';
@@ -203,7 +193,6 @@ class SeminarProposalController extends Controller
             $data = [
                 'beritaacara' => $filename,
             ];
-            // dd($data );
             $sempro->update($data);
             $status = array(
                 'status_id' => 7,

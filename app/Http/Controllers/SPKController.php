@@ -6,12 +6,15 @@ use App\Models\TA;
 use App\Models\SPK;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use File;
 
 class SPKController extends Controller
 {
@@ -24,8 +27,13 @@ class SPKController extends Controller
     {
         $jurusan = jurusan::all();
         $taAll = TA::with(['mahasiswa'])->get();
-
-        $spk = TA::with('mahasiswa', 'spk')->where('status_id','>=' , '4')->latest()->get();
+        $id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+        $spk = TA::with(['mahasiswa','spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+            $q->where('jurusan_id', $dosen_id->jurusan_id);
+       })->where('status_id','>=' , '4')->latest()->get();
+        // $spk = TA::with('mahasiswa', 'spk')->where('status_id','>=' , '4')->latest()->get();
         // dd($spk);
         return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll'));
     }
@@ -63,7 +71,7 @@ class SPKController extends Controller
         $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
             $pdf = PDF::loadView('TA.SPK.download');
             $filename = 'SPK' . '_'.$taAll->mahasiswa->nim.'_' . time() . '.pdf';
-            Storage::put('public/assets/file/SPK/'. $filename, $pdf->output());
+            Storage::put('public/assets/file/SPK TA/'. $filename, $pdf->output());
             $data = [
                 'TA_id' => $request->ta_id,
                 'fileSPK' => $filename,
@@ -119,6 +127,7 @@ class SPKController extends Controller
     {
         $data = $request->all();
         $spk = SPK::where('ta_id',$id)->get()->first();
+        // $hapus = $spk->fileSPK;
         $data = [
             'fileSPK' => $request->fileSPK,
         ];
@@ -137,6 +146,8 @@ class SPKController extends Controller
             return back();
         }
         // dd($data);
+        // File::delete(public_path('storage/assets/file/SPK TA/' . $hapus . ''));
+        // dd($hapus);
         $spk->update($data);
         $taAll = TA::with(['mahasiswa'])->where('id',$id)->get()->first();
         $status = array(
@@ -155,10 +166,17 @@ class SPKController extends Controller
      */
     public function destroy($fileSPK)
     {
-        $spk = SPK::where('fileSPK', $fileSPK)->first();
+        $spk = SPK::with('ta')->where('fileSPK', $fileSPK)->first();
+        // dd($spk->ta->id);
         // $post =Post::where('id',$post_id)->first();
         if ($spk != null) {
+            File::delete(public_path('storage/assets/file/SPK TA/' . $fileSPK . ''));
             $spk->delete();
+            $taAll = TA::with(['mahasiswa'])->where('id',$spk->ta->id)->get()->first();
+            $status = array(
+                'status_id' => 4,
+            );
+            $taAll->update($status);
             Alert::success('Berhasil', 'Berhasil hapus data SPK');
             return back();
         }

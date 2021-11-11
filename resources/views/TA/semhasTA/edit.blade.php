@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{ route('semhas.update', $semhas->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('semhas.update', $semhas->id) }}" id="editData" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
                 <input type="hidden" class="form-control" id="mahasiswa_id" name="ta_id" value="{{ $semhas->ta_id }}">
@@ -87,7 +87,7 @@
                             Berita Acara Dosen
                         </label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara_dosen" value="{{ $semhas->beritaacara_dosen }}" />
+                            <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara_dosen }}" />
                         </div>
                     </div>
                     {{-- <div class="form-group row">
@@ -103,10 +103,22 @@
                         </div>
                     </div> --}}
                     <a href="{{ route('semhas.index') }}" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
-                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan </button>
+                    <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+    $("#editData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection

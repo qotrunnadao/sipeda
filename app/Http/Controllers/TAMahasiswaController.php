@@ -66,7 +66,7 @@ class TAMahasiswaController extends Controller
             // dd($mhs_id);
             $file = $request->file('praproposal');
             $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('praproposal')->storeAS('public/assets/file/PraproposalTA', $filename);
+            $path = $request->file('praproposal')->storeAS('public/assets/file/PraproposalTA/', $filename);
             $data = [
                 'mahasiswa_id' => $mhs_id->id,
                 'judulTA' => $request->judulTA,
@@ -153,7 +153,7 @@ class TAMahasiswaController extends Controller
             $nim = $mhs_id->nim;
             $file = $request->file('praproposal');
             $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('praproposal')->storeAS('public/assets/file/TA', $filename);
+            $path = $request->file('praproposal')->storeAS('public/assets/file/PraproposalTA/', $filename);
             $data = [
                 'mahasiswa_id' => $request->mahasiswa,
                 'judulTA' => $request->judulTA,

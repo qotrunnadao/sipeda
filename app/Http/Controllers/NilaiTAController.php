@@ -109,7 +109,12 @@ class NilaiTAController extends Controller
     public function destroy($id)
     {
         $nilai = NilaiTA::find($id);
+        $taAll = TA::with(['mahasiswa'])->where('id',$nilai->ta_id)->get()->first();
         $nilai->delete();
+        $status = array(
+            'status_id' => 9,
+        );
+        $taAll->update($status);
         Alert::success('Berhasil', 'Berhasil hapus data Nilai Tugas Akhir');
         return back();
     }
