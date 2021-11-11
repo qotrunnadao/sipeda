@@ -160,6 +160,11 @@ Route::put('/tugas-akhir/nilaita/update/{id}',  'NilaiTAController@update')->nam
 Route::get('/tugas-akhir/nilaita/delete/{id}',  'NilaiTAController@destroy')->name('nilaita.delete');
 Route::post('/tugas-akhir/nilaita/nim/',  'NilaiTAController@nim')->name('nilaita.nim');
 
+//distribusi
+Route::get('/tugas-akhir/distribusi',  'DistribusiController@index')->name('distribusi.index');
+Route::put('/tugas-akhir/distribusi/download/{filename}',  'DistribusiController@download')->name('distribusi.download');
+Route::get('/tugas-akhir/distribusi/destroy/{id}',  'DistribusiController@destroy')->name('distribusi.destroy');
+
 //=============== PENDADARAN ===================
 //status pendadaran
 Route::get('/pendadaran/status-pendadaran',  'StatusPendadaranController@index')->name('statuspendadaran.index');
@@ -253,9 +258,8 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     //nilai TA
     Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita_mhs.index');
     //distribusi
-    Route::get('/tugas-akhir/distribusi', function () {
-        return view('mahasiswa.TA.pages.distribusi');
-    })->name('mahasiswaTA.distribusi');
+    Route::get('/tugas-akhir/distribusi/create', 'DistribusiController@create')->name('distribusi.create');
+    Route::post('/tugas-akhir/distribusi/store', 'DistribusiController@store')->name('distribusi.store');
 
     //=========== PENDADARAN==============
 

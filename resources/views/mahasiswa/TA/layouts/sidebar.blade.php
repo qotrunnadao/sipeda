@@ -47,11 +47,11 @@
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>
         </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link" href="{{ route('mahasiswaTA.distribusi') }}">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('distribusi.create') }}">
                 <span class="menu-title">Distribusi</span>
                 <i class="mdi mdi-share-variant menu-icon"></i>
             </a>
-        </li> --}}
+        </li>
     </ul>
 </nav>

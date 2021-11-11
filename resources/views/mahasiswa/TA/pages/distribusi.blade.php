@@ -5,18 +5,23 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mb-5">Upload berkas distribusi</h4>
-                <div class="form-group row">
-                    <div class="col-lg-3">
-                        <label class="col-form-label">File Distribusi</label>
+            <form class="forms-sample" action="{{route('distribusi.store')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
+                <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
+                <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="1">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            File Distribusi
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" name="fileDistribusi" />
+                        </div>
                     </div>
-                    <div class="col-lg-8">
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
+                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
-                <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
-            </div>
+            </form>
         </div>
     </div>
     <div class="col-12 grid-margin stretch-card">
@@ -27,26 +32,20 @@
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr class="text-center">
-                                <th> # </th>
+                                <th> No. </th>
                                 <th> Nama Dokumen </th>
-                                <th> Aksi </th>
+                                <th> Tanggal Upload </th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php($no=1)
+                            @foreach ( $distribusi as $value )
                             <tr>
-                                <td class="text-center"> 1 </td>
-                                <td> Distribusi dokumen TA - H1D018033 </td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete-forever"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <td class="text-center"> {{ $no ++ }} </td>
+                                <td class="text-center"> {{ $value->fileDistribusi }} </td>
+                                <td class="text-center"> {{ $value->created_at }} </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

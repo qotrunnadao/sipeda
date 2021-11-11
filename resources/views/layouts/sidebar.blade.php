@@ -55,6 +55,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('semprop.index') }}"> Seminar Proposal </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('semhas.index') }}"> Seminar Hasil </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('nilaita.index') }}"> Nilai TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('distribusi.index') }}"> Data Distribusi </a></li>
                 </ul>
             </div>
         </li>
