@@ -41,11 +41,13 @@ class TAMahasiswaController extends Controller
         $dosen = Dosen::all();
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
+        $tahun = TahunAkademik::where('aktif', '1')->get()->first();
+        // dd($tahun);
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $tugas_akhir = TA::with(['mahasiswa', 'dosen1', 'dosen2', 'status'])->where('mahasiswa_id', $mhs_id->id)->get();
         // dd($tugas_akhir);
         $mahasiswa = Mahasiswa::with('user')->get()->all();
-        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'dosen'));
+        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'dosen', 'tahun'));
     }
 
     /**

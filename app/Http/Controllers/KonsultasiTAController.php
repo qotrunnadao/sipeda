@@ -67,8 +67,11 @@ class KonsultasiTAController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $ta_id = $request->id;
-        $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->latest()->get();
+        $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('dosen_id', $dosen_id->id)->latest()->get();
         // dd($konsultasi);
         return view('TA.konsultasiTA.detail', compact('konsultasi'));
     }
