@@ -54,6 +54,7 @@ class SeminarProposalMahasiswaController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        // dd($data);
 
         if ($request->file('proposal')) {
             $jamMulai = $request->jamMulai;
@@ -128,8 +129,8 @@ class SeminarProposalMahasiswaController extends Controller
                     $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
                     $status = array(
                         'status_id' => 6,
+                        'judulTA' => $request->judul,
                     );
-                    // dd($status);
                     $taAll->update($status);
                     Alert::success('Berhasil', 'Pengajuan Seminar Proposal telah Berhasil');
                 } else {

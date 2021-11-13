@@ -35,11 +35,19 @@ class NilaiTAController extends Controller
             }
             return view('mahasiswa.TA.pages.nilai', compact('nilai','NilaiHuruf'));
         } else {
+            $id = Auth::User()->id;
+            $user_id = User::where('id', $id)->get()->first();
+            $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+            // dd($dosen_id->id);
             $NilaiHuruf = NilaiHuruf::latest()->get();
             $jurusan = jurusan::all();
             $taAll = TA::with(['mahasiswa'])->get();
             $statusnilai = StatusNilai::all();
-            $nilai = NilaiTA::With('TA.mahasiswa.jurusan', 'NilaiHuruf')->latest()->get();
+            $nilai = NilaiTA::with(['TA.mahasiswa.jurusan', 'NilaiHuruf'])->whereHas('TA', function ($q) use ($dosen_id) {
+                $q->where('pembimbing1_id', $dosen_id->id)
+                    ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->latest()->get();
+            // $nilai = NilaiTA::With('TA.mahasiswa.jurusan', 'NilaiHuruf')->where('dosen_id', $dosen_id->id)->latest()->get();
             // dd($nilai);
             return view('TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai', 'NilaiHuruf'));
         }
