@@ -132,8 +132,8 @@
                                 <th> # </th>
                                 <th> Nama </th>
                                 <th> Status Tugas Akhir </th>
-                                <th> Status Pendadaran </th>
-                                <th> Status Yudisium </th>
+                                {{-- <th> Status Pendadaran </th>
+                                <th> Status Yudisium </th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -152,7 +152,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">
+                                    {{-- <div class="badge badge-danger badge-pill"> --}}
                                         {{-- @if($pendadaran == null)
                                         belum mengajukan
                                         @else
@@ -161,7 +161,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="badge badge-danger badge-pill">
+                                    {{-- <div class="badge badge-danger badge-pill"> --}}
                                         {{-- @if($yudisium == null)
                                         belum mengajukan
                                         @else
