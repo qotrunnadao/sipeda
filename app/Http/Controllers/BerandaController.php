@@ -40,7 +40,7 @@ class BerandaController extends Controller
             'akademik' => Akademik::latest()->get(),
         );
         if (auth()->user()->level_id == 2) {
-            return view('admin.master.beranda', $data);
+            return view('admin.beranda', $data);
         } elseif (auth()->user()->level_id == 1) {
             return view('komisi.beranda', $data);
         } elseif (auth()->user()->level_id == 3) {
