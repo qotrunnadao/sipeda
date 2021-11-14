@@ -258,7 +258,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     //nilai TA
     Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita_mhs.index');
     //distribusi
-    Route::get('/tugas-akhir/distribusi/create', 'DistribusiController@create')->name('distribusi.create');
+    Route::get('/tugas-akhir/distribusi-mahasiswa', 'DistribusiController@create')->name('distribusi.create');
     Route::post('/tugas-akhir/distribusi/store', 'DistribusiController@store')->name('distribusi.store');
 
     //=========== PENDADARAN==============

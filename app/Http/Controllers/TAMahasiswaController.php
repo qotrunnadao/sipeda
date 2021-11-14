@@ -37,6 +37,10 @@ class TAMahasiswaController extends Controller
      */
     public function create(Request $request)
     {
+        $id = auth()->User()->id;
+        $user_id = User::where('id', $id)->get()->first();
+        $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         $data_ta = new TA();
         $dosen = Dosen::all();
         $id = Auth::User()->id;
@@ -47,7 +51,7 @@ class TAMahasiswaController extends Controller
         $tugas_akhir = TA::with(['mahasiswa', 'dosen1', 'dosen2', 'status'])->where('mahasiswa_id', $mhs_id->id)->get();
         // dd($tugas_akhir);
         $mahasiswa = Mahasiswa::with('user')->get()->all();
-        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'dosen', 'tahun'));
+        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'dosen', 'tahun', 'TA'));
     }
 
     /**

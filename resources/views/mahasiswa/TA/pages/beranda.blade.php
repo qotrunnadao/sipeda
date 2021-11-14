@@ -47,10 +47,11 @@
                             <tr>
                                 <td> Judul Penelitian </td>
                                 <td>:</td>
-                                @if ($TA == null)
-                                <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
-                                @else
-                                <td> {{ $TA->judulTA }}
+                                <td>
+                                    @if ($TA == null)
+                                    <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
+                                    @else
+                                    {{ $TA->judulTA }}
                                 </td>
                                 @endif
                             </tr>
@@ -58,10 +59,12 @@
                                 <td> Lokasi </td>
                                 <td>:</td>
                                 @if ($TA == null)
-                                <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
+                                </td>
                                 @else
-                                    <td> {{ $TA->instansi }}
-                                    </td>
+                                <td> {{ $TA->instansi }}
+                                </td>
                                 @endif
                             </tr>
                         </tbody>
@@ -75,7 +78,9 @@
                                 <td> SPK Tanggal </td>
                                 <td>:</td>
                                 @if ($spk == null)
-                                <td><span class="badge badge-primary">SPK Tugas Akhir Belum Terbit</span></td>
+                                <td>
+                                    <span class="badge badge-primary">SPK Tugas Akhir Belum Terbit</span>
+                                </td>
                                 @else
                                 <td> {{ $spk->created_at }} </td>
                                 @endif
@@ -136,13 +141,15 @@
                                 <td> 1 </td>
                                 <td> {{$mhs_id->nama }} </td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">
-                                        @if($TA == null)
-                                     Belum mengajukan Tugas Akhir
-                                        @else
-                                        {{ $TA->status->ket }}
-                                        @endif
+                                    @if($TA == null)
+                                    <div class="badge badge-danger badge-pill">
+                                        Belum mengajukan Tugas Akhir
                                     </div>
+                                    @else
+                                    <div class="badge badge-primary badge-pill">
+                                        {{ $TA->status->ket }}
+                                    </div>
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="badge badge-danger badge-pill">
@@ -177,9 +184,15 @@
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
+                            @if($TA == null)
                             <tr>
                                 <td>
-
+                                    <div class="badge badge-danger badge-pill">Belum mengajukan Tugas Akhir</div>
+                                </td>
+                            </tr>
+                            @else
+                            <tr>
+                                <td>
                                     @if($TA->status_id >=5)
                                     <div class="btn-group">
                                         <form action="{{ route('download.spk', $spk->fileSPK) }}" method="post">
@@ -196,7 +209,6 @@
                             </tr>
                             <tr>
                                 <td>
-
                                     @if($TA->status_id >=7)
                                     <div class="btn-group">
                                         <form action="{{ route('download.semprop', $semprop->beritaacara) }}" method="post">
@@ -227,6 +239,7 @@
                                     @endif
                                 </td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

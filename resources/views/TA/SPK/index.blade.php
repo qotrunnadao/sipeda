@@ -6,11 +6,8 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                {{-- <div>
-                    <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#uploadSPK"> <i class="mdi mdi-plus"></i> Tambah</button>
-                </div> --}}
                 <div class="table-responsive">
-                    <table id="creatData" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>
@@ -37,19 +34,19 @@
                                 <td class="text-center">
                                     <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
                                     @if (auth()->user()->level_id == 5)
-                                    <td>
-                                        <a href="" id="linkButton">
-                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport" idv="{{ $value->ta_id }}"><i class="mdi mdi-check"></i></button>
-                                        </a>
-                                    </td>
-                                    @endif
+                                <td>
+                                    <a href="" id="linkButton">
+                                        <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport" idv="{{ $value->ta_id }}"><i class="mdi mdi-check"></i></button>
+                                    </a>
+                                </td>
+                                @endif
                                 </td>
                                 @else
                                 <td>
-                                @if ($value->spk->fileSPK == null)
+                                    @if ($value->spk->fileSPK == null)
                                     SPK Tugas Akhir
                                     <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
-                                @else
+                                    @else
                                     <div class="btn-group">
                                         <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
                                             @method('PUT')
@@ -78,7 +75,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                 </form>
+                    </form>
                 </div>
             </div>
         </div>

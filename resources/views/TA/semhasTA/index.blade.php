@@ -14,13 +14,13 @@
                             <tr>
                                 <th class="text-center"> No. </th>
                                 <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> Status</th>
                                 <th class="text-center"> NIM </th>
                                 <th class="text-center"> Jurusan </th>
                                 <th class="text-center"> Ruang </th>
                                 <th class="text-center"> Tanggal </th>
                                 <th class="text-center"> Waktu </th>
                                 <th class="text-center"> Berita Acara</th>
-                                <th class="text-center"> Status</th>
                                 <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
@@ -30,6 +30,16 @@
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
                                 <td> {{ $value->TA->mahasiswa->nama }} </td>
+                                <td class="text-center">
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">menunggu</span>
+                                    @elseif($value->status == 1)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @else
+                                    <span class="badge badge-danger">Tidak Disetujui</span>
+                                    @endif
+                                </td>
+
                                 <td> {{ $value->TA->mahasiswa->nim }} </td>
                                 <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
@@ -46,15 +56,6 @@
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    @if($value->status == 0)
-                                    <span class="badge badge-warning">menunggu</span>
-                                    @elseif($value->status == 1)
-                                    <span class="badge badge-success">Disetujui</span>
-                                    @else
-                                    <span class="badge badge-danger">Tidak Disetujui</span>
                                     @endif
                                 </td>
 
@@ -109,12 +110,12 @@
                             <tr>
                                 <th class="text-center"> No. </th>
                                 <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> Status</th>
                                 <th class="text-center"> NIM </th>
                                 <th class="text-center"> Ruang </th>
                                 <th class="text-center"> Tanggal </th>
                                 <th class="text-center"> Waktu </th>
                                 <th class="text-center"> Berita Acara</th>
-                                <th class="text-center"> Status</th>
                                 <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
@@ -124,6 +125,15 @@
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
                                 <td> {{ $value->TA->mahasiswa->nama }} </td>
+                                <td class="text-center">
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">menunggu</span>
+                                    @elseif($value->status == 1)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @else
+                                    <span class="badge badge-danger">Tidak Disetujui</span>
+                                    @endif
+                                </td>
                                 <td class="text-center"> {{ $value->TA->mahasiswa->nim }}</td>
                                 <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
                                 <td class="text-center"> {{ $value->tanggal }}</td>
@@ -141,15 +151,7 @@
                                     </div>
                                     @endif
                                 </td>
-                                <td class="text-center">
-                                    @if($value->status == 0)
-                                    <span class="badge badge-warning">menunggu</span>
-                                    @elseif($value->status == 1)
-                                    <span class="badge badge-success">Disetujui</span>
-                                    @else
-                                    <span class="badge badge-danger">Tidak Disetujui</span>
-                                    @endif
-                                </td>
+
 
                                 <td class="text-center">
                                     @if ($value->status != 0)

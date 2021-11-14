@@ -56,15 +56,15 @@ class BerandaController extends Controller
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
-        // $pendadaran = Pendadaran::where('mhs_id', $mhs_id->id)->latest()->get();
-        // $yudisium = Yudisium::where('mhs_id', $mhs_id->id)->latest()->get();
-        $semprop = SeminarProposal::with('ta')->where('ta_id', $TA->id)->latest()->first();
-        $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
-        $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
-        // $spkterbit = $spk->where('created_at', date());
-        // $spkberakhir = Carbon::now()->addYear(1)->isoFormat('Y M D');
-
-        // dd($semprop);
+        if ($TA == null) {
+            $semprop = SeminarProposal::with('ta')->latest()->first();
+            $spk = SPK::with('ta')->latest()->first();
+            $semhas = SeminarHasil::with('ta')->latest()->first();
+        } else {
+            $semprop = SeminarProposal::with('ta')->where('ta_id', $TA->id)->latest()->first();
+            $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
+            $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
+        }
 
         $ta = array(
             'status' => Status::latest()->get(),

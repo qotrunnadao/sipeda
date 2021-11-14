@@ -38,11 +38,12 @@ class SeminarProposalMahasiswaController extends Controller
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         $tugas_akhir = TA::where('mahasiswa_id', $mhs_id->id)->latest()->first();
         $Ruang = Ruang::get();
         $SeminarProposal = SeminarProposal::with(['ta', 'ruang'])->where('ta_id', $tugas_akhir->id)->select('*')->latest()->get();
         // dd($SeminarProposal);
-        return view('mahasiswa.TA.pages.semprop', compact('SeminarProposal', 'tugas_akhir', 'Ruang'));
+        return view('mahasiswa.TA.pages.semprop', compact('TA', 'SeminarProposal', 'tugas_akhir', 'Ruang'));
     }
 
     /**
@@ -126,7 +127,7 @@ class SeminarProposalMahasiswaController extends Controller
                         'proposal' => $filename,
                     ];
                     $cek = SeminarProposal::create($data);
-                    $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
+                    $taAll = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
                     $status = array(
                         'status_id' => 6,
                         'judulTA' => $request->judul,

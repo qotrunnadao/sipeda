@@ -30,8 +30,15 @@ class TAController extends Controller
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         if (auth()->user()->level_id == 2) {
             $tugas_akhir = TA::with('status')->latest()->get();
+            $acc_ta = TA::with('status')->where('status_id', 2)->latest()->get();
         } elseif (auth()->user()->level_id == 3) {
             $tugas_akhir = TA::with(['status'])->whereHas('status', function ($q) use ($dosen_id) {
+                $q->where('pembimbing1_id', $dosen_id->id)
+                    ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->latest()->get();
+            $acc_ta = TA::with('status')->where('status_id', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->orWhereHas('status', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
@@ -42,9 +49,15 @@ class TAController extends Controller
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
+            $acc_ta = TA::with('status')->where('status_id', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->orWhereHas('status', function ($q) use ($dosen_id) {
+                $q->where('pembimbing1_id', $dosen_id->id)
+                    ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->latest()->get();
         }
         $jurusan = jurusan::get();
-        return view('TA.dataTA.index', compact('tugas_akhir', 'status'));
+        return view('TA.dataTA.index', compact('acc_ta', 'tugas_akhir', 'status'));
     }
 
     /**

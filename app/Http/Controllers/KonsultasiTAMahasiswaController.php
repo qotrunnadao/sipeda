@@ -23,11 +23,12 @@ class KonsultasiTAMahasiswaController extends Controller
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         $tugas_akhir = TA::with(['dosen1', 'dosen2'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         // $tugas_akhir = TA::find($id)->with(['dosen1', 'dosen2'])->where('status_id', '3')->first();
         $konsultasi = KonsultasiTA::with(['dosen'])->where('ta_id', $tugas_akhir->id)->select('*')->latest()->get();
         // dd($konsultasi);
-        return view('mahasiswa.TA.pages.konsultasi', compact('konsultasi', 'tugas_akhir'));
+        return view('mahasiswa.TA.pages.konsultasi', compact('TA', 'konsultasi', 'tugas_akhir'));
     }
 
     /**

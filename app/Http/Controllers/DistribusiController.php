@@ -57,10 +57,11 @@ class DistribusiController extends Controller
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
+        $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         $tugas_akhir = TA::with(['dosen1', 'dosen2'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
-    //    dd($tugas_akhir);
+        //    dd($tugas_akhir);
         $distribusi = Distribusi::with(['mahasiswa'])->where('ta_id', $tugas_akhir->id)->select('*')->latest()->get();
-        return view('mahasiswa.TA.pages.distribusi', compact('data_distribusi', 'distribusi', 'tugas_akhir'));
+        return view('mahasiswa.TA.pages.distribusi', compact('TA', 'data_distribusi', 'distribusi', 'tugas_akhir'));
     }
 
     /**
@@ -77,8 +78,7 @@ class DistribusiController extends Controller
         if ($tugas_akhir->status_id < '5') {
             Alert::warning('Gagal', ' Anda Belom Mempunyai Data Pengajuan TA yang Sudah Disetujui');
             return back();
-        }
-        elseif ($tugas_akhir->status_id >= '5') {
+        } elseif ($tugas_akhir->status_id >= '5') {
             $mhs_id = Mahasiswa::with(['user'])->where('user_id', $request->user_id)->get()->first();
             $nim = $mhs_id->nim;
             // dd($nim);
