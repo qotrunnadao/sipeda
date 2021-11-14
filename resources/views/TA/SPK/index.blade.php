@@ -35,9 +35,11 @@
                                     <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
                                     @if (auth()->user()->level_id == 5)
                                 <td>
-                                    <a href="" id="linkButton">
-                                        <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport" idv="{{ $value->ta_id }}"><i class="mdi mdi-check"></i></button>
-                                    </a>
+                                    <div class="btn-group">
+                                        <form action="{{ route('spk.eksport', $value->id) }}" method="get" id="eksport">
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div>
                                 </td>
                                 @endif
                                 </td>
@@ -110,7 +112,7 @@
         </div>
     </div>
 </div>
-<script>
+{{-- <script>
     $(document).ready(function () {
         var cek = true;
 
@@ -131,11 +133,23 @@
 
     });
 });
-</script>
+</script> --}}
 <script>
     $(document).ready(function () {
 
     $("#editData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
+<script>
+    $(document).ready(function () {
+
+    $("#eksport").submit(function () {
 
         $("#btnSubmit").attr("disabled", true);
 
