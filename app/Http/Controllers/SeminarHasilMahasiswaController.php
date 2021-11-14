@@ -131,6 +131,7 @@ class SeminarHasilMahasiswaController extends Controller
                         $taAll = TA::with(['mahasiswa'])->where('id',$request->ta_id)->get()->first();
                         $status = array(
                             'status_id' => 8,
+                            'judulTA' => $request->judul,
                         );
                         // dd($taAll);
                         $taAll->update($status);

@@ -27,7 +27,7 @@
                                     <div class="badge badge-secondary badge-pill">{{ $value->nilaiAngka }}</div>
                                 </td>
                                 <td class="text-center">
-                                    <div class="badge badge-secondary badge-pill">{{ $value->nilaiHuruf }}</div>
+                                    <div class="badge badge-secondary badge-pill">{{ $value->nilaiHuruf->nilaiHuruf }}</div>
                                 </td>
                                 <td class="text-center">
                                     @if($value->statusnilai_id == 1)

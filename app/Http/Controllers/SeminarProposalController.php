@@ -164,7 +164,7 @@ class SeminarProposalController extends Controller
         );
         // dd($SeminarProposal);
         $SeminarProposal->update($data);
-        Alert::warning('Gagal', 'Pengajuan Seminar Proposal Ditolak');
+        Alert::success('Berhasil', 'Pengajuan Seminar Proposal Berhasil Ditolak');
         return back();
     }
     public function download($filename)
