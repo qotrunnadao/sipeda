@@ -24,7 +24,7 @@ class User extends Authenticatable
     }
     public function Dosen()
     {
-        return $this->belongsTo(Dosen::class, 'Dosen_id');
+        return $this->hasOne(Dosen::class, 'user_id');
     }
     /**
      * The attributes that should be hidden for arrays.

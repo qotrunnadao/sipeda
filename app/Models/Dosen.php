@@ -40,8 +40,12 @@ class Dosen extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function TA()
+    public function TA1()
     {
-        return $this->belongsTo(TA::class);
+        return $this->hasMany(TA::class, 'pembimbing1_id');
+    }
+    public function TA2()
+    {
+        return $this->hasMany(TA::class, 'pembimbing2_id');
     }
 }

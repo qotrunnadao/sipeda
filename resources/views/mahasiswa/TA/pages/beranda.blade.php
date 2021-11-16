@@ -75,14 +75,14 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td> SPK Tanggal </td>
+                                <td> SPK Disahkan </td>
                                 <td>:</td>
                                 @if ($spk == null)
                                 <td>
                                     <span class="badge badge-primary">SPK Tugas Akhir Belum Terbit</span>
                                 </td>
                                 @else
-                                <td> {{ $spk->created_at }} </td>
+                                <td> {{ $sah }} </td>
                                 @endif
                             </tr>
                             <tr>
@@ -93,7 +93,7 @@
                             <tr>
                                 <td> SPK Berakhir </td>
                                 <td>:</td>
-                                <td> 24/10/2022 </td>
+                                <td> {{$expired}} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -111,7 +111,7 @@
                         <li>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} "> {{ $value->ket }} <i class="input-helper"></i></label>
+                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} " {{ $loop->iteration <= $TA->status_id && $loop->iteration != 1 || $TA->status_id == 1 && $loop->iteration == $TA->status_id ? 'checked' : '' }}> {{ $value->ket }} <i class="input-helper"></i></label>
                             </div>
                         </li>
                         @endforeach
@@ -247,5 +247,4 @@
         </div>
     </div>
 </div>
-
 @endsection
