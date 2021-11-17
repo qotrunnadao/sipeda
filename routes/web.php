@@ -43,14 +43,31 @@ Auth::routes();
 // ROUTE GUEST
 Route::get('/', function () {
     return view('guest.login');
-});  //Halaman Login LandingPage
+})->name('loginpage');  //Halaman Login LandingPage
 
 // Route::get('/cas/login', function () {
-//     return cas()->authenticate();
+//     cas()->authenticate();
 // })->name('cas.login'); //Halaman login KORI
 
-Route::get('/cas/callback', 'CasController@callback')->name('cas.login');
+// Route::post('/cas/logout', ['middleware' => 'auth', function () {
+//     cas()->logout(url('/'));
+// }])->name('cas.logout'); //Logout SSO
 
+Route::get('/cas/login', 'CasController@callback')->name('cas.login');  //Halaman login KORI
+Route::post('/cas/logout', 'CasController@logout')->name('cas.logout');
+
+// Route::get('/logout', function () {
+//     if (cas()->isAuthenticated()) {
+//         Auth::logout();;
+//         session()->flush();
+//         request()->session()->getHandler()->destroy(request()->session()->getId());
+//         cas()->logout();
+//         return redirect('/');
+//     } else {
+//         session()->flush();
+//         return redirect('/');
+//     }
+// })->name('cas.logout');
 
 //=============== ROUTE ADMIN ====================
 Route::get('/admin/beranda', 'BerandaController@index')->name('admin.beranda')->middleware('admin');
@@ -90,6 +107,9 @@ Route::get('/data-dosen', 'DosenController@index')->name('dosen.index');
 
 //Route Data Komisi
 Route::get('/data-komisi', 'KomisiController@index')->name('komisi.index');
+
+//Route Data Komisi
+Route::get('/data-kajur', 'DosenController@kajur')->name('dataKajur');
 
 
 //================= ROUTE DOSEN ========================

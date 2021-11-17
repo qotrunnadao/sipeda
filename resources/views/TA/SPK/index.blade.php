@@ -34,7 +34,7 @@
                                 <td class="text-center">
                                     <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
                                     @if (auth()->user()->level_id == 5)
-                                <td>
+                                <td class="text-center">
                                     <div class="btn-group">
                                         <form action="{{ route('spk.eksport', $value->id) }}" method="get" id="eksport">
                                             <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
@@ -44,7 +44,7 @@
                                 @endif
                                 </td>
                                 @else
-                                <td>
+                                <td class="text-center">
                                     @if ($value->spk->fileSPK == null)
                                     SPK Tugas Akhir
                                     <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
@@ -59,7 +59,7 @@
                                 </td>
                                 @endif
                                 @if (auth()->user()->level_id == 5)
-                                <td>
+                                <td class="text-center">
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>

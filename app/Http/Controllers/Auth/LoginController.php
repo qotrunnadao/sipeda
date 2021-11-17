@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Subfission\Cas\Facades\Cas;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Subfission\Cas\Facades\Cas;
 
 class LoginController extends Controller
 {
@@ -31,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::BERANDA;
 
     /**
      * Create a new controller instance.
@@ -45,7 +46,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required',
         ]);
@@ -54,7 +55,8 @@ class LoginController extends Controller
             ->where('password', $request->password)->get()
             ->first();
 
-        if (auth()->loginUsingId($user->id)) {
+        if (Auth::loginUsingId($user->id)) {
+            $request->session()->regenerate();
             if (auth()->user()->level_id == 2) {
                 return redirect()->route('admin.beranda');
             } elseif (auth()->user()->level_id == 1) {
@@ -66,9 +68,18 @@ class LoginController extends Controller
             } elseif (auth()->user()->level_id == 4) {
                 return redirect()->route('mahasiswa.menu');
             }
-        } else {
-            Alert::warning('Gagal', 'Anda gagal login');
-            return back();
         }
+
+        Alert::warning('Gagal', 'Anda gagal login');
+        return back();
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+        Alert::warning('Gagal', 'Anda gagal login');
+        return redirect()->route('loginpage');
     }
 }
