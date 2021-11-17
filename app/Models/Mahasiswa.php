@@ -35,7 +35,10 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(KonsultasiTA::class, 'konsultasiTA_id');
     }
-
+    public function TA()
+    {
+        return $this->belongsTo(TA::class, 'TA_id');
+    }
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');

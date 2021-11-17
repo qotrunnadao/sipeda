@@ -6,6 +6,7 @@ use App\Models\TA;
 use App\Models\SPK;
 use App\Models\User;
 use App\Models\Status;
+use App\Models\Dosen;
 use App\Models\Akademik;
 use Carbon\Carbon;
 use App\Models\StatusKP;
@@ -39,6 +40,13 @@ class BerandaController extends Controller
             'statusYudisium' => StatusYudisium::latest()->get(),
             'akademik' => Akademik::latest()->get(),
         );
+        $id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user','TA1','TA2'])->where('user_id', $id)->get()->first();
+        $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+        // $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+        $Mahasiswa = Mahasiswa::with('TA')->where('jurusan_id', $dosen_id->jurusan_id)->latest()->get();
+        // dd($dosen);
         if (auth()->user()->level_id == 2) {
             return view('admin.beranda', $data);
         } elseif (auth()->user()->level_id == 1) {
@@ -46,7 +54,7 @@ class BerandaController extends Controller
         } elseif (auth()->user()->level_id == 3) {
             return view('dosen.beranda', $data);
         } elseif (auth()->user()->level_id == 5) {
-            return view('kajur.beranda');
+            return view('kajur.beranda', compact( 'dosen', 'dosen_id', 'Mahasiswa'));
         }
     }
 
@@ -65,7 +73,10 @@ class BerandaController extends Controller
             $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
             $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
         }
-
+        $sah = Carbon::parse( $spk->created_at )->isoFormat('D/M/Y');
+        $expired = Carbon::parse( $spk->created_at )->addYear()->isoFormat('D/M/Y');
+        // dd($expired);
+        // dd($spk->created_at);
         $ta = array(
             'status' => Status::latest()->get(),
             'statusnilai' => StatusNilai::latest()->get(),
@@ -76,7 +87,7 @@ class BerandaController extends Controller
             // 'user' => Auth::user()::With('mahasiswa')->latest()->get(),
         );
 
-        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id', 'spk'));
+        return view('mahasiswa.TA.pages.beranda', $ta, compact('TA', 'semhas', 'semprop', 'mhs_id', 'spk', 'expired', 'sah'));
     }
 
     public function downloadSPK($filename)

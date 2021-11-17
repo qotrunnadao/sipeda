@@ -55,6 +55,7 @@ class LoginController extends Controller
             ->where('password', $request->password)->get()
             ->first();
 
+<<<<<<< HEAD
         if (Auth::loginUsingId($user->id)) {
             $request->session()->regenerate();
             if (auth()->user()->level_id == 2) {
@@ -67,6 +68,24 @@ class LoginController extends Controller
                 return redirect()->route('kajur.beranda');
             } elseif (auth()->user()->level_id == 4) {
                 return redirect()->route('mahasiswa.menu');
+=======
+        if($user == null){
+            Alert::Warning('Gagal', 'Anda gagal login');
+            return back();
+        }else{
+            if (auth()->loginUsingId($user->id)) {
+                if (auth()->user()->level_id == 2) {
+                    return redirect()->route('admin.beranda');
+                } elseif (auth()->user()->level_id == 1) {
+                    return redirect()->route('komisi.beranda');
+                } elseif (auth()->user()->level_id == 3) {
+                    return redirect()->route('dosen.beranda');
+                } elseif (auth()->user()->level_id == 5) {
+                    return redirect()->route('kajur.beranda');
+                } elseif (auth()->user()->level_id == 4) {
+                    return redirect()->route('mahasiswa.menu');
+                }
+>>>>>>> a531311fc2a28f9c43213032995b91ef94e819fe
             }
         }
 
