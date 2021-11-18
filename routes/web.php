@@ -155,6 +155,7 @@ Route::get('/tugas-akhir/semhas/ditolak/{SeminarHasil}',  'SeminarHasilControlle
 //spk
 Route::get('/tugas-akhir/spk',  'SPKController@index')->name('spk.index');
 Route::post('/tugas-akhir/spk/store',  'SPKController@store')->name('spk.store');
+Route::post('/tugas-akhir/spk/create/{id}',  'SPKController@create')->name('spk.create');
 Route::put('/tugas-akhir/spk/download/{filename}',  'SPKController@download')->name('spk.download');
 Route::put('/tugas-akhir/spk/update/{id}',  'SPKController@update')->name('spk.update');
 Route::get('/tugas-akhir/spk/destroy/{id}',  'SPKController@destroy')->name('spk.destroy');

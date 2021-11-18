@@ -15,7 +15,8 @@
                                 <th class="text-center"> NIM </th>
                                 <th class="text-center"> Jurusan </th>
                                 <th class="text-center"> File SPK </th>
-                                @if (auth()->user()->level_id == 5)
+                                @if (auth()->user()->level_id == 5  || auth()->user()->level_id == 2)
+                                <th class="text-center"> Nomer Surat </th>
                                 <th class="text-center"> Aksi </th>
                                 @endif
                             </tr>
@@ -31,24 +32,11 @@
                                 </td>
                                 <td class="text-center"> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
                                 @if ($value->spk == null)
-                                <td class="text-center">
+                                <td>
                                     <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
-                                    @if (auth()->user()->level_id == 5)
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <form action="{{ route('spk.eksport', $value->id) }}" method="get" id="eksport">
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
-                                @endif
                                 </td>
                                 @else
-                                <td class="text-center">
-                                    @if ($value->spk->fileSPK == null)
-                                    SPK Tugas Akhir
-                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
-                                    @else
+                                <td>
                                     <div class="btn-group">
                                         <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
                                             @method('PUT')
@@ -58,21 +46,38 @@
                                     </div>
                                 </td>
                                 @endif
-                                @if (auth()->user()->level_id == 5)
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
-                                    </div>
-                                    <div class="btn-group">
-                                        <form action="{{ route('spk.destroy', $value->spk->fileSPK) }}" method="GET">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
-                                @endif
-                                @endif
+                                    @if ($value->no_surat == null)
+                                    <td>
+                                        <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
+                                    </td>
+                                    @elseif(auth()->user()->level_id == 5 || auth()->user()->level_id == 2)
+                                    <td > {{ $value->no_surat}} </td>
+                                    @endif
+                                    <td>
+                                        @if ($value->no_surat == null && auth()->user()->level_id == 2)
+                                            <div class="btn-group">
+                                                <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}' ><i class="mdi mdi-plus"></i></a>
+                                            </div>
+                                        @elseif ($value->spk == null && auth()->user()->level_id == 2)
+                                            <div class="btn-group">
+                                                <form action="{{ route('spk.eksport', $value->id) }}" method="get" id="eksport">
+                                                    <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                        @if ($value->spk && $value->no_surat && auth()->user()->level_id == 2 || auth()->user()->level_id == 5)
+                                            <div class="btn-group">
+                                                <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
+                                            </div>
+                                            <div class="btn-group">
+                                                <form action="{{ route('spk.destroy', $value->spk->fileSPK) }}" method="GET">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                    </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -112,6 +117,36 @@
         </div>
     </div>
 </div>
+{{-- Tambah Data Nomer Surat --}}
+<div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Nomer Surat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" method="POST" id="surat" action="" >
+                    @csrf
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            Nomer Surat SPK
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat SPK" name="no_surat" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- <script>
     $(document).ready(function () {
         var cek = true;
@@ -158,6 +193,18 @@
     });
 });
 </script>
+<script>
+    $(document).ready(function () {
+
+    $("#surat").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
 @section('javascripts')
 <script>
@@ -170,6 +217,18 @@
 
     modal.find(".modal-body input[name='fileSPK']").val(fileSPK)
     modal.find(".modal-body form").attr("action",'/tugas-akhir/spk/update/'+id)
+    })
+</script>
+<script>
+    $('#nomersurat').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var no_surat = button.data('no_surat')
+
+    var modal = $(this)
+
+    modal.find(".modal-body input[name='no_surat']").val(no_surat)
+    modal.find(".modal-body form").attr("action",'/tugas-akhir/spk/create/'+id)
     })
 </script>
 @endsection
