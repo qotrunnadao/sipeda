@@ -23,6 +23,7 @@
         </div>
 
         <div class="card__container bd-container">
+
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/TA.svg') }}" alt="" class="card__img">
                 <a href="{{ route('mahasiswaTA.beranda') }}" class="card__button">Tugas akhir</a>
@@ -36,6 +37,13 @@
             <div class="card__glass" data-tilt data-tilt-max="50" data-tilt-speed="400" data-tilt-perspective="500">
                 <img src="{{ asset('menu/img/graduation.svg') }}" alt="" class="card__img">
                 <a href="{{ route('mahasiswaYudisium.beranda') }}" class="card__button">Yudisium</a>
+            </div>
+
+            <div>
+                <form method="POST" action="{{ route('cas.logout') }}">
+                    @csrf
+                    <button type="submit" class="card__button" style="border: none;">Keluar Aplikasi</button>
+                </form>
             </div>
         </div>
     </section>

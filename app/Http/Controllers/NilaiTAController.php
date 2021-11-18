@@ -44,10 +44,14 @@ class NilaiTAController extends Controller
             $jurusan = jurusan::all();
             $taAll = TA::with(['mahasiswa'])->get();
             $statusnilai = StatusNilai::all();
-            $nilai = NilaiTA::with(['TA.mahasiswa.jurusan', 'NilaiHuruf'])->whereHas('TA', function ($q) use ($dosen_id) {
-                $q->where('pembimbing1_id', $dosen_id->id)
-                    ->orWhere('pembimbing2_id', $dosen_id->id);
-            })->latest()->get();
+            if (auth()->user()->level_id == 2) {
+                $nilai = NilaiTA::with(['TA.mahasiswa.jurusan', 'NilaiHuruf'])->latest()->get();
+            } else {
+                $nilai = NilaiTA::with(['TA.mahasiswa.jurusan', 'NilaiHuruf'])->whereHas('TA', function ($q) use ($dosen_id) {
+                    $q->where('pembimbing1_id', $dosen_id->id)
+                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                })->latest()->get();
+            }
             // $nilai = NilaiTA::With('TA.mahasiswa.jurusan', 'NilaiHuruf')->where('dosen_id', $dosen_id->id)->latest()->get();
             // dd($nilai);
             return view('TA.nilaiTA.index', compact('nilai', 'jurusan', 'taAll', 'statusnilai', 'NilaiHuruf'));

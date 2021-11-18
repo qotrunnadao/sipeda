@@ -32,6 +32,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('user.index') }}"> Data User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('komisi.index') }}"> Data Komisi </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('dosen.index') }}"> Data Dosen </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('dataKajur') }}"> Data Ketua Jurusan </a></li>
                 </ul>
             </div>
         </li>

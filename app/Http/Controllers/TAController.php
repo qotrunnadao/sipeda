@@ -36,7 +36,7 @@ class TAController extends Controller
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
-            $acc_ta = TA::with('status')->where('status_id', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+            $acc_ta = TA::with('status')->where('status_id', 2)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->orWhereHas('status', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)

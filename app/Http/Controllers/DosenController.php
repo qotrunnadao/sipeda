@@ -25,9 +25,12 @@ class DosenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function kajur()
     {
-        //
+        $data = array(
+            'kajur' => Dosen::where('isKajur', 1)->latest()->get(),
+        );
+        return view('admin.master.datakajur', $data);
     }
 
     /**
