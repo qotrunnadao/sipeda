@@ -30,11 +30,26 @@ class SPKController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
-        $spk = TA::with(['mahasiswa','spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
-            $q->where('jurusan_id', $dosen_id->jurusan_id);
-       })->where('status_id','>=' , '4')->latest()->get();
-        // $spk = TA::with('mahasiswa', 'spk')->where('status_id','>=' , '4')->latest()->get();
-        // dd($spk);
+        if((auth()->user()->level_id == 5)){
+            $spk = TA::with(['mahasiswa','spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+           })->where('status_id','>=' , '4')->where('no_surat', '!=', null)->latest()->get();
+        }
+        if(auth()->user()->level_id == 1 ){
+            $spk = TA::with(['mahasiswa','spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+           })->where('pembimbing1_id', $dosen_id->id)->orWhere('pembimbing1_id', $dosen_id->id)->where('status_id','>=' , '4')->latest()->get();
+        //    dd($spk);
+        }
+        if(auth()->user()->level_id == 3 ){
+            $spk = TA::with(['mahasiswa','spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+           })->where('pembimbing1_id', $dosen_id->id)->orWhere('pembimbing1_id', $dosen_id->id)->where('status_id','>=' , '4')->latest()->get();
+        //    dd($spk);
+        }
+        if((auth()->user()->level_id == 2 )){
+            $spk = TA::with('mahasiswa', 'spk')->where('status_id','>=' , '4')->latest()->get();
+        }
         return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll'));
     }
 
@@ -52,9 +67,20 @@ class SPKController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        $taAll = TA::with(['mahasiswa'])->where('id',$id)->get()->first();
+        $status = array(
+            'no_surat' => $request->no_surat,
+        );
+        if ($taAll->update($status)) {
+            Alert::success('Berhasil', 'Berhasil Tambah Nomer SPK Tugas Akhir');
+        } else {
+            Alert::warning('Gagal', 'Data Nomer SPK Tugas Akhir Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**

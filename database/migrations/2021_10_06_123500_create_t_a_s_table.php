@@ -18,6 +18,7 @@ class CreateTASTable extends Migration
             $table->foreignId('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->string('judulTA');
             $table->string('instansi')->nullable();
+            $table->string('no_surat')->nullable();
             $table->string('praproposal');
             $table->foreignId('pembimbing1_id')->references('id')->on('dosen');
             $table->foreignId('pembimbing2_id')->references('id')->on('dosen');

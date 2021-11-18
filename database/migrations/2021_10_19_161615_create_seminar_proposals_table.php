@@ -17,6 +17,7 @@ class CreateSeminarProposalsTable extends Migration
             $table->id();
             $table->foreignId('ta_id')->references('id')->on('TA');
             $table->string('proposal')->nullable();
+            $table->string('no_surat')->nullable();
             $table->string('beritaacara')->nullable();
             $table->time('jamMulai')->nullable();
             $table->time('jamSelesai')->nullable();

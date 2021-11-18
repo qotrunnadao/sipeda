@@ -43,17 +43,25 @@ class BerandaController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user','TA1','TA2'])->where('user_id', $id)->get()->first();
-        $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
-        // $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
-        $Mahasiswa = Mahasiswa::with('TA')->where('jurusan_id', $dosen_id->jurusan_id)->latest()->get();
-        // dd($dosen);
         if (auth()->user()->level_id == 2) {
             return view('admin.beranda', $data);
         } elseif (auth()->user()->level_id == 1) {
-            return view('komisi.beranda', $data);
+            // $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            $Mahasiswa = TA::with('mahasiswa')->whereHas('mahasiswa', function ($q) use ($dosen_id){
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->where('status_id', '>=', '4')->latest()->get();
+            // dd($Mahasiswa);
+            return view('komisi.beranda', compact( 'dosen', 'dosen_id', 'Mahasiswa'));
         } elseif (auth()->user()->level_id == 3) {
             return view('dosen.beranda', $data);
         } elseif (auth()->user()->level_id == 5) {
+            // $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            $Mahasiswa = TA::with('mahasiswa')->whereHas('mahasiswa', function ($q) use ($dosen_id){
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->where('status_id', '>=', '4')->latest()->get();
+            // dd($Mahasiswa);
             return view('kajur.beranda', compact( 'dosen', 'dosen_id', 'Mahasiswa'));
         }
     }
