@@ -32,32 +32,11 @@
                                 </td>
                                 <td class="text-center"> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
                                 @if ($value->spk == null)
-<<<<<<< HEAD
                                 <td>
                                     <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
                                 </td>
                                 @else
                                 <td>
-=======
-                                <td class="text-center">
-                                    <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
-                                    @if (auth()->user()->level_id == 5)
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <form action="{{ route('spk.eksport', $value->id) }}" method="get" id="eksport">
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
-                                        </form>
-                                    </div>
-                                </td>
-                                @endif
-                                </td>
-                                @else
-                                <td class="text-center">
-                                    @if ($value->spk->fileSPK == null)
-                                    SPK Tugas Akhir
-                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
-                                    @else
->>>>>>> db1119e54a97b76f3ad43caef0174a58038ce693
                                     <div class="btn-group">
                                         <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
                                             @method('PUT')
