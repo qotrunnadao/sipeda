@@ -56,18 +56,6 @@ Route::get('/', function () {
 Route::get('/cas/login', 'CasController@callback')->name('cas.login');  //Halaman login KORI
 Route::post('/cas/logout', 'CasController@logout')->name('cas.logout');
 
-// Route::get('/logout', function () {
-//     if (cas()->isAuthenticated()) {
-//         Auth::logout();;
-//         session()->flush();
-//         request()->session()->getHandler()->destroy(request()->session()->getId());
-//         cas()->logout();
-//         return redirect('/');
-//     } else {
-//         session()->flush();
-//         return redirect('/');
-//     }
-// })->name('cas.logout');
 
 //=============== ROUTE ADMIN ====================
 Route::get('/admin/beranda', 'BerandaController@index')->name('admin.beranda')->middleware('admin');

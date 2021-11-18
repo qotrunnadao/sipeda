@@ -42,19 +42,21 @@ class BerandaController extends Controller
         );
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
-        $dosen_id = Dosen::with(['user','TA1','TA2'])->where('user_id', $id)->get()->first();
-        $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
-        // $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
-        $Mahasiswa = Mahasiswa::with('TA')->where('jurusan_id', $dosen_id->jurusan_id)->latest()->get();
+        $dosen_id = Dosen::with(['user', 'TA1', 'TA2'])->where('user_id', $id)->get()->first();
+        // $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
         // dd($dosen);
         if (auth()->user()->level_id == 2) {
             return view('admin.beranda', $data);
         } elseif (auth()->user()->level_id == 1) {
-            return view('komisi.beranda', $data);
+            $Mahasiswa = Mahasiswa::with('TA')->where('jurusan_id', $dosen_id->jurusan_id)->latest()->get();
+            $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            return view('komisi.beranda',  compact('dosen', 'dosen_id', 'Mahasiswa'));
         } elseif (auth()->user()->level_id == 3) {
             return view('dosen.beranda', $data);
         } elseif (auth()->user()->level_id == 5) {
-            return view('kajur.beranda', compact( 'dosen', 'dosen_id', 'Mahasiswa'));
+            $Mahasiswa = Mahasiswa::with('TA')->where('jurusan_id', $dosen_id->jurusan_id)->latest()->get();
+            $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            return view('kajur.beranda', compact('dosen', 'dosen_id', 'Mahasiswa'));
         }
     }
 
@@ -73,8 +75,8 @@ class BerandaController extends Controller
             $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
             $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
         }
-        $sah = Carbon::parse( $spk->created_at )->isoFormat('D/M/Y');
-        $expired = Carbon::parse( $spk->created_at )->addYear()->isoFormat('D/M/Y');
+        $sah = Carbon::parse($spk->created_at)->isoFormat('D/M/Y');
+        $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D/M/Y');
         // dd($expired);
         // dd($spk->created_at);
         $ta = array(

@@ -136,7 +136,7 @@ class SeminarProposalController extends Controller
     public function destroy($id)
     {
         $semprop = SeminarProposal::find($id);
-        $taAll = TA::with(['mahasiswa'])->where('id',$semprop->ta->id)->get()->first();
+        $taAll = TA::with(['mahasiswa'])->where('id', $semprop->ta->id)->get()->first();
         File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $semprop->beritaacara . ''));
         $semprop->delete();
         $status = array(
@@ -175,9 +175,9 @@ class SeminarProposalController extends Controller
     public function eksport(Request $request, $id)
     {
         $id = $request->route('id');
-        $ta_id =  SeminarProposal::where('id',$id )->get()->first();
+        $ta_id =  SeminarProposal::where('id', $id)->get()->first();
 
-        $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id',$ta_id->ta_id )->get()->first();
+        $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id', $ta_id->ta_id)->get()->first();
         // dd($sempro->ta->mahasiswa->nim);
         $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
 

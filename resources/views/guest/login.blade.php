@@ -26,7 +26,7 @@
                         <span class="login100-form-logo">
                             <img src="{{ asset('sitak/assets/images/unsoed.png') }}">
                         </span>
-                        <span class="form__social-text" style="text-align: center"><b>Sistem Infromasi Pengelolaan Tugas Akhir <br>Fakultas Teknik UNSOED</b></span>
+                        <span class="form__social-text" style="text-align: center"><b>Sistem Informasi Pengelolaan Studi Akhir <br>Fakultas Teknik UNSOED</b></span>
                         <div class="form__div form__div-one">
                             <div class="form__icon">
                                 <i class='bx bx-user-circle'></i>
@@ -63,7 +63,7 @@
                         @csrf
                         <button class="form__button" href="">Login SSO</button>
                         <div class="form__social">
-                            <span class="form__social-text"><i class='bx bx-info-circle'></i> Mahasiswa Silahkan Login Menggunakan Akun SSO</span>
+                            <span class="form__social-text"><i class='bx bx-info-circle'></i> Selain admin silahkan login menggunakan SSO</span>
                         </div>
                     </form>
                 </div>

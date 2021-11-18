@@ -51,33 +51,29 @@ class CasController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        if (!isset($_SESSION['user'])) {
-            $_SESSION['user'] = null;
-        }
-        if (isset($_REQUEST['login']) or isset($_REQUEST['logout'])) {
-            phpCAS::client(CAS_VERSION_2_0, config('cas.cas_hostname'), config('cas.cas_port'), '');
-            phpCAS::setNoCasServerValidation();
-            phpCAS::forceAuthentication();
-            $_SESSION['user'] = phpCAS::getUser();
-            if (isset($_REQUEST['logout'])) {
-                unset($_SESSION['user']);
-                unset($_COOKIE['CASAuth']);
-                phpCAS::logout();
-                return redirect()->route('loginpage')->withSuccess('Terimakasih, selamat datang kembali!');
-            }
+        phpCAS::client(CAS_VERSION_2_0, config('cas.cas_hostname'), config('cas.cas_port'), '');
+        phpCAS::setNoCasServerValidation();
+        phpCAS::forceAuthentication();
+        $_SESSION['user'] = phpCAS::getUser();
+        //dd($_SESSION);
+        if (phpCAS::isAuthenticated()) {
+            unset($_SESSION['user']);
+            phpCAS::logout();
+            session()->flush();
+            return redirect('/')->withSuccess('Terimakasih, selamat datang kembali!');
         }
     }
 
-    // public function logout(Request $request)
-    // {
-    //     Auth::logout();
 
-    //     $request->session()->invalidate();
+    public function logoutcas()
+    {
 
-    //     $request->session()->regenerateToken();
-
-    //     return redirect('/');
-    // }
+        if (phpCAS::isAuthenticated()) {
+            phpCAS::logout();
+        } else {
+            redirect('/');
+        }
+    }
 }
