@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" id = "creatData" method="post" enctype="multipart/form-data">
+            <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" id="creatData" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
                 <input type="hidden" class="form-control" id="status_id" name="status_id" value="2">
@@ -26,6 +26,7 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="instansi" id="instansi" value="{{ old('instansi') }}" />
+                            <p class="text-muted">*jika tidak ada maka kosongi</p>
                         </div>
                     </div>
                     <div class="form-group row">

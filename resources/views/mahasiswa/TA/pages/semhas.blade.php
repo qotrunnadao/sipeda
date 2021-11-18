@@ -11,7 +11,8 @@
                 <input type="hidden" class="form-control" id="status" name="status" value="0">
                 <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
                 <div class="card-body">
-                    <h4 class="card-title mb-5">Pengajuan Seminar</h4>
+                    <h4 class="card-title">Pengajuan Seminar Hasil</h4>
+                    <p class="text-danger mb-5">*pengajuan seminar maksimal dilakukan h-3 pelaksanaan!</p>
                     <div class="form-group row">
                         <div class="col-lg-3">
                             <label class="col-form-label">Judul Penelitian</label>

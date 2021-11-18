@@ -102,7 +102,7 @@ return [
     | CAS Logout URI
     |--------------------------------------------------------------------------
     */
-    'cas_logout_url'      => env('CAS_LOGOUT_URL', 'https://kori.unsoed.ac.id/logout'),
+    'cas_logout_url'      => env('CAS_LOGOUT_URL', 'https://kori.unsoed.ac.id/cas/logout'),
 
     /*
     |--------------------------------------------------------------------------
@@ -111,7 +111,7 @@ return [
     | If your server supports redirection services, enter the redirect url
     | in this section.  If left blank, it will default to disabled.
     */
-    'cas_logout_redirect' => env('CAS_LOGOUT_REDIRECT', 'localhost:8000'),
+    'cas_logout_redirect' => env('CAS_LOGOUT_REDIRECT', 'https://kori.unsoed.ac.id/cas/logout'),
 
     /*
     |--------------------------------------------------------------------------

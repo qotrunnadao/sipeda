@@ -6,13 +6,13 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card  bg-gradient-primary">
             <div class="card-body">
-                <img class="float-left" src="{{ asset('sitak/assets/images/hello.svg') }}" alt="" style="width: 250px">
+                <img class="float-left" src="{{ asset('sitak/assets/images/hello.svg') }}" style="width: 250px">
                 <h1 class="card-title text-white text-center mt-5">Selamat Datang, {{$mhs_id->nama }}!</h1>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div class="border-bottom text-center pb-4">
@@ -47,7 +47,7 @@
                             <tr>
                                 <td> Judul Penelitian </td>
                                 <td>:</td>
-                                <td>
+                                <td style="text-overflow: ellipsis;">
                                     @if ($TA == null)
                                     <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
                                     @else
@@ -67,13 +67,21 @@
                                 </td>
                                 @endif
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <hr>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <tbody>
+                            <tr>
+                                <td> Status Pelaksanaan </td>
+                                <td>:</td>
+                                @if ($TA == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Tugas Akhir</span>
+                                </td>
+                                @else
+                                <td>
+                                    <span class="badge badge-primary badge-pill">
+                                        {{ $TA->status->ket }}
+                                    </span>
+                                </td>
+                                @endif
+                            </tr>
                             <tr>
                                 <td> SPK Disahkan </td>
                                 <td>:</td>
@@ -86,11 +94,6 @@
                                 @endif
                             </tr>
                             <tr>
-                                <td> SPK diambil </td>
-                                <td>:</td>
-                                <td> 26/10/2000 </td>
-                            </tr>
-                            <tr>
                                 <td> SPK Berakhir </td>
                                 <td>:</td>
                                 <td> {{$expired}} </td>
@@ -101,7 +104,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-3">Tahapan TA</h4>
@@ -121,58 +124,21 @@
         </div>
     </div>
 
-    <div class="col-6 grid-margin stretch-card">
-        <div class="card">
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white">
             <div class="card-body">
-                <h4 class="card-title mb-5">Status Pelaksanaan Studi Akhir</h4>
-                <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                            <tr>
-                                <th> # </th>
-                                <th> Nama </th>
-                                <th> Status Tugas Akhir </th>
-                                {{-- <th> Status Pendadaran </th>
-                                <th> Status Yudisium </th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> 1 </td>
-                                <td> {{$mhs_id->nama }} </td>
-                                <td>
-                                    @if($TA == null)
-                                    <div class="badge badge-danger badge-pill">
-                                        Belum mengajukan Tugas Akhir
-                                    </div>
-                                    @else
-                                    <div class="badge badge-primary badge-pill">
-                                        {{ $TA->status->ket }}
-                                    </div>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{-- <div class="badge badge-danger badge-pill"> --}}
-                                        {{-- @if($pendadaran == null)
-                                        belum mengajukan
-                                        @else
-                                        {{ $pendadaran->StatusPendadaran->id }}
-                                        @endif --}}
-                                    </div>
-                                </td>
-                                <td>
-                                    {{-- <div class="badge badge-danger badge-pill"> --}}
-                                        {{-- @if($yudisium == null)
-                                        belum mengajukan
-                                        @else
-                                        {{ $yudisium->StatusYudisium->id }}
-                                        @endif --}}
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {{-- <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image"> --}}
+                <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Tugas Akhir
+                </h4>
+                <ul>
+                    <li>sedang mengambil mata kuliah TA</li>
+                    <li>telah menyelesaikan matakuliah sekurang-sekurangnya 120 SKS dengan IPK
+                        serendah-rendahnya 2,0</li>
+                    <li>telah menyelesaikan sekurang-kurangnya 1 (satu) mata kuliah pilihan sesuai
+                        dengan bidang keahlian topik TA</li>
+                    <li>telah menyelesaikan Kerja Praktik</li>
+                    <li>. praproposal yang telah disetujui 1 (satu) calon pembimbing</li>
+                </ul>
             </div>
         </div>
     </div>
