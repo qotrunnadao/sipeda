@@ -134,6 +134,8 @@ Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAC
 
 //semprop
 Route::get('/tugas-akhir/semprop', 'SeminarProposalController@index')->name('semprop.index');
+Route::get('/tugas-akhir/semprop/create',  'SeminarProposalController@create')->name('semprop.create');
+Route::post('/tugas-akhir/semprop/store',  'SeminarProposalController@store')->name('semprop.store');
 Route::get('/tugas-akhir/semprop/edit/{id}', 'SeminarProposalController@edit')->name('semprop.edit');
 Route::put('/tugas-akhir/semprop/update/{id}', 'SeminarProposalController@update')->name('semprop.update');
 Route::get('/tugas-akhir/semprop/delete/{id}', 'SeminarProposalController@destroy')->name('semprop.delete');
@@ -141,9 +143,13 @@ Route::put('/tugas-akhir/beritaAcara/download/{filename}',  'SeminarProposalCont
 Route::get('/tugas-akhir/beritaAcara/pdf/{id}',  'SeminarProposalController@eksport')->name('semprop.eksport');
 Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', 'SeminarProposalController@diterima')->name('semprop.diterima');
 Route::get('/tugas-akhir/semprop/ditolak/{SeminarProposal}', 'SeminarProposalController@ditolak')->name('semprop.ditolak');
+Route::get('/tugas-akhir/semprop/berkas', 'SeminarProposalController@berkas')->name('semprop.berkas');
+
 
 //semhas
 Route::get('/tugas-akhir/semhas',  'SeminarHasilController@index')->name('semhas.index');
+Route::get('/tugas-akhir/semhas/create',  'SeminarHasilController@create')->name('semhas.create');
+Route::post('/tugas-akhir/semhas/store',  'SeminarHasilController@store')->name('semhas.store');
 Route::get('/tugas-akhir/semhas/edit/{id}',  'SeminarHasilController@edit')->name('semhas.edit');
 Route::put('/tugas-akhir/semhas/update/{id}',  'SeminarHasilController@update')->name('semhas.update');
 Route::get('/tugas-akhir/semhas/delete/{id}',  'SeminarHasilController@destroy')->name('semhas.delete');
@@ -151,6 +157,7 @@ Route::put('/tugas-akhir/beritaAcaraSemhas/download/{filename}',  'SeminarHasilC
 Route::get('/tugas-akhir/beritaAcaraSemhas/pdf/{id}',  'SeminarHasilController@eksport')->name('semhas.eksport');
 Route::get('/tugas-akhir/semhas/diterima/{seminarHasil}',  'SeminarHasilController@diterima')->name('semhas.diterima');
 Route::get('/tugas-akhir/semhas/ditolak/{SeminarHasil}',  'SeminarHasilController@ditolak')->name('semhas.ditolak');
+Route::get('/tugas-akhir/semhas/berkas', 'SeminarHasilController@berkas')->name('semhas.berkas');
 
 //spk
 Route::get('/tugas-akhir/spk',  'SPKController@index')->name('spk.index');
@@ -161,6 +168,7 @@ Route::put('/tugas-akhir/spk/update/{id}',  'SPKController@update')->name('spk.u
 Route::get('/tugas-akhir/spk/destroy/{id}',  'SPKController@destroy')->name('spk.destroy');
 Route::post('/tugas-akhir/spk/nim/',  'SPKController@nim')->name('spk.nim');
 Route::get('/tugas-akhir/spk/pdf/{id}',  'SPKController@eksport')->name('spk.eksport');
+Route::get('/tugas-akhir/spk/berkas', 'SPKController@berkas')->name('spk.berkas');
 
 //nilai TA
 Route::get('/tugas-akhir/nilaita',  'NilaiTAController@index')->name('nilaita.index');
@@ -295,6 +303,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
         return view('mahasiswa.yudisium.pages.jadwal');
     });
 });
+
 
 Auth::routes();
 

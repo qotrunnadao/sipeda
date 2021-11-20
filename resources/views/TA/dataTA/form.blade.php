@@ -6,10 +6,8 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
             <form action="{{$action}}" method="post" enctype="multipart/form-data">
-                {{-- {{ dd($mhs) }} --}}
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
-                {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">

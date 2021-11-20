@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use File;
 use App\Models\TA;
-use App\Models\Ruang;
 use App\Models\User;
 use App\Models\Dosen;
+use App\Models\Ruang;
+use App\Models\Status;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\SeminarHasil;
 use Illuminate\Http\Request;
-use PDF;
-use File;
+use App\Models\TahunAkademik;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -54,7 +56,11 @@ class SeminarHasilController extends Controller
      */
     public function create()
     {
-        //
+        $data_semhas = new SeminarHasil();
+        $semhas = SeminarHasil::get();
+        $mhs = Mahasiswa::all();
+        $Ruang = Ruang::get();
+        return view('TA.semhasTA.create', compact('data_semhas', 'semhas', 'mhs', 'Ruang'));
     }
 
     /**
@@ -137,7 +143,7 @@ class SeminarHasilController extends Controller
     public function destroy($id)
     {
         $semhas = SeminarHasil::find($id);
-        $taAll = TA::with(['mahasiswa'])->where('id',$semprop->ta->id)->get()->first();
+        $taAll = TA::with(['mahasiswa'])->where('id', $semprop->ta->id)->get()->first();
         File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $semhas->beritaacara . ''));
         $semhas->delete();
         $status = array(
@@ -203,5 +209,10 @@ class SeminarHasilController extends Controller
             Alert::warning('Gagal', 'Data Berita Acara Seminar Hasil Gagal Ditambahkan');
         }
         return back();
+    }
+
+    public function berkas()
+    {
+        return view('TA.semhasTA.berkas');
     }
 }

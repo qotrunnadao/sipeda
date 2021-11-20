@@ -23,7 +23,7 @@
                             NIM
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semprop->TA->mahasiswa->nim }}" readonly/>
+                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semprop->TA->mahasiswa->nim }}" readonly />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -59,7 +59,7 @@
                         </label>
                         <div class="col-sm-9">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" name="tanggal" value="{{ $semprop->tanggal }}" readonly/>
+                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" name="tanggal" value="{{ $semprop->tanggal }}" readonly />
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="hidden" class="form-control" id="mahasiswa_id" name="ruang_id" value="{{ $semprop->ruang_id }}">
-                            <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semprop->ruang->namaRuang }}"readonly />
+                            <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semprop->ruang->namaRuang }}" readonly />
                         </div>
                     </div>
                     {{-- <div class="form-group row">

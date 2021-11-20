@@ -7,9 +7,8 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    @if(auth()->user()->level_id == 2)
-                    <button type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-upload"></i> Unggah SIA</button>
-                    @else
+                    {{-- <button type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-upload"></i> Unggah SIA</button> --}}
+                    @if(auth()->user()->level_id !== 2)
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
                     @endif
                 </div>
@@ -39,7 +38,7 @@
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->NilaiHuruf->nilaiHuruf }} </td>
                                 <td class="text-center">
-                                @if($value->statusnilai_id == 1)
+                                    @if($value->statusnilai_id == 1)
                                     <span class="badge badge-warning">Menunggu</span>
                                 </td>
                                 @elseif($value->statusnilai_id == 2)
@@ -50,7 +49,7 @@
 
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiangka ='{{ $value->nilaiAngka }}' data-nilai_huruf_id ='{{ $value->NilaiHuruf->id }}' data-ket ='{{ $value->ket }}' data-statusnilai_id ='{{ $value->statusnilai_id }}' ><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiangka='{{ $value->nilaiAngka }}' data-nilai_huruf_id='{{ $value->NilaiHuruf->id }}' data-ket='{{ $value->ket }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('nilaita.delete', $value->id) }}" method="GET">

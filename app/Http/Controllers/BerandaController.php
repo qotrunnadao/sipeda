@@ -81,8 +81,13 @@ class BerandaController extends Controller
             $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
             $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
         }
-        $sah = Carbon::parse($spk->created_at)->isoFormat('D/M/Y');
-        $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D/M/Y');
+        if ($spk !== null) {
+            $sah = Carbon::parse($spk->created_at)->isoFormat('D/M/Y');
+            $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D/M/Y');
+        } else {
+            $sah = null;
+            $expired = null;
+        }
         // dd($expired);
         // dd($spk->created_at);
         $ta = array(

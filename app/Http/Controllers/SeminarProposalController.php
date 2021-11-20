@@ -55,7 +55,11 @@ class SeminarProposalController extends Controller
      */
     public function create()
     {
-        //
+        $data_semprop = new SeminarProposal();
+        $semprop = SeminarProposal::get();
+        $mhs = Mahasiswa::all();
+        $Ruang = Ruang::get();
+        return view('TA.sempropTA.create', compact('data_semprop', 'semprop', 'mhs', 'Ruang'));
     }
 
     /**
@@ -204,5 +208,10 @@ class SeminarProposalController extends Controller
             Alert::warning('Gagal', 'Data Berita Acara Seminar Proposal Gagal Ditambahkan');
         }
         return back();
+    }
+
+    public function berkas()
+    {
+        return view('TA.sempropTA.berkas');
     }
 }
