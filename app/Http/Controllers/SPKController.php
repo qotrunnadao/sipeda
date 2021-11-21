@@ -219,6 +219,7 @@ class SPKController extends Controller
 
 
         $data = ['ta_id' => $ta_id, 'taAll' => $taAll];
+
         $pdf = PDF::loadView('TA.SPK.download', $data);
 
         $filename = 'SPK' . '_' . $taAll->mahasiswa->nim . '_' . time() . '.pdf';

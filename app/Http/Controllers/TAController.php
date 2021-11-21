@@ -71,12 +71,12 @@ class TAController extends Controller
         $button = 'Tambah';
         $data_ta = new TA();
         $tugas_akhir = TA::get();
+        $jurusan = jurusan::all();
         $dosen = Dosen::all();
         $tahunAkademik = TahunAkademik::With('semester')->get();
-        $mhs = Mahasiswa::all();
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();
-        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'status', 'dosen', 'mhs', 'tahunAkademik'));
+        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'status', 'dosen', 'jurusan', 'tahunAkademik'));
     }
 
     /**
@@ -85,10 +85,15 @@ class TAController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function nim(Request $request)
     {
-        // TA::create($request->all());
-        // $cek = false;
+        $mahasiswa = Mahasiswa::where('jurusan_id', $request->id)->get();
+        // dd($mahasiswa);
+        return response()->json($mahasiswa, 200);
+    }
+
+     public function store(Request $request)
+    {
         $data = $request->all();
         // dd($data);
 

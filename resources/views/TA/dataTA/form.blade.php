@@ -9,19 +9,41 @@
                 {{-- {{ dd($mhs) }} --}}
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
-                {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
+                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Mahasiswa
-                        </label>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label">Jurusan</label>
                         <div class="col-sm-9">
-                            <select name="mahasiswa" id="mahasiswa" class="form-control">
-                                <option selected disabled>PILIH MAHASISWA</option>
-                                @foreach ($mhs as $value )
-                                <option value="{{ $value->id }}" {{ $value->id == $data_ta->mahasiswa_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option selected disabled>Pilih Jurusan </option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        @if ($errors->has('jurusan'))
+                        <div class="text-danger">
+                            {{ $errors->first('jurusan') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label"> NIM</label>
+                        <div class="col-sm-9">
+                            <select type="text" class="form-control" id="nim" name="nim">
+                                <option value="" selected disabled>Pilih NIM </option>
+                            </select>
+                        </div>
+                        @if ($errors->has('nim'))
+                        <div class="text-danger">
+                            {{ $errors->first('nim') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -118,4 +140,48 @@
         </div>
     </div>
 </div>
+@endsection
+@section('javascripts')
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+        $("#nim").find('option').not(':first').remove();
+        $("#name").val('');
+        var id = $(this).val();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('TA.nim') }}",
+           data:{id:id},
+           success:function(data){
+            //    console.log(data)
+               var nim = document.getElementById('nim')
+                for (var i = 0; i < data.length; i++) {
+                    nim.innerHTML = nim.innerHTML +
+                        '<option value="' + data[i]['id'] + '" data-nama="'+data[i]['nama']+'">' + data[i]['nim'] + '</option>';
+
+                }
+           }
+        });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#mahasiswa_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
+</script>
 @endsection
