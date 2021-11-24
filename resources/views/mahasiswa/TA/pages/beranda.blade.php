@@ -161,7 +161,7 @@
                                 <td>
                                     @if($TA->status_id >=5)
                                     <div class="btn-group">
-                                        <form action="{{ route('download.spk', $spk->fileSPK) }}" method="post">
+                                        <form action="{{ route('download.spk', $spk->fileSPK) }}" target="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
@@ -177,7 +177,7 @@
                                 <td>
                                     @if($TA->status_id >=7)
                                     <div class="btn-group">
-                                        <form action="{{ route('download.semprop', $semprop->beritaacara) }}" method="post">
+                                        <form action="{{ route('download.semprop', $semprop->beritaacara) }}" target="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semprop->beritaacara }} <i class="mdi mdi-download"></i></a></button>
@@ -193,7 +193,7 @@
                                 <td>
                                     @if($TA->status_id >=9)
                                     <div class="btn-group">
-                                        <form action="{{ route('download.semhas', $semhas->beritaacara) }}" method="post">
+                                        <form action="{{ route('download.semhas', $semhas->beritaacara) }}" target="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semhas->beritaacara }} <i class="mdi mdi-download"></i></a></button>

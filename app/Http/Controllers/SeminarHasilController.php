@@ -14,6 +14,7 @@ use App\Models\Mahasiswa;
 use App\Models\SeminarHasil;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -65,10 +66,10 @@ class SeminarHasilController extends Controller
     }
     public function nim(Request $request)
 	{
-		$taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($id) {
-            $query->where('jurusan_id', $id);
+		$taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+            $query->where('jurusan_id', $request->id);
 		})->where('status_id', '7')->get();
-        // dd($id);
+        // dd($taAll);
 		return response()->json($taAll, 200);
 	}
 

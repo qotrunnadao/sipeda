@@ -38,7 +38,7 @@
                                 @else
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
+                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" target="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>

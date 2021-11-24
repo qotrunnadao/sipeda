@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use PDF;
 use File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\SeminarProposal;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -54,7 +55,8 @@ class SeminarProposalController extends Controller
         $id = $request->id;
         $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($id) {
             $query->where('jurusan_id', $id);
-        })->where('status_id', '5')->get();
+        })->where('status_id', '4')->get();
+        // dd($taAll);
         return response()->json($taAll, 200);
 	}
 
