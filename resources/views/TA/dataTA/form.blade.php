@@ -8,7 +8,7 @@
             <form action="{{$action}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
-                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
+                {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
                     <div class="form-group">
                         <label class="col-sm-3 col-form-label">Jurusan</label>

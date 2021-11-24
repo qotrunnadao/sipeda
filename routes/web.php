@@ -137,6 +137,7 @@ Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAC
 Route::get('/tugas-akhir/semprop', 'SeminarProposalController@index')->name('semprop.index');
 Route::get('/tugas-akhir/semprop/create',  'SeminarProposalController@create')->name('semprop.create');
 Route::post('/tugas-akhir/semprop/store',  'SeminarProposalController@store')->name('semprop.store');
+Route::post('/tugas-akhir/semprop/nim/',  'SeminarProposalController@nim')->name('semprop.nim');
 Route::get('/tugas-akhir/semprop/edit/{id}', 'SeminarProposalController@edit')->name('semprop.edit');
 Route::put('/tugas-akhir/semprop/update/{id}', 'SeminarProposalController@update')->name('semprop.update');
 Route::get('/tugas-akhir/semprop/delete/{id}', 'SeminarProposalController@destroy')->name('semprop.delete');
@@ -151,6 +152,7 @@ Route::get('/tugas-akhir/semprop/berkas', 'SeminarProposalController@berkas')->n
 Route::get('/tugas-akhir/semhas',  'SeminarHasilController@index')->name('semhas.index');
 Route::get('/tugas-akhir/semhas/create',  'SeminarHasilController@create')->name('semhas.create');
 Route::post('/tugas-akhir/semhas/store',  'SeminarHasilController@store')->name('semhas.store');
+Route::post('/tugas-akhir/semhas/nim/',  'SeminarHasilController@nim')->name('semhas.nim');
 Route::get('/tugas-akhir/semhas/edit/{id}',  'SeminarHasilController@edit')->name('semhas.edit');
 Route::put('/tugas-akhir/semhas/update/{id}',  'SeminarHasilController@update')->name('semhas.update');
 Route::get('/tugas-akhir/semhas/delete/{id}',  'SeminarHasilController@destroy')->name('semhas.delete');

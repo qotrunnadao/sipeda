@@ -5,32 +5,33 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{ route('semprop.store') }}" method="post" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <input type="hidden" class="form-control" id="mahasiswa_id" name="ta_id" value="{{ $data_semprop->ta_id }}">
+            <form action="{{ route('semprop.store') }}" id="creatData" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nama
-                        </label>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label">Jurusan</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="nama" />
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option selected disabled>Pilih Jurusan </option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            NIM
-                        </label>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label"> NIM</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" required placeholder="NIM" name="nim" />
+                            <select type="text" class="form-control" id="nim" name="nim">
+                                <option value="" selected disabled>Pilih NIM </option>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Jurusan
-                        </label>
+                    <div class="form-group">
+                        <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" />
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -90,4 +91,65 @@
         </div>
     </div>
 </div>
+@section('javascripts')
+
+<script>
+     $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+    $("#nim").find('option').not(':first').remove();
+    $("#name").val('');
+    var id = $('#jurusan').val();
+
+    $.ajax({
+    type:'POST',
+    url:"{{ route('semprop.nim') }}",
+    data:{id:id},
+    success:function(data){
+        console.log(data);
+        var nim = document.getElementById('nim')
+            for (var i = 0; i < data.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+                nim.innerHTML = nim.innerHTML +
+                    '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
+
+            }
+    }
+    });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    // var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#ta_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
+</script>
+
+<script>
+    $(document).ready(function () {
+
+    $("#creatData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
+@endsection
+
+

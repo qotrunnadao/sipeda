@@ -58,7 +58,7 @@
 
         <p class="text-center mt-4"><b>SURAT PERINTAH KERJA TUGAS AKHIR <br>
                 (SPK-TA) <br>
-                Nomor: 442/UN23.12.6.01/PP.05.02/2021 </b>
+                Nomor: {{$taAll->no_surat}} </b>
         </p>
 
         <p>Berdasarkan hasil sidang Komisi Komisi Studi Akhir Fakultas Teknik Universitas Jenderal Soedirman, pada:
@@ -88,22 +88,22 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> qotrunnada oktiriani </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> H1D018033 </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nim}} </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> Teknik Informatika </td>
+                        <td> {{$taAll->mahasiswa->jurusan->namaJurusan}} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td> {{$taAll->judulTA}} </td>
                     </tr>
                     <tr>
                         <td> Terhitung sejak </td>
@@ -124,12 +124,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td> {{$taAll->Dosen1->nama}}</td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td>{{$taAll->Dosen1->nohp}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -141,12 +141,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td> {{$taAll->Dosen2->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td> {{$taAll->Dosen1->nohp}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -167,16 +167,16 @@
                         <td>Purbalingga, {{ date('d F Y ') }}</td>
                     </tr>
                     <tr>
-                        <td>Ketua Jurusan Informatika</td>
+                        <td>Ketua Jurusan {{$taAll->mahasiswa->jurusan->namaJurusan}}</td>
                     </tr>
                     <tr>
                         <td height="100px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center"><b><u>Teguh Cahyono</u></b></td>
+                        <td class="text-center"><b><u>{{$dosen->nama}}</u></b></td>
                     </tr>
                     <tr>
-                        <td class="text-center">NIP. 197502012000032005</td>
+                        <td class="text-center">NIP. {{$dosen->nohp}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -220,27 +220,27 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> qotrunnada oktiriani </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nama}}  </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> H1D018033 </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nim}}  </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> Teknik Informatika </td>
+                        <td> {{$taAll->mahasiswa->jurusan->namaJurusan}}  </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td> {{$taAll->judulTA}} </td>
                     </tr>
                     <tr>
                         <td> No SPK </td>
                         <td>:</td>
-                        <td> 442/UN23.12.6.01/PP.05.02/2021 </td>
+                        <td> {{$taAll->no_surat}} </td>
                     </tr>
                     <tr>
                         <td> Dimulai sejak </td>
@@ -253,12 +253,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td>{{$taAll->Dosen1->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td> {{$taAll->Dosen1->nohp}} </td>
                     </tr>
                     <tr>
                         <td> Dosen Pembimbing 2</td>
@@ -266,12 +266,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td> {{$taAll->Dosen2->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td> {{$taAll->Dosen2->nohp}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -291,7 +291,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center baris">
+                    <tr class="text-center baris" table border="5">
                         <td></td>
                         <td></td>
                         <td></td>

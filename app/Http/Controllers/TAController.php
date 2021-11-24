@@ -72,11 +72,12 @@ class TAController extends Controller
         $data_ta = new TA();
         $tugas_akhir = TA::get();
         $jurusan = jurusan::all();
+        $mhs = Mahasiswa::all();
         $dosen = Dosen::all();
         $tahunAkademik = TahunAkademik::With('semester')->get();
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();
-        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'status', 'dosen', 'jurusan', 'tahunAkademik'));
+        return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'status', 'dosen', 'jurusan', 'tahunAkademik', 'mhs'));
     }
 
     /**
@@ -99,20 +100,20 @@ class TAController extends Controller
 
         if ($request->file('praproposal')) {
             $TA = TA::latest()->get();
-            $mhs_id = Mahasiswa::where('id', $request->mahasiswa)->get()->first();
+            $mhs_id = Mahasiswa::where('id', $request->nim)->get()->first();
             // dd($mhs_id);
             $nim = $mhs_id->nim;
             $file = $request->file('praproposal');
             $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('praproposal')->storeAS('public/assets/file/PraproposalTA/', $filename);
             $data = [
-                'mahasiswa_id' => $request->mahasiswa,
+                'mahasiswa_id' => $request->nim,
                 'judulTA' => $request->judulTA,
                 'instansi' => $request->instansi,
                 'pembimbing1_id' => $request->pembimbing1_id,
                 'pembimbing2_id' => $request->pembimbing2_id,
                 'ket' => $request->ket,
-                'status_id' => $request->status,
+                'status_id' => $request->status_id,
                 'thnAkad_id' => $request->tahunAkademik,
                 'praproposal' => $filename,
             ];

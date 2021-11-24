@@ -274,7 +274,6 @@
            url:"{{ route('nilaita.nim') }}",
            data:{id:id},
            success:function(data){
-               console.log(data)
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                 // POPULATE SELECT ELEMENT WITH JSON.
@@ -289,7 +288,7 @@
     })
     $('#nim').on('change', function (event) {
 
-    var kel = $(this).val();
+    // var kel = $(this).val();
     var id = $(this).find(':selected').data('id');
     var name = $(this).find(':selected').data('nama');
 

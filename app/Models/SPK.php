@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SPK extends Model
@@ -34,4 +35,9 @@ class SPK extends Model
     {
         return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
     }
+	public static function Berkas($pdf, $filename){
+        Storage::put('public/assets/file/SPK TA/' . $filename, $pdf->output());
+        dd($filename);
+    }
+
 }
