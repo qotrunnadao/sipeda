@@ -14,6 +14,7 @@ use App\Models\Mahasiswa;
 use App\Models\SeminarHasil;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -58,10 +59,20 @@ class SeminarHasilController extends Controller
     {
         $data_semhas = new SeminarHasil();
         $semhas = SeminarHasil::get();
+        $jurusan = jurusan::all();
         $mhs = Mahasiswa::all();
         $Ruang = Ruang::get();
-        return view('TA.semhasTA.create', compact('data_semhas', 'semhas', 'mhs', 'Ruang'));
+        return view('TA.semhasTA.create', compact('data_semhas', 'semhas', 'mhs', 'Ruang', 'jurusan'));
     }
+    public function nim(Request $request)
+	{
+		$taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+            $query->where('jurusan_id', $request->id);
+		})->where('status_id', '7')->get();
+        // dd($taAll);
+		return response()->json($taAll, 200);
+	}
+
 
     /**
      * Store a newly created resource in storage.

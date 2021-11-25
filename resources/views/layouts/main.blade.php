@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-
+{{-- Logout --}}
     <div class="modal fade" id="modal-logout">
         <div class="modal-dialog">
             <div class="modal-content">

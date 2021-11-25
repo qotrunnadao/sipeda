@@ -369,7 +369,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center baris" style="border: 5;">
+                    <tr class="text-center baris" table border="5">
                         <td></td>
                         <td></td>
                         <td></td>

@@ -149,7 +149,7 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        {{-- <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post">
+                                        {{-- <form action="{{ route('semhas.download', $value->beritaacara) }}" target="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>

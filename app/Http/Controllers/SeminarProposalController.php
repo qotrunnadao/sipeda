@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use PDF;
 use File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\SeminarProposal;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -48,6 +49,17 @@ class SeminarProposalController extends Controller
         return view('TA.sempropTA.index', $data);
     }
 
+    public function nim(Request $request)
+	{
+        // dd($request);
+        $id = $request->id;
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($id) {
+            $query->where('jurusan_id', $id);
+        })->where('status_id', '4')->get();
+        // dd($taAll);
+        return response()->json($taAll, 200);
+	}
+
     /**
      * Show the form for creating a new resource.
      *
@@ -58,8 +70,9 @@ class SeminarProposalController extends Controller
         $data_semprop = new SeminarProposal();
         $semprop = SeminarProposal::get();
         $mhs = Mahasiswa::all();
+        $jurusan = jurusan::all();
         $Ruang = Ruang::get();
-        return view('TA.sempropTA.create', compact('data_semprop', 'semprop', 'mhs', 'Ruang'));
+        return view('TA.sempropTA.create', compact('data_semprop', 'semprop', 'mhs', 'Ruang', 'jurusan'));
     }
 
     /**
