@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     public function __construct()
 {
-    ini_set('max_execution_time', 200);
+    ini_set('max_execution_time', 30);
 }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

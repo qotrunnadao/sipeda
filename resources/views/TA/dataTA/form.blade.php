@@ -158,7 +158,7 @@
            url:"{{ route('TA.nim') }}",
            data:{id:id},
            success:function(data){
-            //    console.log(data)
+               console.log(data)
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                     nim.innerHTML = nim.innerHTML +

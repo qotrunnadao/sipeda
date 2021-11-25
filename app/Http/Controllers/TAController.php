@@ -85,7 +85,8 @@ class TAController extends Controller
      */
     public function nim(Request $request)
     {
-        $mahasiswa = Mahasiswa::where('jurusan_id', $request->id)->get();
+        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
+        // $mahasiswa = Mahasiswa::where('jurusan_id', $request->id);
         // dd($mahasiswa);
         return response()->json($mahasiswa, 200);
     }

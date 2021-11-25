@@ -37,7 +37,7 @@ class Mahasiswa extends Model
     }
     public function TA()
     {
-        return $this->belongsTo(TA::class, 'TA_id');
+        return $this->hasMany(TA::class, 'Mahasiswa_id');
     }
     public function getCreatedAtAttribute()
     {

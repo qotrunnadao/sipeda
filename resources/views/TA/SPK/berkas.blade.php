@@ -1,13 +1,7 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie-edge">
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    <style>
+<html>
+    <head>
+        <title>Judul</title>
+         <style>
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 18px;
@@ -112,14 +106,13 @@
             height: 650px;
         }
     </style>
-    <title>SPK Tugas Akhir</title>
-</head>
-
-<body>
-    <div class="container ml-5 mt-5 mr-2">
+    </head>
+    <body>
+        <h1>Test123</h1>
+        <div class="container ml-5 mt-5 mr-2">
         <div class="row">
             <div class="col col-md-1 float-left ml-5">
-                <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
+                <img src="/sitak/assets/images/unsoed_b&w.png" height="130" width="130">
             </div>
             <div class="col col-md-10 float-left">
                 <p style="align:center;"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
@@ -259,7 +252,6 @@
                 </tbody>
             </table>
         </div>
-
         <div class="mt-3">
             <p>Disampaikan kepada :</p>
             <ol class="ml-5">
@@ -268,12 +260,12 @@
                 <li>Mahasiswa</li>
             </ol>
         </div>
-    </div>
-
-    <div class="container ml-5 mr-2" style="margin-top:1000px; padding-top: 50px;">
+        </div>
+        {{-- <div style="margin-top:1000px"></div> --}}
+        <div class="container ml-5 mr-2" style="">
         <div class="row">
             <div class="col col-md-1 float-left ml-5">
-                <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
+                <img src="/sitak/assets/images/unsoed_b&w.png" height="130" width="130">
             </div>
             <div class="col col-md-10 float-left">
                 <p align="center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
@@ -381,8 +373,7 @@
         <div class="mt-5">
             <p>*) Kartu kendali dapat diperbanyak sendiri</p>
         </div>
-    </div>
+        </div>
 
-</body>
-
+    </body>
 </html>

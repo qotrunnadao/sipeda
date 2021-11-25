@@ -219,7 +219,7 @@ class SPKController extends Controller
 		$dosen = Dosen::where('jurusan_id', $taAll->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
 
 		$berkas = ['ta_id' => $ta_id, 'taAll' => $taAll, 'dosen' => $dosen];
-		$pdf = PDF::loadView('TA.SPK.berkas', ['taAll' => $taAll,'dosen' => $dosen ]);
+		$pdf = PDF::loadView('TA.SPK.download', ['taAll' => $taAll,'dosen' => $dosen ]);
 
 		$filename = 'SPK' . '_' . $taAll->mahasiswa->nim . '_' . time() . '.pdf';
 
