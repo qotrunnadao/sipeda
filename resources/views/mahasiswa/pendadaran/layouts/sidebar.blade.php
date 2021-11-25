@@ -18,13 +18,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/pendadaran/pendaftaran">
+            <a class="nav-link" href="{{ route('mahasiswaPendadaran.create') }}">
                 <span class="menu-title">Pendaftaran</span>
                 <i class="mdi mdi-file menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/pendadaran/nilai">
+            <a class="nav-link @if ($pendadaran == null) btn disabled @endif" href="<?= url('') ?>/mahasiswa/pendadaran/nilai">
                 <span class="menu-title">Nilai Pendadaran</span>
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>

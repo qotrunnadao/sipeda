@@ -135,7 +135,7 @@ class BerandaController extends Controller
             'akademik' => Akademik::latest()->get(),
         );
 
-        return view('mahasiswa.Pendadaran.pages.beranda', $data_pendadaran, compact('pendadaran', 'mhs_id'));
+        return view('mahasiswa.Pendadaran.pages.beranda', $data_pendadaran, compact('pendadaran', 'mhs_id', 'data_pendadaran'));
     }
 
     public function mahasiswaYudisium()

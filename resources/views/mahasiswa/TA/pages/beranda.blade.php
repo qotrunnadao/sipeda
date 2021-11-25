@@ -87,7 +87,7 @@
                                 <td>:</td>
                                 @if ($spk == null)
                                 <td>
-                                    <span class="badge badge-primary">SPK Tugas Akhir Belum Terbit</span>
+                                    <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
                                 </td>
                                 @else
                                 <td> {{ $sah }} </td>
@@ -113,8 +113,13 @@
                         @foreach ($status as $value)
                         <li>
                             <div class="form-check">
+                                @if($TA == null)
+                                <label class="form-check-label">
+                                    <input class="checkbox" type="checkbox"> {{ $value->ket }} <i class="input-helper"></i></label>
+                                @else
                                 <label class="form-check-label">
                                     <input class="checkbox" type="checkbox" value="{{ $value->id }} " {{ $loop->iteration <= $TA->status_id && $loop->iteration != 1 || $TA->status_id == 1 && $loop->iteration == $TA->status_id ? 'checked' : '' }}> {{ $value->ket }} <i class="input-helper"></i></label>
+                                @endif
                             </div>
                         </li>
                         @endforeach
@@ -137,7 +142,7 @@
                     <li>telah menyelesaikan sekurang-kurangnya 1 (satu) mata kuliah pilihan sesuai
                         dengan bidang keahlian topik TA</li>
                     <li>telah menyelesaikan Kerja Praktik</li>
-                    <li>. praproposal yang telah disetujui 1 (satu) calon pembimbing</li>
+                    <li>praproposal yang telah disetujui 1 (satu) calon pembimbing</li>
                 </ul>
             </div>
         </div>
@@ -169,7 +174,7 @@
                                     </div>
                                     @else
                                     SPK Tugas Akhir
-                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
+                                    <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
                                     @endif
                                 </td>
                             </tr>
@@ -185,7 +190,7 @@
                                     </div>
                                     @else
                                     Berita Acara Seminar Proposal
-                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
+                                    <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
                                     @endif
                                 </td>
                             </tr>
@@ -201,7 +206,7 @@
                                     </div>
                                     @else
                                     Berita Acara Seminar Hasil
-                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
+                                    <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
                                     @endif
                                 </td>
                             </tr>

@@ -19,7 +19,7 @@ class PendadaranMahasiswaController extends Controller
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
-        $pendadaran = Pendadaran::with(['mahasiswa', 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'status'])->where('mahasiswa_id', $mhs_id->id)->latest()->get();
+        $pendadaran = Pendadaran::with(['mahasiswa', 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'statusPendadaran'])->where('mhs_id', $mhs_id->id)->latest()->get();
         $mahasiswa = Mahasiswa::with('user')->get()->all();
         return view('mahasiswa.pendadaran.pages.pengajuan', compact('data_pendadaran', 'pendadaran', 'dosen'));
     }

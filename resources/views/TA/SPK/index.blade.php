@@ -15,8 +15,8 @@
                                 <th class="text-center"> NIM </th>
                                 <th class="text-center"> Jurusan </th>
                                 <th class="text-center"> File SPK </th>
-                                <th class="text-center"> Nomer Surat </th>
                                 @if (auth()->user()->level_id == 5 || auth()->user()->level_id == 2)
+                                <th class="text-center"> Nomer Surat </th>
                                 <th class="text-center"> Aksi </th>
                                 @endif
                             </tr>
@@ -44,9 +44,12 @@
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
-                                    {{-- <div class="btn-group">
-                                        <a href="{{ route('spk.download') }}" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
-                                    </div> --}}
+                                     {{-- <div class="btn-group">
+                                         <a href="{{ route('spk.berkas') }}" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+
+                                            <a href="{{ route('spk.download') }}" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                            @endif
+                                     </div> --}}
                                 </td>
                                 @endif
                                 @if ($value->no_surat == null)

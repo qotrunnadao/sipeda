@@ -6,13 +6,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('sitak/assets/css/style.css') }}">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 18px;
+        }
+
+        .container {
+
+            width: 100%;
+            padding-right: 20px;
+            padding-left: 20px;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         p {
@@ -30,6 +37,77 @@
             font-size: 18px;
         }
 
+        .ml-5 {
+            margin-left: 3rem !important;
+        }
+
+        .mt-5 {
+            margin-top: 3rem !important;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        .mr-4 {
+            margin-right: 1.5rem !important;
+        }
+
+        .row {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -20px;
+            margin-left: -20px;
+        }
+
+        .col,
+        .col-md-1,
+        .col-md-10 {
+            position: relative;
+            width: 100%;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+
+        .col {
+            padding-right: 0;
+            padding-left: 0;
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+
+        .col-md-1 {
+            flex: 0 0 8.33333%;
+            max-width: 8.33333%;
+        }
+
+        .col-md-10 {
+            flex: 0 0 83.33333%;
+            max-width: 83.33333%;
+        }
+
+        .float-left {
+            float: left !important;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+
+
         .baris {
             height: 650px;
         }
@@ -37,14 +115,14 @@
     <title>SPK Tugas Akhir</title>
 </head>
 
-<body onload="window.print()">
+<body>
     <div class="container ml-5 mt-5 mr-2">
-        <div class="row g-0">
+        <div class="row">
             <div class="col col-md-1 float-left ml-5">
                 <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
             </div>
             <div class="col col-md-10 float-left">
-                <p align="center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
+                <p style="align:center;"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
                     Telepon/Faks. : (0281)6596801 <br>
@@ -193,7 +271,7 @@
     </div>
 
     <div class="container ml-5 mr-2" style="margin-top:1000px; padding-top: 50px;">
-        <div class="row g-0">
+        <div class="row">
             <div class="col col-md-1 float-left ml-5">
                 <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
             </div>
@@ -220,17 +298,17 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nama}}  </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nim}}  </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nim}} </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> {{$taAll->mahasiswa->jurusan->namaJurusan}}  </td>
+                        <td> {{$taAll->mahasiswa->jurusan->namaJurusan}} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
@@ -279,7 +357,7 @@
 
 
         <div class="mt-3">
-            <table class="table table-bordered" align="center" border="1px" style="width:95% ">
+            <table class="table table-bordered" style="align:center; width:95%; border:1px; ">
                 <thead>
                     <tr class="text-center">
                         <th width="5%">No</th>
@@ -306,10 +384,5 @@
     </div>
 
 </body>
-
-
-
-
-
 
 </html>

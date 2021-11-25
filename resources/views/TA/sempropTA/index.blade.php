@@ -56,11 +56,12 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        <form action="{{ route('semprop.download', $value->beritaacara) }}" target="blank" method="post">
+                                        {{-- <form action="{{ route('semprop.download', $value->beritaacara) }}" target="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
+                                        </form> --}}
+                                        <a href="{{ route('semprop.berkas') }}" type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
                                     </div>
                                     @endif
                                 </td>
@@ -150,11 +151,12 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post">
+                                        {{-- <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
+                                        </form> --}}
+                                        <a href="{{ route('semprop.berkas') }}" type="button" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
                                     </div>
                                     @endif
                                 </td>

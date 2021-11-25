@@ -285,9 +285,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
 
     Route::get('/pendadaran/beranda', 'BerandaController@mahasiswaPendadaran')->name('mahasiswaPendadaran.beranda');
 
-    Route::get('/pendadaran/pendaftaran', function () {
-        return view('mahasiswa.pendadaran.pages.pengajuan');
-    });
+    Route::get('/pendadaran/pendaftaran', 'PendadaranMahasiswaController@create')->name('mahasiswaPendadaran.create');
     Route::get('/pendadaran/jadwal', function () {
         return view('mahasiswa.pendadaran.pages.jadwal');
     });
