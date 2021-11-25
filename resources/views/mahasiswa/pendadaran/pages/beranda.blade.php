@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div class="border-bottom text-center pb-4">
@@ -46,36 +46,127 @@
                             <tr>
                                 <td> Tanggal Pendadaran </td>
                                 <td>:</td>
-                                <td> 08 Juni 2022 </td>
+                                @if ($pendadaran == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
+                                </td>
+                                @else
+                                <td> {{ $pendadaran->tanggal }} </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> Waktu </td>
                                 <td>:</td>
-                                <td> 09:00 </td>
+                                @if ($pendadaran == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
+                                </td>
+                                @else
+                                <td> {{ $pendadaran->waktu }} </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> Dosen Penguji 1 </td>
                                 <td>:</td>
-                                <td> Ipung Permadi </td>
+                                @if ($pendadaran == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
+                                </td>
+                                @else
+                                <td> {{ $pendadaran->penguji1->nama }} </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> Dosen Penguji 2 </td>
                                 <td>:</td>
-                                <td> Noviyati </td>
+                                @if ($pendadaran == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
+                                </td>
+                                @else
+                                <td> {{ $pendadaran->penguji2->nama }} </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> Dosen Penguji 3 </td>
                                 <td>:</td>
-                                <td> Lasmedi Afuan </td>
+                                @if ($pendadaran == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
+                                </td>
+                                @else
+                                <td> {{ $pendadaran->penguji3->nama }} </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> Dosen Penguji 4 </td>
                                 <td>:</td>
-                                <td> Lasmedi Afuan </td>
+                                @if ($pendadaran == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
+                                </td>
+                                @else
+                                <td> {{ $pendadaran->penguji4->nama }} </td>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td> Status Pelaksanaan </td>
+                                <td>:</td>
+                                @if ($pendadaran == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
+                                </td>
+                                @else
+                                <td>
+                                    <span class="badge badge-primary badge-pill">
+                                        {{ $pendadaran->StatusPendadaran->status }}
+                                    </span>
+                                </td>
+                                @endif
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-3">Tahapan Pendadaran</h4>
+                <div class="list-wrapper">
+                    <ul class="d-flex flex-column todo-list todo-list-custom">
+                        @foreach ($statusPendadaran as $value)
+                        <li>
+                            <div class="form-check">
+                                @if($pendadaran == null)
+                                <label class="form-check-label">
+                                    <input class="checkbox" type="checkbox"> {{ $value->status }} <i class="input-helper"></i></label>
+                                @else
+                                <label class="form-check-label">
+                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} " {{ $loop->iteration <= $pendadaran->statusPendadaran_id && $loop->iteration != 1 || $pendadaran->statusPendadaran_id == 1 && $loop->iteration == $pendadaran->statusPendadaran_id ? 'checked' : '' }}> {{ $value->status }} <i class="input-helper"></i></label>
+                                @endif
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white">
+            <div class="card-body">
+                <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Pendadaran
+                </h4>
+                <ul>
+                    <li>Mengambil Mata Kuliah Pendadaran</li>
+                    <li>Telah menyelesaikan Tugas Akhir</li>
+                    <li>Lulus Ujian UEPT (Nilai Minimal 400 dan masih berlaku < 2 tahun) </li>
+                    <li>Sudah lulus semua mata kuliah tanpa nilai <span class="badge badge-danger badge-pill">E</span></li>
+                    <li>Nilai tugas akhir sudah di upload di sistem SIA Unsoed</li>
+                    <li>Lembar Validasi Nilai Transkip Akademik dengan ketua program studi.</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -86,57 +177,30 @@
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
+                            @if($pendadaran == null)
                             <tr>
-                                <td> Surat Tugas Pendadaran </td>
                                 <td>
+                                    <div class="badge badge-danger badge-pill">Belum mengajukan Pendadaran</div>
+                                </td>
+                            </tr>
+                            @else
+                            <tr>
+                                <td>
+                                    @if($pendadaran->statusPendadaran_id >=3)
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
+                                        <form action="" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $pendadaran->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
                                     </div>
+                                    @else
+                                    Berita Acara Pendadaran
+                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
+                                    @endif
                                 </td>
                             </tr>
-                            <tr>
-                                <td> Laporan Hasil Pendadaran </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mb-5">Status Pelaksanaan Studi Akhir</h4>
-                <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                            <tr>
-                                <th> # </th>
-                                <th> Nama </th>
-                                <th> Status Tugas Akhir </th>
-                                <th> Status Pendadaran </th>
-                                <th> Status Yudisium </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> 1 </td>
-                                <td> Qotrunnada Oktiriani </td>
-                                <td>
-                                    <div class="badge badge-success badge-pill">Selesai</div>
-                                </td>
-                                <td>
-                                    <div class="badge badge-warning badge-pill">Menunggu Persetujuan</div>
-                                </td>
-                                <td>
-                                    <div class="badge badge-danger badge-pill">Belum Mengajukan</div>
-                                </td>
-                            </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

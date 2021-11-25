@@ -7,12 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('sitak/assets/css/style.css') }}">
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 18px;
+        }
+
+        .container {
+
+            width: 100%;
+            padding-right: 20px;
+            padding-left: 20px;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         p {
@@ -30,6 +37,77 @@
             font-size: 18px;
         }
 
+        .ml-5 {
+            margin-left: 3rem !important;
+        }
+
+        .mt-5 {
+            margin-top: 3rem !important;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        .mr-4 {
+            margin-right: 1.5rem !important;
+        }
+
+        .row {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -20px;
+            margin-left: -20px;
+        }
+
+        .col,
+        .col-md-1,
+        .col-md-10 {
+            position: relative;
+            width: 100%;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+
+        .col {
+            padding-right: 0;
+            padding-left: 0;
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+
+        .col-md-1 {
+            flex: 0 0 8.33333%;
+            max-width: 8.33333%;
+        }
+
+        .col-md-10 {
+            flex: 0 0 83.33333%;
+            max-width: 83.33333%;
+        }
+
+        .float-left {
+            float: left !important;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+
+
         .baris {
             height: 650px;
         }
@@ -37,14 +115,14 @@
     <title>SPK Tugas Akhir</title>
 </head>
 
-<body onload="window.print()">
+<body>
     <div class="container ml-5 mt-5 mr-2">
-        <div class="row g-0">
+        <div class="row">
             <div class="col col-md-1 float-left ml-5">
                 <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
             </div>
             <div class="col col-md-10 float-left">
-                <p align="center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
+                <p style="align:center;"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
                     Telepon/Faks. : (0281)6596801 <br>
@@ -58,7 +136,7 @@
 
         <p class="text-center mt-4"><b>SURAT PERINTAH KERJA TUGAS AKHIR <br>
                 (SPK-TA) <br>
-                Nomor: 442/UN23.12.6.01/PP.05.02/2021 </b>
+                Nomor: {{$taAll->no_surat}} </b>
         </p>
 
         <p>Berdasarkan hasil sidang Komisi Komisi Studi Akhir Fakultas Teknik Universitas Jenderal Soedirman, pada:
@@ -88,22 +166,22 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> qotrunnada oktiriani </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> H1D018033 </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nim}} </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> Teknik Informatika </td>
+                        <td> {{$taAll->mahasiswa->jurusan->namaJurusan}} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td> {{$taAll->judulTA}} </td>
                     </tr>
                     <tr>
                         <td> Terhitung sejak </td>
@@ -124,12 +202,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td> {{$taAll->Dosen1->nama}}</td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td>{{$taAll->Dosen1->nohp}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -141,12 +219,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td> {{$taAll->Dosen2->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td> {{$taAll->Dosen1->nohp}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -167,16 +245,16 @@
                         <td>Purbalingga, {{ date('d F Y ') }}</td>
                     </tr>
                     <tr>
-                        <td>Ketua Jurusan Informatika</td>
+                        <td>Ketua Jurusan {{$taAll->mahasiswa->jurusan->namaJurusan}}</td>
                     </tr>
                     <tr>
                         <td height="100px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center"><b><u>Teguh Cahyono</u></b></td>
+                        <td class="text-center"><b><u>{{$dosen->nama}}</u></b></td>
                     </tr>
                     <tr>
-                        <td class="text-center">NIP. 197502012000032005</td>
+                        <td class="text-center">NIP. {{$dosen->nohp}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -193,7 +271,7 @@
     </div>
 
     <div class="container ml-5 mr-2" style="margin-top:1000px; padding-top: 50px;">
-        <div class="row g-0">
+        <div class="row">
             <div class="col col-md-1 float-left ml-5">
                 <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
             </div>
@@ -220,27 +298,27 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> qotrunnada oktiriani </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> H1D018033 </td>
+                        <td style="text-transform: uppercase"> {{$taAll->mahasiswa->nim}} </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> Teknik Informatika </td>
+                        <td> {{$taAll->mahasiswa->jurusan->namaJurusan}} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td> {{$taAll->judulTA}} </td>
                     </tr>
                     <tr>
                         <td> No SPK </td>
                         <td>:</td>
-                        <td> 442/UN23.12.6.01/PP.05.02/2021 </td>
+                        <td> {{$taAll->no_surat}} </td>
                     </tr>
                     <tr>
                         <td> Dimulai sejak </td>
@@ -253,12 +331,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td>{{$taAll->Dosen1->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td> {{$taAll->Dosen1->nohp}} </td>
                     </tr>
                     <tr>
                         <td> Dosen Pembimbing 2</td>
@@ -266,12 +344,12 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> Prof. Dr.Eng.Suroso, ST., M.Eng </td>
+                        <td> {{$taAll->Dosen2->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> 197812242001121002 </td>
+                        <td> {{$taAll->Dosen2->nohp}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -279,7 +357,7 @@
 
 
         <div class="mt-3">
-            <table class="table table-bordered" align="center" border="1px" style="width:95% ">
+            <table class="table table-bordered" style="align:center; width:95%; border:1px; ">
                 <thead>
                     <tr class="text-center">
                         <th width="5%">No</th>
@@ -291,7 +369,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center baris">
+                    <tr class="text-center baris" style="border: 5;">
                         <td></td>
                         <td></td>
                         <td></td>
@@ -306,10 +384,5 @@
     </div>
 
 </body>
-
-
-
-
-
 
 </html>
