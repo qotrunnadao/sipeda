@@ -2,56 +2,187 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie-edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('sitak/assets/css/style.css') }}">
     <style>
-        body {
+        * {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 18px;
+            font-size: 12px;
+        }
+
+        .container {
+            width: 100%;
+            padding-right: 20px;
+            padding-left: 20px;
         }
 
         p {
             line-height: 1.5;
-            font-size: 18px;
+            font-size: 12px;
         }
 
-        table td {
+        td {
             line-height: 1.5;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 18px;
-        }
-
-        table th {
-            line-height: 1.5;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 18px;
+            font-size: 12px;
         }
 
         li {
             line-height: 1.5;
-            font-size: 18px;
+            font-size: 12px;
+        }
+
+        .ml-5 {
+            margin-left: 30px !important;
+        }
+
+        .mt-5 {
+            margin-top: 30px !important;
+        }
+
+        .mt-4 {
+            margin-top: 20px !important;
+        }
+
+        .mt-3 {
+            margin-top: 18px !important;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem !important;
+        }
+
+        .mt-1 {
+
+            margin-top: 0.25rem !important;
+        }
+
+        .mr-2 {
+            margin-right: 9px !important;
+        }
+
+        .mr-4 {
+            margin-right: 20px !important;
+        }
+
+        .row {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -20px;
+            margin-left: -20px;
+        }
+
+        .col,
+        .col-md-1,
+        .col-md-10 {
+            position: relative;
+            width: 100%;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .col {
+            padding-right: 0;
+            padding-left: 0;
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+
+        .col-md-1 {
+            flex: 0 0 8.33333%;
+            max-width: 8.33333%;
+        }
+
+        .col-md-10 {
+            flex: 0 0 83.33333%;
+            max-width: 83.33333%;
+        }
+
+        .col-md-8 {
+            flex: 0 0 66.66667%;
+            max-width: 66.66667%;
+        }
+
+        .col-md-4 {
+            flex: 0 0 33.33333%;
+            max-width: 33.33333%;
+        }
+
+        .float-left {
+            float: left !important;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        .ttd {
+            display: flex;
+            flex: 100%;
+            float: right;
+            /* position: absolute; */
+            /* justify-content: flex-end;
+            display: flex; */
+        }
+
+        .table {
+            border-collapse: collapse;
+            /* margin-bottom: 1rem; */
+            color: #212529;
+            line-height: 1.5;
+        }
+
+        .table th,
+        .table td {
+            /* padding: 0.9375rem; */
+            vertical-align: center;
+            border-top: 1px solid #212529;
+            line-height: 1.5;
+        }
+
+        .table thead th {
+            vertical-align: center;
+            border-bottom: 2px solid #212529;
+        }
+
+        .table tbody+tbody {
+            border-top: 2px solid #212529;
+        }
+
+        .table-bordered {
+            border: 1px solid #212529;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #212529;
+        }
+
+        .table-bordered thead th,
+        .table-bordered thead td {
+            border-bottom-width: 2px;
+            align-content: center;
         }
 
         .baris {
-            height: 700px;
+            height: 650px;
         }
     </style>
-    <title>Berkas Semprop</title>
 </head>
 
-<body onload="window.print()">
+<body>
     <div class="container ml-5 mt-5 mr-2">
-        <div class="row g-0">
-            <div class="col col-md-1 float-left ml-5">
+        <div class="row">
+            {{-- <div class="col col-md-1 float-left ml-5">
                 <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
-            </div>
-            <div class="col col-md-10 float-left">
-                <p align="center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
+            </div> --}}
+            <div class="col">
+                <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
                     Telepon/Faks. : (0281)6596801 <br>
@@ -115,13 +246,13 @@
                     <tr>
                         <td> Judul Proposal TA </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>akan melakukan seminar proposal tugas akhir pada :</p>
             <table class="ml-3">
                 <tbody>
@@ -144,11 +275,11 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>Demikian surat undangan seminar proposal tugas akhir , terimakasih atas perhatiannya.</p>
         </div>
 
-        <div class="mr-4 mt-5" style="display: flex; justify-content: right;">
+        <div class="mr-4 mt-5 ttd">
             <table>
                 <tbody>
                     <tr>
@@ -158,7 +289,7 @@
                         <td>Ketua Jurusan Informatika</td>
                     </tr>
                     <tr>
-                        <td height="100px"></td>
+                        <td height="70px"></td>
                     </tr>
                     <tr>
                         <td class="text-center"><b><u>Teguh Cahyono</u></b></td>
@@ -170,19 +301,20 @@
             </table>
         </div>
 
-        <div class="mt-5">
+        {{-- <div class="mt-5">
             <p>[Rangkap 4 untuk dosen penguji, bapendik, ketua komisi]</p>
-        </div>
+        </div> --}}
 
     </div>
 
-    <div class="container ml-5 mr-2" style="margin-top:1000px; padding-top: 50px;">
-        <div class="row g-0">
-            <div class="col col-md-1 float-left ml-5">
+    <div class="page-break"></div>
+    <div class="container ml-5 mr-2">
+        <div class="row">
+            {{-- <div class="col col-md-1 float-left ml-5">
                 <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
-            </div>
-            <div class="col col-md-10 float-left">
-                <p align="center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
+            </div> --}}
+            <div class="col">
+                <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
                     Telepon/Faks. : (0281)6596801 <br>
@@ -219,7 +351,7 @@
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
                     </tr>
                     <tr>
                         <td> Hari/tanggal </td>
@@ -245,7 +377,7 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>Berdasarkan pelaksanaan seminar proposal tugas akhir, ditetapkan bahwa mahasiswa tersebut diatas dinyatakan : (**)</p>
             <ol>
                 <li>Lulus</li>
@@ -254,12 +386,12 @@
             </ol>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>Telah ditetapkan di Purbalingga pada 21 Oktober 2021 pada jam ............ s/d selesai di ruang seminar Fakultas Teknik Purbalingga.</p>
         </div>
 
-        <div class="mt-3">
-            <table class="ml-3">
+        <div>
+            <table class="ml-3" style="width: 100%">
                 <tbody>
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
@@ -279,7 +411,7 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p><i>(*) diisi oleh dosen pembimbing</i></p>
             <p><i>(**) jika diperlukan dapat diberi halaman tambahan</i></p>
         </div>
@@ -289,13 +421,15 @@
         </div>
     </div>
 
-    <div class="container ml-5 mr-2" style="margin-top:1000px; padding-top: 50px;">
-        <div class="row g-0">
-            <div class="col col-md-1 float-left ml-5">
+    <div class="page-break"></div>
+
+    <div class="container ml-5 mr-2">
+        <div class="row">
+            {{-- <div class="col col-md-1 float-left ml-5">
                 <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
-            </div>
-            <div class="col col-md-10 float-left">
-                <p align="center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
+            </div> --}}
+            <div class="col">
+                <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
                     Telepon/Faks. : (0281)6596801 <br>
@@ -310,7 +444,7 @@
         <p class="text-center mt-4"><b>LAMPIRAN DAFTAR HADIR SEMINAR PROPOSAL TUGAS AKHIR</b>
         </p>
 
-        <div class="mt-3">
+        <div>
             <p>Telah melakukan seminar proposal tugas akhir atas nama mahasiswa sebagai berikut,</p>
             <table>
                 <tbody>
@@ -332,7 +466,7 @@
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
                     </tr>
                     <tr>
                         <td> Hari/tanggal </td>
@@ -357,9 +491,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-3">
+        <div>
             <p>Dengan perincian peserta sebagai berikut</p>
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="width: 100%">
                 <thead class="text-center">
                     <tr style="border-width:medium;">
                         <th width="10%">No</th>
@@ -434,12 +568,12 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>Telah ditetapkan di Purbalingga pada 21 Oktober 2021 pada jam ............ s/d selesai di ruang seminar Fakultas Teknik Purbalingga.</p>
         </div>
 
         <div class="mt-3">
-            <table class="ml-3">
+            <table class="ml-3" style="width: 100%">
                 <tbody>
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
@@ -459,7 +593,7 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>Catatan : seminar proposal TA dianggap sah jika peserta/mahasiswa yang hadir minimal 10 orang.</p>
         </div>
 

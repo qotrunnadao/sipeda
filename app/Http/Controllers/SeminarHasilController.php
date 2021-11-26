@@ -65,13 +65,13 @@ class SeminarHasilController extends Controller
         return view('TA.semhasTA.create', compact('data_semhas', 'semhas', 'mhs', 'Ruang', 'jurusan'));
     }
     public function nim(Request $request)
-	{
-		$taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+    {
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
             $query->where('jurusan_id', $request->id);
-		})->where('status_id', '7')->get();
+        })->where('status_id', '7')->get();
         // dd($taAll);
-		return response()->json($taAll, 200);
-	}
+        return response()->json($taAll, 200);
+    }
 
 
     /**
@@ -154,7 +154,7 @@ class SeminarHasilController extends Controller
     public function destroy($id)
     {
         $semhas = SeminarHasil::find($id);
-        $taAll = TA::with(['mahasiswa'])->where('id', $semprop->ta->id)->get()->first();
+        $taAll = TA::with(['mahasiswa'])->where('id', $semhas->ta->id)->get()->first();
         File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $semhas->beritaacara . ''));
         $semhas->delete();
         $status = array(
@@ -187,7 +187,7 @@ class SeminarHasilController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
+        return response()->file(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
     }
     public function eksport(Request $request, $id)
     {
@@ -196,9 +196,10 @@ class SeminarHasilController extends Controller
         $semhas = SeminarHasil::with(['TA.mahasiswa'])->where('ta_id', $request->route('id'))->get()->first();
         $taAll = TA::with(['mahasiswa'])->where('id', $request->route('id'))->get()->first();
         // dd($semhas->ta->mahasiswa->nim);
+        $dosen = Dosen::where('jurusan_id', $taAll->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
 
         $data = ['ta_id' => $ta_id, 'semhas' => $semhas];
-        $pdf = PDF::loadView('TA.SPK.download', $data);
+        $pdf = PDF::loadView('TA.semhasTA.berkas', ['taAll' => $taAll, 'dosen' => $dosen])->setPaper('a4');
 
         $filename = 'Berita Acara Seminar Hasil' . '_' . $semhas->ta->mahasiswa->nim . '_' . time() . '.pdf';
 

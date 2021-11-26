@@ -68,10 +68,9 @@
                                     @if ($value->status != 0)
                                     @if ( $value->beritaacara == null)
                                     <div class="btn-group">
-                                        {{-- <form action="{{ route('semhas.eksport', $value->ta_id) }}" method="GET" id="export">
+                                        <form action="{{ route('semhas.eksport', $value->ta_id) }}" method="GET" id="export">
                                             <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                        </form> --}}
-                                        <a href="{{ route('semhas.berkas') }}" type="button" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
                                     </div>
                                     @endif
 
@@ -149,12 +148,12 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        {{-- <form action="{{ route('semhas.download', $value->beritaacara) }}" target="blank" method="post">
+                                        <form action="{{ route('semhas.download', $value->beritaacara) }}" target="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form> --}}
-                                        <a href="{{ route('semhas.berkas') }}" type="button" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                        {{-- <a href="{{ route('semhas.berkas') }}" type="button" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button> --}}
                                     </div>
                                     @endif
                                 </td>

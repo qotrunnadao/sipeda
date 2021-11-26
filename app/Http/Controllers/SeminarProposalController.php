@@ -50,7 +50,7 @@ class SeminarProposalController extends Controller
     }
 
     public function nim(Request $request)
-	{
+    {
         // dd($request);
         $id = $request->id;
         $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($id) {
@@ -58,7 +58,7 @@ class SeminarProposalController extends Controller
         })->where('status_id', '4')->get();
         // dd($taAll);
         return response()->json($taAll, 200);
-	}
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -187,7 +187,7 @@ class SeminarProposalController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
+        return response()->file(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
     }
     public function eksport(Request $request, $id)
     {
@@ -197,10 +197,10 @@ class SeminarProposalController extends Controller
         $sempro = SeminarProposal::with(['TA.mahasiswa'])->where('ta_id', $ta_id->ta_id)->get()->first();
         // dd($sempro->ta->mahasiswa->nim);
         $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
-
+        $dosen = Dosen::where('jurusan_id', $taAll->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
 
         $data = ['id' => $id, 'sempro' => $sempro];
-        $pdf = PDF::loadView('TA.SPK.download', $data);
+        $pdf = PDF::loadView('TA.sempropTA.berkas', ['taAll' => $taAll, 'dosen' => $dosen])->setPaper('a4');
 
         $filename = 'Berita Acara Seminar Proposal' . '_' . $sempro->ta->mahasiswa->nim . '_' . time() . '.pdf';
 
