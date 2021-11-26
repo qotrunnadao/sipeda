@@ -1,19 +1,23 @@
 <html>
-    <head>
-        <title>Judul</title>
-         <style>
+
+<head>
+    <title>Judul</title>
+    <style>
         body {
             font-family: 'Times New Roman', Times, serif;
             font-size: 18px;
         }
 
         .container {
-
             width: 100%;
             padding-right: 20px;
             padding-left: 20px;
             margin-right: auto;
             margin-left: auto;
+        }
+
+        .page-break {
+            page-break-after: always;
         }
 
         p {
@@ -106,10 +110,11 @@
             height: 650px;
         }
     </style>
-    </head>
-    <body>
-        <h1>Test123</h1>
-        <div class="container ml-5 mt-5 mr-2">
+</head>
+
+<body>
+    <h1>Test123</h1>
+    <div class="container ml-5 mt-5 mr-2">
         <div class="row">
             <div class="col col-md-1 float-left ml-5">
                 <img src="/sitak/assets/images/unsoed_b&w.png" height="130" width="130">
@@ -260,9 +265,9 @@
                 <li>Mahasiswa</li>
             </ol>
         </div>
-        </div>
-        {{-- <div style="margin-top:1000px"></div> --}}
-        <div class="container ml-5 mr-2" style="">
+    </div>
+    <div class="page-break"></div>
+    <div class="container ml-5 mr-2">
         <div class="row">
             <div class="col col-md-1 float-left ml-5">
                 <img src="/sitak/assets/images/unsoed_b&w.png" height="130" width="130">
@@ -373,7 +378,8 @@
         <div class="mt-5">
             <p>*) Kartu kendali dapat diperbanyak sendiri</p>
         </div>
-        </div>
+    </div>
 
-    </body>
+</body>
+
 </html>

@@ -1,34 +1,33 @@
-<html>
-    <head>
-        {{-- <title>Judul</title> --}}
-         <style>
-        body {
+<!doctype html>
+<html lang="en">
+
+<head>
+    {{-- <title>Judul</title> --}}
+    <style>
+        * {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 18px;
+            font-size: 12px;
         }
 
         .container {
-
             width: 100%;
             padding-right: 20px;
             padding-left: 20px;
-            margin-right: auto;
-            margin-left: auto;
         }
 
         p {
             line-height: 1.5;
-            font-size: 18px;
+            font-size: 12px;
         }
 
         td {
             line-height: 1.5;
-            font-size: 18px;
+            font-size: 12px;
         }
 
         li {
             line-height: 1.5;
-            font-size: 18px;
+            font-size: 12px;
         }
 
         .ml-5 {
@@ -45,6 +44,15 @@
 
         .mt-3 {
             margin-top: 18px !important;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem !important;
+        }
+
+        .mt-1 {
+
+            margin-top: 0.25rem !important;
         }
 
         .mr-2 {
@@ -74,6 +82,10 @@
             padding-left: 20px;
         }
 
+        .page-break {
+            page-break-after: always;
+        }
+
         .col {
             padding-right: 0;
             padding-left: 0;
@@ -92,6 +104,16 @@
             max-width: 83.33333%;
         }
 
+        .col-md-8 {
+            flex: 0 0 66.66667%;
+            max-width: 66.66667%;
+        }
+
+        .col-md-4 {
+            flex: 0 0 33.33333%;
+            max-width: 33.33333%;
+        }
+
         .float-left {
             float: left !important;
         }
@@ -100,22 +122,68 @@
             text-align: center !important;
         }
 
+        .ttd {
+            display: flex;
+            flex: 100%;
+            float: right;
+            /* position: absolute; */
+            /* justify-content: flex-end;
+            display: flex; */
+        }
 
+        .table {
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            color: #212529;
+            line-height: 1;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.9375rem;
+            vertical-align: top;
+            border-top: 1px solid #212529;
+            line-height: 1;
+        }
+
+        .table thead th {
+            vertical-align: center;
+            border-bottom: 2px solid #212529;
+        }
+
+        .table tbody+tbody {
+            border-top: 2px solid #212529;
+        }
+
+        .table-bordered {
+            border: 1px solid #212529;
+        }
+
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #212529;
+        }
+
+        .table-bordered thead th,
+        .table-bordered thead td {
+            border-bottom-width: 2px;
+            align-content: center;
+        }
 
         .baris {
             height: 650px;
         }
     </style>
-    </head>
-    <body>
-        {{-- <h1>Test123</h1> --}}
-        <div class="container ml-5 mt-5 mr-2">
+</head>
+
+<body>
+    <div class="container ml-5 mt-2 mr-2">
         <div class="row">
-            <div class="col col-md-1 ml-5" style="display : inline-block">
-                <img src="/sitak/assets/images/unsoed_b&w.png" height="130" width="130">
-            </div>
-            <div class="col col-md-10 ">
-                <p style="align:center;"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
+            {{-- <div class="col col-md-1 ml-5" style="display : inline-block">
+                <img src="{{ $taAll->mahasiswa->foto }}" height="130" width="130">
+            </div> --}}
+            <div class="col">
+                <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
                     Telepon/Faks. : (0281)6596801 <br>
@@ -127,7 +195,7 @@
         <hr color="#000000" style="height: 5px; margin-top: -10px;">
 
 
-        <p class="text-center mt-4"><b>SURAT PERINTAH KERJA TUGAS AKHIR <br>
+        <p class="text-center mt-3"><b>SURAT PERINTAH KERJA TUGAS AKHIR <br>
                 (SPK-TA) <br>
                 Nomor: {{$taAll->no_surat}} </b>
         </p>
@@ -135,7 +203,7 @@
         <p>Berdasarkan hasil sidang Komisi Komisi Studi Akhir Fakultas Teknik Universitas Jenderal Soedirman, pada:
         </p>
 
-        <div class="mt-3">
+        <div class="mt-2">
             <table class="ml-5">
                 <tbody>
                     <tr>
@@ -152,7 +220,7 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>Tugas Akhir mahasiswa :</p>
             <table class="ml-5">
                 <tbody>
@@ -174,7 +242,7 @@
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td> {{$taAll->judulTA}} </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> {{$taAll->judulTA}}</td>
                     </tr>
                     <tr>
                         <td> Terhitung sejak </td>
@@ -185,7 +253,7 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>dengan pembimbing :</p>
             <table class="ml-5">
                 <tbody>
@@ -223,7 +291,7 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div>
             <p>Surat Perintah Kerja (SPK) Tugas Akhir ini diterbitkan untuk maksud dan fungsi sebagai:</p>
             <ol class="ml-5">
                 <li>dasar mahasiswa melaksanakan tugas akhir</li>
@@ -231,7 +299,7 @@
                 <li>dasar penerbitan SK pembimbing Tugas Akhir.</li>
             </ol>
         </div>
-        <div class="mr-4 mt-5" style="display: flex; justify-content: right;">
+        <div class="mr-4 mt-5 ttd">
             <table>
                 <tbody>
                     <tr>
@@ -241,7 +309,7 @@
                         <td>Ketua Jurusan {{$taAll->mahasiswa->jurusan->namaJurusan}}</td>
                     </tr>
                     <tr>
-                        <td height="100px"></td>
+                        <td height="60px"></td>
                     </tr>
                     <tr>
                         <td class="text-center"><b><u>{{$dosen->nama}}</u></b></td>
@@ -252,7 +320,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-3">
+        <div class="mt-1">
             <p>Disampaikan kepada :</p>
             <ol class="ml-5">
                 <li>Dekan Fakultas Teknik</li>
@@ -260,15 +328,15 @@
                 <li>Mahasiswa</li>
             </ol>
         </div>
-        </div>
-        {{-- <div style="margin-top:1000px"></div> --}}
-        <div class="container ml-5 mr-2" style="">
+    </div>
+    <div class="page-break"></div>
+    <div class="container ml-5 mt-2 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
+            {{-- <div class="col col-md-1 float-left ml-5">
                 <img src="/sitak/assets/images/unsoed_b&w.png" height="130" width="130">
-            </div>
-            <div class="col col-md-10 float-left">
-                <p align="center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
+            </div> --}}
+            <div class="col">
+                <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
                     Telepon/Faks. : (0281)6596801 <br>
@@ -305,7 +373,7 @@
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td> {{$taAll->judulTA}} </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> {{$taAll->judulTA}} </td>
                     </tr>
                     <tr>
                         <td> No SPK </td>
@@ -349,31 +417,31 @@
 
 
         <div class="mt-3">
-            <table class="table table-bordered" style="align:center; width:95%; border:1px; ">
+            <table class="table table-bordered ml-5" style="align:center; width:100%;">
                 <thead>
                     <tr class="text-center">
                         <th width="5%">No</th>
                         <th>Tanggal dan Waktu
                             Bimbingan</th>
                         <th width="60%">Uraian</th>
-                        <th>tanda
-                            tangan</th>
+                        <th>Tanda
+                            Tangan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center baris" table border="5">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr class="text-center">
+                        <td style="height: 300px"></td>
+                        <td style="height: 300px"></td>
+                        <td style="height: 300px"></td>
+                        <td style="height: 300px"></td>
                     </tr>
             </table>
         </div>
-
         <div class="mt-5">
             <p>*) Kartu kendali dapat diperbanyak sendiri</p>
         </div>
-        </div>
+    </div>
 
-    </body>
+</body>
+
 </html>
