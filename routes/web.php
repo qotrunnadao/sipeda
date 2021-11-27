@@ -141,6 +141,7 @@ Route::post('/tugas-akhir/semprop/nim/',  'SeminarProposalController@nim')->name
 Route::get('/tugas-akhir/semprop/edit/{id}', 'SeminarProposalController@edit')->name('semprop.edit');
 Route::put('/tugas-akhir/semprop/update/{id}', 'SeminarProposalController@update')->name('semprop.update');
 Route::get('/tugas-akhir/semprop/delete/{id}', 'SeminarProposalController@destroy')->name('semprop.delete');
+Route::post('/tugas-akhir/semprop/surat/{id}',  'SeminarProposalController@show')->name('semprop.surat');
 Route::put('/tugas-akhir/beritaAcara/download/{filename}',  'SeminarProposalController@download')->name('semprop.download');
 Route::get('/tugas-akhir/beritaAcara/pdf/{id}',  'SeminarProposalController@eksport')->name('semprop.eksport');
 Route::get('/tugas-akhir/semprop/diterima/{seminarProposal}', 'SeminarProposalController@diterima')->name('semprop.diterima');
@@ -154,6 +155,8 @@ Route::get('/tugas-akhir/semhas/create',  'SeminarHasilController@create')->name
 Route::post('/tugas-akhir/semhas/store',  'SeminarHasilController@store')->name('semhas.store');
 Route::post('/tugas-akhir/semhas/nim/',  'SeminarHasilController@nim')->name('semhas.nim');
 Route::get('/tugas-akhir/semhas/edit/{id}',  'SeminarHasilController@edit')->name('semhas.edit');
+Route::post('/tugas-akhir/semhas/store',  'SeminarHasilController@store')->name('semhas.store');
+Route::post('/tugas-akhir/semhas/surat/{id}',  'SeminarHasilController@show')->name('semhas.surat');
 Route::put('/tugas-akhir/semhas/update/{id}',  'SeminarHasilController@update')->name('semhas.update');
 Route::get('/tugas-akhir/semhas/delete/{id}',  'SeminarHasilController@destroy')->name('semhas.delete');
 Route::put('/tugas-akhir/beritaAcaraSemhas/download/{filename}',  'SeminarHasilController@download')->name('semhas.download');

@@ -61,8 +61,8 @@ class SeminarHasilMahasiswaController extends Controller
             $jamMulai = $request->jamMulai;
             $jamSelesai = $request->jamSelesai;
             $ruang = $request->ruang;
-            $tanggal = $request->tanggal;
-            $today = Carbon::now()->addDays(4)->isoFormat('Y-M-D');
+            $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-D');
+            $today = Carbon::now()->addDays(3)->isoFormat('Y-M-D');
             // dd($ruang);
             if ($tanggal >= $today) {
                 $semhasCount = SeminarHasil::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
@@ -141,7 +141,7 @@ class SeminarHasilMahasiswaController extends Controller
                     Alert::warning('Gagal', 'Pengajuan Seminar Hasil Gagal Ditambahkan, Ruangan Sudah Digunakan');
                 }
             } else {
-                Alert::warning('Gagal', 'Pengajuan Seminar Hasil diajukan minimal 4 Hari Sebelum Pelaksanaan Seminar');
+                Alert::warning('Gagal', 'Pengajuan Seminar Hasil diajukan minimal 3 Hari Sebelum Pelaksanaan Seminar');
             }
         } else {
             $data['doc'] = NULL;

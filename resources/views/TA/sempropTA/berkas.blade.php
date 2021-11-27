@@ -199,7 +199,7 @@
                     <tr>
                         <td> Nomor </td>
                         <td>:</td>
-                        <td> <b>442/UN23.12.6.01/PP.05.02/2021</b> </td>
+                        <td> <b>{{ $ta_id->no_surat }}</b> </td>
                     </tr>
                     <tr>
                         <td> Lampiran </td>
@@ -218,8 +218,8 @@
         <div class="mt-3">
             <p>Yth. Bapak/Ibu</p>
             <ol>
-                <li>Arief Kelik Nugroho (Dosen Pembimbing 1)</li>
-                <li>Eddy maryanto (Dosen Pembimbing 2)</li>
+                <li>{{ $ta_id->ta->Dosen1->nama }} (Dosen Pembimbing 1)</li>
+                <li>{{ $ta_id->ta->Dosen2->nama }} (Dosen Pembimbing 2)</li>
                 <li>Semua mahasiswa di tempat</li>
             </ol>
         </div>
@@ -231,22 +231,22 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> <b> qotrunnada oktiriani</b> </td>
+                        <td style="text-transform: uppercase"> <b> {{ $ta_id->ta->mahasiswa->nama }}</b> </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> H1D018033 </td>
+                        <td style="text-transform: uppercase"> {{ $ta_id->ta->mahasiswa->nim }} </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> Teknik Informatika </td>
+                        <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
                     </tr>
                     <tr>
                         <td> Judul Proposal TA </td>
                         <td>:</td>
-                        <td style="text-transform: capitalize; border: 1px solid;"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> {{ $ta_id->ta->judulTA }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -259,17 +259,17 @@
                     <tr>
                         <td> Hari/tanggal </td>
                         <td>:</td>
-                        <td> Jumat, 12 November 2021 </td>
+                        <td> {{ $hari }} </td>
                     </tr>
                     <tr>
                         <td> Waktu </td>
                         <td>:</td>
-                        <td> Jam 09:00 s/d selesai WIB </td>
+                        <td> {{ $jamMulai }} - {{ $jamSelesai }} </td>
                     </tr>
                     <tr>
                         <td> Tempat </td>
                         <td>:</td>
-                        <td> di ruang seminar Jurusan Teknik FT kampus Purbalingga. </td>
+                        <td> di ruang {{ $ta_id->ruang->namaRuang }} Fakultas Teknik FT kampus Purbalingga. </td>
                     </tr>
                 </tbody>
             </table>
@@ -283,19 +283,19 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>Purbalingga, {{ date('d F Y ') }}</td>
+                        <td>Purbalingga, {{ $spk }}</td>
                     </tr>
                     <tr>
-                        <td>Ketua Jurusan Informatika</td>
+                        <td>Ketua Jurusan {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }}</td>
                     </tr>
                     <tr>
                         <td height="70px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center"><b><u>Teguh Cahyono</u></b></td>
+                        <td class="text-center"><b><u>{{ $dosen->nama }}</u></b></td>
                     </tr>
                     <tr>
-                        <td class="text-center">NIP. 197502012000032005</td>
+                        <td class="text-center">NIP. {{ $dosen->nip }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -336,37 +336,37 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> qotrunnada oktiriani </td>
+                        <td style="text-transform: uppercase"> {{ $ta_id->ta->mahasiswa->nama }} </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> H1D018033 </td>
+                        <td style="text-transform: uppercase"> {{ $ta_id->ta->mahasiswa->nim }} </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> Teknik Informatika </td>
+                    <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td style="text-transform: capitalize; border: 1px solid;"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> {{ $ta_id->ta->judulTA }} </td>
                     </tr>
                     <tr>
                         <td> Hari/tanggal </td>
                         <td>:</td>
-                        <td> Jumat, 12 November 2021 </td>
+                        <td> {{ $hari }} </td>
                     </tr>
                     <tr>
                         <td> Waktu </td>
                         <td>:</td>
-                        <td> Jam 09:00 s/d selesai WIB </td>
+                        <td> {{ $jamMulai }} - {{ $jamSelesai }} </td>
                     </tr>
                     <tr>
                         <td> Tempat </td>
                         <td>:</td>
-                        <td> di ruang seminar Jurusan Teknik FT kampus Purbalingga. </td>
+                        <td> di ruang {{ $ta_id->ruang->namaRuang }} Fakultas Teknik FT kampus Purbalingga. </td>
                     </tr>
                     <tr>
                         <td> Jumlah Peserta </td>
@@ -387,7 +387,7 @@
         </div>
 
         <div>
-            <p>Telah ditetapkan di Purbalingga pada 21 Oktober 2021 pada jam ............ s/d selesai di ruang seminar Fakultas Teknik Purbalingga.</p>
+            <p>Telah ditetapkan di Purbalingga pada {{ $spk }} pada jam {{ $jamMulai }} s/d {{ $jamSelesai }} di ruang {{ $ta_id->ruang->namaRuang }} Fakultas Teknik Purbalingga.</p>
         </div>
 
         <div>
@@ -396,15 +396,15 @@
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
                         <td>:</td>
-                        <td width=50%> Teguh Cahyono <br>
-                            NIP. 1986307190106 </td>
+                        <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
+                            NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
                         <td> ttd : .................</td>
                     </tr>
                     <tr>
                         <td width=30%> Pembimbing 2 </td>
                         <td>:</td>
-                        <td width="50%"> Teguh Cahyono <br>
-                            NIP. 1986307190106 </td>
+                        <td width="50%"> {{ $ta_id->ta->Dosen2->nama }} <br>
+                            NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
                         <td> ttd : .................</td>
                     </tr>
                 </tbody>
@@ -451,37 +451,37 @@
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> qotrunnada oktiriani </td>
+                        <td style="text-transform: uppercase"> {{ $ta_id->ta->mahasiswa->nama }} </td>
                     </tr>
                     <tr>
                         <td> NIM </td>
                         <td>:</td>
-                        <td style="text-transform: uppercase"> H1D018033 </td>
+                        <td style="text-transform: uppercase"> {{ $ta_id->ta->mahasiswa->nim }} </td>
                     </tr>
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                        <td> Teknik Informatika </td>
+                    <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
                         <td>:</td>
-                        <td style="text-transform: capitalize; border: 1px solid;"> Pengembangan Frontend Sistem Pengelolaan Studi Akhir </td>
+                        <td style="text-transform: capitalize; border: 1px solid;"> {{ $ta_id->ta->judulTA }} </td>
                     </tr>
                     <tr>
                         <td> Hari/tanggal </td>
                         <td>:</td>
-                        <td> Jumat, 12 November 2021 </td>
+                        <td> {{ $hari }} </td>
                     </tr>
                     <tr>
                         <td> Waktu </td>
                         <td>:</td>
-                        <td> Jam 09:00 s/d selesai WIB </td>
+                        <td> {{ $jamMulai }} - {{ $jamSelesai }} </td>
                     </tr>
                     <tr>
                         <td> Tempat </td>
                         <td>:</td>
-                        <td> di ruang seminar Jurusan Teknik FT kampus Purbalingga. </td>
+                        <td> di ruang {{ $ta_id->ruang->namaRuang }} Fakultas Teknik FT kampus Purbalingga. </td>
                     </tr>
                     <tr>
                         <td> Jumlah Peserta </td>
@@ -569,7 +569,7 @@
         </div>
 
         <div>
-            <p>Telah ditetapkan di Purbalingga pada 21 Oktober 2021 pada jam ............ s/d selesai di ruang seminar Fakultas Teknik Purbalingga.</p>
+            <p>Telah ditetapkan di Purbalingga pada {{ $spk }} pada jam {{ $jamMulai }} s/d {{ $jamSelesai }} di ruang {{ $ta_id->ruang->namaRuang }} Fakultas Teknik Purbalingga.</p>
         </div>
 
         <div class="mt-3">
@@ -578,15 +578,15 @@
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
                         <td>:</td>
-                        <td width=50%> Teguh Cahyono <br>
-                            NIP. 1986307190106 </td>
+                        <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
+                            NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
                         <td> ttd : .................</td>
                     </tr>
                     <tr>
                         <td width=30%> Pembimbing 2 </td>
                         <td>:</td>
-                        <td width="50%"> Teguh Cahyono <br>
-                            NIP. 1986307190106 </td>
+                        <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
+                            NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
                         <td> ttd : .................</td>
                     </tr>
                 </tbody>
