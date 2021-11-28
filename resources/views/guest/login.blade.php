@@ -14,62 +14,84 @@
 </head>
 
 <body>
-    <div class="l-form">
-        <div class="shape1"></div>
-        <div class="shape2"></div>
-        <div class="form">
-            <img src="{{ asset('masuk/assets/img/auth4.svg') }}" alt="" class="form__img move" data-speed="2">
-            <div class="form__content">
-                <div class="d-grid gap-2 mx-auto">
-                    <form action="{{ route('login') }}" method="POST">
-                        @csrf
-                        <span class="login100-form-logo">
-                            <img src="{{ asset('sitak/assets/images/unsoed.png') }}">
+    <div class="container-fluid">
+        <div class="row" style="background: linear-gradient(to right, #95b6fc,#1f3a93 ) !important; box-shadow: 0px 1px 20px #2f3b96;">
+            <div class="col">
+                <header class="d-flex py-3 header">
+                    <div class="d-flex align-items-center text-light" style="padding-left: 100px">
+                        <span style="width: 40px;">
+                            <img src=" {{ asset('sitak/assets/images/unsoed.png') }}">
                         </span>
-                        <span class="form__social-text" style="text-align: center"><b>Sistem Informasi Pengelolaan Studi Akhir <br>Fakultas Teknik UNSOED</b></span>
-                        <div class="form__div form__div-one">
-                            <div class="form__icon">
-                                <i class='bx bx-user-circle'></i>
-                            </div>
-                            <div class="form__div-input">
-                                <label for="email" class="form__label">E-mail</label>
-                                <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" autocomplete="email">
-                                @error('email')
-                                <span class="invalid-feedback mt-4" role="alert">
-                                    <strong>{{ $message }}</strong>
+                        {{-- <span class="fs-5" style="letter-spacing: 3px; margin-left:30px; text-shadow:0px 5px 4px #5f638a;"><b>UNIVERSITAS JENDERAL SOEDIRMAN</b></span> --}}
+                        <span class="fs-5" style="letter-spacing: 3px; margin-left:30px; text-shadow:0px 5px 4px #5f638a;"><b>FAKULTAS TEKNIK</b></span>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="l-form">
+                <div class="shape1"></div>
+                <div class="shape2"></div>
+                <div class="form">
+                    <img src="{{ asset('masuk/assets/img/auth4.svg') }}" alt="" class="form__img move" data-speed="2">
+                    <div class="form__content">
+                        <div class="d-grid gap-2 mx-auto">
+                            <form action="{{ route('login') }}" method="POST">
+                                @csrf
+                                <span class="login100-form-logo">
+                                    <img src="{{ asset('sitak/assets/images/unsoed.png') }}">
                                 </span>
-                                @enderror
-                            </div>
+                                <span class="form__social-text" style="text-align: center; "><b>Sistem Informasi Pengelolaan Studi Akhir <br>Fakultas Teknik UNSOED</b></span>
+                                <div class="form__div form__div-one">
+                                    <div class="form__icon">
+                                        <i class='bx bx-user-circle'></i>
+                                    </div>
+                                    <div class="form__div-input">
+                                        <label for="email" class="form__label">E-mail</label>
+                                        <input type="text" class="form__input @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" autocomplete="email">
+                                        @error('email')
+                                        <span class="invalid-feedback mt-4" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form__div">
+                                    <div class="form__icon">
+                                        <i class='bx bx-lock'></i>
+                                    </div>
+                                    <div class="form__div-input">
+                                        <label for="password" class="form__label">Password</label>
+                                        <input type="password" class="form__input @error('password') is-invalid @enderror" id="password" type="password" name="password" autocomplete="current-password">
+                                        @error('password')
+                                        <span class="invalid-feedback mt-4" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <button type="submit" class="form__button">
+                                    {{ __('Login') }}
+                                </button>
+                            </form>
+                            <form action="{{ route('cas.login') }}" method="get">
+                                @csrf
+                                <button class="form__button" href="">Login SSO</button>
+                                <div class="form__social">
+                                    <span class="form__social-text"><i class='bx bx-info-circle'></i> Selain admin silahkan login menggunakan SSO</span>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form__div">
-                            <div class="form__icon">
-                                <i class='bx bx-lock'></i>
-                            </div>
-                            <div class="form__div-input">
-                                <label for="password" class="form__label">Password</label>
-                                <input type="password" class="form__input @error('password') is-invalid @enderror" id="password" type="password" name="password" autocomplete="current-password">
-                                @error('password')
-                                <span class="invalid-feedback mt-4" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <button type="submit" class="form__button">
-                            {{ __('Login') }}
-                        </button>
-                    </form>
-                    <form action="{{ route('cas.login') }}" method="get">
-                        @csrf
-                        <button class="form__button" href="">Login SSO</button>
-                        <div class="form__social">
-                            <span class="form__social-text"><i class='bx bx-info-circle'></i> Selain admin silahkan login menggunakan SSO</span>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © fakultas teknik 2021</span>
+        </div>
+    </footer>
     <!-- ===== MAIN JS ===== -->
     <script src="{{ asset('masuk/assets/js/main.js') }}"></script>
     <!-- ===== BOOTSTRAP ===== -->

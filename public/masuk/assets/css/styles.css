@@ -165,14 +165,17 @@ img {
     font-size: var(--normal-font-size);
     outline: none;
     border: none;
-    background-color: var(--first-color);
+    background: linear-gradient(to right, #95b6fc, #1f3a93) !important;
     color: #fff;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: 0.3s;
 }
+
 .form__button:hover {
-    box-shadow: 0px 15px 36px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 5px 10px #5f638a;
+    color: #1f3a93;
+    transform: translate3d(0, 0, 50px) scale(1.1);
 }
 
 /*=== Form social===*/
@@ -253,6 +256,11 @@ a {
     margin-top: 3rem;
     margin-bottom: 1rem;
     box-shadow: 0px 5px 10px #5f638a;
+}
+
+.login100-form-logo:hover {
+    transform: translate3d(0, 0, 50px) scale(1.5);
+    transition: 0.5s;
 }
 
 a.active,

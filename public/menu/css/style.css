@@ -9,7 +9,8 @@
     --title-color: #1c1c22;
 
     /*========== Font and typography ==========*/
-    --body-font: "Montserrat", sans-serif;
+    --body-font: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace !important;
     --normal-font-size: 0.938rem;
     --h3-font-size: 1.125rem;
     --small-font-size: 0.75rem;
@@ -72,23 +73,60 @@ img {
 
 .card__glass {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-align: center;
     padding: 2.5rem;
-    background: linear-gradient(
+    height: 400px;
+    /* background-color: #1f3a93; */
+    background: linear-gradient(to right, #95b6fc, #1f3a93) !important;
+    /* background: linear-gradient(
         130deg,
         rgba(251, 251, 254, 0.6),
         rgba(251, 251, 254, 0.2)
-    );
-    box-shadow: inset 2px 2px 1px rgba(251, 251, 254, 0.3) inset -2px -2px 1px
-        rgba(251, 251, 254, 0.2);
+    ); */
+    box-shadow: 0px 15px 36px rgba(0, 0, 0, 0.15);
     border-radius: 1.5rem;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
+    transform-style: preserve-3d;
+}
+
+.card__glass:hover {
+    transform: translate3d(0, 0, 50px) scale(1.1);
+    transition: 0.5s;
+    box-shadow: 0px 5px 10px #5f638a;
+}
+
+.card__name {
+    /* position: absolute; */
+    top: 20px;
+    /* width: 100%; */
+    color: #eceffa;
+    /* text-align: center; */
+    /* font-size: 2em; */
+    font-weight: bold;
+    opacity: 0.5;
+    transition: 0.5s;
+    transform: translate3d(0, 0, 50px);
+}
+
+.card__glass:hover .card__name {
+    /* top: 20px; */
+    opacity: 1;
+    /* transform: translate3d(0, 0, 50px) scale(1.2); */
 }
 
 .card__img {
-    width: max-content;
-    margin-bottom: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 80px);
+    max-width: 300px;
+    /* margin-bottom: 1rem; */
+    transition: 0.5s;
+}
+
+.card__glass:hover .card__img {
+    transform: translate3d(-50%, -50%, 80px) scale(1.3) rotate(5deg);
 }
 
 .card__button {
@@ -96,18 +134,29 @@ img {
     background: #1f3a93;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
-    color: #fff;
+    color: #eceffa;
     font-weight: 500;
-    transition: 0.4s;
+    transition: 0.5s;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 100px);
+    opacity: 0;
+}
+
+.card__glass:hover .card__button {
+    opacity: 1;
+    bottom: 20px;
 }
 
 .card__button:hover {
-    background: linear-gradient(
+    /* background: linear-gradient(
         130deg,
-        rgba(251, 251, 254, 1),
-        rgba(251, 251, 254, 0.4)
-    );
-    color: #1c1c22;
+        rgb(129, 129, 248),
+        rgba(169, 169, 247, 0.4)
+    ); */
+    background-color: #eceffa;
+    color: #1f3a93;
 }
 
 .shape1,
