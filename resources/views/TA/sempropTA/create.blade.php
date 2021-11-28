@@ -36,6 +36,14 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-3">
+                            <label class="col-form-label">Judul Penelitian</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input class="form-control" maxlength="100" name="judul" id="judul" type="text" autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
                             <label class="col-form-label">waktu</label>
                         </div>
                         <div class="col-lg-4">
@@ -74,6 +82,14 @@
                                 <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            Nomer Surat Berita Acara
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara" name="no_surat" />
                         </div>
                     </div>
                     <div class="form-group row">

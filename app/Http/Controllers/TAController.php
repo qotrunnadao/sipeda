@@ -230,6 +230,6 @@ class TAController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/PraproposalTA/' . $filename . ''));
+        return response()->file(public_path('storage/assets/file/PraproposalTA/' . $filename . ''));
     }
 }

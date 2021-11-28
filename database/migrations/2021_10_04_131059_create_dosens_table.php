@@ -19,6 +19,7 @@ class CreateDosensTable extends Migration
             $table->string('foto')->nullable();
             $table->string('nama');
             $table->string('nohp');
+            $table->string('nip');
             $table->dateTime('tglLahir')->nullable();
             $table->tinyInteger('isKomisi')->comment('0=false, 1=true')->default('0');
             $table->tinyInteger('isKajur')->comment('0=false, 1=true')->default('0');

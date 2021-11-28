@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use Carbon\Carbon;
 use File;
 
 class SPKController extends Controller
@@ -70,7 +71,7 @@ class SPKController extends Controller
     public function create(Request $request, $id)
     {
         $data = $request->all();
-        // dd($data);
+        // dd($id);
         $taAll = TA::with(['mahasiswa'])->where('id', $id)->get()->first();
         $status = array(
             'no_surat' => $request->no_surat,
@@ -213,13 +214,14 @@ class SPKController extends Controller
     public function eksport(Request $request, $id)
     {
         $ta_id = $request->route('id');
-        // dd($request);
-
+        $today = Carbon::now()->isoFormat('D MMMM YYYY');
+        $tanggal =  Carbon::parse($today)->addYear()->isoFormat('D MMMM YYYY');
+        // dd($tanggal);
         $taAll = TA::with(['mahasiswa.jurusan', 'Dosen1', 'Dosen2'])->where('id', $request->route('id'))->get()->first();
         $dosen = Dosen::where('jurusan_id', $taAll->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
 
         $berkas = ['ta_id' => $ta_id, 'taAll' => $taAll, 'dosen' => $dosen];
-        $pdf = PDF::loadView('TA.SPK.download', ['taAll' => $taAll, 'dosen' => $dosen])->setPaper('a4');
+        $pdf = PDF::loadView('TA.SPK.download', ['taAll' => $taAll, 'dosen' => $dosen, 'today' => $today, 'tanggal' => $tanggal])->setPaper('a4');
 
         $filename = 'SPK' . '_' . $taAll->mahasiswa->nim . '_' . time() . '.pdf';
 

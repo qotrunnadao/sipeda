@@ -116,7 +116,7 @@
                                 <td> {{ $value->judulTA }}</td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <form action="{{ route('TA.download', $value->praproposal) }}" method="post">
+                                        <form action="{{ route('TA.download', $value->praproposal) }}" method="post" target="blank">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->praproposal }} <i class="mdi mdi-download"></i></a></button>
