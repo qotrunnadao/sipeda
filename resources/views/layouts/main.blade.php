@@ -45,7 +45,7 @@
                 <div class="content-wrapper">
                     <div class="page-header">
                         <h3 class="page-title">
-                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                            <span class="page-title-icon bg-gradient-primary text-white mr-2 card-hover">
                                 <i class="mdi mdi-@yield('icon')"></i>
                             </span> @yield('title')
                         </h3>
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-{{-- Logout --}}
+    {{-- Logout --}}
     <div class="modal fade" id="modal-logout">
         <div class="modal-dialog">
             <div class="modal-content">

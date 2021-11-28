@@ -176,7 +176,7 @@ class SeminarProposalController extends Controller
         } else {
             $data['doc'] = NULL;
         }
-        return back();
+        return redirect(route('semprop.index'));
     }
 
     /**

@@ -346,7 +346,7 @@
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                    <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
+                        <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>
@@ -426,7 +426,7 @@
     <div class="container ml-5 mr-2">
         <div class="row">
             {{-- <div class="col col-md-1 float-left ml-5">
-                <img src="{{ asset('sitak/assets/images/unsoed_b&w.png') }}" height="130" width="130">
+                <img src="/unsoed_b&w.png" height="130" width="130">
             </div> --}}
             <div class="col">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
@@ -461,7 +461,7 @@
                     <tr>
                         <td> Jurusan </td>
                         <td>:</td>
-                    <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
+                        <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
                     </tr>
                     <tr>
                         <td> Judul Tugas Akhir </td>

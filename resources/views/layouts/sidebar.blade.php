@@ -18,12 +18,12 @@
         </li>
         @if (auth()->user()->level_id == 2)
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#master-data" aria-expanded="false" aria-controls="master-data">
                 <span class="menu-title">Master Data</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-database menu-icon"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="master-data">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('tahunAkademik.index') }}"> Tahun Akademik </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('jurusan.index') }}"> Data Jurusan </a></li>
@@ -38,12 +38,12 @@
         </li>
         @endif
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#tugas-akhir" aria-expanded="false" aria-controls="tugas-akhir">
                 <span class="menu-title">Tugas Akhir</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-apps menu-icon"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="tugas-akhir">
                 <ul class="nav flex-column sub-menu">
                     @if (auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statusta.index') }}"> Status TA </a></li>
@@ -62,12 +62,12 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#pendadaran" aria-expanded="false" aria-controls="pendadaran">
                 <span class="menu-title">Pendadaran</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-table menu-icon"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="pendadaran">
                 <ul class="nav flex-column sub-menu">
                     @if (auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statuspendadaran.index') }}"> Status Pendadaran </a></li>
@@ -80,12 +80,12 @@
         </li>
         @if (auth()->user()->level_id == 2)
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#yudisium" aria-expanded="false" aria-controls="yudisium">
                 <span class="menu-title">Yudisium</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-folder menu-icon"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="yudisium">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statusyudisium.index') }}"> Status Yudisium </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
@@ -95,12 +95,12 @@
         </li>
         @elseif (auth()->user()->level_id == 5)
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#yudisium" aria-expanded="false" aria-controls="yudisium">
                 <span class="menu-title">Yudisium</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-folder menu-icon"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="yudisium">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('sk.index') }}"> SK Kelulusan </a></li>

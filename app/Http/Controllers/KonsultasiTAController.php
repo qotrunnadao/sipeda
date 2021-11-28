@@ -71,8 +71,13 @@ class KonsultasiTAController extends Controller
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $ta_id = $request->id;
-        $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('dosen_id', $dosen_id->id)->latest()->get();
-        $acc_konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('dosen_id', $dosen_id->id)->where('verifikasiDosen', 0)->latest()->get();
+        if (auth()->user()->level_id == 2) {
+            $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->latest()->get();
+            $acc_konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('verifikasiDosen', 0)->latest()->get();
+        } else {
+            $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('dosen_id', $dosen_id->id)->latest()->get();
+            $acc_konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('dosen_id', $dosen_id->id)->where('verifikasiDosen', 0)->latest()->get();
+        }
         // dd($konsultasi);
         return view('TA.konsultasiTA.detail', compact('acc_konsultasi', 'konsultasi'));
     }

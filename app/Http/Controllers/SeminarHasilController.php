@@ -177,7 +177,7 @@ class SeminarHasilController extends Controller
         } else {
             $data['doc'] = NULL;
         }
-        return back();
+        return redirect(route('semhas.index'));
     }
 
     /**
@@ -306,7 +306,7 @@ class SeminarHasilController extends Controller
         $jamSelesai = Carbon::parse($ta_id->jamSelesai)->isoFormat('H:mm');
         $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
         // dd($spk );
-        $pdf = PDF::loadView('TA.semhasTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen,'hari' => $hari ,'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        $pdf = PDF::loadView('TA.semhasTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
         $filename = 'Berita Acara Seminar Hasil' . '_' . $ta_id->ta->mahasiswa->nim . '_' . time() . '.pdf';
 
         $cek = Storage::put('public/assets/file/Berita Acara Semhas TA/' . $filename, $pdf->output());

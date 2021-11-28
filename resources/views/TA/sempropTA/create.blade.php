@@ -9,9 +9,11 @@
                 @csrf
                 <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                 <div class="card-body">
-                    <div class="form-group">
-                        <label class="col-sm-3 col-form-label">Jurusan</label>
-                        <div class="col-sm-8">
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">Jurusan</label>
+                        </div>
+                        <div class="col-lg-8">
                             <select type="text" class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
@@ -19,18 +21,32 @@
                                 @endforeach
                             </select>
                         </div>
+                        @if ($errors->has('jurusan'))
+                        <div class="text-danger">
+                            {{ $errors->first('jurusan') }}
+                        </div>
+                        @endif
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 col-form-label"> NIM</label>
-                        <div class="col-sm-8">
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">NIM</label>
+                        </div>
+                        <div class="col-lg-8">
                             <select type="text" class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
                         </div>
+                        @if ($errors->has('nim'))
+                        <div class="text-danger">
+                            {{ $errors->first('nim') }}
+                        </div>
+                        @endif
                     </div>
-                    <div class="form-group">
-                        <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
-                        <div class="col-sm-8">
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">Nama Mahasiswa</label>
+                        </div>
+                        <div class="col-lg-8">
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
@@ -39,7 +55,7 @@
                             <label class="col-form-label">Judul Penelitian</label>
                         </div>
                         <div class="col-lg-8">
-                            <input class="form-control" maxlength="100" name="judul" id="judul" type="text" autofocus>
+                            <input class="form-control" maxlength="100" name="judul" id="judul" type="text">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -110,7 +126,7 @@
 @section('javascripts')
 
 <script>
-     $.ajaxSetup({
+    $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         }
@@ -167,5 +183,3 @@
 </script>
 @endsection
 @endsection
-
-

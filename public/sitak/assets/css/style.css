@@ -7439,6 +7439,12 @@ input[type="button"].btn-block {
     padding: 1.25rem;
 }
 
+.card-hover:hover {
+    transform: translate3d(0, 0, 50px) scale(1.1);
+    transition: 0.5s;
+    box-shadow: 0px 5px 10px #5f638a;
+}
+
 .card-title {
     margin-bottom: 0.75rem;
 }

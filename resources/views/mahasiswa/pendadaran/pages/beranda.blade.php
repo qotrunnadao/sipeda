@@ -21,7 +21,7 @@
                     <img src="{{ asset('sitak/assets/images/profile.jpg') }}" alt="{{$mhs_id->nama}}" class="img-lg rounded-circle mb-3">
                     @endif
                     <div class="d-flex justify-content-center">
-                        <div class="badge badge-gradient-primary">{{$mhs_id->nama}}</div>
+                        <div class="badge badge-gradient-primary  card-hover">{{$mhs_id->nama}}</div>
                     </div>
                 </div>
                 <h4 class="card-title mb-4">Deskripsi Pendadaran Anda</h4>
@@ -155,7 +155,7 @@
         </div>
     </div>
     <div class="col-md-6 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white">
+        <div class="card bg-primary card-img-holder text-white  card-hover">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Pendadaran
                 </h4>

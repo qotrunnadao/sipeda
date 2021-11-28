@@ -22,7 +22,7 @@
                     <img src="{{ asset('sitak/assets/images/profile.jpg') }}" alt="{{$mhs_id->nama}}" class="img-lg rounded-circle mb-3">
                     @endif
                     <div class="d-flex justify-content-center">
-                        <div class="badge badge-gradient-primary">{{$mhs_id->nama}}</div>
+                        <div class="badge badge-gradient-primary  card-hover">{{$mhs_id->nama}}</div>
                     </div>
                 </div>
                 <h4 class="card-title mb-4">Deskripsi Yudisium Anda</h4>

@@ -4,7 +4,7 @@
 @section('title', 'Beranda Komisi')
 <div class="row">
     <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-danger card-img-holder text-white">
+        <div class="card bg-gradient-danger card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Jurusan
@@ -17,7 +17,7 @@
     </div>
     {{-- {{ dd($dosen) }} --}}
     <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-info card-img-holder text-white">
+        <div class="card bg-gradient-info card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Jurusan
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-success card-img-holder text-white">
+        <div class="card bg-gradient-success card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3"> Jumlah Dosen Jurusan
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-warning card-img-holder text-white">
+        <div class="card bg-gradient-warning card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Bimbingan
@@ -53,7 +53,7 @@
     </div>
     {{-- {{ dd($dosen->TA1->where('status_id', '>=', '4')) }} --}}
     <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-primary card-img-holder text-white">
+        <div class="card bg-gradient-primary card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Bimbingan
@@ -65,7 +65,7 @@
         </div>
     </div>
     <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-dark card-img-holder text-white">
+        <div class="card bg-gradient-dark card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Total Mahasiswa Bimbingan

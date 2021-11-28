@@ -45,13 +45,6 @@ Route::get('/', function () {
     return view('guest.login');
 })->name('loginpage');  //Halaman Login LandingPage
 
-// Route::get('/cas/login', function () {
-//     cas()->authenticate();
-// })->name('cas.login'); //Halaman login KORI
-
-// Route::post('/cas/logout', ['middleware' => 'auth', function () {
-//     cas()->logout(url('/'));
-// }])->name('cas.logout'); //Logout SSO
 
 Route::get('/cas/login', 'CasController@callback')->name('cas.login');  //Halaman login KORI
 Route::post('/cas/logout', 'CasController@logout')->name('cas.logout');
