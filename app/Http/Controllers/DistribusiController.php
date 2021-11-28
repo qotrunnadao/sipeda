@@ -112,7 +112,12 @@ class DistribusiController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/fileDistribusiTA/' . $filename . ''));
+        if(File::exists(public_path('storage/assets/file/fileDistribusiTA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/fileDistribusiTA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
     }
 
 

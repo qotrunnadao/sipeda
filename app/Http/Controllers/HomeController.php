@@ -24,20 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // if (Auth::check()) {
-        //     if (auth()->user()->level_id == 2) {
-        //         return redirect()->route('admin.route');
-        //     } elseif (auth()->user()->level_id == 1) {
-        //         return redirect()->route('komisi.route');
-        //     } elseif (auth()->user()->level_id == 1) {
-        //         return redirect()->route('dosen.route');
-        //     } else {
-        //         return redirect()->route('mhs.route');
-        //     }
-        // } else {
-        //     return redirect('/login')
-        //         ->with('error', 'Email & Password are incorrect.');
-        // }
-        return view('home');
+        if (auth()->user()->level_id == 2) {
+            return redirect()->route('admin.beranda');
+        } elseif (auth()->user()->level_id == 1) {
+            return redirect()->route('komisi.beranda');
+        } elseif (auth()->user()->level_id == 3) {
+            return redirect()->route('dosen.beranda');
+        } elseif (auth()->user()->level_id == 5) {
+            return redirect()->route('kajur.beranda');
+        } elseif (auth()->user()->level_id == 4) {
+            return redirect()->route('mahasiswa.menu');
+        }
     }
 }

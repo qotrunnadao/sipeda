@@ -12,6 +12,7 @@ use App\Models\Mahasiswa;
 use App\Models\NilaiTA;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
+use File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -85,8 +86,10 @@ class TAController extends Controller
      */
     public function nim(Request $request)
     {
-        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
-        // $mahasiswa = Mahasiswa::where('jurusan_id', $request->id);
+        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->orHas('TA')->whereHas('TA', function ($q) {
+            $q->where('status_id', '=','1' );
+        })->where('jurusan_id','4')->get();
+        // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
         // dd($mahasiswa);
         return response()->json($mahasiswa, 200);
     }
@@ -230,6 +233,11 @@ class TAController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->file(public_path('storage/assets/file/PraproposalTA/' . $filename . ''));
+        if(File::exists(public_path('storage/assets/file/PraproposalTA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/PraproposalTA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
     }
 }

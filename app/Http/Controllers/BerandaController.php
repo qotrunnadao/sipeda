@@ -106,17 +106,32 @@ class BerandaController extends Controller
     public function downloadSPK($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage\assets\file\SPK TA/' . $filename . ''));
+        if(File::exists(public_path('storage/assets/file/SPK TA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/SPK TA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
     }
     public function downloadSemprop($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
+        if(File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
     }
     public function downloadSemhas($filename)
     {
         //    dd($filename);
-        return response()->download(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
+        if(File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
     }
 
     public function mahasiswaPendadaran()
