@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{$action}}" method="post" enctype="multipart/form-data">
+            <form action="{{$action}}" method="post" enctype="multipart/form-data"  id="eksport">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
                 {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <a href="<?= url('') ?>/tugas-akhir/data-TA" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
-                    <button type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</button>
                 </div>
             </form>
         </div>
@@ -141,6 +141,18 @@
 </div>
 @endsection
 @section('javascripts')
+<script>
+    $(document).ready(function () {
+
+    $("#eksport").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 <script>
     $.ajaxSetup({
         headers: {

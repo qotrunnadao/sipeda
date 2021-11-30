@@ -126,7 +126,12 @@ class SPKController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->file(public_path('storage/assets/file/SPK TA/' . $filename . ''));
+        if(File::exists(public_path('storage/assets/file/SPK TA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/SPK TA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
     }
 
     /**
@@ -217,7 +222,7 @@ class SPKController extends Controller
         $today = Carbon::now()->isoFormat('D MMMM YYYY');
         $tanggal =  Carbon::parse($today)->addYear()->isoFormat('D MMMM YYYY');
         // dd($tanggal);
-        $taAll = TA::with(['mahasiswa.jurusan', 'Dosen1', 'Dosen2'])->where('id', $request->route('id'))->get()->first();
+        $taAll = TA::with(['mahasiswa.jurusan', 'Dosen1', 'Dosen2'])->where('id', $request->route('id'))->where('no_surat', '!=', null)->get()->first();
         $dosen = Dosen::where('jurusan_id', $taAll->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
 
         $berkas = ['ta_id' => $ta_id, 'taAll' => $taAll, 'dosen' => $dosen];

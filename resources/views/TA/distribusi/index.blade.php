@@ -28,7 +28,7 @@
                                 <td class="text-center"> {{ $value->ta->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <form action="{{ route('distribusi.download', $value->fileDistribusi) }}" method="post">
+                                        <form action="{{ route('distribusi.download', $value->fileDistribusi) }}" t arget="blank" method="post">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileDistribusi }} <i class="mdi mdi-download"></i></a></button>

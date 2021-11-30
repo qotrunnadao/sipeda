@@ -293,7 +293,12 @@ class SeminarHasilController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        return response()->file(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
+        if(File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
     }
     public function eksport(Request $request, $id)
     {
