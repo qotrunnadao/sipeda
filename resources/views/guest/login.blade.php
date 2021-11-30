@@ -15,15 +15,15 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row" style="background: linear-gradient(to right, #95b6fc,#1f3a93 ) !important; box-shadow: 0px 1px 20px #2f3b96;">
+        <div class="row fixed-top sticky-top" style="background: linear-gradient(to right, #95b6fc,#1f3a93 ) !important; box-shadow: 0px 1px 20px #2f3b96;">
             <div class="col">
-                <header class="d-flex py-3 header">
+                <header class="d-flex py-3 header" style="position: sticky;">
                     <div class="d-flex align-items-center text-light" style="padding-left: 100px">
                         <span style="width: 40px;">
                             <img src=" {{ asset('sitak/assets/images/unsoed.png') }}">
                         </span>
                         {{-- <span class="fs-5" style="letter-spacing: 3px; margin-left:30px; text-shadow:0px 5px 4px #5f638a;"><b>UNIVERSITAS JENDERAL SOEDIRMAN</b></span> --}}
-                        <span class="fs-5" style="letter-spacing: 3px; margin-left:30px; text-shadow:0px 5px 4px #5f638a;"><b>FAKULTAS TEKNIK</b></span>
+                        <span class="fs-5 tulisan" style="letter-spacing: 3px; margin-left:30px; text-shadow:0px 5px 4px #5f638a;"><b>FAKULTAS TEKNIK</b></span>
                     </div>
                 </header>
             </div>
@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    <footer class="footer mt-auto py-3 bg-light">
+    <footer class="footer mt-auto py-3 bg-light fixed-bottom">
         <div class="container">
             <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © fakultas teknik 2021</span>
         </div>
@@ -96,6 +96,12 @@
     <script src="{{ asset('masuk/assets/js/main.js') }}"></script>
     <!-- ===== BOOTSTRAP ===== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <script>
+        gsap.from('.form__img', {duration:1.5, y:'-100%', opacity:0, ease:'bounce'});
+        gsap.from('.login100-form-logo', {duration:1.5, rotateY:360, opacity:0});
+    </script>
 </body>
 
 </html>

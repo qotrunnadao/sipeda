@@ -7,9 +7,9 @@
         <div class="card bg-gradient-danger card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
-                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Menunggu Verifikasi<i class="mdi mdi-bell-outline mdi-24px float-right"></i>
+                <h5 class="font-weight-normal mb-3">Jumlah Pengajuan Tugas Akhir<i class="mdi mdi-bell-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>0</h2>
+                <h2>{{ $tugas_akhir->where('status_id', '=', '2')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -17,9 +17,9 @@
         <div class="card bg-gradient-info card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
-                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Pelaksanaan TA<i class="mdi mdi-timetable mdi-24px float-right"></i>
+                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Pelaksanaan Tugas Akhir<i class="mdi mdi-timetable mdi-24px float-right"></i>
                 </h5>
-                <h2>36</h2>
+                <h2>{{ $tugas_akhir->where('status_id', '>=', '4')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -27,9 +27,39 @@
         <div class="card bg-gradient-success card-img-holder text-white card-hover">
             <div class="card-body">
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
-                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Selesai TA<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
+                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Selesai Tugas Akhir<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>45</h2>
+                <h2>{{ $tugas_akhir->where('status_id', '=', '10')->count() }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-warning card-img-holder text-white card-hover">
+            <div class="card-body">
+                <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
+                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Pengajuan Pendadaran<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
+                </h5>
+                <h2>{{ $pendadaran->where('statusPendadaran_id', '=', '1')->count() }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-primary card-img-holder text-white card-hover">
+            <div class="card-body">
+                <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
+                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Selesai Pendadaran<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
+                </h5>
+                <h2>{{ $pendadaran->where('statusPendadaran_id', '=', '7')->count() }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+        <div class="card bg-gradient-dark card-img-holder text-white card-hover">
+            <div class="card-body">
+                <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
+                <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Pengajuan Yudisium<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
+                </h5>
+                <h2>{{ $yudisium->where('statusYudisium_id', '=', '1')->count() }}</h2>
             </div>
         </div>
     </div>

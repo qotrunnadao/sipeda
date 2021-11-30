@@ -4,10 +4,10 @@
 @section('title', 'beranda mahasiswa')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
-        <div class="card  bg-gradient-primary">
+        <div class="card bg-gradient-primary">
             <div class="card-body">
-                <img class="float-left img-start" src="{{ asset('sitak/assets/images/welcome.svg') }}" alt="" style="width: 200px">
-                <h1 class="card-title text-white text-center mt-5">Selamat Datang, {{$mhs_id->nama }}!</h1>
+                <img class="float-left img-start img-hover" src="{{ asset('sitak/assets/images/welcome.svg') }}" alt="" style="width: 200px;">
+                <h1 class="card-title text-white text-center mt-5 welcome">Selamat Datang, {{$mhs_id->nama }}!</h1>
             </div>
         </div>
     </div>

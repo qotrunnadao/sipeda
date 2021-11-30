@@ -141,7 +141,7 @@
         .table th,
         .table td {
             padding: 0.9375rem;
-            vertical-align: top;
+            vertical-align: center;
             border-top: 1px solid #212529;
             line-height: 1;
         }
@@ -180,7 +180,7 @@
     <div class="container ml-5 mt-2 mr-2">
         <div class="row">
             {{-- <div class="col col-md-1 ml-5" style="display : inline-block">
-                <img src="{{ $taAll->mahasiswa->foto }}" height="130" width="130">
+                <img src="{{ asset('unsoed_b&w.png') }}" height="130" width="130">
             </div> --}}
             <div class="col">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
@@ -353,7 +353,7 @@
         </p>
 
         <div class="mt-3">
-            <table class="ml-5">
+            <table>
                 <tbody>
                     <tr>
                         <td> Nama </td>
@@ -417,7 +417,7 @@
 
 
         <div class="mt-3">
-            <table class="table table-bordered ml-5" style="align:center; width:100%;">
+            <table class="table table-bordered" style="align:center; width:100%;">
                 <thead>
                     <tr class="text-center">
                         <th width="5%">No</th>

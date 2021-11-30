@@ -20,7 +20,7 @@
     <div class="shape2"></div> --}}
 
     <div class="container-fluid">
-        <div class="row" style="background: #eceffa !important; box-shadow: 0px 1px 20px #a6a8b8;">
+        <div class="row fixed-top sticky-top" style="background: #eceffa !important; box-shadow: 0px 1px 20px #a6a8b8;">
             <div class="col">
                 <header class="d-flex py-3 header">
                     <div class="d-flex align-items-center text-dark" style="padding-left: 100px">
@@ -75,6 +75,14 @@
             <span class="text-muted d-block text-center"><b>Copyright © fakultas teknik 2021</b></span>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/TextPlugin.min.js"></script>
+    <script>
+        // gsap.to(body, {duration: 2, physics2D: {velocity: 300, angle: -60, acceleration: 50, accelerationAngle: 180}});
+        gsap.from('.sticky-top', {duration:1.5, y:'-100%', opacity:0, ease:'bounce'});
+        // gsap.from('.card__glass', {duration:1.5, rotateY:360, opacity:0});
+        gsap.to('.text-muted', {duration:1.5, text:'Copyright © fakultas teknik 2021'});
+    </script>
     <script type="text/javascript" src="{{ asset('menu/js/vanilla-tilt.js') }}"></script>
     {{-- <script type="text/javascript">
         VanillaTilt.init(document.querySelectorAll(".card__glass"), {
@@ -82,6 +90,7 @@
             speed: 400
         });
     </script> --}}
+
 </body>
 
 </html>

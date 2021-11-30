@@ -88,10 +88,10 @@ img {
     display: grid;
     justify-content: center;
     align-items: center;
-    padding: 0 1rem;
+    /* padding: 0 1rem; */
 }
 .form__content {
-    width: 290px;
+    width: 250px;
 }
 .form__img {
     display: none;
@@ -107,7 +107,7 @@ img {
 }
 /*=== Div focus ===*/
 .form__div.focus {
-    border-bottom: 1px solid var(--first-color);
+    border-bottom: 2px solid var(--first-color);
 }
 
 .form__div-one {
