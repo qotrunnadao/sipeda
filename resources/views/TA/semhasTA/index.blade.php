@@ -56,11 +56,23 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post" target="blank">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $value->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     </div>
                                     @endif
                                 </td>
@@ -204,12 +216,23 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        <form action="{{ route('semhas.download', $value->beritaacara) }}" target="blank" method="post">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                        {{-- <a href="{{ route('semhas.berkas') }}" type="button" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button> --}}
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $value->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     </div>
                                     @endif
                                 </td>

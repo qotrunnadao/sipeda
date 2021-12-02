@@ -21,6 +21,7 @@ use App\Models\SeminarProposal;
 use App\Models\StatusYudisium;
 use App\Models\StatusPendadaran;
 use App\Models\Yudisium;
+use File;
 
 class BerandaController extends Controller
 {
@@ -90,8 +91,8 @@ class BerandaController extends Controller
             $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
         }
         if ($spk !== null) {
-            $sah = Carbon::parse($spk->created_at)->isoFormat('D/M/Y');
-            $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D/M/Y');
+            $sah = Carbon::parse($spk->created_at)->isoFormat('D MMMM YYYY');
+            $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D MMMM YYYY');
         } else {
             $sah = null;
             $expired = null;

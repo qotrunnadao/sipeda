@@ -209,7 +209,7 @@
                     <tr>
                         <td> Tanggal </td>
                         <td>:</td>
-                        <td> {{ date('d F Y ') }} </td>
+                        <td> {{ $today }} </td>
                     </tr>
                     <tr>
                         <td> Tempat </td>
@@ -247,7 +247,7 @@
                     <tr>
                         <td> Terhitung sejak </td>
                         <td>:</td>
-                        <td> 15 Februari 2021 s.d 15 Februari 2022 </td>
+                        <td>{{$today}} s.d {{ $tanggal }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -268,7 +268,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td>{{$taAll->Dosen1->nohp}} </td>
+                        <td>{{$taAll->Dosen1->nip}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -285,7 +285,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen1->nohp}} </td>
+                        <td> {{$taAll->Dosen1->nip}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -303,7 +303,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>Purbalingga, {{ date('d F Y ') }}</td>
+                        <td>Purbalingga, {{ $today }}}</td>
                     </tr>
                     <tr>
                         <td>Ketua Jurusan {{$taAll->mahasiswa->jurusan->namaJurusan}}</td>
@@ -315,7 +315,7 @@
                         <td class="text-center"><b><u>{{$dosen->nama}}</u></b></td>
                     </tr>
                     <tr>
-                        <td class="text-center">NIP. {{$dosen->nohp}}</td>
+                        <td class="text-center">NIP. {{$dosen->nip}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -383,7 +383,7 @@
                     <tr>
                         <td> Dimulai sejak </td>
                         <td>:</td>
-                        <td> 15 Februari 2021 s.d 15 Februari 2022 </td>
+                        <td> {{ $today }} s.d {{ $tanggal }} </td>
                     </tr>
                     <tr>
                         <td> Dosen Pembimbing 1</td>
@@ -396,7 +396,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen1->nohp}} </td>
+                        <td> {{$taAll->Dosen1->nip}} </td>
                     </tr>
                     <tr>
                         <td> Dosen Pembimbing 2</td>
@@ -409,7 +409,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen2->nohp}} </td>
+                        <td> {{$taAll->Dosen2->nip}} </td>
                     </tr>
                 </tbody>
             </table>

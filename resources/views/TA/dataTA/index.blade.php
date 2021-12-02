@@ -36,6 +36,7 @@
                                 <td class="text-center"> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
                                 <td> {{ $value->judulTA }}</td>
                                 <td class="text-center">
+                                    @if (File::exists(public_path('storage/assets/file/PraproposalTA/' . $value->praproposal . '')))
                                     <div class="btn-group">
                                         <form action="{{ route('TA.download', $value->praproposal) }}" method="post" target="blank">
                                             @method('PUT')
@@ -43,6 +44,15 @@
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->praproposal }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('TA.download', $value->praproposal) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->praproposal }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </td>
                                 <td class="text-center"> {{ $value->dosen1->nama }}</td>
                                 <td class="text-center"> {{ $value->dosen2->nama }}</td>
@@ -115,6 +125,7 @@
                                 <td class="text-center"> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
                                 <td> {{ $value->judulTA }}</td>
                                 <td class="text-center">
+                                    @if (File::exists(public_path('storage/assets/file/PraproposalTA/' . $value->praproposal . '')))
                                     <div class="btn-group">
                                         <form action="{{ route('TA.download', $value->praproposal) }}" method="post" target="blank">
                                             @method('PUT')
@@ -122,6 +133,15 @@
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->praproposal }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('TA.download', $value->praproposal) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->praproposal }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </td>
                                 <td class="text-center"> {{ $value->dosen1->nama }}</td>
                                 <td class="text-center"> {{ $value->dosen2->nama }}</td>

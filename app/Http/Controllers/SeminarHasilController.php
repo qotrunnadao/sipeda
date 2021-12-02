@@ -189,7 +189,7 @@ class SeminarHasilController extends Controller
     public function show(Request $request, $id)
     {
         $data = $request->all();
-        $taAll = SeminarHasil::with(['mahasiswa'])->where('ta_id', $id)->get()->first();
+        $taAll = SeminarHasil::with(['mahasiswa'])->where('id', $id)->get()->first();
         // dd($taAll);
         $status = array(
             'no_surat' => $request->no_surat,
@@ -304,7 +304,7 @@ class SeminarHasilController extends Controller
     {
         $id = $request->route('id');
         $ta_id =  SeminarHasil::with(['TA.mahasiswa.Jurusan', 'TA.Dosen1', 'TA.Dosen2', 'ruang'])->where('ta_id', $id)->where('no_surat', '!=', null)->get()->first();
-        $dosen = Dosen::where('jurusan_id', $ta_id->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
+        $dosen = Dosen::where('jurusan_id', $ta_id->ta->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
         $spk = Carbon::parse($ta_id->tanggal)->isoFormat('D MMMM YYYY');
         $hari = Carbon::parse($ta_id->tanggal)->isoFormat('dddd D MMMM YYYY');
         $jamMulai = Carbon::parse($ta_id->jamMulai)->isoFormat('H:mm');

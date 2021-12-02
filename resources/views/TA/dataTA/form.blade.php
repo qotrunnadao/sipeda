@@ -7,9 +7,19 @@
         <div class="card card-primary">
             <form action="{{$action}}" method="post" enctype="multipart/form-data"  id="eksport">
                 {{ csrf_field() }}
-                @if ($button == 'Edit'){{ method_field('PUT') }}@endif
+                @if ($button == 'Edit'){{ method_field('PUT') }}
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">
+                        Nama Mahasiswa
+                    </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_ta->mahasiswa->nama }}@endif" />
+                    </div>
+                </div>
+                @endif
                 {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
+                    @if ($button == 'Tambah')
                     <div class="form-group">
                         <label class="col-sm-3 col-form-label">Jurusan</label>
                         <div class="col-sm-9">
@@ -45,6 +55,7 @@
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
+                    @endif
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Judul Tugas Akhir
