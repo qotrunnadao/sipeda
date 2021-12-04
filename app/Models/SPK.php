@@ -26,18 +26,5 @@ class SPK extends Model
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa.id');
     }
 
-    public function getCreatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
-    }
-
-    public function getUpdatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
-    }
-	public static function Berkas($pdf, $filename){
-        Storage::put('public/assets/file/SPK TA/' . $filename, $pdf->output());
-        dd($filename);
-    }
 
 }

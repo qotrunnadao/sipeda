@@ -93,9 +93,10 @@ class SeminarProposalController extends Controller
             $jamMulai = $request->jamMulai;
             $jamSelesai = $request->jamSelesai;
             $ruang = $request->ruang;
-            $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-D');
-            $today = Carbon::now()->addDays(3)->isoFormat('Y-M-D');
-            // dd($today);
+            $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
+            // $tanggal = date('Y-m-d', strtotime($request->tanggal));
+            $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
+            // dd($tanggal >= $today);
 
             if ($tanggal >= $today) {
                 $semhasCount = SeminarHasil::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
@@ -140,10 +141,10 @@ class SeminarProposalController extends Controller
                                 ->where('ruang_id', '=', $ruang);
                         });;
                 })->count();
-                // dd($tanggalCount);
 
                 if (!$semhasCount && !$semproCount && !$seminarCount) {
                     $ta_id = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
+                    // dd($tanggalCount);
                     $nim = $ta_id->mahasiswa->nim;
                     $file = $request->file('proposal');
                     $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
@@ -302,12 +303,12 @@ class SeminarProposalController extends Controller
     {
         $id = $request->route('id');
         $ta_id =  SeminarProposal::with(['TA.mahasiswa.Jurusan', 'TA.Dosen1', 'TA.Dosen2', 'ruang'])->where('id', $id)->where('no_surat', '!=', null)->get()->first();
-        // dd($ta_id->ta->mahasiswa->jurusan_id);
         $dosen = Dosen::where('jurusan_id', $ta_id->ta->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
         $hari = Carbon::parse($ta_id->tanggal)->isoFormat('dddd D MMMM YYYY');
         $spk = Carbon::parse($ta_id->tanggal)->isoFormat('D MMMM YYYY');
         $jamMulai = Carbon::parse($ta_id->jamMulai)->isoFormat('H:mm');
         $jamSelesai = Carbon::parse($ta_id->jamSelesai)->isoFormat('H:mm');
+        // dd($jamMulai);
         $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
         $pdf = PDF::loadView('TA.sempropTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
 

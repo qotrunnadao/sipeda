@@ -135,14 +135,13 @@
 
     $("#nim").find('option').not(':first').remove();
     $("#name").val('');
-    var id = $('#jurusan').val();
+    var id = $(this).val();
 
     $.ajax({
     type:'POST',
     url:"{{ route('semprop.nim') }}",
     data:{id:id},
     success:function(data){
-        console.log(data)
         var nim = document.getElementById('nim')
             for (var i = 0; i < data.length; i++) {
             // POPULATE SELECT ELEMENT WITH JSON.

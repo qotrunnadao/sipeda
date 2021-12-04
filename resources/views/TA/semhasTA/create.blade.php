@@ -155,7 +155,6 @@
            url:"{{ route('semhas.nim') }}",
            data:{id:id},
            success:function(data){
-               console.log(data);
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                 // POPULATE SELECT ELEMENT WITH JSON.

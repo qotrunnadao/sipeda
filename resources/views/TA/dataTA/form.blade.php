@@ -8,53 +8,56 @@
             <form action="{{$action}}" method="post" enctype="multipart/form-data"  id="eksport">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">
-                        Nama Mahasiswa
-                    </label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_ta->mahasiswa->nama }}@endif" />
-                    </div>
-                </div>
+
                 @endif
                 {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
+                    @if ($button == 'Edit')
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            Nama Mahasiswa
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_ta->mahasiswa->nama }}@endif" />
+                        </div>
+                    </div>
+                    @endif
                     @if ($button == 'Tambah')
-                    <div class="form-group">
-                        <label class="col-sm-3 col-form-label">Jurusan</label>
-                        <div class="col-sm-9">
-                            <select type="text" class="form-control" id="jurusan" name="jurusan">
-                                <option selected disabled>Pilih Jurusan </option>
-                                @foreach ($jurusan as $value)
-                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-group">
+                            <label class="col-sm-3 col-form-label">Jurusan</label>
+                            <div class="col-sm-9">
+                                <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                    <option selected disabled>Pilih Jurusan </option>
+                                    @foreach ($jurusan as $value)
+                                    <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @if ($errors->has('jurusan'))
+                            <div class="text-danger">
+                                {{ $errors->first('jurusan') }}
+                            </div>
+                            @endif
                         </div>
-                        @if ($errors->has('jurusan'))
-                        <div class="text-danger">
-                            {{ $errors->first('jurusan') }}
+                        <div class="form-group">
+                            <label class="col-sm-3 col-form-label"> NIM</label>
+                            <div class="col-sm-9">
+                                <select type="text" class="form-control" id="nim" name="nim">
+                                    <option value="" selected disabled>Pilih NIM </option>
+                                </select>
+                            </div>
+                            @if ($errors->has('nim'))
+                            <div class="text-danger">
+                                {{ $errors->first('nim') }}
+                            </div>
+                            @endif
                         </div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 col-form-label"> NIM</label>
-                        <div class="col-sm-9">
-                            <select type="text" class="form-control" id="nim" name="nim">
-                                <option value="" selected disabled>Pilih NIM </option>
-                            </select>
+                        <div class="form-group">
+                            <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" id="name" value="" readonly />
+                            </div>
                         </div>
-                        @if ($errors->has('nim'))
-                        <div class="text-danger">
-                            {{ $errors->first('nim') }}
-                        </div>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
-                        </div>
-                    </div>
                     @endif
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
@@ -181,7 +184,6 @@
            url:"{{ route('TA.nim') }}",
            data:{id:id},
            success:function(data){
-               console.log(data)
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                     nim.innerHTML = nim.innerHTML +

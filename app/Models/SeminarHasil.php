@@ -34,28 +34,4 @@ class SeminarHasil extends Model
     {
         return $this->belongsTo(SeminarProposal::class, 'seminarProposal_id');
     }
-    public function getCreatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
-    }
-
-    public function getUpdatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
-    }
-
-    // public function getTanggalAttribute()
-    // {
-    //     return Carbon::parse($this->attributes['tanggal'])->translatedFormat('d F Y');
-    // }
-
-    public function getJamMulaitribute()
-    {
-        return Carbon::parse($this->attributes['jamMulai'])->translatedFormat('H:i:s');
-    }
-
-    public function getJamSelesaitribute()
-    {
-        return Carbon::parse($this->attributes['jamSelesai'])->translatedFormat('H:i:s');
-    }
 }

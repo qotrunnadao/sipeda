@@ -23,7 +23,6 @@ class KonsultasiTA extends Model
     {
         return $this->belongsTo(TA::class, 'ta_id');
     }
-
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');

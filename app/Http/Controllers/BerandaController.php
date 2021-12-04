@@ -88,17 +88,17 @@ class BerandaController extends Controller
         } else {
             $semprop = SeminarProposal::with('ta')->where('ta_id', $TA->id)->latest()->first();
             $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
+            // dd($tanggal);
             $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
         }
         if ($spk !== null) {
-            $sah = Carbon::parse($spk->created_at)->isoFormat('D MMMM YYYY');
-            $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D MMMM YYYY');
+            $sah = Carbon::parse($spk->created_at)->isoFormat('DD MMMM YYYY');
+            $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('DD MMMM YYYY');
+            // dd($sah);
         } else {
             $sah = null;
             $expired = null;
         }
-        // dd($expired);
-        // dd($spk->created_at);
         $ta = array(
             'status' => Status::latest()->get(),
             'statusnilai' => StatusNilai::latest()->get(),

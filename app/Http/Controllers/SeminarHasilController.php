@@ -87,15 +87,15 @@ class SeminarHasilController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // dd($data);
+        dd($data);
 
         if ($request->file('laporan')) {
             $jamMulai = $request->jamMulai;
             $jamSelesai = $request->jamSelesai;
             $ruang = $request->ruang;
-            $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-D');
-            $today = Carbon::now()->addDays(3)->isoFormat('Y-M-D');
-            // dd($today);
+            $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
+            $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
+            // dd($tanggal);
             if ($tanggal >= $today) {
                 $semhasCount = SeminarHasil::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {

@@ -122,6 +122,9 @@ Route::get('/tugas-akhir/data-TA/delete/{id}', 'TAController@destroy')->name('TA
 
 //data Konsul
 Route::get('/tugas-akhir/data-konsultasi', 'KonsultasiTAController@index')->name('konsultasi.index');
+Route::post('/tugas-akhir/data-konsultasi/nim/',  'KonsultasiTAController@nim')->name('konsultasi.nim');
+Route::post('/tugas-akhir/data-konsultasi/dosen/',  'KonsultasiTAController@dosen')->name('konsultasi.dosen');
+Route::post('/tugas-akhir/data-konsultasi/store', 'KonsultasiTAController@store')->name('konsultasi.store');
 Route::get('/tugas-akhir/data-konsultasi/{id}',  'KonsultasiTAController@show')->name('konsultasi.show');
 Route::get('/tugas-akhir/data-konsultasi/diterima/{konsultasiTA}', 'KonsultasiTAController@diterima')->name('konsultasi.diterima');
 Route::get('/tugas-akhir/data-pendadaran/ditolak/{konsultasiTA}', 'KonsultasiTAController@ditolak')->name('konsultasi.ditolak');
