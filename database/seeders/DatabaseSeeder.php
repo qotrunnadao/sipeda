@@ -260,22 +260,19 @@ class DatabaseSeeder extends Seeder
 
         $statuspendadaran = [
             [
+                'status' => "Tidak Layak",
+            ],
+            [
                 'status' => "Review Bapendik",
             ],
             [
                 'status' => "Review Komisi",
             ],
             [
-                'status' => "Layak",
+                'status' => "Pencetakan Berita Acara",
             ],
             [
-                'status' => "Tidak Layak",
-            ],
-            [
-                'status' => "Revisi",
-            ],
-            [
-                'status' => "Pelaksanaan Pendadaran",
+                'status' => "Pelaksanaan Ujian Pendadaran",
             ],
             [
                 'status' => "Selesai",
@@ -286,16 +283,19 @@ class DatabaseSeeder extends Seeder
 
         $statusyudisium = [
             [
+                'status' => "Tidak Layak",
+            ],
+            [
                 'status' => "Review Bapendik",
             ],
             [
-                'status' => "Disetujui",
+                'status' => "Review Komisi",
             ],
             [
-                'status' => "Tidak Disetujui",
+                'status' => "Pencetakan Berita Acara",
             ],
             [
-                'status' => "Boleh Ajukan Lagi",
+                'status' => "Pelaksanaan Ujian Pendadaran",
             ],
             [
                 'status' => "Selesai",

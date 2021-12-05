@@ -219,8 +219,8 @@ class SPKController extends Controller
     public function eksport(Request $request, $id)
     {
         $ta_id = $request->route('id');
-        $today = Carbon::now()->isoFormat('D/M/Y');
-        $tanggal =  Carbon::parse($today)->addYear()->isoFormat('D/M/Y');
+        $today = Carbon::now()->isoFormat('D MMMM YYYY');
+        $tanggal =  Carbon::now()->addYear()->isoFormat('D MMMM YYYY');
         // dd($tanggal);
         $taAll = TA::with(['mahasiswa.jurusan', 'Dosen1', 'Dosen2'])->where('id', $request->route('id'))->where('no_surat', '!=', null)->get()->first();
         $dosen = Dosen::where('jurusan_id', $taAll->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();

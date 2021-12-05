@@ -57,7 +57,7 @@ class LoginController extends Controller
 
         if ($user != null) {
             if (Auth::loginUsingId($user->id)) {
-                $request->session()->regenerate();
+                // $request->session()->regenerate();
                 if (auth()->user()->level_id == 2) {
                     return redirect()->route('admin.beranda');
                 } elseif (auth()->user()->level_id == 1) {

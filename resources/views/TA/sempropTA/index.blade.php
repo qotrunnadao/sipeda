@@ -57,12 +57,23 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        <form action="{{ route('semprop.download', $value->beritaacara) }}" target="blank" method="post">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                        {{-- <a href="{{ route('semprop.berkas') }}" type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button> --}}
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $value->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     </div>
                                     @endif
                                 </td>
@@ -75,18 +86,20 @@
                                 @endif
                                 <td class="text-center">
                                     @if ($value->status != 0)
-                                    @if ($value->no_surat == null)
+                                        @if ($value->no_surat == null)
+                                        <div class="btn-group">
+                                            <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                        </div>
+                                        @elseif ( $value->beritaacara == null)
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.eksport', $value->id) }}" method="GET" id="export">
+                                                <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     <div class="btn-group">
-                                        <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                         <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
-                                    @elseif ( $value->beritaacara == null)
-                                    <div class="btn-group">
-                                        <form action="{{ route('semprop.eksport', $value->id) }}" method="GET" id="export">
-                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                        </form>
-                                    </div>
-                                    @endif
-
                                     <div class="btn-group">
                                         <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
@@ -100,6 +113,7 @@
                                     <div class="btn-group">
                                         <a href="{{ route('semprop.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
                                     </div>
+
                                     <div class="btn-group">
                                         <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
@@ -208,12 +222,23 @@
                                     <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
                                     @else
                                     <div class="btn-group">
-                                        <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post" target="blank">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                        {{-- <a href="{{ route('semprop.berkas') }}" type="button" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button> --}}
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $value->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     </div>
                                     @endif
                                 </td>

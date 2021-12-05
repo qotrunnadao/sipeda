@@ -6,11 +6,11 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                {{-- @if (auth()->user()->level_id == 2)
+                @if (auth()->user()->level_id == 2)
                 <div>
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
                 </div>
-                @endif --}}
+                @endif
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -61,36 +61,189 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample">
+                <form class="forms-sample" action="{{route('konsultasi.store')}}" id="createData" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label">Jurusan</label>
+                        <div class="col-sm-9">
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                                <option selected disabled>Pilih Jurusan </option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @if ($errors->has('jurusan'))
+                        <div class="text-danger">
+                            {{ $errors->first('jurusan') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 col-form-label"> NIM</label>
+                        <div class="col-sm-9">
+                            <select type="text" class="form-control" id="nim" name="nim">
+                                <option value="" selected disabled>Pilih NIM </option>
+                            </select>
+                        </div>
+                        @if ($errors->has('nim'))
+                        <div class="text-danger">
+                            {{ $errors->first('nim') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleSelectGender">Nama Pembimbing</label>
-                        <select class="form-control" id="exampleSelectGender">
-                            <option>Lasmedi Afuan</option>
-                            <option>Ipung Permadi</option>
-                            <option>Ipung Permadi</option>
-                            <option>Ipung Permadi</option>
-                            <option>Ipung Permadi</option>
+                        <select type="text" class="form-control" name="dosen_id" id="dosen_id">
+                            <option value="" selected disabled> Pilih Dosen </option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Tanggal Konsultasi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal seminar" />
+                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail3">Topik Konsultasi</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="topik" id="topik" />
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="alasan">Hasil Konsultasi</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id = "btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+    $("#createData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
+@endsection
+@section('javascripts')
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+        $("#nim").find('option').not(':first').remove();
+        $("#name").val('');
+        var id = $(this).val();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('konsultasi.nim') }}",
+           data:{id:id},
+           success:function(data){
+               var nim = document.getElementById('nim')
+                for (var i = 0; i < data.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                    nim.innerHTML = nim.innerHTML +
+                        '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
+
+                }
+           }
+        });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    // var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#ta_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
+</script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#nim').on('change', function (event) {
+
+        $("#dosen_id").find('option').not(':first').remove();
+        var id = $(this).val();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('konsultasi.dosen') }}",
+           data:{id:id},
+           success:function(data){
+               console.log(data);
+               var nim = document.getElementById('dosen_id')
+                for (var i = 0; i < data.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                    nim.innerHTML = nim.innerHTML +
+                        '<option value="' + data[i]['dosen_id']['id'] + '" data-id="'+data[i]['id']+ '" data-dosen_id="'+data[i]['dosen_id']['nama']+'">' + data[i]['dosen_id']['nim'] + '</option>';
+
+                }
+           }
+        });
+
+
+    })
+    $('#dosen_id').on('change', function (event) {
+
+    // var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    // var name = $(this).find(':selected').data('nama');
+
+    $('#ta_id').val(id);
+    // $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
+</script>
+<script>
+    $('#editdata').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var dosen_id = button.data('dosen_id')
+    var tanggal = button.data('tanggal')
+    var topik = button.data('topik')
+    var hasil = button.data('hasil')
+    var modal = $(this)
+
+    modal.find(".modal-body select[name='dosen_id']").val(dosen_id)
+    modal.find(".modal-body input[name='tanggal']").val(tanggal)
+    modal.find(".modal-body input[name='topik']").val(topik)
+    modal.find(".modal-body textarea[name='hasil']").val(hasil)
+    modal.find(".modal-body form").attr("action",'/mahasiswa/tugas-akhir/konsultasi/update/'+id)
+    })
+</script>
 @endsection

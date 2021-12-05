@@ -77,10 +77,8 @@
                         <label for="exampleSelectGender">Nama Pembimbing</label>
                         <select class="form-control" id="exampleSelectGender" name="dosen_id">
                             <option selected disabled> Pilih Dosen </option>
-                            {{-- @foreach ($tugas_akhir as $value) --}}
                             <option value="{{ $tugas_akhir->pembimbing1_id }}">{{ $tugas_akhir->dosen1->nama }}</option>
                             <option value="{{ $tugas_akhir->pembimbing2_id }}">{{ $tugas_akhir->dosen2->nama }}</option>
-                            {{-- @endforeach --}}
                         </select>
                     </div>
                     <div class="form-group">

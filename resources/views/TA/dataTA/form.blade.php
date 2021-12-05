@@ -7,15 +7,25 @@
         <div class="card card-primary">
             <form action="{{$action}}" method="post" enctype="multipart/form-data" id="eksport">
                 {{ csrf_field() }}
-                @if ($button == 'Edit'){{ method_field('PUT') }}@endif
+                @if ($button == 'Edit'){{ method_field('PUT') }}
+
+                @endif
                 {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
+                    @if ($button == 'Edit')
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            Nama Mahasiswa
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_ta->mahasiswa->nama }}@endif" />
+                        </div>
+                    </div>
+                    @endif
                     @if ($button == 'Tambah')
                     <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">Jurusan</label>
-                        </div>
-                        <div class="col-lg-8">
+                        <label class="col-sm-3 col-form-label">Jurusan</label>
+                        <div class="col-sm-9">
                             <select type="text" class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
@@ -30,10 +40,8 @@
                         @endif
                     </div>
                     <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">NIM</label>
-                        </div>
-                        <div class="col-lg-8">
+                        <label class="col-sm-3 col-form-label"> NIM</label>
+                        <div class="col-sm-9">
                             <select type="text" class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
@@ -45,20 +53,9 @@
                         @endif
                     </div>
                     <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">Nama Mahasiswa</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
-                        </div>
-                    </div>
-                    @else
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nama Mahasiswa
-                        </label>
+                        <label class="col-sm-3 col-form-label">Nama Mahasiswa</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_ta->mahasiswa->nama }}@endif" />
+                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     @endif
@@ -187,7 +184,6 @@
            url:"{{ route('TA.nim') }}",
            data:{id:id},
            success:function(data){
-               console.log(data)
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                     nim.innerHTML = nim.innerHTML +

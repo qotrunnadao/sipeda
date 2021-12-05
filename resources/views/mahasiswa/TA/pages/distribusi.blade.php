@@ -42,11 +42,23 @@
                             <tr>
                                 <td class="text-center"> {{ $no ++ }} </td>
                                 <div class="btn-group">
-                                    <form action="{{ route('distribusi.download', $value->fileDistribusi) }}" t arget="blank" method="post">
-                                        @method('PUT')
-                                        @csrf
-                                        <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileDistribusi }} <i class="mdi mdi-download"></i></a></button>
-                                    </form>
+                                    @if (File::exists(public_path('storage/assets/file/fileDistribusiTA/' . $value->fileDistribusi . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('distribusi.download', $value->fileDistribusi) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileDistribusi }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('distribusi.download', $value->fileDistribusi) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileDistribusi }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </div>
                                 <td class="text-center"> {{ $value->created_at }} </td>
                             </tr>

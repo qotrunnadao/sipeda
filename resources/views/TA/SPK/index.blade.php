@@ -37,19 +37,23 @@
                                 </td>
                                 @else
                                 <td class="text-center">
+                                    @if (File::exists(public_path('storage/assets/file/SPK TA/' . $value->spk->fileSPK . '')))
                                     <div class="btn-group">
-                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" target="blank" method="post">
+                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post" target="blank">
                                             @method('PUT')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
-                                     {{-- <div class="btn-group">
-                                         <a href="{{ route('spk.berkas') }}" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
-
-                                            <a href="{{ route('spk.download') }}" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
-                                            @endif
-                                     </div> --}}
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                 </td>
                                 @endif
                                 @if ($value->no_surat == null)

@@ -247,7 +247,7 @@
                     <tr>
                         <td> Terhitung sejak </td>
                         <td>:</td>
-                        <td> {{ $today }} s.d. {{ $tanggal }}</td>
+                        <td>{{$today}} s.d {{ $tanggal }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -268,7 +268,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td>{{$taAll->Dosen1->nohp}} </td>
+                        <td>{{$taAll->Dosen1->nip}} </td>
                     </tr>
                 </tbody>
             </table>
@@ -285,7 +285,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen1->nohp}} </td>
+                        <td> {{$taAll->Dosen1->nip}} </td>
                     </tr>
                 </tbody>
             </table>

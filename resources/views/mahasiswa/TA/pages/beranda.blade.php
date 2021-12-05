@@ -146,29 +146,49 @@
                             <tr>
                                 <td>
                                     @if($TA->status_id >=5)
-                                    <div class="btn-group">
-                                        <form action="{{ route('download.spk', $spk->fileSPK) }}" target="blank" method="post">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                    </div>
+                                        @if (File::exists(public_path('storage/assets/file/SPK TA/' . $spk->fileSPK . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('download.spk', $spk->fileSPK) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('download.spk', $spk->fileSPK) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     @else
-                                    SPK Tugas Akhir
-                                    <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
+                                        SPK Tugas Akhir
+                                        <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
                                     @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     @if($TA->status_id >=7)
-                                    <div class="btn-group">
-                                        <form action="{{ route('download.semprop', $semprop->beritaacara) }}" target="blank" method="post">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semprop->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                    </div>
+                                         @if (File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $semprop->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('download.semprop', $semprop->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semprop->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('download.semprop', $semprop->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semprop->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     @else
                                     Berita Acara Seminar Proposal
                                     <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
@@ -178,13 +198,23 @@
                             <tr>
                                 <td>
                                     @if($TA->status_id >=9)
-                                    <div class="btn-group">
-                                        <form action="{{ route('download.semhas', $semhas->beritaacara) }}" target="blank" method="post">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semhas->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                    </div>
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $semhas->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('download.semhas', $semhas->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semhas->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('download.semhas', $semhas->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $semhas->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     @else
                                     Berita Acara Seminar Hasil
                                     <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>

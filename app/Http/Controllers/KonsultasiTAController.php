@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Mahasiswa;
 use App\Models\KonsultasiTA;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -22,20 +23,21 @@ class KonsultasiTAController extends Controller
     public function index()
     {
         $id = auth()->user()->id;
+        $jurusan = jurusan::all();
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         if (auth()->user()->level_id == 2) {
             $konsultasi = KonsultasiTA::with('dosen')->get();
-            $tugas_akhir = TA::with(['konsultasiTA'])->latest()->get();
+            $tugas_akhir = TA::with(['konsultasiTA', 'dosen1', 'dosen2'])->where('status_id', '>=', '5')->latest()->get();
+            // dd($tugas_akhir);
         } else {
             $konsultasi = KonsultasiTA::with('dosen')->where('dosen_id', $dosen_id->id)->get();
 
             $tugas_akhir = TA::with(['konsultasiTA'])->whereHas('konsultasiTA', function ($q) use ($dosen_id) {
                 $q->where('dosen_id', $dosen_id->id);
             })->latest()->get();
-            // dd($tugas_akhir);
         }
-        return view('TA.konsultasiTA.index', compact('tugas_akhir'));
+        return view('TA.konsultasiTA.index', compact('tugas_akhir', 'jurusan'));
     }
 
     /**
@@ -47,7 +49,20 @@ class KonsultasiTAController extends Controller
     {
         //
     }
-
+    public function nim(Request $request)
+    {
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+            $query->where('jurusan_id', $request->id);
+        })->where('status_id', '>=','5')->get();
+        // dd($taAll);
+        return response()->json($taAll, 200);
+    }
+    public function dosen(Request $request)
+    {
+        $taAll = TA::with(['mahasiswa'])->where('ta_id',$request->id)->get();
+        // dd($taAll);
+        return response()->json($taAll, 200);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -56,7 +71,15 @@ class KonsultasiTAController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        $cek = KonsultasiTA::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Konsultasi TA');
+        } else {
+            Alert::warning('Gagal', 'Data Konsultasi TA Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
@@ -100,9 +123,27 @@ class KonsultasiTAController extends Controller
      * @param  \App\Models\KonsultasiTA  $konsultasiTA
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KonsultasiTA $konsultasiTA)
+    public function update(Request $request,$id)
     {
-        //
+        $value = KonsultasiTA::where('id', $id)->first();
+        // $data = $request->all();
+        $data = [
+            'ta_id' => $request->ta_id,
+            'dosen_id' => $request->dosen_id,
+            'hasil' => $request->hasil,
+            'tanggal' => $request->tanggal,
+            'topik' => $request->topik,
+            // 'ket' => $request->ket,
+            'verifikasiDosen' => 0,
+        ];
+        // dd($data);
+        $ubah = $value->update($data);
+        if ($ubah == true) {
+            Alert::success('Berhasil', 'Berhasil Ubah Data Konsultasi');
+        } else {
+            Alert::warning('Gagal', 'Data Konsultasi Gagal Diubah');
+        }
+        return back();
     }
 
     /**

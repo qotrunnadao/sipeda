@@ -41,7 +41,6 @@
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#hasilkonsultasi" data-id='{{ $value->id }}' data-topik='{{ $value->topik }}' data-hasil='{{ $value->hasil }}'><i class="mdi mdi-information"></i></a>
                                     </div>
-                                    @if(auth()->user()->level_id !== 2)
                                     @if($value->verifikasiDosen == 0)
                                     <div class="btn-group">
                                         <a href="{{ route('konsultasi.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="fa fa-check"></i></a>
@@ -49,7 +48,6 @@
                                     <div class="btn-group">
                                         <a href="{{ route('konsultasi.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm"><i class="fa fa-times"></i></a>
                                     </div>
-                                    @endif
                                     @elseif($value->verifikasiDosen == 1)
 
                                     @endif
