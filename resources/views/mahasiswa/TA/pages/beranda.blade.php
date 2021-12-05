@@ -129,25 +129,6 @@
         </div>
     </div>
 
-    <div class="col-md-6 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white  card-hover">
-            <div class="card-body">
-                {{-- <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image"> --}}
-                <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Tugas Akhir
-                </h4>
-                <ul>
-                    <li>sedang mengambil mata kuliah TA</li>
-                    <li>telah menyelesaikan matakuliah sekurang-sekurangnya 120 SKS dengan IPK
-                        serendah-rendahnya 2,0</li>
-                    <li>telah menyelesaikan sekurang-kurangnya 1 (satu) mata kuliah pilihan sesuai
-                        dengan bidang keahlian topik TA</li>
-                    <li>telah menyelesaikan Kerja Praktik</li>
-                    <li>praproposal yang telah disetujui 1 (satu) calon pembimbing</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -214,6 +195,25 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white  card-hover">
+            <div class="card-body">
+                {{-- <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image"> --}}
+                <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Tugas Akhir
+                </h4>
+                <ul>
+                    <li>sedang mengambil mata kuliah TA</li>
+                    <li>telah menyelesaikan matakuliah sekurang-sekurangnya 120 SKS dengan IPK
+                        serendah-rendahnya 2,0</li>
+                    <li>telah menyelesaikan sekurang-kurangnya 1 (satu) mata kuliah pilihan sesuai
+                        dengan bidang keahlian topik TA</li>
+                    <li>telah menyelesaikan Kerja Praktik</li>
+                    <li>praproposal yang telah disetujui 1 (satu) calon pembimbing</li>
+                </ul>
             </div>
         </div>
     </div>

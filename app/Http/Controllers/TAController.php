@@ -87,14 +87,14 @@ class TAController extends Controller
     public function nim(Request $request)
     {
         $mahasiswa = Mahasiswa::whereDoesntHave('TA')->orHas('TA')->whereHas('TA', function ($q) {
-            $q->where('status_id', '=','1' );
-        })->where('jurusan_id','4')->get();
+            $q->where('status_id', '=', '1');
+        })->where('jurusan_id', '4')->get();
         // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
         // dd($mahasiswa);
         return response()->json($mahasiswa, 200);
     }
 
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $data = $request->all();
         // dd($data);
@@ -233,11 +233,11 @@ class TAController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/PraproposalTA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/PraproposalTA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/PraproposalTA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
 }

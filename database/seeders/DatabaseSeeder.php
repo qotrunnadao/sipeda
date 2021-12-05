@@ -834,10 +834,9 @@ class DatabaseSeeder extends Seeder
         $pendadaran = [
             [
                 'mhs_id' => 1,
-                'transkip' => "transkip - H1D018033",
-                'hasilUEPT' => "uept - H1D018033",
-                'buktidistribusi' => "distribusi - H1D018033",
+                'berkas' => "berkas - H1D018033",
                 'beritaacara' => "berita acara",
+                'no_surat' => "1234566",
                 'penguji1_id' => 1,
                 'penguji2_id' => 1,
                 'penguji3_id' => 1,
@@ -847,10 +846,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'mhs_id' => 2,
-                'transkip' => "transkip - H1D018009",
-                'hasilUEPT' => "uept - H1D018009",
-                'buktidistribusi' => "distribusi - H1D018009",
+                'berkas' => "berkas - H1D018009",
                 'beritaacara' => "berita acara",
+                'no_surat' => "1234566",
                 'penguji1_id' => 1,
                 'penguji2_id' => 1,
                 'penguji3_id' => 1,
@@ -860,10 +858,9 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'mhs_id' => 3,
-                'transkip' => "transkip - H1D018009",
-                'hasilUEPT' => "uept - H1D018009",
-                'buktidistribusi' => "distribusi - H1D018009",
+                'berkas' => "berkas - H1D018009",
                 'beritaacara' => "berita acara",
+                'no_surat' => "1234566",
                 'penguji1_id' => 1,
                 'penguji2_id' => 1,
                 'penguji3_id' => 1,
@@ -920,7 +917,5 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('SK')->insert($SK);
-
-
     }
 }

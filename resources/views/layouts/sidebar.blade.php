@@ -46,7 +46,7 @@
             <div class="collapse" id="tugas-akhir">
                 <ul class="nav flex-column sub-menu">
                     @if (auth()->user()->level_id == 2)
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('statusta.index') }}"> Status TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('statusta.index') }}"> Status Tugas Akhir </a></li>
                     @endif
                     <li class="nav-item"> <a class="nav-link" href="{{ route('TA.index') }}"> Data Tugas Akhir </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('spk.index') }}"> SPK </a></li>
@@ -55,7 +55,7 @@
                     {{-- @endif --}}
                     <li class="nav-item"> <a class="nav-link" href="{{ route('semprop.index') }}"> Seminar Proposal </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('semhas.index') }}"> Seminar Hasil </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('nilaita.index') }}"> Nilai TA </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('nilaita.index') }}"> Nilai Tugas Akhir </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('distribusi.index') }}"> Data Distribusi </a></li>
                 </ul>
             </div>
@@ -73,7 +73,6 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statuspendadaran.index') }}"> Status Pendadaran </a></li>
                     @endif
                     <li class="nav-item"> <a class="nav-link" href="{{ route('pendadaran.index') }}"> Data Pendadaran </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('beritaacarapendadaran.index') }}"> Berita Acara </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('nilaiPendadaran.index') }}"> Nilai Pendadaran </a></li>
                 </ul>
             </div>

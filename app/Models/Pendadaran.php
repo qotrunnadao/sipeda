@@ -37,7 +37,7 @@ class Pendadaran extends Model
     }
     public function Tahunakademik()
     {
-        return $this->belongsTo(Tahunakademik::class);
+        return $this->belongsTo(Tahunakademik::class, 'thnAkad_id');
     }
 
     public function StatusPendadaran()

@@ -28,16 +28,11 @@ class SPK extends Model
 
     public function getCreatedAtAttribute()
     {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d/m/y');
     }
 
     public function getUpdatedAtAttribute()
     {
-        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
+        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d/m/y');
     }
-	public static function Berkas($pdf, $filename){
-        Storage::put('public/assets/file/SPK TA/' . $filename, $pdf->output());
-        dd($filename);
-    }
-
 }

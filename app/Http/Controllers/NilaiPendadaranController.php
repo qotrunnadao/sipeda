@@ -9,6 +9,7 @@ use App\Models\StatusNilai;
 use Illuminate\Http\Request;
 use App\Models\NilaiPendadaran;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -25,7 +26,11 @@ class NilaiPendadaranController extends Controller
         $pendadaran = Pendadaran::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::all();
         $nilai = NilaiPendadaran::With('pendadaran.mahasiswa.jurusan')->latest()->get();
-        return view('pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        if (Auth::user()->level_id == 4) {
+            return view('mahasiswa.pendadaran.pages.nilai', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        } else {
+            return view('pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+        }
 
         // if (auth()->user()->level_id == 2) {
         //     return view('admin.pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));

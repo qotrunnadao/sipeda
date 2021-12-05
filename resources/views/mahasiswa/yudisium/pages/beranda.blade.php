@@ -69,6 +69,14 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
+                                <td> Surat Undangan </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td> SK Kelulusan </td>
                                 <td>
                                     <div class="btn-group">
@@ -83,7 +91,7 @@
         </div>
     </div>
 
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-5">Status Pelaksanaan Studi Akhir</h4>
@@ -115,6 +123,25 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white  card-hover">
+            <div class="card-body">
+                <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Yudisium
+                </h4>
+                <ul>
+                    <li>Menyerahkan Surat Perintah Kerja(SPK) Tugas Akhir</li>
+                    <li>Berkas Penilaian Komprehensif (Pendadaran) disiapkan Bapendik</li>
+                    <li>Distribusi Jilid Laporan Tugas Akhir ke: PII Fakultas Teknik, Pembimbing 1 dan 2 menggunakan FORM Distribusi</li>
+                    <li>Bukti Jilid Laporan Tugas akhir ke Perpustakaan UNSOED</li>
+                    <li>Surat Cuti Akademik (apabila pernah cuti dan <b>Wajib di lampirkan</b>) </li>
+                    <li>Foto Copy Ijazah SMA/SMK (<b>Wajib di lampirkan</b>)</li>
+                    <li>Mengisi Surat Keterangan Pendamping Ijazah pada SIA, di cetak serta lampirkan foto copy sertifikat</li>
+                    <li>Biodata mahasiswa adalah biodata a pada saat mendaftar wisuda setelah yudisium Fakultas</li>
+                </ul>
             </div>
         </div>
     </div>

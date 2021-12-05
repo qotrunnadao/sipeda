@@ -19,10 +19,9 @@ class CreatePendadaransTable extends Migration
             $table->string('nosurat')->nullable();
             $table->dateTime('tanggal')->nullable();
             $table->time('waktu')->nullable();
-            $table->string('transkip');
-            $table->string('hasiluept');
-            $table->string('buktidistribusi');
+            $table->string('berkas');
             $table->string('beritaacara');
+            $table->string('no_surat');
             $table->foreignId('penguji1_id')->references('id')->on('dosen');
             $table->foreignId('penguji2_id')->references('id')->on('dosen');
             $table->foreignId('penguji3_id')->references('id')->on('dosen');

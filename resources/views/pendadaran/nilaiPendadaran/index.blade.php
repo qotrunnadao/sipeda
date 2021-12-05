@@ -36,7 +36,7 @@
                                 <td class="text-center"> {{ $value->pendadaran->mahasiswa->nim }}</td>
                                 <td class="text-center"> {{ $value->pendadaran->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
-                                <td class="text-center"> {{ $value->nilaiHuruf }}</td>
+                                <td class="text-center"> {{ $value->nilaiHuruf->nilaiHuruf }}</td>
                                 <td class="text-center">
                                     @if($value->statusnilai_id == 1)
                                     <span class="badge badge-warning">Entry dosen</span>

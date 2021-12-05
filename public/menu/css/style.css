@@ -138,10 +138,10 @@ img {
     font-weight: 500;
     transition: 0.5s;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 50%;
     transform: translate3d(-50%, 0, 100px);
-    opacity: 0;
+    opacity: 1;
 }
 
 .card__glass:hover .card__button {

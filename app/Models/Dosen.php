@@ -26,15 +26,15 @@ class Dosen extends Model
 
     public function Agama()
     {
-        return $this->belongsTo(Agama::class);
+        return $this->belongsTo(Agama::class, 'agama_id');
     }
     public function Jenkel()
     {
-        return $this->belongsTo(Jenkel::class);
+        return $this->belongsTo(Jenkel::class, 'jk_id');
     }
     public function Jurusan()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
     }
     public function User()
     {

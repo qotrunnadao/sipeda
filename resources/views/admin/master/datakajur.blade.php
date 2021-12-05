@@ -6,9 +6,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div>
+                {{-- <div>
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#komisi"> <i class="mdi mdi-plus"></i> Tambah</button>
-                </div>
+                </div> --}}
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>

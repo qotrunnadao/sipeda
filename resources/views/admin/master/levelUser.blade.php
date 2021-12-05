@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-@section('icon', 'user')
+@section('icon', 'folder-account')
 @section('title', 'Level User')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">

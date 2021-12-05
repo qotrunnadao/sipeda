@@ -69,7 +69,7 @@
     <div class="modal fade" id="modal-logout">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#f96868">
+                <div class="modal-header" style="background-color:#f78282">
                     <h4 class="modal-title text-white"><i class="fas fa-sign-out-alt"></i> Keluar Aplikasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -80,7 +80,7 @@
                     <div class="col text-center">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="btn btn-primary text-center"><i class="fas fa-sign-out-alt"></i> Ya. Keluar Aplikasi</button>
+                            <button type="submit" class="btn btn-gradient-primary text-center"><i class="fas fa-sign-out-alt"></i> Ya. Keluar Aplikasi</button>
                         </form>
                     </div>
                 </div>
@@ -184,8 +184,8 @@
                     text: 'Apakah anda yakin menghapus data ini?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#1f3a93',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#95b6fc',
+                    cancelButtonColor: '#f78282',
                     confirmButtonText: 'Ya, Hapus!',
                     cancelButtonText: 'Batal'
                 }).then((result) => {

@@ -282,12 +282,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::get('/pendadaran/beranda', 'BerandaController@mahasiswaPendadaran')->name('mahasiswaPendadaran.beranda');
 
     Route::get('/pendadaran/pendaftaran', 'PendadaranMahasiswaController@create')->name('mahasiswaPendadaran.create');
-    Route::get('/pendadaran/jadwal', function () {
-        return view('mahasiswa.pendadaran.pages.jadwal');
-    });
-    Route::get('/pendadaran/nilai', function () {
-        return view('mahasiswa.pendadaran.pages.nilai');
-    });
+    Route::get('/pendadaran/nilai', 'NilaiPendadaranController@index')->name('mahasiswaPendadaran.nilai');
 
     //============= YUDISIUM =============
 

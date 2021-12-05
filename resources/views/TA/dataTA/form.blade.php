@@ -5,14 +5,17 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{$action}}" method="post" enctype="multipart/form-data"  id="eksport">
+            <form action="{{$action}}" method="post" enctype="multipart/form-data" id="eksport">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
                 {{-- <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value=""> --}}
                 <div class="card-body">
-                    <div class="form-group">
-                        <label class="col-sm-3 col-form-label">Jurusan</label>
-                        <div class="col-sm-9">
+                    @if ($button == 'Tambah')
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">Jurusan</label>
+                        </div>
+                        <div class="col-lg-8">
                             <select type="text" class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
@@ -26,9 +29,11 @@
                         </div>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 col-form-label"> NIM</label>
-                        <div class="col-sm-9">
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">NIM</label>
+                        </div>
+                        <div class="col-lg-8">
                             <select type="text" class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
@@ -39,12 +44,24 @@
                         </div>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
-                        <div class="col-sm-9">
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label class="col-form-label">Nama Mahasiswa</label>
+                        </div>
+                        <div class="col-lg-8">
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
+                    @else
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            Nama Mahasiswa
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_ta->mahasiswa->nama }}@endif" />
+                        </div>
+                    </div>
+                    @endif
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Judul Tugas Akhir

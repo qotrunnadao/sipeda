@@ -23,11 +23,5 @@
                 <i class="mdi mdi-file menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/yudisium/jadwal">
-                <span class="menu-title">Jadwal</span>
-                <i class="mdi mdi-calendar menu-icon"></i>
-            </a>
-        </li>
     </ul>
 </nav>

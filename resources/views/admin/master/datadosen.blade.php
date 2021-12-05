@@ -19,8 +19,6 @@
                                 <th> Alamat </th>
                                 <th> Foto </th>
                                 <th> No.HP </th>
-                                <th> Tgl Lahir</th>
-                                <th> Tempat Lahir</th>
                                 <th> Agama </th>
                                 <th> Jenis Kelamin </th>
                                 <th> Jurusan</th>
@@ -39,12 +37,15 @@
                                 <td> {{ $value->alamat }}</td>
                                 <td> {{ $value->foto }}</td>
                                 <td> {{ $value->nohp }}</td>
-                                <td> {{ $value->tglLahir }}</td>
-                                <td> {{ $value->tmptLahir }}</td>
                                 <td> {{ $value->agama->namaAgama }}</td>
-                                <td> {{ $value->jk_id }} </td>
-                                <td> {{ $value->jurusan_id }}</td>
-                                <td> {{ $value->isKomisi }}</td>
+                                <td> {{ $value->jenkel->ket }} </td>
+                                <td> {{ $value->jurusan->namaJurusan }}</td>
+                                <td> @if($value->isKomisi == 0)
+                                    <span class="badge badge-danger">false</span>
+                                    @else
+                                    <span class="badge badge-primary">true</span>
+                                    @endif
+                                </td>
                                 <td> {{ $value->user_id }} </td>
                                 <td>
                                     <div class="btn-group">

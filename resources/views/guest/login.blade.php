@@ -11,6 +11,7 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <!-- ===== BOOTSRAP ===== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -41,7 +42,15 @@
                                 <span class="login100-form-logo">
                                     <img src="{{ asset('sitak/assets/images/unsoed.png') }}">
                                 </span>
-                                <span class="form__social-text" style="text-align: center; "><b>Sistem Informasi Pengelolaan Studi Akhir <br>Fakultas Teknik UNSOED</b></span>
+                                <span class="form__social-text" style="text-align: center; "><b>Sistem Pengelolaan Studi Akhir <br>Fakultas Teknik UNSOED</b></span>
+
+                                @if(session()->has('loginError'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ session('loginError') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+
                                 <div class="form__div form__div-one">
                                     <div class="form__icon">
                                         <i class='bx bx-user-circle'></i>
@@ -96,6 +105,8 @@
     <script src="{{ asset('masuk/assets/js/main.js') }}"></script>
     <!-- ===== BOOTSTRAP ===== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
     <script>

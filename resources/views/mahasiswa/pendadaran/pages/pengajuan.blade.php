@@ -1,55 +1,37 @@
 @extends('mahasiswa.pendadaran.layouts.main')
 @section('content')
 @section('icon', 'file')
-@section('title', 'pendaftaran pendadarn')
+@section('title', 'pendaftaran pendadaran')
 <div class="row">
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-6 grid-margin stretch-card">
         <div class="card card-primary">
             <form>
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nama
+                    <div class="form-group">
+                        <label>
+                            Berkas Persyaratan
                         </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required autofocus />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Transkip nilai
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="file" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Skripsi
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="file" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Form Distribusi TA
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="file" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Scan KTM
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="file" class="form-control" />
+                        <div class="input-group">
+                            <input type="file" class="form-control" name="berkas" id="berkas" />
                         </div>
                     </div>
                     <button type="button" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white  card-hover">
+            <div class="card-body">
+                <h4 class="font-weight-normal mb-3">Berkas Persyaratan Meliputi
+                </h4>
+                <ul>
+                    <li>Transkip Nilai</li>
+                    <li>Hasil Tes Ujian UEPT</li>
+                    <li>Bukti Distribusi Tugas Akhir</li>
+                    <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="col-12 grid-margin stretch-card">
@@ -70,31 +52,15 @@
                                 <td> 20/02/2022 </td>
                             </tr>
                             <tr>
-                                <td> Transkip Nilai </td>
+                                <td> Berkas </td>
                                 <td>:</td>
-                                <td> transkip nilai - H1D018033 </td>
+                                <td> berkas - H1D018033 </td>
                             </tr>
-                            <tr>
-                                <td> Skripsi </td>
-                                <td>:</td>
-                                <td> Skripsi - H1D018033 </td>
-                            </tr>
-                            <tr>
-                                <td> Form Distribusi TA </td>
-                                <td>:</td>
-                                <td> Form Distribusi - H1D018033 </td>
-                            </tr>
-                            <tr>
-                                <td> Scan KTM </td>
-                                <td>:</td>
-                                <td> KTM - H1D018033 </td>
-                            </tr>
-                            <tr>
-                                <td> Status Pendaftaran </td>
-                                <td>:</td>
-                                <td>
-                                    <div class="badge badge-success badge-pill">menunggu persetujuan</div>
-                                </td>
+                            <td> Status Pengajuan </td>
+                            <td>:</td>
+                            <td>
+                                <div class="badge badge-success badge-pill">menunggu persetujuan</div>
+                            </td>
                             </tr>
                             <tr>
                                 <td> Keterangan </td>

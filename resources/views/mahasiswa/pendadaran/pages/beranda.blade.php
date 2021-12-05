@@ -154,22 +154,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white  card-hover">
-            <div class="card-body">
-                <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Pendadaran
-                </h4>
-                <ul>
-                    <li>Mengambil Mata Kuliah Pendadaran</li>
-                    <li>Telah menyelesaikan Tugas Akhir</li>
-                    <li>Lulus Ujian UEPT (Nilai Minimal 400 dan masih berlaku < 2 tahun) </li>
-                    <li>Sudah lulus semua mata kuliah tanpa nilai <span class="badge badge-danger badge-pill">E</span></li>
-                    <li>Nilai tugas akhir sudah di upload di sistem SIA Unsoed</li>
-                    <li>Lembar Validasi Nilai Transkip Akademik dengan ketua program studi.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -204,6 +189,23 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white  card-hover">
+            <div class="card-body">
+                <h4 class="font-weight-normal mb-3">Persyaratan Mengajukan Pendadaran
+                </h4>
+                <ul>
+                    <li>Mengambil Mata Kuliah Pendadaran</li>
+                    <li>Telah menyelesaikan Tugas Akhir</li>
+                    <li>Lulus Ujian UEPT (Nilai Minimal 400 dan masih berlaku < 2 tahun) </li>
+                    <li>Sudah lulus semua mata kuliah tanpa nilai <span class="badge badge-danger badge-pill">E</span></li>
+                    <li>Nilai tugas akhir sudah di upload di sistem SIA Unsoed</li>
+                    <li>Lembar Validasi Nilai Transkip Akademik dengan ketua program studi.</li>
+                </ul>
             </div>
         </div>
     </div>

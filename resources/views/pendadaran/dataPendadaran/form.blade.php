@@ -35,55 +35,19 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
-                            Transkip nilai
+                            Berkas Pendadaran
                         </label>
                         <div class="col-sm-9">
-                            @if($data_pendadaran->transkip != null)
+                            @if($data_pendadaran->berkas != null)
                             <div class="btn-group">
                                 <form action="" method="post">
                                     @method('PUT')
                                     @csrf
-                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_pendadaran->transkip }} <i class="mdi mdi-download"></i></a></button>
+                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_pendadaran->berkas }} <i class="mdi mdi-download"></i></a></button>
                                 </form>
                             </div>
                             @else
-                            <input type="file" class="form-control" placeholder="transkip nilai" name="transkip" value="@if ($button == 'Tambah'){{ old('transkip') }}@else{{ $data_pendadaran->transkip }}@endif" />
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            ujian UEPT
-                        </label>
-                        <div class="col-sm-9">
-                            @if($data_pendadaran->hasiluept != null)
-                            <div class="btn-group">
-                                <form action="" method="post">
-                                    @method('PUT')
-                                    @csrf
-                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_pendadaran->hasiluept }} <i class="mdi mdi-download"></i></a></button>
-                                </form>
-                            </div>
-                            @else
-                            <input type="file" class="form-control" placeholder="Hasil Ujian UEPT" name="hasiluept" value="@if ($button == 'Tambah'){{ old('hasiluept') }}@else{{ $data_pendadaran->hasiluept }}@endif" />
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Bukti Distribusi TA
-                        </label>
-                        <div class="col-sm-9">
-                            @if($data_pendadaran->buktidistribusi != null)
-                            <div class="btn-group">
-                                <form action="" method="post">
-                                    @method('PUT')
-                                    @csrf
-                                    <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $data_pendadaran->buktidistribusi }} <i class="mdi mdi-download"></i></a></button>
-                                </form>
-                            </div>
-                            @else
-                            <input type="file" class="form-control" placeholder="form distribusi TA" name="buktidistribusi" value="@if ($button == 'Tambah'){{ old('buktidistribusi') }}@else{{ $data_pendadaran->buktidistribusi }}@endif" />
+                            <input type="file" class="form-control" placeholder="berkas persyaratan" name="berkas" value="@if ($button == 'Tambah'){{ old('berkas') }}@else{{ $data_pendadaran->berkas }}@endif" />
                             @endif
                         </div>
                     </div>

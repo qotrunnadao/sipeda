@@ -3,24 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\TA;
+use Carbon\Carbon;
 use App\Models\SPK;
 use App\Models\User;
-use App\Models\Status;
 use App\Models\Dosen;
+use App\Models\Status;
 use App\Models\Akademik;
-use Carbon\Carbon;
 use App\Models\StatusKP;
 use App\Models\StatusTA;
+use App\Models\Yudisium;
 use App\Models\Mahasiswa;
+use App\Models\Pendadaran;
 use App\Models\StatusNilai;
+use App\Models\SeminarHasil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
-use App\Models\Pendadaran;
-use App\Models\SeminarHasil;
-use App\Models\SeminarProposal;
 use App\Models\StatusYudisium;
+use App\Models\SeminarProposal;
 use App\Models\StatusPendadaran;
-use App\Models\Yudisium;
+use RealRashid\SweetAlert\Facades\Alert;
+use File;
 
 class BerandaController extends Controller
 {
@@ -90,8 +92,8 @@ class BerandaController extends Controller
             $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
         }
         if ($spk !== null) {
-            $sah = Carbon::parse($spk->created_at)->isoFormat('D/M/Y');
-            $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D/M/Y');
+            $sah = Carbon::parse($spk->created_at)->isoFormat('D MMMM YYYY');
+            $expired = Carbon::parse($spk->created_at)->addYear()->isoFormat('D MMMM YYYY');
         } else {
             $sah = null;
             $expired = null;
@@ -114,31 +116,31 @@ class BerandaController extends Controller
     public function downloadSPK($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/SPK TA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/SPK TA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/SPK TA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
     public function downloadSemprop($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
     public function downloadSemhas($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
 
