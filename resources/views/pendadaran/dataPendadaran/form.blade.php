@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{$action}}@if($button == 'Edit')/{{ $data_pendadaran->id}}@endif" enctype="multipart/form-data" id="eksport" method="post">
+            <form action="{{$action}}@if($button == 'Edit')@endif" enctype="multipart/form-data" id="eksport" method="post">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
                 <div class="card-body">
@@ -73,15 +73,15 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="jamMulai" placeholder="mulai">
+                                <input type="text" class="form-control" name="jamMulai" placeholder="mulai" value="@if ($button == 'Tambah'){{ old('jamMulai') }}@else{{ $data_pendadaran->jamMulai }}@endif" />
                                 <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="jamSelesai" placeholder="selesai">
-                                <span class="input-group-text">
+                                <input type="text" class="form-control" name="jamSelesai" placeholder="selesai" value="@if ($button == 'Tambah'){{ old('jamSelesai') }}@else{{ $data_pendadaran->jamSelesai }}@endif" />
+                            <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                         <div class="col-lg-8">
                             <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                 @foreach ($ruang as $value)
-                                <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
+                                <option value="{{ $value->id }} "{{ $value->id == $data_pendadaran->ruangpendadaran_id ? 'selected' : '' }}>{{ $value->namaRuang }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -105,7 +105,7 @@
                         <div class="col-sm-9">
                             <select name="penguji1_id" id="penguji1_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('penguji1_id') }}@else{{ $data_pendadaran->penguji1->nama }}@endif">{{ $value->nama}}</option>
+                                <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji1_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -117,7 +117,7 @@
                         <div class="col-sm-9">
                             <select name="penguji2_id" id="penguji2_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('penguji2_id') }}@else{{ $data_pendadaran->penguji2->nama }}@endif">{{ $value->nama}}</option>
+                                <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -129,7 +129,7 @@
                         <div class="col-sm-9">
                             <select name="penguji3_id" id="penguji3_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('penguji3_id') }}@else{{ $data_pendadaran->penguji3->nama }}@endif">{{ $value->nama}}</option>
+                                <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji3_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -141,7 +141,7 @@
                         <div class="col-sm-9">
                             <select name="penguji4_id" id="penguji4_id" class="form-control">
                                 @foreach ($dosen as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('penguji4_id') }}@else{{ $data_pendadaran->penguji4->nama }}@endif">{{ $value->nama}}</option>
+                                <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji4_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -153,7 +153,7 @@
                         <div class="col-sm-9">
                             <select name="statuspendadaran_id" id="status" class="form-control">
                                 @foreach ($status as $value )
-                                <option value="@if ($button == 'Tambah'){{ old('status') }}@else{{ $data_pendadaran->statuspendadaran->status }}@endif">{{ $value->status}}</option>
+                                <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->statuspendadaran_id ? 'selected' : '' }}>{{ $value->status}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -178,7 +178,7 @@
                     </div>
                     @endif
                     <a href="<?= url('') ?>/pendadaran/data-pendadaran" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
-                    <a href="" type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</a>
+                    <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</button>
                 </div>
             </form>
         </div>

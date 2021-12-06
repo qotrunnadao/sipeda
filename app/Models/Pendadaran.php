@@ -41,7 +41,7 @@ class Pendadaran extends Model
     }
     public function RuangPendadaran()
     {
-        return $this->belongsTo(RuangPendadaran::class, 'ruangpendadaran_id');
+        return $this->belongsTo(RuangPendadaran::class, 'ruangPendadaran_id');
     }
     public function StatusPendadaran()
     {

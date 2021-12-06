@@ -122,7 +122,7 @@
                     </div>
                     <div class="form-group">
                         <label for="alasan">Hasil Konsultasi</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil"></textarea>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil" id="hasil"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id = "btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
@@ -141,6 +141,37 @@
 
         return true;
 
+    });
+});
+</script>
+<script>
+    $(function() {
+
+    $("#createData").validate({
+        rules: {
+            topik: {
+            required: true,
+            },
+            action: "required"
+        },
+        messages: {
+            topik: {
+            required: "Please enter some data",
+            },
+            action: "Please provide some data",
+        }
+        rules: {
+            hasil: {
+            required: true,
+            },
+            action: "required"
+        },
+        messages: {
+            hasil: {
+            required: "Please enter some data",
+            },
+            action: "Please provide some data",
+        }
     });
 });
 </script>

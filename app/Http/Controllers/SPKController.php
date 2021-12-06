@@ -160,9 +160,6 @@ class SPKController extends Controller
         $data = $request->all();
         $spk = SPK::where('ta_id', $id)->get()->first();
         // $hapus = $spk->fileSPK;
-        $data = [
-            'fileSPK' => $request->fileSPK,
-        ];
         if ($request->file('fileSPK')) {
             // dd($seminar_proposal->ta->mahasiswa->nim);
             $file = $request->file('fileSPK');

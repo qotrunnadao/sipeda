@@ -55,14 +55,14 @@
                                 @endif
                             </tr>
                             <tr>
-                                <td> Waktu </td>
+                                <td> Waktu Pelaksanaan</td>
                                 <td>:</td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
                                 @else
-                                <td> {{ $pendadaran->waktu }} </td>
+                                <td> {{ $pendadaran->jamMulai }} s/d {{ $pendadaran->jamSelesai }} WIB </td>
                                 @endif
                             </tr>
                             <tr>
@@ -171,14 +171,24 @@
                             @else
                             <tr>
                                 <td>
-                                    @if($pendadaran->statusPendadaran_id >=3)
-                                    <div class="btn-group">
-                                        <form action="" method="post">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $pendadaran->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                    </div>
+                                    @if($pendadaran->statuspendadaran_id >=5)
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $value->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     @else
                                     Berita Acara Pendadaran
                                     <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>

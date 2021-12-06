@@ -59,33 +59,18 @@ class BeritaAcaraPendadaranController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $data = $request->all();
-        if ($request->file('beritaacara')) {
-            $beritaacara = BeritaAcaraPendadaran::latest()->get();
-            foreach ($beritaacara as $value) {
-                $pendadaran_id = $value->pendadaran_id;
-                $pdd = Pendadaran::where('id', $pendadaran_id)->first();
-                $mahasiswa_id = $pdd->mhs_id;
-                $mhs_id = Mahasiswa::where('id', $mahasiswa_id)->first();
-                $nim = $mhs_id->nim;
-            }
-            $file = $request->file('beritaacara');
-            $filename = 'beritaAcara_pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('beritaacara')->storeAS('public/assets/file/beritaAcaraPendadaran', $filename);
-            $data = [
-                'pendadaran_id' => $request->pendadaran_id,
-                'beritaacara' => $filename,
-            ];
-            $cek = BeritaAcaraPendadaran::create($data);
+        $pendadaran = Pendadaran::with(['mahasiswa'])->find($id);
+        $status = array(
+            'no_surat' => $request->no_surat,
+        );
+        // dd($status);
+        if ($pendadaran->update($status)) {
+            Alert::success('Berhasil', 'Berhasil Tambah Nomer Berita Acara Ujian Pendadaran');
         } else {
-            $data['doc'] = NULL;
-        }
-        if ($cek == true) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Berita Acara');
-        } else {
-            Alert::warning('Gagal', 'Data Berita Acara Gagal Ditambahkan');
+            Alert::warning('Gagal', 'Data Nomer Berita Acara Ujian Pendadaran Gagal Ditambahkan');
         }
         return back();
     }
@@ -120,9 +105,29 @@ class BeritaAcaraPendadaranController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $value = BeritaAcaraPendadaran::findOrFail($id);
+        dd($data);
+        $value = Pendadaran::findOrFail($id);
+        $hapus = $value->beritaacara;
+        if ($request->file('beritaacara')) {
+            // dd($seminar_proposal->ta->mahasiswa->nim);
+            $file = $request->file('beritaacara');
+            $filename = 'Berita Acara Pendadaran Terbaru' . '_' . $value->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
+            $data = [
+                'statuspendadaran_id' => 5,
+                'beritaacara' => $filename,
+            ];
+            // dd($data);
+        } else {
+            $data['beritaacara'] = $value->beritaacara;
+            Alert::warning('Gagal', 'Gagal Ubah Data SPK');
+            return back();
+        }
+        // dd($data);
+        File::delete(public_path('storage/assets/file/Berita Acara Pendadaran/' . $hapus . ''));
+        // dd($hapus);
         $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Berita Acara');
+        Alert::success('Berhasil', 'Berhasil Ubah Data Berita Acara Ujian Pendadaran');
         return back();
     }
 
