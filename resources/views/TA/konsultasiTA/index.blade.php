@@ -63,6 +63,7 @@
             <div class="modal-body">
                 <form class="forms-sample" action="{{route('konsultasi.store')}}" id="createData" method="post">
                     @csrf
+                    <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
                         <label class="col-sm-3 col-form-label">Jurusan</label>
                         <div class="col-sm-9">
@@ -146,6 +147,7 @@
 @endsection
 @section('javascripts')
 <script>
+    var coba;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -155,6 +157,7 @@
 
         $("#nim").find('option').not(':first').remove();
         $("#name").val('');
+        $("#dosen_id").find('option').not(':first').remove();
         var id = $(this).val();
 
         $.ajax({
@@ -162,68 +165,31 @@
            url:"{{ route('konsultasi.nim') }}",
            data:{id:id},
            success:function(data){
+               window.coba = data;
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                 // POPULATE SELECT ELEMENT WITH JSON.
                     nim.innerHTML = nim.innerHTML +
-                        '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
+                        '<option value="' + data[i]['mahasiswa']['id'] +
+                       '" data-array="'+i+'">'
+                        + data[i]['mahasiswa']['nim'] + '</option>';
 
                 }
            }
         });
-
-
     })
     $('#nim').on('change', function (event) {
 
     // var kel = $(this).val();
-    var id = $(this).find(':selected').data('id');
-    var name = $(this).find(':selected').data('nama');
-
-    $('#ta_id').val(id);
-    $('#name').val(name);
-    // $('#keluhan').val(kel);
-
-})
-
-</script>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        }
-    });
-    $('#nim').on('change', function (event) {
-
-        $("#dosen_id").find('option').not(':first').remove();
-        var id = $(this).val();
-
-        $.ajax({
-           type:'POST',
-           url:"{{ route('konsultasi.dosen') }}",
-           data:{id:id},
-           success:function(data){
-               console.log(data);
-               var nim = document.getElementById('dosen_id')
-                for (var i = 0; i < data.length; i++) {
-                // POPULATE SELECT ELEMENT WITH JSON.
-                    nim.innerHTML = nim.innerHTML +
-                        '<option value="' + data[i]['dosen_id']['id'] + '" data-id="'+data[i]['id']+ '" data-dosen_id="'+data[i]['dosen_id']['nama']+'">' + data[i]['dosen_id']['nim'] + '</option>';
-
-                }
-           }
-        });
-
-
-    })
-    $('#dosen_id').on('change', function (event) {
-
-    // var kel = $(this).val();
-    var id = $(this).find(':selected').data('id');
-    // var name = $(this).find(':selected').data('nama');
-
-    $('#ta_id').val(id);
-    // $('#name').val(name);
+    var array = $(this).find(':selected').data('array');
+    $('#ta_id').val(coba[array]['id']);
+    $('#name').val(coba[array]['mahasiswa']['nama']);
+    dosen_id.innerHTML = dosen_id.innerHTML +
+        '<option value="' + coba[array]['dosen1']['id'] + '" >'
+        + coba[array]['dosen1']['nama'] + '</option>';
+    dosen_id.innerHTML = dosen_id.innerHTML +
+        '<option value="' + coba[array]['dosen2']['id'] + '" >'
+        + coba[array]['dosen2']['nama'] + '</option>';
     // $('#keluhan').val(kel);
 
 })

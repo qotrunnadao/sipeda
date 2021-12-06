@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RuangController;
+use App\Http\Controllers\RuangPendadaranController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\BerandaController;
@@ -194,8 +195,11 @@ Route::get('/pendadaran/status-pendadaran/delete/{id}',  'StatusPendadaranContro
 //data pendadaran
 Route::get('/pendadaran/data-pendadaran',  'PendadaranController@index')->name('pendadaran.index');
 Route::get('/pendadaran/data-pendadaran/create',  'PendadaranController@create')->name('pendadaran.create');
+Route::put('/pendadaran/data-pendadaran/download/{filename}',  'PendadaranController@download')->name('pendadaran.download');
+Route::get('/pendadaran/berita-acara/pdf/{id}',  'PendadaranController@eksport')->name('pendadaran.eksport');
 Route::post('/pendadaran/data-pendadaran/store',  'PendadaranController@store')->name('pendadaran.store');
 Route::get('/pendadaran/data-pendadaran/edit/{id}',  'PendadaranController@edit')->name('pendadaran.edit');
+Route::get('/pendadaran/data-pendadaran/verifikasi/{id}',  'PendadaranController@verifikasi')->name('pendadaran.verifikasi');
 Route::put('/pendadaran/data-pendadaran/update/{id}',  'PendadaranController@update')->name('pendadaran.update');
 Route::get('/pendadaran/data-pendadaran/delete/{id}',  'PendadaranController@destroy')->name('pendadaran.delete');
 
@@ -285,6 +289,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::get('/pendadaran/beranda', 'BerandaController@mahasiswaPendadaran')->name('mahasiswaPendadaran.beranda');
 
     Route::get('/pendadaran/pendaftaran', 'PendadaranMahasiswaController@create')->name('mahasiswaPendadaran.create');
+    Route::post('/pendadaran/pendaftaran/store',  'PendadaranMahasiswaController@store')->name('mahasiswaPendadaran.store');
     Route::get('/pendadaran/nilai', 'NilaiPendadaranController@index')->name('mahasiswaPendadaran.nilai');
 
     //============= YUDISIUM =============

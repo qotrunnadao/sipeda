@@ -51,15 +51,9 @@ class KonsultasiTAController extends Controller
     }
     public function nim(Request $request)
     {
-        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+        $taAll = TA::with(['mahasiswa','Dosen1','Dosen2'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
             $query->where('jurusan_id', $request->id);
         })->where('status_id', '>=','5')->get();
-        // dd($taAll);
-        return response()->json($taAll, 200);
-    }
-    public function dosen(Request $request)
-    {
-        $taAll = TA::with(['mahasiswa'])->where('ta_id',$request->id)->get();
         // dd($taAll);
         return response()->json($taAll, 200);
     }

@@ -321,6 +321,23 @@ class DatabaseSeeder extends Seeder
 
         DB::table('ruang')->insert($ruang);
 
+        $ruangPendadaran = [
+            [
+                'namaRuang' => "Pendadaran 1",
+            ],
+            [
+                'namaRuang' => "Pendadaran 2",
+            ],
+            [
+                'namaRuang' => "Pendadaran 3",
+            ],
+            [
+                'namaRuang' => "Pendadaran 4",
+            ],
+        ];
+
+        DB::table('ruang_pendadaran')->insert($ruangPendadaran);
+
         $seminar = [
             [
                 'jenis' => "seminar KP",
@@ -628,7 +645,7 @@ class DatabaseSeeder extends Seeder
                 'nohp' => "082241443663",
                 'tmptLahir' => "Cirebon",
                 'agama_id' => 1,
-                'jurusan_id' => 1,
+                'jurusan_id' => 4,
                 'user_id' => 2,
             ],
             [
@@ -841,6 +858,7 @@ class DatabaseSeeder extends Seeder
                 'penguji2_id' => 1,
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
+                'ruangpendadaran_id' => 1,
                 'thnAkad_id' => 1,
                 'statuspendadaran_id' => 1,
             ],
@@ -852,6 +870,7 @@ class DatabaseSeeder extends Seeder
                 'penguji1_id' => 1,
                 'penguji2_id' => 1,
                 'penguji3_id' => 1,
+                'ruangpendadaran_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,
                 'statuspendadaran_id' => 2,
@@ -863,6 +882,7 @@ class DatabaseSeeder extends Seeder
                 'no_surat' => "1234566",
                 'penguji1_id' => 1,
                 'penguji2_id' => 1,
+                'ruangpendadaran_id' => 1,
                 'penguji3_id' => 1,
                 'penguji4_id' => 1,
                 'thnAkad_id' => 1,

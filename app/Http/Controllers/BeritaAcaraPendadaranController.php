@@ -93,8 +93,7 @@ class BeritaAcaraPendadaranController extends Controller
     public function download($filename)
     {
         // dd($filename);
-        // return response()->download(public_path('storage/assets/sk/' . $filename . ''));
-        return response()->download(public_path('storage/assets/file/beritaAcaraPendadaran/' . $filename . ''));
+        return response()->download(public_path('storage/assets/file/berita Acara Pendadaran/' . $filename . ''));
     }
     /**
      * Display the specified resource.
