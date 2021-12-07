@@ -31,10 +31,11 @@ class DistribusiController extends Controller
         if (auth()->user()->level_id == 2) {
             $distribusi = Distribusi::with('ta')->latest()->get();
         } elseif (auth()->user()->level_id == 3) {
-            $distribusi = Distribusi::with(['ta'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+            $distribusi = Distribusi::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
+            // dd($distribusi);
         } elseif (auth()->user()->level_id == 1 || 5) {
             $distribusi = Distribusi::with(['ta'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
@@ -112,11 +113,11 @@ class DistribusiController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/fileDistribusiTA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/fileDistribusiTA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/fileDistribusiTA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
 

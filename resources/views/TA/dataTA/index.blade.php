@@ -156,7 +156,7 @@
                                     <div class="btn-group">
                                         <a href="" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>
                                     </div>
-                                    {{-- @elseif (auth()->user()->level_id == 1) --}}
+                                    @elseif (auth()->user()->level_id == 1)
                                     <div class="btn-group">
                                         <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>

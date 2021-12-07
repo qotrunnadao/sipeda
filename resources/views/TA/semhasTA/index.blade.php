@@ -77,11 +77,11 @@
                                     @endif
                                 </td>
                                 @if ($value->no_surat == null)
-                                    <td class="text-center">
-                                        <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
-                                    </td>
+                                <td class="text-center">
+                                    <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
+                                </td>
                                 @else
-                                    <td class="text-center"> {{ $value->no_surat}} </td>
+                                <td class="text-center"> {{ $value->no_surat}} </td>
                                 @endif
                                 <td class="text-center">
                                     @if ($value->status != 0)
@@ -126,8 +126,8 @@
         </div>
     </div>
 </div>
- {{-- Tambah Data Nomer Surat --}}
- <div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- Tambah Data Nomer Surat --}}
+<div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -286,6 +286,8 @@
                                 <th class="text-center"> Tanggal </th>
                                 <th class="text-center"> Waktu </th>
                                 <th class="text-center"> Status</th>
+                                <th class="text-center"> Berita Acara</th>
+                                <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -305,6 +307,43 @@
                                     <span class="badge badge-success">Disetujui</span>
                                     @else
                                     <span class="badge badge-danger">Tidak Disetujui</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if ($value->beritaacara == null)
+                                    <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
+                                    @else
+                                    <div class="btn-group">
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $value->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.download', $value->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if ($value->status != 0)
+                                    <div class="btn-group">
+                                        <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <form action="{{ route('semhas.delete', $value->id) }}" method="GET">
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
                                     @endif
                                 </td>
                             </tr>
