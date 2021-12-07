@@ -178,10 +178,10 @@
 <body>
     <div class="container ml-5 mt-5 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
@@ -215,14 +215,14 @@
             </table>
         </div>
 
-        <div class="mt-3">
+        <div class="ml-5 mt-3">
             <p>Yth. Bapak/Ibu</p>
             <p>di tempat</p>
         </div>
 
         <div class="mt-3">
             <p>Berdasarkan pengajuan ujian pendadaran dari mahasiswa berikut :</p>
-            <table class="ml-3">
+            <table class="ml-5" style="width: 100%">
                 <tbody>
                     <tr>
                         <td> Nama </td>
@@ -245,7 +245,7 @@
 
         <div>
             <p>yang akan melakukan ujian pendadaran pada :</p>
-            <table class="ml-3">
+            <table class="ml-5" style="width: 100%">
                 <tbody>
                     <tr>
                         <td> Hari/tanggal </td>
@@ -301,10 +301,10 @@
     <div class="page-break"></div>
     <div class="container ml-5 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
@@ -322,7 +322,7 @@
 
         <div class="mt-3">
             <p>Telah dilakukan ujian komprehensif atas nama :</p>
-            <table>
+            <table class="ml-5" style="width: 100%">
                 <tbody>
                     <tr>
                         <td> Nama </td>
@@ -375,10 +375,10 @@
 
     <div class="container ml-5 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
@@ -396,7 +396,7 @@
 
         <div>
             <p>Telah melakukan seminar proposal tugas akhir atas nama mahasiswa sebagai berikut,</p>
-            <table>
+            <table class="ml-5" style="width: 100%">
                 <tbody>
                     <tr>
                         <td> Nama </td>
@@ -433,13 +433,12 @@
         </div>
         <div>
             <p>Dengan perincian nilai sebagai berikut</p>
-            <table class="table table-bordered" style="width: 100%">
+            <table class="table table-bordered ml-5" style="width: 100%">
                 <thead class="text-center">
                     <tr style="border-width:medium;">
                         <th width="10%">No</th>
                         <th width="70%">Komponen Penilaian</th>
                         <th width="20%">NILAI</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -465,7 +464,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-center"> <b>TOTAL NILAI</b></td>
+                        <td colspan="2" class="text-center"> <b>TOTAL NILAI</b></td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -474,7 +473,7 @@
 
         <div>
             <p>Keterangan</p>
-            <table style="width:100%;">
+            <table class="ml-5" style="width:100%;">
                 <tbody>
                     <tr>
                         <td width=30%><b>A = Nilai >= 80.00</b> </td>
@@ -496,9 +495,9 @@
         </div>
 
         <div>
-            <p>Nilai diatas akan sah sebagai matakuliah Pendadaran jika yang bersangkutan telah dinyatakan lulus yang</p>
-            <p>tercantum dalam Surat Kelulusan serta menyerahkan laporan Tugas Akhir yang telah dijilid dan disahkan.</p>
-            <p>Telah ditetapkan di Purbalingga pada hari {{ $hari }} di ruang {{ $pendadaran->ruangpendadaran->namaRuang }} Fakultas Teknik Purbalingga.</p>
+            <p style="text-align: justify">Nilai diatas akan sah sebagai matakuliah Pendadaran jika yang bersangkutan telah dinyatakan lulus yang
+                tercantum dalam Surat Kelulusan serta menyerahkan laporan Tugas Akhir yang telah dijilid dan disahkan.
+                Telah ditetapkan di Purbalingga pada hari {{ $hari }} di ruang {{ $pendadaran->ruangpendadaran->namaRuang }} Fakultas Teknik Purbalingga.</p>
 
         </div>
 

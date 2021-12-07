@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
+use App\Models\NilaiHuruf;
 use App\Models\Pendadaran;
 use App\Models\StatusNilai;
 use Illuminate\Http\Request;
@@ -26,10 +27,11 @@ class NilaiPendadaranController extends Controller
         $pendadaran = Pendadaran::with(['mahasiswa'])->get();
         $statusnilai = StatusNilai::all();
         $nilai = NilaiPendadaran::With('pendadaran.mahasiswa.jurusan')->latest()->get();
+        $NilaiHuruf = NilaiHuruf::get();
         if (Auth::user()->level_id == 4) {
-            return view('mahasiswa.pendadaran.pages.nilai', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+            return view('mahasiswa.pendadaran.pages.nilai', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai', 'NilaiHuruf'));
         } else {
-            return view('pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai'));
+            return view('pendadaran.nilaiPendadaran.index', compact('nilai', 'jurusan', 'pendadaran', 'statusnilai', 'NilaiHuruf'));
         }
 
         // if (auth()->user()->level_id == 2) {

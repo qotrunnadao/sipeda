@@ -7,9 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    @if(auth()->user()->level_id == 2)
-                    <button type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-upload"></i> Unggah SIA</button>
-                    @elseif(auth()->user()->level_id == 3)
+                    @if(auth()->user()->level_id !== 2)
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
                     @endif
                 </div>
@@ -24,6 +22,7 @@
                                 <th> Nilai Angka </th>
                                 <th> Nilai Huruf </th>
                                 <th> Status Nilai</th>
+                                <th> Keterangan</th>
                                 <th> Aksi</th>
                             </tr>
                         </thead>
@@ -46,7 +45,13 @@
                                 @else
                                 <span class="badge badge-success">Upload SIA</span></td>
                                 @endif</td>
-
+                                <td class="text-center">
+                                    @if($value->ket == null)
+                                    <span class="badge badge-danger">tidak ada keterangan</span>
+                                    @else
+                                    {{ $value->ket }}
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>
@@ -80,7 +85,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{ route('nilaiPendadaran.store') }}" enctype="multipart/form-data">
+                <form class="forms-sample" id="creatData" method="POST" action="{{ route('nilaiPendadaran.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" class="form-control" id="pendadaran_id" name="pendadaran_id" value="">
                     <div class="form-group">
@@ -117,16 +122,20 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            {{-- <input type="text" class="form-control" name="nilaiHuruf" /> --}}
-                            <select type="text" class="form-control" name="nilaiHuruf">
-                                <option value="">PILIH</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
+                            <select type="text" class="form-control" name="nilai_huruf_id">
+                                <option value="">PILIH Nilai Huruf</option>
+                                @foreach ($NilaiHuruf as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
+                                @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Keterangan</label>
+                        <div class="input-group">
+                            <textarea type="text" class="form-control" placeholder="" name="ket"></textarea>
+                        </div>
+                        <p class="text-muted"> * tidak wajib di isi</p>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
@@ -140,7 +149,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

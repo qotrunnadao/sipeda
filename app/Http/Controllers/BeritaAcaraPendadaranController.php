@@ -105,7 +105,7 @@ class BeritaAcaraPendadaranController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        dd($data);
+        //dd($data);
         $value = Pendadaran::findOrFail($id);
         $hapus = $value->beritaacara;
         if ($request->file('beritaacara')) {
@@ -120,7 +120,7 @@ class BeritaAcaraPendadaranController extends Controller
             // dd($data);
         } else {
             $data['beritaacara'] = $value->beritaacara;
-            Alert::warning('Gagal', 'Gagal Ubah Data SPK');
+            Alert::warning('Gagal', 'Gagal Ubah Data Berita Acara');
             return back();
         }
         // dd($data);

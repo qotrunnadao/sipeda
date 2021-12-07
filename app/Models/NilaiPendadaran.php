@@ -15,6 +15,7 @@ class NilaiPendadaran extends Model
         'nilaiAngka',
         'statusnilai_id',
         'pendadaran_id',
+        'ket',
     ];
     protected $primaryKey = 'id';
 

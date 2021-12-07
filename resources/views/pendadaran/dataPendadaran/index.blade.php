@@ -39,30 +39,30 @@
                                 <td> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
                                 <td class="text-center">
                                     @if($value->berkas != null)
-                                        @if (File::exists(public_path('storage/assets/file/Pendadaran/' . $value->berkas . '')))
-                                        <div class="btn-group">
-                                            <form action="{{ route('pendadaran.download', $value->berkas) }}" method="post" target="blank">
-                                                @method('PUT')
-                                                @csrf
-                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
-                                            </form>
-                                        </div>
-                                        @else
-                                        <div class="btn-group">
-                                            <form action="{{ route('pendadaran.download', $value->berkas) }}" method="post">
-                                                @method('PUT')
-                                                @csrf
-                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
-                                            </form>
-                                        </div>
-                                        @endif
+                                    @if (File::exists(public_path('storage/assets/file/Pendadaran/' . $value->berkas . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('pendadaran.download', $value->berkas) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('pendadaran.download', $value->berkas) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                     @else
 
                                     <div class="badge badge-danger badge-pill ">Berkas Pendadaran Tidak Ada</div>
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                 @if($value->beritaacara != null)
+                                    @if($value->beritaacara != null)
                                     @if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $value->beritaacara . '')))
                                     <div class="btn-group">
                                         <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post" target="blank">
@@ -80,9 +80,9 @@
                                         </form>
                                     </div>
                                     @endif
-                                @else
-                                <div class="badge badge-danger badge-pill ">Berita Acara Pendadaran Belom Terbit</div>
-                                @endif
+                                    @else
+                                    <div class="badge badge-danger badge-pill ">Berita Acara Pendadaran Belom Terbit</div>
+                                    @endif
                                 </td>
                                 @if ($value->no_surat == null )
                                 <td class="text-center">
@@ -96,30 +96,30 @@
                                 </td>
                                 @if ($value->ket == null)
                                 <td>
-                                        <span class="badge badge-danger">Tidak Ada Data Keterangan</span>
+                                    <span class="badge badge-danger">Tidak Ada Data Keterangan</span>
                                 </td>
                                 @else
                                 <td> {{ $value->ket }}</td>
                                 @endif
                                 <td>
-                                        @if (auth()->user()->level_id == 2 && $value->statuspendadaran_id == 2)
-                                        {{-- verifikasi --}}
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-statuspendadaran_id='{{ $value->statuspendadaran_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>
-                                        </div>
-                                        @elseif ( $value->statuspendadaran_id != 2 && auth()->user()->level_id == 2 || auth()->user()->level_id == 1)
-                                        {{-- edit data pendadaran --}}
-                                        <div class="btn-group">
-                                            <a href="{{ route('pendadaran.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
-                                        </div>
-                                        @elseif ( $value->statuspendadaran_id > 3 && auth()->user()->level_id == 5)
-                                        {{-- edit data Berita Acara pendadaran Kajur--}}
-                                        {{-- minta tolong tun ini ditampilin modalnya ga bisa --}}
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editberita" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
-                                        </div>
-                                        @endif
-                                     @if ($value->no_surat == null && auth()->user()->level_id == 2 && $value->statuspendadaran_id == 4)
+                                    @if (auth()->user()->level_id == 2 && $value->statuspendadaran_id == 2)
+                                    {{-- verifikasi --}}
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-statuspendadaran_id='{{ $value->statuspendadaran_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>
+                                    </div>
+                                    @elseif ( $value->statuspendadaran_id != 2 && auth()->user()->level_id == 2 || auth()->user()->level_id == 1)
+                                    {{-- edit data pendadaran --}}
+                                    <div class="btn-group">
+                                        <a href="{{ route('pendadaran.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @elseif ( $value->statuspendadaran_id > 3 && auth()->user()->level_id == 5)
+                                    {{-- edit data Berita Acara pendadaran Kajur--}}
+                                    {{-- minta tolong tun ini ditampilin modalnya ga bisa --}}
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editberita" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @endif
+                                    @if ($value->no_surat == null && auth()->user()->level_id == 2 && $value->statuspendadaran_id == 4)
                                     {{-- nomer surat --}}
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
@@ -236,7 +236,8 @@
                     @csrf
                     <div class="form-group row">
                         <div class="col">
-                            <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="beritaacara" />
+                            {{-- <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="beritaacara" /> --}}
+                            <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" />
                         </div>
 
                     </div>

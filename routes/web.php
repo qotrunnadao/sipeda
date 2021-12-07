@@ -287,7 +287,6 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     //=========== PENDADARAN==============
 
     Route::get('/pendadaran/beranda', 'BerandaController@mahasiswaPendadaran')->name('mahasiswaPendadaran.beranda');
-
     Route::get('/pendadaran/pendaftaran', 'PendadaranMahasiswaController@create')->name('mahasiswaPendadaran.create');
     Route::post('/pendadaran/pendaftaran/store',  'PendadaranMahasiswaController@store')->name('mahasiswaPendadaran.store');
     Route::get('/pendadaran/nilai', 'NilaiPendadaranController@index')->name('mahasiswaPendadaran.nilai');

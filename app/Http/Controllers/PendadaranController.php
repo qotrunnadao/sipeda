@@ -57,7 +57,7 @@ class PendadaranController extends Controller
         }
 
 
-        return view('pendadaran.dataPendadaran.index', compact('pendadaran','status'));
+        return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'status'));
     }
 
     /**
@@ -75,6 +75,7 @@ class PendadaranController extends Controller
         $dosen = Dosen::get();
         $status = StatusPendadaran::latest()->get();
         $jurusan = jurusan::get();
+        $ruang = RuangPendadaran::get();
         foreach ($pendadaran as $value) {
             $penguji1_id = $value->penguji1_id;
             $penguji2_id = $value->penguji2_id;
@@ -100,7 +101,7 @@ class PendadaranController extends Controller
             $stts = StatusPendadaran::where('id', $status_id)->first();
             $ketStatus = $stts->status;
         }
-        return view('pendadaran.dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan'));
+        return view('pendadaran.dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan', 'ruang'));
     }
 
     /**
@@ -195,16 +196,16 @@ class PendadaranController extends Controller
             $pendadaranCount = Pendadaran::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                 $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where('tanggal', '=', $tanggal)
-                    ->where('jamMulai', '>=', $jamMulai)
-                    ->where('jamSelesai', '<', $jamMulai)
-                    ->where('ruangpendadaran_id', '=', $ruang);
+                        ->where('jamMulai', '>=', $jamMulai)
+                        ->where('jamSelesai', '<', $jamMulai)
+                        ->where('ruangpendadaran_id', '=', $ruang);
                 })
-                ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai , $ruang) {
-                    $query->where('jamMulai', '<', $jamSelesai)
-                    ->where('jamSelesai', '>=', $jamSelesai)
-                    ->where('tanggal', '=', $tanggal)
-                    ->where('ruangpendadaran_id', '=', $ruang);
-                });;
+                    ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                        $query->where('jamMulai', '<', $jamSelesai)
+                            ->where('jamSelesai', '>=', $jamSelesai)
+                            ->where('tanggal', '=', $tanggal)
+                            ->where('ruangpendadaran_id', '=', $ruang);
+                    });;
             })->count();
             // dd($pendadaranCount);
             if (!$pendadaranCount) {
@@ -230,8 +231,7 @@ class PendadaranController extends Controller
                         'penguji3_id' => $request->penguji3_id,
                         'penguji4_id' => $request->penguji4_id,
                     ];
-                }
-                elseif ($request->file('beritaacara')) {
+                } elseif ($request->file('beritaacara')) {
                     $berita = $request->file('beritaacara');
                     $beritaacara = 'Berita Acara Pendadaran Terbaru' . '_' . $nim . '_' . time() . '.' . $berita->getClientOriginalExtension();
                     $path1 = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
@@ -248,7 +248,7 @@ class PendadaranController extends Controller
                         'penguji3_id' => $request->penguji3_id,
                         'penguji4_id' => $request->penguji4_id,
                     ];
-                }elseif($request->file('berkas')){
+                } elseif ($request->file('berkas')) {
                     $file = $request->file('berkas');
                     $filename = 'Pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
                     $path = $request->file('berkas')->storeAS('public/assets/file/Pendadaran/', $filename);
@@ -265,7 +265,7 @@ class PendadaranController extends Controller
                         'penguji3_id' => $request->penguji3_id,
                         'penguji4_id' => $request->penguji4_id,
                     ];
-                }else{
+                } else {
                     $data = [
                         'jamMulai' => $jamMulai,
                         'jamSelesai' => $jamSelesai,
@@ -286,7 +286,7 @@ class PendadaranController extends Controller
                 Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran Gagal Ditambahkan, Ruangan Sudah Digunakan');
             }
         } else {
-                Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran diajukan minimal 3 Hari Sebelum Pelaksanaan Ujian Pendadaran');
+            Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran diajukan minimal 3 Hari Sebelum Pelaksanaan Ujian Pendadaran');
         }
         return redirect(route('pendadaran.index'));
     }
@@ -304,12 +304,13 @@ class PendadaranController extends Controller
         Alert::success('Berhasil', 'Berhasil hapus data Pendadaran');
         return back();
     }
-    public function verifikasi(Request $request,$id)
+    public function verifikasi(Request $request, $id)
     {
         $pendadaran = Pendadaran::with(['mahasiswa'])->find($id);
         $data = $request->all();
         $pendadaran->update($data);
         Alert::success('Berhasil', 'Berhasil Mengubah Status data Pendadaran');
+        return redirect(route('pendadaran.index'));
     }
     public function eksport(Request $request, $id)
     {
