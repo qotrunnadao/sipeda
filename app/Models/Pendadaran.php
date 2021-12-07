@@ -39,29 +39,13 @@ class Pendadaran extends Model
     {
         return $this->belongsTo(Tahunakademik::class, 'thnAkad_id');
     }
-
+    public function RuangPendadaran()
+    {
+        return $this->belongsTo(RuangPendadaran::class, 'ruangpendadaran_id');
+    }
     public function StatusPendadaran()
     {
         return $this->belongsTo(StatusPendadaran::class, 'statuspendadaran_id');
     }
 
-    public function getCreatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
-    }
-
-    public function getUpdatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
-    }
-
-    public function getTanggalAttribute()
-    {
-        return Carbon::parse($this->attributes['tanggal'])->translatedFormat('d F Y');
-    }
-
-    public function getWaktuAttribute()
-    {
-        return Carbon::parse($this->attributes['waktu'])->translatedFormat('H:i:s');
-    }
 }

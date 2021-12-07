@@ -16,17 +16,18 @@ class CreatePendadaransTable extends Migration
         Schema::create('pendadaran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
-            $table->string('nosurat')->nullable();
             $table->dateTime('tanggal')->nullable();
-            $table->time('waktu')->nullable();
+            $table->time('jamMulai')->nullable();
+            $table->time('jamSelesai')->nullable();
             $table->string('berkas');
-            $table->string('beritaacara');
-            $table->string('no_surat');
-            $table->foreignId('penguji1_id')->references('id')->on('dosen');
-            $table->foreignId('penguji2_id')->references('id')->on('dosen');
-            $table->foreignId('penguji3_id')->references('id')->on('dosen');
+            $table->string('beritaacara')->nullable();
+            $table->string('no_surat')->nullable();
+            $table->foreignId('penguji1_id')->references('id')->on('dosen')->nullable();
+            $table->foreignId('penguji2_id')->references('id')->on('dosen')->nullable();
+            $table->foreignId('penguji3_id')->references('id')->on('dosen')->nullable();
             $table->foreignId('penguji4_id')->references('id')->on('dosen')->nullable();
-            $table->foreignId('statuspendadaran_id')->references('id')->on('statuspendadaran')->default(1);
+            $table->foreignId('statuspendadaran_id')->references('id')->on('statuspendadaran');
+            $table->foreignId('ruangPendadaran_id')->references('id')->on('ruang_pendadaran');
             $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik');
             $table->longText('ket')->nullable();
             $table->timestamps();

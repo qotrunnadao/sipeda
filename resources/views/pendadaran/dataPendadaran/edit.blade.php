@@ -1,61 +1,21 @@
 @extends('layouts.main')
 @section('content')
 @section('icon', 'file')
-@section('title', $button.' Pendadaran')
+@section('title', 'Edit Pendadaran')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{$action}}@if($button == 'Edit')/{{ $data_pendadaran->id}}@endif" enctype="multipart/form-data" id="eksport" method="post">
+            <form action="{{route('pendadaran.update')}}" enctype="multipart/form-data" id="eksport" method="post">
                 {{ csrf_field() }}
-                @if ($button == 'Edit'){{ method_field('PUT') }}@endif
                 <div class="card-body">
-                    @if ($button == 'Edit')
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Nama Mahasiswa
                         </label>
                         <div class="col-sm-9">
-                            <input readonly type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_pendadaran->mahasiswa->nama }}@endif" />
+                            <input readonly type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="{{ $data_pendadaran->mahasiswa->nama }}" />
                         </div>
                     </div>
-                    @endif
-                    @if ($button == 'Tambah')
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Jurusan</label>
-                        <div class="col-sm-9">
-                            <select type="text" class="form-control" id="jurusan" name="jurusan">
-                                <option selected disabled>Pilih Jurusan </option>
-                                @foreach ($jurusan as $value)
-                                <option value="{{ $value->id }} ">{{ $value->jurusan->namaJurusan }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        @if ($errors->has('jurusan'))
-                        <div class="text-danger">
-                            {{ $errors->first('jurusan') }}
-                        </div>
-                        @endif
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label"> NIM</label>
-                        <div class="col-sm-9">
-                            <select type="text" class="form-control" id="nim" name="nim">
-                                <option value="" selected disabled>Pilih NIM </option>
-                            </select>
-                        </div>
-                        @if ($errors->has('nim'))
-                        <div class="text-danger">
-                            {{ $errors->first('nim') }}
-                        </div>
-                        @endif
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Nama Mahasiswa</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
-                        </div>
-                    </div>
-                    @endif
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Tanggal Ujian Pendadaran

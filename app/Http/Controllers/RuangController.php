@@ -82,7 +82,7 @@ class RuangController extends Controller
         $data = $request->all();
         $value = Ruang::findOrFail($id);
         $value->update($data);
-        Alert::success('Berhasil', 'Berhasil Ubah Data Jurusan');
+        Alert::success('Berhasil', 'Berhasil Ubah Data Ruangan');
         return back();
     }
 
@@ -96,7 +96,7 @@ class RuangController extends Controller
     {
         $jurusan = Ruang::find($id);
         $jurusan->delete();
-        Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
+        Alert::success('Berhasil', 'Berhasil hapus Data Ruangan');
         return back();
     }
 }

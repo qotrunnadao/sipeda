@@ -144,7 +144,7 @@
                                     <input class="checkbox" type="checkbox"> {{ $value->status }} <i class="input-helper"></i></label>
                                 @else
                                 <label class="form-check-label">
-                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} " {{ $loop->iteration <= $pendadaran->statusPendadaran_id && $loop->iteration != 1 || $pendadaran->statusPendadaran_id == 1 && $loop->iteration == $pendadaran->statusPendadaran_id ? 'checked' : '' }}> {{ $value->status }} <i class="input-helper"></i></label>
+                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} " {{ $loop->iteration <= $pendadaran->statuspendadaran_id && $loop->iteration != 1 || $pendadaran->statuspendadaran_id == 1 && $loop->iteration == $pendadaran->statuspendadaran_id ? 'checked' : '' }}> {{ $value->status }} <i class="input-helper"></i></label>
                                 @endif
                             </div>
                         </li>

@@ -180,9 +180,9 @@
 <body>
     <div class="container ml-5 mt-5 mr-2">
         <div class="row">
-            {{-- <div class="col col-md-1 float-left ml-5">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Logo-unsoed-2017-bw.png/747px-Logo-unsoed-2017-bw.png" height="130" width="130">
-            </div> --}}
+            <div class="col col-md-1 float-left ml-5">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            </div>
             {{-- <div class="col col-md-10 float-left"> --}}
                 <div class="col">
                     <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
@@ -313,9 +313,9 @@
 
         <div class="container ml-5 mr-2">
             <div class="row g-0">
-                {{-- <div class="col col-md-1 float-left ml-5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Logo-unsoed-2017-bw.png/747px-Logo-unsoed-2017-bw.png" height="130" width="130">
-                </div> --}}
+                <div class="col col-md-1 float-left ml-5">
+                    <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+                </div>
                 <div class="col">
                     <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                         <b>FAKULTAS TEKNIK</b> <br>
@@ -427,9 +427,9 @@
 
         <div class="container ml-5 mr-2">
             <div class="row">
-                {{-- <div class="col col-md-1 float-left ml-5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Logo-unsoed-2017-bw.png/747px-Logo-unsoed-2017-bw.png" height="130" width="130">
-                </div> --}}
+                <div class="col col-md-1 float-left ml-5">
+                    <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+                </div>
                 <div class="col">
                     <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                         <b>FAKULTAS TEKNIK</b> <br>
@@ -610,9 +610,9 @@
 
         <div class="container ml-5 mr-2">
             <div class="row">
-                {{-- <div class="col col-md-1 float-left ml-5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Logo-unsoed-2017-bw.png/747px-Logo-unsoed-2017-bw.png" height="130" width="130">
-                </div> --}}
+                <div class="col col-md-1 float-left ml-5">
+                    <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+                </div>
                 <div class="col">
                     <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                         <b>FAKULTAS TEKNIK</b> <br>
@@ -797,9 +797,9 @@
 
         <div class="container ml-5 mr-2">
             <div class="row">
-                {{-- <div class="col col-md-1 float-left ml-5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Logo-unsoed-2017-bw.png/747px-Logo-unsoed-2017-bw.png" height="130" width="130">
-                </div> --}}
+                <div class="col col-md-1 float-left ml-5">
+                    <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+                </div>
                 <div class="col">
                     <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                         <b>FAKULTAS TEKNIK</b> <br>
@@ -934,9 +934,9 @@
 
         <div class="container ml-5 mr-2">
             <div class="row">
-                {{-- <div class="col col-md-1 float-left ml-5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Logo-unsoed-2017-bw.png/747px-Logo-unsoed-2017-bw.png" height="130" width="130">
-                </div> --}}
+                <div class="col col-md-1 float-left ml-5">
+                    <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+                </div>
                 <div class="col">
                     <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                         <b>FAKULTAS TEKNIK</b> <br>
