@@ -10,23 +10,28 @@
                     <table class="table table-striped">
                         <thead>
                             <tr class="text-center">
-                                <th> # </th>
+                                <th> No. </th>
                                 <th> Komponen Penilaian </th>
                                 <th> Nilai Angka </th>
                                 <th> Nilai Huruf </th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($nilai as $value)
                             <tr>
-                                <td class="text-center"> 1 </td>
-                                <td> Ujian Pendadaran </td>
+                                <td class="text-center"> {{ $loop->iteration }} </td>
+                                <td class="text-center"> Nilai Akhir Ujian Pendadaran</td>
                                 <td class="text-center">
-                                    <div class="badge badge-success badge-pill">85.00</div>
+                                    <div class="badge badge-secondary badge-pill">{{ $value->nilaiAngka }}</div>
                                 </td>
                                 <td class="text-center">
-                                    <div class="badge badge-primary badge-pill">A</div>
+                                    <div class="badge badge-secondary badge-pill">{{ $value->nilaiHuruf->nilaiHuruf }}</div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

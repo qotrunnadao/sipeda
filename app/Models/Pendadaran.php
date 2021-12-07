@@ -47,5 +47,9 @@ class Pendadaran extends Model
     {
         return $this->belongsTo(StatusPendadaran::class, 'statuspendadaran_id');
     }
+    public function NilaiPendadaran()
+    {
+        return $this->hasMany(NilaiPendadaran::class, 'pendadaran_id');
+    }
 
 }

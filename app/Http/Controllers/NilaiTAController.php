@@ -109,7 +109,7 @@ class NilaiTAController extends Controller
         // dd($value->ta_id);
         $taAll = TA::with(['mahasiswa'])->where('id', $value->ta_id)->get()->first();
         $value->update($data);
-        if ($request->statusnilai_id == 2) {
+         if ($request->statusnilai_id == 2) {
             $status = array(
                 'status_id' => 10,
             );

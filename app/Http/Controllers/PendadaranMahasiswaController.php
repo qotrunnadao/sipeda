@@ -44,7 +44,7 @@ class PendadaranMahasiswaController extends Controller
             'penguji2_id' => 2,
             'penguji3_id' => 3,
             'penguji4_id' => 4,
-            'ruangPendadaran_id' => 2,
+            'ruangPendadaran_id' => 4,
         ];
         // dd($data);
         $cek = Pendadaran::create($data);

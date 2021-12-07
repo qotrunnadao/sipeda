@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\BeritaAcaraPendadaran;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
+use File;
 
 class BeritaAcaraPendadaranController extends Controller
 {
@@ -105,14 +106,14 @@ class BeritaAcaraPendadaranController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        //dd($data);
         $value = Pendadaran::findOrFail($id);
         $hapus = $value->beritaacara;
-        if ($request->file('beritaacara')) {
+        if ($request->file('berita')) {
             // dd($seminar_proposal->ta->mahasiswa->nim);
-            $file = $request->file('beritaacara');
+            $file = $request->file('berita');
             $filename = 'Berita Acara Pendadaran Terbaru' . '_' . $value->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
+            $path = $request->file('berita')->storeAS('public/assets/file/Berita Acara Pendadaran/', $filename);
+            // dd($filename);
             $data = [
                 'statuspendadaran_id' => 5,
                 'beritaacara' => $filename,

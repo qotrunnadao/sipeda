@@ -172,17 +172,17 @@
                             <tr>
                                 <td>
                                     @if($pendadaran->statuspendadaran_id >=5)
-                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $value->beritaacara . '')))
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $pendadaran->beritaacara . '')))
                                         <div class="btn-group">
-                                            <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post" target="blank">
+                                            <form action="{{ route('beritaacarapendadaran.download', $pendadaran->beritaacara) }}" method="post" target="blank">
                                                 @method('PUT')
                                                 @csrf
-                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $pendadaran->beritaacara }} <i class="mdi mdi-download"></i></a></button>
                                             </form>
                                         </div>
                                         @else
                                         <div class="btn-group">
-                                            <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post">
+                                            <form action="{{ route('beritaacarapendadaran.download', $pendadaran->beritaacara) }}" method="post">
                                                 @method('PUT')
                                                 @csrf
                                                 <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>

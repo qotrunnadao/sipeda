@@ -55,6 +55,14 @@
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">
+                            Berkas Persyaratan
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" placeholder="Berkas Persyaratan Ujian Pendadaran"  name="berkas" id="berkas" />
+                        </div>
+                    </div>
                     @endif
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
@@ -167,13 +175,13 @@
                             <p class="text-muted"> * tidak wajib di isi</p>
                         </div>
                     </div>
-                    @if (auth()->user()->level_id == 2)
+                    @if (auth()->user()->level_id == 2 && $button == 'Edit')
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Berita Acara Ujian Pendadaran
                         </label>
                         <div class="col-sm-8">
-                            <input type="file" class="form-control" placeholder="berita acara Ujian Pendadaran" name="beritaacara" value="{{ $data_pendadaran->beritaacara }}" />
+                            <input type="file" class="form-control" placeholder="berita acara Ujian Pendadaran" name="beritaacara"  />
                         </div>
                     </div>
                     @endif
@@ -184,4 +192,48 @@
         </div>
     </div>
 </div>
+@endsection
+@section('javascripts')
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+        $("#nim").find('option').not(':first').remove();
+        $("#name").val('');
+        var id = $(this).val();
+
+        $.ajax({
+           type:'POST',
+           url:"{{ route('pendadaran.nim') }}",
+           data:{id:id},
+           success:function(data){
+               var nim = document.getElementById('nim')
+                for (var i = 0; i < data.length; i++) {
+                // POPULATE SELECT ELEMENT WITH JSON.
+                    nim.innerHTML = nim.innerHTML +
+                        '<option value="' + data[i]['id'] + '" data-nama="'+data[i]['nama']+'">' + data[i]['nim'] + '</option>';
+
+                }
+           }
+        });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#mahasiswa_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
+</script>
 @endsection

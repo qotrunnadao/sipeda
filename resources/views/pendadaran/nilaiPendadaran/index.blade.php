@@ -7,9 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    @if(auth()->user()->level_id !== 2)
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
-                    @endif
                 </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -37,14 +35,8 @@
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf->nilaiHuruf }}</td>
                                 <td class="text-center">
-                                    @if($value->statusnilai_id == 1)
-                                    <span class="badge badge-warning">Entry dosen</span>
-                                </td>
-                                @elseif($value->statusnilai_id == 2)
-                                <span class="badge badge-primary">Verifikasi Bapendik</span></td>
-                                @else
-                                <span class="badge badge-success">Upload SIA</span></td>
-                                @endif</td>
+                                <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
+                                 </td>
                                 <td class="text-center">
                                     @if($value->ket == null)
                                     <span class="badge badge-danger">tidak ada keterangan</span>
@@ -54,7 +46,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiangka='{{ $value->nilaiAngka }}' data-nilai_huruf_id='{{ $value->NilaiHuruf->id }}' data-ket='{{ $value->ket }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('nilaiPendadaran.delete', $value->id) }}" method="GET">
@@ -168,9 +160,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="">
+                <form class="forms-sample" id="editData" method="POST" action="">
                     @method('PUT')
                     @csrf
+                    {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $nilai->ta_id }}"> --}}
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nilai Angka</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nilaiangka" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nilai Huruf</label>
+                        <div class="input-group">
+                            <select type="text" class="form-control" name="nilai_huruf_id">
+                                <option value="">PILIH Nilai Huruf</option>
+                                @foreach ($NilaiHuruf as $value)
+                                <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Keterangan</label>
+                        <div class="input-group">
+                            <textarea type="text" class="form-control" placeholder="" name="ket"></textarea>
+                        </div>
+                        <p class="text-muted"> * tidak wajib di isi</p>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">
@@ -184,7 +201,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -193,18 +210,26 @@
 </div>
 @endsection
 @section('javascripts')
+
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
     var statusnilai_id = button.data('statusnilai_id')
+    var nilaiangka = button.data('nilaiangka')
+    var nilai_huruf_id = button.data('nilai_huruf_id')
+    var ket = button.data('ket')
+
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='statusnilai_id']").val(statusnilai_id)
+
+    modal.find(".modal-body input[name='nilaiangka']").val(nilaiangka)
+    modal.find(".modal-body select[name='nilai_huruf_id']").val(nilai_huruf_id)
+    modal.find(".modal-body textarea[name='ket']").val(ket)
+    modal.find(".modal-body select[name='statusnilai_id']").val(statusnilai_id)
     modal.find(".modal-body form").attr("action",'/pendadaran/nilai-pendadaran/update/'+id)
+
     })
 </script>
-
 <script>
     $.ajaxSetup({
         headers: {
@@ -222,7 +247,7 @@
            url:"{{ route('nilaipendadaran.nim') }}",
            data:{id:id},
            success:function(data){
-               console.log(data)
+               console.log(id)
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                 // POPULATE SELECT ELEMENT WITH JSON.

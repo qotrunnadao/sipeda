@@ -76,34 +76,17 @@ class PendadaranController extends Controller
         $status = StatusPendadaran::latest()->get();
         $jurusan = jurusan::get();
         $ruang = RuangPendadaran::get();
-        foreach ($pendadaran as $value) {
-            $penguji1_id = $value->penguji1_id;
-            $penguji2_id = $value->penguji2_id;
-            $penguji3_id = $value->penguji3_id;
-            $penguji4_id = $value->penguji4_id;
-            $status_id = $value->statuspendadaran_id;
-            $mhs_id = $value->mhs_id;
-            $mahasiswa = Mahasiswa::where('id', $mhs_id)->first();
-            $namaMahasiswa = $mahasiswa->nama;
-            $nim = $mahasiswa->nim;
-            $jrsn_id = $mahasiswa->jurusan_id;
-            $jurusan_id = Jurusan::where('id', $jrsn_id)->first();
-            $namaJurusan = $jurusan_id->namaJurusan;
-
-            $penguji1 = Dosen::where('id', $penguji1_id)->first();
-            $namaPenguji1 = $penguji1->nama;
-            $penguji2 = Dosen::where('id', $penguji2_id)->first();
-            $namaPenguji2 = $penguji2->nama;
-            $penguji3 = Dosen::where('id', $penguji3_id)->first();
-            $namaPenguji3 = $penguji3->nama;
-            $penguji4 = Dosen::where('id', $penguji4_id)->first();
-            $namaPenguji4 = $penguji4->nama;
-            $stts = StatusPendadaran::where('id', $status_id)->first();
-            $ketStatus = $stts->status;
-        }
-        return view('pendadaran.dataPendadaran.form', compact('action', 'button', 'data_pendadaran', 'pendadaran', 'namaPenguji1', 'namaPenguji2', 'namaPenguji3', 'namaPenguji4', 'ketStatus', 'status', 'jurusan', 'dosen', 'namaMahasiswa', 'nim', 'namaJurusan', 'ruang'));
+        return view('pendadaran.dataPendadaran.form', compact('action', 'status','button', 'data_pendadaran', 'pendadaran', 'jurusan', 'dosen', 'ruang'));
     }
-
+    public function nim(Request $request)
+    {
+        $mahasiswa = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
+            $q->where('status_id', '=', '10');
+        })->where('jurusan_id', $request->id)->get();
+        // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
+        // dd($mahasiswa);
+        return response()->json($mahasiswa, 200);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -112,13 +95,63 @@ class PendadaranController extends Controller
      */
     public function store(Request $request)
     {
-        Pendadaran::create($request->all());
         $data = $request->all();
+        // dd($data);
+        $jamMulai = $request->jamMulai;
+        $jamSelesai = $request->jamSelesai;
+        $ruang = $request->ruang;
+        $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
+        $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
+        // dd($tanggal >= $today);
 
-        if (Pendadaran::create($data)) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Izin');
+        if ($tanggal >= $today) {
+            $pendadaranCount = Pendadaran::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                    $query->where('tanggal', '=', $tanggal)
+                        ->where('jamMulai', '>=', $jamMulai)
+                        ->where('jamSelesai', '<', $jamMulai)
+                        ->where('ruangpendadaran_id', '=', $ruang);
+                })
+                    ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                        $query->where('jamMulai', '<', $jamSelesai)
+                            ->where('jamSelesai', '>=', $jamSelesai)
+                            ->where('tanggal', '=', $tanggal)
+                            ->where('ruangpendadaran_id', '=', $ruang);
+                    });;
+            })->count();
+            // dd($pendadaranCount);
+            if (!$pendadaranCount) {
+                $mhs_id = Mahasiswa::where('id', $request->nim)->get()->first();
+                $nim = $mhs_id->nim;
+                //  dd($nim);
+                if ($request->file('berkas')) {
+                    $file = $request->file('berkas');
+                    $filename = 'Pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+                    $path = $request->file('berkas')->storeAS('public/assets/file/Pendadaran/', $filename);
+                    $data = [
+                        'mhs_id' => $request->nim,
+                        'jamMulai' => $jamMulai,
+                        'jamSelesai' => $jamSelesai,
+                        'tanggal' => $request->tanggal,
+                        'ruangPendadaran_id' => $ruang,
+                        'statuspendadaran_id' => $request->statuspendadaran_id,
+                        'no_surat' => $request->no_surat,
+                        'thnAkad_id' =>1,
+                        'berkas' => $filename,
+                        'penguji1_id' => $request->penguji1_id,
+                        'penguji2_id' => $request->penguji2_id,
+                        'penguji3_id' => $request->penguji3_id,
+                        'penguji4_id' => $request->penguji4_id,
+                    ];
+                }
+                // dd($data);
+                Pendadaran::create($data);
+                Alert::success('Berhasil', 'Berhasil Menambahkan Data Ujian Pendadaran');
+            } else {
+                Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran Gagal Ditambahkan, Ruangan Sudah Digunakan');
+            }
         } else {
-            Alert::warning('Gagal', 'Data Izin Gagal Ditambahkan');
+            Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran diajukan minimal 3 Hari Sebelum Pelaksanaan Ujian Pendadaran');
         }
         return redirect(route('pendadaran.index'));
     }

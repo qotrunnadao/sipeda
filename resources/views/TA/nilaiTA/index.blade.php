@@ -38,15 +38,8 @@
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->NilaiHuruf->nilaiHuruf }} </td>
                                 <td class="text-center">
-                                    @if($value->statusnilai_id == 1)
-                                    <span class="badge badge-warning">Menunggu</span>
+                                    <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
                                 </td>
-                                @elseif($value->statusnilai_id == 2)
-                                <span class="badge badge-success">Upload SIA</span></td>
-                                @else
-                                <span class="badge badge-primary">Verifikasi Bapendik</span></td>
-                                @endif</td>
-
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiangka='{{ $value->nilaiAngka }}' data-nilai_huruf_id='{{ $value->NilaiHuruf->id }}' data-ket='{{ $value->ket }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>

@@ -18,10 +18,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php ($no = 1)
                             @foreach ($nilai as $value)
                             <tr>
-                                <td class="text-center"> {{ $no++}} </td>
+                                <td class="text-center"> {{ $loop->iteration }} </td>
                                 <td class="text-center"> Nilai Akhir Tugas Akhir</td>
                                 <td class="text-center">
                                     <div class="badge badge-secondary badge-pill">{{ $value->nilaiAngka }}</div>
@@ -30,13 +29,7 @@
                                     <div class="badge badge-secondary badge-pill">{{ $value->nilaiHuruf->nilaiHuruf }}</div>
                                 </td>
                                 <td class="text-center">
-                                    @if($value->statusnilai_id == 1)
-                                    <span class="badge badge-warning">Entry dosen</span>
-                                    @elseif($value->statusnilai_id == 2)
-                                    <span class="badge badge-success">Upload SIA</span>
-                                    @else
-                                    <span class="badge badge-primary">Verifikasi Bapendik</span>
-                                    @endif
+                                    <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
                                 </td>
                             </tr>
                             @endforeach

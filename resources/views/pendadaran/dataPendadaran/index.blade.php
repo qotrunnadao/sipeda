@@ -225,7 +225,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ubah Status Pendadaran</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Berita Acara Ujian Pendadaran Resmi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -237,7 +237,7 @@
                     <div class="form-group row">
                         <div class="col">
                             {{-- <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="beritaacara" /> --}}
-                            <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" />
+                            <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="berita"/>
                         </div>
 
                     </div>
@@ -268,11 +268,11 @@
     $('#editberita').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
-    var beritaacara = button.data('beritaacara')
+    var beritaacara = button.data('berita')
 
     var modal = $(this)
 
-    modal.find(".modal-body input[name='beritaacara']").val(beritaacara)
+    modal.find(".modal-body input[name='berita']").val(beritaacara)
     modal.find(".modal-body form").attr("action",'/pendadaran/beritaacara/update/'+id)
     })
 </script>

@@ -201,6 +201,7 @@ Route::post('/pendadaran/data-pendadaran/store',  'PendadaranController@store')-
 Route::get('/pendadaran/data-pendadaran/edit/{id}',  'PendadaranController@edit')->name('pendadaran.edit');
 Route::put('/pendadaran/data-pendadaran/verifikasi/{id}',  'PendadaranController@verifikasi')->name('pendadaran.verifikasi');
 Route::put('/pendadaran/data-pendadaran/update/{id}',  'PendadaranController@update')->name('pendadaran.update');
+Route::post('/pendadaran/data-pendadaran/nim/', 'PendadaranController@nim')->name('pendadaran.nim');
 Route::get('/pendadaran/data-pendadaran/delete/{id}',  'PendadaranController@destroy')->name('pendadaran.delete');
 
 //nilai pendadaran
