@@ -114,6 +114,11 @@
             max-width: 33.33333%;
         }
 
+        .col-md-2 {
+            flex: 0 0 16.66667%;
+            max-width: 16.66667%;
+        }
+
         .float-left {
             float: left !important;
         }
@@ -179,10 +184,10 @@
 <body>
     <div class="container ml-5 mt-2 mr-2">
         <div class="row">
-            <div class="col col-md-1 ml-5" style="display : inline-block">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
@@ -332,10 +337,10 @@
     <div class="page-break"></div>
     <div class="container ml-5 mt-2 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>

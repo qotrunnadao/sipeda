@@ -178,10 +178,10 @@
 <body>
     <div class="container ml-5 mt-5 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
@@ -310,10 +310,10 @@
     <div class="page-break"></div>
     <div class="container ml-5 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
@@ -425,10 +425,10 @@
 
     <div class="container ml-5 mr-2">
         <div class="row">
-            <div class="col col-md-1 float-left ml-5">
-                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="130" width="130">
+            <div class="col-md-1 float-left">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
-            <div class="col">
+            <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
                     <b>FAKULTAS TEKNIK</b> <br>
                     Alamat : JI. Mayjend Sungkono km 5 Blater, Kalimanah, Purbalingga 53371 <br>
