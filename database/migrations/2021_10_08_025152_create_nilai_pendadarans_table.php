@@ -18,6 +18,7 @@ class CreateNilaiPendadaransTable extends Migration
             $table->foreignId('pendadaran_id')->references('id')->on('Pendadaran');
             $table->foreignId('statusnilai_id')->references('id')->on('statusnilai');
             $table->foreignId('nilai_huruf_id')->references('id')->on('nilai_huruf');
+            $table->string('ket')->nullable();
             $table->double('nilaiAngka');
             $table->timestamps();
         });

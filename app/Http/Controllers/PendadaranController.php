@@ -14,7 +14,9 @@ use Illuminate\Http\Request;
 use App\Models\RuangPendadaran;
 use App\Models\TahunAkademik;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 use File;
+use PDF;
 
 class PendadaranController extends Controller
 {
@@ -162,7 +164,7 @@ class PendadaranController extends Controller
         $button = 'Edit';
         $pendadaran = Pendadaran::get();
         $data_pendadaran = Pendadaran::with(['mahasiswa', 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'statusPendadaran'])->find($id);
-        // dd( $data_pendadaran->statuspendadaran->status);
+        // dd( $data_pendadaran->statuspendadaran->id);
         $dosen = Dosen::get();
         $status = StatusPendadaran::latest()->get();
         $ruang = RuangPendadaran::get();
@@ -182,12 +184,10 @@ class PendadaranController extends Controller
     {
         $pendadaran = Pendadaran::with(['mahasiswa'])->find($id);
         $data = $request->all();
-        dd($data);
         $jamMulai = $request->jamMulai;
         $jamSelesai = $request->jamSelesai;
         $ruang = $request->ruang;
         $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
-        // $tanggal = date('Y-m-d', strtotime($request->tanggal));
         $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
         // dd($tanggal >= $today);
 
@@ -195,49 +195,98 @@ class PendadaranController extends Controller
             $pendadaranCount = Pendadaran::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                 $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where('tanggal', '=', $tanggal)
-                        ->where('jamMulai', '>=', $jamMulai)
-                        ->where('jamSelesai', '<', $jamMulai)
-                        ->where('ruang_id', '=', $ruang);
+                    ->where('jamMulai', '>=', $jamMulai)
+                    ->where('jamSelesai', '<', $jamMulai)
+                    ->where('ruangpendadaran_id', '=', $ruang);
                 })
-                    ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai , $ruang) {
-                        $query->where('jamMulai', '<', $jamSelesai)
-                            ->where('jamSelesai', '>=', $jamSelesai)
-                            ->where('tanggal', '=', $tanggal)
-                            ->where('ruang_id', '=', $ruang);
-                    });;
+                ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai , $ruang) {
+                    $query->where('jamMulai', '<', $jamSelesai)
+                    ->where('jamSelesai', '>=', $jamSelesai)
+                    ->where('tanggal', '=', $tanggal)
+                    ->where('ruangpendadaran_id', '=', $ruang);
+                });;
             })->count();
+            // dd($pendadaranCount);
             if (!$pendadaranCount) {
-                // $ta_id = Pendadaran::with(['mahasiswa'])->where('id', $id)->get()->first();
                 $nim = $pendadaran->mahasiswa->nim;
-                dd($nim);
-                $file = $request->file('berkas');
-                $filename = 'Pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $path = $request->file('berkas')->storeAS('public/assets/file/Pendadaran/', $filename);
-                $berita = $request->file('beritaacara');
-                $beritaacara = 'Berita Acara Pendadaran' . '_' . $nim . '_' . time() . '.' . $berita->getClientOriginalExtension();
-                $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
-                $data = [
-                    'ta_id' => $request->ta_id,
-                    'jamMulai' => $jamMulai,
-                    'jamSelesai' => $jamSelesai,
-                    'tanggal' => $request->tanggal,
-                    'ruangPendadaran_id' => $ruang,
-                    'statuspendadaran_id' => $request->statuspendadaran_id,
-                    'no_surat' => $request->no_surat,
-                    'berkas' => $filename,
-                    'beritaacara' => $beritaacara,
-                    'penguji1_id' => $request->penguji1_id,
-                    'penguji2_id' => $request->penguji2_id,
-                    'penguji3_id' => $request->penguji3_id,
-                    'penguji4_id' => $request->penguji4_id,
-                ];
+                if ($request->file('berkas') && $request->file('beritaacara')) {
+                    $file = $request->file('berkas');
+                    $filename = 'Pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+                    $path = $request->file('berkas')->storeAS('public/assets/file/Pendadaran/', $filename);
+                    $berita = $request->file('beritaacara');
+                    $beritaacara = 'Berita Acara Pendadaran' . '_' . $nim . '_' . time() . '.' . $berita->getClientOriginalExtension();
+                    $path1 = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
+                    $data = [
+                        'jamMulai' => $jamMulai,
+                        'jamSelesai' => $jamSelesai,
+                        'tanggal' => $request->tanggal,
+                        'ruangPendadaran_id' => $ruang,
+                        'statuspendadaran_id' => $request->statuspendadaran_id,
+                        'no_surat' => $request->no_surat,
+                        'berkas' => $filename,
+                        'beritaacara' => $beritaacara,
+                        'penguji1_id' => $request->penguji1_id,
+                        'penguji2_id' => $request->penguji2_id,
+                        'penguji3_id' => $request->penguji3_id,
+                        'penguji4_id' => $request->penguji4_id,
+                    ];
+                }
+                elseif ($request->file('beritaacara')) {
+                    $berita = $request->file('beritaacara');
+                    $beritaacara = 'Berita Acara Pendadaran Terbaru' . '_' . $nim . '_' . time() . '.' . $berita->getClientOriginalExtension();
+                    $path1 = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
+                    $data = [
+                        'jamMulai' => $jamMulai,
+                        'jamSelesai' => $jamSelesai,
+                        'tanggal' => $request->tanggal,
+                        'ruangPendadaran_id' => $ruang,
+                        'statuspendadaran_id' => 5,
+                        'no_surat' => $request->no_surat,
+                        'beritaacara' => $beritaacara,
+                        'penguji1_id' => $request->penguji1_id,
+                        'penguji2_id' => $request->penguji2_id,
+                        'penguji3_id' => $request->penguji3_id,
+                        'penguji4_id' => $request->penguji4_id,
+                    ];
+                }elseif($request->file('berkas')){
+                    $file = $request->file('berkas');
+                    $filename = 'Pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+                    $path = $request->file('berkas')->storeAS('public/assets/file/Pendadaran/', $filename);
+                    $data = [
+                        'jamMulai' => $jamMulai,
+                        'jamSelesai' => $jamSelesai,
+                        'tanggal' => $request->tanggal,
+                        'ruangPendadaran_id' => $ruang,
+                        'statuspendadaran_id' => $request->statuspendadaran_id,
+                        'no_surat' => $request->no_surat,
+                        'berkas' => $filename,
+                        'penguji1_id' => $request->penguji1_id,
+                        'penguji2_id' => $request->penguji2_id,
+                        'penguji3_id' => $request->penguji3_id,
+                        'penguji4_id' => $request->penguji4_id,
+                    ];
+                }else{
+                    $data = [
+                        'jamMulai' => $jamMulai,
+                        'jamSelesai' => $jamSelesai,
+                        'tanggal' => $request->tanggal,
+                        'ruangPendadaran_id' => $ruang,
+                        'statuspendadaran_id' => $request->statuspendadaran_id,
+                        'no_surat' => $request->no_surat,
+                        'penguji1_id' => $request->penguji1_id,
+                        'penguji2_id' => $request->penguji2_id,
+                        'penguji3_id' => $request->penguji3_id,
+                        'penguji4_id' => $request->penguji4_id,
+                    ];
+                }
+                // dd($data);
                 $pendadaran->update($data);
-                Alert::success('Berhasil', 'Berhasil Mengubah Status data Pendadaran');
+                Alert::success('Berhasil', 'Berhasil Mengubah Data Pendadaran');
             } else {
-                Alert::warning('Gagal', 'Pengajuan Seminar Proposal Gagal Ditambahkan, Ruangan Sudah Digunakan');
+                Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran Gagal Ditambahkan, Ruangan Sudah Digunakan');
             }
         } else {
-            Alert::warning('Gagal', 'Pengajuan Seminar Proposal Gagal Ditambahkan, Ruangan Sudah Digunakan');
+                Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran diajukan minimal 3 Hari Sebelum Pelaksanaan Ujian Pendadaran');
         }
         return redirect(route('pendadaran.index'));
     }
@@ -265,33 +314,27 @@ class PendadaranController extends Controller
     public function eksport(Request $request, $id)
     {
         $id = $request->route('id');
-        $ta_id =  SeminarProposal::with(['TA.mahasiswa.Jurusan', 'TA.Dosen1', 'TA.Dosen2', 'ruang'])->where('id', $id)->where('no_surat', '!=', null)->get()->first();
-        $dosen = Dosen::where('jurusan_id', $ta_id->ta->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
-        $hari = Carbon::parse($ta_id->tanggal)->isoFormat('dddd D MMMM YYYY');
-        $spk = Carbon::parse($ta_id->tanggal)->isoFormat('D MMMM YYYY');
-        $jamMulai = Carbon::parse($ta_id->jamMulai)->isoFormat('H:mm');
-        $jamSelesai = Carbon::parse($ta_id->jamSelesai)->isoFormat('H:mm');
-        // dd($jamMulai);
-        $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
-        $pdf = PDF::loadView('TA.sempropTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        $pendadaran = Pendadaran::with(['mahasiswa.jurusan', 'ruangPendadaran'])->where('no_surat', '!=', null)->find($id);
+        $dosen = Dosen::where('jurusan_id', $pendadaran->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
+        $hari = Carbon::now()->isoFormat('dddd, D MMMM YYYY');
+        $spk = Carbon::now()->isoFormat('D MMMM YYYY');
+        $jamMulai = Carbon::parse($pendadaran->jamMulai)->isoFormat('H:mm');
+        $jamSelesai = Carbon::parse($pendadaran->jamSelesai)->isoFormat('H:mm');
+        $pdf = PDF::loadView('pendadaran.dataPendadaran.berkas', ['pendadaran' => $pendadaran, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
 
-        $filename = 'Berita Acara Seminar Proposal' . '_' . $ta_id->ta->mahasiswa->nim . '_' . time() . '.pdf';
+        $filename = 'Berita Acara Pendadaran' . '_' . $pendadaran->mahasiswa->nim . '_' . time() . '.pdf';
 
-        $cek = Storage::put('public/assets/file/Berita Acara Semprop TA/' . $filename, $pdf->output());
+        $cek = Storage::put('public/assets/file/Berita Acara Pendadaran/' . $filename, $pdf->output());
 
         if ($cek) {
             $data = [
                 'beritaacara' => $filename,
             ];
-            $ta_id->update($data);
-            $status = array(
-                'status_id' => 7,
-            );
-            // dd($status);
-            $taAll->update($status);
-            Alert::success('Berhasil', 'Berhasil Tambah Data Berita Acara Seminar Proposal');
+            // dd($pendadaran);
+            $pendadaran->update($data);
+            Alert::success('Berhasil', 'Berhasil Tambah Data Berita Acara Ujian Pendadaran');
         } else {
-            Alert::warning('Gagal', 'Data Berita Acara Seminar Proposal Gagal Ditambahkan');
+            Alert::warning('Gagal', 'Data Berita Acara Ujian Pendadaran Gagal Ditambahkan');
         }
         return back();
     }

@@ -112,6 +112,12 @@
                                         <div class="btn-group">
                                             <a href="{{ route('pendadaran.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                         </div>
+                                        @elseif ( $value->statuspendadaran_id > 3 && auth()->user()->level_id == 5)
+                                        {{-- edit data Berita Acara pendadaran Kajur--}}
+                                        {{-- minta tolong tun ini ditampilin modalnya ga bisa --}}
+                                        <div class="btn-group">
+                                            <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editberita" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
+                                        </div>
                                         @endif
                                      @if ($value->no_surat == null && auth()->user()->level_id == 2 && $value->statuspendadaran_id == 4)
                                     {{-- nomer surat --}}
@@ -121,7 +127,7 @@
                                     @elseif ($value->beritaacara == null && auth()->user()->level_id == 2 && $value->statuspendadaran_id == 4)
                                     {{-- eksport --}}
                                     <div class="btn-group">
-                                        <form action="{{ route('spk.eksport', $value->id) }}" method="get" id="eksport">
+                                        <form action="{{ route('pendadaran.eksport', $value->id) }}" method="get" id="eksport">
                                             <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
                                         </form>
                                     </div>
@@ -144,34 +150,7 @@
         </div>
     </div>
 </div>
-{{-- Edit Data SPK --}}
-<div class="modal fade" id="verifikasi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload SPK Ketua Jurusan</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="forms-sample" method="POST" id="editData" action="" enctype="multipart/form-data">
-                    @method('PUT')
-                    @csrf
-                    <div class="form-group row">
-                        <div class="col">
-                            <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK" />
-                        </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 {{-- Tambah Nomer SUrat --}}
 <div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -190,7 +169,7 @@
                             Nomer Surat Berita Acara
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara Seminar Proposal" name="no_surat" />
+                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara Ujian Pendadaran" name="no_surat" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -241,6 +220,34 @@
         </div>
     </div>
 </div>
+{{-- Edit Data Berita Acara Kajur --}}
+<div class="modal fade" id="editberita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Status Pendadaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" method="POST" id="beritaAcara" action="" enctype="multipart/form-data">
+                    @method('PUT')
+                    @csrf
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="beritaacara" />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('javascripts')
 <script>
@@ -250,10 +257,34 @@
     var statuspendadaran_id = button.data('statuspendadaran_id')
     var ket = button.data('ket')
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
+
     modal.find(".modal-body input[name='statuspendadaran_id']").val(statuspendadaran_id)
     modal.find(".modal-body input[name='ket']").val(ket)
     modal.find(".modal-body form").attr("action",'/pendadaran/data-pendadaran/verifikasi/'+id)
+    })
+</script>
+<script>
+    $('#editberita').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var beritaacara = button.data('beritaacara')
+
+    var modal = $(this)
+
+    modal.find(".modal-body input[name='beritaacara']").val(beritaacara)
+    modal.find(".modal-body form").attr("action",'/pendadaran/beritaacara/update/'+id)
+    })
+</script>
+<script>
+    $('#nomersurat').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var no_surat = button.data('no_surat')
+
+    var modal = $(this)
+
+    modal.find(".modal-body input[name='no_surat']").val(no_surat)
+    modal.find(".modal-body form").attr("action",'/pendadaran/beritaacara/store/'+id)
     })
 </script>
 @endsection

@@ -199,7 +199,7 @@ Route::put('/pendadaran/data-pendadaran/download/{filename}',  'PendadaranContro
 Route::get('/pendadaran/berita-acara/pdf/{id}',  'PendadaranController@eksport')->name('pendadaran.eksport');
 Route::post('/pendadaran/data-pendadaran/store',  'PendadaranController@store')->name('pendadaran.store');
 Route::get('/pendadaran/data-pendadaran/edit/{id}',  'PendadaranController@edit')->name('pendadaran.edit');
-Route::get('/pendadaran/data-pendadaran/verifikasi/{id}',  'PendadaranController@verifikasi')->name('pendadaran.verifikasi');
+Route::put('/pendadaran/data-pendadaran/verifikasi/{id}',  'PendadaranController@verifikasi')->name('pendadaran.verifikasi');
 Route::put('/pendadaran/data-pendadaran/update/{id}',  'PendadaranController@update')->name('pendadaran.update');
 Route::get('/pendadaran/data-pendadaran/delete/{id}',  'PendadaranController@destroy')->name('pendadaran.delete');
 
@@ -212,7 +212,7 @@ Route::post('/pendadaran/nilai-pendadaran/nim/', 'NilaiPendadaranController@nim'
 
 // berita acara pendadaran
 Route::get('/pendadaran/beritaacara',  'BeritaAcaraPendadaranController@index')->name('beritaacarapendadaran.index');
-Route::post('/pendadaran/beritaacara/store',  'BeritaAcaraPendadaranController@store')->name('beritaacarapendadaran.store');
+Route::post('/pendadaran/beritaacara/store/{id}',  'BeritaAcaraPendadaranController@store')->name('beritaacarapendadaran.store');
 Route::put('/pendadaran/beritaacara/download/{filename}',  'BeritaAcaraPendadaranController@download')->name('beritaacarapendadaran.download');
 Route::put('/pendadaran/beritaacara/update/{id}',  'BeritaAcaraPendadaranController@update')->name('beritaacarapendadaran.update');
 Route::get('/pendadaran/beritaacara/destroy/{id}',  'BeritaAcaraPendadaranController@destroy')->name('beritaacarapendadaran.destroy');
