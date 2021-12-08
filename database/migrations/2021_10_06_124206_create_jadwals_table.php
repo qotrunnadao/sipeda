@@ -19,7 +19,7 @@ class CreateJadwalsTable extends Migration
             $table->time('jamSelesai');
             $table->string('ket');
             $table->dateTime('tanggal');
-            $table->foreignId('ruang_id')->references('id')->on('ruang');
+            $table->foreignId('ruang_id')->references('id')->on('ruang')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

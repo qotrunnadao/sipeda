@@ -24,10 +24,10 @@ class CreateDosensTable extends Migration
             $table->tinyInteger('isKomisi')->comment('0=false, 1=true')->default('0');
             $table->tinyInteger('isKajur')->comment('0=false, 1=true')->default('0');
             $table->string('tmptLahir')->default('Indonesia');
-            $table->foreignId('agama_id')->references('id')->on('agama');
-            $table->foreignId('jk_id')->references('id')->on('jenkel');
-            $table->foreignId('jurusan_id')->references('id')->on('jurusan');
-            $table->foreignId('user_id')->references('id')->on('user');
+            $table->foreignId('agama_id')->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('jk_id')->references('id')->on('jenkel')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('jurusan_id')->references('id')->on('jurusan')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

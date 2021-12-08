@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('noInduk');
             $table->string('password');
-            $table->foreignId('level_id')->references('id')->on('level');
+            $table->foreignId('level_id')->references('id')->on('level')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateDistribusisTable extends Migration
     {
         Schema::create('distribusi_ta', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ta_id')->references('id')->on('TA');
+            $table->foreignId('ta_id')->references('id')->on('TA')->onUpdate('cascade')->onDelete('cascade');
             $table->string('fileDistribusi');
             $table->timestamps();
         });

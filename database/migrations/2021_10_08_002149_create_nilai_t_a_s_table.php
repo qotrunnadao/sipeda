@@ -15,9 +15,9 @@ class CreateNilaiTASTable extends Migration
     {
         Schema::create('nilaiTA', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ta_id')->references('id')->on('TA');
-            $table->foreignId('statusnilai_id')->references('id')->on('statusnilai');
-            $table->foreignId('nilai_huruf_id')->references('id')->on('nilai_huruf');
+            $table->foreignId('ta_id')->references('id')->on('TA')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('statusnilai_id')->references('id')->on('statusnilai')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('nilai_huruf_id')->references('id')->on('nilai_huruf')->onUpdate('cascade')->onDelete('cascade');
             $table->double('nilaiAngka');
             // $table->string('nilaiHuruf');
             $table->string('ket')->nullable();

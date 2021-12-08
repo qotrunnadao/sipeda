@@ -21,7 +21,7 @@ class CreateAkademiksTable extends Migration
             $table->tinyInteger('isPendadaran')->comment('0=false, 1=true')->default('0');
             $table->tinyInteger('isYudisium')->comment('0=false, 1=true')->default('0');
             $table->bigInteger('sks');
-            $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
+            $table->foreignId('mhs_id')->references('id')->on('mahasiswa')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

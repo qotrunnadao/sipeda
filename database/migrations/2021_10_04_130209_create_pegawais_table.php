@@ -21,10 +21,10 @@ class CreatePegawaisTable extends Migration
             $table->string('nohp');
             $table->dateTime('tglLahir')->nullable();
             $table->string('tmptLahir')->default('Indonesia');
-            $table->foreignId('agama_id')->references('id')->on('agama');
-            $table->foreignId('jk_id')->references('id')->on('jenkel');
-            $table->foreignId('jurusan_id')->references('id')->on('jurusan');
-            $table->foreignId('user_id')->references('id')->on('user');
+            $table->foreignId('agama_id')->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('jk_id')->references('id')->on('jenkel')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('jurusan_id')->references('id')->on('jurusan')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

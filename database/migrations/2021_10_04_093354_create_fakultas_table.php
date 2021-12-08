@@ -20,7 +20,7 @@ class CreateFakultasTable extends Migration
             $table->string('fax');
             $table->string('namaFakultas');
             $table->string('website');
-            $table->foreignId('ins_id')->references('id')->on('institusi');
+            $table->foreignId('ins_id')->references('id')->on('institusi')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

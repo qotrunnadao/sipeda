@@ -21,7 +21,7 @@ class CreateBeritasTable extends Migration
             $table->string('jenisBerita');
             $table->string('judulBerita');
             $table->dateTime('tanggal');
-            $table->foreignId('penulis_id')->references('id')->on('user');
+            $table->foreignId('penulis_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

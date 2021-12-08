@@ -20,13 +20,13 @@ class CreateTASTable extends Migration
             $table->string('instansi')->nullable();
             $table->string('no_surat')->nullable();
             $table->string('praproposal');
-            $table->foreignId('pembimbing1_id')->references('id')->on('dosen');
-            $table->foreignId('pembimbing2_id')->references('id')->on('dosen');
+            $table->foreignId('pembimbing1_id')->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('pembimbing2_id')->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
             $table->dateTime('tglSPK')->nullable();
             $table->dateTime('tglAmbil')->nullable();
             $table->longText('ket')->nullable();
-            $table->foreignId('status_id')->references('id')->on('status');
-            $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik')->nullable();
+            $table->foreignId('status_id')->references('id')->on('status')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik')->nullable()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

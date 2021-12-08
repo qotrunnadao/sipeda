@@ -17,7 +17,7 @@ class CreateTahunAkademiksTable extends Migration
             $table->id();
             $table->tinyInteger('aktif')->comment('0=false, 1=true')->default('1');
             $table->string('namaTahun');
-            $table->foreignId('semester_id')->references('id')->on('semester');
+            $table->foreignId('semester_id')->references('id')->on('semester')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

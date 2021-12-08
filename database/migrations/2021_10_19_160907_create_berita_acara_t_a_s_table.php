@@ -15,7 +15,7 @@ class CreateBeritaAcaraTASTable extends Migration
     {
         Schema::create('beritaacara_ta', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('seminar_id')->references('id')->on('seminar');
+            $table->foreignId('seminar_id')->references('id')->on('seminar')->onUpdate('cascade')->onDelete('cascade');
             $table->string('beritaacara');
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ class CreateSKSTable extends Migration
     {
         Schema::create('SK', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('yudisium_id')->references('id')->on('yudisium');
+            $table->foreignId('yudisium_id')->references('id')->on('yudisium')->onUpdate('cascade')->onDelete('cascade');
             $table->string('fileSK');
             $table->timestamps();
         });

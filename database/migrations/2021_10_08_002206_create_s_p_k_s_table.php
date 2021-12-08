@@ -15,7 +15,7 @@ class CreateSPKSTable extends Migration
     {
         Schema::create('SPK', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('TA_id')->references('id')->on('TA');
+            $table->foreignId('TA_id')->references('id')->on('TA')->onUpdate('cascade')->onDelete('cascade');
             $table->string('fileSPK');
             $table->timestamps();
         });

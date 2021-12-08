@@ -15,7 +15,7 @@ class CreateBeritaAcaraPendadaransTable extends Migration
     {
         Schema::create('beritaacara_pendadaran', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendadaran_id')->references('id')->on('pendadaran');
+            $table->foreignId('pendadaran_id')->references('id')->on('pendadaran')->onUpdate('cascade')->onDelete('cascade');
             $table->string('beritaacara');
             $table->timestamps();
         });

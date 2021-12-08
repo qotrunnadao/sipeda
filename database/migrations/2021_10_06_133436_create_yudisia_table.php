@@ -20,9 +20,9 @@ class CreateYudisiaTable extends Migration
             $table->dateTime('tanggal')->nullable();
             $table->time('waktu')->nullable();
             $table->string('transkip');
-            $table->foreignId('status_id')->references('id')->on('statusyudisium')->default(1);
+            $table->foreignId('status_id')->references('id')->on('statusyudisium')->default(1)->onUpdate('cascade')->onDelete('cascade');
             $table->longText('ket')->nullable();
-            $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik');
+            $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
