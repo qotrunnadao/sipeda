@@ -24,7 +24,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @if ($Pendadaran == null) btn disabled @endif" href="{{ route('mahasiswaPendadaran.nilai') }}">
+            <a class="nav-link @if ($pendadaran == null) btn disabled @endif" href="{{ route('mahasiswaPendadaran.nilai') }}">
                 <span class="menu-title">Nilai Pendadaran</span>
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>

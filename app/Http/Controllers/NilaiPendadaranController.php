@@ -40,7 +40,7 @@ class NilaiPendadaranController extends Controller
                 $pendadaran = Pendadaran::with(['mahasiswa'])->where('mhs_id', $mhs_id->id)->latest()->get()->first();
                 $nilai = NilaiTA::with('Pendadaran', 'NilaiHuruf')->where('pendadaran_id', $pendadaran->id)->where('statusnilai_id', '2')->latest()->get();
             }
-            return view('mahasiswa.pendadaran.pages.nilai', compact('Pendadaran', 'nilai', 'NilaiHuruf'));
+            return view('mahasiswa.pendadaran.pages.nilai', compact('Pendadaran', 'nilai', 'NilaiHuruf', 'pendadaran'));
         } else {
             $id = Auth::User()->id;
             $user_id = User::where('id', $id)->get()->first();
@@ -55,9 +55,9 @@ class NilaiPendadaranController extends Controller
             } else {
                 $nilai = NilaiPendadaran::with(['Pendadaran.mahasiswa.jurusan', 'NilaiHuruf'])->whereHas('Pendadaran', function ($q) use ($dosen_id) {
                     $q->where('penguji1_id', $dosen_id->id)
-                    ->orWhere('penguji2_id', $dosen_id->id)
-                    ->orWhere('penguji3_id', $dosen_id->id)
-                    ->orWhere('penguji4_id', $dosen_id->id);
+                        ->orWhere('penguji2_id', $dosen_id->id)
+                        ->orWhere('penguji3_id', $dosen_id->id)
+                        ->orWhere('penguji4_id', $dosen_id->id);
                 })->latest()->get();
             }
             // $nilai = NilaiTA::With('TA.mahasiswa.jurusan', 'NilaiHuruf')->where('dosen_id', $dosen_id->id)->latest()->get();
@@ -72,15 +72,15 @@ class NilaiPendadaranController extends Controller
             $pendadaranAll = Pendadaran::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
                 $query->where('jurusan_id', $request->id);
             })->where('statuspendadaran_id', '5')->get();
-        }else{
+        } else {
             $id = auth()->user()->id;
             $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
             $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
             $pendadaranAll = Pendadaran::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request, $dosen_id) {
-                $query->where('jurusan_id', $request->id) ->where('penguji1_id', $dosen_id->id)
-                ->orWhere('penguji2_id', $dosen_id->id)
-                ->orWhere('penguji3_id', $dosen_id->id)
-                ->orWhere('penguji4_id', $dosen_id->id);
+                $query->where('jurusan_id', $request->id)->where('penguji1_id', $dosen_id->id)
+                    ->orWhere('penguji2_id', $dosen_id->id)
+                    ->orWhere('penguji3_id', $dosen_id->id)
+                    ->orWhere('penguji4_id', $dosen_id->id);
             })->where('statuspendadaran_id', '5')->get();
         }
         // dd($taAll);

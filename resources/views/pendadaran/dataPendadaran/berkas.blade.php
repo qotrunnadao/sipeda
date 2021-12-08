@@ -395,7 +395,7 @@
         </p>
 
         <div>
-            <p>Telah melakukan seminar proposal tugas akhir atas nama mahasiswa sebagai berikut,</p>
+            <p>Telah dilakukan ujian komprehensif atas nama :</p>
             <table class="ml-5" style="width: 100%">
                 <tbody>
                     <tr>

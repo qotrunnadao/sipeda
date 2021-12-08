@@ -76,7 +76,7 @@ class PendadaranController extends Controller
         $status = StatusPendadaran::latest()->get();
         $jurusan = jurusan::get();
         $ruang = RuangPendadaran::get();
-        return view('pendadaran.dataPendadaran.form', compact('action', 'status','button', 'data_pendadaran', 'pendadaran', 'jurusan', 'dosen', 'ruang'));
+        return view('pendadaran.dataPendadaran.form', compact('action', 'status', 'button', 'data_pendadaran', 'pendadaran', 'jurusan', 'dosen', 'ruang'));
     }
     public function nim(Request $request)
     {
@@ -136,7 +136,7 @@ class PendadaranController extends Controller
                         'ruangPendadaran_id' => $ruang,
                         'statuspendadaran_id' => $request->statuspendadaran_id,
                         'no_surat' => $request->no_surat,
-                        'thnAkad_id' =>1,
+                        'thnAkad_id' => 1,
                         'berkas' => $filename,
                         'penguji1_id' => $request->penguji1_id,
                         'penguji2_id' => $request->penguji2_id,
@@ -350,7 +350,7 @@ class PendadaranController extends Controller
         $id = $request->route('id');
         $pendadaran = Pendadaran::with(['mahasiswa.jurusan', 'ruangPendadaran'])->where('no_surat', '!=', null)->find($id);
         $dosen = Dosen::where('jurusan_id', $pendadaran->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
-        $hari = Carbon::now()->isoFormat('dddd, D MMMM YYYY');
+        $hari = Carbon::parse($pendadaran->tanggal)->isoFormat('dddd, D MMMM YYYY');
         $spk = Carbon::now()->isoFormat('D MMMM YYYY');
         $jamMulai = Carbon::parse($pendadaran->jamMulai)->isoFormat('H:mm');
         $jamSelesai = Carbon::parse($pendadaran->jamSelesai)->isoFormat('H:mm');
