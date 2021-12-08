@@ -50,7 +50,11 @@
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @else
+                                @elseif($pendadaran->statuspendadaran_id <5)
+                                <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                </td>
+                                @elseif($pendadaran->statuspendadaran_id >=5)
                                 <td> {{ $pendadaran->tanggal }} </td>
                                 @endif
                             </tr>
@@ -61,7 +65,11 @@
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @else
+                                @elseif($pendadaran->statuspendadaran_id <5)
+                                <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                </td>
+                                @elseif($pendadaran->statuspendadaran_id >=5)
                                 <td> {{ $pendadaran->jamMulai }} s/d {{ $pendadaran->jamSelesai }} WIB </td>
                                 @endif
                             </tr>
@@ -72,7 +80,11 @@
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @else
+                                @elseif($pendadaran->statuspendadaran_id <5)
+                                <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                </td>
+                                @elseif($pendadaran->statuspendadaran_id >=5)
                                 <td> {{ $pendadaran->penguji1->nama }} </td>
                                 @endif
                             </tr>
@@ -83,7 +95,11 @@
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @else
+                                @elseif($pendadaran->statuspendadaran_id <5)
+                                <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                </td>
+                                @elseif($pendadaran->statuspendadaran_id >=5)
                                 <td> {{ $pendadaran->penguji2->nama }} </td>
                                 @endif
                             </tr>
@@ -94,7 +110,11 @@
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @else
+                                @elseif($pendadaran->statuspendadaran_id <5)
+                                <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                </td>
+                                @elseif($pendadaran->statuspendadaran_id >=5)
                                 <td> {{ $pendadaran->penguji3->nama }} </td>
                                 @endif
                             </tr>
@@ -105,7 +125,11 @@
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @else
+                                @elseif($pendadaran->statuspendadaran_id <5)
+                                <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                </td>
+                                @elseif($pendadaran->statuspendadaran_id >=5)
                                 <td> {{ $pendadaran->penguji4->nama }} </td>
                                 @endif
                             </tr>

@@ -112,9 +112,8 @@
                                     <div class="btn-group">
                                         <a href="{{ route('pendadaran.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
-                                    @elseif ( $value->statuspendadaran_id > 3 && auth()->user()->level_id == 5)
-                                    {{-- edit data Berita Acara pendadaran Kajur--}}
-                                    {{-- minta tolong tun ini ditampilin modalnya ga bisa --}}
+                                    @elseif ( $value->statuspendadaran_id > 3 && auth()->user()->level_id == 5 || 3)
+                                    {{-- edit data Berita Acara pendadaran Kajur dan Dospeng--}}
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editberita" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
@@ -225,7 +224,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Berita Acara Ujian Pendadaran Resmi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Berita Acara Ujian Pendadaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -249,6 +248,32 @@
         </div>
     </div>
 </div>
+{{-- edit data Berita Acara pendadaran Kajur dan Dospeng--}}
+<script>
+    $(document).ready(function () {
+
+    $("#beritaAcara").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
+{{-- eksport--}}
+<script>
+    $(document).ready(function () {
+
+    $("#eksport").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
 @section('javascripts')
 <script>

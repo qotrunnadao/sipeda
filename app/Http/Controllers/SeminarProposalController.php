@@ -227,9 +227,6 @@ class SeminarProposalController extends Controller
     {
         $seminar_proposal = SeminarProposal::find($id);
         $data = $request->all();
-        $data = [
-            'beritaacara' => $request->beritaacara,
-        ];
 
         if ($request->file('beritaacara')) {
             $semprop = SeminarProposal::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();

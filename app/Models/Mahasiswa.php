@@ -37,7 +37,11 @@ class Mahasiswa extends Model
     }
     public function TA()
     {
-        return $this->hasMany(TA::class, 'Mahasiswa_id');
+        return $this->hasMany(TA::class, 'mahasiswa_id');
+    }
+    public function Pendadaran()
+    {
+        return $this->hasMany(Pendadaran::class, 'mhs_id');
     }
     public function getCreatedAtAttribute()
     {
