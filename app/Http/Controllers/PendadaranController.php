@@ -170,7 +170,7 @@ class PendadaranController extends Controller
     {
         //    dd($filename);
         if (File::exists(public_path('storage/assets/file/Pendadaran/' . $filename . ''))) {
-            return response()->file(public_path('storage/assets/file/Pendadaran/' . $filename . ''));
+            return response()->File(public_path('storage/assets/file/Pendadaran/' . $filename . ''));
         } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
             return back();
@@ -180,7 +180,7 @@ class PendadaranController extends Controller
     {
         //    dd($filename);
         if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $filename . ''))) {
-            return response()->file(public_path('storage/assets/file/Berita Acara Pendadaran/' . $filename . ''));
+            return response()->File(public_path('storage/assets/file/Berita Acara Pendadaran/' . $filename . ''));
         } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
             return back();

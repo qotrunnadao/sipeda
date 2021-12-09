@@ -22,12 +22,12 @@ class CreatePendadaransTable extends Migration
             $table->string('berkas');
             $table->string('beritaacara')->nullable();
             $table->string('no_surat')->nullable();
-            $table->foreignId('penguji1_id')->references('id')->on('dosen')->nullable()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('penguji2_id')->references('id')->on('dosen')->nullable()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('penguji3_id')->references('id')->on('dosen')->nullable()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('penguji4_id')->references('id')->on('dosen')->nullable()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penguji1_id')->nullable()->unsigned()->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penguji2_id')->nullable()->unsigned()->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penguji3_id')->nullable()->unsigned()->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penguji4_id')->nullable()->unsigned()->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('statuspendadaran_id')->references('id')->on('statuspendadaran')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('ruangPendadaran_id')->references('id')->on('ruang_pendadaran')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('ruangPendadaran_id')->nullable()->unsigned()->references('id')->on('ruang_pendadaran')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik')->onUpdate('cascade')->onDelete('cascade');
             $table->longText('ket')->nullable();
             $table->timestamps();
