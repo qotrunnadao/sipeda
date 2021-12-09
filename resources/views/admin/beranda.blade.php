@@ -76,23 +76,18 @@
                                 <th> Nama Mahasiswa </th>
                                 <th> IPK </th>
                                 <th> SKS </th>
-                                <th> Status KP </th>
                                 <th> Status TA </th>
                                 <th> Status Pendadaran</th>
                                 <th> Status Yudisium</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php ($no = 1)
                             @foreach ($akademik as $value)
                             <tr>
-                                <td> 1 </td>
-                                <td> {{ $value->mahasiswa->nama }} </td>
+                                <td> {{ $loop->iteration }} </td>
+                                <td> {{ $value->nama }} </td>
                                 <td> {{ $value->ipk }}</td>
-                                <td> {{ $vavue->sks }}</td>
-                                <td>
-                                    <div class="badge badge-primary badge-pill">{{ $value->isKP }}</div>
-                                </td>
+                                <td> {{ $value->sks }}</td>
                                 <td>
                                     <div class="badge badge-waring badge-pill">{{ $value->isTA }}</div>
                                 </td>
@@ -112,3 +107,21 @@
     </div>
 </div>
 @endsection
+{{-- @if($value->has('TA'))
+<td>
+    <div class="badge badge-primary badge-pill">{{ $value->TA->first()->status->ket }}</div>
+</td>
+@else
+<td>
+    <div class="badge badge-primary badge-pill">Belum Mengajukan</div>
+</td>
+@endif
+@if($value->whereDoesntHave('Pendadaran'))
+<td>
+    <div class="badge badge-primary badge-pill">Belum Mengajukan</div>
+</td>
+@elseif($value->has('Pendadaran'))
+<td>
+    <div class="badge badge-primary badge-pill">{{ $value->Pendadaran->first()->StatusPendadaran->status }}</div>
+</td>
+@endif --}}

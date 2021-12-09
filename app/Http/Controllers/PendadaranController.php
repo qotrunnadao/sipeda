@@ -76,12 +76,14 @@ class PendadaranController extends Controller
         $status = StatusPendadaran::latest()->get();
         $jurusan = jurusan::get();
         $ruang = RuangPendadaran::get();
-        return view('pendadaran.dataPendadaran.form', compact('action', 'status', 'button', 'data_pendadaran', 'pendadaran', 'jurusan', 'dosen', 'ruang'));
+        return view('pendadaran.dataPendadaran.form', compact('action', 'tahun','status', 'button', 'data_pendadaran', 'pendadaran', 'jurusan', 'dosen', 'ruang'));
     }
     public function nim(Request $request)
     {
         $mahasiswa = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
-            $q->where('status_id', '=', '10');
+            $q->where('status_id','10');
+        })->whereDoesntHave('Pendadaran')->orHas('Pendadaran')->whereHas('Pendadaran', function ($q){
+            $q->where('statuspendadaran_id','1');
         })->where('jurusan_id', $request->id)->get();
         // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
         // dd($mahasiswa);
@@ -224,7 +226,20 @@ class PendadaranController extends Controller
         $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
         $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
         // dd($tanggal >= $today);
+        if ($request->file('beritaacara')) {
+            $nim = $pendadaran->mahasiswa->nim;
+            $berita = $request->file('beritaacara');
+            $beritaacara = 'Berita Acara Pendadaran Terbaru' . '_' . $nim . '_' . time() . '.' . $berita->getClientOriginalExtension();
+            $path1 = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
+            $data = [
+                'statuspendadaran_id' => 5,
+                'beritaacara' => $beritaacara,
+            ];
+            $pendadaran->update($data);
+            Alert::success('Berhasil', 'Berhasil Menambahkan Berita Acara Pendadaran');
+            return redirect(route('pendadaran.index'));
 
+        }
         if ($tanggal >= $today) {
             $pendadaranCount = Pendadaran::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                 $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {

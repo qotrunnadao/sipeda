@@ -208,6 +208,18 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+    $("#creatData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
 @section('javascripts')
 

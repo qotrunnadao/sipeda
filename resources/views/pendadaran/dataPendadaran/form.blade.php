@@ -18,8 +18,19 @@
                             <input readonly type="text" class="form-control" required placeholder="Nama Mahasiswa" id="name" name="name" value="@if ($button == 'Tambah'){{ old('nama') }}@else{{ $data_pendadaran->mahasiswa->nama }}@endif" />
                         </div>
                     </div>
+                        @if ( $data_pendadaran->statuspendadaran_id >=4)
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Berita Acara Ujian Pendadaran
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="file" class="form-control" placeholder="berita acara Ujian Pendadaran" name="beritaacara"  />
+                            </div>
+                        </div>
+                        @endif
                     @endif
                     @if ($button == 'Tambah')
+                    <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="{{ $tahun->id }}">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Jurusan</label>
                         <div class="col-sm-8">
@@ -175,16 +186,6 @@
                             <p class="text-muted"> * tidak wajib di isi</p>
                         </div>
                     </div>
-                    @if (auth()->user()->level_id == 2 && $button == 'Edit')
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Berita Acara Ujian Pendadaran
-                        </label>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control" placeholder="berita acara Ujian Pendadaran" name="beritaacara"  />
-                        </div>
-                    </div>
-                    @endif
                     <a href="<?= url('') ?>/pendadaran/data-pendadaran" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</button>
                 </div>
@@ -192,6 +193,18 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+    $("#eksport").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection
 @section('javascripts')
 <script>

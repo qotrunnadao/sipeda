@@ -46,7 +46,8 @@ class BerandaController extends Controller
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user', 'TA1', 'TA2'])->where('user_id', $id)->get()->first();
         if (auth()->user()->level_id == 2) {
-            $akademik = Akademik::latest()->get();
+            $akademik = Mahasiswa::with('TA.status', 'Pendadaran.statusPendadaran')->latest()->get();
+            // dd($akademik->first()->pendadaran);
             $tugas_akhir = TA::with('mahasiswa')->where('status_id', '>=', '4')->latest()->get();
             $pendadaran = Pendadaran::with('mahasiswa')->where('statusPendadaran_id', '>=', '3')->latest()->get();
             $yudisium = Yudisium::with('mahasiswa')->where('status_id', '>=', '3')->latest()->get();
