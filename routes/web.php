@@ -260,6 +260,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::put('/tugas-akhir/downloadBeritaAcaraSempro/{filename}',  'BerandaController@downloadSemprop')->name('download.semprop');
     Route::put('/tugas-akhir/downloadBeritaAcaraSemhas/{filename}',  'BerandaController@downloadSemhas')->name('download.semhas');
     Route::put('/tugas-akhir/downloadSPK/{filename}',  'BerandaController@downloadSPK')->name('download.spk');
+    Route::put('/tugas-akhir/downloadPermohonanSeminar',  'BerandaController@downloadPermohonanSeminar')->name('download.permohonanseminar');
 
     //pengajuan
     Route::get('/tugas-akhir/data-TA/create', 'TAMahasiswaController@create')->name('mahasiswaTA.create');
@@ -284,6 +285,7 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     //distribusi
     Route::get('/tugas-akhir/distribusi-mahasiswa', 'DistribusiController@create')->name('distribusi.create');
     Route::post('/tugas-akhir/distribusi/store', 'DistribusiController@store')->name('distribusi.store');
+    Route::put('/tugas-akhir/distribusi/downloadform', 'DistribusiController@downloadForm')->name('download.formdistribusi');
 
     //=========== PENDADARAN==============
 

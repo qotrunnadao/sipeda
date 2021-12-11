@@ -3,7 +3,7 @@
 @section('title', 'Seminar Proposal')
 @section('content')
 <div class="row">
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-8 grid-margin stretch-card">
         <div class="card">
             <form class="forms-sample" action="{{route('mahasiswaSempro.store')}}" method="post" id="createData" enctype="multipart/form-data">
                 @csrf
@@ -68,7 +68,7 @@
 
                     <div class="form-group row">
                         <label class="col-lg-3 col-form-label">
-                            File Proposal
+                            Berkas Persayaratan
                         </label>
                         <div class="col-lg-8">
                             <input type="file" class="form-control" name="proposal" />
@@ -77,6 +77,32 @@
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="col-4 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white">
+            <div class="card-body">
+                <h4 class="font-weight-normal mb-3">Syarat Pengajuan Seminar Proposal
+                </h4>
+                <ul>
+                    <li>Lembar pengesahan proposal yang telah di acc Pembimbing I dan II</li>
+                    <li>Telah ikut seminar serupa min. 5X <br>
+                        ( dengan menunjukan kartu seminar )</li>
+                    <li>Melampirkan lembar permohonan seminar proposal yang telah di acc pembimbing I dan II</li>
+                    <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
+                </ul>
+                <h4 class="font-weight-normal mb-3">File Unduhan
+                </h4>
+                <div class="table-responsive mt-3">
+                    <div class="btn-group">
+                        <form action="{{ route('download.permohonanseminar') }}" method="post" target="blank">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-light btn-sm download">Lembar Permohonan Seminar<i class="mdi mdi-download"></i></a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-12 grid-margin stretch-card">

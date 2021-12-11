@@ -121,6 +121,17 @@ class DistribusiController extends Controller
         }
     }
 
+    public function downloadform()
+    {
+        //    dd($filename);
+        if (File::exists(public_path('storage/assets/file/form distribusi/'))) {
+            return response()->file(public_path('storage/assets/file/form distribusi/FORM DISTRIBUSI.pdf'));
+        } else {
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+            return back();
+        }
+    }
+
 
     public function show(Distribusi $distribusi)
     {

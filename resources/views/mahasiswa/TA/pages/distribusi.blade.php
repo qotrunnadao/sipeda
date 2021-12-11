@@ -3,7 +3,7 @@
 @section('icon', 'share-variant')
 @section('content')
 <div class="row">
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-8 grid-margin stretch-card">
         <div class="card">
             <form class="forms-sample" id="creatData" action="{{route('distribusi.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -21,6 +21,30 @@
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-3">File Unduhan</h4>
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                        <form action="{{ route('download.formdistribusi') }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">Contoh Form Distribusi Tugas Akhir<i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-12 grid-margin stretch-card">

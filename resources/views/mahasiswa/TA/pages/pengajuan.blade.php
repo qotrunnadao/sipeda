@@ -3,7 +3,7 @@
 @section('title', 'Pengajuan TA')
 @section('content')
 <div class="row">
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-8 grid-margin stretch-card">
         <div class="card card-primary">
             <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" id="creatData" method="post" enctype="multipart/form-data">
                 @csrf
@@ -64,6 +64,31 @@
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="col-4 stretch-card grid-margin">
+        <div class="card bg-primary card-img-holder text-white">
+            <div class="card-body">
+                <h4 class="font-weight-normal mb-3">Syarat Pengajuan Seminar Proposal
+                </h4>
+                <ul>
+                    <li>Transkip Nilai Mahasiswa</li>
+                    <li>Praproposal yang telah di acc calon Pembimbing I dan II</li>
+                    <li>Melampirkan lembar permohonan Tugas Akhir</li>
+                    <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
+                </ul>
+                <h4 class="font-weight-normal mb-3">File Unduhan
+                </h4>
+                <div class="table-responsive mt-3">
+                    <div class="btn-group">
+                        <form action="" method="post" target="blank">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-light btn-sm download">Contoh Lembar Permohonan Tugas Akhir<i class="mdi mdi-download"></i></a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

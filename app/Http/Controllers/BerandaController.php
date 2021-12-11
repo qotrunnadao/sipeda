@@ -145,6 +145,18 @@ class BerandaController extends Controller
         }
     }
 
+    public function downloadPermohonanSeminar()
+    {
+        //    dd($filename);
+        if (File::exists(public_path('storage/assets/file/permohonanSeminar/Lembar Permohonan Seminar Proposal TA.pdf'))) {
+            return response()->file(public_path('storage/assets/file/permohonanSeminar/Lembar Permohonan Seminar Proposal TA.pdf'));
+        } else {
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+            return back();
+        }
+    }
+
+
     public function mahasiswaPendadaran()
     {
         $id = auth()->User()->id;
