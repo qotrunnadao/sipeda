@@ -40,11 +40,6 @@ class PendadaranMahasiswaController extends Controller
             'thnAkad_id' => $request->thnAkad_id,
             'statuspendadaran_id' => 2,
             'berkas' => $filename,
-            'penguji1_id' => 1,
-            'penguji2_id' => 2,
-            'penguji3_id' => 3,
-            'penguji4_id' => 4,
-            'ruangPendadaran_id' => 4,
         ];
         // dd($data);
         $cek = Pendadaran::create($data);
