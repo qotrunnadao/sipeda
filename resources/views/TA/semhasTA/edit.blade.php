@@ -14,7 +14,7 @@
                         <label class="col-sm-3 col-form-label">
                             Nama
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="nama" value="{{ $semhas->TA->mahasiswa->nama }}" />
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                         <label class="col-sm-3 col-form-label">
                             NIM
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semhas->TA->mahasiswa->nim }}" />
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <label class="col-sm-3 col-form-label">
                             Jurusan
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="{{ $semhas->TA->mahasiswa->jurusan->namaJurusan }}" />
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                         <label class="col-sm-3 col-form-label">
                             Tanggal Seminar
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <div class="input-group">
                                 <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" name="tanggal" value="{{ $semhas->tanggal }}" />
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
@@ -68,7 +68,7 @@
                         <label class="col-sm-3 col-form-label">
                             Ruang Seminar
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="hidden" class="form-control" id="mahasiswa_id" name="ruang_id" value="{{ $semhas->ruang_id }}">
                             <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semhas->ruang->namaRuang }}" />
                         </div>
@@ -77,7 +77,7 @@
                         <label class="col-sm-3 col-form-label">
                             Berita Acara Bapendik
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara }}" />
                         </div>
                     </div> --}}
@@ -86,7 +86,7 @@
                         <label class="col-sm-3 col-form-label">
                             Berita Acara Dosen
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara_dosen }}" />
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                         <label class="col-sm-3 col-form-label">
                             Status Pengajuan
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <select name="status" id="status" class="form-control">
                                 <option value="0" {{ $semhas->status == 0 ? 'selected' : '' }}>Menunggu</option>
                                 <option value="1" {{ $semhas->status == 1 ? 'selected' : '' }}>Disetujui</option>

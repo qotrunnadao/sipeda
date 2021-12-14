@@ -91,6 +91,7 @@
                     <li>Melampirkan lembar permohonan seminar hasil yang telah di acc pembimbing I dan II</li>
                     <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
                 </ul>
+                <hr class="border-light">
                 <h4 class="font-weight-normal mb-3">File Unduhan
                 </h4>
                 <div class="table-responsive mt-3">

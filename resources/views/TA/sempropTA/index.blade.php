@@ -78,27 +78,27 @@
                                     @endif
                                 </td>
                                 @if ($value->no_surat == null)
-                                    <td class="text-center">
-                                        <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
-                                    </td>
+                                <td class="text-center">
+                                    <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
+                                </td>
                                 @else
-                                    <td class="text-center"> {{ $value->no_surat}} </td>
+                                <td class="text-center"> {{ $value->no_surat}} </td>
                                 @endif
                                 <td class="text-center">
                                     @if ($value->status != 0)
-                                        @if ($value->no_surat == null)
-                                        <div class="btn-group">
-                                            <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
-                                        </div>
-                                        @elseif ( $value->beritaacara == null)
-                                        <div class="btn-group">
-                                            <form action="{{ route('semprop.eksport', $value->id) }}" method="GET" id="export">
-                                                <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                            </form>
-                                        </div>
-                                        @endif
+                                    @if ($value->no_surat == null)
                                     <div class="btn-group">
-                                         <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                    </div>
+                                    @elseif ( $value->beritaacara == null)
+                                    <div class="btn-group">
+                                        <form action="{{ route('semprop.eksport', $value->id) }}" method="GET" id="export">
+                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    <div class="btn-group">
+                                        <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
@@ -130,40 +130,37 @@
         </div>
     </div>
 </div>
-    {{-- Tambah Data Nomer Surat --}}
-    <div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Nomer Surat</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="forms-sample" method="POST" id="surat" action="">
-                        @csrf
-                        {{-- @dd($semprop_all); --}}
-                        {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $semprop_all->ta_id }}"> --}}
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">
-                                Nomer Surat Berita Acara
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara Seminar Proposal" name="no_surat" />
-                            </div>
+{{-- Tambah Data Nomer Surat --}}
+<div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Nomer Surat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" method="POST" id="surat" action="">
+                    @csrf
+                    {{-- @dd($semprop_all); --}}
+                    {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $semprop_all->ta_id }}"> --}}
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara Seminar Proposal" name="no_surat" />
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    @section('javascripts')
-    <script>
-        $('#nomersurat').on('show.bs.modal', function (event) {
+</div>
+@section('javascripts')
+<script>
+    $('#nomersurat').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         var id = button.data('id')
         var no_surat = button.data('no_surat')
@@ -173,8 +170,8 @@
         modal.find(".modal-body input[name='no_surat']").val(no_surat)
         modal.find(".modal-body form").attr("action",'/tugas-akhir/semprop/surat/' + id)
         })
-    </script>
-    @endsection
+</script>
+@endsection
 
 @elseif(auth()->user()->level_id == 3 || 1 || 5)
 <div class="row">

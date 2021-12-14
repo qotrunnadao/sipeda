@@ -91,6 +91,7 @@
                     <li>Melampirkan lembar permohonan seminar proposal yang telah di acc pembimbing I dan II</li>
                     <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
                 </ul>
+                <hr class="border-light">
                 <h4 class="font-weight-normal mb-3">File Unduhan
                 </h4>
                 <div class="table-responsive mt-3">
@@ -104,54 +105,53 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mb-5">Data Pengajuan Seminar</h4>
-                <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead class="text-center">
-                            <tr>
-                                <th> # </th>
-                                <th> Judul Penelitian </th>
-                                <th> Tanggal </th>
-                                <th> Waktu </th>
-                                <th> Ruang </th>
-                                <th> Status </th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            @php($no=1)
-                            @foreach ($SeminarProposal as $value )
-                            <tr>
-                                <td> {{ $no++ }} </td>
-                                <td> {{ $value->TA->judulTA}} </td>
-                                <td>
-                                    {{ $value->tanggal }}
-                                </td>
-                                <td> {{ $value->jamMulai }} - {{$value->jamSelesai}}</td>
-                                <td> {{ $value->ruang->namaRuang }}</td>
-                                <td>
-                                    @if($value->status == 0)
-                                    <span class="badge badge-warning">menunggu</span>
-                                    @elseif($value->status == 1)
-                                    <span class="badge badge-success">Disetujui</span>
-                                    @else
-                                    <span class="badge badge-danger">Tidak Disetujui</span>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-5">Data Pengajuan Seminar</h4>
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead class="text-center">
+                                <tr>
+                                    <th> # </th>
+                                    <th> Judul Penelitian </th>
+                                    <th> Tanggal </th>
+                                    <th> Waktu </th>
+                                    <th> Ruang </th>
+                                    <th> Status </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @php($no=1)
+                                @foreach ($SeminarProposal as $value )
+                                <tr>
+                                    <td> {{ $no++ }} </td>
+                                    <td> {{ $value->TA->judulTA}} </td>
+                                    <td>
+                                        {{ $value->tanggal }}
+                                    </td>
+                                    <td> {{ $value->jamMulai }} - {{$value->jamSelesai}}</td>
+                                    <td> {{ $value->ruang->namaRuang }}</td>
+                                    <td>
+                                        @if($value->status == 0)
+                                        <span class="badge badge-warning">menunggu</span>
+                                        @elseif($value->status == 1)
+                                        <span class="badge badge-success">Disetujui</span>
+                                        @else
+                                        <span class="badge badge-danger">Tidak Disetujui</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
     $("#createData").submit(function () {
 
@@ -161,5 +161,5 @@
 
     });
 });
-</script>
-@endsection
+    </script>
+    @endsection

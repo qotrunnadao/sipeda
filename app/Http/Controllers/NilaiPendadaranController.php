@@ -38,7 +38,7 @@ class NilaiPendadaranController extends Controller
                 $nilai = NilaiPendadaran::with('Pendadaran', 'NilaiHuruf')->where('pendadaran_id', $pendadaran->id)->latest()->get();
             } else {
                 $pendadaran = Pendadaran::with(['mahasiswa'])->where('mhs_id', $mhs_id->id)->latest()->get()->first();
-                $nilai = NilaiTA::with('Pendadaran', 'NilaiHuruf')->where('pendadaran_id', $pendadaran->id)->where('statusnilai_id', '2')->latest()->get();
+                $nilai = NilaiPendadaran::with('Pendadaran', 'NilaiHuruf')->where('pendadaran_id', $pendadaran->id)->where('statusnilai_id', '2')->latest()->get();
             }
             return view('mahasiswa.pendadaran.pages.nilai', compact('Pendadaran', 'nilai', 'NilaiHuruf', 'pendadaran'));
         } else {

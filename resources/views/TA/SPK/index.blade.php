@@ -141,10 +141,7 @@
                 <form class="forms-sample" method="POST" id="surat" action="">
                     @csrf
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nomer Surat SPK
-                        </label>
-                        <div class="col-sm-9">
+                        <div class="col">
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat SPK" name="no_surat" />
                         </div>
                     </div>
