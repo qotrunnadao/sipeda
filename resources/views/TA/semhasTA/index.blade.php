@@ -85,18 +85,20 @@
                                 @endif
                                 <td class="text-center">
                                     @if ($value->status != 0)
-                                    @if ($value->no_surat == null)
+                                        @if ($value->no_surat == null)
+                                        <div class="btn-group">
+                                            <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                        </div>
+                                        @elseif ( $value->beritaacara == null)
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.eksport', $value->ta_id) }}" method="GET" id="export">
+                                                <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                            </form>
+                                        </div>
+                                        @endif
                                     <div class="btn-group">
-                                        <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                        <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
-                                    @elseif ( $value->beritaacara == null)
-                                    <div class="btn-group">
-                                        <form action="{{ route('semhas.eksport', $value->ta_id) }}" method="GET" id="export">
-                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                        </form>
-                                    </div>
-                                    @endif
-
                                     <div class="btn-group">
                                         <form action="{{ route('semhas.delete', $value->id) }}" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
@@ -236,12 +238,10 @@
                                     </div>
                                     @endif
                                 </td>
-
-
                                 <td class="text-center">
                                     @if ($value->status != 0)
                                     <div class="btn-group">
-                                        <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('semhas.delete', $value->id) }}" method="GET">
@@ -266,6 +266,34 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Edit Data Berita Acara --}}
+    <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Berita Acara</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="forms-sample" method="POST" id="editData" action="" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-group row">
+                            <div class="col">
+                                <input type="file" class="form-control" name="berita" />
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -368,5 +396,31 @@
 
     });
 });
+</script>
+<script>
+    $(document).ready(function () {
+
+    $("#editData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
+@endsection
+@section('javascripts')
+<script>
+    $('#editdata').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var berita = button.data('berita')
+
+    var modal = $(this)
+
+    modal.find(".modal-body input[name='berita']").val(berita)
+    modal.find(".modal-body form").attr("action",'/tugas-akhir/semhas/update/'+id)
+    })
 </script>
 @endsection

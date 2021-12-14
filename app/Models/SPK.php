@@ -25,14 +25,4 @@ class SPK extends Model
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa.id');
     }
-
-    public function getCreatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d/m/y');
-    }
-
-    public function getUpdatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d/m/y');
-    }
 }

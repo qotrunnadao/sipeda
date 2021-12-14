@@ -23,11 +23,27 @@
                 <i class="mdi mdi-file menu-icon"></i>
             </a>
         </li>
+        @if ($pendadaran == null)
         <li class="nav-item">
-            <a class="nav-link @if ($pendadaran == null && $pendadaran->statuspendadaran_id == 1) btn disabled @endif" href="{{ route('mahasiswaPendadaran.nilai') }}">
+            <a class="nav-link btn disabled" href="{{ route('mahasiswaPendadaran.nilai') }}">
                 <span class="menu-title">Nilai Pendadaran</span>
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>
         </li>
+        @elseif ($pendadaran->statuspendadaran_id == 1)
+        <li class="nav-item">
+            <a class="nav-link btn disabled" href="{{ route('mahasiswaPendadaran.nilai') }}">
+                <span class="menu-title">Nilai Pendadaran</span>
+                <i class="mdi mdi-trophy menu-icon"></i>
+            </a>
+        </li>
+        @else
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('mahasiswaPendadaran.nilai') }}">
+                <span class="menu-title">Nilai Pendadaran</span>
+                <i class="mdi mdi-trophy menu-icon"></i>
+            </a>
+        </li>
+        @endif
     </ul>
 </nav>

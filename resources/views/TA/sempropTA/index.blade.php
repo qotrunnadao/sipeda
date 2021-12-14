@@ -130,6 +130,7 @@
         </div>
     </div>
 </div>
+
     {{-- Tambah Data Nomer Surat --}}
     <div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -245,7 +246,7 @@
                                 <td class="text-center">
                                     @if ($value->status != 0)
                                     <div class="btn-group">
-                                        <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
@@ -274,7 +275,34 @@
             </div>
         </div>
     </div>
+    {{-- Edit Data Berita Acara --}}
+    <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Berita Acara</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="forms-sample" method="POST" id="editData" action="" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-group row">
+                            <div class="col">
+                                <input type="file" class="form-control" name="berita" />
+                            </div>
 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     @if(auth()->user()->level_id == 1 || 5)
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
@@ -334,5 +362,31 @@
 
     });
 });
+</script>
+<script>
+    $(document).ready(function () {
+
+    $("#editData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
+@endsection
+@section('javascripts')
+<script>
+    $('#editdata').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var berita = button.data('berita')
+
+    var modal = $(this)
+
+    modal.find(".modal-body input[name='berita']").val(berita)
+    modal.find(".modal-body form").attr("action",'/tugas-akhir/semprop/update/'+id)
+    })
 </script>
 @endsection

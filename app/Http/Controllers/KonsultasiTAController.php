@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use Carbon\Carbon;
 use App\Models\TA;
 use App\Models\Dosen;
 use Illuminate\Support\Facades\Auth;
@@ -91,10 +92,14 @@ class KonsultasiTAController extends Controller
         if (auth()->user()->level_id == 2) {
             $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->latest()->get();
             $acc_konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('verifikasiDosen', 0)->latest()->get();
+            // $hari = Carbon::parse(KonsultasiTA['tanggal'])->isoFormat('D MMMM YYYY');
+            // return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
+            // dd($hari);
         } else {
             $konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('dosen_id', $dosen_id->id)->latest()->get();
             $acc_konsultasi = KonsultasiTA::with(['TA.mahasiswa'])->where('ta_id', $ta_id)->where('dosen_id', $dosen_id->id)->where('verifikasiDosen', 0)->latest()->get();
         }
+
         // dd($konsultasi);
         return view('TA.konsultasiTA.detail', compact('acc_konsultasi', 'konsultasi'));
     }
