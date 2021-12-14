@@ -30,10 +30,10 @@
                         @csrf
                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-logout"><i class="mdi mdi-logout mr-2 text-primary"></i> {{ __('Logout') }}</button>
                     </form>
-                    <form method="POST" action="{{ route('cas.logout') }}">
+                    {{-- <form method="POST" action="{{ route('cas.logout') }}">
                         @csrf
                         <button type="submit" class="dropdown-item"><i class="mdi mdi-logout mr-2 text-primary"></i> Logout Kori</button>
-                    </form>
+                    </form> --}}
                 </div>
             </li>
             <li class="nav-item d-none d-lg-block full-screen-link">

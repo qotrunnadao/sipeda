@@ -65,8 +65,8 @@
                     @csrf
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
-                        <label class="col-sm-3 col-form-label">Jurusan</label>
-                        <div class="col-sm-9">
+                        <label for="exampleInputEmail3">Jurusan</label>
+                        <div class="input-group">
                             <select type="text" class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
@@ -81,8 +81,8 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 col-form-label"> NIM</label>
-                        <div class="col-sm-9">
+                        <label for="exampleInputEmail3">NIM</label>
+                        <div class="input-group">
                             <select type="text" class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
@@ -94,8 +94,8 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="col-sm-3 col-form-label">Nama Mahasiswa</label>
-                        <div class="col-sm-9">
+                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <div class="input-group">
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                         <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil" id="hasil"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id = "btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                     </div>
                 </form>
             </div>

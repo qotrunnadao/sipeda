@@ -104,7 +104,7 @@
                         <label class="col-sm-3 col-form-label">
                             Nomer Surat Berita Acara
                         </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara" name="no_surat" />
                         </div>
                     </div>

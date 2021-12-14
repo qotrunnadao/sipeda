@@ -21,9 +21,15 @@
                             <tr>
                                 <td class="text-center"> {{ $loop->iteration }} </td>
                                 <td class="text-center"> Nilai Akhir Ujian Pendadaran</td>
+                                @if ($value->nilaiAngka == null)
+                                <td>
+                                    <div class="badge badge-secondary badge-pill">Belum ada data nilai</div>
+                                </td>
+                                @else
                                 <td class="text-center">
                                     <div class="badge badge-secondary badge-pill">{{ $value->nilaiAngka }}</div>
                                 </td>
+                                @endif
                                 <td class="text-center">
                                     <div class="badge badge-secondary badge-pill">{{ $value->nilaiHuruf->nilaiHuruf }}</div>
                                 </td>
