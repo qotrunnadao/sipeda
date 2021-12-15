@@ -77,7 +77,7 @@
                 </ul>
             </div>
         </li>
-        @if (auth()->user()->level_id == 2)
+        @if (auth()->user()->level_id == 2 || 5)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#yudisium" aria-expanded="false" aria-controls="yudisium">
                 <span class="menu-title">Yudisium</span>
@@ -86,21 +86,9 @@
             </a>
             <div class="collapse" id="yudisium">
                 <ul class="nav flex-column sub-menu">
+                    @if (auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statusyudisium.index') }}"> Status Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('sk.index') }}"> SK Kelulusan </a></li>
-                </ul>
-            </div>
-        </li>
-        @elseif (auth()->user()->level_id == 5)
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#yudisium" aria-expanded="false" aria-controls="yudisium">
-                <span class="menu-title">Yudisium</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-folder menu-icon"></i>
-            </a>
-            <div class="collapse" id="yudisium">
-                <ul class="nav flex-column sub-menu">
+                    @endif
                     <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('sk.index') }}"> SK Kelulusan </a></li>
                 </ul>

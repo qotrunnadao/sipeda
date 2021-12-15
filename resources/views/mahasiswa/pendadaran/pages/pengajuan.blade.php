@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-6 grid-margin stretch-card">
         <div class="card card-primary">
-            <form  action="{{route('mahasiswaPendadaran.store')}}" method="post" enctype="multipart/form-data" id="creatData">
+            <form action="{{route('mahasiswaPendadaran.store')}}" method="post" enctype="multipart/form-data" id="creatData">
                 @csrf
                 <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="{{ $tahun->id }}">
                 <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="{{  $mhs_id->id }}">
@@ -34,6 +34,7 @@
                     <li>Bukti Distribusi Tugas Akhir</li>
                     <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
                 </ul>
+                <hr class="border-light">
             </div>
         </div>
     </div>
@@ -65,7 +66,7 @@
                             <td> Status Pengajuan </td>
                             <td>:</td>
                             <td>
-                                 {{ $value->statusPendadaran->status}}
+                                {{ $value->statusPendadaran->status}}
                             </td>
                             </tr>
                             <tr>

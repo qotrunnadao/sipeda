@@ -41,7 +41,7 @@ class PendadaranController extends Controller
                     ->orWhere('penguji3_id', $dosen_id->id)
                     ->orWhere('penguji4_id', $dosen_id->id);
             })->latest()->get();
-        } elseif (auth()->user()->level_id == 1 || 5) {
+        } elseif (auth()->user()->level_id == 1) {
 
             $pendadaran = Pendadaran::with(['statusPendadaran'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
@@ -54,10 +54,21 @@ class PendadaranController extends Controller
             $acc_pendadaran = Pendadaran::with('statusPendadaran')->where('statuspendadaran_id', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->latest()->get();
+        } elseif (auth()->user()->level_id == 5) {
+
+            $pendadaran = Pendadaran::with(['statusPendadaran'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->orWhereHas('statusPendadaran', function ($q) use ($dosen_id) {
+                $q->where('penguji1_id', $dosen_id->id)
+                    ->orWhere('penguji2_id', $dosen_id->id)
+                    ->orWhere('penguji3_id', $dosen_id->id)
+                    ->orWhere('penguji4_id', $dosen_id->id);
+            })->latest()->get();
+            $acc_pendadaran = Pendadaran::with('statusPendadaran')->where('statuspendadaran_id', 4)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->latest()->get();
         }
-
-
-        return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'status'));
+        return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'status', 'acc_pendadaran'));
     }
 
     /**
@@ -76,14 +87,14 @@ class PendadaranController extends Controller
         $status = StatusPendadaran::latest()->get();
         $jurusan = jurusan::get();
         $ruang = RuangPendadaran::get();
-        return view('pendadaran.dataPendadaran.form', compact('action', 'tahun','status', 'button', 'data_pendadaran', 'pendadaran', 'jurusan', 'dosen', 'ruang'));
+        return view('pendadaran.dataPendadaran.form', compact('action', 'tahun', 'status', 'button', 'data_pendadaran', 'pendadaran', 'jurusan', 'dosen', 'ruang'));
     }
     public function nim(Request $request)
     {
         $mahasiswa = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
-            $q->where('status_id','10');
-        })->whereDoesntHave('Pendadaran')->orHas('Pendadaran')->whereHas('Pendadaran', function ($q){
-            $q->where('statuspendadaran_id','1');
+            $q->where('status_id', '10');
+        })->whereDoesntHave('Pendadaran')->orHas('Pendadaran')->whereHas('Pendadaran', function ($q) {
+            $q->where('statuspendadaran_id', '1');
         })->where('jurusan_id', $request->id)->get();
         // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
         // dd($mahasiswa);
@@ -238,7 +249,6 @@ class PendadaranController extends Controller
             $pendadaran->update($data);
             Alert::success('Berhasil', 'Berhasil Menambahkan Berita Acara Pendadaran');
             return redirect(route('pendadaran.index'));
-
         }
         if ($tanggal >= $today) {
             $pendadaranCount = Pendadaran::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {

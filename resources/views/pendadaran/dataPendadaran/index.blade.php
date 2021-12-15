@@ -3,6 +3,149 @@
 @section('icon', 'file')
 @section('title', 'Pengajuan Pendadaran')
 <div class="row">
+    @if(Auth::user()->level_id !== 3)
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Menunggu Verifikasi</h4>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Nama Mahasiswa </th>
+                                <th> NIM </th>
+                                <th> Jurusan</th>
+                                <th> Berkas </th>
+                                <th> Berita Acara </th>
+                                @if (auth()->user()->level_id == 5 || 2 || 1)
+                                <th> Nomor Surat</th>
+                                @endif
+                                <th> status </th>
+                                <th> Keterangan </th>
+                                <th> Aksi </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($no=1)
+                            @foreach ($acc_pendadaran as $value )
+                            <tr>
+                                <td> {{ $no++ }} </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
+                                <td> {{ $value->mahasiswa->nim }} </td>
+                                <td> {{ $value->mahasiswa->Jurusan->namaJurusan }}</td>
+                                <td class="text-center">
+                                    @if($value->berkas != null)
+                                    @if (File::exists(public_path('storage/assets/file/Pendadaran/' . $value->berkas . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('pendadaran.download', $value->berkas) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('pendadaran.download', $value->berkas) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    @else
+
+                                    <div class="badge badge-danger badge-pill ">Berkas Pendadaran Tidak Ada</div>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if($value->beritaacara != null)
+                                    @if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $value->beritaacara . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('beritaacarapendadaran.download', $value->beritaacara) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    @else
+                                    <div class="badge badge-danger badge-pill ">Berita Acara Pendadaran Belom Terbit</div>
+                                    @endif
+                                </td>
+                                @if ($value->no_surat == null )
+                                <td class="text-center">
+                                    <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
+                                </td>
+                                @elseif(auth()->user()->level_id == 5 || 2 || 1)
+                                <td class="text-center"> {{ $value->no_surat}} </td>
+                                @endif
+                                <td>
+                                    {{ $value->statuspendadaran->status}}
+                                </td>
+                                @if ($value->ket == null)
+                                <td>
+                                    <span class="badge badge-danger">Tidak Ada Data Keterangan</span>
+                                </td>
+                                @else
+                                <td> {{ $value->ket }}</td>
+                                @endif
+                                <td>
+                                    @if (auth()->user()->level_id == 2 && $value->statuspendadaran_id == 2)
+                                    {{-- verifikasi --}}
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-statuspendadaran_id='{{ $value->statuspendadaran_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>
+                                    </div>
+                                    @elseif ( $value->statuspendadaran_id != 2 && auth()->user()->level_id == 2 || auth()->user()->level_id == 1)
+                                    {{-- edit data pendadaran --}}
+                                    <div class="btn-group">
+                                        <a href="{{ route('pendadaran.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @elseif ( $value->statuspendadaran_id > 3 && auth()->user()->level_id == 5 || 3)
+                                    {{-- edit data Berita Acara pendadaran Kajur dan Dospeng--}}
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editberita" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @endif
+                                    @if ($value->no_surat == null && auth()->user()->level_id == 2 && $value->statuspendadaran_id == 4)
+                                    {{-- nomer surat --}}
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                    </div>
+                                    @elseif ($value->beritaacara == null && auth()->user()->level_id == 2 && $value->statuspendadaran_id == 4)
+                                    {{-- eksport --}}
+                                    <div class="btn-group">
+                                        <form action="{{ route('pendadaran.eksport', $value->id) }}" method="get" id="eksport">
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    {{-- Hapus --}}
+                                    <div class="btn-group">
+                                        <form action="{{ route('pendadaran.delete', $value->id) }}" method="GET">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -236,7 +379,7 @@
                     <div class="form-group row">
                         <div class="col">
                             {{-- <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="beritaacara" /> --}}
-                            <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="berita"/>
+                            <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="berita" />
                         </div>
 
                     </div>
