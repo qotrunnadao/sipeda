@@ -14,24 +14,34 @@
                         <label class="col-sm-3 col-form-label">
                             Nama
                         </label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="nama" value="{{ $semhas->TA->mahasiswa->nama }}" />
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="nama" value="{{ $semhas->TA->mahasiswa->nama }}" readonly/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             NIM
                         </label>
+<<<<<<< HEAD
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semhas->TA->mahasiswa->nim }}" readonly/>
+=======
                         <div class="col-sm-8">
                             <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semhas->TA->mahasiswa->nim }}" />
+>>>>>>> e5473aa760cedda838ad71c0dbcf7a09905f1df1
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
                             Jurusan
                         </label>
+<<<<<<< HEAD
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="{{ $semhas->TA->mahasiswa->jurusan->namaJurusan }}" readonly/>
+=======
                         <div class="col-sm-8">
                             <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="{{ $semhas->TA->mahasiswa->jurusan->namaJurusan }}" />
+>>>>>>> e5473aa760cedda838ad71c0dbcf7a09905f1df1
                         </div>
                     </div>
                     <div class="form-group row">
@@ -40,14 +50,14 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="jamMulai" placeholder="mulai" value="{{ $semhas->jamMulai }}">
+                                <input type="text" class="form-control" name="jamMulai" placeholder="mulai" value="{{ $semhas->jamMulai }}" readonly>
                                 <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="jamSelesai" placeholder="selesai" value="{{ $semhas->jamSelesai }}">
+                                <input type="text" class="form-control" name="jamSelesai" placeholder="selesai" value="{{ $semhas->jamSelesai }}" readonly>
                                 <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
@@ -59,7 +69,7 @@
                         </label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" name="tanggal" value="{{ $semhas->tanggal }}" />
+                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" name="tanggal" value="{{ $semhas->tanggal }}" readonly/>
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
                         </div>
@@ -70,7 +80,7 @@
                         </label>
                         <div class="col-sm-8">
                             <input type="hidden" class="form-control" id="mahasiswa_id" name="ruang_id" value="{{ $semhas->ruang_id }}">
-                            <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semhas->ruang->namaRuang }}" />
+                            <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semhas->ruang->namaRuang }}" readonly/>
                         </div>
                     </div>
                     {{-- <div class="form-group row">
@@ -84,10 +94,15 @@
 
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">
-                            Berita Acara Dosen
+                            Berita Acara Seminar Hasil
                         </label>
+<<<<<<< HEAD
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" placeholder="berita acara Seminar Hasil" name="beritaacara" value="{{ $semhas->beritaacara_dosen }}" />
+=======
                         <div class="col-sm-8">
                             <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara_dosen }}" />
+>>>>>>> e5473aa760cedda838ad71c0dbcf7a09905f1df1
                         </div>
                     </div>
                     {{-- <div class="form-group row">

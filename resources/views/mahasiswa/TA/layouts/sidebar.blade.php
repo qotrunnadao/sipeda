@@ -23,35 +23,99 @@
                 <i class="mdi mdi-file menu-icon"></i>
             </a>
         </li>
+        @if ($TA == null)
         <li class="nav-item">
-            <a class="nav-link @if ($TA == null && $TA->status_id == 1) btn disabled @endif" href="{{ route('mahasiswaTA.konsultasi') }}">
+            <a class="nav-link btn disabled" href="{{ route('mahasiswaTA.konsultasi') }}">
                 <span class="menu-title">Konsultasi TA</span>
                 <i class="mdi mdi-account-multiple menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link  @if ($TA == null && $TA->status_id == 1) btn disabled @endif" href="{{ route('mahasiswaTA.semprop') }}">
+            <a class="nav-link  btn disabled" href="{{ route('mahasiswaTA.semprop') }}">
                 <span class="menu-title">Seminar Proposal</span>
                 <i class="mdi mdi-comment-text menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link  @if ($TA == null && $TA->status_id == 1) btn disabled @endif" href="{{ route('mahasiswaTA.semhas') }}">
+            <a class="nav-link  btn disabled" href="{{ route('mahasiswaTA.semhas') }}">
                 <span class="menu-title">Seminar Hasil</span>
                 <i class="mdi mdi-comment-text menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link  @if ($TA == null && $TA->status_id == 1) btn disabled @endif" href="{{ route('nilaita_mhs.index') }}">
+            <a class="nav-link  btn disabled" href="{{ route('nilaita_mhs.index') }}">
                 <span class="menu-title">Nilai TA</span>
                 <i class="mdi mdi-trophy menu-icon"></i>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link  @if ($TA == null && $TA->status_id == 1) btn disabled @endif" href="{{ route('distribusi.create') }}">
+            <a class="nav-link  btn disabled" href="{{ route('distribusi.create') }}">
                 <span class="menu-title">Distribusi</span>
                 <i class="mdi mdi-share-variant menu-icon"></i>
             </a>
         </li>
+        @elseif($TA->status_id == 1)
+        <li class="nav-item">
+            <a class="nav-link btn disabled" href="{{ route('mahasiswaTA.konsultasi') }}">
+                <span class="menu-title">Konsultasi TA</span>
+                <i class="mdi mdi-account-multiple menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  btn disabled" href="{{ route('mahasiswaTA.semprop') }}">
+                <span class="menu-title">Seminar Proposal</span>
+                <i class="mdi mdi-comment-text menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  btn disabled" href="{{ route('mahasiswaTA.semhas') }}">
+                <span class="menu-title">Seminar Hasil</span>
+                <i class="mdi mdi-comment-text menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  btn disabled" href="{{ route('nilaita_mhs.index') }}">
+                <span class="menu-title">Nilai TA</span>
+                <i class="mdi mdi-trophy menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link  btn disabled" href="{{ route('distribusi.create') }}">
+                <span class="menu-title">Distribusi</span>
+                <i class="mdi mdi-share-variant menu-icon"></i>
+            </a>
+        </li>
+        @else
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('mahasiswaTA.konsultasi') }}">
+                <span class="menu-title">Konsultasi TA</span>
+                <i class="mdi mdi-account-multiple menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('mahasiswaTA.semprop') }}">
+                <span class="menu-title">Seminar Proposal</span>
+                <i class="mdi mdi-comment-text menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('mahasiswaTA.semhas') }}">
+                <span class="menu-title">Seminar Hasil</span>
+                <i class="mdi mdi-comment-text menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('nilaita_mhs.index') }}">
+                <span class="menu-title">Nilai TA</span>
+                <i class="mdi mdi-trophy menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('distribusi.create') }}">
+                <span class="menu-title">Distribusi</span>
+                <i class="mdi mdi-share-variant menu-icon"></i>
+            </a>
+        </li>
+        @endif
     </ul>
 </nav>

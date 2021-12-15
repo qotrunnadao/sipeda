@@ -43,11 +43,11 @@ class SeminarProposalController extends Controller
                     $q->where('pembimbing1_id', $dosen_id->id)
                         ->orWhere('pembimbing2_id', $dosen_id->id);
                 })->latest()->get(),
-                'semprop_jurusan' => SeminarProposal::with(['ta.mahasiswa'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
-                    $q->where('jurusan_id', $dosen_id->jurusan_id);
-                })->latest()->get(),
-
+                'semprop_jurusan' => SeminarProposal::with(['TA.Mahasiswa'])->whereHas('Mahasiswa', function ($query) use ($dosen_id) {
+                    $query->where('jurusan_id', $dosen_id->jurusan_id);
+                })->where('status','!=', '2')->latest()->get(),
             );
+            // dd($dosen_id->jurusan_id);
         }
 
         return view('TA.sempropTA.index', $data);
@@ -59,7 +59,7 @@ class SeminarProposalController extends Controller
         $id = $request->id;
         $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($id) {
             $query->where('jurusan_id', $id);
-        })->where('status_id', '4')->get();
+        })->where('status_id', '5')->get();
         // dd($taAll);
         return response()->json($taAll, 200);
     }
@@ -227,22 +227,50 @@ class SeminarProposalController extends Controller
     {
         $seminar_proposal = SeminarProposal::find($id);
         $data = $request->all();
+        // dd($data);
 
         if ($request->file('beritaacara')) {
             $semprop = SeminarProposal::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
-            // dd($seminar_proposal->ta->mahasiswa->nim);
             $file = $request->file('beritaacara');
+            // dd($file);
             $filename = 'Berita Acara Dosen SEMPROP' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semprop TA/', $filename);
             $data = [
                 'beritaacara' => $filename,
             ];
+            $status = array(
+                'status_id' => 7,
+            );
+            $taAll = TA::with(['mahasiswa'])->where('id', $seminar_proposal->ta_id)->get()->first();
+            // dd($status);
+            $taAll->update($status);
+            $seminar_proposal->update($data);
+            Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Proposal');
         } else {
             $data['beritaacara'] = $seminar_proposal->beritaacara;
         }
+        if ($request->file('berita')) {
+            $semprop = SeminarProposal::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
+            $file = $request->file('berita');
+            $filename = 'Berita Acara Dosen SEMPROP' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('berita')->storeAS('public/assets/file/Berita Acara Semprop TA/', $filename);
+            $data = [
+                'beritaacara' => $filename,
+            ];
+            $status = array(
+                'status_id' => 7,
+            );
+            $taAll = TA::with(['mahasiswa'])->where('id', $seminar_proposal->ta_id)->get()->first();
+            // dd($taAll);
+            // dd($status);
+            $taAll->update($status);
+            $seminar_proposal->update($data);
+
+            Alert::success('Berhasil', 'Berhasil Mengubah Berita Acara Seminar Proposal');
+        } else {
+            $data['berita'] = $seminar_proposal->beritaacara;
+        }
         // dd($data);
-        $seminar_proposal->update($data);
-        Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Proposal');
         return redirect(route('semprop.index'));
     }
 
@@ -318,11 +346,6 @@ class SeminarProposalController extends Controller
                 'beritaacara' => $filename,
             ];
             $ta_id->update($data);
-            $status = array(
-                'status_id' => 7,
-            );
-            // dd($status);
-            $taAll->update($status);
             Alert::success('Berhasil', 'Berhasil Tambah Data Berita Acara Seminar Proposal');
         } else {
             Alert::warning('Gagal', 'Data Berita Acara Seminar Proposal Gagal Ditambahkan');
