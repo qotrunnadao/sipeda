@@ -241,6 +241,29 @@
             });
         });
     </script>
+
+    {{-- mengatur session login --}}
+    <script>
+        let log_off = new Date();
+        log_off.setMinutes(log_off.getMinutes() + 5)
+        log_off = new Date(log_off)
+
+        let int_logoff = setInterval(function(){
+            let now = new Date();
+            if(now>log_off){
+                window.location.assign("/");
+                clearInterval(int_logoff);
+            }
+        }, 5000);
+
+
+        $('body').on('click', function(){
+            log_off = new Date()
+            log_off.setMinutes(log_off.getMinutes() + 5)
+            log_off = new Date(log_off)
+            console.log(log_off)
+        })
+    </script>
     @yield('javascripts')
 
 </body>
