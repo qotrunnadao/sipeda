@@ -30,28 +30,28 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td> IP Terakhir </td>
-                                <td>:</td>
+                                <td> <b>IP Terakhir</b> </td>
+                                <td> <b>:</b></td>
                                 <td> 3,93 </td>
                             </tr>
                             <tr>
-                                <td> IPK </td>
-                                <td>:</td>
+                                <td> <b>IPK </b> </td>
+                                <td> <b>:</b> </td>
                                 <td> 3,84 </td>
                             </tr>
                             <tr>
-                                <td> Total SKS </td>
-                                <td>:</td>
+                                <td> <b>Total SKS </b> </td>
+                                <td> <b>:</b> </td>
                                 <td> 138 </td>
                             </tr>
                             <tr>
-                                <td> Tanggal Yudisium </td>
-                                <td>:</td>
+                                <td> <b>Tanggal Yudisium</b> </td>
+                                <td> <b>:</b></td>
                                 <td> 08 Juni 2022 </td>
                             </tr>
                             <tr>
-                                <td> Waktu </td>
-                                <td>:</td>
+                                <td> <b>Waktu</b> </td>
+                                <td> <b>:</b></td>
                                 <td> 09:00 </td>
                             </tr>
                         </tbody>

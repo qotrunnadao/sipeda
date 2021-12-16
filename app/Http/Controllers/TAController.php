@@ -73,7 +73,7 @@ class TAController extends Controller
         $jurusan = jurusan::all();
         $mhs = Mahasiswa::all();
         $dosen = Dosen::all();
-        $tahunAkademik = TahunAkademik::where('aktif', '1')->first();
+        $tahunAkademik = TahunAkademik::where('aktif', '1')->first()->get();
         // dd($tahunAkademik->namaTahun);
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();

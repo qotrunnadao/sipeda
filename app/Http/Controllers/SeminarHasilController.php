@@ -327,6 +327,16 @@ class SeminarHasilController extends Controller
         return back();
         }
     }
+    public function laporan($filename)
+    {
+        //    dd($filename);
+        if(File::exists(public_path('storage/assets/file/LaporanTA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/LaporanTA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
+    }
     public function eksport(Request $request, $id)
     {
         $id = $request->route('id');

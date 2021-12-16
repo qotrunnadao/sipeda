@@ -324,6 +324,16 @@ class SeminarProposalController extends Controller
         return back();
         }
     }
+    public function proposal($filename)
+    {
+        //    dd($filename);
+        if(File::exists(public_path('storage/assets/file/ProposalTA/' . $filename . ''))){
+            return response()->file(public_path('storage/assets/file/ProposalTA/' . $filename . ''));
+        }else{
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+        return back();
+        }
+    }
     public function eksport(Request $request, $id)
     {
         $id = $request->route('id');

@@ -3,51 +3,44 @@
 @section('icon', 'share-variant')
 @section('content')
 <div class="row">
-    <div class="col-8 grid-margin stretch-card">
+    <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <form class="forms-sample" id="creatData" action="{{route('distribusi.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
                 <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            File Distribusi
+                    <div class="form-group">
+                        <label>
+                            File Distribusi <code>*</code>
                         </label>
-                        <div class="col-sm-10">
-                            <input type="file" class="form-control" name="fileDistribusi" />
-                        </div>
+                        <input type="file" class="form-control" name="fileDistribusi" />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card bg-primary card-img-holder text-white">
             <div class="card-body">
-                <h4 class="card-title mb-3">File Unduhan</h4>
+                <h4 class="font-weight-normal mb-3">File Unduhan
+                </h4>
                 <div class="table-responsive mt-3">
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="btn-group">
-                                        <form action="{{ route('download.formdistribusi') }}" method="post" target="blank">
-                                            @method('PUT')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">Contoh Form Distribusi Tugas Akhir<i class="mdi mdi-download"></i></a></button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="btn-group">
+                        <div class="btn-group">
+                            <form action="{{ route('download.formdistribusi') }}" method="post" target="blank">
+                                @method('PUT')
+                                @csrf
+                                <button type="submit" class="btn btn-light download">Contoh Form Distribusi Tugas Akhir<i class="mdi mdi-download"></i></a></button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-5">Data berkas distribusi</h4>

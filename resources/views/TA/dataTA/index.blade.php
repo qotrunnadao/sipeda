@@ -88,7 +88,6 @@
         </div>
     </div>
     @endif
-
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -150,17 +149,16 @@
 
                                 </td>
                                 <td class="text-center"> {{ $value->ket }}</td>
-                                {{-- @if(auth()->user()->level_id == 2 && auth()->user()->level_id == 1) --}}
                                 <td class="text-center">
                                     @if (auth()->user()->level_id == 2)
                                     <div class="btn-group">
                                         <a href="" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>
                                     </div>
-                                    @elseif (auth()->user()->level_id == 1)
+                                    @endif
                                     <div class="btn-group">
                                         <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
-                                    @endif
+
                                     <div class="btn-group">
                                         <form action="{{ route('TA.delete', $value->id) }}" method="GET">
                                             @method('DELETE')
@@ -169,7 +167,6 @@
                                         </form>
                                     </div>
                                 </td>
-                                {{-- @endif --}}
                             </tr>
                             @endforeach
                         </tbody>

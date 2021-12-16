@@ -3,7 +3,7 @@
 @section('title', 'Seminar Hasil')
 @section('content')
 <div class="row">
-    <div class="col-8 grid-margin stretch-card">
+    <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
             <form class="forms-sample" action="{{route('mahasiswaSemhas.store')}}" id="createData" method="post" enctype="multipart/form-data">
                 @csrf
@@ -12,20 +12,16 @@
                 <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
                 <div class="card-body">
                     <h4 class="card-title">Pengajuan Seminar Hasil</h4>
-                    <p class="text-danger mb-5">*pengajuan seminar maksimal dilakukan h-3 pelaksanaan!</p>
-                    <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">Judul Penelitian</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <input class="form-control" maxlength="100" name="judul" id="judul" type="text" autofocus>
-                        </div>
+                    <p class="badge badge-danger mb-5">*pengajuan seminar maksimal dilakukan h-3 pelaksanaan</p>
+                    <div class="form-group">
+                        <label>Judul Penelitian <code>*</code></label>
+                        <input class="form-control" name="judul" id="judul" type="text" autofocus>
                     </div>
                     <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">Tanggal Seminar</label>
-                        </div>
-                        <div class="col-lg-8">
+                        <div class="col-6">
+                            <label>
+                                Tanggal Seminar <code>*</code>
+                            </label>
                             <div class="input-group">
                                 <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal seminar" />
                                 <div class="input-group-prepend">
@@ -33,31 +29,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <label>
+                                Ruang Seminar <code>*</code>
+                            </label>
+                            <div>
+                                <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    @foreach ($Ruang as $value)
+                                    <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">Ruang Seminar</label>
-                        </div>
-                        <div class="col-lg-8">
-                            <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                @foreach ($Ruang as $value)
-                                <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">waktu</label>
-                        </div>
-                        <div class="col-lg-4">
+                        <div class="col-6">
+                            <label>
+                                Waktu Mulai <code>*</code>
+                            </label>
                             <div class="input-group clockpicker">
                                 <input type="text" id="jamMulai" name="jamMulai" class="form-control" placeholder="mulai">
                                 <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-6">
+                            <label>
+                                Waktu Selesai <code>*</code>
+                            </label>
                             <div class="input-group clockpicker">
                                 <input type="text" id="jamSelesai" name="jamSelesai" class="form-control" placeholder="selesai">
                                 <span class="input-group-text">
@@ -66,32 +65,33 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label">
-                            Berkas Persyaratan
+                    <div class="form-group">
+                        <label>
+                            Berkas Persayaratan <code>*</code>
                         </label>
-                        <div class="col-lg-8">
-                            <input type="file" class="form-control" name="laporan" />
-                        </div>
+                        <input type="file" class="form-control" name="laporan" />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-4 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white">
-            <div class="card-body">
-                <h4 class="font-weight-normal mb-3">Syarat Pengajuan Seminar Hasil
+    <div class="col-md-4 grid-margin">
+        <div class="card bg-primary card-img-holder text-white grid-margin">
+            <div class="card-body mb-3">
+                <h4 class="font-weight-normal mb-3">Berkas Persyaratan Seminar Hasil
                 </h4>
                 <ul>
                     <li>Lembar pengesahan laporan tugas akhir yang telah di acc Pembimbing I dan II</li>
                     <li>Telah ikut seminar serupa min. 5X <br>
                         ( dengan menunjukan kartu seminar )</li>
                     <li>Melampirkan lembar permohonan seminar hasil yang telah di acc pembimbing I dan II</li>
-                    <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
+                    <code>Berkas dijadikan 1 file PDF</code>
                 </ul>
-                <hr class="border-light">
+            </div>
+        </div>
+        <div class="card bg-primary card-img-holder text-white grid-margin">
+            <div class="card-body mb-3">
                 <h4 class="font-weight-normal mb-3">File Unduhan
                 </h4>
                 <div class="table-responsive mt-3">
@@ -99,7 +99,7 @@
                         <form action="{{ route('download.permohonanseminar') }}" method="post" target="blank">
                             @method('PUT')
                             @csrf
-                            <button type="submit" class="btn btn-light btn-sm download">Lembar Permohonan Seminar<i class="mdi mdi-download"></i></a></button>
+                            <button type="submit" class="btn btn-light download">Lembar Permohonan Seminar<i class="mdi mdi-download"></i></a></button>
                         </form>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-5">Data Pengajuan Seminar</h4>
+                <h4 class="card-title mb-5">Data Pengajuan Seminar Hasil</h4>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead class="text-center">

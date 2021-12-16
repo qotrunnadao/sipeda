@@ -19,9 +19,10 @@
                             <tr>
                                 <th class="text-center"> No. </th>
                                 <th class="text-center"> Nama Mahasiswa </th>
-                                <th class="text-center"> Status</th>
                                 <th class="text-center"> NIM </th>
                                 <th class="text-center"> Jurusan </th>
+                                <th class="text-center"> Berkas </th>
+                                <th class="text-center"> Status</th>
                                 <th class="text-center"> Ruang </th>
                                 <th class="text-center"> Tanggal </th>
                                 <th class="text-center"> Waktu </th>
@@ -36,6 +37,33 @@
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
                                 <td> {{ $value->TA->mahasiswa->nama }} </td>
+                                <td> {{ $value->TA->mahasiswa->nim }} </td>
+                                <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td class="text-center">
+                                    @if ($value->laporan == null)
+                                    <span class="badge badge-danger">Belum Ada Data Berkas Laporan TA</span>
+                                    @else
+                                    <div class="btn-group">
+                                        @if (File::exists(public_path('storage/assets/file/LaporanTA/' . $value->laporan . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.laporan', $value->laporan ) }}" method="post" target="_blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->laporan  }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semhas.laporan', $value->laporan ) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->laporan  }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if($value->status == 0)
                                     <span class="badge badge-warning">menunggu</span>
@@ -45,9 +73,6 @@
                                     <span class="badge badge-danger">Tidak Disetujui</span>
                                     @endif
                                 </td>
-
-                                <td> {{ $value->TA->mahasiswa->nim }} </td>
-                                <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
                                 <td class="text-center"> {{ $value->tanggal }}</td>
                                 <td class="text-center"> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
@@ -85,17 +110,17 @@
                                 @endif
                                 <td class="text-center">
                                     @if ($value->status != 0)
-                                        @if ($value->no_surat == null)
-                                        <div class="btn-group">
-                                            <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
-                                        </div>
-                                        @elseif ( $value->beritaacara == null)
-                                        <div class="btn-group">
-                                            <form action="{{ route('semhas.eksport', $value->ta_id) }}" method="GET" id="export">
-                                                <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
-                                            </form>
-                                        </div>
-                                        @endif
+                                    @if ($value->no_surat == null)
+                                    <div class="btn-group">
+                                        <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                    </div>
+                                    @elseif ( $value->beritaacara == null)
+                                    <div class="btn-group">
+                                        <form action="{{ route('semhas.eksport', $value->ta_id) }}" method="GET" id="export">
+                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                     <div class="btn-group">
                                         <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
@@ -141,8 +166,6 @@
             <div class="modal-body">
                 <form class="forms-sample" method="POST" id="surat" action="">
                     @csrf
-                    {{-- @dd($semprop_all); --}}
-                    {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $semprop_all->ta_id }}"> --}}
                     <div class="form-group row">
                         <div class="form-group row">
                             <div class="col">
