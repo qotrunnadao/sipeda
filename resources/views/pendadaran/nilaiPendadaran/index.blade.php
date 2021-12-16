@@ -83,7 +83,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                            <select type="text"  class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
                                 <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
@@ -94,7 +94,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3"> NIM</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="nim" name="nim">
+                            <select type="text" required class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
                         </div>
@@ -114,7 +114,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="nilai_huruf_id">
+                            <select type="text" required class="form-control" name="nilai_huruf_id">
                                 <option value="">PILIH Nilai Huruf</option>
                                 @foreach ($NilaiHuruf as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
@@ -132,7 +132,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="statusnilai_id">
+                            <select type="text" required class="form-control" name="statusnilai_id">
                                 <option value="">PILIH</option>
                                 @foreach ($statusnilai as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}</option>
@@ -167,13 +167,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Angka</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiangka" />
+                            <input type="text" required class="form-control" name="nilaiangka" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="nilai_huruf_id">
+                            <select type="text" required class="form-control" name="nilai_huruf_id">
                                 <option value="">PILIH Nilai Huruf</option>
                                 @foreach ($NilaiHuruf as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
@@ -191,7 +191,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="statusnilai_id">
+                            <select type="text" required class="form-control" name="statusnilai_id">
                                 <option value="">PILIH</option>
                                 @foreach ($statusnilai as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}
@@ -259,7 +259,6 @@
            url:"{{ route('nilaipendadaran.nim') }}",
            data:{id:id},
            success:function(data){
-               console.log(id)
                var nim = document.getElementById('nim')
                 for (var i = 0; i < data.length; i++) {
                 // POPULATE SELECT ELEMENT WITH JSON.
@@ -280,7 +279,6 @@
 
     $('#pendadaran_id').val(id);
     $('#name').val(name);
-    // $('#keluhan').val(kel);
 
 })
 

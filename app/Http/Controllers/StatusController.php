@@ -76,6 +76,7 @@ class StatusController extends Controller
     {
         $data = $request->all();
         $value = Status::findOrFail($id);
+        // dd($data);
         $value->update($data);
         Alert::success('Berhasil', 'Berhasil Ubah Status TA');
         return back();

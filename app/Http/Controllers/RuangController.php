@@ -42,9 +42,9 @@ class RuangController extends Controller
         $data = $request->all();
         $cek = Ruang::create($data);
         if ($cek == true) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
+            Alert::success('Berhasil', 'Berhasil Tambah Data Ruang');
         } else {
-            Alert::warning('Gagal', 'Data Jurusan Gagal Ditambahkan');
+            Alert::warning('Gagal', 'Data Ruang Gagal Ditambahkan');
         }
         return back();
     }

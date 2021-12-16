@@ -39,7 +39,6 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Jurusan::create($data);
         if (Jurusan::create($data)) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Jurusan');
         } else {
@@ -97,6 +96,7 @@ class JurusanController extends Controller
     public function destroy($id)
     {
         $jurusan = Jurusan::find($id);
+        // dd($jurusan);
         $jurusan->delete();
         Alert::success('Berhasil', 'Berhasil hapus data Jurusan');
         return back();

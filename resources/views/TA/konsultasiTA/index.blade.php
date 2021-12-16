@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                            <select type="text" required class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
                                 <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
@@ -83,7 +83,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">NIM</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="nim" name="nim">
+                            <select type="text" required class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
                         </div>
@@ -96,19 +96,19 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Mahasiswa</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="name" id="name" value="" readonly />
+                            <input type="text" required class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleSelectGender">Nama Pembimbing</label>
-                        <select type="text" class="form-control" name="dosen_id" id="dosen_id">
+                        <select type="text" required class="form-control" name="dosen_id" id="dosen_id">
                             <option value="" selected disabled> Pilih Dosen </option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Tanggal Konsultasi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
+                            <input type="text" required class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
@@ -117,12 +117,12 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Topik Konsultasi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="topik" id="topik" />
+                            <input type="text" required class="form-control" name="topik" id="topik" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="alasan">Hasil Konsultasi</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil" id="hasil"></textarea>
+                        <textarea class="form-control" required id="exampleTextarea1" rows="4" name="hasil" id="hasil"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
@@ -141,37 +141,6 @@
 
         return true;
 
-    });
-});
-</script>
-<script>
-    $(function() {
-
-    $("#createData").validate({
-        rules: {
-            topik: {
-            required: true,
-            },
-            action: "required"
-        },
-        messages: {
-            topik: {
-            required: "Please enter some data",
-            },
-            action: "Please provide some data",
-        }
-        rules: {
-            hasil: {
-            required: true,
-            },
-            action: "required"
-        },
-        messages: {
-            hasil: {
-            required: "Please enter some data",
-            },
-            action: "Please provide some data",
-        }
     });
 });
 </script>

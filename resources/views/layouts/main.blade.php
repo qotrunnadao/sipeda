@@ -141,6 +141,8 @@
     <!-- clockpicker -->
     <script src="{{ asset('sitak/plugins/clockpicker-gh-pages/src/clockpicker.js') }}"></script>
     <!-- My Script -->
+    <script src="{{ asset('sitak/plugins/validator/jquery.form-validator.min.js') }}"></script>
+    {{-- Validator --}}
 
     <script>
         $(document).ready(function() {

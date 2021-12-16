@@ -11,7 +11,6 @@
                         <thead>
                             <tr>
                                 <th> No. </th>
-                                <th> ID </th>
                                 <th> Email </th>
                                 <th> no Induk </th>
                                 <th> Level ID</th>
@@ -24,7 +23,6 @@
                             @foreach ($user as $value)
                             <tr>
                                 <td> {{ $no++ }}</td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->email }}</td>
                                 <td> {{ $value->noInduk }}</td>
                                 <td> {{ $value->level_id }}</td>

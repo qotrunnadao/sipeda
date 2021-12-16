@@ -6,6 +6,11 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                @if (auth()->user()->level_id == 2)
+                <div>
+                    <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
+                </div>
+                @endif
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -65,4 +70,125 @@
         </div>
     </div>
 </div>
+<!-- Modal Tambah Data Konsultasi -->
+<div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Konsultasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" action="{{route('distribusi.show')}}" id="createData" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Jurusan</label>
+                        <div class="input-group">
+                            <select type="text" required class="form-control" id="jurusan" name="jurusan">
+                                <option selected disabled>Pilih Jurusan </option>
+                                @foreach ($jurusan as $value)
+                                <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @if ($errors->has('jurusan'))
+                        <div class="text-danger">
+                            {{ $errors->first('jurusan') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">NIM</label>
+                        <div class="input-group">
+                            <select type="text" required class="form-control" id="nim" name="nim">
+                                <option value="" selected disabled>Pilih NIM </option>
+                            </select>
+                        </div>
+                        @if ($errors->has('nim'))
+                        <div class="text-danger">
+                            {{ $errors->first('nim') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <div class="input-group">
+                            <input type="text" required class="form-control" name="name" id="name" value="" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="file" required class="form-control" name="Distribusi" />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@section('javascripts')
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    });
+    $('#jurusan').on('change', function (event) {
+
+    $("#nim").find('option').not(':first').remove();
+    $("#name").val('');
+    var id = $(this).val();
+
+    $.ajax({
+    type:'POST',
+    url:"{{ route('distribusi.nim') }}",
+    data:{id:id},
+    success:function(data){
+        var nim = document.getElementById('nim')
+            for (var i = 0; i < data.length; i++) {
+            // POPULATE SELECT ELEMENT WITH JSON.
+                nim.innerHTML = nim.innerHTML +
+                    '<option value="' + data[i]['mahasiswa']['id'] + '" data-id="'+data[i]['id']+ '" data-nama="'+data[i]['mahasiswa']['nama']+'">' + data[i]['mahasiswa']['nim'] + '</option>';
+
+            }
+    }
+    });
+
+
+    })
+    $('#nim').on('change', function (event) {
+
+    // var kel = $(this).val();
+    var id = $(this).find(':selected').data('id');
+    var name = $(this).find(':selected').data('nama');
+
+    $('#ta_id').val(id);
+    $('#name').val(name);
+    // $('#keluhan').val(kel);
+
+})
+
+</script>
+
+<script>
+    $(document).ready(function () {
+
+    $("#creatData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 @endsection

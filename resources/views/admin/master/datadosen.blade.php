@@ -14,16 +14,13 @@
                         <thead>
                             <tr>
                                 <th> No. </th>
-                                <th> ID </th>
                                 <th> Nama </th>
                                 <th> Alamat </th>
-                                <th> Foto </th>
+                                <th> NIP </th>
                                 <th> No.HP </th>
                                 <th> Agama </th>
                                 <th> Jenis Kelamin </th>
                                 <th> Jurusan</th>
-                                <th> is Komisi</th>
-                                <th> id user </th>
                                 <th> Aksi</th>
                             </tr>
                         </thead>
@@ -32,21 +29,13 @@
                             @foreach ($dosen as $value)
                             <tr>
                                 <td> {{ $no++ }}</td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->nama }}</td>
                                 <td> {{ $value->alamat }}</td>
-                                <td> {{ $value->foto }}</td>
+                                <td> {{ $value->nip }}</td>
                                 <td> {{ $value->nohp }}</td>
                                 <td> {{ $value->agama->namaAgama }}</td>
                                 <td> {{ $value->jenkel->ket }} </td>
                                 <td> {{ $value->jurusan->namaJurusan }}</td>
-                                <td> @if($value->isKomisi == 0)
-                                    <span class="badge badge-danger">false</span>
-                                    @else
-                                    <span class="badge badge-primary">true</span>
-                                    @endif
-                                </td>
-                                <td> {{ $value->user_id }} </td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>

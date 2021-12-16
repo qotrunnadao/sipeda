@@ -14,7 +14,6 @@
                         <thead>
                             <tr>
                                 <th> No. </th>
-                                <th> ID </th>
                                 <th> Nama </th>
                                 <th> Jurusan</th>
                                 <th> Aksi </th>
@@ -25,7 +24,6 @@
                             @foreach ($kajur as $value)
                             <tr>
                                 <td> {{ $no++ }}</td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->nama }}</td>
                                 <td> {{ $value->jurusan->namaJurusan }} </td>
                                 <td>

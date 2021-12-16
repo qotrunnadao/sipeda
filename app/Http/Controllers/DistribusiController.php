@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\TA;
 use App\Models\User;
 use App\Models\Dosen;
+use App\Models\Jurusan;
 use App\Models\Status;
 use Barryvdh\DomPDF\PDF;
 use App\Models\Mahasiswa;
 use App\Models\Distribusi;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -24,6 +26,7 @@ class DistribusiController extends Controller
      */
     public function index()
     {
+        $jurusan = jurusan::all();
         $status = Status::latest()->get();
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
@@ -44,7 +47,7 @@ class DistribusiController extends Controller
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
         }
-        return view('TA.distribusi.index', compact('distribusi', 'status'));
+        return view('TA.distribusi.index', compact('distribusi', 'status', 'jurusan'));
     }
 
     /**
@@ -132,10 +135,39 @@ class DistribusiController extends Controller
         }
     }
 
-
-    public function show(Distribusi $distribusi)
+    public function nim(Request $request)
     {
-        //
+        // dd($request);
+        $id = $request->id;
+        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($id) {
+            $query->where('jurusan_id', $id);
+        })->where('status_id', '10')->get();
+        // dd($taAll);
+        return response()->json($taAll, 200);
+    }
+    public function show(Request $request)
+    {
+        $data = $request->all();
+        // dd($request->file('Distribusi'));
+        $mhs_id = TA::with(['mahasiswa'])->where('mahasiswa_id', $request->nim)->get()->first();
+        $nim = $mhs_id->mahasiswa->nim;
+        $file = $request->file('Distribusi');
+        $filename = 'Distribusi TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+        // dd($filename);
+        $path = $request->file('Distribusi')->storeAS('public/assets/file/fileDistribusiTA/', $filename);
+        $data = [
+            'ta_id' => $request->ta_id,
+            'fileDistribusi' => $filename,
+        ];
+        // dd($data);
+        $cek = Distribusi::create($data);
+
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Menambahkan Data Distribusi Tugas Akhir');
+        } else {
+            Alert::warning('Gagal', 'Data Distribusi Tugas Akhir Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**

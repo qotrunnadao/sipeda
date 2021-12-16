@@ -181,7 +181,9 @@ Route::get('/tugas-akhir/nilaita/delete/{id}',  'NilaiTAController@destroy')->na
 Route::post('/tugas-akhir/nilaita/nim/',  'NilaiTAController@nim')->name('nilaita.nim');
 
 //distribusi
+Route::post('/tugas-akhir/distribusi/nim/',  'DistribusiController@nim')->name('distribusi.nim');
 Route::get('/tugas-akhir/distribusi',  'DistribusiController@index')->name('distribusi.index');
+Route::post('/tugas-akhir/distribusi/store', 'DistribusiController@show')->name('distribusi.show');
 Route::put('/tugas-akhir/distribusi/download/{filename}',  'DistribusiController@download')->name('distribusi.download');
 Route::get('/tugas-akhir/distribusi/destroy/{id}',  'DistribusiController@destroy')->name('distribusi.destroy');
 

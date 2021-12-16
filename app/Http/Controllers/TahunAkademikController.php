@@ -83,6 +83,7 @@ class TahunAkademikController extends Controller
         $value = TahunAkademik::where('id', $id)->first();
         $data = $request->all();
         $ubah = $value->update($data);
+        // dd($database);
         if ($ubah == true) {
             Alert::success('Berhasil', 'Berhasil Ubah Data Tahun Akademik');
         } else {

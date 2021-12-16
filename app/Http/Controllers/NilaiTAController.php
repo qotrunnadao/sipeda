@@ -63,12 +63,19 @@ class NilaiTAController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
-        $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request, $dosen_id) {
-            $query->where('jurusan_id', $request->id)
-                ->where('pembimbing1_id', $dosen_id->id)
-                ->orWhere('pembimbing2_id', $dosen_id->id);
-        })->where('status_id', '9')
-            ->get();
+        if (auth()->user()->level_id == 2) {
+            $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+                $query->where('jurusan_id', $request->id);
+            })->where('status_id', '9')
+                ->get();
+        }else{
+            $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request, $dosen_id) {
+                $query->where('jurusan_id', $request->id)
+                    ->where('pembimbing1_id', $dosen_id->id)
+                    ->orWhere('pembimbing2_id', $dosen_id->id);
+            })->where('status_id', '9')
+                ->get();
+        }
         // dd($taAll);
         return response()->json($taAll, 200);
     }

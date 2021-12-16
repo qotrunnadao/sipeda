@@ -54,6 +54,7 @@ class TAController extends Controller
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->latest()->get();
         }
+        // dd($tugas_akhir->first()->status_id);
         $jurusan = jurusan::get();
         return view('TA.dataTA.index', compact('acc_ta', 'tugas_akhir', 'status'));
     }
@@ -72,7 +73,8 @@ class TAController extends Controller
         $jurusan = jurusan::all();
         $mhs = Mahasiswa::all();
         $dosen = Dosen::all();
-        $tahunAkademik = TahunAkademik::With('semester')->get();
+        $tahunAkademik = TahunAkademik::where('aktif', '1')->first();
+        // dd($tahunAkademik->namaTahun);
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();
         return view('TA.dataTA.form', compact('action', 'button', 'data_ta', 'tugas_akhir', 'status', 'dosen', 'jurusan', 'tahunAkademik', 'mhs'));
@@ -160,7 +162,7 @@ class TAController extends Controller
         $action = route('TA.update', $data_ta->id);
         $button = 'Edit';
         $dosen = Dosen::get();
-        $tahunAkademik = TahunAkademik::With('semester')->get();
+        $tahunAkademik = TahunAkademik::where('aktif', '1')->get()->first();
         $mhs = Mahasiswa::get();
         $status = Status::latest()->get();
         $tugas_akhir = TA::latest()->get();

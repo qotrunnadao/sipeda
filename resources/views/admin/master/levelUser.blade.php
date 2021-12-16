@@ -14,7 +14,6 @@
                         <thead>
                             <tr>
                                 <th> No. </th>
-                                <th> ID </th>
                                 <th> Level User </th>
                                 <th> Aksi</th>
                             </tr>
@@ -24,7 +23,6 @@
                             @foreach ($level as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->namaLevel }}</td>
                                 <td>
                                     <div class="btn-group">
@@ -58,16 +56,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{route('level.store')}}">
+                <form class="forms-sample" method="POST" name="eksport" id="eksport" action="{{route('level.store')}}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Level</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="namaLevel" />
+                            <input type="text" required class="form-control" name="namaLevel" />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id = "btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -86,13 +84,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="">
+                <form class="forms-sample" method="POST" name="edit" id="edit" action="">
                     @method('PUT')
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Level</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="level" name="namaLevel" value="" />
+                            <input type="text" required class="form-control" id="level" name="namaLevel" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -106,12 +104,26 @@
 @endsection
 @section('javascripts')
 <script>
+
+        $(document).ready(function () {
+
+        $("#eksport").submit(function () {
+
+            $("#btnSubmit").attr("disabled", true);
+
+            return true;
+
+            });
+        });
+
+</script>
+<script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
     var level = button.data('level')
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
+
     modal.find(".modal-body input[name='namaLevel']").val(level)
     modal.find(".modal-body form").attr("action",'/level-user/update/'+id)
     })

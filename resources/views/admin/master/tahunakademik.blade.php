@@ -14,7 +14,6 @@
                         <thead>
                             <tr>
                                 <th> No. </th>
-                                <th> ID </th>
                                 <th> Nama Tahun </th>
                                 <th> Semester </th>
                                 <th> Aktif </th>
@@ -26,7 +25,6 @@
                             @foreach ($tahun_akademik as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->namaTahun }}</td>
                                 <td> {{ $value->Semester->semester }} </td>
                                 <td> {{ $value->aktif == 0 ? 'false' : 'true'}} </td>
@@ -62,18 +60,18 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" action="{{route('tahunAkademik.store')}}" method="post">
+                <form class="forms-sample" action="{{route('tahunAkademik.store')}}" method="post" name="eksport" id="eksport">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Tahun</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="namaTahun" />
+                            <input type="text" required class="form-control" name="namaTahun" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Semester</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="semester_id">
+                            <select type="text" required class="form-control" name="semester_id">
                                 <option value="">PILIH</option>
                                 @foreach ($semester as $value)
                                 <option value="{{ $value->id }}">{{ $value->semester }}</option>
@@ -84,7 +82,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="aktif">
+                            <select type="text" required class="form-control" name="aktif">
                                 <option value="" selected disabled>PILIH</option>
                                 <option value="1">True</option>
                                 <option value="0">False</option>
@@ -92,7 +90,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit"  id = "btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -118,13 +116,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Tahun</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="tahunakademik" name="namaTahun" value="" />
+                            <input type="text" required class="form-control" id="tahunakademik" name="namaTahun" value="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Semester</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="semester" name="semester_id">
+                            <select type="text" required class="form-control" id="semester" name="semester_id">
                                 <option value="">PILIH</option>
                                 @foreach ($semester as $value)
                                 <option value="{{ $value->id }}">{{ $value->semester }}</option>
@@ -135,8 +133,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="aktif1" name="aktif">
-                                <option value="">PILIH</option>
+                            <select type="text" required class="form-control" id="aktif1" name="aktif">
                                 <option value="" selected disabled>PILIH</option>
                                 <option value="1">True</option>
                                 <option value="0">False</option>
@@ -152,8 +149,22 @@
         </div>
     </div>
 </div>
+{{-- create--}}
 @endsection
 @section('javascripts')
+<script>
+
+$(document).ready(function () {
+
+$("#eksport").submit(function () {
+
+    $("#btnSubmit").attr("disabled", true);
+
+    return true;
+
+    });
+});
+</script>
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal

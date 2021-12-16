@@ -15,8 +15,9 @@ class UserController extends Controller
     public function index()
     {
         $data = array(
-            'user' => User::latest()->get(),
+            'user' => User::with(['Dosen'])->latest()->get(),
         );
+        // dd($data);
         return view('admin.master.datauser', $data);
     }
 

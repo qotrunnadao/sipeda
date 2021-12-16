@@ -14,7 +14,6 @@
                         <thead>
                             <tr>
                                 <th> No. </th>
-                                <th> ID </th>
                                 <th> Nama Ruang </th>
                                 <th> Aksi </th>
                             </tr>
@@ -24,7 +23,6 @@
                             @foreach ($ruang as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->namaRuang }}</td>
                                 <td>
                                     <div class="btn-group">
@@ -58,16 +56,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{route('ruang.store')}}">
+                <form class="forms-sample" method="POST" name="eksport" id="eksport" action="{{route('ruang.store')}}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Ruang</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="namaRuang" />
+                            <input type="text" required class="form-control" name="namaRuang" />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit"  id = "btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -93,7 +91,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Ruang</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="ruang" name="namaRuang" value="" />
+                            <input type="text" required class="form-control" id="ruang" name="namaRuang" value="" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -108,13 +106,26 @@
 @endsection
 @section('javascripts')
 <script>
+
+        $(document).ready(function () {
+
+        $("#eksport").submit(function () {
+
+            $("#btnSubmit").attr("disabled", true);
+
+            return true;
+
+            });
+        });
+</script>
+<script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
     var ruang = button.data('ruang') // Extract info from data-* attributes
 
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
+
     modal.find(".modal-body input[name='namaRuang']").val(ruang)
     modal.find(".modal-body form").attr("action",'/data-ruang/update/'+id)
     })

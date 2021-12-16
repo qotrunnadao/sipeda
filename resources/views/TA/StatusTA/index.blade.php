@@ -14,7 +14,6 @@
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>
-                                <th class="text-center"> ID </th>
                                 <th class="text-center"> Keterangan Status </th>
                                 <th class="text-center"> Aksi </th>
                             </tr>
@@ -24,7 +23,6 @@
                             @foreach ($status as $value)
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
-                                <td class="text-center"> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td class="text-center"> {{ $value->ket }}</td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -58,16 +56,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{route('statusta.store')}}">
+                <form class="forms-sample" method="POST" name="eksport" id="eksport"  action="{{route('statusta.store')}}">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan Status</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="ket" />
+                            <input type="text" required class="form-control" name="ket" />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id = "btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -75,7 +73,7 @@
         </div>
     </div>
 </div>
-{{-- Edit Ruang --}}
+{{-- Edit Status --}}
 <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -86,27 +84,37 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{-- @foreach ($jurusan as $value ) --}}
-                <form class="forms-sample" method="POST" action="">
+                <form class="forms-sample" method="POST" name="edit" id="edit" action="">
                     @method('PUT')
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan Status</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="ket" name="ket" value="" />
+                            <input type="text" required class="form-control" id="ket" name="ket" value="" />
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </div>
                 </form>
-                {{-- @endforeach --}}
             </div>
         </div>
     </div>
 </div>
 @endsection
 @section('javascripts')
+<script>
+        $(document).ready(function () {
+
+        $("#eksport").submit(function () {
+
+            $("#btnSubmit").attr("disabled", true);
+
+            return true;
+
+            });
+        });
+</script>
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal

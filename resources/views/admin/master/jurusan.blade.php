@@ -14,7 +14,6 @@
                         <thead>
                             <tr>
                                 <th> No. </th>
-                                <th> ID </th>
                                 <th> Nama Jurusan </th>
                                 <th> Nama fakultas </th>
                                 <th> Kode MK </th>
@@ -26,8 +25,6 @@
                             @foreach ($jurusan as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
-                                </td>
                                 <td> {{ $value->namaJurusan }}</td>
                                 <td> {{ $value->fakultas->namaFakultas }}</td>
                                 <td> {{ $value->kodemk }}</td>
@@ -63,32 +60,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{ route('jurusan.store') }}">
+                <form class="forms-sample" method="POST" action="{{ route('jurusan.store') }}" name="eksport" id="eksport">
                     @csrf
+                    <input type="hidden" class="form-control" id="fakultas_id" name="fakultas_id" value="1">
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Jurusan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="namaJurusan" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Fakultas</label>
-                        <div class="input-group">
-                            <select type="text" class="form-control" name="fakultas_id">
-                                @foreach ($jurusan as $value )
-                                <option value="1" {{ $value->fakultas_id == 1 ? 'selected' : '' }}>Teknik</option>
-                                @endforeach
-                            </select>
+                            <input type="text" required class="form-control" name="namaJurusan" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Kode Mata Kuliah</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="kodemk" />
+                            <input type="text" required class="form-control" name="kodemk" />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -114,21 +102,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Jurusan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="jurusan" name="namaJurusan" value="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Fakultas</label>
-                        <div class="input-group">
-                            <select type="text" class="form-control" name="fakultas_id">
-                                <option value="1">Teknik</option>
-                            </select>
+                            <input type="text" required class="form-control" id="jurusan" name="namaJurusan" value="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Kode Mata Kuliah</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="kodemk" id="kodemk" value="" />
+                            <input type="text" required class="form-control" name="kodemk" id="kodemk" value="" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -143,15 +123,24 @@
 @endsection
 @section('javascripts')
 <script>
+            $(document).ready(function () {
+
+            $("#eksport").submit(function () {
+
+                $("#btnSubmit").attr("disabled", true);
+
+                return true;
+
+                });
+            });
+    </script>
+<script>
     $('#editdata').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    var jurusan = button.data('jurusan') // Extract info from data-* attributes
-    var kodemk = button.data('kodemk') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var jurusan = button.data('jurusan')
+    var kodemk = button.data('kodemk')
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
     modal.find(".modal-body input[name='namaJurusan']").val(jurusan)
     modal.find(".modal-body input[name='kodemk']").val(kodemk)
     modal.find(".modal-body form").attr("action",'/jurusan/update/'+id)
