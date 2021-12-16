@@ -68,13 +68,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Jurusan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="namaJurusan" />
+                            <input type="text" class="form-control" name="namaJurusan" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Fakultas</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="fakultas_id">
+                            <select type="text" class="form-control" name="fakultas_id" required>
                                 @foreach ($jurusan as $value )
                                 <option value="1" {{ $value->fakultas_id == 1 ? 'selected' : '' }}>Teknik</option>
                                 @endforeach
@@ -84,7 +84,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Kode Mata Kuliah</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="kodemk" />
+                            <input type="text" class="form-control" name="kodemk" required />
                         </div>
                     </div>
                     <div class="modal-footer">

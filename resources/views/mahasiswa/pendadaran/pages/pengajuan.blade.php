@@ -3,7 +3,7 @@
 @section('icon', 'file')
 @section('title', 'pendaftaran pendadaran')
 <div class="row">
-    <div class="col-6 grid-margin stretch-card">
+    <div class="col-md-6 grid-margin stretch-card">
         <div class="card card-primary">
             <form action="{{route('mahasiswaPendadaran.store')}}" method="post" enctype="multipart/form-data" id="creatData">
                 @csrf
@@ -14,9 +14,7 @@
                         <label>
                             Berkas Persyaratan
                         </label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" name="berkas" id="berkas" />
-                        </div>
+                        <input type="file" class="form-control" name="berkas" id="berkas" />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
@@ -26,22 +24,21 @@
     <div class="col-md-6 stretch-card grid-margin">
         <div class="card bg-primary card-img-holder text-white  card-hover">
             <div class="card-body">
-                <h4 class="font-weight-normal mb-3">Berkas Persyaratan Meliputi
+                <h4 class="font-weight-normal mb-3">Berkas Persyaratan Pendadaran
                 </h4>
                 <ul>
                     <li>Transkip Nilai</li>
                     <li>Hasil Tes Ujian UEPT</li>
                     <li>Bukti Distribusi Tugas Akhir</li>
-                    <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
+                    <code>Berkas dijadikan 1 file PDF</code>
                 </ul>
-                <hr class="border-light">
             </div>
         </div>
     </div>
 </div>
 <div class="row">
     @foreach ($pendadaran as $value )
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Data Pengajuan {{ $loop->iteration }}</h4>
@@ -72,7 +69,12 @@
                             <tr>
                                 <td> Keterangan </td>
                                 <td> : </td>
-                                <td> - </td>
+                                <td> @if($value->ket == null)
+                                    <span class="badge badge-danger">tidak ada keterangan</span>
+                                    @else
+                                    {{ $value->ket }}
+                                    @endif
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -3,79 +3,74 @@
 @section('title', 'Pengajuan TA')
 @section('content')
 <div class="row">
-    <div class="col-8 grid-margin stretch-card">
-        <div class="card card-primary">
+    <div class="col-md-8 grid-margin">
+        <div class="card">
             <form class="forms-sample" action="{{route('mahasiswaTA.store')}}" id="creatData" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
                 <input type="hidden" class="form-control" id="status_id" name="status_id" value="2">
                 <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="{{ $tahun->id }}">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            Judul Penelitian
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="judulTA" id="judulTA" value="{{ old('judulTA') }}" required autofocus />
-                        </div>
+                    <div class="form-group">
+                        <label>Judul Penelitian <code>*</code></label>
+                        <input type="text" class="form-control" name="judulTA" id="judulTA" value="{{ old('judulTA') }}" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Lokasi / Instansi Penelitian <code>(opsional)</code></label>
+                        <input type="text" class="form-control" name="instansi" id="instansi" value="{{ old('instansi') }}">
+                        <p class="text-muted">*jika tidak ada maka kosongi</p>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            Lokasi/Instansi
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="instansi" id="instansi" value="{{ old('instansi') }}" />
-                            <p class="text-muted">*jika tidak ada maka kosongi</p>
+                        <div class="col-6">
+                            <label>
+                                Pembimbing 1 <code>*</code>
+                            </label>
+                            <div>
+                                <select type="text" id="pembimbing1_id" name="pembimbing1" class="form-control">
+                                    <option selected disabled> Pilih Dosen </option>
+                                    @foreach ($dosen as $value)
+                                    <option value="{{ $value->id }} ">{{ $value->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label>
+                                Pembimbing 2 <code>*</code>
+                            </label>
+                            <div>
+                                <select type="text" id="pembimbing2_id" name="pembimbing2" class="form-control">
+                                    <option selected disabled>Pilih Dosen </option>
+                                    @foreach ($dosen as $value)
+                                    <option value="{{ $value->id }} ">{{ $value->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            Pembimbing 1
+                    <div class="form-group">
+                        <label>
+                            Berkas Persyaratan <code>*</code>
                         </label>
-                        <div class="col-sm-4">
-                            <select type="text" id="pembimbing1_id" name="pembimbing1" class="form-control form-control-sm">
-                                <option selected disabled> Pilih Dosen </option>
-                                @foreach ($dosen as $value)
-                                <option value="{{ $value->id }} ">{{ $value->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <label class="col-sm-2 col-form-label">
-                            Pembimbing 2
-                        </label>
-                        <div class="col-sm-4">
-                            <select type="text" id="pembimbing2_id" name="pembimbing2" class="form-control form-control-sm">
-                                <option selected disabled>Pilih Dosen </option>
-                                @foreach ($dosen as $value)
-                                <option value="{{ $value->id }} ">{{ $value->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            File Pra Proposal
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="file" class="form-control" name="praproposal" />
-                        </div>
+                        <input type="file" class="form-control" name="praproposal" />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-4 stretch-card grid-margin">
+    <div class="col-md-4 stretch-card grid-margin">
         <div class="card bg-primary card-img-holder text-white">
             <div class="card-body">
-                <h4 class="font-weight-normal mb-3">Syarat Pengajuan Seminar Proposal
+                <h4 class="font-weight-normal mb-3">Berkas Persayaratan Tugas Akhir
                 </h4>
                 <ul>
                     <li>Transkip Nilai Mahasiswa</li>
                     <li>Praproposal yang telah di acc calon Pembimbing I dan II</li>
                     <li>Melampirkan lembar permohonan Tugas Akhir</li>
-                    <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
+                    <code>*Berkas dijadikan 1 file PDF</code>
                 </ul>
                 <hr class="border-light">
                 <h4 class="font-weight-normal mb-3">File Unduhan
@@ -85,7 +80,7 @@
                         <form action="" method="post" target="blank">
                             @method('PUT')
                             @csrf
-                            <button type="submit" class="btn btn-light btn-sm download">Contoh Lembar Permohonan Tugas Akhir<i class="mdi mdi-download"></i></a></button>
+                            <button type="submit" class="btn btn-light download">Lembar Permohonan Tugas Akhir<i class="mdi mdi-download"></i></a></button>
                         </form>
                     </div>
                 </div>
@@ -97,10 +92,10 @@
 <div class="row">
     @php ($no = 1)
     @foreach ($tugas_akhir as $value )
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Data Pengajuan TA {{ $no++ }}</h4>
+                <h4 class="card-title mb-4">Data Pengajuan Tugas Akhir {{ $no++ }}</h4>
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
@@ -122,7 +117,12 @@
                             <tr>
                                 <td> Lokasi / Instansi</td>
                                 <td>:</td>
-                                <td> {{ $value->instansi }} </td>
+                                <td> @if($value->instansi == null)
+                                    <span class="badge badge-danger">tidak ada lokasi penelitian</span>
+                                    @else
+                                    {{ $value->instansi }}
+                                    @endif
+                                </td>
                             </tr>
                             <tr>
                                 <td> Dosen Pembimbing 1</td>
@@ -147,7 +147,12 @@
                             <tr>
                                 <td> Keterangan </td>
                                 <td>:</td>
-                                <td> {{ $value->ket}}</td>
+                                <td> @if($value->ket == null)
+                                    <span class="badge badge-danger">tidak ada keterangan</span>
+                                    @else
+                                    {{ $value->ket}}
+                                    @endif
+                                </td>
                             </tr>
                         </tbody>
                     </table>

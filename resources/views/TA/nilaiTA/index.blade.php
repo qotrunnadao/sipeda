@@ -7,10 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    {{-- <button type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-upload"></i> Unggah SIA</button> --}}
-                    @if(auth()->user()->level_id !== 2)
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
-                    @endif
                 </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -62,7 +59,7 @@
     </div>
 </div>
 
-<!-- Tambah Jurusan -->
+<!-- Tambah Nilai TA -->
 <div class="modal fade" id="tambahdata" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -79,7 +76,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Jurusan</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="jurusan" name="jurusan">
+                            <select type="text" class="form-control" id="jurusan" name="jurusan" required>
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
                                 <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
@@ -90,7 +87,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3"> NIM</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" id="nim" name="nim">
+                            <select type="text" class="form-control" id="nim" name="nim" required>
                                 <option value="" selected disabled>Pilih NIM </option>
                             </select>
                         </div>
@@ -104,13 +101,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Angka</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiAngka" />
+                            <input type="text" class="form-control" name="nilaiAngka" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="nilai_huruf_id">
+                            <select type="text" class="form-control" name="nilai_huruf_id" required>
                                 <option value="">PILIH Nilai Huruf</option>
                                 @foreach ($NilaiHuruf as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
@@ -121,14 +118,14 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan</label>
                         <div class="input-group">
-                            <textarea type="text" class="form-control" placeholder="" name="ket"></textarea>
+                            <textarea type="text" class="form-control" placeholder="" name="ket" required></textarea>
                         </div>
                         <p class="text-muted"> * tidak wajib di isi</p>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="statusnilai_id">
+                            <select type="text" class="form-control" name="statusnilai_id" required>
                                 <option value="">PILIH</option>
                                 @foreach ($statusnilai as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}</option>
@@ -159,7 +156,6 @@
                 <form class="forms-sample" id="editData" method="POST" action="">
                     @method('PUT')
                     @csrf
-                    {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $nilai->ta_id }}"> --}}
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Angka</label>
                         <div class="input-group">
@@ -204,6 +200,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascripts')
 <script>
     $(document).ready(function () {
 
@@ -228,8 +227,6 @@
     });
 });
 </script>
-@endsection
-@section('javascripts')
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)

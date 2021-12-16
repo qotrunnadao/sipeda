@@ -29,113 +29,107 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td> IP Terakhir </td>
-                                <td>:</td>
+                                <td> <b>IP Terakhir </b> </td>
+                                <td> <b>:</b> </td>
                                 <td> 3,93 </td>
                             </tr>
                             <tr>
-                                <td> IPK </td>
-                                <td>:</td>
+                                <td> <b>IPK </b> </td>
+                                <td> <b>:</b></td>
                                 <td> 3,84 </td>
                             </tr>
                             <tr>
-                                <td> Total SKS </td>
-                                <td>:</td>
+                                <td> <b>Total SKS</b> </td>
+                                <td> <b>:</b> </td>
                                 <td> 138 </td>
                             </tr>
                             <tr>
-                                <td> Tanggal Pendadaran </td>
-                                <td>:</td>
+                                <td> <b>Tanggal Pendadaran</b> </td>
+                                <td> <b>:</b> </td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @elseif($pendadaran->statuspendadaran_id <5)
-                                <td>
+                                @elseif($pendadaran->statuspendadaran_id <5) <td>
                                     <span class="badge badge-primary">Menunggu Konfirmasi</span>
-                                </td>
-                                @elseif($pendadaran->statuspendadaran_id >=5)
-                                <td> {{ $pendadaran->tanggal }} </td>
-                                @endif
+                                    </td>
+                                    @elseif($pendadaran->statuspendadaran_id >=5)
+                                    <td> {{ $pendadaran->tanggal }} </td>
+                                    @endif
                             </tr>
                             <tr>
-                                <td> Waktu Pelaksanaan</td>
-                                <td>:</td>
+                                <td> <b>Waktu Pelaksanaan</b></td>
+                                <td> <b>:</b></td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @elseif($pendadaran->statuspendadaran_id <5)
-                                <td>
+                                @elseif($pendadaran->statuspendadaran_id <5) <td>
                                     <span class="badge badge-primary">Menunggu Konfirmasi</span>
-                                </td>
-                                @elseif($pendadaran->statuspendadaran_id >=5)
-                                <td> {{ $pendadaran->jamMulai }} s/d {{ $pendadaran->jamSelesai }} WIB </td>
-                                @endif
+                                    </td>
+                                    @elseif($pendadaran->statuspendadaran_id >=5)
+                                    <td> {{ $pendadaran->jamMulai }} s/d {{ $pendadaran->jamSelesai }} WIB </td>
+                                    @endif
                             </tr>
                             <tr>
-                                <td> Dosen Penguji 1 </td>
-                                <td>:</td>
+                                <td> <b>Dosen Penguji 1</b> </td>
+                                <td> <b>:</b> </td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @elseif($pendadaran->statuspendadaran_id <5)
-                                <td>
+                                @elseif($pendadaran->statuspendadaran_id <5) <td>
                                     <span class="badge badge-primary">Menunggu Konfirmasi</span>
-                                </td>
-                                @elseif($pendadaran->statuspendadaran_id >=5)
-                                <td> {{ $pendadaran->penguji1->nama }} </td>
-                                @endif
+                                    </td>
+                                    @elseif($pendadaran->statuspendadaran_id >=5)
+                                    <td> {{ $pendadaran->penguji1->nama }} </td>
+                                    @endif
                             </tr>
                             <tr>
-                                <td> Dosen Penguji 2 </td>
-                                <td>:</td>
+                                <td> <b>Dosen Penguji 2</b> </td>
+                                <td> <b>:</b> </td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @elseif($pendadaran->statuspendadaran_id <5)
-                                <td>
+                                @elseif($pendadaran->statuspendadaran_id <5) <td>
                                     <span class="badge badge-primary">Menunggu Konfirmasi</span>
-                                </td>
-                                @elseif($pendadaran->statuspendadaran_id >=5)
-                                <td> {{ $pendadaran->penguji2->nama }} </td>
-                                @endif
+                                    </td>
+                                    @elseif($pendadaran->statuspendadaran_id >=5)
+                                    <td> {{ $pendadaran->penguji2->nama }} </td>
+                                    @endif
                             </tr>
                             <tr>
-                                <td> Dosen Penguji 3 </td>
-                                <td>:</td>
+                                <td> <b>Dosen Penguji 3</b> </td>
+                                <td> <b>:</b></td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @elseif($pendadaran->statuspendadaran_id <5)
-                                <td>
+                                @elseif($pendadaran->statuspendadaran_id <5) <td>
                                     <span class="badge badge-primary">Menunggu Konfirmasi</span>
-                                </td>
-                                @elseif($pendadaran->statuspendadaran_id >=5)
-                                <td> {{ $pendadaran->penguji3->nama }} </td>
-                                @endif
+                                    </td>
+                                    @elseif($pendadaran->statuspendadaran_id >=5)
+                                    <td> {{ $pendadaran->penguji3->nama }} </td>
+                                    @endif
                             </tr>
                             <tr>
-                                <td> Dosen Penguji 4 </td>
-                                <td>:</td>
+                                <td> <b>Dosen Penguji 4</b> </td>
+                                <td> <b>:</b></td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
                                 </td>
-                                @elseif($pendadaran->statuspendadaran_id <5)
-                                <td>
+                                @elseif($pendadaran->statuspendadaran_id <5) <td>
                                     <span class="badge badge-primary">Menunggu Konfirmasi</span>
-                                </td>
-                                @elseif($pendadaran->statuspendadaran_id >=5)
-                                <td> {{ $pendadaran->penguji4->nama }} </td>
-                                @endif
+                                    </td>
+                                    @elseif($pendadaran->statuspendadaran_id >=5)
+                                    <td> {{ $pendadaran->penguji4->nama }} </td>
+                                    @endif
                             </tr>
                             <tr>
-                                <td> Status Pelaksanaan </td>
-                                <td>:</td>
+                                <td> <b>Status Pelaksanaan</b> </td>
+                                <td> <b>:</b> </td>
                                 @if ($pendadaran == null)
                                 <td>
                                     <span class="badge badge-danger">Belum mengajukan Pendadaran</span>
@@ -196,23 +190,23 @@
                             <tr>
                                 <td>
                                     @if($pendadaran->statuspendadaran_id >=5)
-                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $pendadaran->beritaacara . '')))
-                                        <div class="btn-group">
-                                            <form action="{{ route('beritaacarapendadaran.download', $pendadaran->beritaacara) }}" method="post" target="blank">
-                                                @method('PUT')
-                                                @csrf
-                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $pendadaran->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                            </form>
-                                        </div>
-                                        @else
-                                        <div class="btn-group">
-                                            <form action="{{ route('beritaacarapendadaran.download', $pendadaran->beritaacara) }}" method="post">
-                                                @method('PUT')
-                                                @csrf
-                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
-                                            </form>
-                                        </div>
-                                        @endif
+                                    @if (File::exists(public_path('storage/assets/file/Berita Acara Pendadaran/' . $pendadaran->beritaacara . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('beritaacarapendadaran.download', $pendadaran->beritaacara) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $pendadaran->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('beritaacarapendadaran.download', $pendadaran->beritaacara) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
                                     @else
                                     Berita Acara Pendadaran
                                     <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>

@@ -3,120 +3,88 @@
 @section('icon', 'file')
 @section('title', 'Detail Seminar Hasil')
 <div class="row">
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-md-12 grid-margin stretch-card">
         <div class="card card-primary">
             <form action="{{ route('semhas.update', $semhas->id) }}" id="editData" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
                 <input type="hidden" class="form-control" id="mahasiswa_id" name="ta_id" value="{{ $semhas->ta_id }}">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nama
-                        </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="nama" value="{{ $semhas->TA->mahasiswa->nama }}" readonly/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            NIM
-                        </label>
-<<<<<<< HEAD
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semhas->TA->mahasiswa->nim }}" readonly/>
-=======
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semhas->TA->mahasiswa->nim }}" />
->>>>>>> e5473aa760cedda838ad71c0dbcf7a09905f1df1
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Jurusan
-                        </label>
-<<<<<<< HEAD
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="{{ $semhas->TA->mahasiswa->jurusan->namaJurusan }}" readonly/>
-=======
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="{{ $semhas->TA->mahasiswa->jurusan->namaJurusan }}" />
->>>>>>> e5473aa760cedda838ad71c0dbcf7a09905f1df1
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-3">
-                            <label class="col-form-label">waktu</label>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="jamMulai" placeholder="mulai" value="{{ $semhas->jamMulai }}" readonly>
-                                <span class="input-group-text">
-                                    <i class="mdi mdi-clock"></i></span>
+                    <div class="row justify-content-between">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Nama Mahasiswa
+                                </label>
+                                <input type="text" class="form-control" required placeholder="Nama Mahasiswa" name="nama" value="{{ $semhas->TA->mahasiswa->nama }}" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    NIM
+                                </label>
+                                <input type="text" class="form-control" required placeholder="NIM" name="nim" value="{{ $semhas->TA->mahasiswa->nim }}" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Jurusan
+                                </label>
+                                <input type="text" class="form-control" required placeholder="Jurusan" name="namaJurusan" value="{{ $semhas->TA->mahasiswa->jurusan->namaJurusan }}" readonly />
+                            </div>
+                            <div class="form-group">
+                                <label>Judul Penelitian</label>
+                                <input class="form-control" name="judul" id="judul" type="text" value="{{ $semhas->TA->judulTA }}" readonly>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="jamSelesai" placeholder="selesai" value="{{ $semhas->jamSelesai }}" readonly>
-                                <span class="input-group-text">
-                                    <i class="mdi mdi-clock"></i></span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    File Proposal
+                                </label>
+                                <input type="file" class="form-control" name="proposal" value="{{ $semhas->proposal }}" />
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label>waktu Mulai</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" name="jamMulai" placeholder="mulai" value="{{ $semhas->jamMulai }}" readonly>
+                                        <span class="input-group-text">
+                                            <i class="mdi mdi-clock"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>waktu Selesai</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" name="jamSelesai" placeholder="selesai" value="{{ $semhas->jamSelesai }}" readonly>
+                                        <span class="input-group-text">
+                                            <i class="mdi mdi-clock"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label>
+                                        Tanggal Seminar
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" name="tanggal" value="{{ $semhas->tanggal }}" readonly />
+                                        <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Ruang Seminar</label>
+                                    <input type="hidden" class="form-control" id="mahasiswa_id" name="ruang_id" value="{{ $semhas->ruang_id }}">
+                                    <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semhas->ruang->namaRuang }}" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Berita Acara Dosen
+                                </label>
+                                <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara }}" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Tanggal Seminar
-                        </label>
-                        <div class="col-sm-8">
-                            <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" name="tanggal" value="{{ $semhas->tanggal }}" readonly/>
-                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Ruang Seminar
-                        </label>
-                        <div class="col-sm-8">
-                            <input type="hidden" class="form-control" id="mahasiswa_id" name="ruang_id" value="{{ $semhas->ruang_id }}">
-                            <input type="text" class="form-control" placeholder="ruang seminar proposal" name="namaRuang" value="{{ $semhas->ruang->namaRuang }}" readonly/>
-                        </div>
-                    </div>
-                    {{-- <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Berita Acara Bapendik
-                        </label>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara }}" />
-                        </div>
-                    </div> --}}
 
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Berita Acara Seminar Hasil
-                        </label>
-<<<<<<< HEAD
-                        <div class="col-sm-9">
-                            <input type="file" class="form-control" placeholder="berita acara Seminar Hasil" name="beritaacara" value="{{ $semhas->beritaacara_dosen }}" />
-=======
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara_dosen }}" />
->>>>>>> e5473aa760cedda838ad71c0dbcf7a09905f1df1
-                        </div>
-                    </div>
-                    {{-- <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Status Pengajuan
-                        </label>
-                        <div class="col-sm-8">
-                            <select name="status" id="status" class="form-control">
-                                <option value="0" {{ $semhas->status == 0 ? 'selected' : '' }}>Menunggu</option>
-                                <option value="1" {{ $semhas->status == 1 ? 'selected' : '' }}>Disetujui</option>
-                                <option value="2" {{ $semhas->status == 2 ? 'selected' : '' }}>Ditolak</option>
-                            </select>
-                        </div>
-                    </div> --}}
                     <a href="{{ route('semhas.index') }}" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan </button>
                 </div>

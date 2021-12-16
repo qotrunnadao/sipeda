@@ -115,7 +115,7 @@
                     @csrf
                     <div class="form-group row">
                         <div class="col">
-                            <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK" />
+                            <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK" required />
                         </div>
 
                     </div>
@@ -154,28 +154,7 @@
     </div>
 </div>
 
-{{-- <script>
-    $(document).ready(function () {
-        var cek = true;
 
-    $("#btnSubmit").on('click', function () {
-        if (cek) {
-        var id = $('#btnSubmit').attr('idv');
-        console.log(id);
-        $("#linkButton").attr("href","/tugas-akhir/spk/pdf/" + id);
-        cek = false;
-        }else {
-
-            $("#linkButton").attr("href","");
-        }
-
-        // $('#btnSubmit').submit();
-
-    return true;
-
-    });
-});
-</script> --}}
 <script>
     $(document).ready(function () {
 

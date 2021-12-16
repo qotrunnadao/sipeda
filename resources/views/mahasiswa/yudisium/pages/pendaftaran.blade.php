@@ -3,7 +3,7 @@
 @section('icon', 'file')
 @section('content')
 <div class="row">
-    <div class="col-6 grid-margin stretch-card">
+    <div class="col-md-6 grid-margin stretch-card">
         <div class="card card-primary">
             <form action="" method="post" enctype="multipart/form-data" id="creatData">
                 @csrf
@@ -50,7 +50,6 @@
                     <li>Pas Foto hitam putih 3x4 = 2 lembar (foto diberi nama dan nim)</li>
                     <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
                 </ul>
-                <hr class="border-light">
             </div>
         </div>
     </div>

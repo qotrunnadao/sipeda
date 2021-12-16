@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan Status</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="ket" />
+                            <input type="text" class="form-control" name="ket" required />
                         </div>
                     </div>
                     <div class="modal-footer">
