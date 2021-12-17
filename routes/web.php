@@ -13,9 +13,9 @@ use App\Http\Controllers\CasController;
 use App\Http\Controllers\SPKController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\KajurController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RuangController;
-use App\Http\Controllers\RuangPendadaranController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\BerandaController;
@@ -28,16 +28,17 @@ use App\Http\Controllers\PendadaranController;
 use App\Http\Controllers\MahasiswaTAController;
 use App\Http\Controllers\TAMahasiswaController;
 use App\Http\Controllers\KonsultasiTAController;
-use App\Http\Controllers\KonsultasiTAMahasiswaController;
 use App\Http\Controllers\SeminarHasilController;
-use App\Http\Controllers\SeminarHasilMahasiswaController;
 use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\StatusYudisiumController;
 use App\Http\Controllers\NilaiPendadaranController;
+use App\Http\Controllers\RuangPendadaranController;
 use App\Http\Controllers\SeminarProposalController;
-use App\Http\Controllers\SeminarProposalMahasiswaController;
 use App\Http\Controllers\StatusPendadaranController;
 use App\Http\Controllers\BeritaAcaraPendadaranController;
+use App\Http\Controllers\KonsultasiTAMahasiswaController;
+use App\Http\Controllers\SeminarHasilMahasiswaController;
+use App\Http\Controllers\SeminarProposalMahasiswaController;
 
 Auth::routes();
 
@@ -83,15 +84,19 @@ Route::get('/level-user/delete/{id}', 'LevelController@destroy')->name('level.de
 
 //Route Data User
 Route::get('/data-user', 'UserController@index')->name('user.index');
+Route::put('/data-user/update/{id}', 'UserController@update')->name('user.update');
 
 //Route Data Dosen
 Route::get('/data-dosen', 'DosenController@index')->name('dosen.index');
+Route::put('/data-dosen/update/{id}', 'DosenController@update')->name('dosen.update');
 
 //Route Data Komisi
 Route::get('/data-komisi', 'KomisiController@index')->name('komisi.index');
+Route::put('/data-komisi/update/{id}', 'KomisiController@update')->name('komisi.update');
 
-//Route Data Komisi
-Route::get('/data-kajur', 'DosenController@kajur')->name('dataKajur');
+//Route Data Kajur
+Route::get('/data-kajur', 'KajurController@index')->name('dataKajur');
+Route::put('/data-kajur/update/{id}', 'KajurController@update')->name('kajur.update');
 
 
 //================= ROUTE DOSEN ========================

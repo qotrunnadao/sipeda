@@ -247,7 +247,7 @@
     {{-- mengatur session login --}}
     <script>
         let log_off = new Date();
-        log_off.setMinutes(log_off.getMinutes() + 5)
+        log_off.setMinutes(log_off.getMinutes() + 60)
         log_off = new Date(log_off)
 
         let int_logoff = setInterval(function(){
@@ -256,12 +256,12 @@
                 window.location.assign("/");
                 clearInterval(int_logoff);
             }
-        }, 5000);
+        }, 60000);
 
 
         $('body').on('click', function(){
             log_off = new Date()
-            log_off.setMinutes(log_off.getMinutes() + 5)
+            log_off.setMinutes(log_off.getMinutes() + 60)
             log_off = new Date(log_off)
             console.log(log_off)
         })

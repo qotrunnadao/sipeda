@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Level;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -16,6 +18,7 @@ class UserController extends Controller
     {
         $data = array(
             'user' => User::with(['Dosen'])->latest()->get(),
+            'level' => Level::latest()->get(),
         );
         // dd($data);
         return view('admin.master.datauser', $data);
@@ -71,9 +74,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $data = $request->all();
+        $user->update($data);
+        Alert::success('Berhasil', 'Berhasil Mengubah Level User');
+        return redirect(route('user.index'));
     }
 
     /**

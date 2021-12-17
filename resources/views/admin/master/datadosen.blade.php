@@ -15,13 +15,15 @@
                             <tr>
                                 <th> No. </th>
                                 <th> Nama </th>
-                                <th> Alamat </th>
+                                {{-- <th> Alamat </th> --}}
                                 <th> NIP </th>
                                 <th> No.HP </th>
-                                <th> Agama </th>
+                                {{-- <th> Agama </th> --}}
                                 <th> Jenis Kelamin </th>
                                 <th> Jurusan</th>
-                                {{-- <th> Aksi</th> --}}
+                                <th> isKomisi</th>
+                                <th> isKajur</th>
+                                <th> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,22 +32,36 @@
                             <tr>
                                 <td> {{ $no++ }}</td>
                                 <td> {{ $value->nama }}</td>
-                                <td> {{ $value->alamat }}</td>
+                                {{-- <td> {{ $value->alamat }}</td> --}}
                                 <td> {{ $value->nip }}</td>
                                 <td> {{ $value->nohp }}</td>
-                                <td> {{ $value->agama->namaAgama }}</td>
+                                {{-- <td> {{ $value->agama->namaAgama }}</td> --}}
                                 <td> {{ $value->jenkel->ket }} </td>
                                 <td> {{ $value->jurusan->namaJurusan }}</td>
-                                {{-- <td>
+                                <td>
+                                    @if($value->isKomisi == 0)
+                                    <span class="badge badge-danger">false</span>
+                                    @else
+                                    <span class="badge badge-primary">true</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($value->isKajur == 0)
+                                    <span class="badge badge-danger">false</span>
+                                    @else
+                                    <span class="badge badge-primary">true</span>
+                                    @endif
+                                </td>
+                                <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-isKomisi='{{ $value->isKomisi }}' data-isKajur='{{ $value->isKajur }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="#" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
-                                </td> --}}
+                                </td>
                                 @endforeach
                         </tbody>
                     </table>
@@ -55,42 +71,66 @@
     </div>
 </div>
 
-<!-- Tambah Komisi -->
-<div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Dosen</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Status Dosen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample">
+                <form class="forms-sample" method="POST" action="">
+                    @method('PUT')
+                    @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
+                        <label for="exampleInputEmail3">Is Komisi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <select type="text" class="form-control" name="isKomisi" required>
+                                <option value="">PILIH</option>
+                                <option value="1">true
+                                </option>
+                                <option value="0">false
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama</label>
+                        <label for="exampleInputEmail3">Is Kajur</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <select type="text" class="form-control" name="isKajur" required>
+                                <option value="">PILIH</option>
+                                <option value="1">true
+                                </option>
+                                <option value="0">false
+                                </option>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">NIP</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" />
-                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Simpan</button>
             </div>
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('javascripts')
+<script>
+    $('#editdata').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var isKomisi = button.data('isKomisi')
+    var isKajur = button.data('isKajur')
+    var modal = $(this)
+    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
+    modal.find(".modal-body input[name='isKomisi']").val(isKomisi)
+    modal.find(".modal-body input[name='isKajur']").val(isKajur)
+    modal.find(".modal-body form").attr("action",'/data-dosen/update/'+id)
+    })
+</script>
 @endsection

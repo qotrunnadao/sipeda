@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dosen;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KomisiController extends Controller
 {
@@ -71,7 +72,11 @@ class KomisiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dosen = Dosen::find($id);
+        $data = $request->all();
+        $dosen->update($data);
+        Alert::success('Berhasil', 'Berhasil Mengubah Status Komisi');
+        return redirect(route('komisi.index'));
     }
 
     /**

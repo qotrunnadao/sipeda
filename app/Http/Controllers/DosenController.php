@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dosen;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DosenController extends Controller
 {
@@ -73,9 +74,22 @@ class DosenController extends Controller
      * @param  \App\Models\Dosen  $dosen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dosen $dosen)
+    public function update(Request $request, $id)
     {
-        //
+        $dosen = Dosen::find($id);
+        $data = $request->all();
+        $dosen->update($data);
+        Alert::success('Berhasil', 'Berhasil Mengubah Status Dosen');
+        return redirect(route('dosen.index'));
+    }
+
+    public function updateKajur(Request $request, $id)
+    {
+        $dosen = Dosen::find($id);
+        $data = $request->all();
+        $dosen->update($data);
+        Alert::success('Berhasil', 'Berhasil Mengubah Status Kajur');
+        return redirect(route('dataKajur'));
     }
 
     /**
