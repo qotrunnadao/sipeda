@@ -88,8 +88,8 @@
     var id = button.data('id')
     var level_id = button.data('level_id')
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='level_id']").val(level_id)
+
+    modal.find(".modal-body select[name='level_id']").val(level_id)
     modal.find(".modal-body form").attr("action",'/data-user/update/'+id)
     })
 </script>

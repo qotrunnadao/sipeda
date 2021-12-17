@@ -38,9 +38,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    File Proposal
+                                    Berkas Persyaratan
                                 </label>
-                                <input type="file" class="form-control" name="proposal" value="{{ $semhas->proposal }}" />
+                                <input type="file" class="form-control" name="laporan" value="{{ $semhas->proposal }}" />
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">

@@ -150,14 +150,15 @@
                                 </td>
                                 <td class="text-center"> {{ $value->ket }}</td>
                                 <td class="text-center">
-                                    @if (auth()->user()->level_id == 2)
+                                    @if (auth()->user()->level_id == 2 && $value->status_id ==2)
                                     <div class="btn-group">
                                         <a href="" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>
                                     </div>
-                                    @endif
+                                    @elseif ($value->status_id !=2)
                                     <div class="btn-group">
                                         <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
+                                    @endif
 
                                     <div class="btn-group">
                                         <form action="{{ route('TA.delete', $value->id) }}" method="GET">

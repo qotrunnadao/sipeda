@@ -79,7 +79,12 @@ class BeritaAcaraPendadaranController extends Controller
     public function download($filename)
     {
         // dd($filename);
-        return response()->download(public_path('storage/assets/file/berita Acara Pendadaran/' . $filename . ''));
+        if (File::exists(public_path('storage/assets/file/berita Acara Pendadaran/' . $filename . ''))) {
+            return response()->file(public_path('storage/assets/file/berita Acara Pendadaran/' . $filename . ''));
+        } else {
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+            return back();
+        }
     }
     /**
      * Display the specified resource.
@@ -118,14 +123,12 @@ class BeritaAcaraPendadaranController extends Controller
                 'statuspendadaran_id' => 5,
                 'beritaacara' => $filename,
             ];
+            File::delete(public_path('storage/assets/file/Berita Acara Pendadaran/' . $hapus . ''));
             // dd($data);
         } else {
             $data['beritaacara'] = $value->beritaacara;
-            Alert::warning('Gagal', 'Gagal Ubah Data Berita Acara');
-            return back();
         }
         // dd($data);
-        File::delete(public_path('storage/assets/file/Berita Acara Pendadaran/' . $hapus . ''));
         // dd($hapus);
         $value->update($data);
         Alert::success('Berhasil', 'Berhasil Ubah Data Berita Acara Ujian Pendadaran');

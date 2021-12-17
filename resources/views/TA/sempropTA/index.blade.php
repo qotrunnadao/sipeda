@@ -317,15 +317,12 @@
                             Nomer Surat Berita Acara
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara Seminar Proposal" name="no_surat" />
+                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat" name="no_surat" />
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
             </div>
             </form>
         </div>

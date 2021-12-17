@@ -20,8 +20,13 @@ class KajurController extends Controller
     {
         $dosen = Dosen::find($id);
         $data = $request->all();
-        $dosen->update($data);
-        Alert::success('Berhasil', 'Berhasil Mengubah Status Kajur');
+        $ubah = $dosen->update($data);
+        // dd($database);
+        if ($ubah == true) {
+            Alert::success('Berhasil', 'Berhasil Mengubah Status Kajur');
+        } else {
+            Alert::warning('Gagal', 'Data Status Kajur Gagal Diubah');
+        }
         return redirect(route('dataKajur'));
     }
 }

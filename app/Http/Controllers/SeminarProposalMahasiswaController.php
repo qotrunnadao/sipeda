@@ -116,7 +116,7 @@ class SeminarProposalMahasiswaController extends Controller
                     $nim = $mhs_id->nim;
                     $file = $request->file('proposal');
                     $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $path = $request->file('proposal')->storeAS('public/assets/file/ProposalTA', $filename);
+                    $path = $request->file('proposal')->storeAS('public/assets/file/ProposalTA/', $filename);
                     $data = [
                         'ta_id' => $request->ta_id,
                         'jamMulai' => $jamMulai,

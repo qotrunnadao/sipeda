@@ -122,7 +122,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    File Proposal
+                                    Berkas Persyaratan
                                 </label>
                                 <input type="file" class="form-control" name="proposal" value="{{ $semprop->proposal }}" />
                             </div>

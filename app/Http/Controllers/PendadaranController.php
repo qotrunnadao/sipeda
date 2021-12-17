@@ -236,7 +236,9 @@ class PendadaranController extends Controller
         $ruang = $request->ruang;
         $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
         $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
+        $hapus1 = $pendadaran->beritaacara;
         // dd($tanggal >= $today);
+
         if ($request->file('beritaacara')) {
             $nim = $pendadaran->mahasiswa->nim;
             $berita = $request->file('beritaacara');
@@ -246,10 +248,12 @@ class PendadaranController extends Controller
                 'statuspendadaran_id' => 5,
                 'beritaacara' => $beritaacara,
             ];
+            File::delete(public_path('storage/assets/file/Berita Acara Pendadaran/' . $hapus1 . ''));
             $pendadaran->update($data);
             Alert::success('Berhasil', 'Berhasil Menambahkan Berita Acara Pendadaran');
             return redirect(route('pendadaran.index'));
         }
+
         if ($tanggal >= $today) {
             $pendadaranCount = Pendadaran::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                 $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
@@ -268,62 +272,7 @@ class PendadaranController extends Controller
             // dd($pendadaranCount);
             if (!$pendadaranCount) {
                 $nim = $pendadaran->mahasiswa->nim;
-                if ($request->file('berkas') && $request->file('beritaacara')) {
-                    $file = $request->file('berkas');
-                    $filename = 'Pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $path = $request->file('berkas')->storeAS('public/assets/file/Pendadaran/', $filename);
-                    $berita = $request->file('beritaacara');
-                    $beritaacara = 'Berita Acara Pendadaran' . '_' . $nim . '_' . time() . '.' . $berita->getClientOriginalExtension();
-                    $path1 = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
-                    $data = [
-                        'jamMulai' => $jamMulai,
-                        'jamSelesai' => $jamSelesai,
-                        'tanggal' => $request->tanggal,
-                        'ruangPendadaran_id' => $ruang,
-                        'statuspendadaran_id' => $request->statuspendadaran_id,
-                        'no_surat' => $request->no_surat,
-                        'berkas' => $filename,
-                        'beritaacara' => $beritaacara,
-                        'penguji1_id' => $request->penguji1_id,
-                        'penguji2_id' => $request->penguji2_id,
-                        'penguji3_id' => $request->penguji3_id,
-                        'penguji4_id' => $request->penguji4_id,
-                    ];
-                } elseif ($request->file('beritaacara')) {
-                    $berita = $request->file('beritaacara');
-                    $beritaacara = 'Berita Acara Pendadaran Terbaru' . '_' . $nim . '_' . time() . '.' . $berita->getClientOriginalExtension();
-                    $path1 = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Pendadaran/', $beritaacara);
-                    $data = [
-                        'jamMulai' => $jamMulai,
-                        'jamSelesai' => $jamSelesai,
-                        'tanggal' => $request->tanggal,
-                        'ruangPendadaran_id' => $ruang,
-                        'statuspendadaran_id' => 5,
-                        'no_surat' => $request->no_surat,
-                        'beritaacara' => $beritaacara,
-                        'penguji1_id' => $request->penguji1_id,
-                        'penguji2_id' => $request->penguji2_id,
-                        'penguji3_id' => $request->penguji3_id,
-                        'penguji4_id' => $request->penguji4_id,
-                    ];
-                } elseif ($request->file('berkas')) {
-                    $file = $request->file('berkas');
-                    $filename = 'Pendadaran' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $path = $request->file('berkas')->storeAS('public/assets/file/Pendadaran/', $filename);
-                    $data = [
-                        'jamMulai' => $jamMulai,
-                        'jamSelesai' => $jamSelesai,
-                        'tanggal' => $request->tanggal,
-                        'ruangPendadaran_id' => $ruang,
-                        'statuspendadaran_id' => $request->statuspendadaran_id,
-                        'no_surat' => $request->no_surat,
-                        'berkas' => $filename,
-                        'penguji1_id' => $request->penguji1_id,
-                        'penguji2_id' => $request->penguji2_id,
-                        'penguji3_id' => $request->penguji3_id,
-                        'penguji4_id' => $request->penguji4_id,
-                    ];
-                } else {
+
                     $data = [
                         'jamMulai' => $jamMulai,
                         'jamSelesai' => $jamSelesai,
@@ -336,7 +285,6 @@ class PendadaranController extends Controller
                         'penguji3_id' => $request->penguji3_id,
                         'penguji4_id' => $request->penguji4_id,
                     ];
-                }
                 // dd($data);
                 $pendadaran->update($data);
                 Alert::success('Berhasil', 'Berhasil Mengubah Data Pendadaran');
@@ -358,6 +306,8 @@ class PendadaranController extends Controller
     public function destroy($id)
     {
         $pendadaran = Pendadaran::find($id);
+        File::delete(public_path('storage/assets/file/Pendadaran/' . $pendadaran->berkas . ''));
+        File::delete(public_path('storage/assets/file/Berita Acara Pendadaran/' . $pendadaran->beritaacara . ''));
         $pendadaran->delete();
         Alert::success('Berhasil', 'Berhasil hapus data Pendadaran');
         return back();

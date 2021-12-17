@@ -148,7 +148,7 @@ class SeminarProposalController extends Controller
                     $nim = $ta_id->mahasiswa->nim;
                     $file = $request->file('proposal');
                     $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $path = $request->file('proposal')->storeAS('public/assets/file/ProposalTA', $filename);
+                    $path = $request->file('proposal')->storeAS('public/assets/file/ProposalTA/', $filename);
                     $data = [
                         'ta_id' => $request->ta_id,
                         'jamMulai' => $jamMulai,
@@ -227,10 +227,37 @@ class SeminarProposalController extends Controller
     {
         $seminar_proposal = SeminarProposal::find($id);
         $data = $request->all();
+        $hapus = $seminar_proposal->proposal;
+        $hapus1 = $seminar_proposal->beritaacara;
         // dd($data);
+        if ($request->file('beritaacara') && $request->file('proposal')) {
+            $file = $request->file('beritaacara');
+            $file1 = $request->file('proposal');
+            // dd($file);
+            $filename = 'Berita Acara Dosen SEMPROP' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $filename1 = 'TA' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file1->getClientOriginalExtension();
 
+            $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semprop TA/', $filename);
+            $path1 = $request->file('proposal')->storeAS('public/assets/file/ProposalTA/', $filename1);
+
+            $data = [
+                'beritaacara' => $filename,
+                'proposal' => $filename1,
+            ];
+
+            File::delete(public_path('storage/assets/file/ProposalTA/' . $hapus . ''));
+            File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $hapus1 . ''));
+
+            $status = array(
+                'status_id' => 7,
+            );
+            $taAll = TA::with(['mahasiswa'])->where('id', $seminar_proposal->ta_id)->get()->first();
+            // dd($status);
+            $taAll->update($status);
+            $seminar_proposal->update($data);
+            Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Proposal');
+        }
         if ($request->file('beritaacara')) {
-            $semprop = SeminarProposal::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
             $file = $request->file('beritaacara');
             // dd($file);
             $filename = 'Berita Acara Dosen SEMPROP' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
@@ -238,6 +265,7 @@ class SeminarProposalController extends Controller
             $data = [
                 'beritaacara' => $filename,
             ];
+            File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $hapus1 . ''));
             $status = array(
                 'status_id' => 7,
             );
@@ -249,14 +277,28 @@ class SeminarProposalController extends Controller
         } else {
             $data['beritaacara'] = $seminar_proposal->beritaacara;
         }
+        if ($request->file('proposal')) {
+            $file = $request->file('proposal');
+            // dd($file);
+            $filename = 'TA' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('proposal')->storeAS('public/assets/file/ProposalTA/', $filename);
+            $data = [
+                'proposal' => $filename,
+            ];
+            File::delete(public_path('storage/assets/file/ProposalTA/' . $hapus . ''));
+            $seminar_proposal->update($data);
+            Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Proposal');
+        } else {
+            $data['proposal'] = $seminar_proposal->proposal;
+        }
         if ($request->file('berita')) {
-            $semprop = SeminarProposal::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
             $file = $request->file('berita');
             $filename = 'Berita Acara Dosen SEMPROP' . '_' . $seminar_proposal->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('berita')->storeAS('public/assets/file/Berita Acara Semprop TA/', $filename);
             $data = [
                 'beritaacara' => $filename,
             ];
+            File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $hapus1 . ''));
             $status = array(
                 'status_id' => 7,
             );
@@ -285,6 +327,7 @@ class SeminarProposalController extends Controller
         $semprop = SeminarProposal::find($id);
         $taAll = TA::with(['mahasiswa'])->where('id', $semprop->ta->id)->get()->first();
         File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $semprop->beritaacara . ''));
+        File::delete(public_path('storage/assets/file/ProposalTA/' . $semprop->proposal . ''));
         $semprop->delete();
         $status = array(
             'status_id' => 4,

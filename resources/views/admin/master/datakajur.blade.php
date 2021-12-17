@@ -36,7 +36,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-isKajur='{{ $value->isKajur }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-kajur='{{ $value->isKajur }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="#" method="GET">
@@ -93,10 +93,10 @@
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
-    var isKajur = button.data('isKajur')
+    var kajur = button.data('kajur')
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='isKajur']").val(isKajur)
+
+    modal.find(".modal-body select[name='isKajur']").val(kajur)
     modal.find(".modal-body form").attr("action",'/data-kajur/update/'+id)
     })
 </script>

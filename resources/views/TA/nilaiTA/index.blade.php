@@ -118,7 +118,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan</label>
                         <div class="input-group">
-                            <textarea type="text" class="form-control" placeholder="" name="ket" required></textarea>
+                            <textarea type="text" class="form-control" placeholder="" name="ket" ></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -158,13 +158,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Angka</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nilaiangka" />
+                            <input type="text" class="form-control" required name="nilaiangka" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Huruf</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="nilai_huruf_id">
+                            <select type="text" class="form-control" required name="nilai_huruf_id">
                                 <option value="">PILIH Nilai Huruf</option>
                                 @foreach ($NilaiHuruf as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->nilaiHuruf ? 'selected' : '' }}>{{ $value->nilaiHuruf }}</option>
@@ -182,7 +182,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="statusnilai_id">
+                            <select type="text" class="form-control" required name="statusnilai_id">
                                 <option value="">PILIH</option>
                                 @foreach ($statusnilai as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}

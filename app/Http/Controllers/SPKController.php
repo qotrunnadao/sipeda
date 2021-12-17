@@ -159,9 +159,8 @@ class SPKController extends Controller
     {
         $data = $request->all();
         $spk = SPK::where('ta_id', $id)->get()->first();
-        // $hapus = $spk->fileSPK;
+        $hapus = $spk->fileSPK;
         if ($request->file('fileSPK')) {
-            // dd($seminar_proposal->ta->mahasiswa->nim);
             $file = $request->file('fileSPK');
             $filename = 'SPK Kajur' . '_' . $spk->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('fileSPK')->storeAS('public/assets/file/SPK TA/', $filename);
@@ -169,14 +168,13 @@ class SPKController extends Controller
                 'fileSPK' => $filename,
             ];
             // dd($data);
+            File::delete(public_path('storage/assets/file/SPK TA/' . $hapus . ''));
         } else {
             $data['fileSPK'] = $spk->fileSPK;
             Alert::warning('Gagal', 'Gagal Ubah Data SPK');
             return back();
         }
         // dd($data);
-        // File::delete(public_path('storage/assets/file/SPK TA/' . $hapus . ''));
-        // dd($hapus);
         $spk->update($data);
         $taAll = TA::with(['mahasiswa'])->where('id', $id)->get()->first();
         $status = array(
@@ -196,8 +194,6 @@ class SPKController extends Controller
     public function destroy($fileSPK)
     {
         $spk = SPK::with('ta')->where('fileSPK', $fileSPK)->first();
-        // dd($spk->ta->id);
-        // $post =Post::where('id',$post_id)->first();
         if ($spk != null) {
             File::delete(public_path('storage/assets/file/SPK TA/' . $fileSPK . ''));
             $spk->delete();

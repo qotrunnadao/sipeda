@@ -17,6 +17,7 @@ class Dosen extends Model
         'tglLahir',
         'tmptLahir',
         'isKomisi',
+        'isKajur',
         'agama_id',
         'jk_id',
         'jurusan_id',

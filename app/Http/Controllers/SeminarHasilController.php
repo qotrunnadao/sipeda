@@ -87,7 +87,7 @@ class SeminarHasilController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        dd($data);
+        // dd($data);
 
         if ($request->file('laporan')) {
             $jamMulai = $request->jamMulai;
@@ -225,22 +225,29 @@ class SeminarHasilController extends Controller
     public function update(Request $request, $id)
     {
         $seminar_hasil = SeminarHasil::find($id);
-        // $hapus = $seminar_hasil->beritaacara;
-        // dd($hapus);
+        $hapus = $seminar_hasil->beritaacara;
+        $hapus1 = $seminar_hasil->laporan;
         $data = $request->all();
-        $data = [
-            'beritaacara' => $request->beritaacara_dosen,
-        ];
+        // dd($data);
 
-        if ($request->file('beritaacara')) {
-            $semhas = SeminarHasil::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
-            // dd($seminar_proposal->ta->mahasiswa->nim);
+        if ($request->file('beritaacara') && $request->file('laporan')) {
             $file = $request->file('beritaacara');
+            $file1 = $request->file('laporan');
+
             $filename = 'Berita Acara Dosen SEMHAS' . '_' . $seminar_hasil->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $filename1 = 'TA' . '_' . $seminar_hasil->ta->mahasiswa->nim . '_' . time() . '.' . $file1->getClientOriginalExtension();
+
             $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semhas TA/', $filename);
+            $path1 = $request->file('laporan')->storeAS('public/assets/file/LaporanTA/', $filename1);
+
             $data = [
                 'beritaacara' => $filename,
+                'laporan' => $filename1,
             ];
+
+            File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
+            File::delete(public_path('storage/assets/file/LaporanTA/' . $hapus1 . ''));
+
             $status = array(
                 'status_id' => 9,
             );
@@ -249,19 +256,48 @@ class SeminarHasilController extends Controller
             $taAll->update($status);
             $seminar_hasil->update($data);
             Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Hasil');
-            // File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
+        }
+
+        if ($request->file('beritaacara')) {
+            $file = $request->file('beritaacara');
+            $filename = 'Berita Acara Dosen SEMHAS' . '_' . $seminar_hasil->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semhas TA/', $filename);
+            $data = [
+                'beritaacara' => $filename,
+            ];
+            File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
+            $status = array(
+                'status_id' => 9,
+            );
+            $taAll = TA::with(['mahasiswa'])->where('id', $seminar_hasil->ta_id)->get()->first();
+            // dd($taAll);
+            $taAll->update($status);
+            $seminar_hasil->update($data);
+            Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Hasil');
         } else {
             $data['beritaacara'] = $seminar_hasil->beritaacara;
         }
+        if ($request->file('laporan')) {
+            $file = $request->file('laporan');
+            $filename = 'TA' . '_' . $seminar_hasil->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('laporan')->storeAS('public/assets/file/LaporanTA/', $filename);
+            $data = [
+                'laporan' => $filename,
+            ];
+            File::delete(public_path('storage/assets/file/LaporanTA/' . $hapus1 . ''));
+            $seminar_hasil->update($data);
+            Alert::success('Berhasil', 'Berhasil Mengubah Data Seminar Hasil');
+        } else {
+            $data['laporan'] = $seminar_hasil->laporan;
+        }
         if ($request->file('berita')) {
-            $semhas = SeminarHasil::with(['ta.mahasiswa'])->where('ta_id', $request->ta_id)->latest()->get();
-            // dd($seminar_proposal->ta->mahasiswa->nim);
             $file = $request->file('berita');
             $filename = 'Berita Acara Dosen SEMHAS' . '_' . $seminar_hasil->ta->mahasiswa->nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('berita')->storeAS('public/assets/file/Berita Acara Semhas TA/', $filename);
             $data = [
                 'beritaacara' => $filename,
             ];
+            File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
             $status = array(
                 'status_id' => 9,
             );
@@ -271,7 +307,6 @@ class SeminarHasilController extends Controller
             // dd($data);
             $seminar_hasil->update($data);
             Alert::success('Berhasil', 'Berhasil Mengubah Berita Acara Seminar Hasil');
-            // File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
         } else {
             $data['beritaacara'] = $seminar_hasil->beritaacara;
         }
@@ -289,6 +324,7 @@ class SeminarHasilController extends Controller
         $semhas = SeminarHasil::find($id);
         $taAll = TA::with(['mahasiswa'])->where('id', $semhas->ta->id)->get()->first();
         File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $semhas->beritaacara . ''));
+        File::delete(public_path('storage/assets/file/LaporanTA/' . $semhas->laporan . ''));
         $semhas->delete();
         $status = array(
             'status_id' => 6,

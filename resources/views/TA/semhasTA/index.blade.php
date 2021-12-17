@@ -167,10 +167,11 @@
                 <form class="forms-sample" method="POST" id="surat" action="">
                     @csrf
                     <div class="form-group row">
-                        <div class="form-group row">
-                            <div class="col">
-                                <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara Seminar Hasil" name="no_surat" />
-                            </div>
+                        <label class="col-sm-3 col-form-label">
+                            Nomer Surat Berita Acara
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat" name="no_surat" />
                         </div>
                     </div>
                     <div class="modal-footer">
