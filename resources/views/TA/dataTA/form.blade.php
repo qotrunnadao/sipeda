@@ -219,7 +219,7 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Instansi / Lokasi Penelitian
+                                    Instansi / Lokasi Penelitian @if ($button == 'Tambah')<code>(opsional)</code> @endif
                                 </label>
                                 <input type="text" class="form-control" placeholder="Instansi / Lokasi Penelitian" name="instansi" value="@if ($button == 'Tambah'){{ old('instansi') }}@else{{ $data_ta->instansi }}@endif" />
                             </div>
@@ -268,12 +268,16 @@
                                     Tahun Akademik @if ($button == 'Tambah') <code>*</code>
                                     @endif
                                 </label>
+                                @if ($button == 'Tambah')
                                 <select name="tahunAkademik" id="tahunAkademik" class="form-control">
                                     <option value="">PILIH</option>
                                     @foreach ($tahunAkademik as $value )
                                     <option value="{{ $value->id }}" {{ $value->id == $data_ta->thnAkad_id ? 'selected' : '' }}>{{ $value->namaTahun }} ({{ $value->semester->semester }})</option>
                                     @endforeach
                                 </select>
+                                @else
+                                <input type="text" class="form-control" name="tahunAkademik" value="{{ $data_ta->tahunAkademik->namaTahun }}" readonly />
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>

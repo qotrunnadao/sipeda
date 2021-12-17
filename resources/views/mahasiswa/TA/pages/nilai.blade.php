@@ -1,6 +1,6 @@
 @extends('mahasiswa.TA.layouts.main')
 @section('icon', 'trophy')
-@section('title', 'Nilai TA')
+@section('title', 'Nilai Tugas Akhir')
 @section('content')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">

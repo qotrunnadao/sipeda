@@ -35,8 +35,8 @@
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->nilaiHuruf->nilaiHuruf }}</td>
                                 <td class="text-center">
-                                <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
-                                 </td>
+                                    <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
+                                </td>
                                 <td class="text-center">
                                     @if($value->ket == null)
                                     <span class="badge badge-danger">tidak ada keterangan</span>
@@ -81,9 +81,9 @@
                     @csrf
                     <input type="hidden" class="form-control" id="pendadaran_id" name="pendadaran_id" value="">
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
+                        <label for="exampleInputEmail3">Jurusan <code>*</code></label>
                         <div class="input-group">
-                            <select type="text"  class="form-control" id="jurusan" name="jurusan">
+                            <select type="text" class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
                                 @foreach ($jurusan as $value)
                                 <option value="{{ $value->id }} ">{{ $value->namaJurusan }}</option>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3"> NIM</label>
+                        <label for="exampleInputEmail3"> NIM <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
@@ -100,19 +100,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <label for="exampleInputEmail3">Nama Mahasiswa <code>*</code></label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Angka</label>
+                        <label for="exampleInputEmail3">Nilai Angka <code>*</code></label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="nilaiAngka" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Huruf</label>
+                        <label for="exampleInputEmail3">Nilai Huruf <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" name="nilai_huruf_id">
                                 <option value="">PILIH Nilai Huruf</option>
@@ -130,7 +130,7 @@
                         <p class="text-muted"> * tidak wajib di isi</p>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Status Nilai</label>
+                        <label for="exampleInputEmail3">Status Nilai <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" name="statusnilai_id">
                                 <option value="">PILIH</option>

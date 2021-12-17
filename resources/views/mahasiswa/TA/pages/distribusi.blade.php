@@ -1,9 +1,9 @@
 @extends('mahasiswa.TA.layouts.main')
-@section('title', 'Distribusi TA')
+@section('title', 'Distribusi Tugas Akhir')
 @section('icon', 'share-variant')
 @section('content')
 <div class="row">
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
             <form class="forms-sample" id="creatData" action="{{route('distribusi.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -14,14 +14,14 @@
                         <label>
                             File Distribusi <code>*</code>
                         </label>
-                        <input type="file" class="form-control" name="fileDistribusi" />
+                        <input type="file" class="form-control" name="fileDistribusi" required />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-4 grid-margin stretch-card">
         <div class="card bg-primary card-img-holder text-white">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">File Unduhan

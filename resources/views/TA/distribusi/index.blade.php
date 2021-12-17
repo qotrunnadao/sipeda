@@ -85,7 +85,7 @@
                     @csrf
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
+                        <label for="exampleInputEmail3">Jurusan <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
@@ -101,7 +101,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">NIM</label>
+                        <label for="exampleInputEmail3">NIM <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
@@ -114,16 +114,14 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <label for="exampleInputEmail3">Nama Mahasiswa <code>*</code></label>
                         <div class="input-group">
                             <input type="text" required class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            <input type="file" required class="form-control" name="Distribusi" />
-                        </div>
-
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">File Distribusi <code>*</code></label>
+                        <input type="file" required class="form-control" name="Distribusi" />
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>

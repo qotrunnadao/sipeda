@@ -6,9 +6,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div>
+                {{-- <div>
                     <button type="button" class="btn btn-sm btn-gradient-primary float-right" data-toggle="modal" data-target="#tambahdata"> <i class="mdi mdi-plus"></i> Tambah</button>
-                </div>
+                </div> --}}
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -21,7 +21,7 @@
                                 <th> Agama </th>
                                 <th> Jenis Kelamin </th>
                                 <th> Jurusan</th>
-                                <th> Aksi</th>
+                                {{-- <th> Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -36,7 +36,7 @@
                                 <td> {{ $value->agama->namaAgama }}</td>
                                 <td> {{ $value->jenkel->ket }} </td>
                                 <td> {{ $value->jurusan->namaJurusan }}</td>
-                                <td>
+                                {{-- <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
@@ -45,7 +45,7 @@
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
-                                </td>
+                                </td> --}}
                                 @endforeach
                         </tbody>
                     </table>

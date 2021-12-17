@@ -15,7 +15,7 @@
                             Berkas Persyaratan
                         </label>
                         <div class="input-group">
-                            <input type="file" class="form-control" name="berkas" id="berkas" />
+                            <input type="file" class="form-control" name="berkas" id="berkas" required />
                         </div>
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
@@ -24,9 +24,9 @@
         </div>
     </div>
     <div class="col-md-6 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white  card-hover">
+        <div class="card bg-primary card-img-holder text-white">
             <div class="card-body">
-                <h4 class="font-weight-normal mb-3">Berkas Persyaratan Meliputi
+                <h4 class="font-weight-normal mb-3">Berkas Persyaratan Yudisium
                 </h4>
                 <ul>
                     <li>Bukti Validasi Nilai Transkrip Akademik Dengan Ketua Program Studi</li>
@@ -48,7 +48,7 @@
                         Pembimbing Tugas Akhir</li>
                     <li>SPK (surat perintah Tugas Akhir) dan kartu kendali Tugas Akhir</li>
                     <li>Pas Foto hitam putih 3x4 = 2 lembar (foto diberi nama dan nim)</li>
-                    <span class="badge badge-danger">Berkas dijadikan 1 file PDF</span>
+                    <code>Berkas dijadikan 1 file PDF</code>
                 </ul>
             </div>
         </div>

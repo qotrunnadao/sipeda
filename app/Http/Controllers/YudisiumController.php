@@ -36,7 +36,9 @@ class YudisiumController extends Controller
         $data_yudisium = new Yudisium();
         $yudisium = Yudisium::get();
         $status = StatusYudisium::get();
-        return view('yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status'));
+        $tahun = TahunAkademik::where('aktif', '1')->get()->first();
+        $jurusan = jurusan::get();
+        return view('yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status', 'tahun', 'jurusan'));
     }
 
     /**

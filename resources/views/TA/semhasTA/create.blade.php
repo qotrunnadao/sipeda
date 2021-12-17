@@ -131,7 +131,7 @@
                     <div class="row justify-content-between">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Jurusan</label>
+                                <label>Jurusan <code>*</code></label>
                                 <select type="text" class="form-control" id="jurusan" name="jurusan">
                                     <option selected disabled>Pilih Jurusan </option>
                                     @foreach ($jurusan as $value)
@@ -145,7 +145,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>NIM</label>
+                                <label>NIM <code>*</code></label>
                                 <select type="text" class="form-control" id="nim" name="nim">
                                     <option value="" selected disabled>Pilih NIM </option>
                                 </select>
@@ -156,24 +156,24 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Nama Mahasiswa</label>
+                                <label>Nama Mahasiswa <code>*</code></label>
                                 <input type="text" class="form-control" name="name" id="name" value="" readonly />
                             </div>
                             <div class="form-group">
-                                <label>Judul Penelitian</label>
+                                <label>Judul Penelitian <code>*</code></label>
                                 <input class="form-control" name="judul" id="judul" type="text">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    File Laporan
+                                    File Laporan <code>*</code>
                                 </label>
                                 <input type="file" class="form-control" name="laporan" />
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                    <label>waktu Mulai</label>
+                                    <label>waktu Mulai <code>*</code></label>
                                     <div class="input-group clockpicker">
                                         <input type="text" class="form-control" name="jamMulai" placeholder="mulai">
                                         <span class="input-group-text">
@@ -181,7 +181,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>waktu Selesai</label>
+                                    <label>waktu Selesai <code>*</code></label>
                                     <div class="input-group clockpicker">
                                         <input type="text" class="form-control" name="jamSelesai" placeholder="selesai">
                                         <span class="input-group-text">
@@ -192,7 +192,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label>
-                                        Tanggal Seminar
+                                        Tanggal Seminar <code>*</code>
                                     </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Seminar" name="tanggal" />
@@ -200,7 +200,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Ruang Seminar</label>
+                                    <label>Ruang Seminar <code>*</code></label>
                                     <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         @foreach ($Ruang as $value)
                                         <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
@@ -210,7 +210,7 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Nomer Surat Berita Acara
+                                    Nomer Surat Berita Acara <code>*</code>
                                 </label>
                                 <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara" name="no_surat" />
                             </div>

@@ -16,7 +16,7 @@
                                 <th> No. </th>
                                 <th> Nama </th>
                                 <th> Jurusan</th>
-                                <th> Aksi </th>
+                                {{-- <th> Aksi </th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -26,7 +26,7 @@
                                 <td> {{ $no++ }}</td>
                                 <td> {{ $value->nama }}</td>
                                 <td> {{ $value->jurusan->namaJurusan }} </td>
-                                <td>
+                                {{-- <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
@@ -35,7 +35,7 @@
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
-                                </td>
+                                </td> --}}
                                 @endforeach
                         </tbody>
                     </table>

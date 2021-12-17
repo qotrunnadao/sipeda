@@ -1,6 +1,6 @@
 @extends('mahasiswa.TA.layouts.main')
 @section('icon', 'file')
-@section('title', 'Pengajuan TA')
+@section('title', 'Pengajuan Tugas Akhir')
 @section('content')
 <div class="row">
     <div class="col-md-8 grid-margin">
@@ -28,7 +28,7 @@
                                 Pembimbing 1 <code>*</code>
                             </label>
                             <div>
-                                <select type="text" id="pembimbing1_id" name="pembimbing1" class="form-control">
+                                <select type="text" id="pembimbing1_id" name="pembimbing1" class="form-control" required>
                                     <option selected disabled> Pilih Dosen </option>
                                     @foreach ($dosen as $value)
                                     <option value="{{ $value->id }} ">{{ $value->nama }}</option>
@@ -41,7 +41,7 @@
                                 Pembimbing 2 <code>*</code>
                             </label>
                             <div>
-                                <select type="text" id="pembimbing2_id" name="pembimbing2" class="form-control">
+                                <select type="text" id="pembimbing2_id" name="pembimbing2" class="form-control" required>
                                     <option selected disabled>Pilih Dosen </option>
                                     @foreach ($dosen as $value)
                                     <option value="{{ $value->id }} ">{{ $value->nama }}</option>
@@ -54,15 +54,15 @@
                         <label>
                             Berkas Persyaratan <code>*</code>
                         </label>
-                        <input type="file" class="form-control" name="praproposal" />
+                        <input type="file" class="form-control" name="praproposal" required />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white">
+    <div class="col-md-4 grid-margin">
+        <div class="card bg-primary card-img-holder text-white grid-margin">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Berkas Persayaratan Tugas Akhir
                 </h4>
@@ -72,7 +72,10 @@
                     <li>Melampirkan lembar permohonan Tugas Akhir</li>
                     <code>*Berkas dijadikan 1 file PDF</code>
                 </ul>
-                <hr class="border-light">
+            </div>
+        </div>
+        <div class="card bg-primary card-img-holder text-white grid-margin">
+            <div class="card-body mb-3">
                 <h4 class="font-weight-normal mb-3">File Unduhan
                 </h4>
                 <div class="table-responsive mt-3">

@@ -15,7 +15,7 @@
                     <p class="badge badge-danger mb-5">*pengajuan seminar maksimal dilakukan h-3 pelaksanaan</p>
                     <div class="form-group">
                         <label>Judul Penelitian <code>*</code></label>
-                        <input class="form-control" name="judul" id="judul" type="text" autofocus>
+                        <input class="form-control" name="judul" id="judul" type="text" autofocus required>
                     </div>
                     <div class="form-group row">
                         <div class="col-6">
@@ -23,7 +23,7 @@
                                 Tanggal Seminar <code>*</code>
                             </label>
                             <div class="input-group">
-                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal seminar" />
+                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal seminar" required />
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                                 </div>
@@ -34,7 +34,7 @@
                                 Ruang Seminar <code>*</code>
                             </label>
                             <div>
-                                <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true" required>
                                     @foreach ($Ruang as $value)
                                     <option value="{{ $value->id }} ">{{ $value->namaRuang }}</option>
                                     @endforeach
@@ -48,7 +48,7 @@
                                 Waktu Mulai <code>*</code>
                             </label>
                             <div class="input-group clockpicker">
-                                <input type="text" id="jamMulai" name="jamMulai" class="form-control" placeholder="mulai">
+                                <input type="text" id="jamMulai" name="jamMulai" class="form-control" placeholder="mulai" required>
                                 <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
@@ -58,7 +58,7 @@
                                 Waktu Selesai <code>*</code>
                             </label>
                             <div class="input-group clockpicker">
-                                <input type="text" id="jamSelesai" name="jamSelesai" class="form-control" placeholder="selesai">
+                                <input type="text" id="jamSelesai" name="jamSelesai" class="form-control" placeholder="selesai" required>
                                 <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
@@ -69,7 +69,7 @@
                         <label>
                             Berkas Persayaratan <code>*</code>
                         </label>
-                        <input type="file" class="form-control" name="proposal" />
+                        <input type="file" class="form-control" name="proposal" required />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>

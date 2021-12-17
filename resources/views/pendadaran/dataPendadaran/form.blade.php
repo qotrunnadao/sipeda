@@ -42,7 +42,7 @@
                             @if ($button == 'Tambah')
                             <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="{{ $tahun->id }}">
                             <div class="form-group">
-                                <label>Jurusan</label>
+                                <label>Jurusan <code>*</code></label>
                                 <select type="text" class="form-control" id="jurusan" name="jurusan">
                                     <option selected disabled>Pilih Jurusan </option>
                                     @foreach ($jurusan as $value)
@@ -56,7 +56,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label> NIM</label>
+                                <label> NIM <code>*</code></label>
                                 <select type="text" class="form-control" id="nim" name="nim">
                                     <option value="" selected disabled>Pilih NIM </option>
                                 </select>
@@ -67,12 +67,12 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Nama Mahasiswa</label>
+                                <label>Nama Mahasiswa <code>*</code></label>
                                 <input type="text" class="form-control" name="name" id="name" value="" readonly />
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Berkas Persyaratan
+                                    Berkas Persyaratan <code>*</code>
                                 </label>
                                 <input type="file" class="form-control" placeholder="Berkas Persyaratan Ujian Pendadaran" name="berkas" id="berkas" />
                             </div>
@@ -80,7 +80,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label>
-                                        Tanggal Ujian Pendadaran
+                                        Tanggal Ujian Pendadaran @if ($button == 'Tambah')<code>*</code> @endif
                                     </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Pendadaran" value="@if ($button == 'Tambah'){{ old('tanggal') }}@else{{ $data_pendadaran->tanggal }}@endif" />
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Ruang Seminar</label>
+                                    <label>Ruang Seminar @if ($button == 'Tambah')<code>*</code> @endif</label>
                                     <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         @foreach ($ruang as $value)
                                         <option value="{{ $value->id }} " {{ $value->id == $data_pendadaran->ruangpendadaran_id ? 'selected' : '' }}>{{ $value->namaRuang }}</option>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                    <label>Waktu Ujian Pendadaran</label>
+                                    <label>Waktu Ujian Pendadaran @if ($button == 'Tambah')<code>*</code> @endif</label>
                                     <div class="input-group clockpicker">
                                         <input type="text" class="form-control" name="jamMulai" placeholder="mulai" value="@if ($button == 'Tambah'){{ old('jamMulai') }}@else{{ $data_pendadaran->jamMulai }}@endif" />
                                         <span class="input-group-text">
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Waktu Ujian Pendadaran</label>
+                                    <label>Waktu Ujian Pendadaran @if ($button == 'Tambah')<code>*</code> @endif</label>
                                     <div class="input-group clockpicker">
                                         <input type="text" class="form-control" name="jamSelesai" placeholder="selesai" value="@if ($button == 'Tambah'){{ old('jamSelesai') }}@else{{ $data_pendadaran->jamSelesai }}@endif" />
                                         <span class="input-group-text">
@@ -118,7 +118,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    Dosen Penguji 1
+                                    Dosen Penguji 1 @if ($button == 'Tambah')<code>*</code> @endif
                                 </label>
                                 <select name="penguji1_id" id="penguji1_id" class="form-control">
                                     @foreach ($dosen as $value )
@@ -128,7 +128,7 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Dosen Penguji 2
+                                    Dosen Penguji 2 @if ($button == 'Tambah')<code>*</code> @endif
                                 </label>
                                 <select name="penguji2_id" id="penguji2_id" class="form-control">
                                     @foreach ($dosen as $value )
@@ -138,7 +138,7 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Dosen Penguji 3
+                                    Dosen Penguji 3 @if ($button == 'Tambah')<code>(jika ada)</code> @endif
                                 </label>
                                 <select name="penguji3_id" id="penguji3_id" class="form-control">
                                     @foreach ($dosen as $value )
@@ -148,7 +148,7 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Dosen Penguji 4
+                                    Dosen Penguji 4 @if ($button == 'Tambah')<code>(jika ada)</code> @endif
                                 </label>
                                 <select name="penguji4_id" id="penguji4_id" class="form-control">
                                     @foreach ($dosen as $value )

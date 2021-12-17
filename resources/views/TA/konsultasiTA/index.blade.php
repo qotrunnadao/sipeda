@@ -65,7 +65,7 @@
                     @csrf
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
+                        <label for="exampleInputEmail3">Jurusan <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" id="jurusan" name="jurusan">
                                 <option selected disabled>Pilih Jurusan </option>
@@ -81,7 +81,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">NIM</label>
+                        <label for="exampleInputEmail3">NIM <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" id="nim" name="nim">
                                 <option value="" selected disabled>Pilih NIM </option>
@@ -94,19 +94,19 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <label for="exampleInputEmail3">Nama Mahasiswa <code>*</code></label>
                         <div class="input-group">
                             <input type="text" required class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleSelectGender">Nama Pembimbing</label>
+                        <label for="exampleSelectGender">Nama Pembimbing <code>*</code></label>
                         <select type="text" required class="form-control" name="dosen_id" id="dosen_id">
                             <option value="" selected disabled> Pilih Dosen </option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Tanggal Konsultasi</label>
+                        <label for="exampleInputEmail3">Tanggal Konsultasi <code>*</code></label>
                         <div class="input-group">
                             <input type="text" required class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
                             <div class="input-group-prepend">
@@ -115,13 +115,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Topik Konsultasi</label>
+                        <label for="exampleInputEmail3">Topik Konsultasi <code>*</code></label>
                         <div class="input-group">
                             <input type="text" required class="form-control" name="topik" id="topik" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="alasan">Hasil Konsultasi</label>
+                        <label for="alasan">Hasil Konsultasi <code>*</code></label>
                         <textarea class="form-control" required id="exampleTextarea1" rows="4" name="hasil" id="hasil"></textarea>
                     </div>
                     <div class="modal-footer">

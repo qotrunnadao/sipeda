@@ -74,7 +74,7 @@
                     @csrf
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="">
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Jurusan</label>
+                        <label for="exampleInputEmail3">Jurusan <code>*</code></label>
                         <div class="input-group">
                             <select type="text" class="form-control" id="jurusan" name="jurusan" required>
                                 <option selected disabled>Pilih Jurusan </option>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3"> NIM</label>
+                        <label for="exampleInputEmail3"> NIM <code>*</code></label>
                         <div class="input-group">
                             <select type="text" class="form-control" id="nim" name="nim" required>
                                 <option value="" selected disabled>Pilih NIM </option>
@@ -93,19 +93,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Mahasiswa</label>
+                        <label for="exampleInputEmail3">Nama Mahasiswa <code>*</code></label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="name" id="name" value="" readonly />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Angka</label>
+                        <label for="exampleInputEmail3">Nilai Angka <code>*</code></label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="nilaiAngka" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nilai Huruf</label>
+                        <label for="exampleInputEmail3">Nilai Huruf <code>*</code></label>
                         <div class="input-group">
                             <select type="text" class="form-control" name="nilai_huruf_id" required>
                                 <option value="">PILIH Nilai Huruf</option>
@@ -120,7 +120,6 @@
                         <div class="input-group">
                             <textarea type="text" class="form-control" placeholder="" name="ket" required></textarea>
                         </div>
-                        <p class="text-muted"> * tidak wajib di isi</p>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Status Nilai</label>

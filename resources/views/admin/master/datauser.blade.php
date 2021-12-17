@@ -15,7 +15,7 @@
                                 <th> no Induk </th>
                                 <th> Level ID</th>
                                 <th> Nama Level </th>
-                                <th> Aksi</th>
+                                {{-- <th> Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +27,7 @@
                                 <td> {{ $value->noInduk }}</td>
                                 <td> {{ $value->level_id }}</td>
                                 <td> {{ $value->level->namaLevel }}</td>
-                                <td>
+                                {{-- <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
                                     </div>
@@ -36,7 +36,7 @@
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
-                                </td>
+                                </td> --}}
                                 @endforeach
                         </tbody>
                     </table>

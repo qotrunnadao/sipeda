@@ -33,7 +33,8 @@
                                     @elseif ($value->verifikasiDosen == '1')
                                     <span class="badge badge-success"> Diterima</span>
                                     @else
-                                    <span class="badge badge-danger">Ditolak</span></td>
+                                    <span class="badge badge-danger">Ditolak</span>
+                                </td>
                                 </td>
                                 @endif
                                 <td>
@@ -74,34 +75,34 @@
                     <input type="hidden" class="form-control" id="verifikasiDosen" name="verifikasiDosen" value="0">
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
                     <div class="form-group">
-                        <label for="exampleSelectGender">Nama Pembimbing</label>
-                        <select class="form-control" id="exampleSelectGender" name="dosen_id">
+                        <label for="exampleSelectGender">Nama Pembimbing <code>*</code></label>
+                        <select class="form-control" id="exampleSelectGender" name="dosen_id" required>
                             <option selected disabled> Pilih Dosen </option>
                             <option value="{{ $tugas_akhir->pembimbing1_id }}">{{ $tugas_akhir->dosen1->nama }}</option>
                             <option value="{{ $tugas_akhir->pembimbing2_id }}">{{ $tugas_akhir->dosen2->nama }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Tanggal Konsultasi</label>
+                        <label for="exampleInputEmail3">Tanggal Konsultasi <code>*</code></label>
                         <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
+                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" required />
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Topik Konsultasi</label>
+                        <label for="exampleInputEmail3">Topik Konsultasi <code>*</code></label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="topik" id="topik" />
+                            <input type="text" class="form-control" name="topik" id="topik" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="alasan">Hasil Konsultasi</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil"></textarea>
+                        <label for="alasan">Hasil Konsultasi <code>*</code></label>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="hasil" required></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id = "btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                     </div>
                 </form>
             </div>

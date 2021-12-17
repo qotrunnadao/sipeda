@@ -1,9 +1,9 @@
 @extends('mahasiswa.pendadaran.layouts.main')
 @section('content')
 @section('icon', 'file')
-@section('title', 'pendaftaran pendadaran')
+@section('title', 'pengajuan pendadaran')
 <div class="row">
-    <div class="col-md-6 grid-margin stretch-card">
+    <div class="col-md-8 grid-margin stretch-card">
         <div class="card card-primary">
             <form action="{{route('mahasiswaPendadaran.store')}}" method="post" enctype="multipart/form-data" id="creatData">
                 @csrf
@@ -12,16 +12,16 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>
-                            Berkas Persyaratan
+                            Berkas Persyaratan <code>*</code>
                         </label>
-                        <input type="file" class="form-control" name="berkas" id="berkas" />
+                        <input type="file" class="form-control" name="berkas" id="berkas" required />
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-md-6 stretch-card grid-margin">
+    <div class="col-md-4 stretch-card grid-margin">
         <div class="card bg-primary card-img-holder text-white  card-hover">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Berkas Persyaratan Pendadaran
