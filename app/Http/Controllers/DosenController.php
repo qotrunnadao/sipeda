@@ -26,13 +26,6 @@ class DosenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function kajur()
-    {
-        $data = array(
-            'kajur' => Dosen::where('isKajur', 1)->latest()->get(),
-        );
-        return view('admin.master.datakajur', $data);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -83,14 +76,6 @@ class DosenController extends Controller
         return redirect(route('dosen.index'));
     }
 
-    public function updateKajur(Request $request, $id)
-    {
-        $dosen = Dosen::find($id);
-        $data = $request->all();
-        $dosen->update($data);
-        Alert::success('Berhasil', 'Berhasil Mengubah Status Kajur');
-        return redirect(route('dataKajur'));
-    }
 
     /**
      * Remove the specified resource from storage.
