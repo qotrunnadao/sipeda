@@ -34,30 +34,51 @@
                                 <td> {{ $value->mahasiswa->nama }} </td>
                                 <td> {{ $value->mahasiswa->nim }}</td>
                                 <td> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
-                                <td> {{ $value->transkip }}</td>
                                 <td>
-                                    @if($value->status_id == 1)
-                                    <span class="badge badge-warning">Review Bapendik</span>
-                                    @elseif($value->status_id == 2)
-                                    <span class="badge badge-success">Disetujui</span>
-                                    @elseif($value->status_id == 3)
-                                    <span class="badge badge-danger">Tidak disetujui</span>
-                                    @elseif($value->status_id == 4)
-                                    <span class="badge badge-primary">boleh ajukan lagi</span>
+                                    @if($value->berkas != null)
+                                    @if (File::exists(public_path('storage/assets/file/Yudisium/' . $value->berkas . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.download', $value->berkas) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
                                     @else
-                                    <span class="badge badge-primary">Selesai</span>
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.download', $value->berkas) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    @else
+
+                                    <div class="badge badge-danger badge-pill ">Berkas Yudisium Tidak Ada</div>
                                     @endif
                                 </td>
-                                <td> {{ $value->periode_id }} </td>
                                 <td>
-                                    @if(auth()->user()->level_id == 5)
+                                    <span class="badge badge-danger">{{ $value->statusyudisium->status}}</span>
+
+                                </td>
+                                <td>
+                                    @if ($value->periode_id)
+                                    {{ $value->periodeyudisium->namaPeriode }}
+                                    @else
+                                    <span class="badge badge-danger">Data Periode Belum Terbit</span>
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if(auth()->user()->level_id == 5 && $value->status_id ==2)
                                     <div class="btn-group">
                                         <a href="{{ route('yudisium.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <a href="{{ route('yudisium.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
                                     </div>
-                                    @else
+                                    @elseif (auth()->user()->level_id == 2 )
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-periode_id='{{ $value->periode_id }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
@@ -108,10 +129,10 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Periode Yudisium</label>
                         <div class="input-group">
-                            <select type="text" class="form-control" name="periode_id">
+                            <select type="text" required class="form-control" name="periode_id">
                                 <option value="">PILIH</option>
                                 @foreach ($periode as $value)
-                                <option value="{{ $value->id }}" {{ $value->id == $value->tanggal ? 'selected' : '' }}>{{ $value->tanggal }}
+                                <option value="{{ $value->id }}" {{ $value->id == $value->namaPeriode ? 'selected' : '' }}>{{ $value->namaPeriode }}
                                 </option>
                                 @endforeach
                             </select>
@@ -135,10 +156,10 @@
     var status_id = button.data('status_id')
     var periode_id = button.data('periode_id')
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='status_id']").val(status_id)
-    modal.find(".modal-body input[name='periode_id']").val(periode_id)
-    modal.find(".modal-body form").attr("action",'/yudisium//update/'+id)
+
+    modal.find(".modal-body select[name='status_id']").val(status_id)
+    modal.find(".modal-body select[name='periode_id']").val(periode_id)
+    modal.find(".modal-body form").attr("action",'/yudisium/data-yudisium/update/'+id)
     })
 </script>
 @endsection

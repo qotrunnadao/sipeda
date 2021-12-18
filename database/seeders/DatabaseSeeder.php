@@ -286,16 +286,16 @@ class DatabaseSeeder extends Seeder
                 'status' => "Tidak Layak",
             ],
             [
+                'status' => "Review Ketua Jurusan",
+            ],
+            [
                 'status' => "Review Bapendik",
             ],
             [
-                'status' => "Review Komisi",
+                'status' => "Pencetakan Surat Kelulusan",
             ],
             [
-                'status' => "Pencetakan Berita Acara",
-            ],
-            [
-                'status' => "Pelaksanaan Ujian Pendadaran",
+                'status' => "Pelaksanaan Yudisium",
             ],
             [
                 'status' => "Selesai",
@@ -914,6 +914,7 @@ class DatabaseSeeder extends Seeder
 
         $periode = [
             [
+                'aktif' => 1,
                 'nosurat' => '1234567889',
                 'fileSK' => "SK_Periode_2022"
             ]

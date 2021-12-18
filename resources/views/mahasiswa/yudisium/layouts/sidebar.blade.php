@@ -18,7 +18,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= url('') ?>/mahasiswa/yudisium/pendaftaran">
+            <a class="nav-link" href="{{ route('mahasiswaYudisium.create') }}">
                 <span class="menu-title">Pendaftaran</span>
                 <i class="mdi mdi-file menu-icon"></i>
             </a>

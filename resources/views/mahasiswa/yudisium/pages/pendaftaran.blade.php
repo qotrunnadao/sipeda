@@ -5,14 +5,14 @@
 <div class="row">
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="" method="post" enctype="multipart/form-data" id="creatData">
+            <form action="{{route('mahasiswaYudisium.store')}}" method="post" enctype="multipart/form-data" id="creatData">
                 @csrf
-                <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="">
-                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="">
+                <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="{{ $tahun->id }}">
+                <input type="hidden" class="form-control" id="mahasiswa_id" name="mahasiswa_id" value="{{  $mhs_id->id }}">
                 <div class="card-body">
                     <div class="form-group">
                         <label>
-                            Berkas Persyaratan
+                            Berkas Persyaratan <code>*</code>
                         </label>
                         <div class="input-group">
                             <input type="file" class="form-control" name="berkas" id="berkas" required />
@@ -60,38 +60,44 @@
     </div>
 </div>
 <div class="row">
+    @foreach ($yudisium as $value )
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Data Pengajuan</h4>
+                <h4 class="card-title mb-4">Data Pengajuan {{ $loop->iteration }}</h4>
                 <div class="table-responsive mt-3">
                     <table class="table table-striped">
                         <tbody>
                             <tr>
                                 <td> Nama</td>
                                 <td>:</td>
-                                <td> </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
                             </tr>
                             <tr>
                                 <td> Diajukan Pada </td>
                                 <td>:</td>
-                                <td> </td>
+                                <td> {{ $value->created_at }} </td>
                             </tr>
                             <tr>
                                 <td> Berkas </td>
                                 <td>:</td>
-                                <td> </td>
+                                <td>{{ $value->berkas }} </td>
                             </tr>
                             <td> Status Pengajuan </td>
                             <td>:</td>
                             <td>
-
+                                {{ $value->statusYudisium->status}}
                             </td>
                             </tr>
                             <tr>
                                 <td> Keterangan </td>
                                 <td> : </td>
-                                <td> - </td>
+                                <td> @if($value->ket == null)
+                                    <span class="badge badge-danger">tidak ada keterangan</span>
+                                    @else
+                                    {{ $value->ket }}
+                                    @endif
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,5 +105,17 @@
             </div>
         </div>
     </div>
+    @endforeach
 </div>
-@endsection
+@endsection<script>
+    $(document).ready(function () {
+
+    $("#creatData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>

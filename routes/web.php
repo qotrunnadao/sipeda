@@ -241,16 +241,18 @@ Route::get('/yudisium/data-yudisium',  'YudisiumController@index')->name('yudisi
 Route::get('/yudisium/data-yudisium/create',  'YudisiumController@create')->name('yudisium.create');
 Route::post('/yudisium/data-yudisium/store',  'YudisiumController@store')->name('yudisium.store');
 Route::get('/yudisium/data-yudisium/edit/{id}',  'YudisiumController@edit')->name('yudisium.edit');
+Route::put('/yudisium/berkas/download/{filename}',  'YudisiumController@download')->name('yudisium.download');
 Route::put('/yudisium/data-yudisium/update/{id}',  'YudisiumController@update')->name('yudisium.update');
 Route::get('/yudisium/data-yudisium/delete/{id}',  'YudisiumController@destroy')->name('yudisium.delete');
 Route::get('/yudisium/data-yudisium/diterima/{yudisium}',  'YudisiumController@diterima')->name('yudisium.diterima');
 Route::get('/yudisium/data-yudisium/ditolak/{yudisium}',  'YudisiumController@ditolak')->name('yudisium.ditolak');
-Route::get('/yudisium/data-yudisium/ulang/{yudisium}',  'YudisiumController@ulang')->name('yudisium.ulang');
-Route::get('/yudisium/data-yudisium/selesai/{yudisium}',  'YudisiumController@selesai')->name('yudisium.selesai');
 
 
 // Periode Yudisium
 Route::get('/yudisium/periode-yudisium', 'PeriodeYudisiumController@index')->name('periode.index');
+Route::post('/yudisium/periode-yudisium/store', 'PeriodeYudisiumController@store')->name('periode.store');
+Route::put('/yudisium/periode-yudisium/update/{id}',  'PeriodeYudisiumController@update')->name('periode.update');
+Route::get('/yudisium/periode-yudisium/delete/{id}',  'PeriodeYudisiumController@destroy')->name('periode.destroy');
 
 //================= ROUTE MAHASISWA =========================
 
@@ -302,13 +304,9 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     //============= YUDISIUM =============
 
     Route::get('/yudisium/beranda', 'BerandaController@mahasiswaYudisium')->name('mahasiswaYudisium.beranda');
+    Route::get('/yudisium/pendaftaran', 'YudisiumMahasiswaController@create')->name('mahasiswaYudisium.create');
+    Route::post('/yudisium/pendaftaran/store',  'YudisiumMahasiswaController@store')->name('mahasiswaYudisium.store');
 
-    Route::get('/yudisium/pendaftaran', function () {
-        return view('mahasiswa.yudisium.pages.pendaftaran');
-    });
-    Route::get('/yudisium/jadwal', function () {
-        return view('mahasiswa.yudisium.pages.jadwal');
-    });
 });
 
 

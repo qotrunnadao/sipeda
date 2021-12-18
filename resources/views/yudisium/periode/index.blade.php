@@ -14,9 +14,11 @@
                         <thead>
                             <tr>
                                 <th> # </th>
-                                <th> tanggal yudisium </th>
-                                <th> nomor surat </th>
+                                <th> Nama Periode Yudisium </th>
+                                <th> Tanggal Yudisium </th>
+                                <th> Nomor Surat </th>
                                 <th> File SK</th>
+                                <th> Aktif </th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
@@ -25,6 +27,7 @@
                             @foreach ($periode as $value )
                             <tr>
                                 <td> {{ $no++ }} </td>
+                                <td> {{ $value->namaPeriode }}</td>
                                 <td> {{ $value->tanggal}} </td>
                                 <td>
                                     {{ $value->nosurat }}
@@ -39,12 +42,13 @@
                                     </div>
 
                                 </td>
+                                <td> {{ $value->aktif == 0 ? 'false' : 'true'}} </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSK='{{ $value->fileSK }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-periode='{{ $value->namaPeriode }}' data-tanggal='{{ $value->tanggal }}' data-surat='{{ $value->nosurat }}' data-fileSK='{{ $value->fileSK }}' data-aktif='{{ $value->aktif}}' data-route="{{ route('periode.update', $value->id) }}"><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="" method="GET">
+                                        <form action="{{ route('periode.destroy', $value->id) }}" method="GET">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
@@ -61,7 +65,7 @@
     </div>
 </div>
 
-<!-- Modal Tambah SPK -->
+<!-- Modal Tambah Periode Yudisium -->
 <div class="modal fade" id="uploadSK" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -72,13 +76,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" action="" method="POST" enctype="multipart/form-data">
+                <form class="forms-sample" action="{{route('periode.store')}}" method="POST" enctype="multipart/form-data" name="eksport" id="eksport">
                     @csrf
-                    <input type="hidden" class="form-control" id="yudisium_id" name="yudisium_id" value="">
-                    <div class="form-group">
+                   <div class="form-group">
+                        <label for="exampleInputEmail3">Nama Periode Yudisium</label>
+                        <div class="input-group">
+                            <input type="text" required class="form-control" name="namaPeriode" />
+                        </div>
+                    </div><div class="form-group">
                         <label for="exampleInputEmail3">Tanggal Yudisium</label>
                         <div class="input-group">
-                            <input type="text" required class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
+                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
@@ -87,11 +95,11 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nomor Surat</label>
                         <div class="input-group">
-                            <input type="text" required class="form-control" name="nosurat" id="nosurat" />
+                            <input type="text" class="form-control" name="nosurat" id="nosurat" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">File SK</label>
+                        <label for="exampleInputEmail3">File Surat Kelulusan Resmi</label>
                         <div class="input-group">
                             <input type="file" class="form-control" name="fileSK" />
                         </div>
@@ -101,15 +109,25 @@
                         </div>
                         @endif
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Status</label>
+                        <div class="input-group">
+                            <select type="text" required class="form-control" name="aktif">
+                                <option value="" selected disabled>PILIH</option>
+                                <option value="1">True</option>
+                                <option value="0">False</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id = "btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+<!-- Modal Edit Periode Yudisium -->
 <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -121,8 +139,28 @@
             </div>
             <div class="modal-body">
                 <form class="forms-sample" action="" method="POST" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
-                    <input type="hidden" class="form-control" id="yudisium_id" name="yudisium_id" value="">
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nama Periode Yudisium</label>
+                        <div class="input-group">
+                            <input type="text" required class="form-control" name="namaPeriode" />
+                        </div>
+                    </div><div class="form-group">
+                        <label for="exampleInputEmail3">Tanggal Yudisium</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Nomor Surat</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="nosurat" id="nosurat" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Upload SK</label>
                         <div class="input-group">
@@ -134,6 +172,16 @@
                         </div>
                         @endif
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Status</label>
+                        <div class="input-group">
+                            <select type="text" required class="form-control" name="aktif">
+                                <option value="" selected disabled>PILIH</option>
+                                <option value="1">True</option>
+                                <option value="0">False</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
@@ -144,16 +192,37 @@
 </div>
 @endsection
 @section('javascripts')
+<script>
 
+    $(document).ready(function () {
+
+    $("#eksport").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+        });
+    });
+</script>
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
-    var id = button.data('id')
+    var route = button.data('route')
     var fileSK = button.data('fileSK')
+    var periode = button.data('periode')
+    var tanggal = button.data('tanggal')
+    var surat = button.data('surat')
+    var aktif = button.data('aktif')
+
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
+
+    modal.find(".modal-body input[name='namaPeriode']").val(periode)
+    modal.find(".modal-body input[name='tanggal']").val(tanggal)
+    modal.find(".modal-body input[name='nosurat']").val(surat)
+    modal.find(".modal-body select[name='aktif']").val(aktif)
     modal.find(".modal-body input[name='fileSK']").val(fileSK)
-    modal.find(".modal-body form").attr("action",'/yudisium//update/'+id)
+    modal.find(".modal-body form").attr("action",route)
     })
 </script>
 @endsection

@@ -13,8 +13,6 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th> No. </th>
-                                <th> ID </th>
                                 <th> Keterangan Status </th>
                                 <th> Aksi </th>
                             </tr>
@@ -24,7 +22,6 @@
                             @foreach ($status as $value)
                             <tr>
                                 <td> {{ $no++ }} </td>
-                                <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->status }}</td>
                                 <td>
                                     <div class="btn-group">

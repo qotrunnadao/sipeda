@@ -16,6 +16,8 @@ class CreatePeriodeYudisiaTable extends Migration
         Schema::create('periode_yudisium', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->tinyInteger('aktif')->comment('0=false, 1=true')->default('1');
+            $table->string('namaPeriode')->nullable();
             $table->string('nosurat')->nullable();
             $table->dateTime('tanggal')->nullable();
             $table->string('fileSK')->nullable();

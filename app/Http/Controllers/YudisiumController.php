@@ -6,10 +6,13 @@ use App\Models\Jurusan;
 use App\Models\Yudisium;
 use App\Models\Mahasiswa;
 use App\Models\PeriodeYudisium;
+use App\Models\Dosen;
+use App\Models\User;
 use App\Models\SK;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
 use App\Models\StatusYudisium;
+use File;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class YudisiumController extends Controller
@@ -21,9 +24,23 @@ class YudisiumController extends Controller
      */
     public function index()
     {
-        $status = StatusYudisium::get()->all();
-        $periode = PeriodeYudisium::get()->all();
-        $yudisium = Yudisium::latest()->get();
+        $status = StatusYudisium::get()->all();$id = auth()->user()->id;
+        $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+        $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
+        $yudisium = Yudisium::with(['periodeyudisium'])->latest()->get();
+        // dd($yudisium);
+        if (auth()->user()->level_id == 2) {
+            $yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium'])->latest()->get();
+            $acc_yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium'])->where('status_id', 2)->latest()->get();
+        } elseif (auth()->user()->level_id == 5) {
+            $yudisium = Yudisium::with(['statusYudisium'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->latest()->get();
+            $acc_yudisium = Yudisium::with('statusYudisium')->where('status_id', 4)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->latest()->get();
+        }
         return view('yudisium.dataYudisium.index', compact('yudisium', 'status', 'periode'));
     }
 
@@ -40,6 +57,7 @@ class YudisiumController extends Controller
         $yudisium = Yudisium::get();
         $status = StatusYudisium::get();
         $tahun = TahunAkademik::where('aktif', '1')->get()->first();
+        // dd($tahun);
         $jurusan = jurusan::get();
         return view('yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status', 'tahun', 'jurusan'));
     }
@@ -59,9 +77,9 @@ class YudisiumController extends Controller
         $data = $request->all();
 
         if (Yudisium::create($data)) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Izin');
+            Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
         } else {
-            Alert::warning('Gagal', 'Data Izin Gagal Ditambahkan');
+            Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
         }
 
         return redirect(route('yudisium.index'));
@@ -105,10 +123,10 @@ class YudisiumController extends Controller
     {
         $yudisium = Yudisium::find($id);
         $data = $request->all();
+        // dd($data);
         $yudisium->update($data);
-        dd($yudisium);
         Alert::success('Berhasil', 'Berhasil edit data Yudisium');
-        return redirect('/yudisium/data-yudisium');
+        return back();
     }
 
     /**
@@ -128,7 +146,7 @@ class YudisiumController extends Controller
     public function diterima(Yudisium $yudisium)
     {
         $data = array(
-            'status_id' => 2,
+            'status_id' => 3,
         );
         $yudisium->update($data);
         Alert::success('Berhasil', 'Pengajuan Yudisium Diterima');
@@ -137,30 +155,20 @@ class YudisiumController extends Controller
     public function ditolak(Yudisium $yudisium)
     {
         $data = array(
-            'status_id' => 3,
+            'status_id' => 1,
         );
         $yudisium->update($data);
         Alert::warning('Berhasil', 'Pengajuan Yudisium Ditolak');
         return back();
     }
-
-    public function ulang(Yudisium $yudisium)
+    public function download($filename)
     {
-        $data = array(
-            'status_id' => 4,
-        );
-        $yudisium->update($data);
-        Alert::success('Berhasil', 'Pengajuan yudisium boleh diajukan lagi');
-        return back();
-    }
-
-    public function selesai(Yudisium $yudisium)
-    {
-        if (SK::where('id', $yudisium->id) != null) {
-            $data = array(
-                'status_id' => 4,
-            );
-            $yudisium->update($data);
+        //    dd($filename);
+        if (File::exists(public_path('storage/assets/file/Yudisium/' . $filename . ''))) {
+            return response()->File(public_path('storage/assets/file/Yudisium/' . $filename . ''));
+        } else {
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+            return back();
         }
     }
 }
