@@ -41,6 +41,8 @@ class PendadaranController extends Controller
                     ->orWhere('penguji3_id', $dosen_id->id)
                     ->orWhere('penguji4_id', $dosen_id->id);
             })->latest()->get();
+        return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'status'));
+
         } elseif (auth()->user()->level_id == 1) {
 
             $pendadaran = Pendadaran::with(['statusPendadaran'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {

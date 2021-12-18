@@ -326,7 +326,7 @@
             </div>
         </div>
     </div>
-    @if(auth()->user()->level_id == 1 || 5)
+    @elseif(auth()->user()->level_id == 1 || 5)
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -410,7 +410,6 @@
             </div>
         </div>
     </div>
-    @endif
 </div>
 @endif
 <script>

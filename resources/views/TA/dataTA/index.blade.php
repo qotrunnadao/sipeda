@@ -111,7 +111,6 @@
                                 <th class="text-center"> Dosen Pembimbing 2</th>
                                 <th class="text-center"> Status</th>
                                 <th class="text-center"> Keterangan </th>
-                                <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,23 +149,6 @@
                                 </td>
                                 <td class="text-center"> {{ $value->ket }}</td>
                                 <td class="text-center">
-                                    @if (auth()->user()->level_id == 2 && $value->status_id ==2)
-                                    <div class="btn-group">
-                                        <a href="" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-ket='{{ $value->ket }}'>Verifikasi</a>
-                                    </div>
-                                    @elseif ($value->status_id !=2)
-                                    <div class="btn-group">
-                                        <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
-                                    </div>
-                                    @endif
-
-                                    <div class="btn-group">
-                                        <form action="{{ route('TA.delete', $value->id) }}" method="GET">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
-                                        </form>
-                                    </div>
                                 </td>
                             </tr>
                             @endforeach
