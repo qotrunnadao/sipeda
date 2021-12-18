@@ -13,16 +13,18 @@ class CreateYudisiaTable extends Migration
      */
     public function up()
     {
+
         Schema::create('yudisium', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
             $table->string('nosurat')->nullable();
             $table->dateTime('tanggal')->nullable();
             $table->time('waktu')->nullable();
-            $table->string('transkip');
+            $table->string('berkas');
             $table->foreignId('status_id')->references('id')->on('statusyudisium')->default(1)->onUpdate('cascade')->onDelete('cascade');
             $table->longText('ket')->nullable();
             $table->foreignId('thnAkad_id')->references('id')->on('tahunakademik')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('periode_id')->nullable()->references('id')->on('periode_yudisium')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

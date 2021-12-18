@@ -88,9 +88,9 @@
                 <ul class="nav flex-column sub-menu">
                     @if (auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statusyudisium.index') }}"> Status Yudisium </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('periode.index') }}"> Periode Yudisium </a></li>
                     @endif
                     <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('sk.index') }}"> SK Kelulusan </a></li>
                 </ul>
             </div>
         </li>

@@ -67,10 +67,10 @@
                                 <label>
                                     Berkas Persyaratan
                                 </label>
-                                <input type="file" class="form-control" placeholder="transkip nilai" name="transkip" value="@if ($button == 'Tambah'){{ old('transkip') }}@else{{ $data_yudisium->transkip }}@endif" />
-                                @if ($errors->has('transkip'))
+                                <input type="file" class="form-control" placeholder="transkip nilai" name="berkas" value="@if ($button == 'Tambah'){{ old('berkas') }}@else{{ $data_yudisium->berkas }}@endif" />
+                                @if ($errors->has('berkas'))
                                 <div class="text-danger">
-                                    {{ $errors->first('transkip') }}
+                                    {{ $errors->first('berkas') }}
                                 </div>
                                 @endif
                             </div>

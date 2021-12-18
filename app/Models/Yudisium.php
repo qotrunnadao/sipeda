@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\PeriodeYudisium;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -26,6 +27,11 @@ class Yudisium extends Model
     public function StatusYudisium()
     {
         return $this->belongsTo(StatusYudisium::class, 'status_id');
+    }
+
+    public function PeriodeYudisium()
+    {
+        return $this->belongsTo(PeriodeYudisium::class, 'periode_id');
     }
 
     public function getCreatedAtAttribute()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jurusan;
 use App\Models\Yudisium;
 use App\Models\Mahasiswa;
+use App\Models\PeriodeYudisium;
 use App\Models\SK;
 use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
@@ -20,8 +21,10 @@ class YudisiumController extends Controller
      */
     public function index()
     {
+        $status = StatusYudisium::get()->all();
+        $periode = PeriodeYudisium::get()->all();
         $yudisium = Yudisium::latest()->get();
-        return view('yudisium.dataYudisium.index', compact('yudisium'));
+        return view('yudisium.dataYudisium.index', compact('yudisium', 'status', 'periode'));
     }
 
     /**
