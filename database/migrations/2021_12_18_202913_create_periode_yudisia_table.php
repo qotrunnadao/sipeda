@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSKSTable extends Migration
+class CreatePeriodeYudisiaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSKSTable extends Migration
      */
     public function up()
     {
-        Schema::create('SK', function (Blueprint $table) {
+        Schema::create('periode_yudisium', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('yudisium_id')->references('id')->on('yudisium')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('fileSK');
             $table->timestamps();
+            $table->string('nosurat')->nullable();
+            $table->dateTime('tanggal')->nullable();
+            $table->string('fileSK')->nullable();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateSKSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('SK');
+        Schema::dropIfExists('periode_yudisium');
     }
 }

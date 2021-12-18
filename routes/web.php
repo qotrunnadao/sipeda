@@ -248,13 +248,9 @@ Route::get('/yudisium/data-yudisium/ditolak/{yudisium}',  'YudisiumController@di
 Route::get('/yudisium/data-yudisium/ulang/{yudisium}',  'YudisiumController@ulang')->name('yudisium.ulang');
 Route::get('/yudisium/data-yudisium/selesai/{yudisium}',  'YudisiumController@selesai')->name('yudisium.selesai');
 
-// sk kelulusan
-Route::get('/yudisium/sk', 'SKController@index')->name('sk.index');
-Route::post('/yudisium/sk/store', 'SKController@store')->name('sk.store');
-Route::put('/yudisium/sk/download/{filename}', 'SKController@download')->name('sk.download');
-Route::put('/yudisium/sk/update/{id}', 'SKController@update')->name('sk.update');
-Route::get('/yudisium/sk/destroy/{id}', 'SKController@destroy')->name('sk.destroy');
-Route::post('/yudisium/sk/nim/', 'SKController@nim')->name('sk.nim');
+
+// Periode Yudisium
+Route::get('/yudisium/periode-yudisium', 'PeriodeYudisiumController@index')->name('periode.index');
 
 //================= ROUTE MAHASISWA =========================
 
