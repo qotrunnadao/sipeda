@@ -62,6 +62,9 @@ class BeritaAcaraPendadaranController extends Controller
      */
     public function store(Request $request, $id)
     {
+        $this->validate($request, [
+            "beritaacara" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         $pendadaran = Pendadaran::with(['mahasiswa'])->find($id);
         $status = array(
@@ -110,6 +113,9 @@ class BeritaAcaraPendadaranController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "beritaacara" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         $value = Pendadaran::findOrFail($id);
         $hapus = $value->beritaacara;

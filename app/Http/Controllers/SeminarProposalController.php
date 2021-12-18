@@ -45,7 +45,7 @@ class SeminarProposalController extends Controller
                 })->latest()->get(),
                 'semprop_jurusan' => SeminarProposal::with(['TA.Mahasiswa'])->whereHas('Mahasiswa', function ($query) use ($dosen_id) {
                     $query->where('jurusan_id', $dosen_id->jurusan_id);
-                })->where('status','!=', '2')->latest()->get(),
+                })->where('status', '!=', '2')->latest()->get(),
             );
             // dd($dosen_id->jurusan_id);
         }
@@ -87,6 +87,9 @@ class SeminarProposalController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "proposal" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
 
         if ($request->file('proposal')) {
@@ -225,6 +228,9 @@ class SeminarProposalController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "beritaacara" => "mimes:pdf|max:10000"
+        ]);
         $seminar_proposal = SeminarProposal::find($id);
         $data = $request->all();
         $hapus = $seminar_proposal->proposal;
@@ -360,21 +366,21 @@ class SeminarProposalController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/Berita Acara Semprop TA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
     public function proposal($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/ProposalTA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/ProposalTA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/ProposalTA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
     public function eksport(Request $request, $id)

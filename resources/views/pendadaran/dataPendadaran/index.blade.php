@@ -380,6 +380,11 @@
                         <div class="col">
                             {{-- <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="beritaacara" /> --}}
                             <input type="file" class="form-control" placeholder="Berita Acara Ketua Jurusan" name="berita" />
+                            @if ($errors->has('beritaacara'))
+                            <div class="text-danger">
+                                {{ $errors->first('beritaacara') }}
+                            </div>
+                            @endif
                         </div>
 
                     </div>

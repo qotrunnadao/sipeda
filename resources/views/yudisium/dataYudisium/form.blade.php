@@ -68,6 +68,11 @@
                                     Berkas Persyaratan
                                 </label>
                                 <input type="file" class="form-control" placeholder="transkip nilai" name="transkip" value="@if ($button == 'Tambah'){{ old('transkip') }}@else{{ $data_yudisium->transkip }}@endif" />
+                                @if ($errors->has('transkip'))
+                                <div class="text-danger">
+                                    {{ $errors->first('transkip') }}
+                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">

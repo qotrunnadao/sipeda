@@ -76,6 +76,9 @@ class DistribusiController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "fileDistribusi" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         $tugas_akhir = TA::where('id', $request->ta_id)->latest()->first();
         // dd($tugas_akhir->status_id);

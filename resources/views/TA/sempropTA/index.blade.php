@@ -345,6 +345,11 @@
                     <div class="form-group row">
                         <div class="col">
                             <input type="file" class="form-control" name="berita" />
+                            @if ($errors->has('beritaacara'))
+                            <div class="text-danger">
+                                {{ $errors->first('beritaacara') }}
+                            </div>
+                            @endif
                         </div>
 
                     </div>

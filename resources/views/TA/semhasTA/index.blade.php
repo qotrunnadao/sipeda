@@ -49,7 +49,7 @@
                                             <form action="{{ route('semhas.laporan', $value->laporan ) }}" method="post" target="_blank">
                                                 @method('PUT')
                                                 @csrf
-                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->laporan  }} <i class="mdi mdi-download"></i></a></button>
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->laporan }} <i class="mdi mdi-download"></i></a></button>
                                             </form>
                                         </div>
                                         @else
@@ -57,7 +57,7 @@
                                             <form action="{{ route('semhas.laporan', $value->laporan ) }}" method="post">
                                                 @method('PUT')
                                                 @csrf
-                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->laporan  }} <i class="mdi mdi-download"></i></a></button>
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->laporan }} <i class="mdi mdi-download"></i></a></button>
                                             </form>
                                         </div>
                                         @endif
@@ -310,6 +310,11 @@
                         <div class="form-group row">
                             <div class="col">
                                 <input type="file" class="form-control" name="berita" />
+                                @if ($errors->has('beritaacara'))
+                                <div class="text-danger">
+                                    {{ $errors->first('beritaacara') }}
+                                </div>
+                                @endif
                             </div>
 
                         </div>

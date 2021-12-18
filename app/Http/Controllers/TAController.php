@@ -88,8 +88,8 @@ class TAController extends Controller
      */
     public function nim(Request $request)
     {
-        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->orHas('TA')->whereHas('TA', function ($q) use ($request){
-            $q->where('status_id','1');
+        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->orHas('TA')->whereHas('TA', function ($q) use ($request) {
+            $q->where('status_id', '1');
         })->where('jurusan_id',  $request->id)->get();
         // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
         // dd($mahasiswa);
@@ -98,6 +98,9 @@ class TAController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "praproposal" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         // dd($data);
 
@@ -189,13 +192,16 @@ class TAController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "praproposal" => "mimes:pdf|max:10000"
+        ]);
         $tugas_akhir = TA::find($id);
         $data = $request->all();
         $hapus = $tugas_akhir->praproposal;
         if ($request->file('praproposal')) {
-           $mhs_id = Mahasiswa::where('id', $tugas_akhir->mahasiswa_id)->get()->first();
-           $nim = $mhs_id->nim;
-        //    dd($request->tahunAkademik);
+            $mhs_id = Mahasiswa::where('id', $tugas_akhir->mahasiswa_id)->get()->first();
+            $nim = $mhs_id->nim;
+            //    dd($request->tahunAkademik);
             $file = $request->file('praproposal');
             $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('praproposal')->storeAS('public/assets/file/PraproposalTA/', $filename);

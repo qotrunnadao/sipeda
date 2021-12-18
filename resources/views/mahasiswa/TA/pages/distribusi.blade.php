@@ -15,6 +15,11 @@
                             File Distribusi <code>*</code>
                         </label>
                         <input type="file" class="form-control" name="fileDistribusi" required />
+                        @if ($errors->has('fileDistribusi'))
+                        <div class="text-danger">
+                            {{ $errors->first('fileDistribusi') }}
+                        </div>
+                        @endif
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>

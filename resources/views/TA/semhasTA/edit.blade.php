@@ -41,6 +41,11 @@
                                     Berkas Persyaratan
                                 </label>
                                 <input type="file" class="form-control" name="laporan" value="{{ $semhas->proposal }}" />
+                                @if ($errors->has('laporan'))
+                                <div class="text-danger">
+                                    {{ $errors->first('laporan') }}
+                                </div>
+                                @endif
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
@@ -81,6 +86,11 @@
                                     Berita Acara Dosen
                                 </label>
                                 <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semhas->beritaacara }}" />
+                                @if ($errors->has('beritaacara'))
+                                <div class="text-danger">
+                                    {{ $errors->first('beritaacara') }}
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

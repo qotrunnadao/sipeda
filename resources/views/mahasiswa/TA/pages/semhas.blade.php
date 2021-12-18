@@ -70,6 +70,11 @@
                             Berkas Persayaratan <code>*</code>
                         </label>
                         <input type="file" class="form-control" name="laporan" required />
+                        @if ($errors->has('laporan'))
+                        <div class="text-danger">
+                            {{ $errors->first('laporan') }}
+                        </div>
+                        @endif
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>
                 </div>

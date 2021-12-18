@@ -92,6 +92,9 @@ class SPKController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "fileSPK" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         // dd($data);
         $jurusan = jurusan::all();
@@ -157,6 +160,9 @@ class SPKController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "fileSPK" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         $spk = SPK::where('ta_id', $id)->get()->first();
         $hapus = $spk->fileSPK;

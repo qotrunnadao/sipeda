@@ -36,6 +36,11 @@
                                     Berita Acara Ujian Pendadaran
                                 </label>
                                 <input type="file" class="form-control" placeholder="berita acara Ujian Pendadaran" name="beritaacara" />
+                                @if ($errors->has('beritaacara'))
+                                <div class="text-danger">
+                                    {{ $errors->first('beritaacara') }}
+                                </div>
+                                @endif
                             </div>
                             @endif
                             @endif
@@ -75,6 +80,11 @@
                                     Berkas Persyaratan <code>*</code>
                                 </label>
                                 <input type="file" class="form-control" placeholder="Berkas Persyaratan Ujian Pendadaran" name="berkas" id="berkas" />
+                                @if ($errors->has('berkas'))
+                                <div class="text-danger">
+                                    {{ $errors->first('berkas') }}
+                                </div>
+                                @endif
                             </div>
                             @endif
                             <div class="form-group row">
@@ -114,7 +124,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>
+                                    Berita Acara <code>*</code>
+                                </label>
+                                <input type="file" class="form-control" placeholder="Berita Acara Dosen" name="beritaacara" id="beritaacara" />
+                                @if ($errors->has('beritaacara'))
+                                <div class="text-danger">
+                                    {{ $errors->first('beritaacara') }}
+                                </div>
+                                @endif
+                            </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>

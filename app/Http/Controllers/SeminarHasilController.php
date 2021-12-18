@@ -86,6 +86,9 @@ class SeminarHasilController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "laporan" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         // dd($data);
 
@@ -224,6 +227,9 @@ class SeminarHasilController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "beritaacara" => "mimes:pdf|max:10000"
+        ]);
         $seminar_hasil = SeminarHasil::find($id);
         $hapus = $seminar_hasil->beritaacara;
         $hapus1 = $seminar_hasil->laporan;
@@ -356,21 +362,21 @@ class SeminarHasilController extends Controller
     public function download($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/Berita Acara Semhas TA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
     public function laporan($filename)
     {
         //    dd($filename);
-        if(File::exists(public_path('storage/assets/file/LaporanTA/' . $filename . ''))){
+        if (File::exists(public_path('storage/assets/file/LaporanTA/' . $filename . ''))) {
             return response()->file(public_path('storage/assets/file/LaporanTA/' . $filename . ''));
-        }else{
+        } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
-        return back();
+            return back();
         }
     }
     public function eksport(Request $request, $id)

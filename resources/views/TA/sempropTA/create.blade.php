@@ -167,9 +167,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    File Proposal <code>*</code>
+                                    Berkas Persyaratan <code>*</code>
                                 </label>
                                 <input type="file" class="form-control" name="proposal" />
+                                @if ($errors->has('proposal'))
+                                <div class="text-danger">
+                                    {{ $errors->first('proposal') }}
+                                </div>
+                                @endif
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">

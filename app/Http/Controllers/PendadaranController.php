@@ -108,6 +108,9 @@ class PendadaranController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "berkas" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         // dd($data);
         $jamMulai = $request->jamMulai;
@@ -229,6 +232,9 @@ class PendadaranController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "beritaacara" => "mimes:pdf|max:10000"
+        ]);
         $pendadaran = Pendadaran::with(['mahasiswa'])->find($id);
         $data = $request->all();
         $jamMulai = $request->jamMulai;
@@ -273,18 +279,18 @@ class PendadaranController extends Controller
             if (!$pendadaranCount) {
                 $nim = $pendadaran->mahasiswa->nim;
 
-                    $data = [
-                        'jamMulai' => $jamMulai,
-                        'jamSelesai' => $jamSelesai,
-                        'tanggal' => $request->tanggal,
-                        'ruangPendadaran_id' => $ruang,
-                        'statuspendadaran_id' => $request->statuspendadaran_id,
-                        'no_surat' => $request->no_surat,
-                        'penguji1_id' => $request->penguji1_id,
-                        'penguji2_id' => $request->penguji2_id,
-                        'penguji3_id' => $request->penguji3_id,
-                        'penguji4_id' => $request->penguji4_id,
-                    ];
+                $data = [
+                    'jamMulai' => $jamMulai,
+                    'jamSelesai' => $jamSelesai,
+                    'tanggal' => $request->tanggal,
+                    'ruangPendadaran_id' => $ruang,
+                    'statuspendadaran_id' => $request->statuspendadaran_id,
+                    'no_surat' => $request->no_surat,
+                    'penguji1_id' => $request->penguji1_id,
+                    'penguji2_id' => $request->penguji2_id,
+                    'penguji3_id' => $request->penguji3_id,
+                    'penguji4_id' => $request->penguji4_id,
+                ];
                 // dd($data);
                 $pendadaran->update($data);
                 Alert::success('Berhasil', 'Berhasil Mengubah Data Pendadaran');

@@ -28,6 +28,9 @@ class PendadaranMahasiswaController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "berkas" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         $mhs_id = Mahasiswa::with(['user'])->where('id', $request->mahasiswa_id)->get()->first();
         $nim = $mhs_id->nim;

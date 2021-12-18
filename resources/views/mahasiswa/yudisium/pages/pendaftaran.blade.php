@@ -16,6 +16,11 @@
                         </label>
                         <div class="input-group">
                             <input type="file" class="form-control" name="berkas" id="berkas" required />
+                            @if ($errors->has('berkas'))
+                            <div class="text-danger">
+                                {{ $errors->first('berkas') }}
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>

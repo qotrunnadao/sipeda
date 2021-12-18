@@ -54,6 +54,9 @@ class SKController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "fileSK" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         if ($request->file('fileSK')) {
             $sk = SK::latest()->get();
@@ -121,6 +124,9 @@ class SKController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "fileSK" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         $value = SK::findOrFail($id);
         $value->update($data);

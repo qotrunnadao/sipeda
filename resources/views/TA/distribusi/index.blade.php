@@ -122,6 +122,11 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">File Distribusi <code>*</code></label>
                         <input type="file" required class="form-control" name="Distribusi" />
+                        @if ($errors->has('fileDistribusi'))
+                        <div class="text-danger">
+                            {{ $errors->first('fileDistribusi') }}
+                        </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> Simpan</button>

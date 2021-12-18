@@ -116,6 +116,11 @@
                     <div class="form-group row">
                         <div class="col">
                             <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK" required />
+                            @if ($errors->has('fileSPK'))
+                            <div class="text-danger">
+                                {{ $errors->first('fileSPK') }}
+                            </div>
+                            @endif
                         </div>
 
                     </div>

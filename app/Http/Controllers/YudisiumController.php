@@ -49,6 +49,9 @@ class YudisiumController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "berkas" => "mimes:pdf|max:10000"
+        ]);
         Yudisium::create($request->all());
         $data = $request->all();
 

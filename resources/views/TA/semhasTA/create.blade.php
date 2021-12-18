@@ -170,6 +170,11 @@
                                     File Laporan <code>*</code>
                                 </label>
                                 <input type="file" class="form-control" name="laporan" />
+                                @if ($errors->has('laporan'))
+                                <div class="text-danger">
+                                    {{ $errors->first('laporan') }}
+                                </div>
+                                @endif
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">

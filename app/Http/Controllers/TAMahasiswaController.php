@@ -62,8 +62,10 @@ class TAMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "praproposal" => "required|mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
-        // dd($data);
 
         if ($request->file('praproposal')) {
             $user_id = User::where('id', $request->user)->get()->first();
@@ -150,6 +152,9 @@ class TAMahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "praproposal" => "required|mimes:pdf|max:10000"
+        ]);
         $tugas_akhir = TA::find($id);
         $data = $request->all();
         if ($request->file('praproposal')) {

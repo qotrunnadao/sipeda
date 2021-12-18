@@ -125,6 +125,11 @@
                                     Berkas Persyaratan
                                 </label>
                                 <input type="file" class="form-control" name="proposal" value="{{ $semprop->proposal }}" />
+                                @if ($errors->has('proposal'))
+                                <div class="text-danger">
+                                    {{ $errors->first('proposal') }}
+                                </div>
+                                @endif
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
@@ -165,6 +170,11 @@
                                     Berita Acara Dosen
                                 </label>
                                 <input type="file" class="form-control" placeholder="berita acara dosen" name="beritaacara" value="{{ $semprop->beritaacara }}" />
+                                @if ($errors->has('beritaacara'))
+                                <div class="text-danger">
+                                    {{ $errors->first('beritaacara') }}
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

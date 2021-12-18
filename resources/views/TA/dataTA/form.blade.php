@@ -228,10 +228,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    Praporosal @if ($button == 'Tambah') <code>*</code>
+                                    Berkas Persyaratan @if ($button == 'Tambah') <code>*</code>
                                     @endif
                                 </label>
                                 <input type="file" class="form-control" placeholder="file praproposal" name="praproposal" value="@if ($button == 'Tambah'){{ old('praproposal') }}@else{{ $data_ta->praproposal }}@endif" />
+                                @if ($errors->has('praproposal'))
+                                <div class="text-danger">
+                                    {{ $errors->first('praproposal') }}
+                                </div>
+                                @endif
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">

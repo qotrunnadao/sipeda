@@ -54,6 +54,9 @@ class SeminarHasilMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            "laporan" => "mimes:pdf|max:10000"
+        ]);
         $data = $request->all();
         // dd($data);
 
