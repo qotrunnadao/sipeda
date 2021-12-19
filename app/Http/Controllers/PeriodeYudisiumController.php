@@ -123,7 +123,7 @@ class PeriodeYudisiumController extends Controller
      * @param  \App\Models\PeriodeYudisium  $periodeYudisium
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $periodeYudisium = PeriodeYudisium::find($id);
         $hapus = $periodeYudisium->delete();
@@ -133,5 +133,10 @@ class PeriodeYudisiumController extends Controller
             Alert::warning('Gagal', 'Data Periode Yudisium Gagal DIhapus');
         }
         return back();
+    }
+
+    public function berkas()
+    {
+        return view('yudisium.periode.sk');
     }
 }

@@ -253,6 +253,9 @@ Route::get('/yudisium/periode-yudisium', 'PeriodeYudisiumController@index')->nam
 Route::post('/yudisium/periode-yudisium/store', 'PeriodeYudisiumController@store')->name('periode.store');
 Route::put('/yudisium/periode-yudisium/update/{id}',  'PeriodeYudisiumController@update')->name('periode.update');
 Route::get('/yudisium/periode-yudisium/delete/{id}',  'PeriodeYudisiumController@destroy')->name('periode.destroy');
+Route::get('/yudisium/sk/', function () {
+    return view('yudisium.periode.sk');
+});
 
 //================= ROUTE MAHASISWA =========================
 
@@ -306,7 +309,6 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::get('/yudisium/beranda', 'BerandaController@mahasiswaYudisium')->name('mahasiswaYudisium.beranda');
     Route::get('/yudisium/pendaftaran', 'YudisiumMahasiswaController@create')->name('mahasiswaYudisium.create');
     Route::post('/yudisium/pendaftaran/store',  'YudisiumMahasiswaController@store')->name('mahasiswaYudisium.store');
-
 });
 
 
