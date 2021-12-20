@@ -43,6 +43,10 @@ class Mahasiswa extends Model
     {
         return $this->hasMany(Pendadaran::class, 'mhs_id');
     }
+    public function Yudisium()
+    {
+        return $this->hasMany(Yudisium::class, 'mhs_id');
+    }
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');

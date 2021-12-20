@@ -45,7 +45,7 @@
                                 <td> {{ $value->aktif == 0 ? 'false' : 'true'}} </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-periode='{{ $value->namaPeriode }}' data-tanggal='{{ $value->tanggal }}' data-surat='{{ $value->nosurat }}' data-fileSK='{{ $value->fileSK }}' data-aktif='{{ $value->aktif}}' data-route="{{ route('periode.update', $value->id) }}"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata{{ $value['id'] }}"><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('periode.destroy', $value->id) }}" method="GET">
@@ -128,7 +128,9 @@
     </div>
 </div>
 <!-- Modal Edit Periode Yudisium -->
-<div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ( $periode as $value )
+
+<div class="modal fade" id="editdata{{ $value['id'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -138,18 +140,18 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" action="" method="POST" enctype="multipart/form-data">
+                <form class="forms-sample" action="{{ route('periode.update', $value->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Periode Yudisium</label>
                         <div class="input-group">
-                            <input type="text" required class="form-control" name="namaPeriode" />
+                            <input type="text" required class="form-control" name="namaPeriode" value="{{ $value->namaPeriode }}"/>
                         </div>
                     </div><div class="form-group">
                         <label for="exampleInputEmail3">Tanggal Yudisium</label>
                         <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" />
+                            <input type="text" class="form-control datepicker" value="{{ $value->tanggal }}" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" />
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
@@ -158,13 +160,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nomor Surat</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="nosurat" id="nosurat" />
+                            <input type="text" class="form-control" value="{{ $value->nosurat }}" name="nosurat" id="nosurat" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Upload SK</label>
                         <div class="input-group">
-                            <input type="file" class="form-control" name="fileSK" />
+                            <input type="file" class="form-control" value="{{ $value->fileSK }}"name="fileSK" />
                         </div>
                         @if ($errors->has('fileSK'))
                         <div class="text-danger">
@@ -177,8 +179,8 @@
                         <div class="input-group">
                             <select type="text" required class="form-control" name="aktif">
                                 <option value="" selected disabled>PILIH</option>
-                                <option value="1">True</option>
-                                <option value="0">False</option>
+                                <option value="1"{{ "1" == $value->aktif ? 'selected' : '' }}>True</option>
+                                <option value="0"{{ "0" == $value->aktif ? 'selected' : '' }}>False</option>
                             </select>
                         </div>
                     </div>
@@ -190,6 +192,7 @@
         </div>
     </div>
 </div>
+@endforeach
 @endsection
 @section('javascripts')
 <script>
@@ -204,25 +207,5 @@
 
         });
     });
-</script>
-<script>
-    $('#editdata').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var route = button.data('route')
-    var fileSK = button.data('fileSK')
-    var periode = button.data('periode')
-    var tanggal = button.data('tanggal')
-    var surat = button.data('surat')
-    var aktif = button.data('aktif')
-
-    var modal = $(this)
-
-    modal.find(".modal-body input[name='namaPeriode']").val(periode)
-    modal.find(".modal-body input[name='tanggal']").val(tanggal)
-    modal.find(".modal-body input[name='nosurat']").val(surat)
-    modal.find(".modal-body select[name='aktif']").val(aktif)
-    modal.find(".modal-body input[name='fileSK']").val(fileSK)
-    modal.find(".modal-body form").attr("action",route)
-    })
 </script>
 @endsection

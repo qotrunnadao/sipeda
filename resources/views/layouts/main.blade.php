@@ -165,6 +165,7 @@
         $(function() {
              $(".datepicker").datepicker({
                  autoclose: true,
+                 todayBtn: true,
                  todayHighlight: true
              });
 

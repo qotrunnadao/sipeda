@@ -175,12 +175,12 @@
     </style>
 </head>
 
-<body onload="window.print()">
+<body>
     <div class="container ml-5 mt-5 mr-2">
         <div class="row">
             <div class="col-md-1 float-left">
                 {{-- <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110"> --}}
-                <img src="{{ asset('unsoed_b&w.jpg') }}" height="110" width="110">
+                <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
             </div>
             <div class="col-md-10 float-right mr-5 ml-5">
                 <p class="text-center"><b>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI </b><br> UNIVERSITAS JENDERAL SOEDIRMAN <br>
@@ -425,7 +425,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table>
+            <table style="width:20%; float:right;">
                 <tbody>
                     <tr>
                         <td>Rata - rata IPK</td>
@@ -532,7 +532,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table>
+            <table style="width:20%; float:right;">
                 <tbody>
                     <tr>
                         <td>Rata - rata IPK</td>
@@ -639,7 +639,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table>
+            <table style="width:20%; float:right;">
                 <tbody>
                     <tr>
                         <td>Rata - rata IPK</td>
@@ -745,7 +745,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table>
+            <table style="width:20%; float:right;">
                 <tbody>
                     <tr>
                         <td>Rata - rata IPK</td>
@@ -840,7 +840,7 @@
         <div>
             <p>Keterangan</p>
             <table style="width:50%; float:left;">
-                <tbody>
+                <tbody style="width:20%; float:right;">
                     <tr>
                         <td>DP : DENGAN PUJIAN</td>
                     </tr>

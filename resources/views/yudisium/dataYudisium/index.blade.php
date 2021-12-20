@@ -118,7 +118,7 @@
                         <label for="exampleInputEmail3">Status Yudisium</label>
                         <div class="input-group">
                             <select type="text" class="form-control" name="status_id">
-                                <option value="">PILIH</option>
+                                <option value="" selected disabled>PILIH</option>
                                 @foreach ($status as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->status ? 'selected' : '' }}>{{ $value->status }}
                                 </option>
@@ -130,7 +130,7 @@
                         <label for="exampleInputEmail3">Periode Yudisium</label>
                         <div class="input-group">
                             <select type="text" required class="form-control" name="periode_id">
-                                <option value="">PILIH</option>
+                                <option value="" selected disabled>PILIH</option>
                                 @foreach ($periode as $value)
                                 <option value="{{ $value->id }}" {{ $value->id == $value->namaPeriode ? 'selected' : '' }}>{{ $value->namaPeriode }}
                                 </option>

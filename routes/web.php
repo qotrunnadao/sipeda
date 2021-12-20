@@ -246,6 +246,7 @@ Route::put('/yudisium/data-yudisium/update/{id}',  'YudisiumController@update')-
 Route::get('/yudisium/data-yudisium/delete/{id}',  'YudisiumController@destroy')->name('yudisium.delete');
 Route::get('/yudisium/data-yudisium/diterima/{yudisium}',  'YudisiumController@diterima')->name('yudisium.diterima');
 Route::get('/yudisium/data-yudisium/ditolak/{yudisium}',  'YudisiumController@ditolak')->name('yudisium.ditolak');
+Route::post('/yudisium/data-yudisium/nim/', 'YudisiumController@nim')->name('yudisium.nim');
 
 
 // Periode Yudisium
@@ -257,6 +258,9 @@ Route::get('/yudisium/sk/', function () {
     return view('yudisium.periode.sk');
 });
 
+// Cetak Draft Yudisium
+Route::get('/yudisium/sk-yudisium', 'YudisiumController@laporan')->name('cetaksk.index');
+Route::get('/yudisium/sk-yudisium/laporan/{periode}', 'YudisiumController@cetaksk')->name('cetaksk.laporan');
 //================= ROUTE MAHASISWA =========================
 
 Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {

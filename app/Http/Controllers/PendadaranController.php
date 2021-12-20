@@ -154,7 +154,7 @@ class PendadaranController extends Controller
                         'ruangPendadaran_id' => $ruang,
                         'statuspendadaran_id' => $request->statuspendadaran_id,
                         'no_surat' => $request->no_surat,
-                        'thnAkad_id' => 1,
+                        'thnAkad_id' => $request->thnAkad_id,
                         'berkas' => $filename,
                         'penguji1_id' => $request->penguji1_id,
                         'penguji2_id' => $request->penguji2_id,

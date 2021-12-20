@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card card-primary">
-            <form action="{{$action}}@if($button == 'Edit')/{{ $data_yudisium->id}}@endif" method="post">
+            <form action="{{$action}}@if($button == 'Edit')@endif" enctype="multipart/form-data" id="eksport"  method="post">
                 {{ csrf_field() }}
                 @if ($button == 'Edit'){{ method_field('PUT') }}@endif
                 <div class="card-body">
@@ -78,30 +78,23 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    Tanggal Yudisium
+                                    Periode Yudisium
                                 </label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Yudisium" name="tanggal" value="@if ($button == 'Tambah'){{ old('tanggal') }}@else{{ $data_yudisium->tanggal }}@endif" />
-                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    Waktu Yudisium
-                                </label>
-                                <div class="input-group clockpicker">
-                                    <input type="text" class="form-control" placeholder="Waktu Yudisium" name="tanggal" value="@if ($button == 'Tambah'){{ old('waktu') }}@else{{ $data_yudisium->waktu }}@endif">
-                                    <span class="input-group-text">
-                                        <i class="mdi mdi-clock"></i></span>
-                                </div>
+                                <select name="periode_id" id="periode_id" class="form-control">
+                                <option value="" selected disabled>PILIH Periode Yudisium</option>
+                                @foreach ($periode as $value )
+                                    <option value="{{ $value->id }}" >{{ $value->namaPeriode }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>
                                     Status
                                 </label>
                                 <select name="statusyudisium_id" id="statusyudisium" class="form-control">
-                                    @foreach ($status as $value )
-                                    <option value="@if ($button == 'Tambah'){{ old('status') }}@else{{ $status }}@endif">{{ $value->status}}</option>
+                                <option value="" selected disabled>PILIH Status Yudisium</option>
+                                @foreach ($status as $value )
+                                    <option value="{{ $value->id }}">{{ $value->status}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -115,7 +108,7 @@
                         </div>
                     </div>
                     <a href="<?= url('') ?>/yudisium/data-yudisium" type="button" class="btn btn-gradient-danger"><i class="mdi mdi-back"></i> Kembali</a>
-                    <a href="" type="submit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</a>
+                    <button type="submit" id="btnSubmit" class="btn btn-gradient-primary"><i class="mdi mdi-content-save"></i> {{ $button }}</button>
                 </div>
             </form>
         </div>
@@ -124,6 +117,18 @@
 @endsection
 
 @section('javascripts')
+<script>
+    $(document).ready(function () {
+
+    $("#eksport").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -138,7 +143,7 @@
 
         $.ajax({
            type:'POST',
-           url:"{{ route('pendadaran.nim') }}",
+           url:"{{ route('yudisium.nim') }}",
            data:{id:id},
            success:function(data){
                var nim = document.getElementById('nim')

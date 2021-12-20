@@ -99,17 +99,17 @@ class PeriodeYudisiumController extends Controller
                 'aktif' => $request->aktif,
             ];
             File::delete(public_path('storage/assets/file/sk/' . $hapus . ''));
+            $yudisium = Yudisium::with(['mahasiswa'])->where('periode_id', $id)->get()->first();
+            $status = array(
+                'status_id' => 5,
+            );
+            $yudisium->update($status);
             // dd($data);
         } else {
             $data['fileSK'] = NULL;
         }
         $ubah = $value->update($data);
         if ($ubah == true) {
-            $yudisium = Yudisium::with(['mahasiswa'])->where('periode_id', $id)->get()->first();
-            $status = array(
-                'status_id' => 5,
-            );
-            $yudisium->update($status);
             Alert::success('Berhasil', 'Berhasil Ubah Data Periode Yudisium');
         } else {
             Alert::warning('Gagal', 'Data Periode Yudisium Gagal Diubah');
@@ -127,6 +127,7 @@ class PeriodeYudisiumController extends Controller
     {
         $periodeYudisium = PeriodeYudisium::find($id);
         $hapus = $periodeYudisium->delete();
+        File::delete(public_path('storage/assets/file/sk/' . $periodeYudisium->fileSK . ''));
         if ($hapus == true) {
             Alert::success('Berhasil', 'Berhasil hapus data Periode Yudisium');
         } else {

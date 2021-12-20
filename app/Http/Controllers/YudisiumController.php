@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
 use App\Models\StatusYudisium;
 use File;
+use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class YudisiumController extends Controller
@@ -44,6 +45,20 @@ class YudisiumController extends Controller
         return view('yudisium.dataYudisium.index', compact('yudisium', 'status', 'periode'));
     }
 
+    public function laporan()
+    {
+        $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
+        // dd($yudisium);
+        return view('yudisium.dataYudisium.cetaksk', compact('periode'));
+    }
+    public function cetaksk()
+    {
+        $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
+        $pdf = PDF::loadView('yudisium.periode.berkas', ['periode' => $periode])->setPaper('a2');
+        return $pdf->stream();
+
+        // dd($yudisium);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -55,11 +70,12 @@ class YudisiumController extends Controller
         $button = 'Tambah';
         $data_yudisium = new Yudisium();
         $yudisium = Yudisium::get();
+        $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
         $status = StatusYudisium::get();
         $tahun = TahunAkademik::where('aktif', '1')->get()->first();
         // dd($tahun);
         $jurusan = jurusan::get();
-        return view('yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status', 'tahun', 'jurusan'));
+        return view('yudisium.dataYudisium.form', compact('action', 'button', 'data_yudisium', 'status', 'tahun', 'jurusan', 'periode'));
     }
 
     /**
@@ -68,15 +84,44 @@ class YudisiumController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function nim(Request $request)
+    {
+        $mahasiswa = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
+            $q->where('status_id', '10');
+        })->Has('Pendadaran')->whereHas('Pendadaran', function ($q) {
+            $q->where('statuspendadaran_id', '6');
+        })->whereDoesntHave('Yudisium')->orHas('Yudisium')->whereHas('Yudisium', function ($q) {
+            $q->where('status_id', '1');
+        })->where('jurusan_id', $request->id)->get();
+        // dd($mahasiswa);
+        return response()->json($mahasiswa, 200);
+    }
     public function store(Request $request)
     {
         $this->validate($request, [
             "berkas" => "mimes:pdf|max:10000"
         ]);
-        Yudisium::create($request->all());
         $data = $request->all();
+        $mhs_id = Mahasiswa::where('id', $request->nim)->get()->first();
+        $nim = $mhs_id->nim;
+        if ($request->file('berkas')) {
+            $file = $request->file('berkas');
+            $filename = 'Yudisium' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('berkas')->storeAS('public/assets/file/Yudisium/', $filename);
+            // dd($filename);
+            $data = [
+                'mhs_id' => $request->nim,
+                'thnAkad_id' => $request->thnAkad_id,
+                'status_id' => $request->statusyudisium_id,
+                'berkas' => $filename,
+                'periode_id' => $request->periode_id,
+                'ket' => $request->ket,
+            ];
+            // dd($data);
+            $cek = Yudisium::create($data);
+        }
 
-        if (Yudisium::create($data)) {
+        if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
         } else {
             Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
@@ -139,6 +184,7 @@ class YudisiumController extends Controller
     {
         $yudisium = Yudisium::find($id);
         $yudisium->delete();
+        File::delete(public_path('storage/assets/file/Yudisium/' . $yudisium->berkas . ''));
         Alert::success('Berhasil', 'Berhasil hapus data Yudisium');
         return back();
     }
