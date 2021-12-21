@@ -43,7 +43,7 @@ class YudisiumController extends Controller
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->latest()->get();
         }
-        return view('yudisium.dataYudisium.index', compact('yudisium', 'status', 'periode'));
+        return view('yudisium.dataYudisium.index', compact('yudisium', 'status', 'periode', 'acc_yudisium'));
     }
 
     public function laporan()

@@ -6,6 +6,105 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div class="table-responsive">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Nama Mahasiswa </th>
+                                <th> NIM</th>
+                                <th> Jurusan</th>
+                                <th> Berkas Persyaratan </th>
+                                <th> status </th>
+                                <th> Periode Yudisium</th>
+                                <th> Keterangan </th>
+                                <th> Aksi </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($no=1)
+                            @foreach ($acc_yudisium as $value)
+
+                            <tr>
+                                <td> {{ $no++ }} </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
+                                <td> {{ $value->mahasiswa->nim }}</td>
+                                <td> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td>
+                                    @if($value->berkas != null)
+                                    @if (File::exists(public_path('storage/assets/file/Yudisium/' . $value->berkas . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.download', $value->berkas) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.download', $value->berkas) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    @else
+
+                                    <div class="badge badge-danger badge-pill ">Berkas Yudisium Tidak Ada</div>
+                                    @endif
+                                </td>
+                                <td>
+                                    <span class="badge badge-danger">{{ $value->statusyudisium->status}}</span>
+
+                                </td>
+                                <td>
+                                    @if ($value->periode_id)
+                                    {{ $value->periodeyudisium->namaPeriode }}
+                                    @else
+                                    <span class="badge badge-danger">Data Periode Belum Terbit</span>
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if($value->ket == null)
+                                    <span class="badge badge-danger">Tidak ada keterangan</span>
+                                    @else
+                                    {{ $value->ket }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(auth()->user()->level_id == 5 && $value->status_id ==2)
+                                    <div class="btn-group">
+                                        <a href="{{ route('yudisium.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="{{ route('yudisium.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
+                                    </div>
+                                    @elseif (auth()->user()->level_id == 2 )
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-periode_id='{{ $value->periode_id }}' data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @endif
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.delete', $value->id)}}" method="GET">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
                 @if(auth()->user()->level_id == 2)
                 <div>
                     <a href="{{ route('yudisium.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>

@@ -13,6 +13,7 @@
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th> Keterangan Status </th>
                                 <th> Aksi </th>
                             </tr>
