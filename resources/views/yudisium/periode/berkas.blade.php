@@ -840,7 +840,7 @@
         <div>
             <p>Keterangan</p>
             <table style="width:50%; float:left;">
-                <tbody style="width:20%; float:right;">
+                <tbody>
                     <tr>
                         <td>DP : DENGAN PUJIAN</td>
                     </tr>
@@ -852,7 +852,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table>
+            <table style="width:20%; float:right;">
                 <tbody>
                     <tr>
                         <td>Rata - rata IPK</td>
@@ -881,7 +881,7 @@
     </div>
 </body>
 
-<script>
+{{-- <script>
     var css = '@page { size: landscape; }',
     head = document.head || document.getElementsByTagName('head')[0],
     style = document.createElement('style');
@@ -898,6 +898,6 @@ if (style.styleSheet){
 head.appendChild(style);
 
 window.print();
-</script>
+</script> --}}
 
 </html>

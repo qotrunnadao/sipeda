@@ -78,12 +78,13 @@
             <div class="modal-body">
                 <form class="forms-sample" action="{{route('periode.store')}}" method="POST" enctype="multipart/form-data" name="eksport" id="eksport">
                     @csrf
-                   <div class="form-group">
+                    <div class="form-group">
                         <label for="exampleInputEmail3">Nama Periode Yudisium</label>
                         <div class="input-group">
                             <input type="text" required class="form-control" name="namaPeriode" />
                         </div>
-                    </div><div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail3">Tanggal Yudisium</label>
                         <div class="input-group">
                             <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
@@ -120,7 +121,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id = "btnSubmit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -146,9 +147,10 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nama Periode Yudisium</label>
                         <div class="input-group">
-                            <input type="text" required class="form-control" name="namaPeriode" value="{{ $value->namaPeriode }}"/>
+                            <input type="text" required class="form-control" name="namaPeriode" value="{{ $value->namaPeriode }}" />
                         </div>
-                    </div><div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail3">Tanggal Yudisium</label>
                         <div class="input-group">
                             <input type="text" class="form-control datepicker" value="{{ $value->tanggal }}" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" />
@@ -166,7 +168,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Upload SK</label>
                         <div class="input-group">
-                            <input type="file" class="form-control" value="{{ $value->fileSK }}"name="fileSK" />
+                            <input type="file" class="form-control" value="{{ $value->fileSK }}" name="fileSK" />
                         </div>
                         @if ($errors->has('fileSK'))
                         <div class="text-danger">
@@ -179,8 +181,8 @@
                         <div class="input-group">
                             <select type="text" required class="form-control" name="aktif">
                                 <option value="" selected disabled>PILIH</option>
-                                <option value="1"{{ "1" == $value->aktif ? 'selected' : '' }}>True</option>
-                                <option value="0"{{ "0" == $value->aktif ? 'selected' : '' }}>False</option>
+                                <option value="1" {{ "1"==$value->aktif ? 'selected' : '' }}>True</option>
+                                <option value="0" {{ "0"==$value->aktif ? 'selected' : '' }}>False</option>
                             </select>
                         </div>
                     </div>
@@ -196,7 +198,6 @@
 @endsection
 @section('javascripts')
 <script>
-
     $(document).ready(function () {
 
     $("#eksport").submit(function () {

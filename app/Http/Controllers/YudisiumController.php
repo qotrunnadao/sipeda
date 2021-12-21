@@ -25,7 +25,8 @@ class YudisiumController extends Controller
      */
     public function index()
     {
-        $status = StatusYudisium::get()->all();$id = auth()->user()->id;
+        $status = StatusYudisium::get()->all();
+        $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
@@ -54,7 +55,28 @@ class YudisiumController extends Controller
     public function cetaksk()
     {
         $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
-        $pdf = PDF::loadView('yudisium.periode.berkas', ['periode' => $periode])->setPaper('a2');
+        $pdf = PDF::loadView('yudisium.periode.berkas', ['periode' => $periode])->setPaper('a4', 'landscape');
+
+        $m = new Merger();
+
+        $view1 = \View::make('pdf.informe1_vertical')->render();
+        $view2 = \View::make('pdf.informe2_horitzontal')->render();
+        $view3 = \View::make('pdf.informe3_vertical')->render();
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view1)->setPaper('a4', 'portrait');
+        $m->addRaw($pdf->output());
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view2)->setPaper('a4', 'landscape');
+        $m->addRaw($pdf->output());
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view3)->setPaper('a4', 'portrait');
+        $m->addRaw($pdf->output());
+
+        file_put_contents('informes/test_' . $user->id . '.pdf', $m->merge());
+
         return $pdf->stream();
 
         // dd($yudisium);

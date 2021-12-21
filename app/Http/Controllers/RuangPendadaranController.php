@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RuangPendadaran;
 use Illuminate\Http\Request;
+use App\Models\RuangPendadaran;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RuangPendadaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $data = array(
+            'ruang' => RuangPendadaran::get(),
+        );
+        return view('admin.master.ruangPendadaran', $data);
     }
 
     /**
@@ -35,51 +34,51 @@ class RuangPendadaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $cek = RuangPendadaran::create($data);
+        if ($cek == true) {
+            Alert::success('Berhasil', 'Berhasil Tambah Data Ruang Pendadaran');
+        } else {
+            Alert::warning('Gagal', 'Data Ruang Pendadaran Gagal Ditambahkan');
+        }
+        return back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RuangPendadaran  $ruangPendadaran
+     * @param  \App\Models\Ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function show(RuangPendadaran $ruangPendadaran)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RuangPendadaran  $ruangPendadaran
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RuangPendadaran $ruangPendadaran)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RuangPendadaran  $ruangPendadaran
+     * @param  \App\Models\Ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RuangPendadaran $ruangPendadaran)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $value = RuangPendadaran::findOrFail($id);
+        $value->update($data);
+        Alert::success('Berhasil', 'Berhasil Ubah Data Ruangan Pendadaran');
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RuangPendadaran  $ruangPendadaran
+     * @param  \App\Models\Ruang  $ruang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RuangPendadaran $ruangPendadaran)
+    public function destroy($id)
     {
-        //
+        $jurusan = RuangPendadaran::find($id);
+        $jurusan->delete();
+        Alert::success('Berhasil', 'Berhasil hapus Data Ruangan Pendadaran');
+        return back();
     }
 }

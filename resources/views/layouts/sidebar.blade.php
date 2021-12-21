@@ -27,7 +27,8 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('tahunAkademik.index') }}"> Tahun Akademik </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('jurusan.index') }}"> Data Jurusan </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('ruang.index') }}"> Data Ruangan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('ruang.index') }}"> Data Ruangan Seminar </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('ruangPendadaran.index') }}"> Data Ruangan Pendadaran</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('level.index') }}"> Level User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('user.index') }}"> Data User </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('komisi.index') }}"> Data Komisi </a></li>

@@ -31,11 +31,11 @@
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-level_id='{{ $value->level_id }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
-                                    <div class="btn-group">
+                                    {{-- <div class="btn-group">
                                         <form action="#" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
-                                    </div>
+                                    </div> --}}
                                 </td>
                                 @endforeach
                         </tbody>

@@ -6,6 +6,7 @@ use App\Http\Middleware\Komisi;
 use Subfission\Cas\Facades\Cas;
 use App\Http\Middleware\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SKController;
 use App\Http\Controllers\TAController;
@@ -75,6 +76,12 @@ Route::get('/data-ruang', 'RuangController@index')->name('ruang.index');
 Route::post('/data-ruang/store', 'RuangController@store')->name('ruang.store');
 Route::put('/data-ruang/update/{id}', 'RuangController@update')->name('ruang.update');
 Route::get('/data-ruang/destroy/{id}', 'RuangController@destroy')->name('ruang.destroy');
+
+// Route Data Ruangan pendadaran
+Route::get('/data-ruang-pendadaran', 'RuangPendadaranController@index')->name('ruangPendadaran.index');
+Route::post('/data-ruang-pendadaran/store', 'RuangPendadaranController@store')->name('ruangPendadaran.store');
+Route::put('/data-ruang-pendadaran/update/{id}', 'RuangPendadaranController@update')->name('ruangPendadaran.update');
+Route::get('/data-ruang-pendadaran/destroy/{id}', 'RuangPendadaranController@destroy')->name('ruangPendadaran.destroy');
 
 // Route Level User
 Route::get('/level-user', 'LevelController@index')->name('level.index');
@@ -315,6 +322,27 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
     Route::post('/yudisium/pendaftaran/store',  'YudisiumMahasiswaController@store')->name('mahasiswaYudisium.store');
 });
 
+
+// ============= API UNSOED =================
+Route::get('testing', function () {
+    // $ch = curl_init('https://soa.unsoed.ac.id/sia-sandbox/v1/dosen/profil?emailunsoed=acep@unsoed.ac.id');
+    $response = Http::withHeaders([
+        'X-API-KEY' => 'hVCK2D4V25rPEN8yIf9Qbf7XeNQcEYoqSckyl83J',
+        'secretkey' => 'Utb6T3g',
+    ])->get('https://soa.unsoed.ac.id/sia-sandbox/v1/dosen/profil?emailunsoed=acep@unsoed.ac.id');
+    // curl_setopt($ch, CURLOPT_POST, 1);
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, $response);
+    // Execute the handle
+    // curl_exec($ch);
+    // return $response->json();
+    dd($response);
+});
+// catching API json placeholder
+Route::get('post', function () {
+    $response = Http::get('https://jsonplaceholder.typicode.com/posts/1');
+    return $response->json();
+    // dd($response);
+});
 
 Auth::routes();
 

@@ -22,6 +22,7 @@
                                 <th> Berkas Persyaratan </th>
                                 <th> status </th>
                                 <th> Periode Yudisium</th>
+                                <th> Keterangan </th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
@@ -71,6 +72,13 @@
                                 </td>
 
                                 <td>
+                                    @if($value->ket == null)
+                                    <span class="badge badge-danger">Tidak ada keterangan</span>
+                                    @else
+                                    {{ $value->ket }}
+                                    @endif
+                                </td>
+                                <td>
                                     @if(auth()->user()->level_id == 5 && $value->status_id ==2)
                                     <div class="btn-group">
                                         <a href="{{ route('yudisium.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
@@ -80,7 +88,7 @@
                                     </div>
                                     @elseif (auth()->user()->level_id == 2 )
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-periode_id='{{ $value->periode_id }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-periode_id='{{ $value->periode_id }}' data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     @endif
                                     <div class="btn-group">
@@ -138,6 +146,14 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Keterangan</label>
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="ket" />
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -155,10 +171,12 @@
     var id = button.data('id')
     var status_id = button.data('status_id')
     var periode_id = button.data('periode_id')
+    var ket = button.data('ket')
     var modal = $(this)
 
     modal.find(".modal-body select[name='status_id']").val(status_id)
     modal.find(".modal-body select[name='periode_id']").val(periode_id)
+    modal.find(".modal-body select[name='ket']").val(ket)
     modal.find(".modal-body form").attr("action",'/yudisium/data-yudisium/update/'+id)
     })
 </script>
