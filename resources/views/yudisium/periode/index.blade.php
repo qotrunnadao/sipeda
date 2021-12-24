@@ -3,7 +3,7 @@
 @section ('icon', 'folder-upload')
 @section('content')
 <div class="row">
-    <div class="col-12 grid-margin stretch-card">
+    <div class="col-8 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div>
@@ -61,6 +61,27 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin">
+        <div class="card card-primary">
+            <form action="" method="GET" enctype="multipart/form-data" id="creatData">
+                @csrf
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Pilih Periode Yudisium <code>*</code></label>
+                        <select type="text" class="form-control" id="periode_id" name="periode_id" required>
+                            <option selected disabled>Pilih Periode </option>
+                            @foreach ($periode_cetak as $value)
+                            <option value="{{ $value->id }} ">{{ $value->namaPeriode }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <a href="" onclick="this.href='/yudisium/sk-yudisium/' + document.getElementById('periode_id').value" target="_blank" id="btnSubmit" class="btn btn-gradient-primary "><i class="fa fa-print"></i>
+                        Cetak SK</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

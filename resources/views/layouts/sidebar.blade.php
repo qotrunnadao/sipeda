@@ -34,6 +34,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('komisi.index') }}"> Data Komisi </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('dosen.index') }}"> Data Dosen </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('dataKajur') }}"> Data Ketua Jurusan </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('master.api') }}"> Data API </a></li>
                 </ul>
             </div>
         </li>
@@ -90,7 +91,7 @@
                     @if (auth()->user()->level_id == 2)
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statusyudisium.index') }}"> Status Yudisium </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('periode.index') }}"> Periode Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('cetaksk.index') }}"> Cetak Draft SK </a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('cetaksk.index') }}"> Cetak Draft SK </a></li> --}}
                     @endif
                     <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
                 </ul>

@@ -203,30 +203,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('statusnilai')->insert($statusnilai);
 
-        $statusta = [
-            [
-                'status' => "Review Bapendik",
-            ],
-            [
-                'status' => "Review Komisi",
-            ],
-            [
-                'status' => "Layak",
-            ],
-            [
-                'status' => "Tidak Layak",
-            ],
-            [
-                'status' => "Revisi",
-            ],
-            [
-                'status' => "Pelaksanaan TA",
-            ],
-            [
-                'status' => "Selesai",
-            ],
-        ];
-
         $nilaiHuruf = [
             [
                 'nilaiHuruf' => 'A',
@@ -255,8 +231,6 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('nilai_huruf')->insert($nilaiHuruf);
-
-        DB::table('statusta')->insert($statusta);
 
         $statuspendadaran = [
             [
@@ -338,19 +312,6 @@ class DatabaseSeeder extends Seeder
 
         DB::table('ruang_pendadaran')->insert($ruangPendadaran);
 
-        $seminar = [
-            [
-                'jenis' => "seminar KP",
-            ],
-            [
-                'jenis' => "seminar proposal",
-            ],
-            [
-                'jenis' => "seminar hasil TA",
-            ],
-        ];
-
-        DB::table('jenis_seminar')->insert($seminar);
 
         $user = [
             [
@@ -778,21 +739,6 @@ class DatabaseSeeder extends Seeder
         ];
 
         DB::table('konsultasiTA')->insert($konsultasi);
-
-        $seminar = [
-            [
-                'ta_id' => 1,
-                'jenis_id' => 3,
-                'ruang_id' => 1,
-            ],
-            [
-                'ta_id' => 1,
-                'jenis_id' => 2,
-                'ruang_id' => 1,
-            ],
-        ];
-
-        DB::table('seminar')->insert($seminar);
 
         $seminar_proposal = [
             [

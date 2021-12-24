@@ -40,6 +40,7 @@ use App\Http\Controllers\BeritaAcaraPendadaranController;
 use App\Http\Controllers\KonsultasiTAMahasiswaController;
 use App\Http\Controllers\SeminarHasilMahasiswaController;
 use App\Http\Controllers\SeminarProposalMahasiswaController;
+use App\Models\Dosen as ModelsDosen;
 
 Auth::routes();
 
@@ -264,10 +265,12 @@ Route::get('/yudisium/periode-yudisium/delete/{id}',  'PeriodeYudisiumController
 Route::get('/yudisium/sk/', function () {
     return view('yudisium.periode.sk');
 });
+// controller cetak sk nya ku pindah kesini ya yok
+Route::get('/yudisium/sk-yudisium/{periode}', 'PeriodeYudisiumController@cetaksk')->name('cetaksk');
 
 // Cetak Draft Yudisium
-Route::get('/yudisium/sk-yudisium', 'YudisiumController@laporan')->name('cetaksk.index');
-Route::get('/yudisium/sk-yudisium/laporan/{periode}', 'YudisiumController@cetaksk')->name('cetaksk.laporan');
+// Route::get('/yudisium/sk-yudisium', 'YudisiumController@laporan')->name('cetaksk.index');
+// Route::get('/yudisium/sk-yudisium/laporan/{periode}', 'YudisiumController@cetaksk')->name('cetaksk.laporan');
 //================= ROUTE MAHASISWA =========================
 
 Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
@@ -325,24 +328,32 @@ Route::middleware('mahasiswa')->prefix('mahasiswa')->group(function () {
 
 // ============= API UNSOED =================
 Route::get('testing', function () {
-    // $ch = curl_init('https://soa.unsoed.ac.id/sia-sandbox/v1/dosen/profil?emailunsoed=acep@unsoed.ac.id');
     $response = Http::withHeaders([
         'X-API-KEY' => 'hVCK2D4V25rPEN8yIf9Qbf7XeNQcEYoqSckyl83J',
         'secretkey' => 'Utb6T3g',
     ])->get('https://soa.unsoed.ac.id/sia-sandbox/v1/dosen/profil?emailunsoed=acep@unsoed.ac.id');
-    // curl_setopt($ch, CURLOPT_POST, 1);
-    // curl_setopt($ch, CURLOPT_POSTFIELDS, $response);
-    // Execute the handle
-    // curl_exec($ch);
-    // return $response->json();
-    dd($response);
+    $array = json_decode($response, true);
+    // foreach ($array["data"] as $value) {
+    //     return $value;
+    // }
+    $array_data = $array["data"];
+    dd($array_data);
 });
-// catching API json placeholder
-Route::get('post', function () {
-    $response = Http::get('https://jsonplaceholder.typicode.com/posts/1');
-    return $response->json();
-    // dd($response);
+
+Route::get('mhs', function () {
+    $response = Http::withHeaders([
+        'X-API-KEY' => 'hVCK2D4V25rPEN8yIf9Qbf7XeNQcEYoqSckyl83J',
+        'secretkey' => 'Utb6T3g',
+    ])->get('https://soa.unsoed.ac.id/sia-sandbox/v1/mahasiswa/profil?nim=F1F014059');
+    $array = json_decode($response, true);
+    $array_data = $array["data"];
+    dd($array_data);
 });
+
+
+
+
+Route::get('admin/master/api', 'APIController@Index')->name('master.api');
 
 Auth::routes();
 

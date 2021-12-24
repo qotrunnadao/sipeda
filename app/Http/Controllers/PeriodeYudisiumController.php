@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PeriodeYudisium;
-use App\Models\Yudisium;
-use RealRashid\SweetAlert\Facades\Alert;
-use Carbon\Carbon;
 use File;
+use Carbon\Carbon;
+use App\Models\Yudisium;
+use PDF;
 use Illuminate\Http\Request;
+use App\Models\PeriodeYudisium;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PeriodeYudisiumController extends Controller
 {
@@ -19,8 +20,15 @@ class PeriodeYudisiumController extends Controller
     public function index()
     {
         $periode = PeriodeYudisium::latest()->get();
+        $periode_cetak = PeriodeYudisium::where('aktif', '1')->get()->all();
         // $tanggal = Carbon::parse($periode->first()->tanggal)->isoFormat('Y-M-DD');
-        return view('yudisium.periode.index',  compact('periode'));
+        return view('yudisium.periode.index',  compact('periode', 'periode_cetak'));
+    }
+
+    public function cetaksk()
+    {
+        $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
+        $pdf = PDF::loadView('yudisium.periode.berkas', ['periode' => $periode])->setPaper('a4', 'landscape');
     }
 
     /**
