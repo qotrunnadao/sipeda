@@ -6,13 +6,18 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <div class="btn-group">
+                    <form action="{{ route('api.store') }}" name="eksport" id="eksport">
+                        <button type="submit" class="btn btn-sm btn-gradient-primary float-right" id="btnSubmit"><i class="mdi mdi-plus">
+                        </i>Generate Data API User</button>
+                    </form>
+                </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th> No. </th>
                                 <th> Email </th>
-                                <th> no Induk </th>
                                 <th> Level ID</th>
                                 <th> Nama Level </th>
                                 <th> Aksi</th>
@@ -24,7 +29,6 @@
                             <tr>
                                 <td> {{ $no++ }}</td>
                                 <td> {{ $value->email }}</td>
-                                <td> {{ $value->noInduk }}</td>
                                 <td> {{ $value->level_id }}</td>
                                 <td> {{ $value->level->namaLevel }}</td>
                                 <td>
@@ -82,6 +86,18 @@
 @endsection
 
 @section('javascripts')
+<script>
+    $(document).ready(function () {
+
+    $("#eksport").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+        });
+    });
+</script>
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)

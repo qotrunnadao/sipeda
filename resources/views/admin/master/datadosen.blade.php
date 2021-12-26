@@ -19,7 +19,7 @@
                                 <th> NIP </th>
                                 <th> No.HP </th>
                                 {{-- <th> Agama </th> --}}
-                                <th> Jenis Kelamin </th>
+                                {{-- <th> Jenis Kelamin </th> --}}
                                 <th> Jurusan</th>
                                 <th> isKomisi</th>
                                 <th> isKajur</th>
@@ -36,7 +36,7 @@
                                 <td> {{ $value->nip }}</td>
                                 <td> {{ $value->nohp }}</td>
                                 {{-- <td> {{ $value->agama->namaAgama }}</td> --}}
-                                <td> {{ $value->jenkel->ket }} </td>
+                                {{-- <td> {{ $value->jenkel->ket }} </td> --}}
                                 <td> {{ $value->jurusan->namaJurusan }}</td>
                                 <td>
                                     @if($value->isKomisi == 0)

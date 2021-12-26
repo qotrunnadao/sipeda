@@ -354,6 +354,7 @@ Route::get('mhs', function () {
 
 
 Route::get('admin/master/api', 'APIController@Index')->name('master.api');
+Route::get('admin/master/api/store', 'APIController@store')->name('api.store');
 
 Auth::routes();
 

@@ -15,17 +15,17 @@ class CreateDosensTable extends Migration
     {
         Schema::create('dosen', function (Blueprint $table) {
             $table->id();
-            $table->longText('alamat');
+            $table->longText('alamat')->nullable();
             $table->string('foto')->nullable();
             $table->string('nama');
-            $table->string('nohp');
+            $table->string('nohp')->nullable();
             $table->string('nip');
             $table->dateTime('tglLahir')->nullable();
             $table->tinyInteger('isKomisi')->comment('0=false, 1=true')->default('0');
             $table->tinyInteger('isKajur')->comment('0=false, 1=true')->default('0');
             $table->string('tmptLahir')->default('Indonesia');
-            $table->foreignId('agama_id')->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('jk_id')->references('id')->on('jenkel')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('agama_id')->nullable()->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('jk_id')->nullable()->references('id')->on('jenkel')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('jurusan_id')->references('id')->on('jurusan')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

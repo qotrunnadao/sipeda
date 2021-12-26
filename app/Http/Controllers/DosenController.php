@@ -18,6 +18,7 @@ class DosenController extends Controller
         $data = array(
             'dosen' => Dosen::latest()->get(),
         );
+        // dd($data);
         return view('admin.master.datadosen', $data);
     }
 

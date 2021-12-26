@@ -4,7 +4,7 @@
 @section('title', 'Pengajuan TA')
 
 <div class="row">
-    @if(Auth::user()->level_id !== 3)
+    @if(Auth::user()->level_id != 3 && Auth::user()->level_id != 5)
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -111,6 +111,7 @@
                                 <th class="text-center"> Dosen Pembimbing 2</th>
                                 <th class="text-center"> Status</th>
                                 <th class="text-center"> Keterangan </th>
+                                <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,6 +150,18 @@
                                 </td>
                                 <td class="text-center"> {{ $value->ket }}</td>
                                 <td class="text-center">
+                                    @if (auth()->user()->level_id == 1 || auth()->user()->level_id == 2)
+                                    <div class="btn-group">
+                                        <a href="{{ route('TA.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @endif
+                                    <div class="btn-group">
+                                        <form action="{{ route('TA.delete', $value->id) }}" method="GET">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
