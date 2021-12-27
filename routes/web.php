@@ -352,6 +352,7 @@ Route::get('mhs', function () {
 });
 
 Route::get('admin/master/api', 'APISIAController@Index')->name('master.api');
+Route::get('admin/master/api/store', 'APISIAController@store')->name('api.store');
 
 
 Auth::routes();

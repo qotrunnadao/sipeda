@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/nilaiTA', 'APIGETController@nilaiTA');
-Route::post('/nilaiTA', 'APIPOSTController@nilaiTA');
+Route::get('/sitak/nilaiTA', 'APIGETController@nilaiTA');
+Route::post('/sitak/nilaiTA', 'APIPOSTController@nilaiTA');

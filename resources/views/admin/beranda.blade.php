@@ -97,6 +97,7 @@
                                 <td>
                                     <div class="badge badge-info badge-pill">{{ $value->isYudisium }}</div>
                                 </td>
+
                             </tr>
                             @endforeach
                         </tbody>

@@ -29,6 +29,8 @@ class PeriodeYudisiumController extends Controller
     {
         $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
         $pdf = PDF::loadView('yudisium.periode.berkas', ['periode' => $periode])->setPaper('a4', 'landscape');
+        return $pdf->stream();
+        // dd($pdf);
     }
 
     /**

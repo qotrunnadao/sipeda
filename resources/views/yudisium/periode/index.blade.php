@@ -33,6 +33,15 @@
                                     {{ $value->nosurat }}
                                 </td>
                                 <td>
+                                    @if (File::exists(public_path('storage/assets/file/sk/' . $value->fileSK . '')))
+                                    <div class="btn-group">
+                                        <form action="" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileSK }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
                                     <div class="btn-group">
                                         <form action="" method="post">
                                             @method('PUT')
@@ -40,7 +49,7 @@
                                             <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->fileSK }} <i class="mdi mdi-download"></i></a></button>
                                         </form>
                                     </div>
-
+                                    @endif
                                 </td>
                                 <td> {{ $value->aktif == 0 ? 'false' : 'true'}} </td>
                                 <td>
@@ -78,7 +87,8 @@
                             @endforeach
                         </select>
                     </div>
-                    <a href="" onclick="this.href='/yudisium/sk-yudisium/' + document.getElementById('periode_id').value" target="_blank" id="btnSubmit" class="btn btn-gradient-primary "><i class="fa fa-print"></i>
+                    <a href=""
+                    onclick="this.href='/yudisium/sk-yudisium/' + document.getElementById('periode_id').value" target="_blank" id="btnSubmit" class="btn btn-gradient-primary "><i class="fa fa-print"></i>
                         Cetak SK</a>
                 </div>
             </form>

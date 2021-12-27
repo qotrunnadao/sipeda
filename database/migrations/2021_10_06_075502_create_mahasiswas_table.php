@@ -15,14 +15,15 @@ class CreateMahasiswasTable extends Migration
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->id();
-            $table->longText('alamat');
+            $table->longText('alamat')->nullable();
             $table->string('foto')->default('NULL');
             $table->string('nama');
             $table->string('nim');
-            $table->string('nohp');
+            $table->string('nohp')->nullable();
             $table->dateTime('tglLahir')->nullable();
             $table->string('tmptLahir')->default('indonesia');
-            $table->foreignId('agama_id')->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('agama_id')->nullable()->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('jk_id')->nullable()->references('id')->on('jenkel')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('jurusan_id')->references('id')->on('jurusan')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
