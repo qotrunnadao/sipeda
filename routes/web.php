@@ -5,6 +5,7 @@ use App\Http\Middleware\Kajur;
 use App\Http\Middleware\Komisi;
 use Subfission\Cas\Facades\Cas;
 use App\Http\Middleware\Mahasiswa;
+use App\Models\Dosen as ModelsDosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KajurController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RuangController;
+use App\Http\Controllers\APISIAController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\BerandaController;
@@ -40,7 +42,6 @@ use App\Http\Controllers\BeritaAcaraPendadaranController;
 use App\Http\Controllers\KonsultasiTAMahasiswaController;
 use App\Http\Controllers\SeminarHasilMahasiswaController;
 use App\Http\Controllers\SeminarProposalMahasiswaController;
-use App\Models\Dosen as ModelsDosen;
 
 Auth::routes();
 
@@ -350,10 +351,8 @@ Route::get('mhs', function () {
     dd($array_data);
 });
 
+Route::get('admin/master/api', 'APISIAController@Index')->name('master.api');
 
-
-
-Route::get('admin/master/api', 'APIController@Index')->name('master.api');
 
 Auth::routes();
 
