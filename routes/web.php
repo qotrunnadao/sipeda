@@ -341,6 +341,8 @@ Route::get('testing', function () {
     dd($array_data);
 });
 
+Route::get('curl/{nim}', 'APISIAController@data_mhs');
+
 Route::get('mhs', function () {
     $response = Http::withHeaders([
         'X-API-KEY' => 'hVCK2D4V25rPEN8yIf9Qbf7XeNQcEYoqSckyl83J',

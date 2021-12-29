@@ -6,10 +6,10 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="btn-group">
+                <div>
                     <form action="{{ route('api.store') }}" name="eksport" id="eksport">
                         <button type="submit" class="btn btn-sm btn-gradient-primary float-right" id="btnSubmit"><i class="mdi mdi-plus">
-                        </i>Generate Data API User</button>
+                            </i>Generate Data API User</button>
                     </form>
                 </div>
                 <div class="table-responsive">
