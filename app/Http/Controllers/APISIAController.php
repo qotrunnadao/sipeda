@@ -125,7 +125,7 @@ class APISIAController extends Controller
 						$mhs->jurusan_id = '3';
 					} elseif ($value["namaprogdikti"] == 'Informatika') {
 						$mhs->jurusan_id = '4';
-					} elseif ($value["namaprogdikti"] == 'Informatika') {
+					} elseif ($value["namaprogdikti"] == 'Teknik Industri') {
 						$mhs->jurusan_id = '5';
 					} else {
 						Alert::warning('Gagal', 'Data User Mahasiswa Gagal Ditambahkan');

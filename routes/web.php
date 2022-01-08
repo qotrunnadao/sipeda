@@ -74,7 +74,7 @@ Route::put('/jurusan/update/{id}', 'JurusanController@update')->name('jurusan.up
 Route::get('/jurusan/destroy/{id}', 'JurusanController@destroy')->name('jurusan.destroy');
 
 // Route Data Ruangan
-Route::get('/data-ruang', 'RuangController@index')->name('ruang.index');
+Route::get('/data-ruang-seminar', 'RuangController@index')->name('ruang.index');
 Route::post('/data-ruang/store', 'RuangController@store')->name('ruang.store');
 Route::put('/data-ruang/update/{id}', 'RuangController@update')->name('ruang.update');
 Route::get('/data-ruang/destroy/{id}', 'RuangController@destroy')->name('ruang.destroy');

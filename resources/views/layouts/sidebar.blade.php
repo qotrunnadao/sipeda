@@ -19,7 +19,7 @@
         @if (auth()->user()->level_id == 2)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#master-data" aria-expanded="false" aria-controls="master-data">
-                <span class="menu-title">Master Data</span>
+                <span class="menu-title">Data Master</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-database menu-icon"></i>
             </a>
@@ -34,7 +34,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('komisi.index') }}"> Data Komisi </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('dosen.index') }}"> Data Dosen </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('dataKajur') }}"> Data Ketua Jurusan </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('master.api') }}"> Data API </a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('master.api') }}"> Data API </a></li> --}}
                 </ul>
             </div>
         </li>
