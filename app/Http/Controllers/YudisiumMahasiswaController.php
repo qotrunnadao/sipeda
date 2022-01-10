@@ -45,6 +45,10 @@ class YudisiumMahasiswaController extends Controller
         ];
         // dd($data);
         $cek = Yudisium::create($data);
+        $status = array(
+            'statusYudisium' => $cek->id,
+        );
+        $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
 
         if ($cek == true) {
             Alert::success('Berhasil', 'Pengajuan Yudisium telah Berhasil');

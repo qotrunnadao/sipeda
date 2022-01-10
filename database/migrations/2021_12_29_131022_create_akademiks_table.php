@@ -15,13 +15,13 @@ class CreateAkademiksTable extends Migration
     {
         Schema::create('akademik', function (Blueprint $table) {
             $table->id();
-            $table->double('ipk');
+            $table->double('ipk')->nullable();
             $table->foreignId('statusKP')->nullable()->references('id')->on('KP')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('statusTA')->nullable()->references('id')->on('TA')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('statusPendadaran')->nullable()->references('id')->on('pendadaran')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('statusYudisium')->nullable()->references('id')->on('yudisium')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('sks');
-            $table->foreignId('angkatan')->references('id')->on('mahasiswa')->onUpdate('cascade')->onDelete('cascade');
+            $table->bigInteger('sks')->nullable();
+            $table->foreignId('angkatan')->nullable();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

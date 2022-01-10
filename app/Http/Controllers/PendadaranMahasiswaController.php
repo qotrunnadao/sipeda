@@ -46,6 +46,10 @@ class PendadaranMahasiswaController extends Controller
         ];
         // dd($data);
         $cek = Pendadaran::create($data);
+        $status = array(
+            'statusPendadaran' => $cek->id,
+        );
+        $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
 
         if ($cek == true) {
             Alert::success('Berhasil', 'Pengajuan Ujian Pendadaran telah Berhasil');

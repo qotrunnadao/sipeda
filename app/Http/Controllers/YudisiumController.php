@@ -119,6 +119,11 @@ class YudisiumController extends Controller
             ];
             // dd($data);
             $cek = Yudisium::create($data);
+                $status = array(
+                    'statusYudisium' => $cek->id,
+                );
+                $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+
         }
 
         if ($cek == true) {
