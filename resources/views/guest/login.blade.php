@@ -23,7 +23,6 @@
                         <span style="width: 40px;">
                             <img src=" {{ asset('sitak/assets/images/unsoed.png') }}">
                         </span>
-                        {{-- <span class="fs-5" style="letter-spacing: 3px; margin-left:30px; text-shadow:0px 5px 4px #5f638a;"><b>UNIVERSITAS JENDERAL SOEDIRMAN</b></span> --}}
                         <span class="fs-5 tulisan" style="letter-spacing: 3px; margin-left:30px; text-shadow:0px 5px 4px #5f638a;"><b>FAKULTAS TEKNIK</b></span>
                     </div>
                 </header>
