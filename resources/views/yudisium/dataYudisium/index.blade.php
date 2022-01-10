@@ -24,7 +24,6 @@
                         <tbody>
                             @php($no=1)
                             @foreach ($acc_yudisium as $value)
-
                             <tr>
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $value->mahasiswa->nama }} </td>
@@ -65,7 +64,6 @@
                                     <span class="badge badge-danger">Data Periode Belum Terbit</span>
                                     @endif
                                 </td>
-
                                 <td>
                                     @if($value->ket == null)
                                     <span class="badge badge-danger">Tidak ada keterangan</span>
@@ -128,7 +126,6 @@
                         <tbody>
                             @php($no=1)
                             @foreach ($yudisium as $value)
-
                             <tr>
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $value->mahasiswa->nama }} </td>
@@ -154,7 +151,6 @@
                                     </div>
                                     @endif
                                     @else
-
                                     <div class="badge badge-danger badge-pill ">Berkas Yudisium Tidak Ada</div>
                                     @endif
                                 </td>

@@ -313,10 +313,7 @@
                     {{-- @dd($semprop_all); --}}
                     {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $semprop_all->ta_id }}"> --}}
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nomer Surat Berita Acara
-                        </label>
-                        <div class="col-sm-9">
+                        <div class="col">
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat" name="no_surat" />
                         </div>
                     </div>
