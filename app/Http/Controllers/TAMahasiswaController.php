@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TA;
+use App\Models\Akademik;
 use App\Models\Dosen;
 use App\Models\User;
 use App\Models\TahunAkademik;
@@ -85,8 +86,14 @@ class TAMahasiswaController extends Controller
                 'status_id' => $request->status_id,
                 'praproposal' => $filename,
             ];
-            // dd($data);
             $cek = TA::create($data);
+            // dd($cek->id);
+            $status = array(
+                'statusTA' => $cek->id,
+            );
+            $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+            // dd($status);
+            $akademik->update($status);
         } else {
             $data['doc'] = NULL;
         }

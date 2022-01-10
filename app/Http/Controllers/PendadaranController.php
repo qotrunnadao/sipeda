@@ -163,7 +163,12 @@ class PendadaranController extends Controller
                     ];
                 }
                 // dd($data);
-                Pendadaran::create($data);
+                $cek = Pendadaran::create($data);
+                $status = array(
+                    'statusPendadaran' => $cek->id,
+                );
+                $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+
                 Alert::success('Berhasil', 'Berhasil Menambahkan Data Ujian Pendadaran');
             } else {
                 Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran Gagal Ditambahkan, Ruangan Sudah Digunakan');

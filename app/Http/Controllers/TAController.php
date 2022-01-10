@@ -88,7 +88,7 @@ class TAController extends Controller
      */
     public function nim(Request $request)
     {
-        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->orHas('TA')->whereHas('TA', function ($q) use ($request) {
+        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->orwhereHas('TA', function ($q) use ($request) {
             $q->where('status_id', '1');
         })->where('jurusan_id',  $request->id)->get();
         // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
@@ -124,6 +124,11 @@ class TAController extends Controller
                 'praproposal' => $filename,
             ];
             $cek = TA::create($data);
+            $status = array(
+                'statusTA' => $cek->id,
+            );
+            $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+
         } else {
             $data['doc'] = NULL;
         }

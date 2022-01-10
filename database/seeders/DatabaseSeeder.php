@@ -669,6 +669,29 @@ class DatabaseSeeder extends Seeder
 
         DB::table('tahunakademik')->insert($thnAkad);
 
+        $Akademik = [
+            [
+                'mhs_id' => 1,
+            ],
+            [
+                'mhs_id' => 2,
+            ],
+            [
+                'mhs_id' => 3,
+            ],
+            [
+                'mhs_id' => 4,
+            ],
+            [
+                'mhs_id' => 5,
+            ],
+            [
+                'mhs_id' => 6,
+            ],
+        ];
+
+        DB::table('akademik')->insert($Akademik);
+
         $TA = [
             [
                 'mahasiswa_id' => "1",

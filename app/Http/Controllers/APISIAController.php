@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Akademik;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -25,10 +26,10 @@ class APISIAController extends Controller
 		$mhs_json = Http::withHeaders([
 			'X-API-KEY' => 'hVCK2D4V25rPEN8yIf9Qbf7XeNQcEYoqSckyl83J',
 			'secretkey' => 'Utb6T3g',
-		])->get('https://soa.unsoed.ac.id/sia-sandbox/v1/mahasiswa/profil?nim=F1F014059');
+		])->get('https://soa.unsoed.ac.id/sia-sandbox/v1/mahasiswa/profil?nim=H1D018036');
 		$mhs = json_decode($mhs_json, true);
 		$mhs_data = $mhs["data"];
-
+        // dd($mhs_data);
 		// ====== API KOMPONEN NILAI ========
 		$komponen = Http::withHeaders([
 			'X-API-KEY' => 'hVCK2D4V25rPEN8yIf9Qbf7XeNQcEYoqSckyl83J',
@@ -106,34 +107,42 @@ class APISIAController extends Controller
 					$mhs->tglLahir = $value["tgllhrmhs"];
 					$mhs->nama = $value["namamhs"];
 					$mhs->nim = $value["nim"];
+                    $mhs->angkatan = $value["tahunangkatan"];
 					$mhs->user_id = $user->id;
 
 					if ($value["namajeniskelamin"] == 'LAKI-LAKI') {
-						$mhs->jk_id = '1';
+                        $mhs->jk_id = '1';
 					} elseif ($value["namajeniskelamin"] == 'PEREMPUAN') {
-						$mhs->jk_id = '2';
+                        $mhs->jk_id = '2';
 					} else {
-						Alert::warning('Gagal', 'Data User Mahasiswa Gagal Ditambahkan');
+                        Alert::warning('Gagal', 'Data User Mahasiswa Gagal Ditambahkan');
 						return back();
 					}
 
 					if ($value["namaprogdikti"] == 'Teknik Elektro') {
-						$mhs->jurusan_id = '1';
+                        $mhs->jurusan_id = '1';
 					} elseif ($value["namaprogdikti"] == 'Teknik Sipil') {
-						$mhs->jurusan_id = '2';
+                        $mhs->jurusan_id = '2';
 					} elseif ($value["namaprogdikti"] == 'Teknik Geologi') {
-						$mhs->jurusan_id = '3';
+                        $mhs->jurusan_id = '3';
 					} elseif ($value["namaprogdikti"] == 'Informatika') {
-						$mhs->jurusan_id = '4';
+                        $mhs->jurusan_id = '4';
 					} elseif ($value["namaprogdikti"] == 'Informatika') {
-						$mhs->jurusan_id = '5';
+                        $mhs->jurusan_id = '5';
 					} else {
-						Alert::warning('Gagal', 'Data User Mahasiswa Gagal Ditambahkan');
+                        Alert::warning('Gagal', 'Data User Mahasiswa Gagal Ditambahkan');
 						return back();
 					}
 
 					$simpan = $mhs->save();
-					if ($simpan == true) {
+					if($simpan){
+                        // dd($mhs->id);
+                        $akademik = new Akademik;
+                        $akademik->angkatan = $value["tahunangkatan"];
+                        $akademik->mhs_id = $mhs->id;
+				    	$simpan = $akademik->save();
+                }
+                    if ($simpan == true) {
 						Alert::success('Berhasil', 'Data  User Mahasiswa dan Dosen berhasil Ditambahkan');
 					} else {
 						Alert::warning('Gagal', 'Data  User Mahasiswa Gagal Ditambahkan');
