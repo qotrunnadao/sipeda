@@ -423,25 +423,25 @@ class DatabaseSeeder extends Seeder
                 'level_id' => 5,
             ],
             [
-                'email' => "laviesta.narini@unsoed.ac.id",
+                'email' => "laviesta.narini@mhs.unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "laviesta123",
                 'level_id' => 4,
             ],
             [
-                'email' => "nada.mitsfir@unsoed.ac.id",
+                'email' => "nada.mitsfir@mhs.unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "nada123",
                 'level_id' => 4,
             ],
             [
-                'email' => "nahda.putri@unsoed.ac.id",
+                'email' => "nahda.putri@mhs.unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "nahda123",
                 'level_id' => 4,
             ],
             [
-                'email' => "mega.mutiara@unsoed.ac.id",
+                'email' => "mega.mutiara@mhs.unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "mega123",
                 'level_id' => 4,
@@ -721,6 +721,12 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'mhs_id' => 6,
+            ],
+            [
+                'mhs_id' => 7,
+            ],
+            [
+                'mhs_id' => 8,
             ],
         ];
 

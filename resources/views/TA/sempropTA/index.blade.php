@@ -4,7 +4,7 @@
 @section('title', 'Data Seminar Proposal')
 
 <div class="row">
-    @if(auth()->user()->level_id == 2)
+    @if(auth()->user()->level_id == 2 )
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">

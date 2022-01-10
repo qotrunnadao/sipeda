@@ -96,23 +96,23 @@ class SeminarProposalMahasiswaController extends Controller
                                 ->where('ruang_id', '=', $ruang);
                         });;
                 })->count();
-                $seminarCount = Seminar::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                    $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                        $query->where('tanggal', '=', $tanggal)
-                            ->where('jamMulai', '>=', $jamMulai)
-                            ->where('jamSelesai', '<', $jamMulai)
-                            ->where('ruang_id', '=', $ruang);
-                    })
-                        ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                            $query->where('jamMulai', '<', $jamSelesai)
-                                ->where('jamSelesai', '>=', $jamSelesai)
-                                ->where('tanggal', '=', $tanggal)
-                                ->where('ruang_id', '=', $ruang);
-                        });;
-                })->count();
+                // $seminarCount = Seminar::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                //     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                //         $query->where('tanggal', '=', $tanggal)
+                //             ->where('jamMulai', '>=', $jamMulai)
+                //             ->where('jamSelesai', '<', $jamMulai)
+                //             ->where('ruang_id', '=', $ruang);
+                //     })
+                //         ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                //             $query->where('jamMulai', '<', $jamSelesai)
+                //                 ->where('jamSelesai', '>=', $jamSelesai)
+                //                 ->where('tanggal', '=', $tanggal)
+                //                 ->where('ruang_id', '=', $ruang);
+                //         });;
+                // })->count();
                 // dd($tanggalCount);
 
-                if (!$semhasCount && !$semproCount && !$seminarCount) {
+                if (!$semhasCount && !$semproCount) {
                     $id = Auth::User()->id;
                     $user_id = User::where('id', $request->user)->get()->first();
                     $mhs_id = Mahasiswa::with(['user'])->where('user_id', $request->user_id)->get()->first();

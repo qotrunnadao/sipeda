@@ -128,7 +128,12 @@ class TAController extends Controller
                 'statusTA' => $cek->id,
             );
             $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-
+            if ($akademik) {
+                $akademik->update($status);
+            } else {
+                Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
+                return back();
+            }
         } else {
             $data['doc'] = NULL;
         }
