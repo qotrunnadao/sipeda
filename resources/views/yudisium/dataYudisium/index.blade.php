@@ -119,7 +119,7 @@
                                 <th> Berkas Persyaratan </th>
                                 <th> status </th>
                                 <th> Periode Yudisium</th>
-                                <th> Keterangan </th>
+                                {{-- <th> Keterangan </th> --}}
                                 <th> Aksi </th>
                             </tr>
                         </thead>
@@ -166,13 +166,13 @@
                                     @endif
                                 </td>
 
-                                <td>
+                                {{-- <td>
                                     @if($value->ket == null)
                                     <span class="badge badge-danger">Tidak ada keterangan</span>
                                     @else
                                     {{ $value->ket }}
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>
                                     @if(auth()->user()->level_id == 5 && $value->status_id ==2)
                                     <div class="btn-group">

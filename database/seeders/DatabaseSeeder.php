@@ -434,6 +434,18 @@ class DatabaseSeeder extends Seeder
                 'password' => "nada123",
                 'level_id' => 4,
             ],
+            [
+                'email' => "nahda.putri@unsoed.ac.id",
+                'noInduk' => "1234567",
+                'password' => "nahda123",
+                'level_id' => 4,
+            ],
+            [
+                'email' => "mega.mutiara@unsoed.ac.id",
+                'noInduk' => "1234567",
+                'password' => "mega123",
+                'level_id' => 4,
+            ],
 
         ];
 
@@ -654,6 +666,28 @@ class DatabaseSeeder extends Seeder
                 'jk_id' => 2,
                 'jurusan_id' => 5,
                 'user_id' => 20,
+            ],
+            [
+                'alamat' => "Pekanbaru",
+                'nama' => "Nahda Faadhila Putri",
+                'nim' => "H1D018019",
+                'nohp' => "082241443765",
+                'tmptLahir' => "Bantul",
+                'agama_id' => 1,
+                'jk_id' => 2,
+                'jurusan_id' => 5,
+                'user_id' => 21,
+            ],
+            [
+                'alamat' => "Banjarnegara",
+                'nama' => "Mega Zulfiya Mutiara",
+                'nim' => "H1D018008",
+                'nohp' => "082241443765",
+                'tmptLahir' => "Banjarnegara",
+                'agama_id' => 1,
+                'jk_id' => 2,
+                'jurusan_id' => 5,
+                'user_id' => 22,
             ],
         ];
 
