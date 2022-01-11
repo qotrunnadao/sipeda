@@ -3,9 +3,107 @@
 @section('icon', 'folder-upload')
 @section('title', 'Upload SPK TA')
 <div class="row">
+    @if (auth()->user()->level_id == 5)
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
+                <h4 class="card-title">Pengajuan SPK Tugas Akhir </h4>
+                <div class="table-responsive">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama </th>
+                                <th class="text-center"> NIM </th>
+                                <th class="text-center"> Jurusan </th>
+                                <th class="text-center"> File SPK </th>
+                                @if (auth()->user()->level_id == 5 || auth()->user()->level_id == 2)
+                                <th class="text-center"> Nomer Surat </th>
+                                <th class="text-center"> Aksi </th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($no=1)
+                            @foreach ($spkKajur as $value )
+                            <tr>
+                                <td class="text-center"> {{ $no++ }} </td>
+                                <td class="text-center"> {{ $value->mahasiswa->nama}} </td>
+                                <td class="text-center">
+                                    {{ $value->mahasiswa->nim }}
+                                </td>
+                                <td class="text-center"> {{ $value->mahasiswa->jurusan->namaJurusan }}</td>
+                                @if ($value->spk == null)
+                                <td class="text-center">
+                                    <span class="badge badge-danger">SPK Tugas Akhir Belum Terbit</span>
+                                </td>
+                                @else
+                                <td class="text-center">
+                                    @if (File::exists(public_path('storage/assets/file/SPK TA/' . $value->spk->fileSPK . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('spk.download', $value->spk->fileSPK) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->spk->fileSPK }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </td>
+                                @endif
+                                @if ($value->no_surat == null)
+                                <td class="text-center">
+                                    <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
+                                </td>
+                                @elseif(auth()->user()->level_id == 5 || auth()->user()->level_id == 2)
+                                <td class="text-center"> {{ $value->no_surat}} </td>
+                                @endif
+                                <td class="text-center">
+                                    @if ($value->no_surat == null && auth()->user()->level_id == 2)
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                    </div>
+                                    @elseif ($value->spk == null && auth()->user()->level_id == 2)
+                                    <div class="btn-group">
+                                        <form action="{{ route('spk.eksport', $value->id) }}" method="get" id="eksport">
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm eksport" id="btnSubmit"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    @if ($value->spk && $value->no_surat && auth()->user()->level_id == 2 || auth()->user()->level_id == 5)
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <form action="{{ route('spk.destroy', $value->spk->fileSPK) }}" method="GET">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">SPK Tugas Akhir Keseluruhan</h4>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -26,7 +124,7 @@
                             @foreach ($spk as $value )
                             <tr>
                                 <td class="text-center"> {{ $no++ }} </td>
-                                <td> {{ $value->mahasiswa->nama}} </td>
+                                <td class="text-center"> {{ $value->mahasiswa->nama}} </td>
                                 <td class="text-center">
                                     {{ $value->mahasiswa->nim }}
                                 </td>

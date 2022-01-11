@@ -31,25 +31,23 @@ class SPKController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
-        if ((auth()->user()->level_id == 5)) {
+        if (auth()->user()->level_id == 5) {
             $spk = TA::with(['mahasiswa', 'spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
-            })->where('status_id', '>=', '4')->where('no_surat', '!=', null)->latest()->get();
+            })->where('status_id', '>=', '4')->latest()->get();
+            $spkKajur = TA::with(['mahasiswa', 'spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->where('status_id', '>=', '5')->where('no_surat', '!=', null)->latest()->get();
+        return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll','spkKajur'));
         }
-        if (auth()->user()->level_id == 1) {
-            $spk = TA::with(['mahasiswa', 'spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+        elseif (auth()->user()->level_id == 1 || auth()->user()->level_id == 3) {
+            $spk = TA::with(['mahasiswa', 'spk'])->where('pembimbing1_id', $dosen_id->id)->orWhere('pembimbing1_id', $dosen_id->id)->where('status_id', '>=', '5')
+            ->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
-            })->where('pembimbing1_id', $dosen_id->id)->orWhere('pembimbing1_id', $dosen_id->id)->where('status_id', '>=', '4')->latest()->get();
+            })->latest()->get();
             //    dd($spk);
-        }
-        if (auth()->user()->level_id == 3) {
-            $spk = TA::with(['mahasiswa', 'spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
-                $q->where('jurusan_id', $dosen_id->jurusan_id);
-            })->where('pembimbing1_id', $dosen_id->id)->orWhere('pembimbing1_id', $dosen_id->id)->where('status_id', '>=', '4')->latest()->get();
-            //    dd($spk);
-        }
-        if ((auth()->user()->level_id == 2)) {
-            $spk = TA::with('mahasiswa', 'spk')->where('status_id', '>=', '4')->latest()->get();
+        }elseif (auth()->user()->level_id == 2) {
+            $spk = TA::with('mahasiswa', 'spk')->where('status_id', '>=', '5')->latest()->get();
         }
         return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll'));
     }
