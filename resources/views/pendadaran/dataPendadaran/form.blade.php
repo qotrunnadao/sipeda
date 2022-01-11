@@ -142,7 +142,8 @@
                                 <label>
                                     Dosen Penguji 1 @if ($button == 'Tambah')<code>*</code> @endif
                                 </label>
-                                <select name="penguji1_id" id="penguji1_id" class="form-control">
+                                <select name="penguji1_id" id="dropdown1" class="form-control">
+                                    <option value="">PILIH</option>
                                     @foreach ($dosen as $value )
                                     <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji1_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                     @endforeach
@@ -152,7 +153,8 @@
                                 <label>
                                     Dosen Penguji 2 @if ($button == 'Tambah')<code>*</code> @endif
                                 </label>
-                                <select name="penguji2_id" id="penguji2_id" class="form-control">
+                                <select name="penguji2_id" id="dropdown2" class="form-control">
+                                    <option value="">PILIH</option>
                                     @foreach ($dosen as $value )
                                     <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                     @endforeach
@@ -162,7 +164,8 @@
                                 <label>
                                     Dosen Penguji 3 @if ($button == 'Tambah')<code>(jika ada)</code> @endif
                                 </label>
-                                <select name="penguji3_id" id="penguji3_id" class="form-control">
+                                <select name="penguji3_id" id="dropdown3" class="form-control">
+                                    <option value="">PILIH</option>
                                     @foreach ($dosen as $value )
                                     <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji3_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                     @endforeach
@@ -172,7 +175,8 @@
                                 <label>
                                     Dosen Penguji 4 @if ($button == 'Tambah')<code>(jika ada)</code> @endif
                                 </label>
-                                <select name="penguji4_id" id="penguji4_id" class="form-control">
+                                <select name="penguji4_id" id="dropdown4" class="form-control">
+                                    <option value="">PILIH</option>
                                     @foreach ($dosen as $value )
                                     <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji4_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                     @endforeach

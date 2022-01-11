@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Dosen;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -72,7 +73,26 @@ class DosenController extends Controller
     {
         $dosen = Dosen::find($id);
         $data = $request->all();
+        // dd($dosen);
+        if ($data['isKajur'] == '1' && $data['isKomisi'] == '1') {
+            Alert::warning('Gagal', 'Gagal, Dosen Tidak bisa mengambil dua Pekerjaan');
+            return back();
+        } elseif ($data['isKomisi'] == '1') {
+            $status = array(
+                'level_id' => '1',
+            );
+        } elseif ($data['isKajur'] == '1') {
+            $status = array(
+                'level_id' => '5',
+            );
+        } else {
+            Alert::warning('Gagal', 'Gagal Mengubah Status Dosen');
+            return back();
+        }
         $dosen->update($data);
+        $user = User::where('id', $dosen->user_id)->get()->first();
+        $user->update($status);
+        // dd($user);
         Alert::success('Berhasil', 'Berhasil Mengubah Status Dosen');
         return redirect(route('dosen.index'));
     }

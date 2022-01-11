@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TA;
 use App\Models\SPK;
 use App\Models\Dosen;
+use App\Models\Akademik;
 use App\Models\User;
 use App\Models\Status;
 use App\Models\jurusan;
@@ -88,9 +89,9 @@ class TAController extends Controller
      */
     public function nim(Request $request)
     {
-        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->orwhereHas('TA', function ($q) use ($request) {
+        $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id',  $request->id)->orwhereHas('TA', function ($q) use ($request) {
             $q->where('status_id', '1');
-        })->where('jurusan_id',  $request->id)->get();
+        })->get();
         // $mahasiswa = Mahasiswa::whereDoesntHave('TA')->where('jurusan_id', $request->id)->get();
         // dd($mahasiswa);
         return response()->json($mahasiswa, 200);
@@ -128,7 +129,12 @@ class TAController extends Controller
                 'statusTA' => $cek->id,
             );
             $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-
+            if ($akademik) {
+                $akademik->update($status);
+            } else {
+                Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
+                return back();
+            }
         } else {
             $data['doc'] = NULL;
         }

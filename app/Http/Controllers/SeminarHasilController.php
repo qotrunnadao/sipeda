@@ -50,9 +50,9 @@ class SeminarHasilController extends Controller
                         ->orWhere('pembimbing2_id', $dosen_id->id);
                 })->orwhereHas('Mahasiswa', function ($q) use ($dosen_id) {
                     $q->where('jurusan_id', $dosen_id->jurusan_id);
-                })->where('status', '!=','0')->latest()->get(),
+                })->where('status', '!=', '0')->latest()->get(),
             );
-        }elseif (auth()->user()->level_id == 3) {
+        } elseif (auth()->user()->level_id == 3) {
             $data = array(
                 'semhas_all' => SeminarHasil::latest()->get(),
                 'semhas_dosen' => SeminarHasil::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
@@ -139,25 +139,25 @@ class SeminarHasilController extends Controller
                                 ->where('ruang_id', '=', $ruang);
                         });;
                 })->count();
-                $seminarCount = Seminar::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                    $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                        $query->where('tanggal', '=', $tanggal)
-                            ->where('jamMulai', '>=', $jamMulai)
-                            ->where('jamSelesai', '<', $jamMulai)
-                            ->where('ruang_id', '=', $ruang);
-                    })
-                        ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
-                            $query->where('jamMulai', '<', $jamSelesai)
-                                ->where('jamSelesai', '>=', $jamSelesai)
-                                ->where('tanggal', '=', $tanggal)
-                                ->where('ruang_id', '=', $ruang);
-                        });;
-                })->count();
+                // $seminarCount = Seminar::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                //     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                //         $query->where('tanggal', '=', $tanggal)
+                //             ->where('jamMulai', '>=', $jamMulai)
+                //             ->where('jamSelesai', '<', $jamMulai)
+                //             ->where('ruang_id', '=', $ruang);
+                //     })
+                //         ->orWhere(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
+                //             $query->where('jamMulai', '<', $jamSelesai)
+                //                 ->where('jamSelesai', '>=', $jamSelesai)
+                //                 ->where('tanggal', '=', $tanggal)
+                //                 ->where('ruang_id', '=', $ruang);
+                //         });;
+                // })->count();
                 // dd($semhasCount);
                 // dd($semproCount);
                 // dd($seminarCount);
 
-                if (!$semhasCount && !$semproCount && !$seminarCount) {
+                if (!$semhasCount && !$semproCount) {
                     $ta_id = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
                     $nim = $ta_id->mahasiswa->nim;
                     $file = $request->file('laporan');

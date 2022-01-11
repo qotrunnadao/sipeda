@@ -51,7 +51,7 @@
             margin-top: 1rem !important;
         }
 
-        .mr-2 {
+        .mr-3 {
             margin-right: 0.5rem !important;
         }
 
@@ -114,7 +114,7 @@
 
 <body>
     <h1>Test123</h1>
-    <div class="container ml-5 mt-5 mr-2">
+    <div class="container ml-5 mt-5 mr-3">
         <div class="row">
             <div class="col col-md-1 float-left ml-5">
                 <img src="/sitak/assets/images/unsoed_b&w.png" height="130" width="130">

@@ -27,7 +27,7 @@ class CreateDosensTable extends Migration
             $table->foreignId('agama_id')->nullable()->references('id')->on('agama')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('jk_id')->nullable()->references('id')->on('jenkel')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('jurusan_id')->references('id')->on('jurusan')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_id')->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

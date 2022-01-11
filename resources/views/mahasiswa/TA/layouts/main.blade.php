@@ -25,7 +25,10 @@
     <link rel="stylesheet" href="{{ asset('sitak/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    {{-- dropdown search --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -194,6 +197,17 @@
                     }
                 })
             });
+        });
+    </script>
+    {{-- dropdown search --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dropdown1').select2();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dropdown2').select2();
         });
     </script>
     @yield('javascripts')

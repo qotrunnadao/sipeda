@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dosen;
 use App\Models\Status;
 use App\Models\Jurusan;
+use App\Models\akademik;
 use App\Models\User;
 use App\Models\Mahasiswa;
 use App\Models\Pendadaran;
@@ -41,8 +42,7 @@ class PendadaranController extends Controller
                     ->orWhere('penguji3_id', $dosen_id->id)
                     ->orWhere('penguji4_id', $dosen_id->id);
             })->latest()->get();
-        return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'status'));
-
+            return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'status'));
         } elseif (auth()->user()->level_id == 1) {
 
             $pendadaran = Pendadaran::with(['statusPendadaran'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {

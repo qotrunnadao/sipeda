@@ -18,6 +18,11 @@
     <link href="{{ asset('sitak/plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('sitak/plugins/Buttons-2.0.1/css/buttons.dataTables.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('sitak/plugins/Buttons-2.0.1/css/buttons.bootstrap5.css') }}" rel="stylesheet" type="text/css">
+    {{-- dropdown search --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
 
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{ asset('sitak/plugins/daterangepicker/daterangepicker.css') }}">
@@ -30,6 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -143,6 +149,27 @@
     <!-- My Script -->
     <script src="{{ asset('sitak/plugins/validator/jquery.form-validator.min.js') }}"></script>
     {{-- Validator --}}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dropdown1').select2();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dropdown2').select2();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dropdown3').select2();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dropdown4').select2();
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -267,6 +294,7 @@
             console.log(log_off)
         })
     </script>
+
     @yield('javascripts')
 
 </body>

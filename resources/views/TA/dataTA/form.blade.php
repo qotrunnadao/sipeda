@@ -99,8 +99,8 @@
                                         @endif
                                     </label>
                                     <div>
-                                        <select name="pembimbing1_id" id="pembimbing1_id" class="form-control">
-                                            <option value="">PILIH</option>
+                                        <select name="pembimbing1_id" id="dropdown1" class="form-control">
+                                            <option value="" <>PILIH </option>
                                             @foreach ($dosen as $value )
                                             <option value="{{ $value->id }}" {{ $value->id == $data_ta->pembimbing1_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                             @endforeach
@@ -113,7 +113,7 @@
                                         @endif
                                     </label>
                                     <div>
-                                        <select name="pembimbing2_id" id="pembimbing2_id" class="form-control">
+                                        <select name="pembimbing2_id" id="dropdown2" class="form-control">
                                             <option value="">PILIH </option>
                                             @foreach ($dosen as $value )
                                             <option value="{{ $value->id }}" {{ $value->id == $data_ta->pembimbing2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
@@ -180,6 +180,7 @@
     });
 });
 </script>
+
 <script>
     $.ajaxSetup({
         headers: {
