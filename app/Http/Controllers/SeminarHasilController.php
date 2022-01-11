@@ -38,15 +38,26 @@ class SeminarHasilController extends Controller
             $data = array(
                 'semhas_all' => SeminarHasil::latest()->get(),
             );
-        } else {
+        } elseif (auth()->user()->level_id == 1 || auth()->user()->level_id == 5) {
             $data = array(
                 'semhas_all' => SeminarHasil::latest()->get(),
                 'semhas_dosen' => SeminarHasil::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
                         ->orWhere('pembimbing2_id', $dosen_id->id);
-                })->latest()->get(),
-                'semhas_jurusan' => SeminarHasil::with(['ta.mahasiswa'])->whereHas('Mahasiswa', function ($q) use ($dosen_id) {
+                })->where('status', '0')->latest()->get(),
+                'semhas_jurusan' => SeminarHasil::with(['ta.mahasiswa'])->whereHas('ta', function ($q) use ($dosen_id) {
+                    $q->where('pembimbing1_id', $dosen_id->id)
+                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                })->orwhereHas('Mahasiswa', function ($q) use ($dosen_id) {
                     $q->where('jurusan_id', $dosen_id->jurusan_id);
+                })->where('status', '!=','0')->latest()->get(),
+            );
+        }elseif (auth()->user()->level_id == 3) {
+            $data = array(
+                'semhas_all' => SeminarHasil::latest()->get(),
+                'semhas_dosen' => SeminarHasil::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
+                    $q->where('pembimbing1_id', $dosen_id->id)
+                        ->orWhere('pembimbing2_id', $dosen_id->id);
                 })->latest()->get(),
             );
         }
