@@ -223,7 +223,7 @@ class SPKController extends Controller
         // dd($tanggal);
         $taAll = TA::with(['mahasiswa.jurusan', 'Dosen1', 'Dosen2'])->where('id', $request->route('id'))->where('no_surat', '!=', null)->get()->first();
         $dosen = Dosen::where('jurusan_id', $taAll->mahasiswa->jurusan_id)->where('isKajur', '1')->get()->first();
-
+        // dd($dosen);
         $berkas = ['ta_id' => $ta_id, 'taAll' => $taAll, 'dosen' => $dosen];
         $pdf = PDF::loadView('TA.SPK.download', ['taAll' => $taAll, 'dosen' => $dosen, 'today' => $today, 'tanggal' => $tanggal])->setPaper('a4');
 

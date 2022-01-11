@@ -28,7 +28,7 @@
                                 Pembimbing 1 <code>*</code>
                             </label>
                             <div>
-                                <select type="text" id="pembimbing1_id" name="pembimbing1" class="form-control" required>
+                                <select type="text" id="dropdown1" name="pembimbing1" class="form-control" required>
                                     <option selected disabled> Pilih Dosen </option>
                                     @foreach ($dosen as $value)
                                     <option value="{{ $value->id }} ">{{ $value->nama }}</option>
@@ -41,7 +41,7 @@
                                 Pembimbing 2 <code>*</code>
                             </label>
                             <div>
-                                <select type="text" id="pembimbing2_id" name="pembimbing2" class="form-control" required>
+                                <select type="text" id="dropdown2" name="pembimbing2" class="form-control" required>
                                     <option selected disabled>Pilih Dosen </option>
                                     @foreach ($dosen as $value)
                                     <option value="{{ $value->id }} ">{{ $value->nama }}</option>

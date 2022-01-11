@@ -14,7 +14,7 @@
                 @endif
                 <h4 class="card-title">Pengajuan Seminar Hasil</h4>
                 <div class="table-responsive">
-                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>
@@ -203,7 +203,7 @@
             <div class="card-body">
                 <h4 class="card-title">Pengajuan Seminar Hasil</h4>
                 <div class="table-responsive">
-                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>
@@ -358,7 +358,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{{ route('semhas.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('semhas.delete', $value->id) }}" method="GET">
@@ -414,7 +414,7 @@
         <div class="card-body">
             <h4 class="card-title">Pengajuan Seminar Hasil</h4>
             <div class="table-responsive">
-                <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th class="text-center"> No. </th>

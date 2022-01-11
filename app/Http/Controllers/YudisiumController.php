@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Yudisium;
+use App\Models\akademik;
 use App\Models\Mahasiswa;
 use App\Models\PeriodeYudisium;
 use App\Models\Dosen;
@@ -119,11 +120,10 @@ class YudisiumController extends Controller
             ];
             // dd($data);
             $cek = Yudisium::create($data);
-                $status = array(
-                    'statusYudisium' => $cek->id,
-                );
-                $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-
+            $status = array(
+                'statusYudisium' => $cek->id,
+            );
+            $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
         }
 
         if ($cek == true) {
