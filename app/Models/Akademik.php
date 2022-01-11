@@ -18,6 +18,7 @@ class akademik extends Model
         'statusYudisium',
         'sks',
         'mhs_id',
+        'TASelesai',
         'angkatan',
     ];
     protected $primaryKey = 'id';
@@ -45,14 +46,5 @@ class akademik extends Model
     public function angkatan()
     {
         return $this->belongsTo(Mahasiswa::class, 'angkatan');
-    }
-    public function getCreatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
-    }
-
-    public function getUpdatedAtAttribute()
-    {
-        return Carbon::parse($this->attributes['updated_at'])->translatedFormat('d F Y H:i:s');
     }
 }

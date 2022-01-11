@@ -80,6 +80,7 @@
                                 <th> Status TA </th>
                                 <th> Status Pendadaran</th>
                                 <th> Status Yudisium</th>
+                                <th> Lama Tugas Akhir</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -117,7 +118,7 @@
                                     <div class="badge badge-primary badge-pill">{{ $value->yudisium->StatusYudisium->status }}</div>
                                     @endif
                                 </td>
-
+                                <td> {{ $value->TASelesai }}</td>
                             </tr>
                             @endforeach
                         </tbody>

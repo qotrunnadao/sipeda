@@ -7,9 +7,9 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Pengajuan SPK Tugas Akhir </h4>
+                <h4 class="card-title">Pengajuan Verifikasi SPK Tugas Akhir </h4>
                 <div class="table-responsive">
-                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>
@@ -103,7 +103,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">SPK Tugas Akhir Keseluruhan</h4>
+                <h4 class="card-title">SPK Tugas Akhir </h4>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
@@ -154,7 +154,7 @@
                                     @endif
                                 </td>
                                 @endif
-                                @if ($value->no_surat == null)
+                                @if ($value->no_surat == null && auth()->user()->level_id == 2 || auth()->user()->level_id == 5)
                                 <td class="text-center">
                                     <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
                                 </td>

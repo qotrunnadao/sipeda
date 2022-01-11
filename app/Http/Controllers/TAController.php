@@ -128,7 +128,7 @@ class TAController extends Controller
             $status = array(
                 'statusTA' => $cek->id,
             );
-            $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+            $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
             if ($akademik) {
                 $akademik->update($status);
             } else {

@@ -8,11 +8,13 @@ use App\Models\Dosen;
 use App\Models\NilaiHuruf;
 use App\Models\Jurusan;
 use App\Models\NilaiTA;
+use App\Models\Akademik;
 use App\Models\Mahasiswa;
 use App\Models\StatusNilai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -83,6 +85,9 @@ class NilaiTAController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
+        $waktuselesai = Carbon::parse($akademik->created_at)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
+        // dd($waktuselesai);
         $taAll = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
         $data = [
             'ta_id' => $request->ta_id,
@@ -91,7 +96,6 @@ class NilaiTAController extends Controller
             'statusnilai_id' => $request->statusnilai_id,
             'ket' => $request->ket,
         ];
-        $cek = NilaiTA::create($data);
         // dd($data);
         if ($request->statusnilai_id == 2) {
             $status = array(
@@ -99,6 +103,13 @@ class NilaiTAController extends Controller
             );
             // dd($status);
             $taAll->update($status);
+
+            $selesai = array(
+                'TASelesai' => $waktuselesai,
+            );
+            // dd($akademik);
+            $akademik->update($selesai);
+            $cek = NilaiTA::create($data);
         }
 
         if ($cek == true) {
@@ -115,12 +126,20 @@ class NilaiTAController extends Controller
         $value = NilaiTA::findOrFail($id);
         // dd($value->ta_id);
         $taAll = TA::with(['mahasiswa'])->where('id', $value->ta_id)->get()->first();
+        $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+        $today = Carbon::now();
         $value->update($data);
          if ($request->statusnilai_id == 2) {
             $status = array(
                 'status_id' => 10,
             );
             $taAll->update($status);
+
+            $selesai = array(
+                'TASelesai' => $today,
+            );
+            // dd($status);
+            $akademik->update($selesai);
         }
         Alert::success('Berhasil', 'Berhasil Ubah Data Nilai Tugas Akhir');
         return back();

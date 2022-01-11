@@ -167,7 +167,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    File Laporan <code>*</code>
+                                    Berkas Persyaratan <code>*</code>
                                 </label>
                                 <input type="file" class="form-control" name="laporan" />
                                 @if ($errors->has('laporan'))

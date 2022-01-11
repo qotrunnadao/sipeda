@@ -44,11 +44,16 @@ class BerandaController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user', 'TA1', 'TA2'])->where('user_id', $id)->get()->first();
-        // dd($user_id);
+        $to_date = Carbon::createFromFormat('Y-m-d H:s:i', '2020-5-5 3:30:34');
+        $from_date = Carbon::createFromFormat('Y-m-d H:s:i', '2021-5-6 9:30:34');
+        $answer_in_days = $to_date->diff($from_date)->format('%y Tahun, %m Bulan and %d Hari');
+        // $hari = Carbon::parse($ta_id->tanggal)->isoFormat('dddd D MMMM YYYY');
         if (auth()->user()->level_id == 2) {
             // $akademik = Mahasiswa::with('TA.status', 'Pendadaran.statusPendadaran', 'Yudisium.statusYudisium')->latest()->get();
             $akademik = Akademik::with('TA.status', 'Pendadaran.statusPendadaran', 'Yudisium.statusYudisium')->latest()->get();
-            // dd($akademik);
+            // $waktuselesai = Carbon::parse($akademik->first()->created_at)->diff(Carbon::parse($akademik->first()->TASelesai))->format('%y Tahun, %m Bulan and %d Hari');
+            // dd($waktuselesai);
+            // dd($akademik->last()->created_at);
             $tugas_akhir = TA::with('mahasiswa')->where('status_id', '>=', '4')->latest()->get();
             $pendadaran = Pendadaran::with('mahasiswa')->where('statusPendadaran_id', '>=', '3')->latest()->get();
             $yudisium = Yudisium::with('mahasiswa')->where('status_id', '>=', '3')->latest()->get();
