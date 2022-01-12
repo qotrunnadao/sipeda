@@ -126,12 +126,12 @@ class TAController extends Controller
                 'thnAkad_id' => $request->tahunAkademik,
                 'praproposal' => $filename,
             ];
-            $status = array(
-                'statusTA' => $cek->id,
-            );
             $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
             if ($akademik) {
                 $cek = TA::create($data);
+                $status = array(
+                    'statusTA' => $cek->id,
+                );
                 $akademik->update($status);
                 if ($cek == true) {
                     Alert::success('Berhasil', 'Pengajuan TA telah Berhasil');

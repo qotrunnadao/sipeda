@@ -146,7 +146,11 @@
                                     </div>
                                     @endif
                                 </td>
-                                <td class="text-center"> {{ $value->dosen1->nama }}</td>
+                                @if ($value->dosen1 == null)
+                                <td class="text-center"> {{ $value->namaDosen }} </td>
+                                @else
+                                <td class="text-center"> {{ $value->dosen1->nama }} </td>
+                                @endif
                                 @if ($value->dosen2 == null)
                                 <td class="text-center"> {{ $value->namaDosen }} </td>
                                 @else

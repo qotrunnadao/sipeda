@@ -22,7 +22,7 @@ class CreateTASTable extends Migration
             $table->string('namaDosen')->nullable();
             $table->string('nip')->nullable();
             $table->string('praproposal');
-            $table->foreignId('pembimbing1_id')->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('pembimbing1_id')->nullable()->unsigned()->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('pembimbing2_id')->nullable()->unsigned()->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
             $table->date('spkMulai')->nullable();
             $table->date('spkSelesai')->nullable();
