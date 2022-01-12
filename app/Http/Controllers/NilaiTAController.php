@@ -70,7 +70,7 @@ class NilaiTAController extends Controller
                 $query->where('jurusan_id', $request->id);
             })->where('status_id', '9')
                 ->get();
-        }else{
+        } else {
             $taAll = TA::with(['mahasiswa'])->whereHas('mahasiswa', function (Builder $query) use ($request, $dosen_id) {
                 $query->where('jurusan_id', $request->id)
                     ->where('pembimbing1_id', $dosen_id->id)
@@ -109,8 +109,9 @@ class NilaiTAController extends Controller
             );
             // dd($akademik);
             $akademik->update($selesai);
-            $cek = NilaiTA::create($data);
+            // dd($cek);
         }
+        $cek = NilaiTA::create($data);
 
         if ($cek == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Data Nilai Tugas Akhir');
@@ -124,12 +125,13 @@ class NilaiTAController extends Controller
     {
         $data = $request->all();
         $value = NilaiTA::findOrFail($id);
-        // dd($value->ta_id);
         $taAll = TA::with(['mahasiswa'])->where('id', $value->ta_id)->get()->first();
-        $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+        // dd($taAll->mahasiswa_id);
+        $akademik = Akademik::where('mhs_id', $taAll->mahasiswa_id)->get()->first();
+        $waktuselesai = Carbon::parse($akademik->created_at)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
         $today = Carbon::now();
         $value->update($data);
-         if ($request->statusnilai_id == 2) {
+        if ($request->statusnilai_id == 2) {
             $status = array(
                 'status_id' => 10,
             );

@@ -48,10 +48,10 @@ class SeminarProposalController extends Controller
                         ->orWhere('pembimbing2_id', $dosen_id->id);
                 })->orwhereHas('Mahasiswa', function ($query) use ($dosen_id) {
                     $query->where('jurusan_id', $dosen_id->jurusan_id);
-                })->where('status', '!=','0')->latest()->get(),
+                })->where('status', '!=', '0')->latest()->get(),
             );
             // dd($dosen_id->jurusan_id);
-        }elseif (auth()->user()->level_id == 3) {
+        } elseif (auth()->user()->level_id == 3) {
             $data = array(
                 'semprop_all' => SeminarProposal::latest()->get(),
                 'semprop_dosen' => SeminarProposal::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
@@ -110,10 +110,10 @@ class SeminarProposalController extends Controller
             $ruang = $request->ruang;
             $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
             // $tanggal = date('Y-m-d', strtotime($request->tanggal));
-            $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
+            $today = Carbon::now()->addDays(1)->isoFormat('Y-M-DD');
             // dd($tanggal >= $today);
 
-            if ($tanggal >= $today) {
+            if ($tanggal) {
                 $semhasCount = SeminarHasil::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                         $query->where('tanggal', '=', $tanggal)

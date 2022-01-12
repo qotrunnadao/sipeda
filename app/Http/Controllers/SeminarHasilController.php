@@ -110,7 +110,7 @@ class SeminarHasilController extends Controller
             $tanggal =  Carbon::parse($request->tanggal)->isoFormat('Y-M-DD');
             $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
             // dd($tanggal);
-            if ($tanggal >= $today) {
+            if ($tanggal) {
                 $semhasCount = SeminarHasil::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                         $query->where('tanggal', '=', $tanggal)
