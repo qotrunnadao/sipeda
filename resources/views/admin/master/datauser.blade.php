@@ -6,11 +6,17 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div>
-                    <form action="{{ route('api.store') }}" name="eksport" id="eksport">
-                        <button type="submit" class="btn btn-sm btn-gradient-primary float-right" id="btnSubmit"><i class="mdi mdi-plus">
-                            </i>Generate Data API User</button>
-                    </form>
+                <div class="float-right">
+                    <div class="btn-group">
+                        <button type="submit" data-toggle="modal" data-target="#unggahexcel" class="btn btn-sm btn-gradient-success" id="btnSubmit"><i class="mdi mdi-plus">
+                            </i>Import excel</button>
+                    </div>
+                    <div class="btn-group">
+                        <form action="{{ route('api.store') }}" name="eksport" id="eksport">
+                            <button type="submit" class="btn btn-sm btn-gradient-primary" id="btnSubmit"><i class="mdi mdi-plus">
+                                </i>Generate Data API User</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -77,6 +83,39 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Unggah Excel --}}
+<div class="modal fade" id="unggahexcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">unggah file excel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('user.excel') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="file" class="form-control" name="file" required />
+                            @if ($errors->has('file'))
+                            <div class="text-danger">
+                                {{ $errors->first('file') }}
+                            </div>
+                            @endif
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>

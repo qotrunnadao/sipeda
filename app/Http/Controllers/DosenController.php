@@ -91,6 +91,7 @@ class DosenController extends Controller
         }
         $dosen->update($data);
         $user = User::where('id', $dosen->user_id)->get()->first();
+        // dd($dosen);
         $user->update($status);
         // dd($user);
         Alert::success('Berhasil', 'Berhasil Mengubah Status Dosen');

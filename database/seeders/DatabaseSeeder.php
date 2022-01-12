@@ -451,595 +451,154 @@ class DatabaseSeeder extends Seeder
 
         DB::table('user')->insert($user);
 
-        $dosen = [
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Teguh Cahyono",
-            //     'nohp' => "082241443663",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 1,
-            //     'agama_id' => 1,
-            //     'nip' => "197412102008011007",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 4,
-            //     'user_id' => 7,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Lasmedi Afuan",
-            //     'nohp' => "082241441234",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 0,
-            //     'agama_id' => 1,
-            //     'nip' => "198505102008121002",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 4,
-            //     'user_id' => 8,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Arief Kelik Nugroho",
-            //     'nohp' => "087871161840",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 1,
-            //     'isKajur' => 0,
-            //     'agama_id' => 1,
-            //     'nip' => "198512242015041001",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 4,
-            //     'user_id' => 9,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Eddy Maryanto",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 0,
-            //     'agama_id' => 1,
-            //     'nip' => "196711101993031025",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 4,
-            //     'user_id' => 10,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Bangun Wijayanto",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 0,
-            //     'agama_id' => 1,
-            //     'nip' => "198306182006041002",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 4,
-            //     'user_id' => 12,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Acep Taryana",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 0,
-            //     'agama_id' => 1,
-            //     'nip' => "197412102008011007",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 1,
-            //     'user_id' => 13,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Hari Siswantoro",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 0,
-            //     'agama_id' => 1,
-            //     'nip' => "197412102008011007",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 1,
-            //     'user_id' => 14,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Farida Asriani",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 1,
-            //     'agama_id' => 1,
-            //     'nip' => "197412102008011007",
-            //     'jk_id' => 2,
-            //     'jurusan_id' => 1,
-            //     'user_id' => 15,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Dr. Eng. Agus Maryoto, S.T., M.T.",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 1,
-            //     'agama_id' => 1,
-            //     'nip' => "197412102008011007",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 2,
-            //     'user_id' => 16,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Adi Candra, S.T., M.T.",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 1,
-            //     'agama_id' => 1,
-            //     'nip' => "197412102008011007",
-            //     'jk_id' => 1,
-            //     'jurusan_id' => 3,
-            //     'user_id' => 17,
-            // ],
-            // [
-            //     'alamat' => "Purwokerto",
-            //     'nama' => "Maria Krisnawati, S.T., M.T.",
-            //     'nohp' => "087871161830",
-            //     'tmptLahir' => "Purwokerto",
-            //     'isKomisi' => 0,
-            //     'isKajur' => 1,
-            //     'agama_id' => 1,
-            //     'nip' => "197412102008011007",
-            //     'jk_id' => 2,
-            //     'jurusan_id' => 5,
-            //     'user_id' => 18,
-            // ],
-            [
-                'nama' => "ACEP TARYANA",
-                'nip' => "197112152000031000",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "AGUNG MUBYARTO",
-                'nip' => "197410062002121001",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "ARIEF WISNU WARDHANA",
-                'nip' => "197212302005011003",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "ARI FADLI",
-                'nip' => "198407312019031007",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "AZIS WISNU WIDHI NUGRAHA",
-                'nip' => "197811022003121002",
-                'jurusan_id' => 1,
-            ],
-            [
-                'nama' => "DARU TRI NUGROHO",
-                'nip' => "196909232008121002",
-                'jurusan_id' => 1
+        // $dosen = [
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Teguh Cahyono",
+        //     'nohp' => "082241443663",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 1,
+        //     'agama_id' => 1,
+        //     'nip' => "197412102008011007",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 4,
+        //     'user_id' => 7,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Lasmedi Afuan",
+        //     'nohp' => "082241441234",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 0,
+        //     'agama_id' => 1,
+        //     'nip' => "198505102008121002",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 4,
+        //     'user_id' => 8,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Arief Kelik Nugroho",
+        //     'nohp' => "087871161840",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 1,
+        //     'isKajur' => 0,
+        //     'agama_id' => 1,
+        //     'nip' => "198512242015041001",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 4,
+        //     'user_id' => 9,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Eddy Maryanto",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 0,
+        //     'agama_id' => 1,
+        //     'nip' => "196711101993031025",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 4,
+        //     'user_id' => 10,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Bangun Wijayanto",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 0,
+        //     'agama_id' => 1,
+        //     'nip' => "198306182006041002",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 4,
+        //     'user_id' => 12,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Acep Taryana",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 0,
+        //     'agama_id' => 1,
+        //     'nip' => "197412102008011007",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 1,
+        //     'user_id' => 13,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Hari Siswantoro",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 0,
+        //     'agama_id' => 1,
+        //     'nip' => "197412102008011007",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 1,
+        //     'user_id' => 14,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Farida Asriani",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 1,
+        //     'agama_id' => 1,
+        //     'nip' => "197412102008011007",
+        //     'jk_id' => 2,
+        //     'jurusan_id' => 1,
+        //     'user_id' => 15,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Dr. Eng. Agus Maryoto, S.T., M.T.",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 1,
+        //     'agama_id' => 1,
+        //     'nip' => "197412102008011007",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 2,
+        //     'user_id' => 16,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Adi Candra, S.T., M.T.",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 1,
+        //     'agama_id' => 1,
+        //     'nip' => "197412102008011007",
+        //     'jk_id' => 1,
+        //     'jurusan_id' => 3,
+        //     'user_id' => 17,
+        // ],
+        // [
+        //     'alamat' => "Purwokerto",
+        //     'nama' => "Maria Krisnawati, S.T., M.T.",
+        //     'nohp' => "087871161830",
+        //     'tmptLahir' => "Purwokerto",
+        //     'isKomisi' => 0,
+        //     'isKajur' => 1,
+        //     'agama_id' => 1,
+        //     'nip' => "197412102008011007",
+        //     'jk_id' => 2,
+        //     'jurusan_id' => 5,
+        //     'user_id' => 18,
+        // ],
 
-            ],
-            [
-                'nama' => "EKO MURDYANTORO AM",
-                'nip' => "197805112009121002",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "FARIDA ASRIANI",
-                'nip' => "197502012000032005",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "HARI PRASETIJO",
-                'nip' => "197308222000121001",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "HARI SISWANTORO",
-                'nip' => "197812242005011002",
-                'jurusan_id' => 1,
-            ],
-            [
-                'nama' => "HESTI SUSILAWATI",
-                'nip' => "197405072000032001",
-                'jurusan_id' => 1,
-            ],
-            [
-                'nama' => "IMRON ROSYADI",
-                'nip' => "197909242003121003",
-                'jurusan_id' => 1,
-            ],
-            [
-                'nama' => "IWAN SETIAWAN",
-                'nip' => "198107212009121004",
-                'jurusan_id' => 1,
-            ],
-            [
-                'nama' => "MUHAMMAD SYAIFUL ALIIM",
-                'nip' => "199009052019031021",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "MULKI INDANA ZULFA",
-                'nip' => "198612082015041001",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "PRISWANTO",
-                'nip' => "197802192001121001",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "RETNO SUPRIYANTI",
-                'nip' => "197108162000032001",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "SUROSO",
-                'nip' => "197812242001121002",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "WIDHIATMOKO HERRY PURNOMO",
-                'nip' => "197604162005011001",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "WINASIS",
-                'nip' => "198112262005011001",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "YOGI RAMADHANI",
-                'nip' => "198207132009121002",
-                'jurusan_id' => 1
-            ],
-            [
-                'nama' => "ADI CANDRA",
-                'nip' => "198003062008121002",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "AKHMAD KHAHLIL GIBRAN",
-                'nip' => "199012282019031014",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "ASMORO WIDAGDO",
-                'nip' => "197608272008011009",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "EKO BAYU PURWASATRIYA",
-                'nip' => "197805182008121004",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "FADLIN",
-                'nip' => "198204142014041001",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "FX ANJAR TRI LAKSONO",
-                'nip' => "199312222019031015",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "GENTUR WALUYO",
-                'nip' => "196006281988031002",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "HUZAELY LATIEF SUNAN",
-                'nip' => "198907042019031011",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "INDRA PERMANA JATI",
-                'nip' => "197701192006041002",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "JANUAR AZIZ ZAENURROHMAN",
-                'nip' => "199101042019031019",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "MAULANA RIZKI ADITAMA",
-                'nip' => "199301282019031012",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "MOCHAMMAD AZIZ",
-                'nip' => "197202022005011001",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "RACHMAD SETIJADI",
-                'nip' => "196801302005011002",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "SACHRUL ISWAHYUDI",
-                'nip' => "197105112008121002",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "SISWANDI",
-                'nip' => "197304062008011011",
-                'jurusan_id' => 3
-            ],
-            [
-                'nama' => "AHMAD YUSUF PRASETIAWAN",
-                'nip' => "198603172018031001",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "AMANDA SOFIANA",
-                'nip' => "199203282019032029",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "AYU ANGGRAENI SIBARANI",
-                'nip' => "198902242019032012",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "HASYIM ASYARI",
-                'nip' => "198610172018031001",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "INDRO PRAKOSO",
-                'nip' => "199205092019031008",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "KATON MUHAMMAD",
-                'nip' => "199302132019031013",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "MARIA KRISNAWATI",
-                'nip' => "198507262012122003",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "MUSMUALLIM",
-                'nip' => "19831210201506101K",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "NIKO SIAMEVA ULETIKA",
-                'nip' => "198107112010122002",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "RANI AULIA IMRAN",
-                'nip' => "198811062018032001",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "SUGENG WALUYO",
-                'nip' => "197904132002121004",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "TIGAR PUTRI ADHIANA",
-                'nip' => "199004292018032001",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "YUDI SYAHRULLAH",
-                'nip' => "198409292019031007",
-                'jurusan_id' => 5
-            ],
-            [
-                'nama' => "AINI HANIFA",
-                'nip' => "199306302019032028",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "ARIEF KELIK NUGROHO",
-                'nip' => "198512242015041001",
-                'jurusan_id' => 4,
-                // 'isKomisi' => 1,
-                // 'isKajur' => 0,
-                // 'agama_id' => 1,
-                // 'jk_id' => 1,
-                // 'user_id' => 9,
-            ],
-            [
-                'nama' => "BANGUN WIJAYANTO",
-                'nip' => "198306182006041002",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "DADANG ISKANDAR",
-                'nip' => "198312022015041001",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "EDDY MARYANTO",
-                'nip' => "196711101993031025",
-                'jurusan_id' => 4,
-                // 'isKomisi' => 0,
-                // 'isKajur' => 0,
-                // 'agama_id' => 1,
-                // 'jk_id' => 1,
-                // 'user_id' => 10,
-            ],
-            [
-                'nama' => "IPUNG PERMADI",
-                'nip' => "198311162008121005",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "LASMEDI AFUAN",
-                'nip' => "198505102008121002",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "NOFIYATI",
-                'nip' => "19810819201406201K",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "NUR CHASANAH",
-                'nip' => "198903132015042004",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "NURUL HIDAYAT",
-                'nip' => "197305172003121001",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "SWAHESTI PUSPITA RAHAYU",
-                'nip' => "198107052008012024",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "TEGUH CAHYONO",
-                'nip' => "197412102008011007",
-                'jurusan_id' => 4,
-                // 'isKomisi' => 0,
-                // 'isKajur' => 1,
-                // 'agama_id' => 1,
-                // 'jk_id' => 1,
-                // 'user_id' => 7,
-            ],
-            [
-                'nama' => "YOGIEK INDRA KURNIAWAN",
-                'nip' => "198803122019031010",
-                'jurusan_id' => 4
-            ],
-            [
-                'nama' => "AGUS MARYOTO",
-                'nip' => "197109202006041001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "ARNIE WIDYANINGRUM",
-                'nip' => "198408242015042001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "ARWAN APRIYONO",
-                'nip' => "198204262005011003",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "BAGYO MULYONO",
-                'nip' => "197006092005011001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "DANI NUGROHO SAPUTRO",
-                'nip' => "198812272019031009",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "EVA WAHYU INDRIYATI",
-                'nip' => "198205312006042002",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "GANDJAR PAMUDJI",
-                'nip' => "197204232000031003",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "GATHOT HERI SUDIBYO",
-                'nip' => "197202222000031001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "GITO SUGIYANTO",
-                'nip' => "198002152002121003",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "HERY AWAN SUSANTO",
-                'nip' => "197404152003121001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "NANANG GUNAWAN WARIYATNO",
-                'nip' => "197703262001121003",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "NASTAIN",
-                'nip' => "197309122000031001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "NOR INTANG SETYO HERMANTO",
-                'nip' => "197106022003121001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "PAULUS SETYO NUGROHO",
-                'nip' => "197612272002121003",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "PROBO HARDINI",
-                'nip' => "197608102005012001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "PURWANTO BEKTI SANTOSO",
-                'nip' => "197209142000121001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "REDITYO JANUARDI",
-                'nip' => "199101212019031014",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "SANIDHYA NIKA PURNOMO",
-                'nip' => "198201242012122001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "SUMIYANTO",
-                'nip' => "197311172000031001",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "SUROSO",
-                'nip' => "197912012003121002",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "WAHYU WIDIYANTO",
-                'nip' => "197506052006041029",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "YANTO",
-                'nip' => "197904182005011002",
-                'jurusan_id' => 2
-            ],
-            [
-                'nama' => "YANUAR HARYANTO",
-                'nip' => "198101172005011001",
-                'jurusan_id' => 2
-            ],
+        // ];
 
-        ];
-
-        DB::table('dosen')->insert($dosen);
+        // DB::table('dosen')->insert($dosen);
 
         $mahasiswa = [
             [

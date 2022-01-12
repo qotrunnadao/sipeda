@@ -1,5 +1,7 @@
 <?php
 
+use App\Imports\UserImport;
+use App\Imports\DosenImport;
 use App\Http\Middleware\Dosen;
 use App\Http\Middleware\Kajur;
 use App\Http\Middleware\Komisi;
@@ -8,6 +10,7 @@ use App\Http\Middleware\Mahasiswa;
 use App\Models\Dosen as ModelsDosen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SKController;
 use App\Http\Controllers\TAController;
@@ -94,10 +97,19 @@ Route::get('/level-user/delete/{id}', 'LevelController@destroy')->name('level.de
 //Route Data User
 Route::get('/data-user', 'UserController@index')->name('user.index');
 Route::put('/data-user/update/{id}', 'UserController@update')->name('user.update');
+Route::post('/data-user/import-excel', function () {
+    Excel::import(new UserImport, request()->file('file'));
+    return back();
+})->name('user.excel');
+
 
 //Route Data Dosen
 Route::get('/data-dosen', 'DosenController@index')->name('dosen.index');
 Route::put('/data-dosen/update/{id}', 'DosenController@update')->name('dosen.update');
+Route::post('/data-dosen/import-excel', function () {
+    Excel::import(new DosenImport, request()->file('file'));
+    return back();
+})->name('dosen.excel');
 
 //Route Data Komisi
 Route::get('/data-komisi', 'KomisiController@index')->name('komisi.index');
