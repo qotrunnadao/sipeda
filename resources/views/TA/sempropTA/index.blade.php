@@ -450,6 +450,39 @@
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat" name="no_surat" />
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label>
+                            Dosen Penguji 1 <code>(opsional)</code>
+                        </label>
+                        <select name="penguji1_id" id="dropdown1" class="form-control">
+                            <option value="">PILIH</option>
+                            @foreach ($dosen as $value )
+                            <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label>
+                            Dosen Penguji 2 <code>(opsional)</code>
+                        </label>
+                        <select name="penguji2_id" id="dropdown2" class="form-control">
+                            <option value="">PILIH</option>
+                            @foreach ($dosen as $value )
+                            <option value="{{ $value->id }}" >{{ $value->nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label>
+                            Dosen Penguji 3 <code>(opsional)</code>
+                        </label>
+                        <select name="penguji3_id" id="dropdown3" class="form-control">
+                            <option value="">PILIH</option>
+                            @foreach ($dosen as $value )
+                            <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>

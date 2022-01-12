@@ -55,7 +55,11 @@
                                     @endif
                                 </td>
                                 <td class="text-center"> {{ $value->dosen1->nama }}</td>
-                                <td class="text-center"> {{ $value->dosen2->nama }}</td>
+                                @if ($value->dosen2 == null)
+                                <td class="text-center"> {{ $value->namaDosen }} </td>
+                                @else
+                                <td class="text-center"> {{ $value->dosen2->nama }} </td>
+                                @endif
                                 <td>
                                     <span class="badge badge-primary">{{ $value->status->ket }}</span>
                                 </td>
@@ -143,7 +147,11 @@
                                     @endif
                                 </td>
                                 <td class="text-center"> {{ $value->dosen1->nama }}</td>
-                                <td class="text-center"> {{ $value->dosen2->nama }}</td>
+                                @if ($value->dosen2 == null)
+                                <td class="text-center"> {{ $value->namaDosen }} </td>
+                                @else
+                                <td class="text-center"> {{ $value->dosen2->nama }} </td>
+                                @endif
                                 <td>
                                     <span class="badge badge-warning">{{ $value->status->ket }}</span>
 

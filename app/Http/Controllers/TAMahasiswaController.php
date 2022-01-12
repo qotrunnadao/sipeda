@@ -82,18 +82,26 @@ class TAMahasiswaController extends Controller
                 'instansi' => $request->instansi,
                 'pembimbing1_id' => $request->pembimbing1,
                 'pembimbing2_id' => $request->pembimbing2,
+                'namaDosen' => $request->namaDosen,
+                'nip' => $request->nip,
                 'thnAkad_id' => $request->thnAkad_id,
                 'status_id' => $request->status_id,
                 'praproposal' => $filename,
             ];
-            $cek = TA::create($data);
             // dd($cek->id);
             $status = array(
                 'statusTA' => $cek->id,
             );
             $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
             if ($akademik) {
+                $cek = TA::create($data);
                 $akademik->update($status);
+                if ($cek == true) {
+                    Alert::success('Berhasil', 'Pengajuan TA telah Berhasil');
+                } else {
+                    Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
+                }
+                return back();
             } else {
                 Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
                 return back();
@@ -102,12 +110,6 @@ class TAMahasiswaController extends Controller
         } else {
             $data['doc'] = NULL;
         }
-        if ($cek == true) {
-            Alert::success('Berhasil', 'Pengajuan TA telah Berhasil');
-        } else {
-            Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
-        }
-        return back();
     }
 
     /**

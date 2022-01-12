@@ -220,6 +220,11 @@
             <ol>
                 <li>{{ $ta_id->ta->Dosen1->nama }} (Dosen Pembimbing 1)</li>
                 <li>{{ $ta_id->ta->Dosen2->nama }} (Dosen Pembimbing 2)</li>
+                @if($ta_id->ta->mahasiswa->jurusan_id == 3 || $ta_id->ta->mahasiswa->jurusan_id == 5)
+                <li>{{ $ta_id->penguji1->nama }} (Dosen Penguji 1)</li>
+                <li>{{ $ta_id->penguji2->nama }} (Dosen Penguji 2)</li>
+                <li>{{ $ta_id->penguji3->nama }} (Dosen Penguji 3)</li>
+                @endif
                 <li>Semua mahasiswa di tempat</li>
             </ol>
         </div>

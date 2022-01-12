@@ -17,6 +17,7 @@ class CreateYudisiaTable extends Migration
         Schema::create('yudisium', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa');
+            $table->string('transkipNilai')->nullable();
             $table->string('berkas')->nullable();
             $table->longText('ket')->nullable();
             $table->foreignId('status_id')->references('id')->on('statusyudisium')->default(1)->onUpdate('cascade')->onDelete('cascade');

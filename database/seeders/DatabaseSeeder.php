@@ -194,7 +194,7 @@ class DatabaseSeeder extends Seeder
 
         $statusnilai = [
             [
-                'status' => "Menunggu",
+                'status' => "Menunggu Berkas Lengkap",
             ],
             [
                 'status' => "Upload SIA",

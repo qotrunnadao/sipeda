@@ -85,11 +85,14 @@ class NilaiTAController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $id = auth()->user()->id;
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
-        $waktuselesai = Carbon::parse($akademik->created_at)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
         // dd($waktuselesai);
         $taAll = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
+        $waktuselesai = Carbon::parse($taAll->spkMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
         $data = [
+            'user_id' => $id,
             'ta_id' => $request->ta_id,
             'nilaiAngka' => $request->nilaiAngka,
             'nilai_huruf_id' => $request->nilai_huruf_id,
@@ -124,12 +127,21 @@ class NilaiTAController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        $id = auth()->user()->id;
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $value = NilaiTA::findOrFail($id);
         $taAll = TA::with(['mahasiswa'])->where('id', $value->ta_id)->get()->first();
         // dd($taAll->mahasiswa_id);
         $akademik = Akademik::where('mhs_id', $taAll->mahasiswa_id)->get()->first();
-        $waktuselesai = Carbon::parse($akademik->created_at)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
-        $today = Carbon::now();
+        $waktuselesai = Carbon::parse($taAll->spkMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
+        $data = [
+            'user_id' => $id,
+            'ta_id' => $request->ta_id,
+            'nilaiAngka' => $request->nilaiAngka,
+            'nilai_huruf_id' => $request->nilai_huruf_id,
+            'statusnilai_id' => $request->statusnilai_id,
+            'ket' => $request->ket,
+        ];
         $value->update($data);
         if ($request->statusnilai_id == 2) {
             $status = array(
@@ -138,7 +150,7 @@ class NilaiTAController extends Controller
             $taAll->update($status);
 
             $selesai = array(
-                'TASelesai' => $today,
+                'TASelesai' => $waktuselesai,
             );
             // dd($status);
             $akademik->update($selesai);

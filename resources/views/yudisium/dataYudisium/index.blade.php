@@ -183,7 +183,7 @@
                                     </div>
                                     @elseif (auth()->user()->level_id == 2 )
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-periode_id='{{ $value->periode_id }}' data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-transkipNilai='{{ $value->transkipNilai }}' data-periode_id='{{ $value->periode_id }}' data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     @endif
                                     <div class="btn-group">
@@ -242,6 +242,17 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label>
+                            Transkip Nilai Mahasiswa
+                        </label>
+                        <input type="file" class="form-control" placeholder="transkip nilai" name="transkipNilai" value="@if ($button == 'Tambah'){{ old('transkipNilai') }}@else{{ $data_yudisium->transkipNilai }}@endif" />
+                        @if ($errors->has('transkipNilai'))
+                        <div class="text-danger">
+                            {{ $errors->first('transkipNilai') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan</label>
                         <div class="input-group">
                             <div class="input-group">
@@ -251,7 +262,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -261,15 +272,29 @@
 @endsection
 @section('javascripts')
 <script>
+    $(document).ready(function () {
+
+    $("#editData").submit(function () {
+
+        $("#btnSubmit").attr("disabled", true);
+
+        return true;
+
+    });
+});
+</script>
+<script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var id = button.data('id')
     var status_id = button.data('status_id')
+    var transkip = button.data('transkipNilai')
     var periode_id = button.data('periode_id')
     var ket = button.data('ket')
     var modal = $(this)
 
     modal.find(".modal-body select[name='status_id']").val(status_id)
+    modal.find(".modal-body input[name='transkipNilai']").val(transkip)
     modal.find(".modal-body select[name='periode_id']").val(periode_id)
     modal.find(".modal-body select[name='ket']").val(ket)
     modal.find(".modal-body form").attr("action",'/yudisium/data-yudisium/update/'+id)

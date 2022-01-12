@@ -235,7 +235,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Nomer Surat</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Detail SPK</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -246,6 +246,24 @@
                     <div class="form-group row">
                         <div class="col">
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat SPK" name="no_surat" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label>
+                            Tanggal SPK Dimulai <code>*</code>
+                        </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="spkMulai" id="spkMulai" placeholder="Tanggal Seminar" name="spkMulai" />
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label>
+                            Tanggal SPK Selesai <code>*</code>
+                        </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker1" data-language="en" data-date-format="yyyy-mm-dd" name="spkSelesai" id="spkSelesai" placeholder="Tanggal Seminar" name="spkSelesai" />
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                         </div>
                     </div>
                     <div class="modal-footer">

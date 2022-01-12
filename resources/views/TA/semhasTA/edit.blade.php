@@ -92,6 +92,39 @@
                                 </div>
                                 @endif
                             </div>
+                            <div class="form-group">
+                                <label>
+                                    Dosen Penguji 1 <code>(opsional)</code>
+                                </label>
+                                <select name="penguji1_id" id="dropdown1" class="form-control">
+                                    <option value="">PILIH</option>
+                                    @foreach ($dosen as $value )
+                                    <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji1_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Dosen Penguji 2 <code>(opsional)</code>
+                                </label>
+                                <select name="penguji2_id" id="dropdown2" class="form-control">
+                                    <option value="">PILIH</option>
+                                    @foreach ($dosen as $value )
+                                    <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Dosen Penguji 3 <code>(opsional)</code>
+                                </label>
+                                <select name="penguji3_id" id="dropdown3" class="form-control">
+                                    <option value="">PILIH</option>
+                                    @foreach ($dosen as $value )
+                                    <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji3_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
 

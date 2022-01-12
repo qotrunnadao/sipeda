@@ -22,6 +22,9 @@ class CreateSeminarHasilsTable extends Migration
             $table->time('jamMulai')->nullable();
             $table->time('jamSelesai')->nullable();
             $table->date('tanggal')->nullable();
+            $table->foreignId('penguji1_id')->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penguji2_id')->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('penguji3_id')->references('id')->on('dosen')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('ruang_id')->references('id')->on('ruang')->onUpdate('cascade')->onDelete('cascade');
             $table->tinyInteger('status')->comment('0=menunggu, 1=disetujui, 2=ditolak')->default('0');
             $table->timestamps();

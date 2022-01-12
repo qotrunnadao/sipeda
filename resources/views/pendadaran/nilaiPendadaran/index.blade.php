@@ -20,6 +20,7 @@
                                 <th> Nilai Angka </th>
                                 <th> Nilai Huruf </th>
                                 <th> Status Nilai</th>
+                                <th> Penilai</th>
                                 <th> Keterangan</th>
                                 <th> Aksi</th>
                             </tr>
@@ -37,6 +38,7 @@
                                 <td class="text-center">
                                     <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
                                 </td>
+                                <td class="text-center"> {{ $value->user->email }} </td>
                                 <td class="text-center">
                                     @if($value->ket == null)
                                     <span class="badge badge-danger">tidak ada keterangan</span>
