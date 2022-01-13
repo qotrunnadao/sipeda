@@ -31,20 +31,20 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>QOTRUNNADA</td>
-                                <td>H1D018033</td>
-                                <td>PEREMPUAN</td>
-                                <td>BANYUMAS, 26 JANUARI 2000</td>
-                                <td>2018</td>
-                                <td>2018</td>
-                                <td>12344</td>
-                                <td>12-03-2022</td>
-                                <td>08-06-2022</td>
-                                <td>INFORMATIKA</td>
-                                <td>144</td>
-                                <td>3,9</td>
-                                <td>3,5 TAHUN</td>
-                                <td>SM</td>
+                                <td>QOTRUNNADA(Mahasiswa)</td>
+                                <td>H1D018033(Mahasiswa)</td>
+                                <td>PEREMPUAN(Mahasiswa)</td>
+                                <td>BANYUMAS, 26 JANUARI 2000 (Mahasiswa)</td>
+                                <td>2018(Kelulusan)</td>
+                                <td>2018(Mahasiswa)</td>
+                                <td>12344(Kelulusan)</td>
+                                <td>12-03-2022 (Pendadaran)</td>
+                                <td>08-06-2022(Periode Yudisium)</td>
+                                <td>INFORMATIKA(Mahasiswa)</td>
+                                <td>144(Mahasiswa)</td>
+                                <td>3,9(Mahasiswa)</td>
+                                <td>3,5 TAHUN(Kelulusan) tanggal masuk unsoed dikurangin - tanggal yudisium</td>
+                                <td>SM(Kelulusan)</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata"><i class="mdi mdi-border-color"></i></a>

@@ -160,7 +160,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nilai Angka</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" required name="nilaiangka" />
+                            <input type="text" class="form-control" required name="nilaiAngka" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -239,7 +239,7 @@
 
     var modal = $(this)
 
-    modal.find(".modal-body input[name='nilaiangka']").val(nilaiangka)
+    modal.find(".modal-body input[name='nilaiAngka']").val(nilaiangka)
     modal.find(".modal-body select[name='nilai_huruf_id']").val(nilai_huruf_id)
     modal.find(".modal-body textarea[name='ket']").val(ket)
     modal.find(".modal-body select[name='statusnilai_id']").val(statusnilai_id)

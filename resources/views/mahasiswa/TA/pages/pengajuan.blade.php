@@ -56,7 +56,7 @@
                                 Nama Dosen Pembimbing Selain FT  <code>(opsional)</code>
 
                             </label>
-                            <input type="text" class="form-control" required placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="{{ old('namaDosen') }}" />
+                            <input type="text" class="form-control"  placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="{{ old('namaDosen') }}" />
                         </div>
                         <div class="col-6">
                             <label>

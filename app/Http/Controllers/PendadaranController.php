@@ -33,7 +33,7 @@ class PendadaranController extends Controller
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         if (auth()->user()->level_id == 2) {
-            $pendadaran = Pendadaran::with(['mahasiswa', 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'statusPendadaran'])->latest()->get();
+            $pendadaran = Pendadaran::with(['mahasiswa', 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'statusPendadaran'])->where('statuspendadaran_id','>', 2)->latest()->get();
             $acc_pendadaran = Pendadaran::with(['mahasiswa', 'penguji1', 'penguji2', 'penguji3', 'penguji4', 'statusPendadaran'])->where('statuspendadaran_id', 2)->latest()->get();
         } elseif (auth()->user()->level_id == 3) {
             $pendadaran = Pendadaran::with(['statusPendadaran'])->whereHas('statusPendadaran', function ($q) use ($dosen_id) {
@@ -45,7 +45,7 @@ class PendadaranController extends Controller
             return view('pendadaran.dataPendadaran.index', compact('pendadaran', 'status'));
         } elseif (auth()->user()->level_id == 1) {
 
-            $pendadaran = Pendadaran::with(['statusPendadaran'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+            $pendadaran = Pendadaran::with(['statusPendadaran'])->where('statuspendadaran_id','>', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->orWhereHas('statusPendadaran', function ($q) use ($dosen_id) {
                 $q->where('penguji1_id', $dosen_id->id)
@@ -58,7 +58,7 @@ class PendadaranController extends Controller
             })->latest()->get();
         } elseif (auth()->user()->level_id == 5) {
 
-            $pendadaran = Pendadaran::with(['statusPendadaran'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+            $pendadaran = Pendadaran::with(['statusPendadaran'])->where('statuspendadaran_id','>', 4)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->orWhereHas('statusPendadaran', function ($q) use ($dosen_id) {
                 $q->where('penguji1_id', $dosen_id->id)

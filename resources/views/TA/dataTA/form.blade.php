@@ -126,13 +126,13 @@
                                     Nama Dosen Pembimbing Non-Fakultas Teknik @if ($button == 'Tambah') <code>(opsional)</code>
                                     @endif
                                 </label>
-                                <input type="text" class="form-control" placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="@if ($button == 'Tambah'){{ old('namaDosen') }}@else{{ $data_ta->namaDosen }}@endif" />
+                                <input type="text" class="form-control" placeholder="Tuliskan nama dosen pembimbing dari luar FT jika ada" name="namaDosen" value="@if ($button == 'Tambah'){{ old('namaDosen') }}@else{{ $data_ta->namaDosen }}@endif" />
                             </div>
                             <div class="form-group">
                                 <label>
                                     NIP Dosen Pembimbing Non-Fakultas Teknik @if ($button == 'Tambah')<code>(opsional)</code> @endif
                                 </label>
-                                <input type="text" class="form-control" placeholder="Tuliskan NIP dosen dari luar FT" name="nip" value="@if ($button == 'Tambah'){{ old('nip') }}@else{{ $data_ta->nip }}@endif" />
+                                <input type="text" class="form-control" placeholder="Tuliskan NIP dosen pembimbing dari luar FT jika ada" name="nip" value="@if ($button == 'Tambah'){{ old('nip') }}@else{{ $data_ta->nip }}@endif" />
                             </div>
                             <div class="form-group">
                                 <label>

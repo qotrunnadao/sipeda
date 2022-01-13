@@ -36,7 +36,12 @@ class SeminarHasilController extends Controller
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         if (auth()->user()->level_id == 2) {
             $data = array(
-                'semhas_all' => SeminarHasil::latest()->get(),
+                'semhas_verifikasi' => SeminarHasil::whereHas('ta', function ($q) {
+                    $q->where('status_id', '8');
+                })->latest()->get(),
+                'semhas_all' => SeminarHasil::whereHas('ta', function ($q) {
+                    $q->where('status_id', '9');
+                })->latest()->get(),
                 'dosen' => Dosen::get(),
             );
         } elseif (auth()->user()->level_id == 1 || auth()->user()->level_id == 5) {
@@ -433,7 +438,11 @@ class SeminarHasilController extends Controller
         $jamSelesai = Carbon::parse($ta_id->jamSelesai)->isoFormat('H:mm');
         $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
         // dd($spk );
-        $pdf = PDF::loadView('TA.semhasTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        if( $ta_id->ta->mahasiswa->jurusan_id != 3){
+            $pdf = PDF::loadView('TA.semhasTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        }else{
+            $pdf = PDF::loadView('TA.semhasTA.bap', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        }
         $filename = 'Berita Acara Seminar Hasil' . '_' . $ta_id->ta->mahasiswa->nim . '_' . time() . '.pdf';
 
         $cek = Storage::put('public/assets/file/Berita Acara Semhas TA/' . $filename, $pdf->output());

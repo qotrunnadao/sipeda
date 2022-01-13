@@ -11,6 +11,153 @@
                 <div>
                     <a href="{{ route('semprop.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right mb-3"> <i class="mdi mdi-plus"></i> Tambah</a>
                 </div>
+                <h4 class="card-title">Verifikasi Pengajuan Seminar Proposal</h4>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="text-center"> No. </th>
+                                <th class="text-center"> Nama Mahasiswa </th>
+                                <th class="text-center"> NIM </th>
+                                <th class="text-center"> Jurusan </th>
+                                <th class="text-center"> Berkas </th>
+                                <th class="text-center"> Status</th>
+                                <th class="text-center"> Ruang </th>
+                                <th class="text-center"> Tanggal </th>
+                                <th class="text-center"> Waktu </th>
+                                <th class="text-center"> Berita Acara</th>
+                                <th class="text-center"> Nomer Surat </th>
+                                <th class="text-center"> Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($no=1)
+                            @foreach ($semprop_verifikasi as $value )
+                            <tr>
+                                <td class="text-center"> {{ $no++ }} </td>
+                                <td> {{ $value->TA->mahasiswa->nama }} </td>
+                                <td> {{ $value->TA->mahasiswa->nim }} </td>
+                                <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
+                                <td class="text-center">
+                                    @if ($value->proposal == null)
+                                    <span class="badge badge-danger">Belum Ada Data Berkas Proposal TA</span>
+                                    @else
+                                    <div class="btn-group">
+                                        @if (File::exists(public_path('storage/assets/file/ProposalTA/' . $value->proposal . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.proposal', $value->proposal) }}" method="post" target="_blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->proposal }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.proposal', $value->proposal) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->proposal }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if($value->status == 0)
+                                    <span class="badge badge-warning">menunggu</span>
+                                    @elseif($value->status == 1)
+                                    <span class="badge badge-success">Disetujui</span>
+                                    @else
+                                    <span class="badge badge-danger">Tidak Disetujui</span>
+                                    @endif
+                                </td>
+                                <td class="text-center"> {{ $value->ruang->namaRuang }} </td>
+                                <td class="text-center"> {{ $value->tanggal }}</td>
+                                <td class="text-center"> {{ $value->jamMulai }} - {{ $value->jamSelesai }} </td>
+                                <td class="text-center">
+                                    @if ($value->beritaacara == null)
+                                    <span class="badge badge-danger">Belum Ada Data Berita Acara</span>
+                                    @else
+                                    <div class="btn-group">
+                                        @if (File::exists(public_path('storage/assets/file/Berita Acara Semprop TA/' . $value->beritaacara . '')))
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post" target="blank">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @else
+                                        <div class="btn-group">
+                                            <form action="{{ route('semprop.download', $value->beritaacara) }}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->beritaacara }} <i class="mdi mdi-download"></i></a></button>
+                                            </form>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    @endif
+                                </td>
+                                @if ($value->no_surat == null)
+                                <td class="text-center">
+                                    <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
+                                </td>
+                                @else
+                                <td class="text-center"> {{ $value->no_surat}} </td>
+                                @endif
+                                <td class="text-center">
+                                    @if ($value->status != 0)
+                                    @if ($value->no_surat == null)
+                                    <div class="btn-group">
+                                        <a href="" method="POST" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                    </div>
+                                    @elseif ( $value->beritaacara == null)
+                                    <div class="btn-group">
+                                        <form action="{{ route('semprop.eksport', $value->id) }}" method="GET" id="export">
+                                            <button type="submit" id="btnSubmit" class="btn btn-gradient-primary btn-sm eksport"><i class="mdi mdi-check"></i></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    <div class="btn-group">
+                                        <a href="{{ route('semprop.edit', $value->id) }}" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
+
+                                    @else
+                                    <div class="btn-group">
+                                        <a href="{{ route('semprop.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="{{ route('semprop.ditolak', $value->id) }}" class="btn btn-gradient-danger btn-sm "><i class="mdi mdi-close"></i></a>
+                                    </div>
+
+                                    <div class="btn-group">
+                                        <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
+                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <a href="{{ route('semprop.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right mb-3"> <i class="mdi mdi-plus"></i> Tambah</a>
+                </div>
                 <h4 class="card-title">Pengajuan Seminar Proposal</h4>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -220,7 +367,7 @@
                                 <td class="text-center">
                                     @if ($value->status != 0)
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-beritaacara='{{ $value->beritaacara }}' data-penguji1='{{ $value->penguji1_id }}' data-penguji2='{{ $value->penguji2_id }}' data-penguji3='{{ $value->penguji3_id }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('semprop.delete', $value->id) }}" method="GET">
@@ -495,7 +642,7 @@
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
-            </div>
+                </div>
             </form>
         </div>
     </div>
@@ -540,10 +687,16 @@
         var button = $(event.relatedTarget)
         var id = button.data('id')
         var no_surat = button.data('no_surat')
+        var penguji1 = button.data('penguji1')
+        var penguji2 = button.data('penguji2')
+        var penguji3 = button.data('penguji3')
 
         var modal = $(this)
 
         modal.find(".modal-body input[name='no_surat']").val(no_surat)
+        modal.find(".modal-body select[name='penguji1_id']").val(penguji1)
+        modal.find(".modal-body select[name='penguji2_id']").val(penguji2)
+        modal.find(".modal-body select[name='penguji3_id']").val(penguji3)
         modal.find(".modal-body form").attr("action",'/tugas-akhir/semprop/surat/' + id)
         })
 </script>

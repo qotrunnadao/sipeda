@@ -39,7 +39,7 @@
                                 @endif
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-dosen_id='{{ $value->dosen->id }}' data-tanggal='{{ $value->tanggal }}' data-topik='{{ $value->topik}}' data-hasil='{{ $value->hasil}}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata{{ $value['id'] }}"><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('mahasiswaKonsultasi.delete', $value->id) }}" method="GET">
@@ -110,8 +110,9 @@
     </div>
 </div>
 
+@foreach ($konsultasi as $value )
 {{-- Modal Edit Data Konsultasi --}}
-<div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editdata{{ $value['id'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -121,7 +122,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" action="" method="post">
+                <form class="forms-sample" action="{{ route('mahasiswaKonsultasi.update', $value->id) }}" method="post">
                     @csrf
                     @method('put')
                     <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $tugas_akhir->id }}">
@@ -135,7 +136,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Tanggal Konsultasi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
+                            <input type="text" class="form-control datepicker" value="{{ $value->tanggal }}" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
@@ -144,13 +145,13 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Topik Konsultasi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="topik" id="topik" />
+                            <input type="text" value="{{ $value->topik }}" class="form-control" name="topik" id="topik" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="alasan">Hasil Konsultasi</label>
                         <div class="input-group">
-                            <textarea class="form-control" rows="4" name="hasil" id="hasil"></textarea>
+                            <textarea class="form-control" rows="4" name="hasil" id="hasil">{{ $value->hasil }}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -161,6 +162,7 @@
         </div>
     </div>
 </div>
+@endforeach
 <script>
     $(document).ready(function () {
 
@@ -172,24 +174,5 @@
 
     });
 });
-</script>
-@endsection
-@section('javascripts')
-<script>
-    $('#editdata').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var dosen_id = button.data('dosen_id')
-    var tanggal = button.data('tanggal')
-    var topik = button.data('topik')
-    var hasil = button.data('hasil')
-    var modal = $(this)
-
-    modal.find(".modal-body select[name='dosen_id']").val(dosen_id)
-    modal.find(".modal-body input[name='tanggal']").val(tanggal)
-    modal.find(".modal-body input[name='topik']").val(topik)
-    modal.find(".modal-body textarea[name='hasil']").val(hasil)
-    modal.find(".modal-body form").attr("action",'/mahasiswa/tugas-akhir/konsultasi/update/'+id)
-    })
 </script>
 @endsection

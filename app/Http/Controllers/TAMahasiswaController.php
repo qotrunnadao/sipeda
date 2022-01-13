@@ -89,14 +89,14 @@ class TAMahasiswaController extends Controller
                 'praproposal' => $filename,
             ];
             // dd($cek->id);
-            $status = array(
-                'statusTA' => $cek->id,
-            );
             $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
             if ($akademik) {
                 $cek = TA::create($data);
-                $akademik->update($status);
-                if ($cek == true) {
+                $status = array(
+                    'statusTA' => $cek->id,
+                );
+                $isi = $akademik->update($status);
+                if ($cek == true && $isi == true) {
                     Alert::success('Berhasil', 'Pengajuan TA telah Berhasil');
                 } else {
                     Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');

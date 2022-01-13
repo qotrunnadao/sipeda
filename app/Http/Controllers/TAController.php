@@ -44,13 +44,13 @@ class TAController extends Controller
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
             })->where('status_id', '>=', 5)->latest()->get();
-        } elseif (auth()->user()->level_id == 1 || 5) {
-            $tugas_akhir = TA::with(['status'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+        } elseif (auth()->user()->level_id == 1 || auth()->user()->level_id == 5) {
+            $tugas_akhir = TA::with(['status'])->where('status_id', '!=', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->orWhereHas('status', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
                     ->orWhere('pembimbing2_id', $dosen_id->id);
-            })->where('status_id', '!=', 3)->latest()->get();
+            })->latest()->get();
             $acc_ta = TA::with('status')->where('status_id', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->latest()->get();

@@ -31,16 +31,15 @@ class YudisiumController extends Controller
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
-        $yudisium = Yudisium::with(['periodeyudisium', 'akademik'])->latest()->get();
-        // dd($yudisium->statusyudisium->sks);
         if (auth()->user()->level_id == 2) {
-            $yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium', 'akademik'])->latest()->get();
-            $acc_yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium'])->where('status_id', 2)->latest()->get();
+            $yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'akademik'])->where('status_id','>=', 3)->latest()->get();
+            $acc_yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'akademik'])->where('status_id', 2)->latest()->get();
+            // dd($yudisium);
         } elseif (auth()->user()->level_id == 5) {
             $yudisium = Yudisium::with(['statusYudisium'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
-            })->latest()->get();
-            $acc_yudisium = Yudisium::with('statusYudisium')->where('status_id', 4)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+            })->where('status_id','>=', 4)->latest()->get();
+            $acc_yudisium = Yudisium::with('statusYudisium')->where('status_id', 3)->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->latest()->get();
         }
@@ -127,7 +126,7 @@ class YudisiumController extends Controller
             $status = array(
                 'statusYudisium' => $cek->id,
             );
-            $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
+            $akademik = Mahasiswa::where('mhs_id', $request->nim)->get()->first();
             $isi = $akademik->update($status);
             if ($cek == true && $isi == true) {
                 Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
@@ -281,7 +280,7 @@ class YudisiumController extends Controller
     public function diterima(Yudisium $yudisium)
     {
         $data = array(
-            'status_id' => 3,
+            'status_id' => 4,
         );
         $yudisium->update($data);
         Alert::success('Berhasil', 'Pengajuan Yudisium Diterima');
@@ -311,6 +310,16 @@ class YudisiumController extends Controller
         //    dd($filename);
         if (File::exists(public_path('storage/assets/file/Transkip Nilai/' . $filename . ''))) {
             return response()->File(public_path('storage/assets/file/Transkip Nilai/' . $filename . ''));
+        } else {
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+            return back();
+        }
+    }
+    public function sk($filename)
+    {
+        //    dd($filename);
+        if (File::exists(public_path('storage/assets/file/sk/' . $filename . ''))) {
+            return response()->File(public_path('storage/assets/file/sk/' . $filename . ''));
         } else {
             Alert::warning('Gagal', 'File Tidak Tersedia');
             return back();

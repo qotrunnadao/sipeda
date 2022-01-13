@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\TahunAkademik;
 use App\Models\Dosen;
+use App\Models\Akademik;
 use App\Models\Mahasiswa;
 use App\Models\Pendadaran;
 use Illuminate\Http\Request;

@@ -9,7 +9,7 @@
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Pengajuan Tugas Akhir<i class="mdi mdi-bell-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $tugas_akhir->where('status_id', '=', '2')->count() }}</h2>
+                <h2>{{ $tugas_akhir->where('status_id', '2')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Pelaksanaan Tugas Akhir<i class="mdi mdi-timetable mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $tugas_akhir->where('status_id', '>=', '4')->count() }}</h2>
+                <h2>{{ $tugas_akhir->where('status_id', '>=', '4')->where('status_id', '<', '10')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Selesai Tugas Akhir<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $tugas_akhir->where('status_id', '=', '10')->count() }}</h2>
+                <h2>{{ $tugas_akhir->where('status_id','10')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Pengajuan Pendadaran<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $pendadaran->where('statusPendadaran_id', '=', '1')->count() }}</h2>
+                <h2>{{ $pendadaran->where('statusPendadaran_id', '>=', '2')->where('statusPendadaran_id', '<=', '4')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Selesai Pendadaran<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $pendadaran->where('statusPendadaran_id', '=', '7')->count() }}</h2>
+                <h2>{{ $pendadaran->where('statusPendadaran_id','6')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
                 <img src="{{ asset('sitak/assets/images/dashboard/circle.svg') }}" class="card-img-absolute" alt="circle-image">
                 <h5 class="font-weight-normal mb-3">Jumlah Mahasiswa Pengajuan Yudisium<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $yudisium->where('statusYudisium_id', '=', '1')->count() }}</h2>
+                <h2>{{ $yudisium->where('statusYudisium_id', '>=', '2')->where('statusYudisium_id', '<=', '4')->count() }}</h2>
             </div>
         </div>
     </div>

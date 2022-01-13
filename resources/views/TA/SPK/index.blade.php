@@ -154,7 +154,7 @@
                                     @endif
                                 </td>
                                 @endif
-                                @if ($value->no_surat == null && auth()->user()->level_id == 2 || auth()->user()->level_id == 5)
+                                @if ($value->no_surat == null && auth()->user()->level_id == 5 || auth()->user()->level_id == 1)
                                 <td class="text-center">
                                     <span class="badge badge-danger">Nomer Belum Dimasukkan</span>
                                 </td>

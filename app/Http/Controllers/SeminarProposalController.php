@@ -34,7 +34,12 @@ class SeminarProposalController extends Controller
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         if (auth()->user()->level_id == 2) {
             $data = array(
-                'semprop_all' => SeminarProposal::latest()->get(),
+                'semprop_verifikasi' => SeminarProposal::whereHas('ta', function ($q) {
+                    $q->where('status_id', '6');
+                })->latest()->get(),
+                'semprop_all' => SeminarProposal::whereHas('ta', function ($q) {
+                    $q->where('status_id', '7');
+                })->latest()->get(),
                 'dosen' => Dosen::get(),
             );
         } elseif (auth()->user()->level_id == 1 || auth()->user()->level_id == 5) {
@@ -48,7 +53,7 @@ class SeminarProposalController extends Controller
                         ->orWhere('penguji2_id', $dosen_id->id)
                         ->orWhere('penguji3_id', $dosen_id->id);
                 })->where('status', '0')->latest()->get(),
-                'semprop_jurusan' => SeminarProposal::with(['TA.Mahasiswa'])->whereHas('ta', function ($q) use ($dosen_id) {
+                'semprop_jurusan' => SeminarProposal::with(['TA.Mahasiswa'])->where('status', '!=', '0')->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
                         ->orWhere('pembimbing2_id', $dosen_id->id)
                         ->orwhere('penguji1_id', $dosen_id->id)
@@ -56,9 +61,9 @@ class SeminarProposalController extends Controller
                         ->orWhere('penguji3_id', $dosen_id->id);
                 })->orwhereHas('Mahasiswa', function ($query) use ($dosen_id) {
                     $query->where('jurusan_id', $dosen_id->jurusan_id);
-                })->where('status', '!=', '0')->latest()->get(),
+                })->latest()->get(),
             );
-            // dd($dosen_id->jurusan_id);
+            // dd($data->semprop_all);
         } elseif (auth()->user()->level_id == 3) {
             $data = array(
                 'dosen' => Dosen::get(),
@@ -221,7 +226,7 @@ class SeminarProposalController extends Controller
     {
         $data = $request->all();
         $taAll = SeminarProposal::with(['mahasiswa'])->where('id', $id)->get()->first();
-        // dd($taAll);
+        // dd($data);
         $status = array(
             'no_surat' => $request->no_surat,
             'penguji1_id' => $request->penguji1_id,
@@ -438,7 +443,11 @@ class SeminarProposalController extends Controller
         $jamSelesai = Carbon::parse($ta_id->jamSelesai)->isoFormat('H:mm');
         // dd($jamMulai);
         $taAll = TA::with(['mahasiswa'])->where('id', $ta_id->ta_id)->get()->first();
-        $pdf = PDF::loadView('TA.sempropTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        if( $ta_id->ta->mahasiswa->jurusan_id != 3){
+            $pdf = PDF::loadView('TA.sempropTA.berkas', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        }else{
+            $pdf = PDF::loadView('TA.sempropTA.bap', ['ta_id' => $ta_id, 'dosen' => $dosen, 'hari' => $hari, 'spk' => $spk, 'jamMulai' => $jamMulai, 'jamSelesai' => $jamSelesai])->setPaper('a4');
+        }
 
         $filename = 'Berita Acara Seminar Proposal' . '_' . $ta_id->ta->mahasiswa->nim . '_' . time() . '.pdf';
 

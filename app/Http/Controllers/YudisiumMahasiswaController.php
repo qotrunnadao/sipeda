@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\TahunAkademik;
 use App\Models\Dosen;
+use App\Models\akademik;
 use App\Models\Mahasiswa;
 use App\Models\Yudisium;
 use Illuminate\Http\Request;
@@ -33,6 +34,8 @@ class YudisiumMahasiswaController extends Controller
         ]);
         $data = $request->all();
         $mhs_id = Mahasiswa::with(['user'])->where('id', $request->mahasiswa_id)->get()->first();
+        // dd($request->mahasiswa_id);
+        $akademik = Akademik::where('mhs_id', $request->mahasiswa_id)->get()->first();
         $nim = $mhs_id->nim;
         $file = $request->file('berkas');
         $filename = 'Yudisium' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
@@ -43,12 +46,10 @@ class YudisiumMahasiswaController extends Controller
             'status_id' => 2,
             'berkas' => $filename,
         ];
-        // dd($data);
         $cek = Yudisium::create($data);
         $status = array(
             'statusYudisium' => $cek->id,
         );
-        $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
         $isi = $akademik->update($status);
         if ($cek == true && $isi == true) {
             Alert::success('Berhasil', 'Pengajuan Yudisium telah Berhasil');

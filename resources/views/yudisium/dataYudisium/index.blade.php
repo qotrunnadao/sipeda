@@ -19,6 +19,7 @@
                                 <th> IPK</th>
                                 <th> SKS</th>
                                 <th> Periode Yudisium</th>
+                                <th> Transkip Nilai </th>
                                 <th> Keterangan </th>
                                 <th> Aksi </th>
                             </tr>
@@ -60,17 +61,17 @@
 
                                 </td>
                                 <td>
-                                    @if ($value->akademik->ipk==null)
+                                    @if ($value->mahasiswa->ipk == null)
                                     <span class="badge badge-danger">Data IPK belum terbit</span>
                                     @else
-                                    {{ $value->akademik->ipk }}
+                                    {{ $value->mahasiswa->ipk }}
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($value->akademik->sks == null)
+                                    @if ($value->mahasiswa->sks == null)
                                     <span class="badge badge-danger">Data SKS belum terbit</span>
                                     @else
-                                    {{ $value->akademik->sks }}
+                                    {{ $value->mahasiswa->sks }}
                                     @endif
                                 </td>
                                 <td>
@@ -81,6 +82,29 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @if($value->transkipNilai != null)
+                                    @if (File::exists(public_path('storage/assets/file/Transkip Nilai/' . $value->transkipNilai . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.transkip', $value->transkipNilai) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->transkipNilai }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.transkip', $value->transkipNilai) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->transkipNilai }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    @else
+                                    <div class="badge badge-danger badge-pill ">Berkas Yudisium Tidak Ada</div>
+                                    @endif
+                                </td>
+                                <td>
                                     @if($value->ket == null)
                                     <span class="badge badge-danger">Tidak ada keterangan</span>
                                     @else
@@ -88,7 +112,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if(auth()->user()->level_id == 5 && $value->status_id ==2)
+                                    @if(auth()->user()->level_id == 5 && $value->status_id ==3)
                                     <div class="btn-group">
                                         <a href="{{ route('yudisium.diterima', $value->id) }}" class="btn btn-gradient-success btn-sm"><i class="mdi mdi-check"></i></a>
                                     </div>
@@ -232,7 +256,7 @@
                                     </div>
                                     @elseif (auth()->user()->level_id == 2 )
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-transkipNilai='{{ $value->transkipNilai }}' data-periode_id='{{ $value->periode_id }}' data-sks='{{ $value->mahasiswa->sks }} data-ipk=' {{ $value->mahasiswa->ipk }} data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-status_id='{{ $value->status_id }}' data-transkipNilai='{{ $value->transkipNilai }}' data-periode_id='{{ $value->periode_id }}' data-sks='{{ $value->mahasiswa->sks }}' data-ipk=' {{ $value->mahasiswa->ipk }}' data-ket='{{ $value->ket }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     @endif
                                     <div class="btn-group">
@@ -364,9 +388,9 @@
     modal.find(".modal-body select[name='status_id']").val(status_id)
     modal.find(".modal-body input[name='transkipNilai']").val(transkip)
     modal.find(".modal-body select[name='periode_id']").val(periode_id)
-    modal.find(".modal-body select[name='sks']").val(sks)
-    modal.find(".modal-body select[name='ipk']").val(ipk)
-    modal.find(".modal-body select[name='ket']").val(ket)
+    modal.find(".modal-body input[name='sks']").val(sks)
+    modal.find(".modal-body input[name='ipk']").val(ipk)
+    modal.find(".modal-body input[name='ket']").val(ket)
     modal.find(".modal-body form").attr("action",'/yudisium/data-yudisium/update/'+id)
     })
 </script>

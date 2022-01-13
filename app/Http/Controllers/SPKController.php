@@ -41,9 +41,9 @@ class SPKController extends Controller
             })->latest()->get();
 
             // Tabel Verifikasi
-            $spkKajur = TA::with(['mahasiswa', 'spk'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+            $spkKajur = TA::with(['mahasiswa', 'spk'])->where('status_id', '4')->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
-            })->where('status_id', '4')->where('no_surat', '!=', null)->latest()->get();
+            })->where('no_surat', '!=', null)->latest()->get();
             //    dd($spk);
             return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll', 'spkKajur'));
         } elseif (auth()->user()->level_id == 3) {

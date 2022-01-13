@@ -258,6 +258,7 @@ Route::post('/yudisium/data-yudisium/store',  'YudisiumController@store')->name(
 Route::get('/yudisium/data-yudisium/edit/{id}',  'YudisiumController@edit')->name('yudisium.edit');
 Route::put('/yudisium/berkas/download/{filename}',  'YudisiumController@download')->name('yudisium.download');
 Route::put('/yudisium/berkas/transkip/{filename}',  'YudisiumController@transkip')->name('yudisium.transkip');
+Route::put('/yudisium/berkas/sk/{filename}',  'YudisiumController@sk')->name('yudisium.sk');
 Route::put('/yudisium/data-yudisium/update/{id}',  'YudisiumController@update')->name('yudisium.update');
 Route::get('/yudisium/data-yudisium/delete/{id}',  'YudisiumController@destroy')->name('yudisium.delete');
 Route::get('/yudisium/data-yudisium/diterima/{yudisium}',  'YudisiumController@diterima')->name('yudisium.diterima');

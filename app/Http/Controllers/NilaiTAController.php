@@ -139,21 +139,31 @@ class NilaiTAController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $id = auth()->user()->id;
-        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
+        $id_user = auth()->user()->id;
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id_user)->get()->first();
         $value = NilaiTA::findOrFail($id);
+        // dd($data);
         $taAll = TA::with(['mahasiswa'])->where('id', $value->ta_id)->get()->first();
         // dd($taAll->mahasiswa_id);
         $akademik = Akademik::where('mhs_id', $taAll->mahasiswa_id)->get()->first();
         $waktuselesai = Carbon::parse($taAll->spkMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
-        $data = [
-            'user_id' => $id,
-            'ta_id' => $request->ta_id,
-            'nilaiAngka' => $request->nilaiAngka,
-            'nilai_huruf_id' => $request->nilai_huruf_id,
-            'statusnilai_id' => $request->statusnilai_id,
-            'ket' => $request->ket,
-        ];
+        if ($dosen_id == null) {
+            $data = [
+                'pengaju' => 'Bapendik',
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilai_huruf_id' => $request->nilai_huruf_id,
+                'statusnilai_id' => $request->statusnilai_id,
+                'ket' => $request->ket,
+            ];
+        } else {
+            $data = [
+                'pengaju' => $dosen_id->nama,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilai_huruf_id' => $request->nilai_huruf_id,
+                'statusnilai_id' => $request->statusnilai_id,
+                'ket' => $request->ket,
+            ];
+        }
         $value->update($data);
         if ($request->statusnilai_id == 2) {
             $status = array(

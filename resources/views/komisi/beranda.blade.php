@@ -11,7 +11,7 @@
                     <br><b>{{$dosen_id->jurusan->namaJurusan }}</b>
                     <br>Pelaksanaan Tugas Akhir <i class="mdi mdi-clock-fast mdi-24px float-right"></i>
                 </h5>
-                <h2>{{$Mahasiswa->count()}}</h2>
+                <h2>{{$Mahasiswa->where(' status_id', '<=' , '9' )->count()}}</h2>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
                     <br><b>{{$dosen_id->jurusan->namaJurusan }}</b>
                     <br>Selesai Tugas Akhir<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>{{$Mahasiswa->Where('status_id', '>=', '10')->count()}}</h2>
+                <h2>{{$Mahasiswa->Where('status_id', '10')->count()}}</h2>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                     <br><b>{{$dosen_id->nama }}</b>
                     <br>Pelaksanaan Tugas Akhir<i class="mdi mdi-clock-fast mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $dosen_id->TA1->where('status_id', '>=', '4')->count() + $dosen_id->TA2->where('status_id', '>=', '4')->count() }}</h2>
+                <h2>{{ $dosen_id->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $dosen_id->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}</h2>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
                     <br><b>{{$dosen_id->nama }}</b>
                     <br>Selesai Tugas Akhir<i class="mdi mdi-checkbox-multiple-marked-outline mdi-24px float-right"></i>
                 </h5>
-                <h2>{{ $dosen_id->TA1->where('status_id', '>=', '10')->count() + $dosen_id->TA2->where('status_id', '>=', '10')->count() }}</h2>
+                <h2>{{ $dosen_id->TA1->where('status_id', '10')->count() + $dosen_id->TA2->where('status_id', '10')->count() }}</h2>
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@
                             <tr class="text-center">
                                 <th> # </th>
                                 <th> Nama Dosen</th>
-                                <th>total</th>
+                                <th>Total Mahasiswa Bimbingan Pelaksanaan</th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
@@ -101,12 +101,16 @@
                                     {{$value->nama}}
                                 </td>
                                 <td class="text-center">
-                                    {{ $value->TA2->where('status_id', '>=', '4')->count() + $value->TA1->where('status_id', '>=', '4')->count()}}
+                                    {{ $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $value->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count()}}
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#detail" data-id='{{ $value->id }}' data-pembimbing1='{{ $value->TA1->where(' status_id', '>=' , '4' )->count() }}' data-pembimbing2='{{ $value->TA2->where('status_id', '>=', '4')->count() }}'
-                                            data-pelaksanaan='{{ $value->TA2->where('status_id', '>=', '4')->count() }}' data-selesai='{{ $value->TA1->where('status_id', '>=', '4')->count() }}' data-total='{{ $value->TA1->where('status_id', '>=', '4')->count() + $value->TA2->where('status_id', '>=', '4')->count() }}'><i class="mdi mdi-information"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#detail" data-id='{{ $value->id }}'
+                                            data-pembimbing1='{{ $value->TA1->where('status_id', '>=', '4' )->where(' status_id', '<=' , '9' )->count() }}'
+                                            data-pembimbing2='{{ $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'
+                                            data-pelaksanaan='{{ $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $value->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'
+                                            data-selesai='{{ $value->TA1->where('status_id', '10')->count() + $value->TA1->where('status_id', '10')->count() }}'
+                                            data-total='{{ $value->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'><i class="mdi mdi-information"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -166,18 +170,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="exampleInputEmail3">Dosen Pembimbing 1</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="pembimbing1" id="pembimbing1" value="" readonly />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail3">Dosen Pembimbing 2</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="pembimbing2" id="pembimbing2" value="" readonly />
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="exampleInputEmail3">Dosen Pembimbing 1</label>
                     <div class="input-group">

@@ -104,6 +104,7 @@ class PeriodeYudisiumController extends Controller
             $data = [
                 'fileSK' => $filename,
                 'namaPeriode' => $request->namaPeriode,
+                'waktu' => $request->waktu,
                 'tanggal' => $request->tanggal,
                 'nosurat' => $request->nosurat,
                 'aktif' => $request->aktif,

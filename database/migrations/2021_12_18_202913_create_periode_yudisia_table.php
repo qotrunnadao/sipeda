@@ -19,7 +19,8 @@ class CreatePeriodeYudisiaTable extends Migration
             $table->tinyInteger('aktif')->comment('0=false, 1=true')->default('1');
             $table->string('namaPeriode')->nullable();
             $table->string('nosurat')->nullable();
-            $table->dateTime('tanggal')->nullable();
+            $table->date('tanggal')->nullable();
+            $table->time('waktu')->nullable();
             $table->string('fileSK')->nullable();
         });
     }

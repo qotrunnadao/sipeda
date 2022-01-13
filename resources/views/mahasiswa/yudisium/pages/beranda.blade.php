@@ -1,7 +1,7 @@
 @extends('mahasiswa.yudisium.layouts.main')
 @section('content')
 @section('icon', 'home')
-@section('title', 'Beranda Admin')
+@section('title', 'Beranda Mahasiswa')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card  bg-gradient-primary">
@@ -30,29 +30,54 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td> <b>IP Terakhir</b> </td>
-                                <td> <b>:</b></td>
-                                <td> 3,93 </td>
-                            </tr>
-                            <tr>
                                 <td> <b>IPK </b> </td>
                                 <td> <b>:</b> </td>
-                                <td> 3,84 </td>
+                                @if($yudisium->mahasiswa->ipk != null)
+                                <td> {{ $yudisium->mahasiswa->ipk }} </td>
+                                @else
+                                <td>
+                                    <span class="badge badge-danger">Data IPK Belum Terbit</span>
+                                </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> <b>Total SKS </b> </td>
                                 <td> <b>:</b> </td>
-                                <td> 138 </td>
+                                @if($yudisium->mahasiswa->sks != null)
+                                <td> {{ $yudisium->mahasiswa->sks }} </td>
+                                @else
+                                <td>
+                                    <span class="badge badge-danger">Data SKS Belum Terbit</span>
+                                </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> <b>Tanggal Yudisium</b> </td>
                                 <td> <b>:</b></td>
-                                <td> 08 Juni 2022 </td>
+                                @if ($yudisium == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Yudisium</span>
+                                </td>
+                                @elseif($yudisium->status_id <5) <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                    </td>
+                                    @elseif($yudisium->status_id >=5)
+                                    <td> {{ $yudisium->periodeYudisium->tanggal }} </td>
+                                    @endif
                             </tr>
                             <tr>
                                 <td> <b>Waktu</b> </td>
                                 <td> <b>:</b></td>
-                                <td> 09:00 </td>
+                                @if ($yudisium == null)
+                                <td>
+                                    <span class="badge badge-danger">Belum mengajukan Yudisium</span>
+                                </td>
+                                @elseif($yudisium->status_id <6) <td>
+                                    <span class="badge badge-primary">Menunggu Konfirmasi</span>
+                                    </td>
+                                    @elseif($yudisium->status_id >=7)
+                                    <td> {{ $yudisium->periodeYudisium->waktu }} </td>
+                                    @endif
                             </tr>
                         </tbody>
                     </table>
@@ -64,28 +89,23 @@
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-3">File Unduhan</h4>
-                <div class="table-responsive mt-3">
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td> Surat Undangan </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> SK Kelulusan </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-gradient-primary btn-sm"><i class="mdi mdi-download"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <h4 class="card-title mb-3">Tahapan Yudisium</h4>
+                <div class="list-wrapper">
+                    <ul class="d-flex flex-column todo-list todo-list-custom">
+                        @foreach ($statusYudisium as $value)
+                        <li>
+                            <div class="form-check">
+                                @if($yudisium == null)
+                                <label class="form-check-label">
+                                    <input class="checkbox" type="checkbox"> {{ $value->status }} <i class="input-helper"></i></label>
+                                @else
+                                <label class="form-check-label">
+                                    <input class="checkbox" type="checkbox" value="{{ $value->id }} " {{ $loop->iteration <= $yudisium->status_id && $loop->iteration != 1 || $yudisium->status_id == 1 && $loop->iteration == $yudisium->statusyudisium_id ? 'checked' : '' }}> {{ $value->status }} <i class="input-helper"></i></label>
+                                @endif
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
@@ -93,7 +113,7 @@
 
     <div class="col-6 grid-margin stretch-card">
         <div class="card">
-            <div class="card-body">
+            {{-- <div class="card-body">
                 <h4 class="card-title mb-5">Status Pelaksanaan Studi Akhir</h4>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -120,6 +140,49 @@
                                     <div class="badge badge-primary badge-pill">Disetujui</div>
                                 </td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> --}}
+            <div class="card-body">
+                <h4 class="card-title mb-3">File Unduhan</h4>
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped">
+                        <tbody>
+                            @if($yudisium == null)
+                            <tr>
+                                <td>
+                                    <div class="badge badge-danger badge-pill">Belum mengajukan Yudisium</div>
+                                </td>
+                            </tr>
+                            @else
+                            <tr>
+                                <td>
+                                    @if($yudisium->status_id >= 4)
+                                    @if (File::exists(public_path('storage/assets/file/sk/' . $yudisium->periodeYudisium->fileSK . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.sk', $yudisium->periodeYudisium->fileSK) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $yudisium->periodeYudisium->fileSK }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('yudisium.sk', $yudisium->periodeYudisium->fileSK) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->periodeYudisium->fileSK }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                    @else
+                                    Surat Kelulusan
+                                    <div class="badge badge-primary badge-pill float-right">Belum Terbit</div>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

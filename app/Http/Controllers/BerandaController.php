@@ -44,16 +44,10 @@ class BerandaController extends Controller
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user', 'TA1', 'TA2'])->where('user_id', $id)->get()->first();
-        $to_date = Carbon::createFromFormat('Y-m-d H:s:i', '2020-5-5 3:30:34');
-        $from_date = Carbon::createFromFormat('Y-m-d H:s:i', '2021-5-6 9:30:34');
-        $answer_in_days = $to_date->diff($from_date)->format('%y Tahun, %m Bulan and %d Hari');
         // $hari = Carbon::parse($ta_id->tanggal)->isoFormat('dddd D MMMM YYYY');
         if (auth()->user()->level_id == 2) {
             // $akademik = Mahasiswa::with('TA.status', 'Pendadaran.statusPendadaran', 'Yudisium.statusYudisium')->latest()->get();
             $akademik = Akademik::with('TA.status', 'Pendadaran.statusPendadaran', 'Yudisium.statusYudisium')->latest()->get();
-            // $waktuselesai = Carbon::parse($akademik->first()->created_at)->diff(Carbon::parse($akademik->first()->TASelesai))->format('%y Tahun, %m Bulan and %d Hari');
-            // dd($waktuselesai);
-            // dd($akademik->last()->created_at);
             $tugas_akhir = TA::with('mahasiswa')->where('status_id', '>=', '4')->latest()->get();
             $pendadaran = Pendadaran::with('mahasiswa')->where('statusPendadaran_id', '>=', '3')->latest()->get();
             $yudisium = Yudisium::with('mahasiswa')->where('status_id', '>=', '3')->latest()->get();
@@ -75,10 +69,10 @@ class BerandaController extends Controller
         } elseif (auth()->user()->level_id == 5) {
             // $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
             $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            // dd($dosen);
             $Mahasiswa = TA::with('mahasiswa')->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->where('status_id', '>=', '4')->latest()->get();
-            // dd($Mahasiswa);
             return view('kajur.beranda', compact('dosen', 'dosen_id', 'Mahasiswa'));
         }
     }
@@ -187,8 +181,8 @@ class BerandaController extends Controller
         $id = auth()->User()->id;
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
-        $yudisium = Yudisium::with(['mahasiswa'])->where('mhs_id', $mhs_id->id)->latest()->first();
-
+        $yudisium = Yudisium::with(['mahasiswa','periodeYudisium'])->where('mhs_id', $mhs_id->id)->latest()->first();
+        // dd($yudisium);
         $data_yudisium = array(
             'status' => Status::latest()->get(),
             'statusnilai' => StatusNilai::latest()->get(),

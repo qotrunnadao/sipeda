@@ -260,19 +260,16 @@ class DatabaseSeeder extends Seeder
                 'status' => "Tidak Layak",
             ],
             [
-                'status' => "Review Ketua Jurusan",
+                'status' => "Review Bapendik",
             ],
             [
-                'status' => "Review Bapendik",
+                'status' => "Review Ketua Jurusan",
             ],
             [
                 'status' => "Pencetakan Surat Kelulusan",
             ],
             [
                 'status' => "Pelaksanaan Yudisium",
-            ],
-            [
-                'status' => "Selesai",
             ],
         ];
 
