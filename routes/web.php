@@ -97,19 +97,13 @@ Route::get('/level-user/delete/{id}', 'LevelController@destroy')->name('level.de
 //Route Data User
 Route::get('/data-user', 'UserController@index')->name('user.index');
 Route::put('/data-user/update/{id}', 'UserController@update')->name('user.update');
-Route::post('/data-user/import-excel', function () {
-    Excel::import(new UserImport, request()->file('file'));
-    return back();
-})->name('user.excel');
+Route::post('/data-user/import-excel', 'UserController@import_excel')->name('user.excel');
 
 
 //Route Data Dosen
 Route::get('/data-dosen', 'DosenController@index')->name('dosen.index');
 Route::put('/data-dosen/update/{id}', 'DosenController@update')->name('dosen.update');
-Route::post('/data-dosen/import-excel', function () {
-    Excel::import(new DosenImport, request()->file('file'));
-    return back();
-})->name('dosen.excel');
+Route::post('/data-dosen/import-excel', 'DosenController@import_excel')->name('dosen.excel');
 
 //Route Data Komisi
 Route::get('/data-komisi', 'KomisiController@index')->name('komisi.index');

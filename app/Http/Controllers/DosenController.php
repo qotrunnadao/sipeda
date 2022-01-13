@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Imports\DosenImport;
 use App\Models\Dosen;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DosenController extends Controller
 {
@@ -108,5 +110,13 @@ class DosenController extends Controller
     public function destroy(Dosen $dosen)
     {
         //
+    }
+
+    public function import_excel(Request $request)
+    {
+        // validasi
+        Excel::import(new DosenImport, request()->file('file'));
+        Alert::success('Berhasil', 'Berhasil Import Data Dosen');
+        return back();
     }
 }
