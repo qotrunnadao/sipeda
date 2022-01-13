@@ -18,7 +18,7 @@ class CreateNilaiPendadaransTable extends Migration
             $table->foreignId('pendadaran_id')->references('id')->on('Pendadaran')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('statusnilai_id')->references('id')->on('statusnilai')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('nilai_huruf_id')->references('id')->on('nilai_huruf')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('pengaju')->nullable();
             $table->string('ket')->nullable();
             $table->double('nilaiAngka');
             $table->timestamps();

@@ -94,12 +94,18 @@
                             </div>
                             <div class="form-group">
                                 <label>
+                                    Nomer Surat Berita Acara <code>*</code>
+                                </label>
+                                <input type="text" class="form-control" placeholder="Masukkan Nomer Surat Berita Acara" name="no_surat" value="{{ $semhas->no_surat }}" />
+                            </div>
+                            <div class="form-group">
+                                <label>
                                     Dosen Penguji 1 <code>(opsional)</code>
                                 </label>
                                 <select name="penguji1_id" id="dropdown1" class="form-control">
                                     <option value="">PILIH</option>
                                     @foreach ($dosen as $value )
-                                    <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji1_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                                    <option value="{{ $value->id }}" {{ $value->id == $semhas->penguji1_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -110,7 +116,7 @@
                                 <select name="penguji2_id" id="dropdown2" class="form-control">
                                     <option value="">PILIH</option>
                                     @foreach ($dosen as $value )
-                                    <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                                    <option value="{{ $value->id }}" {{ $value->id == $semhas->penguji2_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -121,7 +127,7 @@
                                 <select name="penguji3_id" id="dropdown3" class="form-control">
                                     <option value="">PILIH</option>
                                     @foreach ($dosen as $value )
-                                    <option value="{{ $value->id }}" {{ $value->id == $data_pendadaran->penguji3_id ? 'selected' : '' }}>{{ $value->nama}}</option>
+                                    <option value="{{ $value->id }}" {{ $value->id == $semhas->penguji3_id ? 'selected' : '' }}>{{ $value->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>

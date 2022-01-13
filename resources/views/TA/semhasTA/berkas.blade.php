@@ -178,7 +178,7 @@
 </head>
 
 <body>
-    <div class="container ml-5 mt-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -220,12 +220,32 @@
         <div class="mt-3">
             <p>Yth. Bapak/Ibu</p>
             <ol>
+                @if ($ta_id->ta->Dosen1 == null)
+                <td> {{$ta_id->ta->namaDosen}} (Dosen Pembimbing 1) </td>
+                @else
                 <li>{{ $ta_id->ta->Dosen1->nama }} (Dosen Pembimbing 1)</li>
+                @endif
+                @if ($ta_id->ta->Dosen2 == null)
+                <td> {{$ta_id->ta->namaDosen}} (Dosen Pembimbing 2) </td>
+                @else
                 <li>{{ $ta_id->ta->Dosen2->nama }} (Dosen Pembimbing 2)</li>
+                @endif
                 @if($ta_id->ta->mahasiswa->jurusan_id == 3 || $ta_id->ta->mahasiswa->jurusan_id == 5)
+                @if ($ta_id->penguji1 == null)
+                <td> </td>
+                @else
                 <li>{{ $ta_id->penguji1->nama }} (Dosen Penguji 1)</li>
+                @endif
+                @if ($ta_id->penguji2 == null)
+                <td> </td>
+                @else
                 <li>{{ $ta_id->penguji2->nama }} (Dosen Penguji 2)</li>
+                @endif
+                @if ($ta_id->penguji3 == null)
+                <td> </td>
+                @else
                 <li>{{ $ta_id->penguji3->nama }} (Dosen Penguji 3)</li>
+                @endif
                 @endif
                 <li>Semua mahasiswa di tempat</li>
             </ol>
@@ -308,14 +328,14 @@
             </table>
         </div>
 
-        {{-- <div class="mt-3">
+        <div class="mt-3">
             <p>[Rangkap 4 untuk dosen penguji, bapendik, ketua komisi]</p>
-        </div> --}}
+        </div>
     </div>
 
     <div class="page-break"></div>
 
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -401,16 +421,62 @@
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
                         <td>:</td>
+                        @if ($ta_id->ta->Dosen1 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
                         <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
                     </tr>
                     <tr>
                         <td width=30%> Pembimbing 2 </td>
                         <td>:</td>
+                        @if ($ta_id->ta->Dosen2 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
                         <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji1 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 1</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji1->nama }} <br>
+                            NIP. {{ $ta_id->penguji1->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji2 == null)
+                        <td> </td>
+                        @else
+
+                        <td width="30%"> Penguji 2</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji2->nama }} <br>
+                            NIP. {{ $ta_id->penguji2->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji3 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 3</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji3->nama }} <br>
+                            NIP. {{ $ta_id->penguji3->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>
@@ -429,7 +495,7 @@
 
     <div class="page-break"></div>
 
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -585,16 +651,62 @@
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
                         <td>:</td>
+                        @if ($ta_id->ta->Dosen1 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
                         <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
                     </tr>
                     <tr>
                         <td width=30%> Pembimbing 2 </td>
                         <td>:</td>
+                        @if ($ta_id->ta->Dosen2 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
                         <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji1 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 1</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji1->nama }} <br>
+                            NIP. {{ $ta_id->penguji1->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji2 == null)
+                        <td> </td>
+                        @else
+
+                        <td width="30%"> Penguji 2</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji2->nama }} <br>
+                            NIP. {{ $ta_id->penguji2->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji3 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 3</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji3->nama }} <br>
+                            NIP. {{ $ta_id->penguji3->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>
@@ -612,7 +724,7 @@
 
     <div class="page-break"></div>
 
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -777,16 +889,62 @@
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
                         <td>:</td>
+                        @if ($ta_id->ta->Dosen1 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
                         <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
                     </tr>
                     <tr>
                         <td width=30%> Pembimbing 2 </td>
                         <td>:</td>
-                        <td width="50%"> {{ $ta_id->ta->Dosen2->nama }} <br>
+                        @if ($ta_id->ta->Dosen2 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
+                        <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji1 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 1</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji1->nama }} <br>
+                            NIP. {{ $ta_id->penguji1->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji2 == null)
+                        <td> </td>
+                        @else
+
+                        <td width="30%"> Penguji 2</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji2->nama }} <br>
+                            NIP. {{ $ta_id->penguji2->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji3 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 3</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji3->nama }} <br>
+                            NIP. {{ $ta_id->penguji3->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>
@@ -799,7 +957,7 @@
 
     <div class="page-break"></div>
 
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -914,16 +1072,62 @@
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
                         <td>:</td>
+                        @if ($ta_id->ta->Dosen1 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
                         <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
                     </tr>
                     <tr>
                         <td width=30%> Pembimbing 2 </td>
                         <td>:</td>
-                        <td width="50%"> {{ $ta_id->ta->Dosen2->nama }} <br>
+                        @if ($ta_id->ta->Dosen2 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
+                        <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji1 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 1</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji1->nama }} <br>
+                            NIP. {{ $ta_id->penguji1->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji2 == null)
+                        <td> </td>
+                        @else
+
+                        <td width="30%"> Penguji 2</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji2->nama }} <br>
+                            NIP. {{ $ta_id->penguji2->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji3 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 3</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji3->nama }} <br>
+                            NIP. {{ $ta_id->penguji3->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>
@@ -936,7 +1140,7 @@
 
     <div class="page-break"></div>
 
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -1077,16 +1281,62 @@
                     <tr>
                         <td width="30%"> Pembimbing 1 </td>
                         <td>:</td>
+                        @if ($ta_id->ta->Dosen1 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
                         <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
                     </tr>
                     <tr>
                         <td width=30%> Pembimbing 2 </td>
                         <td>:</td>
-                        <td width="50%"> {{ $ta_id->ta->Dosen2->nama }} <br>
+                        @if ($ta_id->ta->Dosen2 == null)
+                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
+                            NIP. {{ $ta_id->ta->nip }} </td>
+                        <td> ttd : .................</td>
+                        @else
+                        <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
                             NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
                         <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji1 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 1</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji1->nama }} <br>
+                            NIP. {{ $ta_id->penguji1->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji2 == null)
+                        <td> </td>
+                        @else
+
+                        <td width="30%"> Penguji 2</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji2->nama }} <br>
+                            NIP. {{ $ta_id->penguji2->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        @if ($ta_id->penguji3 == null)
+                        <td> </td>
+                        @else
+                        <td width="30%"> Penguji 3</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji3->nama }} <br>
+                            NIP. {{ $ta_id->penguji3->nip }} </td>
+                        <td> ttd : .................</td>
+                        @endif
                     </tr>
                 </tbody>
             </table>

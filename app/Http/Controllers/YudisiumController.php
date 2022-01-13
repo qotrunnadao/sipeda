@@ -31,10 +31,10 @@ class YudisiumController extends Controller
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $periode = PeriodeYudisium::where('aktif', '1')->get()->all();
-        $yudisium = Yudisium::with(['periodeyudisium'])->latest()->get();
-        // dd($yudisium);
+        $yudisium = Yudisium::with(['periodeyudisium', 'akademik'])->latest()->get();
+        // dd($yudisium->statusyudisium->sks);
         if (auth()->user()->level_id == 2) {
-            $yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium'])->latest()->get();
+            $yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium', 'akademik'])->latest()->get();
             $acc_yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium'])->where('status_id', 2)->latest()->get();
         } elseif (auth()->user()->level_id == 5) {
             $yudisium = Yudisium::with(['statusYudisium'])->whereHas('mahasiswa', function ($q) use ($dosen_id) {
@@ -111,7 +111,7 @@ class YudisiumController extends Controller
             $transkipname = 'Transkip Nilai' . '_' . $nim . '_' . time() . '.' . $transkip->getClientOriginalExtension();
             $filename = 'Yudisium' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('berkas')->storeAS('public/assets/file/Yudisium/', $filename);
-            $path1 = $request->file('transkipNilai')->storeAS('public/assets/file/Transkip Nilai/', $transkipNilai);
+            $path1 = $request->file('transkipNilai')->storeAS('public/assets/file/Transkip Nilai/', $transkipname);
             // dd($filename);
             $data = [
                 'mhs_id' => $request->nim,
@@ -127,13 +127,14 @@ class YudisiumController extends Controller
             $status = array(
                 'statusYudisium' => $cek->id,
             );
-            $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-            if ($cek == true) {
+            $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
+            $isi = $akademik->update($status);
+            if ($cek == true && $isi == true) {
                 Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
             } else {
                 Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
             }
-        }elseif ($request->file('berkas')) {
+        } elseif ($request->file('berkas')) {
             $file = $request->file('berkas');
             $filename = 'Yudisium' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('berkas')->storeAS('public/assets/file/Yudisium/', $filename);
@@ -160,7 +161,7 @@ class YudisiumController extends Controller
         } elseif ($request->file('transkipNilai')) {
             $transkip = $request->file('transkipNilai');
             $transkipname = 'Transkip Nilai' . '_' . $nim . '_' . time() . '.' . $transkip->getClientOriginalExtension();
-            $path = $request->file('transkipNilai')->storeAS('public/assets/file/Transkip Nilai/', $transkipNilai);
+            $path = $request->file('transkipNilai')->storeAS('public/assets/file/Transkip Nilai/', $transkipname);
             // dd($transkipNilai);
             $data = [
                 'mhs_id' => $request->nim,
@@ -223,7 +224,40 @@ class YudisiumController extends Controller
     {
         $yudisium = Yudisium::find($id);
         $data = $request->all();
+        $mhs_id = Mahasiswa::where('id', $yudisium->mhs_id)->get()->first();
+        $nim = $mhs_id->nim;
         // dd($data);
+        if ($request->file('transkipNilai')) {
+            $transkip = $request->file('transkipNilai');
+            $transkipname = 'Transkip Nilai' . '_' . $nim . '_' . time() . '.' . $transkip->getClientOriginalExtension();
+            $path = $request->file('transkipNilai')->storeAS('public/assets/file/Transkip Nilai/', $transkipname);
+            // dd($transkipNilai);
+            $data = [
+                'status_id' => $request->status_id,
+                'transkipNilai' => $transkipname,
+                'periode_id' => $request->periode_id,
+                'ket' => $request->ket,
+            ];
+            $status = array(
+                'sks' => $request->sks,
+                'ipk' => $request->ipk,
+            );
+            $mahasiswa = Mahasiswa::where('id', $yudisium->mhs_id)->get()->first();
+            $isi = $mahasiswa->update($status);
+        } else {
+            $data = [
+                'status_id' => $request->status_id,
+                'periode_id' => $request->periode_id,
+                'ket' => $request->ket,
+            ];
+            $status = array(
+                'sks' => $request->sks,
+                'ipk' => $request->ipk,
+            );
+            $mahasiswa = Mahasiswa::where('id', $yudisium->mhs_id)->get()->first();
+            $mahasiswa->update($status);
+            // dd($akademik);
+        }
         $yudisium->update($data);
         Alert::success('Berhasil', 'Berhasil edit data Yudisium');
         return back();
@@ -271,5 +305,27 @@ class YudisiumController extends Controller
             Alert::warning('Gagal', 'File Tidak Tersedia');
             return back();
         }
+    }
+    public function transkip($filename)
+    {
+        //    dd($filename);
+        if (File::exists(public_path('storage/assets/file/Transkip Nilai/' . $filename . ''))) {
+            return response()->File(public_path('storage/assets/file/Transkip Nilai/' . $filename . ''));
+        } else {
+            Alert::warning('Gagal', 'File Tidak Tersedia');
+            return back();
+        }
+    }
+
+    public function kelulusan(Request $request)
+    {
+        $kelulusan = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
+            $q->where('status_id', '10');
+        })->Has('Pendadaran')->whereHas('Pendadaran', function ($q) {
+            $q->where('statuspendadaran_id', '6');
+        })->whereDoesntHave('Yudisium')->orHas('Yudisium')->whereHas('Yudisium', function ($q) {
+            $q->where('status_id', '6');
+        });
+        return view('yudisium.dataKelulusan.index', compact('kelulusan'));
     }
 }

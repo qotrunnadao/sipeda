@@ -41,13 +41,13 @@ class NilaiTAController extends Controller
             $id = Auth::User()->id;
             $user_id = User::where('id', $id)->get()->first();
             $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
-            // dd($dosen_id->id);
             $NilaiHuruf = NilaiHuruf::latest()->get();
             $jurusan = jurusan::all();
             $taAll = TA::with(['mahasiswa'])->get();
             $statusnilai = StatusNilai::all();
             if (auth()->user()->level_id == 2) {
                 $nilai = NilaiTA::with(['TA.mahasiswa.jurusan', 'NilaiHuruf'])->latest()->get();
+                // dd($nilai);
             } else {
                 $nilai = NilaiTA::with(['TA.mahasiswa.jurusan', 'NilaiHuruf'])->whereHas('TA', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
@@ -86,19 +86,31 @@ class NilaiTAController extends Controller
     {
         $data = $request->all();
         $id = auth()->user()->id;
+        $user_id = User::where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
-        // dd($waktuselesai);
         $taAll = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
-        $waktuselesai = Carbon::parse($taAll->spkMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
-        $data = [
-            'user_id' => $id,
-            'ta_id' => $request->ta_id,
-            'nilaiAngka' => $request->nilaiAngka,
-            'nilai_huruf_id' => $request->nilai_huruf_id,
-            'statusnilai_id' => $request->statusnilai_id,
-            'ket' => $request->ket,
-        ];
+        $waktuselesai = Carbon::parse($akademik->TAMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
+        // dd($waktuselesai);
+        if ($dosen_id == null) {
+            $data = [
+                'pengaju' => 'Bapendik',
+                'ta_id' => $request->ta_id,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilai_huruf_id' => $request->nilai_huruf_id,
+                'statusnilai_id' => $request->statusnilai_id,
+                'ket' => $request->ket,
+            ];
+        } else {
+            $data = [
+                'pengaju' => $dosen_id->nama,
+                'ta_id' => $request->ta_id,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilai_huruf_id' => $request->nilai_huruf_id,
+                'statusnilai_id' => $request->statusnilai_id,
+                'ket' => $request->ket,
+            ];
+        }
         // dd($data);
         if ($request->statusnilai_id == 2) {
             $status = array(

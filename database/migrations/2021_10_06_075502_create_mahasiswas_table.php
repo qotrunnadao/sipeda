@@ -19,6 +19,8 @@ class CreateMahasiswasTable extends Migration
             $table->string('foto')->default('NULL');
             $table->string('nama');
             $table->string('nim');
+            $table->string('ipk')->nullable();
+            $table->bigInteger('sks')->nullable();
             $table->string('angkatan')->nullable();
             $table->string('nohp')->nullable();
             $table->dateTime('tglLahir')->nullable();

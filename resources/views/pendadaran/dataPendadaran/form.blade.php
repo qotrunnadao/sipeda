@@ -126,7 +126,11 @@
                             </div>
                             <div class="form-group">
                                 <label>
+                                    @if($button == 'Tambah')
+                                    Berita Acara <code>(kosongkan jika belum tersedia)</code>
+                                    @else
                                     Berita Acara <code>*</code>
+                                    @endif
                                 </label>
                                 <input type="file" class="form-control" placeholder="Berita Acara Dosen" name="beritaacara" id="beritaacara" />
                                 @if ($errors->has('beritaacara'))

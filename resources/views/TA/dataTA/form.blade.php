@@ -123,10 +123,10 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    Nama Dosen Pembimbing Non-Fakultas Teknik  @if ($button == 'Tambah') <code>(opsional)</code>
+                                    Nama Dosen Pembimbing Non-Fakultas Teknik @if ($button == 'Tambah') <code>(opsional)</code>
                                     @endif
                                 </label>
-                                <input type="text" class="form-control" required placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="@if ($button == 'Tambah'){{ old('namaDosen') }}@else{{ $data_ta->namaDosen }}@endif" />
+                                <input type="text" class="form-control" placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="@if ($button == 'Tambah'){{ old('namaDosen') }}@else{{ $data_ta->namaDosen }}@endif" />
                             </div>
                             <div class="form-group">
                                 <label>

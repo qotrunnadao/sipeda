@@ -35,10 +35,10 @@
                                 <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->NilaiHuruf->nilaiHuruf }} </td>
-                                <td class="text-center"> {{ $value->user->email }} </td>
                                 <td class="text-center">
                                     <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
                                 </td>
+                                <td class="text-center"> {{ $value->pengaju }} </td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-nilaiangka='{{ $value->nilaiAngka }}' data-nilai_huruf_id='{{ $value->NilaiHuruf->id }}' data-ket='{{ $value->ket }}' data-statusnilai_id='{{ $value->statusnilai_id }}'><i class="mdi mdi-border-color"></i></a>
@@ -120,7 +120,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail3">Keterangan</label>
                         <div class="input-group">
-                            <textarea type="text" class="form-control" placeholder="" name="ket" ></textarea>
+                            <textarea type="text" class="form-control" placeholder="" name="ket"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

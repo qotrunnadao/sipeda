@@ -172,7 +172,7 @@ class SeminarProposalController extends Controller
 
                 if (!$semhasCount && !$semproCount) {
                     $ta_id = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
-                    // dd($tanggalCount);
+                    // dd($data);
                     $nim = $ta_id->mahasiswa->nim;
                     $file = $request->file('proposal');
                     $filename = 'TA' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();

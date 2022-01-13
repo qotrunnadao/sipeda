@@ -176,7 +176,7 @@
 </head>
 
 <body>
-    <div class="container ml-5 mt-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 {{-- <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110"> --}}
@@ -302,7 +302,7 @@
 
     <div class="page-break"></div>
 
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="mt-3">
             <p> <b> LAMPIRAN <br>
                     KEPUTUSAN REKTOR <br>
@@ -454,7 +454,7 @@
     </div>
 
     <div class="page-break"></div>
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div>
             <p><b>B. PROGRAM STUDI TEKNIK SIPIL</b></p>
         </div>
@@ -561,7 +561,7 @@
     </div>
 
     <div class="page-break"></div>
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div>
             <p><b>C. PROGRAM STUDI TEKNIK GEOLOGI</b></p>
         </div>
@@ -667,7 +667,7 @@
     </div>
 
     <div class="page-break"></div>
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div>
             <p><b>D. PROGRAM STUDI INFORMATIKA</b></p>
         </div>
@@ -774,7 +774,7 @@
     </div>
 
     <div class="page-break"></div>
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div>
             <p><b>E. PROGRAM STUDI TEKNIK INDUSTRI</b></p>
         </div>

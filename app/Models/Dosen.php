@@ -23,6 +23,7 @@ class Dosen extends Model
         'jk_id',
         'jurusan_id',
         'user_id',
+        'nip'
     ];
     protected $primaryKey = 'id';
 

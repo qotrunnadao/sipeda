@@ -257,12 +257,14 @@ Route::get('/yudisium/data-yudisium/create',  'YudisiumController@create')->name
 Route::post('/yudisium/data-yudisium/store',  'YudisiumController@store')->name('yudisium.store');
 Route::get('/yudisium/data-yudisium/edit/{id}',  'YudisiumController@edit')->name('yudisium.edit');
 Route::put('/yudisium/berkas/download/{filename}',  'YudisiumController@download')->name('yudisium.download');
+Route::put('/yudisium/berkas/transkip/{filename}',  'YudisiumController@transkip')->name('yudisium.transkip');
 Route::put('/yudisium/data-yudisium/update/{id}',  'YudisiumController@update')->name('yudisium.update');
 Route::get('/yudisium/data-yudisium/delete/{id}',  'YudisiumController@destroy')->name('yudisium.delete');
 Route::get('/yudisium/data-yudisium/diterima/{yudisium}',  'YudisiumController@diterima')->name('yudisium.diterima');
 Route::get('/yudisium/data-yudisium/ditolak/{yudisium}',  'YudisiumController@ditolak')->name('yudisium.ditolak');
 Route::post('/yudisium/data-yudisium/nim/', 'YudisiumController@nim')->name('yudisium.nim');
-
+// data kelulusan
+Route::get('/yudisium/data-kelulusan', 'YudisiumController@kelulusan')->name('yudisium.kelulusan');
 
 // Periode Yudisium
 Route::get('/yudisium/periode-yudisium', 'PeriodeYudisiumController@index')->name('periode.index');
@@ -272,6 +274,7 @@ Route::get('/yudisium/periode-yudisium/delete/{id}',  'PeriodeYudisiumController
 Route::get('/yudisium/sk/', function () {
     return view('yudisium.periode.sk');
 });
+
 // controller cetak sk nya ku pindah kesini ya yok
 Route::get('/yudisium/sk-yudisium/{periode}', 'PeriodeYudisiumController@cetaksk')->name('cetaksk');
 
@@ -361,6 +364,8 @@ Route::get('mhs', function () {
 
 Route::get('admin/master/api', 'APISIAController@Index')->name('master.api');
 Route::get('admin/master/api/store', 'APISIAController@store')->name('api.store');
+
+Route::get('spk/liat', 'SPKController@berkas');
 
 
 Auth::routes();

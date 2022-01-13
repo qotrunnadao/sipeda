@@ -55,8 +55,8 @@
             margin-top: 0.25rem !important;
         }
 
-        .mr-2 {
-            margin-right: 9px !important;
+        .mr-5 {
+            margin-right: 100px !important;
         }
 
         .mr-4 {
@@ -182,7 +182,7 @@
 </head>
 
 <body>
-    <div class="container ml-5 mt-2 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -265,16 +265,29 @@
                     <tr>
                         <td> Dosen Pembimbing 1</td>
                     </tr>
+                    @if ($taAll->Dosen1 == null)
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen1->nama}}</td>
+                        <td> {{$taAll->namaDosen}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td>{{$taAll->Dosen1->nip}} </td>
+                        <td> {{$taAll->nip}} </td>
                     </tr>
+                    @else
+                    <tr>
+                        <td> Nama </td>
+                        <td>:</td>
+                        <td> {{$taAll->Dosen1->nama}} </td>
+                    </tr>
+                    <tr>
+                        <td> NIP </td>
+                        <td>:</td>
+                        <td> {{$taAll->Dosen1->nip}} </td>
+                    </tr>
+                    @endif
                 </tbody>
             </table>
             <table class="ml-5">
@@ -302,7 +315,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen1->nip}} </td>
+                        <td> {{$taAll->Dosen2->nip}} </td>
                     </tr>
                     @endif
                 </tbody>
@@ -348,7 +361,7 @@
         </div>
     </div>
     <div class="page-break"></div>
-    <div class="container ml-5 mt-2 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -406,16 +419,29 @@
                     <tr>
                         <td> Dosen Pembimbing 1</td>
                     </tr>
+                    @if ($taAll->Dosen1 == null)
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
-                        <td>{{$taAll->Dosen1->nama}} </td>
+                        <td> {{$taAll->namaDosen}} </td>
+                    </tr>
+                    <tr>
+                        <td> NIP </td>
+                        <td>:</td>
+                        <td> {{$taAll->nip}} </td>
+                    </tr>
+                    @else
+                    <tr>
+                        <td> Nama </td>
+                        <td>:</td>
+                        <td> {{$taAll->Dosen1->nama}} </td>
                     </tr>
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
                         <td> {{$taAll->Dosen1->nip}} </td>
                     </tr>
+                    @endif
                     <tr>
                         <td> Dosen Pembimbing 2</td>
                     </tr>
@@ -439,7 +465,7 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen1->nip}} </td>
+                        <td> {{$taAll->Dosen2->nip}} </td>
                     </tr>
                     @endif
                 </tbody>

@@ -122,7 +122,7 @@ class PendadaranController extends Controller
         $today = Carbon::now()->addDays(3)->isoFormat('Y-M-DD');
         // dd($tanggal >= $today);
 
-        if ($tanggal >= $today) {
+        if ($tanggal) {
             $pendadaranCount = Pendadaran::where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                 $query->where(function ($query) use ($tanggal, $jamMulai, $jamSelesai, $ruang) {
                     $query->where('tanggal', '=', $tanggal)
@@ -167,8 +167,8 @@ class PendadaranController extends Controller
                 $status = array(
                     'statusPendadaran' => $cek->id,
                 );
-                $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-
+                $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
+                $akademik->update($status);
                 Alert::success('Berhasil', 'Berhasil Menambahkan Data Ujian Pendadaran');
             } else {
                 Alert::warning('Gagal', 'Pengajuan Ujian Pendadaran Gagal Ditambahkan, Ruangan Sudah Digunakan');
