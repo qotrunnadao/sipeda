@@ -76,12 +76,19 @@ class SPKController extends Controller
         $data = $request->all();
         // dd($id);
         $taAll = TA::with(['mahasiswa'])->where('id', $id)->get()->first();
+        $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
         $status = array(
             'no_surat' => $request->no_surat,
             'spkMulai' => $request->spkMulai,
             'spkSelesai' => $request->spkSelesai,
         );
-        if ($taAll->update($status)) {
+        $waktuTA = array(
+            'TAMulai' => $request->spkMulai,
+        );
+        $cek = $taAll->update($status);
+        $waktu = $akademik->update($waktuTA);
+
+        if ($cek == true && $waktu == true) {
             Alert::success('Berhasil', 'Berhasil Tambah Nomer SPK Tugas Akhir');
         } else {
             Alert::warning('Gagal', 'Data Nomer SPK Tugas Akhir Gagal Ditambahkan');

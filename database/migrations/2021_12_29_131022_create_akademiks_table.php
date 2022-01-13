@@ -22,6 +22,7 @@ class CreateAkademiksTable extends Migration
             $table->foreignId('statusYudisium')->nullable()->references('id')->on('yudisium')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('sks')->nullable();
             $table->foreignId('angkatan')->nullable();
+            $table->date('TAMulai')->nullable();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa')->onUpdate('cascade')->onDelete('cascade');
             $table->string('TASelesai')->nullable();
             $table->timestamps();
