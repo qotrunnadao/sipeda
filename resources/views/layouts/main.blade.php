@@ -195,6 +195,11 @@
                  todayBtn: true,
                  todayHighlight: true
              });
+             $(".datepicker1").datepicker({
+                 autoclose: true,
+                 todayBtn: true,
+                 todayHighlight: true
+             });
 
              $(".datepicker_month").datepicker({
                  format: "mm-yyyy",

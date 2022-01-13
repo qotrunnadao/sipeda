@@ -120,28 +120,30 @@ class TAController extends Controller
                 'pembimbing1_id' => $request->pembimbing1_id,
                 'pembimbing2_id' => $request->pembimbing2_id,
                 'ket' => $request->ket,
+                'namaDosen' => $request->namaDosen,
+                'nip' => $request->nip,
                 'status_id' => $request->status_id,
                 'thnAkad_id' => $request->tahunAkademik,
                 'praproposal' => $filename,
             ];
-            $cek = TA::create($data);
-            $status = array(
-                'statusTA' => $cek->id,
-            );
             $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
             if ($akademik) {
+                $cek = TA::create($data);
+                $status = array(
+                    'statusTA' => $cek->id,
+                );
                 $akademik->update($status);
+                if ($cek == true) {
+                    Alert::success('Berhasil', 'Pengajuan TA telah Berhasil');
+                } else {
+                    Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
+                }
             } else {
                 Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
                 return back();
             }
         } else {
             $data['doc'] = NULL;
-        }
-        if ($cek == true) {
-            Alert::success('Berhasil', 'Pengajuan TA telah Berhasil');
-        } else {
-            Alert::warning('Gagal', 'Pengajuan TA Gagal Ditambahkan');
         }
 
         return redirect(route('TA.index'));
@@ -222,7 +224,10 @@ class TAController extends Controller
                 'pembimbing1_id' => $request->pembimbing1_id,
                 'pembimbing2_id' => $request->pembimbing2_id,
                 'ket' => $request->ket,
+                'namaDosen' => $request->namaDosen,
+                'nip' => $request->nip,
                 'status_id' => $request->status_id,
+                'thnAkad_id' => $request->tahunAkademik,
                 'praproposal' => $filename,
             ];
             File::delete(public_path('storage/assets/file/PraproposalTA/' . $hapus . ''));

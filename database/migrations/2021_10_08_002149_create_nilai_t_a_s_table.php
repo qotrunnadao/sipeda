@@ -20,6 +20,7 @@ class CreateNilaiTASTable extends Migration
             $table->foreignId('nilai_huruf_id')->references('id')->on('nilai_huruf')->onUpdate('cascade')->onDelete('cascade');
             $table->double('nilaiAngka');
             // $table->string('nilaiHuruf');
+            $table->foreignId('user_id')->nullable()->references('id')->on('user')->onUpdate('cascade')->onDelete('cascade');
             $table->string('ket')->nullable();
             $table->timestamps();
         });

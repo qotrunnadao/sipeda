@@ -13,6 +13,7 @@ class Dosen extends Model
         'alamat',
         'foto',
         'nama',
+        'nip',
         'nohp',
         'tglLahir',
         'tmptLahir',

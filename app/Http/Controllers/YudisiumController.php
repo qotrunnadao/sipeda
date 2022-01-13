@@ -105,7 +105,35 @@ class YudisiumController extends Controller
         $data = $request->all();
         $mhs_id = Mahasiswa::where('id', $request->nim)->get()->first();
         $nim = $mhs_id->nim;
-        if ($request->file('berkas')) {
+        if ($request->file('berkas') && $request->file('transkipNilai')) {
+            $transkip = $request->file('transkipNilai');
+            $file = $request->file('berkas');
+            $transkipname = 'Transkip Nilai' . '_' . $nim . '_' . time() . '.' . $transkip->getClientOriginalExtension();
+            $filename = 'Yudisium' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $request->file('berkas')->storeAS('public/assets/file/Yudisium/', $filename);
+            $path1 = $request->file('transkipNilai')->storeAS('public/assets/file/Transkip Nilai/', $transkipNilai);
+            // dd($filename);
+            $data = [
+                'mhs_id' => $request->nim,
+                'thnAkad_id' => $request->thnAkad_id,
+                'status_id' => $request->statusyudisium_id,
+                'transkipNilai' => $transkipname,
+                'berkas' => $filename,
+                'periode_id' => $request->periode_id,
+                'ket' => $request->ket,
+            ];
+            // dd($data);
+            $cek = Yudisium::create($data);
+            $status = array(
+                'statusYudisium' => $cek->id,
+            );
+            $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+            if ($cek == true) {
+                Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
+            } else {
+                Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
+            }
+        }elseif ($request->file('berkas')) {
             $file = $request->file('berkas');
             $filename = 'Yudisium' . '_' . $nim . '_' . time() . '.' . $file->getClientOriginalExtension();
             $path = $request->file('berkas')->storeAS('public/assets/file/Yudisium/', $filename);
@@ -124,14 +152,36 @@ class YudisiumController extends Controller
                 'statusYudisium' => $cek->id,
             );
             $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+            if ($cek == true) {
+                Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
+            } else {
+                Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
+            }
+        } elseif ($request->file('transkipNilai')) {
+            $transkip = $request->file('transkipNilai');
+            $transkipname = 'Transkip Nilai' . '_' . $nim . '_' . time() . '.' . $transkip->getClientOriginalExtension();
+            $path = $request->file('transkipNilai')->storeAS('public/assets/file/Transkip Nilai/', $transkipNilai);
+            // dd($transkipNilai);
+            $data = [
+                'mhs_id' => $request->nim,
+                'thnAkad_id' => $request->thnAkad_id,
+                'status_id' => $request->statusyudisium_id,
+                'transkipNilai' => $transkipname,
+                'periode_id' => $request->periode_id,
+                'ket' => $request->ket,
+            ];
+            // dd($data);
+            $cek = Yudisium::create($data);
+            $status = array(
+                'statusYudisium' => $cek->id,
+            );
+            $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
+            if ($cek == true) {
+                Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
+            } else {
+                Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
+            }
         }
-
-        if ($cek == true) {
-            Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
-        } else {
-            Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
-        }
-
         return redirect(route('yudisium.index'));
     }
 

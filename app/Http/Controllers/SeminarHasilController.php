@@ -37,27 +37,39 @@ class SeminarHasilController extends Controller
         if (auth()->user()->level_id == 2) {
             $data = array(
                 'semhas_all' => SeminarHasil::latest()->get(),
+                'dosen' => Dosen::get(),
             );
         } elseif (auth()->user()->level_id == 1 || auth()->user()->level_id == 5) {
             $data = array(
+                'dosen' => Dosen::get(),
                 'semhas_all' => SeminarHasil::latest()->get(),
                 'semhas_dosen' => SeminarHasil::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
-                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                        ->orWhere('pembimbing2_id', $dosen_id->id)
+                        ->orwhere('penguji1_id', $dosen_id->id)
+                        ->orWhere('penguji2_id', $dosen_id->id)
+                        ->orWhere('penguji3_id', $dosen_id->id);
                 })->where('status', '0')->latest()->get(),
                 'semhas_jurusan' => SeminarHasil::with(['ta.mahasiswa'])->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
-                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                        ->orWhere('pembimbing2_id', $dosen_id->id)
+                        ->orwhere('penguji1_id', $dosen_id->id)
+                        ->orWhere('penguji2_id', $dosen_id->id)
+                        ->orWhere('penguji3_id', $dosen_id->id);
                 })->orwhereHas('Mahasiswa', function ($q) use ($dosen_id) {
                     $q->where('jurusan_id', $dosen_id->jurusan_id);
                 })->where('status', '!=', '0')->latest()->get(),
             );
         } elseif (auth()->user()->level_id == 3) {
             $data = array(
+                'dosen' => Dosen::get(),
                 'semhas_all' => SeminarHasil::latest()->get(),
                 'semhas_dosen' => SeminarHasil::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
-                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                        ->orWhere('pembimbing2_id', $dosen_id->id)
+                        ->orwhere('penguji1_id', $dosen_id->id)
+                        ->orWhere('penguji2_id', $dosen_id->id)
+                        ->orWhere('penguji3_id', $dosen_id->id);
                 })->latest()->get(),
             );
         }
@@ -74,10 +86,11 @@ class SeminarHasilController extends Controller
     {
         $data_semhas = new SeminarHasil();
         $semhas = SeminarHasil::get();
+        $dosen = Dosen::get();
         $jurusan = jurusan::all();
         $mhs = Mahasiswa::all();
         $Ruang = Ruang::get();
-        return view('TA.semhasTA.create', compact('data_semhas', 'semhas', 'mhs', 'Ruang', 'jurusan'));
+        return view('TA.semhasTA.create', compact('data_semhas', 'semhas', 'mhs', 'Ruang', 'jurusan', 'dosen'));
     }
     public function nim(Request $request)
     {
@@ -170,6 +183,9 @@ class SeminarHasilController extends Controller
                         'tanggal' => $request->tanggal,
                         'ruang_id' => $ruang,
                         'status' => '1',
+                        'penguji1_id' => $request->penguji1_id,
+                        'penguji2_id' => $request->penguji2_id,
+                        'penguji3_id' => $request->penguji3_id,
                         'no_surat' => $request->no_surat,
                         'laporan' => $filename,
                     ];
@@ -207,6 +223,9 @@ class SeminarHasilController extends Controller
         // dd($taAll);
         $status = array(
             'no_surat' => $request->no_surat,
+            'penguji1_id' => $request->penguji1_id,
+            'penguji2_id' => $request->penguji2_id,
+            'penguji3_id' => $request->penguji3_id,
         );
         if ($taAll->update($status)) {
             Alert::success('Berhasil', 'Berhasil Tambah Nomer Berita Acara Seminar Hasil Tugas Akhir');
@@ -225,8 +244,9 @@ class SeminarHasilController extends Controller
     public function edit($id)
     {
         $semhas = SeminarHasil::find($id);
+        $dosen = Dosen::get();
         $ruang = Ruang::get();
-        return view('TA.semhasTA.edit', compact('semhas', 'ruang'));
+        return view('TA.semhasTA.edit', compact('semhas', 'ruang','dosen'));
     }
 
     /**
@@ -260,6 +280,9 @@ class SeminarHasilController extends Controller
             $data = [
                 'beritaacara' => $filename,
                 'laporan' => $filename1,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
 
             File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
@@ -281,6 +304,9 @@ class SeminarHasilController extends Controller
             $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semhas TA/', $filename);
             $data = [
                 'beritaacara' => $filename,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
             File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
             $status = array(
@@ -300,6 +326,9 @@ class SeminarHasilController extends Controller
             $path = $request->file('laporan')->storeAS('public/assets/file/LaporanTA/', $filename);
             $data = [
                 'laporan' => $filename,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
             File::delete(public_path('storage/assets/file/LaporanTA/' . $hapus1 . ''));
             $seminar_hasil->update($data);
@@ -313,6 +342,9 @@ class SeminarHasilController extends Controller
             $path = $request->file('berita')->storeAS('public/assets/file/Berita Acara Semhas TA/', $filename);
             $data = [
                 'beritaacara' => $filename,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
             File::delete(public_path('storage/assets/file/Berita Acara Semhas TA/' . $hapus . ''));
             $status = array(

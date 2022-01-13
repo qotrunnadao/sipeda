@@ -77,9 +77,6 @@
                                 </label>
                                 <input type="text" class="form-control" placeholder="Instansi / Lokasi Penelitian" name="instansi" value="@if ($button == 'Tambah'){{ old('instansi') }}@else{{ $data_ta->instansi }}@endif" />
                             </div>
-
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>
                                     Berkas Persyaratan @if ($button == 'Tambah') <code>*</code>
@@ -92,10 +89,12 @@
                                 </div>
                                 @endif
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label>
-                                        Pembimbing 1 @if ($button == 'Tambah') <code>*</code>
+                                        Dosen Pembimbing 1 @if ($button == 'Tambah') <code>*</code>
                                         @endif
                                     </label>
                                     <div>
@@ -109,7 +108,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>
-                                        Pembimbing 2 @if ($button == 'Tambah') <code>*</code>
+                                        Dosen Pembimbing 2 @if ($button == 'Tambah') <code>*</code>
                                         @endif
                                     </label>
                                     <div>
@@ -121,6 +120,19 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    Nama Dosen Pembimbing Non-Fakultas Teknik  @if ($button == 'Tambah') <code>(opsional)</code>
+                                    @endif
+                                </label>
+                                <input type="text" class="form-control" required placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="@if ($button == 'Tambah'){{ old('namaDosen') }}@else{{ $data_ta->namaDosen }}@endif" />
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    NIP Dosen Pembimbing Non-Fakultas Teknik @if ($button == 'Tambah')<code>(opsional)</code> @endif
+                                </label>
+                                <input type="text" class="form-control" placeholder="Tuliskan NIP dosen dari luar FT" name="nip" value="@if ($button == 'Tambah'){{ old('nip') }}@else{{ $data_ta->nip }}@endif" />
                             </div>
                             <div class="form-group">
                                 <label>

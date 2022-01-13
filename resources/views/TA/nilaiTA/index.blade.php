@@ -20,6 +20,7 @@
                                 <th class="text-center"> Nilai Angka </th>
                                 <th class="text-center"> Nilai Huruf </th>
                                 <th class="text-center"> Status Nilai</th>
+                                <th class="text-center"> Penilai</th>
                                 <th class="text-center"> Aksi</th>
                             </tr>
                         </thead>
@@ -34,6 +35,7 @@
                                 <td class="text-center"> {{ $value->TA->mahasiswa->jurusan->namaJurusan }}</td>
                                 <td class="text-center"> {{ $value->nilaiAngka }}</td>
                                 <td class="text-center"> {{ $value->NilaiHuruf->nilaiHuruf }} </td>
+                                <td class="text-center"> {{ $value->user->email }} </td>
                                 <td class="text-center">
                                     <span class="badge badge-primary">{{ $value->statusnilai->status }}</span>
                                 </td>

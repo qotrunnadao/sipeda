@@ -106,12 +106,15 @@ class NilaiPendadaranController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $id = auth()->user()->id;
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $pendadaran = Pendadaran::with(['mahasiswa'])->where('id', $request->pendadaran_id)->get()->first();
         $data = array(
             'pendadaran_id' => $request->pendadaran_id,
             'nilaiAngka' => $request->nilaiAngka,
             'nilai_huruf_id' => $request->nilai_huruf_id,
             'statusnilai_id' => $request->statusnilai_id,
+            'user_id' => $id,
             'ket' => $request->ket,
         );
         // dd($data);
@@ -163,9 +166,19 @@ class NilaiPendadaranController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        $id = auth()->user()->id;
+        $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $value = NilaiPendadaran::find($id);
         // dd($value);
         $pendadaran = Pendadaran::with(['mahasiswa'])->where('id', $value->pendadaran_id)->get()->first();
+        $data = array(
+            'pendadaran_id' => $request->pendadaran_id,
+            'nilaiAngka' => $request->nilaiAngka,
+            'nilai_huruf_id' => $request->nilai_huruf_id,
+            'statusnilai_id' => $request->statusnilai_id,
+            'user_id' => $id,
+            'ket' => $request->ket,
+        );
         $value->update($data);
         if ($request->statusnilai_id == 2) {
             $status = array(

@@ -282,6 +282,18 @@
                     <tr>
                         <td> Dosen Pembimbing 2</td>
                     </tr>
+                    @if ($taAll->Dosen2 == null)
+                    <tr>
+                        <td> Nama </td>
+                        <td>:</td>
+                        <td> {{$taAll->namaDosen}} </td>
+                    </tr>
+                    <tr>
+                        <td> NIP </td>
+                        <td>:</td>
+                        <td> {{$taAll->nip}} </td>
+                    </tr>
+                    @else
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
@@ -292,6 +304,7 @@
                         <td>:</td>
                         <td> {{$taAll->Dosen1->nip}} </td>
                     </tr>
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -406,6 +419,18 @@
                     <tr>
                         <td> Dosen Pembimbing 2</td>
                     </tr>
+                    @if ($taAll->Dosen2 == null)
+                    <tr>
+                        <td> Nama </td>
+                        <td>:</td>
+                        <td> {{$taAll->namaDosen}} </td>
+                    </tr>
+                    <tr>
+                        <td> NIP </td>
+                        <td>:</td>
+                        <td> {{$taAll->nip}} </td>
+                    </tr>
+                    @else
                     <tr>
                         <td> Nama </td>
                         <td>:</td>
@@ -414,8 +439,9 @@
                     <tr>
                         <td> NIP </td>
                         <td>:</td>
-                        <td> {{$taAll->Dosen2->nip}} </td>
+                        <td> {{$taAll->Dosen1->nip}} </td>
                     </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

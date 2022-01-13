@@ -35,17 +35,25 @@ class SeminarProposalController extends Controller
         if (auth()->user()->level_id == 2) {
             $data = array(
                 'semprop_all' => SeminarProposal::latest()->get(),
+                'dosen' => Dosen::get(),
             );
         } elseif (auth()->user()->level_id == 1 || auth()->user()->level_id == 5) {
             $data = array(
+                'dosen' => Dosen::get(),
                 'semprop_all' => SeminarProposal::latest()->get(),
                 'semprop_dosen' => SeminarProposal::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
-                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                        ->orWhere('pembimbing2_id', $dosen_id->id)
+                        ->orwhere('penguji1_id', $dosen_id->id)
+                        ->orWhere('penguji2_id', $dosen_id->id)
+                        ->orWhere('penguji3_id', $dosen_id->id);
                 })->where('status', '0')->latest()->get(),
                 'semprop_jurusan' => SeminarProposal::with(['TA.Mahasiswa'])->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
-                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                        ->orWhere('pembimbing2_id', $dosen_id->id)
+                        ->orwhere('penguji1_id', $dosen_id->id)
+                        ->orWhere('penguji2_id', $dosen_id->id)
+                        ->orWhere('penguji3_id', $dosen_id->id);
                 })->orwhereHas('Mahasiswa', function ($query) use ($dosen_id) {
                     $query->where('jurusan_id', $dosen_id->jurusan_id);
                 })->where('status', '!=', '0')->latest()->get(),
@@ -53,10 +61,14 @@ class SeminarProposalController extends Controller
             // dd($dosen_id->jurusan_id);
         } elseif (auth()->user()->level_id == 3) {
             $data = array(
+                'dosen' => Dosen::get(),
                 'semprop_all' => SeminarProposal::latest()->get(),
                 'semprop_dosen' => SeminarProposal::with(['ta'])->whereHas('ta', function ($q) use ($dosen_id) {
                     $q->where('pembimbing1_id', $dosen_id->id)
-                        ->orWhere('pembimbing2_id', $dosen_id->id);
+                        ->orWhere('pembimbing2_id', $dosen_id->id)
+                        ->orwhere('penguji1_id', $dosen_id->id)
+                        ->orWhere('penguji2_id', $dosen_id->id)
+                        ->orWhere('penguji3_id', $dosen_id->id);
                 })->latest()->get(),
             );
             // dd($dosen_id->jurusan_id);
@@ -85,10 +97,11 @@ class SeminarProposalController extends Controller
     {
         $data_semprop = new SeminarProposal();
         $semprop = SeminarProposal::get();
+        $dosen = Dosen::get();
         $mhs = Mahasiswa::all();
         $jurusan = jurusan::all();
         $Ruang = Ruang::get();
-        return view('TA.sempropTA.create', compact('data_semprop', 'semprop', 'mhs', 'Ruang', 'jurusan'));
+        return view('TA.sempropTA.create', compact('data_semprop', 'semprop', 'mhs', 'Ruang', 'jurusan', 'dosen'));
     }
 
     /**
@@ -171,6 +184,9 @@ class SeminarProposalController extends Controller
                         'tanggal' => $request->tanggal,
                         'ruang_id' => $ruang,
                         'status' => '1',
+                        'penguji1_id' => $request->penguji1_id,
+                        'penguji2_id' => $request->penguji2_id,
+                        'penguji3_id' => $request->penguji3_id,
                         'no_surat' => $request->no_surat,
                         'proposal' => $filename,
                     ];
@@ -208,11 +224,14 @@ class SeminarProposalController extends Controller
         // dd($taAll);
         $status = array(
             'no_surat' => $request->no_surat,
+            'penguji1_id' => $request->penguji1_id,
+            'penguji2_id' => $request->penguji2_id,
+            'penguji3_id' => $request->penguji3_id,
         );
         if ($taAll->update($status)) {
-            Alert::success('Berhasil', 'Berhasil Tambah Nomer Berita Acara Seminar Proposal Tugas Akhir');
+            Alert::success('Berhasil', 'Berhasil Tambah Detail Berita Acara Seminar Proposal Tugas Akhir');
         } else {
-            Alert::warning('Gagal', 'Data Nomer Berita Acara Seminar Proposal Tugas Akhir Gagal Ditambahkan');
+            Alert::warning('Gagal', 'Data Detail Berita Acara Seminar Proposal Tugas Akhir Gagal Ditambahkan');
         }
         return back();
     }
@@ -227,8 +246,9 @@ class SeminarProposalController extends Controller
     {
         $sempropAll = SeminarProposal::get();
         $semprop = SeminarProposal::find($id);
+        $dosen = Dosen::get();
         $ruang = Ruang::get();
-        return view('TA.sempropTA.edit', compact('semprop', 'ruang'));
+        return view('TA.sempropTA.edit', compact('semprop', 'ruang', 'dosen'));
     }
 
     /**
@@ -261,6 +281,9 @@ class SeminarProposalController extends Controller
             $data = [
                 'beritaacara' => $filename,
                 'proposal' => $filename1,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
 
             File::delete(public_path('storage/assets/file/ProposalTA/' . $hapus . ''));
@@ -282,6 +305,9 @@ class SeminarProposalController extends Controller
             $path = $request->file('beritaacara')->storeAS('public/assets/file/Berita Acara Semprop TA/', $filename);
             $data = [
                 'beritaacara' => $filename,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
             File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $hapus1 . ''));
             $status = array(
@@ -302,6 +328,9 @@ class SeminarProposalController extends Controller
             $path = $request->file('proposal')->storeAS('public/assets/file/ProposalTA/', $filename);
             $data = [
                 'proposal' => $filename,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
             File::delete(public_path('storage/assets/file/ProposalTA/' . $hapus . ''));
             $seminar_proposal->update($data);
@@ -315,6 +344,9 @@ class SeminarProposalController extends Controller
             $path = $request->file('berita')->storeAS('public/assets/file/Berita Acara Semprop TA/', $filename);
             $data = [
                 'beritaacara' => $filename,
+                'penguji1_id' => $request->penguji1_id,
+                'penguji2_id' => $request->penguji2_id,
+                'penguji3_id' => $request->penguji3_id,
             ];
             File::delete(public_path('storage/assets/file/Berita Acara Semprop TA/' . $hapus1 . ''));
             $status = array(

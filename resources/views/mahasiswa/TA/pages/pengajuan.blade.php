@@ -50,6 +50,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label>
+                                Nama Dosen Pembimbing Selain FT  <code>(opsional)</code>
+
+                            </label>
+                            <input type="text" class="form-control" required placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="{{ old('namaDosen') }}" />
+                        </div>
+                        <div class="col-6">
+                            <label>
+                                NIP Dosen Pembimbing Selain FT<code>(opsional)</code>
+                            </label>
+                            <input type="text" class="form-control" placeholder="Tuliskan NIP dosen dari luar FT" name="nip" value="{{ old('nip') }}" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>
                             Berkas Persyaratan <code>*</code>
@@ -140,7 +155,11 @@
                             <tr>
                                 <td> Dosen Pembimbing 2</td>
                                 <td>:</td>
+                                @if ($value->dosen2 == null)
+                                <td> {{ $value->namaDosen }} </td>
+                                @else
                                 <td> {{ $value->dosen2->nama }} </td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> File Pra Proposal</td>
