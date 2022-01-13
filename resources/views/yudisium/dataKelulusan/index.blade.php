@@ -75,19 +75,22 @@
                     @csrf
                     <div class="form-group row">
                         <div class="col">
-                            <label for="">Tanggal Masuk Unsoed</label>
-                            <input type="text" class="form-control" name="tanggal_masuk" required />
+                            <label for="">Tanggal Masuk Unsoed <code>*</code></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal_masuk" id="tanggal_masuk" value="" />
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <label for="">Nomor Alumni</label>
+                            <label for="">Nomor Alumni <code>*</code></label>
                             <input type="text" class="form-control" name="no_alumni" required />
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col">
-                            <label for="">Predikat</label>
+                            <label for="">Predikat <code>*</code></label>
                             <select type="text" class="form-control" name="predikat" required>
                                 <option value="">PILIH</option>
                                 <option value="DP">Dengan Pujian</option>
