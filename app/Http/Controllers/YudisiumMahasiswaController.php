@@ -49,8 +49,8 @@ class YudisiumMahasiswaController extends Controller
             'statusYudisium' => $cek->id,
         );
         $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-
-        if ($cek == true) {
+        $isi = $akademik->update($status);
+        if ($cek == true && $isi == true) {
             Alert::success('Berhasil', 'Pengajuan Yudisium telah Berhasil');
         } else {
             Alert::warning('Gagal', 'Pengajuan Yudisium Gagal Ditambahkan');

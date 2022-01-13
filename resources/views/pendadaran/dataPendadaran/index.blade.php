@@ -307,10 +307,10 @@
                 <form class="forms-sample" method="POST" id="surat" action="">
                     @csrf
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nomer Surat Berita Acara
-                        </label>
-                        <div class="col-sm-9">
+                        <div class="col">
+                            <label>
+                                Nomer Surat Berita Acara
+                            </label>
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat Berita Acara Ujian Pendadaran" name="no_surat" />
                         </div>
                     </div>

@@ -11,12 +11,13 @@ class akademik extends Model
     use HasFactory;
     protected $table = 'akademik';
     protected $fillable = [
-        'ipk',
+        // 'ipk',
         'statusKP',
         'statusTA',
         'statusPendadaran',
         'statusYudisium',
-        'sks',
+        // 'sks',
+        'TAMulai',
         'mhs_id',
         'TASelesai',
         'angkatan',

@@ -52,9 +52,9 @@ class KonsultasiTAController extends Controller
     }
     public function nim(Request $request)
     {
-        $taAll = TA::with(['mahasiswa','Dosen1','Dosen2'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
+        $taAll = TA::with(['mahasiswa', 'Dosen1', 'Dosen2'])->whereHas('mahasiswa', function (Builder $query) use ($request) {
             $query->where('jurusan_id', $request->id);
-        })->where('status_id', '>=','5')->get();
+        })->where('status_id', '>=', '5')->where('status_id', '<=', '9')->get();
         // dd($taAll);
         return response()->json($taAll, 200);
     }
@@ -122,7 +122,7 @@ class KonsultasiTAController extends Controller
      * @param  \App\Models\KonsultasiTA  $konsultasiTA
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $value = KonsultasiTA::where('id', $id)->first();
         // $data = $request->all();

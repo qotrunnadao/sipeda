@@ -28,6 +28,10 @@ class Yudisium extends Model
     {
         return $this->belongsTo(StatusYudisium::class, 'status_id');
     }
+    public function Akademik()
+    {
+        return $this->belongsTo(Akademik::class, 'id');
+    }
 
     public function PeriodeYudisium()
     {

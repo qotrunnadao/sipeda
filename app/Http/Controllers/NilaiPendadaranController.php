@@ -107,16 +107,29 @@ class NilaiPendadaranController extends Controller
     {
         $data = $request->all();
         $id = auth()->user()->id;
+        $user_id = User::where('id', $id)->get()->first();
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $pendadaran = Pendadaran::with(['mahasiswa'])->where('id', $request->pendadaran_id)->get()->first();
-        $data = array(
-            'pendadaran_id' => $request->pendadaran_id,
-            'nilaiAngka' => $request->nilaiAngka,
-            'nilai_huruf_id' => $request->nilai_huruf_id,
-            'statusnilai_id' => $request->statusnilai_id,
-            'user_id' => $id,
-            'ket' => $request->ket,
-        );
+        if ($dosen_id == null) {
+            $data = array(
+                'pendadaran_id' => $request->pendadaran_id,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilai_huruf_id' => $request->nilai_huruf_id,
+                'statusnilai_id' => $request->statusnilai_id,
+                'pengaju' => 'Bapendik',
+                'ket' => $request->ket,
+            );
+        } else {
+            $data = array(
+                'pendadaran_id' => $request->pendadaran_id,
+                'nilaiAngka' => $request->nilaiAngka,
+                'nilai_huruf_id' => $request->nilai_huruf_id,
+                'statusnilai_id' => $request->statusnilai_id,
+                'pengaju' => $dosen_id->nama,
+                'ket' => $request->ket,
+            );
+        }
+
         // dd($data);
         $cek = NilaiPendadaran::create($data);
         if ($request->statusnilai_id == 2) {

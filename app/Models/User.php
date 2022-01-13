@@ -48,6 +48,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Level::class);
     }
+    public function NilaiTA()
+    {
+        return $this->belongsTo(NilaiTA::class, 'user_id');
+    }
 
 
     public function getCreatedAtAttribute()

@@ -3,36 +3,32 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\Mahasiswa;
+use App\Models\Pendadaran;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class NilaiPendadaran extends Model
+class Kelulusan extends Model
 {
     use HasFactory;
-    protected $table = 'nilai_pendadaran';
-    protected $fillable = [
-        'nilai_huruf_id',
-        'nilaiAngka',
-        'pengaju',
-        'statusnilai_id',
-        'pendadaran_id',
-        'ket',
+    protected $table = 'kelulusan';
+    protected $guarded = [
+        'id',
     ];
     protected $primaryKey = 'id';
 
+    public function Mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mhs_id');
+    }
     public function Pendadaran()
     {
         return $this->belongsTo(Pendadaran::class, 'pendadaran_id');
     }
-    public function NilaiHuruf()
+    public function Yudisium()
     {
-        return $this->belongsTo(NilaiHuruf::class, 'nilai_huruf_id');
+        return $this->belongsTo(Yudisium::class, 'yudisium_id');
     }
-    public function StatusNilai()
-    {
-        return $this->belongsTo(StatusNilai::class, 'statusnilai_id');
-    }
-
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');

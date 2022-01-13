@@ -13,6 +13,7 @@ class NilaiTA extends Model
     protected $fillable = [
         'nilai_huruf_id',
         'nilaiAngka',
+        'pengaju',
         'statusnilai_id',
         'ta_id',
         'ket',
@@ -22,6 +23,10 @@ class NilaiTA extends Model
     public function TA()
     {
         return $this->belongsTo(TA::class, 'ta_id');
+    }
+    public function user()
+    {
+        return $this->hasMany(User::class, 'id');
     }
     public function NilaiHuruf()
     {

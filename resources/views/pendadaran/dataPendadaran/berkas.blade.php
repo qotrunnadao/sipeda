@@ -176,7 +176,7 @@
 </head>
 
 <body>
-    <div class="container ml-5 mt-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -217,6 +217,23 @@
 
         <div class="ml-5 mt-3">
             <p>Yth. Bapak/Ibu</p>
+            <ol>
+                @if ($pendadaran->penguji1 == null)
+                <td> {{$pendadaran->penguji1->namaPenguji}} (Dosen Penguji 1) </td>
+                @else
+                <li>{{ $pendadaran->penguji1->nama }} (Dosen Penguji 1)</li>
+                @endif
+                @if ($pendadaran->penguji2 == null)
+                <td> {{$pendadaran->penguji2->namaDosen}} (Dosen Penguji 2) </td>
+                @else
+                <li>{{ $pendadaran->penguji2->nama }} (Dosen Penguji 2)</li>
+                @endif
+                @if ($pendadaran->penguji3 == null)
+                <td> {{$pendadaran->penguji3->namaDosen}} (Dosen Penguji 3) </td>
+                @else
+                <li>{{ $pendadaran->penguji3->nama }} (Dosen Penguji 3)</li>
+                @endif
+            </ol>
             <p>di tempat</p>
         </div>
 
@@ -299,7 +316,7 @@
     </div>
 
     <div class="page-break"></div>
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -373,7 +390,7 @@
 
     <div class="page-break"></div>
 
-    <div class="container ml-5 mr-2">
+    <div class="container">
         <div class="row">
             <div class="col-md-1 float-left">
                 <img src="{{ public_path('unsoed_b&w.jpg') }}" height="110" width="110">
@@ -433,7 +450,7 @@
         </div>
         <div>
             <p>Dengan perincian nilai sebagai berikut</p>
-            <table class="table table-bordered ml-5" style="width: 100%">
+            <table class="table table-bordered" style="width: 100%">
                 <thead class="text-center">
                     <tr style="border-width:medium;">
                         <th width="10%">No</th>

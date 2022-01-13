@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TA;
-use App\Models\SPK;
-use App\Models\Jurusan;
-use App\Models\Mahasiswa;
-use App\Models\Dosen;
-use App\Models\User;
-use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
 use PDF;
-use Carbon\Carbon;
 use File;
+use App\Models\TA;
+use Carbon\Carbon;
+use App\Models\SPK;
+use App\Models\User;
+use App\Models\Dosen;
+use App\Models\Jurusan;
+use App\Models\Akademik;
+use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Builder;
 
 class SPKController extends Controller
 {
@@ -34,9 +35,9 @@ class SPKController extends Controller
         if (auth()->user()->level_id == 5 || auth()->user()->level_id == 1) {
             $spk = TA::with(['mahasiswa', 'spk'])->where('status_id', '>=', '5')->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
-            })->orWhereHas('status', function ($q) use ($dosen_id){
+            })->orWhereHas('status', function ($q) use ($dosen_id) {
                 $q->where('pembimbing1_id', $dosen_id->id)
-                ->orWhere('pembimbing2_id', $dosen_id->id);
+                    ->orWhere('pembimbing2_id', $dosen_id->id);
             })->latest()->get();
 
             // Tabel Verifikasi
@@ -44,14 +45,13 @@ class SPKController extends Controller
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->where('status_id', '4')->where('no_surat', '!=', null)->latest()->get();
             //    dd($spk);
-        return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll','spkKajur'));
-        }
-        elseif (auth()->user()->level_id == 3 ) {
+            return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll', 'spkKajur'));
+        } elseif (auth()->user()->level_id == 3) {
             $spk = TA::with(['mahasiswa', 'spk'])->where('status_id', '>=', '5')
-            ->orwhere('pembimbing1_id', $dosen_id->id)
-            ->orWhere('pembimbing1_id', $dosen_id->id)->latest()->get();
+                ->orwhere('pembimbing1_id', $dosen_id->id)
+                ->orWhere('pembimbing1_id', $dosen_id->id)->latest()->get();
             //    dd($spk);
-        }elseif (auth()->user()->level_id == 2) {
+        } elseif (auth()->user()->level_id == 2) {
             $spk = TA::with('mahasiswa', 'spk')->where('status_id', '>=', '4')->latest()->get();
         }
         return view('TA.SPK.index', compact('spk', 'jurusan', 'taAll'));
@@ -74,17 +74,23 @@ class SPKController extends Controller
     public function create(Request $request, $id)
     {
         $data = $request->all();
-        // dd($id);
         $taAll = TA::with(['mahasiswa'])->where('id', $id)->get()->first();
-        $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
+        // dd($taAll->mahasiswa_id);
+        $akademik = Akademik::where('mhs_id', $taAll->mahasiswa_id)->get()->first();
         $status = array(
             'no_surat' => $request->no_surat,
             'spkMulai' => $request->spkMulai,
             'spkSelesai' => $request->spkSelesai,
         );
-        $waktuTA = array(
-            'TAMulai' => $request->spkMulai,
-        );
+        if ($akademik->TAMulai == null) {
+            $waktuTA = array(
+                'TAMulai' => $request->spkMulai,
+            );
+        } else {
+            $waktuTA = array(
+                'TAMulai' => $akademik->spkMulai,
+            );
+        }
         $cek = $taAll->update($status);
         $waktu = $akademik->update($waktuTA);
 

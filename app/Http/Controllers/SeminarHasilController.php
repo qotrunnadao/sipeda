@@ -246,7 +246,7 @@ class SeminarHasilController extends Controller
         $semhas = SeminarHasil::find($id);
         $dosen = Dosen::get();
         $ruang = Ruang::get();
-        return view('TA.semhasTA.edit', compact('semhas', 'ruang','dosen'));
+        return view('TA.semhasTA.edit', compact('semhas', 'ruang', 'dosen'));
     }
 
     /**
@@ -453,6 +453,6 @@ class SeminarHasilController extends Controller
 
     public function berkas()
     {
-        return view('TA.semhasTA.berkas');
+        return view('TA.sempropTA.bap');
     }
 }

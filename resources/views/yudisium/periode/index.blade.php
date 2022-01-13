@@ -87,8 +87,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <a href=""
-                    onclick="this.href='/yudisium/sk-yudisium/' + document.getElementById('periode_id').value" target="_blank" id="btnSubmit" class="btn btn-gradient-primary "><i class="fa fa-print"></i>
+                    <a href="" onclick="this.href='/yudisium/sk-yudisium/' + document.getElementById('periode_id').value" target="_blank" id="btnSubmit" class="btn btn-gradient-primary "><i class="fa fa-print"></i>
                         Cetak SK</a>
                 </div>
             </form>
@@ -110,28 +109,28 @@
                 <form class="forms-sample" action="{{route('periode.store')}}" method="POST" enctype="multipart/form-data" name="eksport" id="eksport">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Periode Yudisium</label>
+                        <label for="exampleInputEmail3">Nama Periode Yudisium <code>*</code></label>
                         <div class="input-group">
                             <input type="text" required class="form-control" name="namaPeriode" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Tanggal Yudisium</label>
+                        <label for="exampleInputEmail3">Tanggal Yudisium <code>*</code></label>
                         <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Konsultasi" />
+                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Yudisium" />
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Nomor Surat</label>
+                        <label for="exampleInputEmail3">Nomor Surat <code>(kosongkan jika belum tersedia)</code></label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="nosurat" id="nosurat" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">File Surat Kelulusan Resmi</label>
+                        <label for="exampleInputEmail3">File Surat Kelulusan Resmi <code>(kosongkan jika belum tersedia)</code></label>
                         <div class="input-group">
                             <input type="file" class="form-control" name="fileSK" />
                         </div>
@@ -142,7 +141,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Status</label>
+                        <label for="exampleInputEmail3">Status <code>*</code></label>
                         <div class="input-group">
                             <select type="text" required class="form-control" name="aktif">
                                 <option value="" selected disabled>PILIH</option>

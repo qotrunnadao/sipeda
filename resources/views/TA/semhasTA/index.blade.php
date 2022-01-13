@@ -9,7 +9,7 @@
             <div class="card-body">
                 @if (auth()->user()->level_id == 2)
                 <div>
-                    <a href="{{ route('semhas.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
+                    <a href="{{ route('semhas.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right mb-3"> <i class="mdi mdi-plus"></i> Tambah</a>
                 </div>
                 @endif
                 <h4 class="card-title">Pengajuan Seminar Hasil</h4>
@@ -167,45 +167,51 @@
                 <form class="forms-sample" method="POST" id="surat" action="">
                     @csrf
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">
-                            Nomer Surat Berita Acara
-                        </label>
-                        <div class="col-sm-9">
+                        <div class="col">
+                            <label>
+                                Nomer Surat Berita Acara
+                            </label>
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat" name="no_surat" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Dosen Penguji 1 <code>(opsional)</code>
-                        </label>
-                        <select name="penguji1_id" id="dropdown1" class="form-control">
-                            <option value="">PILIH</option>
-                            @foreach ($dosen as $value )
-                            <option value="{{ $value->id }}">{{ $value->nama}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col">
+                            <label>
+                                Dosen Penguji 1 <code>(opsional)</code>
+                            </label>
+                            <select name="penguji1_id" id="dropdown1" class="form-control">
+                                <option value="">PILIH</option>
+                                @foreach ($dosen as $value )
+                                <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Dosen Penguji 2 <code>(opsional)</code>
-                        </label>
-                        <select name="penguji2_id" id="dropdown2" class="form-control">
-                            <option value="">PILIH</option>
-                            @foreach ($dosen as $value )
-                            <option value="{{ $value->id }}" >{{ $value->nama}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col">
+                            <label>
+                                Dosen Penguji 2 <code>(opsional)</code>
+                            </label>
+                            <select name="penguji2_id" id="dropdown2" class="form-control">
+                                <option value="">PILIH</option>
+                                @foreach ($dosen as $value )
+                                <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Dosen Penguji 3 <code>(opsional)</code>
-                        </label>
-                        <select name="penguji3_id" id="dropdown3" class="form-control">
-                            <option value="">PILIH</option>
-                            @foreach ($dosen as $value )
-                            <option value="{{ $value->id }}">{{ $value->nama}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col">
+                            <label>
+                                Dosen Penguji 3 <code>(opsional)</code>
+                            </label>
+                            <select name="penguji3_id" id="dropdown3" class="form-control">
+                                <option value="">PILIH</option>
+                                @foreach ($dosen as $value )
+                                <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>

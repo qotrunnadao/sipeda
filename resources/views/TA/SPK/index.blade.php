@@ -164,7 +164,7 @@
                                 <td class="text-center">
                                     @if ($value->no_surat == null && auth()->user()->level_id == 2)
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat" data-id='{{ $value->id }}' data-no_surat='{{ $value->no_surat }}'><i class="mdi mdi-plus"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#nomersurat{{$value['id']}}"><i class="mdi mdi-plus"></i></a>
                                     </div>
                                     @elseif ($value->spk == null && auth()->user()->level_id == 2)
                                     <div class="btn-group">
@@ -230,8 +230,9 @@
         </div>
     </div>
 </div>
+@foreach ( $spk as $value )
 {{-- Tambah Data Nomer Surat --}}
-<div class="modal fade" id="nomersurat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="nomersurat{{$value['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -241,29 +242,38 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" id="surat" action="">
+                <form class="forms-sample" method="POST" action="{{ route('spk.create', $value->id) }}">
                     @csrf
                     <div class="form-group row">
                         <div class="col">
-                            <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat SPK" name="no_surat" />
+                            <label>
+                                Nomor surat <code>*</code>
+                            </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat SPK" name="no_surat" value="{{ $value->no_surat }}" />
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Tanggal SPK Dimulai <code>*</code>
-                        </label>
-                        <div class="input-group">
-                            <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="spkMulai" id="spkMulai" placeholder="Tanggal Seminar" name="spkMulai" />
-                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        <div class="col">
+                            <label>
+                                Tanggal SPK Dimulai <code>*</code>
+                            </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="spkMulai" id="spkMulai" placeholder="Tanggal Seminar" name="spkMulai" value="{{ $value->spkMulai }}" />
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Tanggal SPK Selesai <code>*</code>
-                        </label>
-                        <div class="input-group">
-                            <input type="text" class="form-control datepicker1" data-language="en" data-date-format="yyyy-mm-dd" name="spkSelesai" id="spkSelesai" placeholder="Tanggal Seminar" name="spkSelesai" />
-                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        <div class="col">
+                            <label>
+                                Tanggal SPK Selesai <code>*</code>
+                            </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker1" data-language="en" data-date-format="yyyy-mm-dd" name="spkSelesai" id="spkSelesai" placeholder="Tanggal Seminar" name="spkSelesai" value="{{ $value->spkSelesai }}" />
+                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -274,7 +284,7 @@
         </div>
     </div>
 </div>
-
+@endforeach
 
 <script>
     $(document).ready(function () {
@@ -324,18 +334,6 @@
 
     modal.find(".modal-body input[name='fileSPK']").val(fileSPK)
     modal.find(".modal-body form").attr("action",'/tugas-akhir/spk/update/'+id)
-    })
-</script>
-<script>
-    $('#nomersurat').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var id = button.data('id')
-    var no_surat = button.data('no_surat')
-
-    var modal = $(this)
-
-    modal.find(".modal-body input[name='no_surat']").val(no_surat)
-    modal.find(".modal-body form").attr("action",'/tugas-akhir/spk/create/'+id)
     })
 </script>
 @endsection

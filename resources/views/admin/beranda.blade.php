@@ -89,8 +89,8 @@
                                 <td> {{ $loop->iteration }} </td>
                                 <td> {{ $value->mahasiswa->nama }} </td>
                                 <td>{{ $value->mahasiswa->angkatan }}</td>
-                                <td> {{ $value->ipk }}</td>
-                                <td> {{ $value->sks }}</td>
+                                <td> {{ $value->mahasiswa->ipk }}</td>
+                                <td> {{ $value->mahasiswa->sks }}</td>
                                 <td>
                                     @if($value->statusTA == null)
                                     <div class="badge badge-danger badge-pill">Belum Mengajukan</div>

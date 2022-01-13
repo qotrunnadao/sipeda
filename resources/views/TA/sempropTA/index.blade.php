@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    <a href="{{ route('semprop.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right"> <i class="mdi mdi-plus"></i> Tambah</a>
+                    <a href="{{ route('semprop.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right mb-3"> <i class="mdi mdi-plus"></i> Tambah</a>
                 </div>
                 <h4 class="card-title">Pengajuan Seminar Proposal</h4>
                 <div class="table-responsive">
@@ -447,41 +447,50 @@
                     {{-- <input type="hidden" class="form-control" id="ta_id" name="ta_id" value="{{ $semprop_all->ta_id }}"> --}}
                     <div class="form-group row">
                         <div class="col">
+                            <label>
+                                Nomor Surat <code>*</code>
+                            </label>
                             <input type="text" class="form-control" required placeholder="Masukkan Nomer Surat" name="no_surat" />
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Dosen Penguji 1 <code>(opsional)</code>
-                        </label>
-                        <select name="penguji1_id" id="dropdown1" class="form-control">
-                            <option value="">PILIH</option>
-                            @foreach ($dosen as $value )
-                            <option value="{{ $value->id }}">{{ $value->nama}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col">
+                            <label>
+                                Dosen Penguji 1 <code>(opsional)</code>
+                            </label>
+                            <select name="penguji1_id" id="dropdown1" class="form-control">
+                                <option value="">PILIH</option>
+                                @foreach ($dosen as $value )
+                                <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Dosen Penguji 2 <code>(opsional)</code>
-                        </label>
-                        <select name="penguji2_id" id="dropdown2" class="form-control">
-                            <option value="">PILIH</option>
-                            @foreach ($dosen as $value )
-                            <option value="{{ $value->id }}" >{{ $value->nama}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col">
+                            <label>
+                                Dosen Penguji 2 <code>(opsional)</code>
+                            </label>
+                            <select name="penguji2_id" id="dropdown2" class="form-control">
+                                <option value="">PILIH</option>
+                                @foreach ($dosen as $value )
+                                <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <label>
-                            Dosen Penguji 3 <code>(opsional)</code>
-                        </label>
-                        <select name="penguji3_id" id="dropdown3" class="form-control">
-                            <option value="">PILIH</option>
-                            @foreach ($dosen as $value )
-                            <option value="{{ $value->id }}">{{ $value->nama}}</option>
-                            @endforeach
-                        </select>
+                        <div class="col">
+                            <label>
+                                Dosen Penguji 3 <code>(opsional)</code>
+                            </label>
+                            <select name="penguji3_id" id="dropdown3" class="form-control">
+                                <option value="">PILIH</option>
+                                @foreach ($dosen as $value )
+                                <option value="{{ $value->id }}">{{ $value->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
