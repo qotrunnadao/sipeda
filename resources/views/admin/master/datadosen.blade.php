@@ -15,11 +15,8 @@
                             <tr>
                                 <th> No. </th>
                                 <th> Nama </th>
-                                {{-- <th> Alamat </th> --}}
                                 <th> NIP </th>
-                                <th> No.HP </th>
-                                {{-- <th> Agama </th> --}}
-                                {{-- <th> Jenis Kelamin </th> --}}
+                                <th> id user </th>
                                 <th> Jurusan</th>
                                 <th> isKomisi</th>
                                 <th> isKajur</th>
@@ -32,11 +29,8 @@
                             <tr>
                                 <td> {{ $no++ }}</td>
                                 <td> {{ $value->nama }}</td>
-                                {{-- <td> {{ $value->alamat }}</td> --}}
                                 <td> {{ $value->nip }}</td>
-                                <td> {{ $value->nohp }}</td>
-                                {{-- <td> {{ $value->agama->namaAgama }}</td> --}}
-                                {{-- <td> {{ $value->jenkel->ket }} </td> --}}
+                                <td> {{ $value->user_id }}</td>
                                 <td> {{ $value->jurusan->namaJurusan }}</td>
                                 <td>
                                     @if($value->isKomisi == 0)
@@ -56,11 +50,6 @@
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-komisi='{{ $value->isKomisi }}' data-kajur='{{ $value->isKajur }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
-                                    {{-- <div class="btn-group">
-                                        <form action="#" method="GET">
-                                            <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
-                                        </form>
-                                    </div> --}}
                                 </td>
                                 @endforeach
                         </tbody>
