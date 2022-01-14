@@ -351,7 +351,7 @@ class DatabaseSeeder extends Seeder
                 'email' => "Teguh.Cahyono@unsoed.ac.id",
                 'noInduk' => "123456",
                 'password' => "teguh123",
-                'level_id' => 5,
+                'level_id' => 3,
             ],
             [
                 'email' => "Lasmedi.Afuan@mhs.unsoed.ac.id",
@@ -363,7 +363,7 @@ class DatabaseSeeder extends Seeder
                 'email' => "ariefkelik.nugroho@unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "arief123",
-                'level_id' => 1,
+                'level_id' => 3,
             ],
             [
                 'email' => "eddy.maryanto@unsoed.ac.id",
@@ -399,25 +399,25 @@ class DatabaseSeeder extends Seeder
                 'email' => "farida.asriani@unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "farida123",
-                'level_id' => 5,
+                'level_id' => 3,
             ],
             [
                 'email' => "eng.maryoto@unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "eng123",
-                'level_id' => 5,
+                'level_id' => 3,
             ],
             [
                 'email' => "adi.candra@unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "adi123",
-                'level_id' => 5,
+                'level_id' => 3,
             ],
             [
                 'email' => "maria.krisnawati@unsoed.ac.id",
                 'noInduk' => "1234567",
                 'password' => "maria123",
-                'level_id' => 5,
+                'level_id' => 3,
             ],
             [
                 'email' => "laviesta.narini@mhs.unsoed.ac.id",

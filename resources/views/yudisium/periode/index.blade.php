@@ -3,7 +3,7 @@
 @section ('icon', 'folder-upload')
 @section('content')
 <div class="row">
-    <div class="col-8 grid-margin stretch-card">
+    <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div>
@@ -12,7 +12,7 @@
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th> # </th>
                                 <th> Nama Periode Yudisium </th>
                                 <th> Tanggal Yudisium </th>
@@ -25,7 +25,7 @@
                         <tbody>
                             @php ($no = 1)
                             @foreach ($periode as $value )
-                            <tr>
+                            <tr class="text-center">
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $value->namaPeriode }}</td>
                                 <td> {{ $value->tanggal}} </td>
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <div class="col-md-4 grid-margin">
+    {{-- <div class="col-md-4 grid-margin">
         <div class="card card-primary">
             <form action="" method="GET" enctype="multipart/form-data" id="creatData">
                 @csrf
@@ -92,7 +92,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <!-- Modal Tambah Periode Yudisium -->
@@ -124,12 +124,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                            <label for="exampleInputEmail3">waktu Mulai <code>*</code></label>
-                            <div class="input-group clockpicker">
-                                <input type="text" class="form-control" name="waktu" placeholder="Waktu Pelaksanaan Yudisium">
-                                <span class="input-group-text">
-                                    <i class="mdi mdi-clock"></i></span>
-                            </div>
+                        <label for="exampleInputEmail3">waktu Mulai <code>*</code></label>
+                        <div class="input-group clockpicker">
+                            <input type="text" class="form-control" name="waktu" placeholder="Waktu Pelaksanaan Yudisium">
+                            <span class="input-group-text">
+                                <i class="mdi mdi-clock"></i></span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nomor Surat <code>(kosongkan jika belum tersedia)</code></label>
@@ -204,7 +204,7 @@
                             <span class="input-group-text">
                                 <i class="mdi mdi-clock"></i></span>
                         </div>
-                </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nomor Surat</label>
                         <div class="input-group">

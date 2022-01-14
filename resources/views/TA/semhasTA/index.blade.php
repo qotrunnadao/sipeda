@@ -7,11 +7,11 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                @if (auth()->user()->level_id == 2)
+                {{-- @if (auth()->user()->level_id == 2)
                 <div>
                     <a href="{{ route('semhas.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right mb-3"> <i class="mdi mdi-plus"></i> Tambah</a>
                 </div>
-                @endif
+                @endif --}}
                 <h4 class="card-title">Verifikasi Pengajuan Seminar Hasil</h4>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -160,9 +160,9 @@
                     <a href="{{ route('semhas.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right mb-3"> <i class="mdi mdi-plus"></i> Tambah</a>
                 </div>
                 @endif
-                <h4 class="card-title">Pengajuan Seminar Hasil</h4>
+                <h4 class="card-title">Data Seminar Hasil</h4>
                 <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
-@section('icon', 'bell')
-@section('title', 'Status Yudisium')
+@section('icon', 'message-text')
+@section('title', 'Berita Studi Akhir')
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
@@ -11,27 +11,27 @@
                 </div>
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead class="text-center">
-                            <tr>
-                                <th>No.</th>
-                                <th> Keterangan Status </th>
+                        <thead>
+                            <tr class="text-center">
+                                <th> No. </th>
+                                <th> Nama Persyaratan </th>
+                                <th> Berkas </th>
                                 <th> Aksi </th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody>
                             @php ($no = 1)
-                            @foreach ($status as $value)
-                            <tr>
+                            @foreach ($berkas as $value)
+                            <tr class="text-center">
                                 <td> {{ $no++ }} </td>
-                                <td> {{ $value->status }}</td>
+                                <td> {{ $value->nama_berkas }}</td>
+                                <td> {{ $value->berkas }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-target="#editdata" data-id='{{ $value->id }}' data-status='{{ $value->status }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-berkas='{{ $value->berkas }}'><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
-                                        <form action="{{ route('statusyudisium.delete', $value->id) }}" method="GET">
-                                            @method('DELETE')
-                                            @csrf
+                                        <form action="{{ route('berkas.delete', $value->id) }}" method="GET">
                                             <button type="submit" class="btn btn-gradient-danger btn-sm hapus"><i class="mdi mdi-delete"></i></button>
                                         </form>
                                     </div>
@@ -45,76 +45,101 @@
     </div>
 </div>
 
-<!-- Tambah Ruang -->
+<!-- Tambah berkas -->
 <div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Status Yudisium</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Berkas Persyaratan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" action="{{route('statusyudisium.store')}}">
+                <form class="forms-sample" action="{{route('berkas.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Keterangan Status</label>
+                        <label for="exampleInputEmail3">Nama Persyaratan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="status" required />
+                            <input type="text" required class="form-control" name="nama_berkas" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="file" class="form-control" name="berkas" />
+                            @if ($errors->has('berkas'))
+                            <div class="text-danger">
+                                {{ $errors->first('berkas') }}
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
-{{-- Edit Ruang --}}
+
+<!-- Edit Berkas -->
 <div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Status Yudisium</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Berkas Persyaratan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                {{-- @foreach ($jurusan as $value ) --}}
-                <form class="forms-sample" method="POST" action="">
+                <form class="forms-sample" method="POST" id="editData" action="" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Keterangan Status</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="status" name="status" value="" />
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="file" class="form-control" name="berkas" required />
+                            @if ($errors->has('berkas'))
+                            <div class="text-danger">
+                                {{ $errors->first('berkas') }}
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-                {{-- @endforeach --}}
             </div>
         </div>
     </div>
 </div>
 @endsection
+
 @section('javascripts')
+<script>
+    $(document).ready(function () {
+
+        $("#eksport").submit(function () {
+
+            $("#btnSubmit").attr("disabled", true);
+
+            return true;
+
+            });
+        });
+</script>
 <script>
     $('#editdata').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
-    var status = button.data('status') // Extract info from data-* attributes
+    var berkas = button.data('berkas') // Extract info from data-* attributes
 
     var modal = $(this)
-    {{-- modal.find('.modal-title').text('New message to ' + recipient) --}}
-    modal.find(".modal-body input[name='status']").val(status)
-    modal.find(".modal-body form").attr("action",'/yudisium/status-yudisium/update/'+id)
+
+    modal.find(".modal-body input[name='berkas']").val(berkas)
+    modal.find(".modal-body form").attr("action",'/berkas-persyaratan/update/'+id)
     })
 </script>
 @endsection

@@ -11,7 +11,7 @@
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th> # </th>
                                 <th> Nama Mahasiswa </th>
                                 <th> NIM </th>
@@ -157,7 +157,7 @@
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th> # </th>
                                 <th> Nama Mahasiswa </th>
                                 <th> NIM </th>

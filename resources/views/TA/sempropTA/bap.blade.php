@@ -359,6 +359,50 @@
 
         <div class="mt-3">
             <p>Telah melakukan seminar hasil tugas akhir atas nama :</p>
+            <table>
+                <tbody>
+                    <tr>
+                        <td> Nama </td>
+                        <td>:</td>
+                        <td style="text-transform: uppercase"> {{ $ta_id->ta->mahasiswa->nama }} </td>
+                    </tr>
+                    <tr>
+                        <td> NIM </td>
+                        <td>:</td>
+                        <td style="text-transform: uppercase"> {{ $ta_id->ta->mahasiswa->nim }} </td>
+                    </tr>
+                    <tr>
+                        <td> Jurusan </td>
+                        <td>:</td>
+                        <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
+                    </tr>
+                    <tr>
+                        <td> Hari/tanggal </td>
+                        <td>:</td>
+                        <td> {{ $hari }} </td>
+                    </tr>
+                    <tr>
+                        <td> Waktu </td>
+                        <td>:</td>
+                        <td> {{ $jamMulai }} - {{ $jamSelesai }} </td>
+                    </tr>
+                    <tr>
+                        <td> Tempat </td>
+                        <td>:</td>
+                        <td> di ruang {{ $ta_id->ruang->namaRuang }} Fakultas Teknik FT kampus Purbalingga. </td>
+                    </tr>
+                    <tr>
+                        <td> Jumlah Peserta </td>
+                        <td>:</td>
+                        <td> ..................... (*) </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="mt-3">
+            <p>Dengan rincian peserta sebagai berikut :</p>
             <div>
                 <table class="table table-bordered" style="width: 100%;">
                     <thead class="text-center">
@@ -553,11 +597,6 @@
                         <td> Jurusan </td>
                         <td>:</td>
                         <td> {{ $ta_id->ta->mahasiswa->Jurusan->namaJurusan }} </td>
-                    </tr>
-                    <tr>
-                        <td> Judul Tugas Akhir </td>
-                        <td>:</td>
-                        <td style="text-transform: capitalize; border: 1px solid;"> {{ $ta_id->ta->judulTA }} </td>
                     </tr>
                     <tr>
                         <td> Hari/tanggal </td>
@@ -1336,13 +1375,13 @@
                     <tr>
                         <td width="30%"> Penelaah I </td>
                         <td>:</td>
-                        @if ($ta_id->ta->Dosen1 == null)
-                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
-                            NIP. {{ $ta_id->ta->nip }} </td>
-                        <td> ttd : .................</td>
+                        @if ($ta_id->penguji1 == null)
+                        <td> </td>
                         @else
-                        <td width=50%> {{ $ta_id->ta->Dosen1->nama }} <br>
-                            NIP. {{ $ta_id->ta->Dosen1->nip }} </td>
+                        <td width="30%"> Penelaah I</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji1->nama }} <br>
+                            NIP. {{ $ta_id->penguji1->nip }} </td>
                         <td> ttd : .................</td>
                         @endif
                     </tr>
@@ -1508,13 +1547,13 @@
                     <tr>
                         <td width="30%"> Penelaah II </td>
                         <td>:</td>
-                        @if ($ta_id->ta->Dosen2 == null)
-                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
-                            NIP. {{ $ta_id->ta->nip }} </td>
-                        <td> ttd : .................</td>
+                        @if ($ta_id->penguji2 == null)
+                        <td> </td>
                         @else
-                        <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
-                            NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
+                        <td width="30%"> Penelaah II</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji2->nama }} <br>
+                            NIP. {{ $ta_id->penguji2->nip }} </td>
                         <td> ttd : .................</td>
                         @endif
                     </tr>
@@ -1680,13 +1719,13 @@
                     <tr>
                         <td width="30%"> Penelaah III </td>
                         <td>:</td>
-                        @if ($ta_id->ta->Dosen2 == null)
-                        <td width=50%> {{ $ta_id->ta->namaDosen }} <br>
-                            NIP. {{ $ta_id->ta->nip }} </td>
-                        <td> ttd : .................</td>
+                        @if ($ta_id->penguji3 == null)
+                        <td> </td>
                         @else
-                        <td width=50%> {{ $ta_id->ta->Dosen2->nama }} <br>
-                            NIP. {{ $ta_id->ta->Dosen2->nip }} </td>
+                        <td width="30%"> Penelaah III</td>
+                        <td>:</td>
+                        <td width=50%> {{ $ta_id->penguji3->nama }} <br>
+                            NIP. {{ $ta_id->penguji3->nip }} </td>
                         <td> ttd : .................</td>
                         @endif
                     </tr>

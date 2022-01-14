@@ -8,9 +8,9 @@
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div>
+                {{-- <div>
                     <a href="{{ route('semprop.create') }}" type="button" class="btn btn-sm btn-gradient-primary float-right mb-3"> <i class="mdi mdi-plus"></i> Tambah</a>
-                </div>
+                </div> --}}
                 <h4 class="card-title">Verifikasi Pengajuan Seminar Proposal</h4>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -160,7 +160,7 @@
                 </div>
                 <h4 class="card-title">Pengajuan Seminar Proposal</h4>
                 <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th class="text-center"> No. </th>
@@ -642,7 +642,7 @@
                     <div class="modal-footer">
                         <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                     </div>
-                </div>
+            </div>
             </form>
         </div>
     </div>

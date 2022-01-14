@@ -34,7 +34,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('komisi.index') }}"> Data Komisi </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('dosen.index') }}"> Data Dosen </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('dataKajur') }}"> Data Ketua Jurusan </a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('master.api') }}"> Data API </a></li> --}}
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('berkas.index') }}"> Berkas Persyaratan </a></li>
                 </ul>
             </div>
         </li>

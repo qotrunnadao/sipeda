@@ -113,6 +113,12 @@ Route::put('/data-komisi/update/{id}', 'KomisiController@update')->name('komisi.
 Route::get('/data-kajur', 'KajurController@index')->name('dataKajur');
 Route::put('/data-kajur/update/{id}', 'KajurController@update')->name('kajur.update');
 
+//Route Data Berkas Persyaratan
+Route::get('/berkas-persyaratan', 'BerkasPersyaratanController@index')->name('berkas.index');
+Route::post('/berkas-persyaratan/store', 'BerkasPersyaratanController@store')->name('berkas.store');
+Route::put('/berkas-persyaratan/update/{id}', 'BerkasPersyaratanController@update')->name('berkas.update');
+Route::get('/berkas-persyaratan/destroy/{id}', 'BerkasPersyaratanController@destroy')->name('berkas.delete');
+
 
 //================= ROUTE DOSEN ========================
 Route::get('/dosen/beranda', [BerandaController::class, 'index'])->name('dosen.beranda')->middleware([Dosen::class]);

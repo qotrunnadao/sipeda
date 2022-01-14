@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Ruang Seminar @if ($button == 'Tambah')<code>*</code> @endif</label>
+                                    <label>Ruang Pendadaran @if ($button == 'Tambah')<code>*</code> @endif</label>
                                     <select class="form-control" id="ruang" name="ruang" style="width:100%" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         @foreach ($ruang as $value)
                                         <option value="{{ $value->id }} " {{ $value->id == $data_pendadaran->ruangpendadaran_id ? 'selected' : '' }}>{{ $value->namaRuang }}</option>
@@ -124,6 +124,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>
                                     @if($button == 'Tambah')
@@ -139,9 +142,6 @@
                                 </div>
                                 @endif
                             </div>
-                        </div>
-
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>
                                     Dosen Penguji 1 @if ($button == 'Tambah')<code>*</code> @endif

@@ -9,7 +9,7 @@
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th> NO URUT </th>
                                 <th> NAMA </th>
                                 <th> NIM</th>
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="text-center">
                                 <td>1</td>
                                 <td>QOTRUNNADA(Mahasiswa)</td>
                                 <td>H1D018033(Mahasiswa)</td>

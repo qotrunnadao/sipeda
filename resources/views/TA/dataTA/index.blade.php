@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 @section('icon', 'file')
-@section('title', 'Pengajuan TA')
+@section('title', 'Pengajuan Tugas Akhir')
 
 <div class="row">
     @if(Auth::user()->level_id != 3 && Auth::user()->level_id != 5)
@@ -11,7 +11,7 @@
                 <h4 class="card-title">Menunggu Verifikasi</h4>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th class="text-center"> No. </th>
                                 <th class="text-center"> Nama Mahasiswa </th>
@@ -157,7 +157,7 @@
                                 <td class="text-center"> {{ $value->dosen2->nama }} </td>
                                 @endif
                                 <td>
-                                    <span class="badge badge-warning">{{ $value->status->ket }}</span>
+                                    <span class="badge badge-success">{{ $value->status->ket }}</span>
 
                                 </td>
                                 <td class="text-center"> {{ $value->ket }}</td>

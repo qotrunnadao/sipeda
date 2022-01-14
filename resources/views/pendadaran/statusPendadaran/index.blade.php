@@ -12,7 +12,7 @@
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th> No. </th>
                                 <th> ID </th>
                                 <th> Keterangan Status </th>
@@ -22,7 +22,7 @@
                         <tbody>
                             @php ($no = 1)
                             @foreach ($status as $value)
-                            <tr>
+                            <tr class="text-center">
                                 <td> {{ $no++ }} </td>
                                 <td> <span class="badge badge-secondary">{{ $value->id }}</span></td>
                                 <td> {{ $value->status }}</td>

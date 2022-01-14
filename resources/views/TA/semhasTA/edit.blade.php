@@ -34,8 +34,6 @@
                                 <label>Judul Penelitian</label>
                                 <input class="form-control" name="judul" id="judul" type="text" value="{{ $semhas->TA->judulTA }}" readonly>
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>
                                     Berkas Persyaratan
@@ -47,6 +45,8 @@
                                 </div>
                                 @endif
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label>waktu Mulai</label>

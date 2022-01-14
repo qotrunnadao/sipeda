@@ -9,7 +9,7 @@
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th> # </th>
                                 <th> Nama Mahasiswa </th>
                                 <th> NIM</th>
@@ -27,7 +27,7 @@
                         <tbody>
                             @php($no=1)
                             @foreach ($acc_yudisium as $value)
-                            <tr>
+                            <tr class="text-center">
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $value->mahasiswa->nama }} </td>
                                 <td> {{ $value->mahasiswa->nim }}</td>
@@ -152,7 +152,7 @@
                 <div class="table-responsive">
                     <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th> # </th>
                                 <th> Nama Mahasiswa </th>
                                 <th> NIM</th>
@@ -169,7 +169,7 @@
                         <tbody>
                             @php($no=1)
                             @foreach ($yudisium as $value)
-                            <tr>
+                            <tr class="text-center">
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $value->mahasiswa->nama }} </td>
                                 <td> {{ $value->mahasiswa->nim }}</td>

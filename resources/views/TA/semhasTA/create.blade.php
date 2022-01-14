@@ -163,8 +163,6 @@
                                 <label>Judul Penelitian <code>*</code></label>
                                 <input class="form-control" name="judul" id="judul" type="text">
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>
                                     Berkas Persyaratan <code>*</code>
@@ -176,6 +174,8 @@
                                 </div>
                                 @endif
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <label>waktu Mulai <code>*</code></label>
