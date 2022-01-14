@@ -32,7 +32,7 @@
                             <tr>
                                 <td> <b>IPK </b> </td>
                                 <td> <b>:</b> </td>
-                                @if($yudisium->mahasiswa->ipk != null)
+                                @if($yudisium != null)
                                 <td> {{ $yudisium->mahasiswa->ipk }} </td>
                                 @else
                                 <td>
@@ -43,7 +43,7 @@
                             <tr>
                                 <td> <b>Total SKS </b> </td>
                                 <td> <b>:</b> </td>
-                                @if($yudisium->mahasiswa->sks != null)
+                                @if($yudisium != null)
                                 <td> {{ $yudisium->mahasiswa->sks }} </td>
                                 @else
                                 <td>
