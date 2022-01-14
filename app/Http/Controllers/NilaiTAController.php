@@ -90,7 +90,7 @@ class NilaiTAController extends Controller
         $dosen_id = Dosen::with(['user'])->where('user_id', $id)->get()->first();
         $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
         $taAll = TA::with(['mahasiswa'])->where('id', $request->ta_id)->get()->first();
-        $waktuselesai = Carbon::parse($akademik->TAMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
+        $waktuselesai = Carbon::parse($akademik->TAMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan dan %d Hari');
         // dd($waktuselesai);
         if ($dosen_id == null) {
             $data = [
@@ -146,7 +146,7 @@ class NilaiTAController extends Controller
         $taAll = TA::with(['mahasiswa'])->where('id', $value->ta_id)->get()->first();
         // dd($taAll->mahasiswa_id);
         $akademik = Akademik::where('mhs_id', $taAll->mahasiswa_id)->get()->first();
-        $waktuselesai = Carbon::parse($taAll->spkMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');
+        $waktuselesai = Carbon::parse($taAll->spkMulai)->diff(Carbon::now())->format('%y Tahun, %m Bulan dan %d Hari');
         if ($dosen_id == null) {
             $data = [
                 'pengaju' => 'Bapendik',

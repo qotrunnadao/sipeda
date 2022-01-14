@@ -43,8 +43,9 @@ class BerandaController extends Controller
         );
         $id = auth()->user()->id;
         $user_id = User::with(['dosen'])->where('id', $id)->get()->first();
-        $dosen_id = Dosen::with(['user', 'TA1', 'TA2'])->where('user_id', $id)->get()->first();
+        $dosen_id = Dosen::with(['user', 'TA1', 'TA2', 'Penguji1', 'Penguji2', 'Penguji3', 'Penguji4'])->where('user_id', $id)->get()->first();
         // $hari = Carbon::parse($ta_id->tanggal)->isoFormat('dddd D MMMM YYYY');
+        // dd($user_id);
         if (auth()->user()->level_id == 2) {
             // $akademik = Mahasiswa::with('TA.status', 'Pendadaran.statusPendadaran', 'Yudisium.statusYudisium')->latest()->get();
             $akademik = Akademik::with('TA.status', 'Pendadaran.statusPendadaran', 'Yudisium.statusYudisium')->latest()->get();
@@ -58,7 +59,6 @@ class BerandaController extends Controller
             $Mahasiswa = TA::with('mahasiswa')->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->where('status_id', '>=', '4')->latest()->get();
-            // dd($Mahasiswa);
             return view('komisi.beranda', compact('dosen', 'dosen_id', 'Mahasiswa'));
         } elseif (auth()->user()->level_id == 3) {
             $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
@@ -68,12 +68,16 @@ class BerandaController extends Controller
             return view('dosen.beranda', compact('dosen', 'dosen_id', 'Mahasiswa'));
         } elseif (auth()->user()->level_id == 5) {
             // $dosen = Dosen::with('TA1', 'TA2')->has('TA2')->where('jurusan_id', $dosen_id->jurusan_id)->orHas('TA1')->where('jurusan_id', $dosen_id->jurusan_id)->get();
+            $akademik = Akademik::with('TA.status', 'Pendadaran.statusPendadaran', 'Yudisium.statusYudisium')
+            ->whereHas('mahasiswa', function ($q) use ($dosen_id) {
+                $q->where('jurusan_id', $dosen_id->jurusan_id);
+            })->latest()->get();
             $dosen = Dosen::with('TA1', 'TA2')->where('jurusan_id', $dosen_id->jurusan_id)->get();
-            // dd($dosen);
+            // dd($akademik);
             $Mahasiswa = TA::with('mahasiswa')->whereHas('mahasiswa', function ($q) use ($dosen_id) {
                 $q->where('jurusan_id', $dosen_id->jurusan_id);
             })->where('status_id', '>=', '4')->latest()->get();
-            return view('kajur.beranda', compact('dosen', 'dosen_id', 'Mahasiswa'));
+            return view('kajur.beranda', compact('dosen', 'dosen_id', 'Mahasiswa', 'akademik'));
         }
     }
 
@@ -83,6 +87,7 @@ class BerandaController extends Controller
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
+        // dd($mhs_id);
         if ($TA == null) {
             $semprop = SeminarProposal::with('ta')->latest()->first();
             $spk = SPK::with('ta')->latest()->first();
@@ -90,7 +95,6 @@ class BerandaController extends Controller
         } else {
             $semprop = SeminarProposal::with('ta')->where('ta_id', $TA->id)->latest()->first();
             $spk = SPK::with('ta')->where('ta_id', $TA->id)->latest()->first();
-            // dd($tanggal);
             $semhas = SeminarHasil::with('ta')->where('ta_id', $TA->id)->latest()->first();
         }
         if ($spk !== null) {

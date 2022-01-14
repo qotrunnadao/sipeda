@@ -51,4 +51,21 @@ class Dosen extends Model
     {
         return $this->hasMany(TA::class, 'pembimbing2_id');
     }
+    public function Penguji1()
+    {
+        return $this->hasMany(Pendadaran::class, 'penguji1_id');
+    }
+    public function Penguji2()
+    {
+        return $this->hasMany(Pendadaran::class, 'penguji2_id');
+    }
+    public function Penguji3()
+    {
+        return $this->hasMany(Pendadaran::class, 'penguji3_id');
+    }
+    public function Penguji4()
+    {
+        return $this->hasMany(Pendadaran::class, 'penguji4_id');
+    }
+
 }

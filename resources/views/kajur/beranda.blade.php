@@ -125,32 +125,60 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title mb-5">Rekap Pelaksanaan Studi Akhir</h5>
+                <h5 class="card-title mb-5">Rekap Pelaksanaan Studi Akhir <b>{{$dosen_id->jurusan->namaJurusan }}</b> </h5>
                 <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="buttondatatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                            <tr class="text-center">
+                            <tr>
                                 <th> # </th>
-                                <th> Nama </th>
-                                <th> Status Tugas Akhir </th>
-                                <th> Status Pendadaran </th>
-                                <th> Status Yudisium </th>
+                                <th> Nama Mahasiswa </th>
+                                <th> Tahun Angkatan</th>
+                                <th> IPK </th>
+                                <th> SKS </th>
+                                <th> Status TA </th>
+                                <th> Status Pendadaran</th>
+                                <th> Status Yudisium</th>
+                                <th> Lama Tugas Akhir</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td> 1 </td>
-                                <td> Qotrunnada Oktiriani </td>
+                            @foreach ($akademik as $value)
+                            <tr>
+                                <td> {{ $loop->iteration }} </td>
+                                <td> {{ $value->mahasiswa->nama }} </td>
+                                <td>{{ $value->mahasiswa->angkatan }}</td>
+                                <td> {{ $value->mahasiswa->ipk }}</td>
+                                <td> {{ $value->mahasiswa->sks }}</td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">Selesai</div>
+                                    @if($value->statusTA == null)
+                                    <div class="badge badge-danger badge-pill">Belum Mengajukan</div>
+                                    @elseif($value->ta->status_id == 1)
+                                    <div class="badge badge-danger badge-pill">{{ $value->ta->status->ket}}</div>
+                                    @else
+                                    <div class="badge badge-primary badge-pill">{{ $value->ta->status->ket }}</div>
+                                    @endif
                                 </td>
                                 <td>
-                                    <div class="badge badge-primary badge-pill">Selesai</div>
+                                    @if($value->statusPendadaran == null)
+                                    <div class="badge badge-danger badge-pill">Belum Mengajukan</div>
+                                    @elseif($value->pendadaran->statuspendadaran_id == 1)
+                                    <div class="badge badge-danger badge-pill">{{ $value->pendadaran->StatusPendadaran->status }}</div>
+                                    @else
+                                    <div class="badge badge-primary badge-pill">{{ $value->pendadaran->StatusPendadaran->status }}</div>
+                                    @endif
                                 </td>
                                 <td>
-                                    <div class="badge badge-success badge-pill">menunggu persetujuan</div>
+                                    @if($value->statusYudisium == null)
+                                    <div class="badge badge-danger badge-pill">Belum Mengajukan</div>
+                                    @elseif($value->yudisium->status_id == 1)
+                                    <div class="badge badge-danger badge-pill">{{ $value->yudisium->StatusYudisium->status }}</div>
+                                    @else
+                                    <div class="badge badge-primary badge-pill">{{ $value->yudisium->StatusYudisium->status }}</div>
+                                    @endif
                                 </td>
+                                <td> {{ $value->TASelesai }}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

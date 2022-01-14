@@ -72,27 +72,6 @@
             </div>
         </div>
     </div>
-
-    {{-- <div class="col-md-4 grid-margin">
-        <div class="card card-primary">
-            <form action="" method="GET" enctype="multipart/form-data" id="creatData">
-                @csrf
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Pilih Periode Yudisium <code>*</code></label>
-                        <select type="text" class="form-control" id="periode_id" name="periode_id" required>
-                            <option selected disabled>Pilih Periode </option>
-                            @foreach ($periode_cetak as $value)
-                            <option value="{{ $value->id }} ">{{ $value->namaPeriode }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <a href="" onclick="this.href='/yudisium/sk-yudisium/' + document.getElementById('periode_id').value" target="_blank" id="btnSubmit" class="btn btn-gradient-primary "><i class="fa fa-print"></i>
-                        Cetak SK</a>
-                </div>
-            </form>
-        </div>
-    </div> --}}
 </div>
 
 <!-- Modal Tambah Periode Yudisium -->
@@ -115,7 +94,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Tanggal Yudisium <code>*</code></label>
+                        <label for="exampleInputEmail3">Tanggal Yudisium</label>
                         <div class="input-group">
                             <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Yudisium" />
                             <div class="input-group-prepend">
@@ -123,14 +102,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group">
+                        <label>Waktu Mulai Yudisium</label>
+                        <div class="input-group clockpicker">
+                            <input type="text" class="form-control" name="waktu" placeholder="Waktu Pelaksanaan Yudisium" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="form-group row">
                         <label for="exampleInputEmail3">waktu Mulai <code>*</code></label>
                         <div class="input-group clockpicker">
                             <input type="text" class="form-control" name="waktu" placeholder="Waktu Pelaksanaan Yudisium">
                             <span class="input-group-text">
                                 <i class="mdi mdi-clock"></i></span>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nomor Surat <code>(kosongkan jika belum tersedia)</code></label>
                         <div class="input-group">
@@ -197,12 +185,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="exampleInputEmail3">waktu Mulai <code>*</code></label>
+                    <div class="form-group">
+                        <label>Waktu Mulai Yudisium</label>
                         <div class="input-group clockpicker">
-                            <input type="text" class="form-control" value="{{ $value->waktu }}" name="waktu" placeholder="Waktu Pelaksanaan Yudisium">
-                            <span class="input-group-text">
-                                <i class="mdi mdi-clock"></i></span>
+                            <input type="text" class="form-control" value="{{ $value->waktu }}" name="waktu" placeholder="Waktu Pelaksanaan Yudisium" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">

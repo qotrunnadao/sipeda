@@ -121,42 +121,6 @@
             </div>
         </div>
     </div>
-
-    <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title mb-5">Rekap Pelaksanaan Studi Akhir</h5>
-                <div class="table-responsive">
-                    <table id="datatable" class="table table-striped dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                            <tr class="text-center">
-                                <th> # </th>
-                                <th> Nama </th>
-                                <th> Status Tugas Akhir </th>
-                                <th> Status Pendadaran </th>
-                                <th> Status Yudisium </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td> 1 </td>
-                                <td> Qotrunnada Oktiriani </td>
-                                <td>
-                                    <div class="badge badge-primary badge-pill">Selesai</div>
-                                </td>
-                                <td>
-                                    <div class="badge badge-primary badge-pill">Selesai</div>
-                                </td>
-                                <td>
-                                    <div class="badge badge-success badge-pill">menunggu persetujuan</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal -->

@@ -21,7 +21,7 @@ class Mahasiswa extends Model
     }
     public function Jenkel()
     {
-        return $this->belongsTo(Jenkel::class);
+        return $this->belongsTo(Jenkel::class, 'jk_id');
     }
     public function Jurusan()
     {
