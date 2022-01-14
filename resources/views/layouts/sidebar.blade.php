@@ -92,9 +92,9 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('statusyudisium.index') }}"> Status Yudisium </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('periode.index') }}"> Periode Yudisium </a></li>
                     {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('cetaksk.index') }}"> Cetak Draft SK </a></li> --}}
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.kelulusan') }}"> Data Kelulusan </a></li>
                     @endif
                     <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.index') }}"> Pengajuan Yudisium </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('yudisium.kelulusan') }}"> Data Kelulusan </a></li>
                 </ul>
             </div>
         </li>

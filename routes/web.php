@@ -266,6 +266,7 @@ Route::get('/yudisium/data-yudisium/ditolak/{yudisium}',  'YudisiumController@di
 Route::post('/yudisium/data-yudisium/nim/', 'YudisiumController@nim')->name('yudisium.nim');
 // data kelulusan
 Route::get('/yudisium/data-kelulusan', 'YudisiumController@kelulusan')->name('yudisium.kelulusan');
+Route::put('/yudisium/data-kelulusan/update/{id}',  'YudisiumController@lulus')->name('kelulusan.update');
 
 // Periode Yudisium
 Route::get('/yudisium/periode-yudisium', 'PeriodeYudisiumController@index')->name('periode.index');

@@ -30,19 +30,22 @@
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <td> <b>IP Terakhir</b> </td>
-                                <td><b>:</b> </td>
-                                <td> 3,93 </td>
-                            </tr>
-                            <tr>
                                 <td> <b> IPK</b></td>
                                 <td> <b>:</b> </td>
-                                <td> 3,84 </td>
+                                @if ($mhs_id->ipk == Null)
+                                <td><div class="badge badge-danger ">Belum Mengajukan Data IPK</div></td>
+                                @else
+                                <td>{{ $mhs_id->ipk }}</td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> <b>Total SKS </b> </td>
                                 <td> <b>:</b> </td>
-                                <td> 138 </td>
+                                @if ($mhs_id->sks == Null)
+                                <td><div class="badge badge-danger ">Belum Mengajukan Data SKS</div></td>
+                                @else
+                                <td>{{ $mhs_id->sks }}</td>
+                                @endif
                             </tr>
                             <tr>
                                 <td> <b>Judul Penelitian</b> </td>

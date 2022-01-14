@@ -17,9 +17,8 @@ class CreateKelulusansTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('mhs_id')->references('id')->on('mahasiswa')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('pendadaran_id')->references('id')->on('pendadaran')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('yudisium_id')->references('id')->on('yudisium')->onUpdate('cascade')->onDelete('cascade');
-            $table->dateTime('tanggal_masuk')->nullable();
+            $table->foreignId('akademik_id')->references('id')->on('akademik')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('tanggal_masuk')->nullable();
             $table->string('no_alumni')->nullable();
             $table->string('lama_studi')->nullable();
             $table->string('predikat')->nullable();

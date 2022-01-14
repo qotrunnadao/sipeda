@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Yudisium;
+use App\Models\Kelulusan;
 use App\Models\akademik;
 use App\Models\Mahasiswa;
 use App\Models\PeriodeYudisium;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Models\TahunAkademik;
 use App\Models\StatusYudisium;
 use File;
+use Carbon\Carbon;
 use PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -86,13 +88,14 @@ class YudisiumController extends Controller
      */
     public function nim(Request $request)
     {
-        $mahasiswa = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
-            $q->where('status_id', '10');
-        })->Has('Pendadaran')->whereHas('Pendadaran', function ($q) {
-            $q->where('statuspendadaran_id', '6');
-        })->whereDoesntHave('Yudisium')->orHas('Yudisium')->whereHas('Yudisium', function ($q) {
-            $q->where('status_id', '1');
-        })->where('jurusan_id', $request->id)->get();
+        // $mahasiswa = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
+        //     $q->where('status_id', '10');
+        // })->Has('Pendadaran')->whereHas('Pendadaran', function ($q) {
+        //     $q->where('statuspendadaran_id', '6');
+        // })->whereDoesntHave('Yudisium')->orHas('Yudisium')->whereHas('Yudisium', function ($q) {
+        //     $q->where('status_id', '1');
+        // })->where('jurusan_id', $request->id)->get();
+        $mahasiswa = Mahasiswa::where('jurusan_id', $request->id)->get();
         // dd($mahasiswa);
         return response()->json($mahasiswa, 200);
     }
@@ -126,9 +129,15 @@ class YudisiumController extends Controller
             $status = array(
                 'statusYudisium' => $cek->id,
             );
-            $akademik = Mahasiswa::where('mhs_id', $request->nim)->get()->first();
+            $akademik = Akademik::where('mhs_id', $request->nim)->get()->first();
             $isi = $akademik->update($status);
-            if ($cek == true && $isi == true) {
+            $lulus = array(
+                'mhs_id' => $cek->id,
+                'akademik_id' => $cek->id,
+            );
+            // dd($lulus);
+            $sk = Kelulusan::create($lulus);
+            if ($cek == true && $isi == true && $sk == true) {
                 Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
             } else {
                 Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
@@ -152,7 +161,13 @@ class YudisiumController extends Controller
                 'statusYudisium' => $cek->id,
             );
             $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-            if ($cek == true) {
+            $isi = $akademik->update($status);
+            $lulus = array(
+                'mhs_id' => $akademik->mhs_id,
+                'akademik_id' => $akademik->id,
+            );
+            $sk = Kelulusan::create($lulus);
+            if ($cek == true  && $isi == true && $sk == true) {
                 Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
             } else {
                 Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
@@ -176,7 +191,13 @@ class YudisiumController extends Controller
                 'statusYudisium' => $cek->id,
             );
             $akademik = Akademik::where('mhs_id', $mhs_id->id)->get()->first();
-            if ($cek == true) {
+            $isi = $akademik->update($status);
+            $lulus = array(
+                'mhs_id' => $cek->id,
+                'akademik_id' => $cek->id,
+            );
+            $sk = Kelulusan::create($lulus);
+            if ($cek == true  && $isi == true && $sk == true) {
                 Alert::success('Berhasil', 'Berhasil Tambah Data Pengajuan Yudisium');
             } else {
                 Alert::warning('Gagal', 'Data Pengajuan Yudisium Gagal Ditambahkan');
@@ -328,13 +349,32 @@ class YudisiumController extends Controller
 
     public function kelulusan(Request $request)
     {
-        $kelulusan = Mahasiswa::Has('TA')->whereHas('TA', function ($q) use ($request) {
-            $q->where('status_id', '10');
-        })->Has('Pendadaran')->whereHas('Pendadaran', function ($q) {
-            $q->where('statuspendadaran_id', '6');
-        })->whereDoesntHave('Yudisium')->orHas('Yudisium')->whereHas('Yudisium', function ($q) {
-            $q->where('status_id', '6');
-        });
+        $kelulusan = Kelulusan::with(['mahasiswa.Jenkel', 'akademik.pendadaran', 'akademik.Yudisium.periodeYudisium'])
+        ->whereHas('akademik.Yudisium.periodeYudisium', function ($q) {
+                $q->where('aktif', '1');})
+        ->latest()->get();
+        // dd($kelulusan);
         return view('yudisium.dataKelulusan.index', compact('kelulusan'));
+    }
+    public function lulus(Request $request, $id)
+    {
+        $value = Kelulusan::find($id);
+        $data = $request->all();
+        $yudisium = Yudisium::with(['periodeYudisium'])->where('mhs_id', $value->mhs_id)->get()->first();
+        $waktuselesai = Carbon::parse($request->tanggal_masuk)->diff(Carbon::parse($yudisium->periodeYudisium->tanggal))->format('%y Tahun, %m Bulan dan %d Hari');
+        // dd($waktuselesai);
+        $data = [
+            'tanggal_masuk' => $request->tanggal_masuk,
+            'no_alumni' => $request->no_alumni,
+            'lama_studi' => $waktuselesai,
+            'predikat' => $request->predikat,
+        ];
+        $ubah = $value->update($data);
+        if ($ubah == true) {
+            Alert::success('Berhasil', 'Berhasil Ubah Data Detail Kelulusan');
+        } else {
+            Alert::warning('Gagal', 'Data Detail Kelulusan Gagal Diubah');
+        }
+        return back();
     }
 }

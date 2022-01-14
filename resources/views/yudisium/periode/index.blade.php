@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail3">Tanggal Yudisium <code>*</code></label>
+                        <label for="exampleInputEmail3">Tanggal Yudisium</label>
                         <div class="input-group">
                             <input type="text" class="form-control datepicker" data-language="en" data-date-format="yyyy-mm-dd" name="tanggal" id="tanggal" placeholder="Tanggal Yudisium" />
                             <div class="input-group-prepend">
@@ -123,14 +123,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group">
+                        <label>Waktu Mulai Yudisium</label>
+                        <div class="input-group clockpicker">
+                            <input type="text" class="form-control" name="waktu" placeholder="Waktu Pelaksanaan Yudisium" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="form-group row">
                             <label for="exampleInputEmail3">waktu Mulai <code>*</code></label>
                             <div class="input-group clockpicker">
                                 <input type="text" class="form-control" name="waktu" placeholder="Waktu Pelaksanaan Yudisium">
                                 <span class="input-group-text">
                                     <i class="mdi mdi-clock"></i></span>
                             </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nomor Surat <code>(kosongkan jika belum tersedia)</code></label>
                         <div class="input-group">
@@ -197,14 +206,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="exampleInputEmail3">waktu Mulai <code>*</code></label>
+                    <div class="form-group">
+                        <label>Waktu Mulai Yudisium</label>
                         <div class="input-group clockpicker">
-                            <input type="text" class="form-control" value="{{ $value->waktu }}" name="waktu" placeholder="Waktu Pelaksanaan Yudisium">
-                            <span class="input-group-text">
-                                <i class="mdi mdi-clock"></i></span>
+                            <input type="text" class="form-control" value="{{ $value->waktu }}" name="waktu" placeholder="Waktu Pelaksanaan Yudisium" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
+                            </div>
                         </div>
-                </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Nomor Surat</label>
                         <div class="input-group">

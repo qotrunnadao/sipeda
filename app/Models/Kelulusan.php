@@ -29,6 +29,10 @@ class Kelulusan extends Model
     {
         return $this->belongsTo(Yudisium::class, 'yudisium_id');
     }
+    public function Akademik()
+    {
+        return $this->belongsTo(Akademik::class, 'akademik_id');
+    }
     public function getCreatedAtAttribute()
     {
         return Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y H:i:s');
