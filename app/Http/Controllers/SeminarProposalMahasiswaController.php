@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Ruang;
 use App\Models\Status;
+use App\Models\BerkasPersyaratan;
 use App\Models\Seminar;
 use App\Models\Mahasiswa;
 use App\Models\SeminarHasil;
@@ -37,13 +38,14 @@ class SeminarProposalMahasiswaController extends Controller
     {
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
+        $berkas = BerkasPersyaratan::where('nama_berkas', 'Seminar Proposal')->get();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
         $tugas_akhir = TA::where('mahasiswa_id', $mhs_id->id)->latest()->first();
         $Ruang = Ruang::get();
         $SeminarProposal = SeminarProposal::with(['ta', 'ruang'])->where('ta_id', $tugas_akhir->id)->select('*')->latest()->get();
         // dd($SeminarProposal);
-        return view('mahasiswa.TA.pages.semprop', compact('TA', 'SeminarProposal', 'tugas_akhir', 'Ruang'));
+        return view('mahasiswa.TA.pages.semprop', compact('TA','berkas', 'SeminarProposal', 'tugas_akhir', 'Ruang'));
     }
 
     /**

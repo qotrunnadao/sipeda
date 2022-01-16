@@ -88,6 +88,11 @@ Route::post('/data-ruang-pendadaran/store', 'RuangPendadaranController@store')->
 Route::put('/data-ruang-pendadaran/update/{id}', 'RuangPendadaranController@update')->name('ruangPendadaran.update');
 Route::get('/data-ruang-pendadaran/destroy/{id}', 'RuangPendadaranController@destroy')->name('ruangPendadaran.destroy');
 
+// Route  Mahasiswa
+Route::get('/level-mahasiswa', 'MahasiswaController@index')->name('mahasiswa.index');
+Route::post('/level-mahasiswa/store', 'MahasiswaController@store')->name('mahasiswa.store');
+Route::put('/level-mahasiswa/update/{id}', 'MahasiswaController@update')->name('mahasiswa.update');
+
 // Route Level User
 Route::get('/level-user', 'LevelController@index')->name('level.index');
 Route::post('/level-user/store', 'LevelController@store')->name('level.store');
@@ -117,6 +122,7 @@ Route::put('/data-kajur/update/{id}', 'KajurController@update')->name('kajur.upd
 Route::get('/berkas-persyaratan', 'BerkasPersyaratanController@index')->name('berkas.index');
 Route::post('/berkas-persyaratan/store', 'BerkasPersyaratanController@store')->name('berkas.store');
 Route::put('/berkas-persyaratan/update/{id}', 'BerkasPersyaratanController@update')->name('berkas.update');
+Route::put('/berkas-persyaratan/download/{filename}',  'BerkasPersyaratanController@download')->name('download.persyaratan');
 Route::get('/berkas-persyaratan/destroy/{id}', 'BerkasPersyaratanController@destroy')->name('berkas.delete');
 
 

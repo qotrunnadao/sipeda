@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
 {
@@ -14,7 +16,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'mahasiswa' => Mahasiswa::latest()->get(),
+        );
+        // dd($data);
+        return view('admin.master.datamahasiswa', $data);
     }
 
     /**
@@ -67,9 +73,19 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, $id)
     {
-        //
+        $value = Mahasiswa::where('id', $id)->first();
+        $data = $request->all();
+        // dd($data);
+        $ubah = $value->update($data);
+        // dd($database);
+        if ($ubah == true) {
+            Alert::success('Berhasil', 'Berhasil Ubah Data Mahasiswa');
+        } else {
+            Alert::warning('Gagal', 'Data Mahasiswa Gagal Diubah');
+        }
+        return back();
     }
 
     /**

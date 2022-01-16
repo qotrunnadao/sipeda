@@ -25,10 +25,28 @@
                             <tr class="text-center">
                                 <td> {{ $no++ }} </td>
                                 <td> {{ $value->nama_berkas }}</td>
-                                <td> {{ $value->berkas }}</td>
+                                <td>
+                                    @if (File::exists(public_path('storage/assets/file/Berkas Persyaratan/' . $value->berkas . '')))
+                                    <div class="btn-group">
+                                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post" target="blank">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="btn-group">
+                                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post">
+                                            @method('PUT')
+                                            @csrf
+                                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                                        </form>
+                                    </div>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-berkas='{{ $value->berkas }}'><i class="mdi mdi-border-color"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata{{ $value['id'] }}" ><i class="mdi mdi-border-color"></i></a>
                                     </div>
                                     <div class="btn-group">
                                         <form action="{{ route('berkas.delete', $value->id) }}" method="GET">
@@ -58,14 +76,22 @@
             <div class="modal-body">
                 <form class="forms-sample" action="{{route('berkas.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Nama Persyaratan</label>
-                        <div class="input-group">
-                            <input type="text" required class="form-control" name="nama_berkas" />
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="">Nama Berkas Persyaratan <code>*</code></label>
+                            <select type="text" class="form-control" name="nama_berkas" required>
+                                <option value="" selected disabled>PILIH</option>
+                                <option value="Tugas Akhir" >Tugas Akhir</option>
+                                <option value="Seminar Proposal" >Seminar Proposal</option>
+                                <option value="Seminar Hasil" >Seminar Hasil</option>
+                                <option value="Pendadaran" >Pendadaran</option>
+                                <option value="Yudisium" >Yudisium</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col">
+                            <label for="">Berkas Persyaratan <code>*</code></label>
                             <input type="file" class="form-control" name="berkas" />
                             @if ($errors->has('berkas'))
                             <div class="text-danger">
@@ -83,8 +109,9 @@
     </div>
 </div>
 
+@foreach ($berkas as $value)
 <!-- Edit Berkas -->
-<div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editdata{{ $value['id'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -94,12 +121,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" method="POST" id="editData" action="" enctype="multipart/form-data">
+                <form class="forms-sample" method="POST" id="editData" action="{{ route('berkas.update', $value->id) }}" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="form-group row">
                         <div class="col">
-                            <input type="file" class="form-control" name="berkas" required />
+                            <label for="">Nama Berkas Persyaratan <code>*</code></label>
+                            <select type="text" class="form-control" name="nama_berkas" required>
+                                <option value="" selected disabled>PILIH</option>
+                                <option value="Tugas Akhir" {{ "Tugas Akhir"==$value->nama_berkas ? 'selected' : '' }}>Tugas Akhir</option>
+                                <option value="Seminar Proposal" {{ "Seminar Proposal"==$value->nama_berkas ? 'selected' : '' }}>Seminar Proposal</option>
+                                <option value="Seminar Hasil" {{ "Seminar Hasil"==$value->nama_berkas ? 'selected' : '' }}>Seminar Hasil</option>
+                                <option value="Pendadaran" {{ "Pendadaran"==$value->nama_berkas ? 'selected' : '' }}>Pendadaran</option>
+                                <option value="Yudisium" {{ "Yudisium"==$value->nama_berkas ? 'selected' : '' }}>Yudisium</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="">Berkas Persyaratan </label>
+                            <input type="file" class="form-control" name="berkas" />
                             @if ($errors->has('berkas'))
                             <div class="text-danger">
                                 {{ $errors->first('berkas') }}
@@ -115,6 +156,7 @@
         </div>
     </div>
 </div>
+@endforeach
 @endsection
 
 @section('javascripts')
@@ -129,17 +171,5 @@
 
             });
         });
-</script>
-<script>
-    $('#editdata').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    var berkas = button.data('berkas') // Extract info from data-* attributes
-
-    var modal = $(this)
-
-    modal.find(".modal-body input[name='berkas']").val(berkas)
-    modal.find(".modal-body form").attr("action",'/berkas-persyaratan/update/'+id)
-    })
 </script>
 @endsection

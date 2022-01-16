@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TA;
 use App\Models\Akademik;
 use App\Models\Dosen;
+use App\Models\BerkasPersyaratan;
 use App\Models\User;
 use App\Models\TahunAkademik;
 use App\Models\Mahasiswa;
@@ -31,6 +32,7 @@ class TAMahasiswaController extends Controller
         return view('mahasiswa.TA.pages.beranda', compact('tugas_akhir', 'status', 'jurusan', 'dosen'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,6 +41,8 @@ class TAMahasiswaController extends Controller
     public function create(Request $request)
     {
         $id = auth()->User()->id;
+        $berkas = BerkasPersyaratan::where('nama_berkas', 'Tugas Akhir')->latest()->get();
+        // dd($berkas);
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $TA = TA::with(['mahasiswa'])->where('mahasiswa_id', $mhs_id->id)->latest()->first();
@@ -47,12 +51,11 @@ class TAMahasiswaController extends Controller
         $id = Auth::User()->id;
         $user_id = User::where('id', $id)->get()->first();
         $tahun = TahunAkademik::where('aktif', '1')->get()->first();
-        // dd($tahun);
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $tugas_akhir = TA::with(['mahasiswa', 'dosen1', 'dosen2', 'status'])->where('mahasiswa_id', $mhs_id->id)->get();
         // dd($tugas_akhir);
         $mahasiswa = Mahasiswa::with('user')->get()->all();
-        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'dosen', 'tahun', 'TA'));
+        return view('mahasiswa.TA.pages.pengajuan', compact('data_ta', 'tugas_akhir', 'dosen', 'tahun', 'TA', 'berkas'));
     }
 
     /**

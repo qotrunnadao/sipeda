@@ -195,8 +195,6 @@ class SPKController extends Controller
             File::delete(public_path('storage/assets/file/SPK TA/' . $hapus . ''));
         } else {
             $data['fileSPK'] = $spk->fileSPK;
-            Alert::warning('Gagal', 'Gagal Ubah Data SPK');
-            return back();
         }
         // dd($data);
         $spk->update($data);
