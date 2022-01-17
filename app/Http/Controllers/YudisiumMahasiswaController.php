@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\TahunAkademik;
 use App\Models\Dosen;
 use App\Models\akademik;
-use App\Models\Mahasiswa;
 use App\Models\Yudisium;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use App\Models\TahunAkademik;
+use App\Models\BerkasPersyaratan;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -19,12 +20,13 @@ class YudisiumMahasiswaController extends Controller
         $data_yudisium = new Yudisium();
         $tahun = TahunAkademik::where('aktif', '1')->get()->first();
         $id = Auth::User()->id;
+        $berkas = BerkasPersyaratan::where('nama_berkas', 'Yudisium')->latest()->get();
         // dd($id);
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium'])->where('mhs_id', $mhs_id->id)->latest()->get();
         // dd($yudisium);
-        return view('mahasiswa.yudisium.pages.pendaftaran', compact('data_yudisium', 'yudisium', 'tahun', 'mhs_id'));
+        return view('mahasiswa.yudisium.pages.pendaftaran', compact('data_yudisium', 'yudisium', 'tahun', 'mhs_id', 'berkas'));
     }
 
     public function store(Request $request)

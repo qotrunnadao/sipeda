@@ -26,8 +26,9 @@
             </form>
         </div>
     </div>
-    <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white  card-hover">
+
+    <div class="col-md-4 grid-margin">
+        <div class="card bg-primary card-img-holder text-white grid-margin">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Berkas Persyaratan Pendadaran
                 </h4>
@@ -37,6 +38,39 @@
                     <li>Bukti Distribusi Tugas Akhir</li>
                     <code>Berkas dijadikan 1 file PDF</code>
                 </ul>
+            </div>
+        </div>
+
+        <div class="card bg-primary card-img-holder text-white grid-margin">
+            <div class="card-body mb-3">
+                @if(! $berkas)
+                @foreach ( $berkas as $value )
+                <br>
+                <h4 class="font-weight-normal mb-3">File Unduhan
+                </h4>
+                <div class="table-responsive mt-3">
+                    @if (File::exists(public_path('storage/assets/file/Berkas Persyaratan/' . $value->berkas . '')))
+                    <div class="btn-group">
+                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post" target="blank">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                        </form>
+                    </div>
+                    @else
+                    <div class="btn-group">
+                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                        </form>
+                    </div>
+                    @endif
+                </div>
+                @endforeach
+                @else
+                <span class="btn btn-danger btn-sm download"></i>Tidak Ada File Unduhan</span>
+                @endif
             </div>
         </div>
     </div>

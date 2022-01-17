@@ -3,8 +3,8 @@
 @section('icon', 'file')
 @section('content')
 <div class="row">
-    <div class="col-md-6 grid-margin stretch-card">
-        <div class="card card-primary">
+    <div class="col-md-6 grid-margin">
+        <div class="card card-primary grid-margin">
             <form action="{{route('mahasiswaYudisium.store')}}" method="post" enctype="multipart/form-data" id="creatData">
                 @csrf
                 <input type="hidden" class="form-control" id="thnAkad_id" name="thnAkad_id" value="{{ $tahun->id }}">
@@ -27,9 +27,42 @@
                 </div>
             </form>
         </div>
+
+        <div class="card bg-primary card-img-holder text-white grid-margin">
+            <div class="card-body mb-3">
+                @if(! $berkas)
+                @foreach ( $berkas as $value )
+                <br>
+                <h4 class="font-weight-normal mb-3">File Unduhan
+                </h4>
+                <div class="table-responsive mt-3">
+                    @if (File::exists(public_path('storage/assets/file/Berkas Persyaratan/' . $value->berkas . '')))
+                    <div class="btn-group">
+                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post" target="blank">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                        </form>
+                    </div>
+                    @else
+                    <div class="btn-group">
+                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                        </form>
+                    </div>
+                    @endif
+                </div>
+                @endforeach
+                @else
+                <span class="btn btn-danger btn-sm download"></i>Tidak Ada File Unduhan</span>
+                @endif
+            </div>
+        </div>
     </div>
-    <div class="col-md-6 stretch-card grid-margin">
-        <div class="card bg-primary card-img-holder text-white">
+    <div class="col-md-6 grid-margin">
+        <div class="card bg-primary card-img-holder text-white grid-margin">
             <div class="card-body">
                 <h4 class="font-weight-normal mb-3">Berkas Persyaratan Yudisium
                 </h4>

@@ -53,10 +53,10 @@
                     <div class="form-group row">
                         <div class="col-6">
                             <label>
-                                Nama Dosen Pembimbing Selain FT  <code>(opsional)</code>
+                                Nama Dosen Pembimbing Selain FT <code>(opsional)</code>
 
                             </label>
-                            <input type="text" class="form-control"  placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="{{ old('namaDosen') }}" />
+                            <input type="text" class="form-control" placeholder="Tuliskan nama dosen dari luar FT" name="namaDosen" value="{{ old('namaDosen') }}" />
                         </div>
                         <div class="col-6">
                             <label>
@@ -97,7 +97,7 @@
 
         <div class="card bg-primary card-img-holder text-white grid-margin">
             <div class="card-body mb-3">
-                @if($berkas != null)
+                @if(! $berkas)
                 @foreach ( $berkas as $value )
                 <br>
                 <h4 class="font-weight-normal mb-3">File Unduhan {{ $loop->iteration }}
@@ -123,8 +123,7 @@
                 </div>
                 @endforeach
                 @else
-                <h4 class="font-weight-normal mb-3"> Tidak Ada File Unduhan
-                </h4>
+                <span class="btn btn-danger btn-sm download"></i>Tidak Ada File Unduhan</span>
                 @endif
             </div>
         </div>
