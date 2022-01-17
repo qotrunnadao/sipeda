@@ -105,12 +105,11 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#detail" data-id='{{ $value->id }}'
-                                            data-pembimbing1='{{ $value->TA1->where('status_id', '>=', '4' )->where(' status_id', '<=' , '9' )->count() }}'
-                                            data-pembimbing2='{{ $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'
-                                            data-pelaksanaan='{{ $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $value->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'
-                                            data-selesai='{{ $value->TA1->where('status_id', '10')->count() + $value->TA1->where('status_id', '10')->count() }}'
-                                            data-total='{{ $value->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'><i class="mdi mdi-information"></i></a>
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#detail" data-id='{{ $value->id }}' data-pembimbing1='{{ $value->TA1->where(' status_id', '>=' , '4' )->where(' status_id', '<=' , '9' )->count() }}'
+                                                data-pembimbing2='{{ $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'
+                                                    data-pelaksanaan='{{ $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $value->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'
+                                                            data-selesai='{{ $value->TA1->where('status_id', '10')->count() + $value->TA1->where('status_id', '10')->count() }}'
+                                                            data-total='{{ $value->TA1->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() + $value->TA2->where('status_id', '>=', '4')->where(' status_id', '<=' , '9' )->count() }}'><i class="mdi mdi-information"></i></a>
                                     </div>
                                 </td>
                             </tr>

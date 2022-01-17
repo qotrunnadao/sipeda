@@ -79,7 +79,7 @@
                 </ul>
             </div>
         </li>
-        @if (auth()->user()->level_id == 2 || 5)
+        @if (auth()->user()->level_id == 2 || auth()->user()->level_id == 5)
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#yudisium" aria-expanded="false" aria-controls="yudisium">
                 <span class="menu-title">Yudisium</span>
