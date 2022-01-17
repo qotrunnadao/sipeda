@@ -21,7 +21,7 @@ class YudisiumMahasiswaController extends Controller
         $tahun = TahunAkademik::where('aktif', '1')->get()->first();
         $id = Auth::User()->id;
         $berkas = BerkasPersyaratan::where('nama_berkas', 'Yudisium')->latest()->get();
-        // dd($id);
+        // dd($berkasyds);
         $user_id = User::where('id', $id)->get()->first();
         $mhs_id = Mahasiswa::with(['user'])->where('user_id', $id)->get()->first();
         $yudisium = Yudisium::with(['mahasiswa', 'periodeYudisium', 'statusYudisium'])->where('mhs_id', $mhs_id->id)->latest()->get();

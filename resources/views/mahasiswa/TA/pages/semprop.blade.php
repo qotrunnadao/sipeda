@@ -97,12 +97,11 @@
         </div>
         <div class="card bg-primary card-img-holder text-white grid-margin">
             <div class="card-body mb-3">
-                @foreach ( $berkas as $value )
+                @forelse ( $berkas as $value )
                 <br>
                 <h4 class="font-weight-normal mb-3">File Unduhan {{ $loop->iteration }}
                 </h4>
                 <div class="table-responsive mt-3">
-                    @if($berkas != null)
                     @if (File::exists(public_path('storage/assets/file/Berkas Persyaratan/' . $value->berkas . '')))
                     <div class="btn-group">
                         <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post" target="blank">
@@ -120,12 +119,10 @@
                         </form>
                     </div>
                     @endif
-                    @else
-                    Berkas Persyaratan Tugas Akhir
-                    <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
-                    @endif
                 </div>
-                @endforeach
+                @empty
+                <span class="btn btn-danger btn-sm download"></i>Tidak Ada File Unduhan</span>
+                @endforelse
             </div>
         </div>
     </div>

@@ -115,8 +115,8 @@
                                 <th class="text-center"> File SPK </th>
                                 @if (auth()->user()->level_id == 5 || auth()->user()->level_id == 2)
                                 <th class="text-center"> Nomer Surat </th>
-                                <th class="text-center"> Aksi </th>
                                 @endif
+                                <th class="text-center"> Aksi </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,6 +173,11 @@
                                         </form>
                                     </div>
                                     @endif
+                                    @if (auth()->user()->level_id == 3)
+                                    <div class="btn-group">
+                                        <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdatadosen" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
+                                    </div>
+                                    @endif
                                     @if ($value->spk && $value->no_surat && auth()->user()->level_id == 2 || auth()->user()->level_id == 5)
                                     <div class="btn-group">
                                         <a href="" class="btn btn-gradient-primary btn-sm" data-toggle="modal" data-target="#editdata" data-id='{{ $value->id }}' data-fileSPK='{{ $value->spk->fileSPK }}'><i class="mdi mdi-border-color"></i></a>
@@ -214,6 +219,38 @@
                     <div class="form-group row">
                         <div class="col">
                             <input type="file" class="form-control" placeholder="SPK Ketua Jurusan" name="fileSPK" required />
+                            @if ($errors->has('fileSPK'))
+                            <div class="text-danger">
+                                {{ $errors->first('fileSPK') }}
+                            </div>
+                            @endif
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editdatadosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Upload SPK Tugas Akhir</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" method="POST" id="editdosen" action="" enctype="multipart/form-data">
+                    @method('PUT')
+                    @csrf
+                    <div class="form-group row">
+                        <div class="col">
+                            <input type="file" class="form-control" placeholder="SPK Tugas Akhir" name="fileSPK" required />
                             @if ($errors->has('fileSPK'))
                             <div class="text-danger">
                                 {{ $errors->first('fileSPK') }}
@@ -296,6 +333,17 @@
         return true;
 
     });
+});
+
+$(document).ready(function () {
+
+$("#editdosen").submit(function () {
+
+    $("#btnSubmit").attr("disabled", true);
+
+    return true;
+
+});
 });
 </script>
 <script>

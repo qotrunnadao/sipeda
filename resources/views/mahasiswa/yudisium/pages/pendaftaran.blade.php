@@ -30,10 +30,9 @@
 
         <div class="card bg-primary card-img-holder text-white grid-margin">
             <div class="card-body mb-3">
-                @if(! $berkas)
-                @foreach ( $berkas as $value )
+                @forelse ( $berkas as $value )
                 <br>
-                <h4 class="font-weight-normal mb-3">File Unduhan
+                <h4 class="font-weight-normal mb-3">File Unduhan {{ $loop->iteration }}
                 </h4>
                 <div class="table-responsive mt-3">
                     @if (File::exists(public_path('storage/assets/file/Berkas Persyaratan/' . $value->berkas . '')))
@@ -54,10 +53,9 @@
                     </div>
                     @endif
                 </div>
-                @endforeach
-                @else
+                @empty
                 <span class="btn btn-danger btn-sm download"></i>Tidak Ada File Unduhan</span>
-                @endif
+                @endforelse
             </div>
         </div>
     </div>

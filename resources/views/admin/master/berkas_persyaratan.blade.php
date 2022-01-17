@@ -74,7 +74,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="forms-sample" action="{{route('berkas.store')}}" method="post" enctype="multipart/form-data">
+                <form class="forms-sample" action="{{route('berkas.store')}}" id="eksport" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                         <div class="col">
