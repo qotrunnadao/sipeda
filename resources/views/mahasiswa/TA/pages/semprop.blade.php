@@ -97,17 +97,35 @@
         </div>
         <div class="card bg-primary card-img-holder text-white grid-margin">
             <div class="card-body mb-3">
-                <h4 class="font-weight-normal mb-3">File Unduhan
+                @foreach ( $berkas as $value )
+                <br>
+                <h4 class="font-weight-normal mb-3">File Unduhan {{ $loop->iteration }}
                 </h4>
                 <div class="table-responsive mt-3">
+                    @if($berkas != null)
+                    @if (File::exists(public_path('storage/assets/file/Berkas Persyaratan/' . $value->berkas . '')))
                     <div class="btn-group">
-                        <form action="{{ route('download.permohonanseminar') }}" method="post" target="blank">
+                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post" target="blank">
                             @method('PUT')
                             @csrf
-                            <button type="submit" class="btn btn-light download">Lembar Permohonan Seminar<i class="mdi mdi-download"></i></a></button>
+                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
                         </form>
                     </div>
+                    @else
+                    <div class="btn-group">
+                        <form action="{{ route('download.persyaratan', $value->berkas) }}" method="post">
+                            @method('PUT')
+                            @csrf
+                            <button type="submit" class="btn btn-gradient-primary btn-sm download">{{ $value->berkas }} <i class="mdi mdi-download"></i></a></button>
+                        </form>
+                    </div>
+                    @endif
+                    @else
+                    Berkas Persyaratan Tugas Akhir
+                    <div class="badge badge-danger badge-pill float-right">Belum Terbit</div>
+                    @endif
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
