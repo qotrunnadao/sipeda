@@ -1,3 +1,6 @@
+The final study management system is a system built to manage the final study process at the engineering faculty of Jenderal Soedirman University. built using laravel framework.
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
